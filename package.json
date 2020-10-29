@@ -1,0 +1,43 @@
+{
+  "name": "trefla",
+  "version": "1.0.0",
+  "description": "trefla back-end",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "npm run dev",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/business-helper/trefla-node.git"
+  },
+  "keywords": [
+    "node",
+    "mysql",
+    "socket",
+    "chat",
+    "social",
+    "id",
+    "card"
+  ],
+  "author": "Business Helper <alerk_star@outlook.com> (https://github.com/business-helper)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/business-helper/trefla-node/issues"
+  },
+  "homepage": "https://github.com/business-helper/trefla-node#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
