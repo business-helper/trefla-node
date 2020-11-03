@@ -53,3 +53,23 @@ exports.DEFAULT_POST = {
   create_time: timestamp(),
   update_time: timestamp(),
 };
+
+exports.DEFAULT_COMMENT = {
+  id: '',
+  user_id: 0,
+  comment: '',
+  target_id: 0,
+  type: 'POST',
+  comment_num: 0,
+  isGuest: 0,
+  like_1_num: 0,
+  like_2_num: 0,
+  like_3_num: 0,
+  like_4_num: 0,
+  like_5_num: 0,
+  like_6_num: 0,
+  active: 1,
+  time: '',
+  create_time: timestamp(),
+  update_time: timestamp(),
+};

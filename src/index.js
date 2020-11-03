@@ -15,6 +15,7 @@ app.use('/api/v1', appV1);
 
 // Routers
 const authRouters = require('./routes/auth.routes');
+const commentRouters = require('./routes/comment.routes');
 const langRouters = require('./routes/lang.routes');
 const postRouters = require('./routes/post.routes');
 
@@ -26,6 +27,7 @@ app.get("/health", (req, res) => {
 
 appV1.use('/lang', langRouters);
 appV1.use('/auth', authRouters);
+appV1.use('/comment', commentRouters);
 appV1.use('/post', postRouters);
 
 // Handle 404 Path

@@ -32,9 +32,18 @@ const generateTZTimeString = (strTime = '') => {
   return `${year}-${month}-${date}-${hh}-${mm}-${ss}:${tz}`;
 }
 
+
+const bool2Int = (boolVal) => {
+  return boolVal ? 1 : 0;
+}
+
 const getTime = () => {
   return new Date().getTime();
 };
+
+const int2Bool = (intVal) => {
+  return Number(intVal) === 1 ? true : false;
+}
 
 const respondError = (res, error) => {
   return res
@@ -50,7 +59,7 @@ const respondValidateError = (res, error) => {
 	});
 };
 
-function sendMail({ from, to, subject, body }) {
+const sendMail = ({ from, to, subject, body }) => {
   const mailOptions = {
     from: 'Trefla Support <admin@trefla.com>',
     to: to,
@@ -67,8 +76,10 @@ const timestamp = () => {
 };
 
 module.exports = {
+  bool2Int,
   generateTZTimeString,
   getTime,
+  int2Bool,
 	respondError,
   respondValidateError,
   sendMail,

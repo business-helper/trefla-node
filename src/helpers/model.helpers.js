@@ -1,6 +1,17 @@
 const { 
-  DEFAULT_POST 
+  DEFAULT_COMMENT,
+  DEFAULT_POST
 } = require('../constants/model.constant');
+
+
+const generateCommentData = (basicData) => {
+  const defaultKeys = Object.keys(DEFAULT_COMMENT);
+  let data = {};
+  for (let field of defaultKeys) {
+    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_COMMENT[field];
+  }
+  return data;
+}
 
 const generatePostData = (basicData) => {
   const defaultKeys = Object.keys(DEFAULT_POST);
@@ -12,5 +23,6 @@ const generatePostData = (basicData) => {
 }
 
 module.exports = {
+  generateCommentData,
   generatePostData
 };
