@@ -17,6 +17,15 @@ Language.create = (newLang) => {
   });
 };
 
+Language.save = async (updateData) => {
+  updateData.update_time = timestamp();
+  return new Promise((resolve, reject) => {
+    sql.query("UPDATE langs SET ? WHERE id=?", [updateData, updateData.id], (err, res) => {
+      err ? reject(err) : resolve(Language.getById(updateData.id));
+    });
+  });
+}
+
 Language.getAll = () => {
   return new Promise((resolve, reject) => {
     sql.query("SELECT * FROM langs", (err, res) => {
@@ -24,6 +33,14 @@ Language.getAll = () => {
     });
   });
 };
+
+Language.getById = (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM langs WHERE id=? LIMIT 1", [id], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    });
+  });
+}
 
 Language.getByCode = (code) => {
 	return new Promise((resolve, reject) => {

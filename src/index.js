@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/v1', appV1);
 
 // Routers
+const authRouters = require('./routes/auth.routes');
 const langRouters = require('./routes/lang.routes');
 
 
@@ -23,6 +24,7 @@ app.get("/health", (req, res) => {
 });
 
 appV1.use('/lang', langRouters);
+appV1.use('/auth', authRouters);
 
 // Handle 404 Path
 app.use((req, res, next) => {
