@@ -58,3 +58,30 @@ exports.getAll = (req, res) => {
       })
     );
 };
+
+// to-do: permission check. only admin or creator can update it.
+exports.updateById = (req, res) => {
+  const { id } = req.params;
+  return Post.getById(id)
+    .then(post => {
+      // remove user id in update data
+      let updateData = {};
+      const disallowedKeys = ['id', 'user_id'];
+      Object.keys(req.body).forEach(key => {
+        if (disallowedKeys.includes(key)) {
+          // skip it
+        // } else if (key === 'isGuest') {
+        //   post.isGuest = bool2Int(req.body.isGuest);
+        } else if (post[key] !== undefined) {
+          post[key] = req.body[key];
+        }
+      });
+      return Post.save(post);      
+    })
+    .then(newPost => res.json({
+      status: true,
+      message: 'success',
+      data: Post.output(newPost)
+    }))
+    .catch((error) => respondError(res, error));
+}

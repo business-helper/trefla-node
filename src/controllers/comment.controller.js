@@ -48,6 +48,33 @@ exports.pagination = (req, res) => {
     .catch((error) => respondError(res, error));
 }
 
+// to-do: only admin or creator can update
+exports.updateById = (req, res) => {
+  const { id } = req.params;
+  return Comment.getById(id)
+    .then(comment => {
+      // remove user id in update data
+      let updateData = {};
+      const disallowedKeys = ['id', 'user_id', 'target_id', 'type'];
+      Object.keys(req.body).forEach(key => {
+        if (disallowedKeys.includes(key)) {
+          // skip it
+        } else if (key === 'isGuest') {
+          comment.isGuest = bool2Int(req.body.isGuest);
+        } else if (comment[key] !== undefined) {
+          comment[key] = req.body[key];
+        }
+      });
+      return Comment.save(comment);      
+    })
+    .then(newComment => res.json({
+      status: true,
+      message: 'success',
+      data: Comment.output(newComment)
+    }))
+    .catch((error) => respondError(res, error));
+}
+
 exports.getAll = (req, res) => {
   Post.getAll()
     .then((langs) =>

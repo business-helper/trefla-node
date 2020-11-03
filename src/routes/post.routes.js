@@ -93,5 +93,40 @@ postRouters.post("/", async (req, res) => {
     .catch((error) => respondValidateError(res, error));
 });
 
+postRouters.patch('/:id', async (req, res) => {
+  const validator = new Validator({
+    id: req.params.id
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Post.getById(provider.inputs.id)
+    ]).then(([postById]) => {
+      if (!postById) {
+        provider.error(
+          "id",
+          "custom",
+          `Post with id "${provider.inputs.id}" does not exists!`
+        );
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => postCtrl.updateById(req, res))
+  .catch((error) => respondValidateError(res, error));
+})
+
 
 module.exports = postRouters;
