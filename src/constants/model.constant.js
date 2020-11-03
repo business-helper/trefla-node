@@ -73,3 +73,14 @@ exports.DEFAULT_COMMENT = {
   create_time: timestamp(),
   update_time: timestamp(),
 };
+
+exports.DEFAULT_NOTIFICATION = {
+  id: '',
+  sender_id: 0,
+  receiver_id: 0,
+  type: 0,
+  optional_val: 0,
+  time: '',
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
