@@ -1,8 +1,9 @@
 const { Validator } = require("node-input-validator");
 const Post = require("../models/post.model");
 const Comment = require("../models/comment.model");
-const { bool2Int, generateTZTimeString, respondError } = require("../helpers/common.helpers");
-const { generateCommentData } = require('../helpers/model.helpers');
+const CommentLike = require("../models/commentLike.model");
+const { bool2Int, getTotalLikes, generateTZTimeString, respondError } = require("../helpers/common.helpers");
+const { generateCommentData, generateCommentLikeData } = require('../helpers/model.helpers');
 
 exports.create = (req, res) => {
   let commentData = generateCommentData(req.body);
@@ -87,3 +88,66 @@ exports.getAll = (req, res) => {
       })
     );
 };
+
+exports.toggleCommentLike = (req, res) => {
+  const { id: comment_id } = req.params;
+  const { user_id, type } = req.body;
+  return CommentLike.userLikedComment({ user_id, comment_id, type })
+    .then(postLike => {
+      return postLike ? dislikeComment({ user_id, comment_id, type }) : likeComment({ user_id, comment_id, type });
+    })
+    .then(result => res.json({
+      status: !!result,
+      message: result ? 'success' : 'failed'
+    }))
+    .catch((error) => respondError(res, error));
+}
+
+const dislikeComment = ({ user_id, comment_id, type }) => {
+  return Promise.all([
+    Comment.getById(comment_id),
+    CommentLike.userLikedComment({ user_id, comment_id, type })
+  ])
+    .then(([comment, commentLike]) => {
+      const like_fld = `like_${type}_num`;
+      comment[like_fld] = comment[like_fld] ? comment[like_fld] - 1 : 0;
+      comment['liked'] = getTotalLikes(comment);
+      return Promise.all([
+        CommentLike.deleteById(commentLike.id),
+        Comment.save(comment)
+      ])
+    })
+    .then(([deleted, newPost]) => {
+      return deleted && newPost;
+    })
+    .catch((error) => false);
+}
+
+const likeComment = ({ user_id, comment_id, type }) => {
+  return Promise.all([
+    Comment.getById(comment_id),
+    CommentLike.userLikedComment({ user_id, comment_id, type })
+  ])
+    .then(([comment, commentLike]) => {
+      if (commentLike) {
+        throw Object.assign(new Error('You liked this comment already!'), { code: 400 }); return;
+      }
+      const like_fld = `like_${type}_num`;
+      comment[like_fld] = comment[like_fld] + 1;
+      comment['liked'] = getTotalLikes(comment);
+
+      const cmtData = generateCommentLikeData({ user_id, comment_id, type });
+      return Promise.all([
+        CommentLike.create(cmtData),
+        Comment.save(comment)
+      ])
+    })
+    .then(([created, newCmt]) => {
+      return created && newCmt;
+    })
+    .catch((error) => {
+      console.log('[Like Comment]', error.message);
+      return false
+    });
+}
+

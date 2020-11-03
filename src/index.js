@@ -21,6 +21,7 @@ const notificationRouters = require('./routes/notification.routes');
 const postRouters = require('./routes/post.routes');
 
 
+
 // simple route
 app.get("/health", (req, res) => {
 	res.json({ status: true, message: "I'm healthy!" });
@@ -31,6 +32,7 @@ appV1.use('/auth', authRouters);
 appV1.use('/comment', commentRouters);
 appV1.use('/notification', notificationRouters);
 appV1.use('/post', postRouters);
+
 
 // Handle 404 Path
 app.use((req, res, next) => {

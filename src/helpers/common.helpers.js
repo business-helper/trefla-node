@@ -75,10 +75,16 @@ const timestamp = () => {
   return Math.floor(new Date().getTime() / 1000);
 };
 
+const getTotalLikes = (obj) => {
+  const fields = [1,2,3,4,5,6].map(type => `like_${type}_num`);
+  return fields.reduce((total, field) => total + Number(obj[field]), 0);
+}
+
 module.exports = {
   bool2Int,
   generateTZTimeString,
   getTime,
+  getTotalLikes,
   int2Bool,
 	respondError,
   respondValidateError,

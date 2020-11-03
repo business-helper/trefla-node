@@ -5,6 +5,7 @@ const postRouters = express.Router();
 const postCtrl = require("../controllers/post.controller");
 const Post = require("../models/post.model");
 const User = require("../models/user.model");
+const PostLike = require("../models/postLike.model")
 const { BearerMiddleware } = require("../middlewares/basic.middleware");
 const { respondValidateError } = require("../helpers/common.helpers");
 
@@ -66,6 +67,54 @@ postRouters.post("/pagination", async (req, res) => {
     })
     .then(() => postCtrl.pagination(req, res))
     .catch((error) => respondValidateError(res, error));
+});
+
+postRouters.post('/:id/toggle-like', async (req, res) => {
+  const { user_id, type } = req.body;
+  const validator = new Validator({
+    id: req.params.id,
+    user_id,
+    type
+  }, {
+    id: "required|integer",
+    user_id: "required|integer",
+    type: "required|integer|between:1,6"
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Post.getById(provider.inputs.id),
+      User.getById(provider.inputs.user_id),
+    ]).then(([post, user]) => {
+      if (!post) {
+        provider.error(
+          "id",
+          "custom",
+          `Post with id "${provider.inputs.id}" does not exists!`
+        );
+      }
+      if (!user) {
+        provider.error(
+          "id",
+          "custom",
+          `User with id "${provider.inputs.user_id}" does not exists!`
+        );
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => postCtrl.togglePostLike(req, res))
+  .catch((error) => respondValidateError(res, error));
 });
 
 postRouters.post("/", async (req, res) => {

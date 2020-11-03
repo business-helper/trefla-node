@@ -1,14 +1,14 @@
 const { Validator } = require("node-input-validator");
 const Post = require("../models/post.model");
-const Notification = require("../models/notification.model");
+const PostLike = require("../models/postLike.model");
 const { bool2Int, generateTZTimeString, respondError } = require("../helpers/common.helpers");
-const { generateNotificationData } = require('../helpers/model.helpers');
+const { generatePostLikeData } = require('../helpers/model.helpers');
 
 exports.create = (req, res) => {
-  let notiData = generateNotificationData(req.body);
-  notiData.time = req.body.time ? req.body.time : generateTZTimeString();
-  return Notification.create(notiData)
-    .then((noti) => res.json({ status: true, message: "success", data: Notification.output(noti) }))
+  let plData = generatePostLikeData(req.body);
+  plData.time = req.body.time ? req.body.time : generateTZTimeString();
+  return PostLike.create(plData)
+    .then((pl) => res.json({ status: true, message: "success", data: PostLike.output(pl) }))
     .catch((error) => respondError(res, error));
 };
 
@@ -26,6 +26,7 @@ exports.getById = (req, res) => {
 exports.pagination = (req, res) => {
   const { page, limit, sender_id, receiver_id } = req.body;
   const offset = page * limit;
+
   return Promise.all([
     Notification.pagination({ limit, offset, receiver_id }),
     Notification.getAll({ receiver_id }),
@@ -85,3 +86,4 @@ exports.getAll = (req, res) => {
       })
     );
 };
+

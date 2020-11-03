@@ -84,3 +84,22 @@ exports.DEFAULT_NOTIFICATION = {
   create_time: timestamp(),
   update_time: timestamp(),
 };
+
+exports.DEFAULT_POSTLIKE = {
+  id: '',
+  user_id: 0,
+  post_id: 0,
+  type: 0,
+  create_time: timestamp(),
+  update_time: timestamp(),
+}
+
+exports.DEFAULT_COMMENTLIKE = {
+  id: '',
+  user_id: 0,
+  comment_id: 0,
+  type: 0,
+  create_time: timestamp(),
+  update_time: timestamp(),
+}
+
