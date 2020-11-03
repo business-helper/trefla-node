@@ -4,6 +4,7 @@ const {
 	ERR_MSG_VALIDATE
 } = require("../constants/common.constant");
 
+
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   // host: 'smtp.gmail.com',
@@ -14,6 +15,22 @@ const transporter = nodemailer.createTransport({
     pass: 'blizanac1',
   },
 });
+
+const formatAsTwoDigits = (num) => {
+  return num > 9 ? num : '0' + num;
+}
+
+const generateTZTimeString = (strTime = '') => {
+  let dt = !strTime ? new Date() : new Date(strTime);
+  const year = dt.getFullYear();
+  const month = formatAsTwoDigits(dt.getMonth() + 1);
+  const date = formatAsTwoDigits(dt.getDate());
+  const hh = formatAsTwoDigits(dt.getHours());
+  const mm = formatAsTwoDigits(dt.getMinutes());
+  const ss = formatAsTwoDigits(dt.getSeconds());
+  const tz = -dt.getTimezoneOffset();
+  return `${year}-${month}-${date}-${hh}-${mm}-${ss}:${tz}`;
+}
 
 const getTime = () => {
   return new Date().getTime();
@@ -49,9 +66,8 @@ const timestamp = () => {
   return Math.floor(new Date().getTime() / 1000);
 };
 
-
-
 module.exports = {
+  generateTZTimeString,
   getTime,
 	respondError,
   respondValidateError,
