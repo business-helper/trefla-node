@@ -12,6 +12,7 @@ exports.DEFAULT_USER = {
   isGuest: 0,
   guestName: '',
   card_number: '',
+  card_img_url: '',
   card_verified: 0,
   avatarIndex: 0,
   photo: '',
