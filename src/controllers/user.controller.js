@@ -7,6 +7,7 @@ const {
   generateUserData,
   genreateAuthToken,
   generatePassword,
+  getTokenInfo,
 } = require("../helpers/auth.helpers");
 
 exports.register = (req, res) => {
@@ -119,4 +120,31 @@ exports.resetPassword = (req, res) => {
     .catch((error) => respondError(res, error));
 }
 
+exports.getById = (req, res) => {
+  const { id: user_id } = req.params;
+  return User.getById(user_id)
+    .then(user => {
+      user = User.output(user);
+      return res.json({
+        status: true,
+        message: 'success',
+        data: user
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.getProfile = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  return User.getById(user_id)
+    .then(user => {
+      user = User.output(user, 'PROFILE');
+      return res.json({
+        status: true,
+        message: 'success',
+        data: user
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
 

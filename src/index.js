@@ -19,6 +19,7 @@ const commentRouters = require('./routes/comment.routes');
 const langRouters = require('./routes/lang.routes');
 const notificationRouters = require('./routes/notification.routes');
 const postRouters = require('./routes/post.routes');
+const userRouters = require('./routes/user.routes');
 
 
 // simple route
@@ -31,6 +32,7 @@ appV1.use('/auth', authRouters);
 appV1.use('/comment', commentRouters);
 appV1.use('/notification', notificationRouters);
 appV1.use('/post', postRouters);
+appV1.use('/user', userRouters);
 
 
 // Handle 404 Path
