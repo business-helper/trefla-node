@@ -51,6 +51,74 @@ userRouters.get('/me', async (req, res) => {
   .catch((error) => respondValidateError(res, error));
 })
 
+userRouters.patch('/me', async (req, res) => {
+  const { uid: id } = getTokenInfo(req);
+  const validator = new Validator({
+    id
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      User.getById(provider.inputs.id)
+    ]).then(([userById]) => {
+      if (!userById) {
+        provider.error(
+          "id",
+          "custom",
+          `User with id "${provider.inputs.id}" does not exists!`
+        );
+      }
+    })
+  );
+
+  if (req.body.email) {
+    validator.addPostRule(async (provider) =>
+      Promise.all([
+        User.getByEmail(req.body.email),
+      ]).then(([userByEmail]) => {
+        if (userByEmail && userByEmail.id !== id) {
+          provider.error(
+            "id",
+            "custom",
+            `Email already exists with other account!`
+          );
+        }
+      })
+    );
+  }
+
+  if (req.body.user_name) {
+    validator.addPostRule(async (provider) =>
+      Promise.all([
+        User.getByUserName(req.body.user_name),
+      ]).then(([user]) => {
+        if (user && user.id !== id) {
+          provider.error(
+            "id",
+            "custom",
+            `User name already exists with other account!`
+          );
+        }
+      })
+    );
+  }
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => userCtrl.updateProfile(req, res))
+  .catch((error) => respondValidateError(res, error));
+})
+
 userRouters.get('/:id', async (req, res) => {
   const validator = new Validator({
     id: req.params.id

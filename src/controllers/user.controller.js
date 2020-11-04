@@ -148,3 +148,25 @@ exports.getProfile = (req, res) => {
     .catch((error) => respondError(res, error));
 }
 
+exports.updateProfile = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  return User.getById(user_id)
+    .then(user => {
+      const keys = Object.keys(user);
+      keys.forEach(key => {
+        if (req.body[key] !== undefined) {
+          user[key] = req.body[key];
+        }
+      });
+      return User.save(user);
+    })
+    .then(newUser => {
+      return res.json({
+        status: true,
+        message: 'Profile has been updated!',
+        data: User.output(newUser, 'PROFILE')
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
