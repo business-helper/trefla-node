@@ -231,7 +231,7 @@ postRouters.post("/", async (req, res) => {
       post_name: "required",
       location_address: "required",
       location_coordinate: "required",
-      city: "required",
+      // city: "required",
     }
   );
 
