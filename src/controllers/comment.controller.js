@@ -1,49 +1,90 @@
 const { Validator } = require("node-input-validator");
+const User = require("../models/user.model");
 const Post = require("../models/post.model");
 const Comment = require("../models/comment.model");
 const CommentLike = require("../models/commentLike.model");
+const { getTokenInfo } = require('../helpers/auth.helpers');
 const { bool2Int, getTotalLikes, generateTZTimeString, respondError } = require("../helpers/common.helpers");
 const { generateCommentData, generateCommentLikeData } = require('../helpers/model.helpers');
 
 exports.create = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
   let commentData = generateCommentData(req.body);
+  commentData.user_id = user_id;
   commentData.time = req.body.time ? req.body.time : generateTZTimeString();
-  commentData.isGuest = bool2Int(req.body.isGuest);
+  // commentData.isGuest = bool2Int(req.body.isGuest);
+
   return Comment.create(commentData)
-    .then((comment) => res.json({ status: true, message: "success", data: Comment.output(comment) }))
+    .then(comment => Promise.all([
+      comment,
+      User.getById(comment.user_id)
+    ]))
+    .then(([comment, user]) => {
+      comment = Comment.output(comment);
+      return res.json({ status: true, message: "success", data: { ...comment, liked: 0, user: User.output(user) } });
+    })
     .catch((error) => respondError(res, error));
 };
 
 exports.getById = (req, res) => {
   const { id } = req.params;
   return Comment.getById(id)
-    .then(post => res.json({ 
-      status: true,
-      message: 'success',
-      data: Comment.output(post)
-    }))
+    .then(comment => Promise.all([
+      comment,
+      User.getById(comment.user_id),
+      CommentLike.commentLikesOfUser({ comment_id: id, user_id: comment.user_id })
+    ]))
+    .then(([comment, user, likes]) => {
+      console.log('[Likes]', likes);
+      comment = Comment.output(comment);
+      return res.json({ status: true, message: "success", data: { 
+        ...comment, 
+        liked: likes.length > 1 ? 1 : 0, 
+        user: User.output(user) } });
+    })
     .catch((error) => respondError(res, error));
 }
 
 exports.pagination = (req, res) => {
+  const { uid } = getTokenInfo(req);
   const { page, limit, target_id, type } = req.body;
   const offset = page * limit;
+  let _comments = [], _total = 0, _posters = {};
 
   return Promise.all([
     Comment.pagination({ limit, offset, target_id, type }),
-    Comment.getAll({ target_id, type }),
+    Comment.getCountOfComments({ target_id, type }),
   ])
-    .then(([comment, allComment]) => {
+    .then(async ([comments, total]) => {
+      _comments = comments; _total = total;
+      const poster_ids = comments.map(comment => comment.user_id);
+      return User.getByIds(poster_ids);
+    })
+    .then(users => {
+      users.map(user => _posters[user.id] = user);
+      return Promise.all(_comments.map(comment => CommentLike.commentLikesOfUser({ user_id: uid, comment_id: comment.id })));
+    })
+    .then((commentLikedArray) => {
+      // console.log('[Liked]', uid, commentLikedArray.map(a => a.length));
+      // console.log('[posters]', _posters);
+      _comments = _comments.map(comment => Comment.output(comment)); // filter keys
+
+      _comments = _comments.map((comment, i) => ({
+        ...comment,
+        liked: commentLikedArray[i].length > 0 ? 1 : 0,
+        user: User.output(_posters[comment.user_id])
+      }));
+
       return res.json({
         status: true,
         message: 'success',
-        data: comment.map(item => Comment.output(item)),
+        data: _comments,
         pager: {
           page,
           limit,
-          total: allComment.length
+          total: _total
         },
-        hadMore: (limit * page + comment.length) < allComment.length
+        hadMore: (limit * page + _comments.length) < _total
       });
     })
     .catch((error) => respondError(res, error));
@@ -90,8 +131,9 @@ exports.getAll = (req, res) => {
 };
 
 exports.toggleCommentLike = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
   const { id: comment_id } = req.params;
-  const { user_id, type } = req.body;
+  const { type } = req.body;
   return CommentLike.userLikedComment({ user_id, comment_id, type })
     .then(postLike => {
       return postLike ? dislikeComment({ user_id, comment_id, type }) : likeComment({ user_id, comment_id, type });
@@ -99,6 +141,44 @@ exports.toggleCommentLike = (req, res) => {
     .then(result => res.json({
       status: !!result,
       message: result ? 'success' : 'failed'
+    }))
+    .catch((error) => respondError(res, error));
+}
+
+exports.doLikeComment = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { id: comment_id } = req.params;
+  const { type } = req.body;
+  return CommentLike.userLikedComment({ user_id, comment_id, type })
+    .then(liked => {
+      if (liked) {
+        throw Object.assign(new Error('You liked it already!'), { code: 400 });
+      } else {
+        return likeComment({ user_id, comment_id, type });
+      }
+    })
+    .then(result => res.json({
+      status: !!result,
+      message: result ? 'You liked the comment!' : 'Failed to like the comment!'
+    }))
+    .catch((error) => respondError(res, error));
+}
+
+exports.dislikeComment = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { id: comment_id } = req.params;
+  const { type } = req.body;
+  return CommentLike.userLikedComment({ user_id, comment_id, type })
+    .then(liked => {
+      if (liked) {
+        return dislikeComment({ user_id, comment_id, type });
+      } else {
+        throw Object.assign(new Error('You disliked it already!'), { code: 400 });
+      }
+    })
+    .then(result => res.json({
+      status: !!result,
+      message: result ? 'You disliked the comment!' : 'Failed to dislike the comment!'
     }))
     .catch((error) => respondError(res, error));
 }

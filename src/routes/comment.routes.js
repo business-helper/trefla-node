@@ -7,6 +7,7 @@ const Post = require("../models/post.model");
 const User = require("../models/user.model");
 const Comment = require("../models/comment.model");
 const { BearerMiddleware } = require("../middlewares/basic.middleware");
+const { getTokenInfo } = require('../helpers/auth.helpers');
 const { respondValidateError } = require("../helpers/common.helpers");
 
 // Bearer authentication
@@ -70,7 +71,8 @@ commentRouters.post("/pagination", async (req, res) => {
 });
 
 commentRouters.post('/:id/toggle-like', async (req, res) => {
-  const { user_id, type } = req.body;
+  const { uid: user_id } = getTokenInfo(req);
+  const { type } = req.body;
   const validator = new Validator({
     id: req.params.id,
     user_id,
@@ -117,15 +119,120 @@ commentRouters.post('/:id/toggle-like', async (req, res) => {
   .catch((error) => respondValidateError(res, error));
 })
 
-commentRouters.post("/", async (req, res) => {
-  const validator = new Validator(req.body, {
+commentRouters.post('/:id/like', async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { type } = req.body;
+  const validator = new Validator({
+    id: req.params.id,
+    user_id,
+    type
+  }, {
+    id: "required|integer",
     user_id: "required|integer",
-    type: "required",
-    comment: "required",
-    target_id: "required",
-    isGuest: "required|boolean",
-    time: "required",
+    type: "required|integer|between:1,6"
   });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Comment.getById(provider.inputs.id),
+      User.getById(provider.inputs.user_id),
+    ]).then(([comment, user]) => {
+      if (!comment) {
+        provider.error(
+          "id",
+          "custom",
+          `Target comment does not exist!`
+        );
+      }
+      if (!user) {
+        provider.error(
+          "id",
+          "custom",
+          `User does not exist!`
+        );
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => commentCtrl.doLikeComment(req, res))
+  .catch((error) => respondValidateError(res, error));
+})
+
+commentRouters.post('/:id/dislike', async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { type } = req.body;
+  const validator = new Validator({
+    id: req.params.id,
+    user_id,
+    type
+  }, {
+    id: "required|integer",
+    user_id: "required|integer",
+    type: "required|integer|between:1,6"
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Comment.getById(provider.inputs.id),
+      User.getById(provider.inputs.user_id),
+    ]).then(([comment, user]) => {
+      if (!comment) {
+        provider.error(
+          "id",
+          "custom",
+          `Target comment does not exist!`
+        );
+      }
+      if (!user) {
+        provider.error(
+          "id",
+          "custom",
+          `User does not exist!`
+        );
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => commentCtrl.dislikeComment(req, res))
+  .catch((error) => respondValidateError(res, error));
+})
+
+commentRouters.post("/", async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const validator = new Validator(
+    {
+      ...req.body,
+      user_id
+    }, 
+    {
+      user_id: "required|integer",
+      type: "required",
+      comment: "required",
+      target_id: "required",
+      isGuest: "required|integer",
+      // time: "required",
+    }
+  );
 
   validator.addPostRule(async (provider) =>
     Promise.all([
@@ -135,7 +242,7 @@ commentRouters.post("/", async (req, res) => {
         provider.error(
           "id",
           "custom",
-          `Targte post or comment with id "${provider.inputs.target_id}" does not exists!`
+          `Target post or comment with id "${provider.inputs.target_id}" does not exist!`
         );
       }
     })

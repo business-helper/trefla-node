@@ -71,16 +71,13 @@ exports.pagination = (req, res) => {
     .then((postLikedArray) => {
       // console.log('[Liked]', uid, postLikedArray.map(a => a.length));
       // console.log('[posters]', _posters);
-
-      postLikedArray.map((likesArr, i) => _posts[i].liked = likesArr.length > 0 ? 1 : 0 );
-
+      
       let posts = _posts.map(post => Post.output(post)); // filter keys
-
-      posts = posts.map(post => ({...post, user: _posters[post.user_id]})); // insert user object to each post
-
-      posts.forEach(post => {
-        post.user = User.output(_posters[post.post_user_id]);
-      });
+      posts = posts.map((post, i) => ({
+        ...post, 
+        liked: postLikedArray[i].length > 0 ? 1 : 0,
+        user: User.output(_posters[post.post_user_id])
+      }));
 
       return res.json({
         status: true,

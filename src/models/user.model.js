@@ -68,9 +68,9 @@ User.getByUserName = (user_name) => {
 
 User.output = (user, mode = 'NORMAL') => {
   try {
-    user.location_array = JSON.parse(user.location_array);
+    user.location_array = JSON.parse(user.location_array || "");
   } catch (e) {
-    console.log('[la]', user.location_array);
+    console.log('[location array]', user.location_array);
   }
   // keys to delete
   let delKeys = [];

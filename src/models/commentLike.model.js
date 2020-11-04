@@ -30,6 +30,14 @@ CommentLike.userLikedComment = async ({ user_id, comment_id, type }) => {
   });
 }
 
+CommentLike.commentLikesOfUser = async ({ user_id, comment_id }) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM comment_likes WHERE user_id=? AND comment_id=?", [user_id, comment_id], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  }); 
+}
+
 CommentLike.pagination = async ({ limit, offset, receiver_id }) => {
   const strWhere = (receiver_id) ? ` WHERE receiver_id=${receiver_id}` : '';
   return new Promise((resolve, reject) => {

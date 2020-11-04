@@ -44,6 +44,15 @@ Comment.getAll = ({ target_id = null, type = null }) => {
   });
 };
 
+Comment.getCountOfComments = ({ type = null, target_id = null }) => {
+  const strWhere = type && target_id ? ` WHERE type='${type}' AND target_id=${target_id}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM comments ${strWhere}`, (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    });
+  });
+}
+
 Comment.getById = (id) => {
   return new Promise((resolve, reject) => {
     sql.query("SELECT * FROM comments WHERE id=? LIMIT 1", [id], (err, res) => {
@@ -53,7 +62,7 @@ Comment.getById = (id) => {
 }
 
 Comment.output = (comment) => {
-  comment.isGuest = int2Bool(comment.isGuest);
+  // comment.isGuest = int2Bool(comment.isGuest);
   return comment;
 }
 
