@@ -117,6 +117,26 @@ exports.updateById = (req, res) => {
     .catch((error) => respondError(res, error));
 }
 
+exports.deleteById = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { id: comment_id } = req.params;
+  return Comment.deleteById(comment_id)
+    .then(deleted => {
+      if (deleted) {
+        return CommentLike.deleteUserCommentLikes({ user_id, comment_id });
+      } else {
+        throw Object.assign(new Error('Failed to delete comment'), { code: 400 });
+      }
+    })
+    .then(() => {
+      return res.json({
+        status: true,
+        message: 'Comment has been deleted!'
+      });
+    })
+    .catch(error => respondError(res, error));
+}
+
 exports.getAll = (req, res) => {
   Post.getAll()
     .then((langs) =>

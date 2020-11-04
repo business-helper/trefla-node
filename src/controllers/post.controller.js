@@ -135,7 +135,23 @@ exports.updateById = (req, res) => {
 }
 
 exports.deleteById = (req, res) => {
-  res.json({test: true})
+  const { uid: user_id } = getTokenInfo(req);
+  const { id: post_id } = req.params;
+  return Post.deleteById(post_id)
+    .then(deleted => {
+      if (deleted) {
+        return PostLike.deleteUserPostLike({ user_id, post_id });
+      } else {
+        throw Object.assign(new Error('Failed to delete the post!'), { code: 400 });
+      }
+    })
+    .then(() => {
+      return res.json({
+        status: true,
+        message: 'Post has been deleted!'
+      })
+    })
+    .catch(error => respondError(res, error));
 }
 
 exports.togglePostLike = (req, res) => {

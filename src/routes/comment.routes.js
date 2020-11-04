@@ -298,4 +298,40 @@ commentRouters.patch("/:id", async (req, res) => {
   .catch((error) => respondValidateError(res, error));
 });
 
+commentRouters.delete("/:id", async (req, res) => {
+  const validator = new Validator({
+    id: req.params.id
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Comment.getById(provider.inputs.id)
+    ]).then(([commentById]) => {
+      if (!commentById) {
+        provider.error(
+          "id",
+          "custom",
+          `Comment does not exist!`
+        );
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => commentCtrl.deleteById(req, res))
+  .catch((error) => respondValidateError(res, error));
+});
+
+
 module.exports = commentRouters;

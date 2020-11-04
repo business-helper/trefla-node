@@ -23,6 +23,22 @@ PostLike.save = async (noti) => {
   });
 }
 
+PostLike.deleteById = id => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM post_likes WHERE id=?", [id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows > 0 ? true : false)
+    });
+  });
+}
+
+PostLike.deleteUserPostLike = ({ user_id, post_id }) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM post_likes WHERE user_id=? AND post_id=?", [user_id, post_id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows);
+    });
+  })
+}
+
 PostLike.userLikedPost = async ({ user_id, post_id, type }) => {
   return new Promise((resolve, reject) => {
     sql.query("SELECT * FROM post_likes WHERE user_id=? AND post_id=? AND type=?", [user_id, post_id, type], (err, res) => {
@@ -61,14 +77,6 @@ PostLike.getById = (id) => {
   return new Promise((resolve, reject) => {
     sql.query("SELECT * FROM post_likes WHERE id=? LIMIT 1", [id], (err, res) => {
       err ? reject(err) : resolve(res[0]);
-    });
-  });
-}
-
-PostLike.deleteById = id => {
-  return new Promise((resolve, reject) => {
-    sql.query("DELETE FROM post_likes WHERE id=?", [id], (err, res) => {
-      err ? reject(err) : resolve(res.affectedRows > 0 ? true : false)
     });
   });
 }

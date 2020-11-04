@@ -27,6 +27,14 @@ Comment.save = async (comment) => {
   });
 }
 
+Comment.deleteById = async (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM comments WHERE id=?", [id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows > 0);
+    })
+  })
+}
+
 Comment.pagination = async ({ limit, offset, target_id = null, type = null }) => {
   const strWhere = (target_id && type) ? ` WHERE target_id=${target_id} AND type="${type}"` : '';
   return new Promise((resolve, reject) => {

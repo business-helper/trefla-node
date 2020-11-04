@@ -27,7 +27,13 @@ Post.save = async (post) => {
   });
 }
 
-
+Post.deleteById = async (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM posts WHERE id=?", [id], (err, res) => {
+      err ? reject(err) : resolve(true);
+    });
+  })
+}
 
 Post.pagination = async ({ limit, offset, type = null }) => {
   const strWhere = type ? ` WHERE type='${type}'` : '';
