@@ -1,5 +1,5 @@
 const { Validator } = require("node-input-validator");
-const Post = require("../models/post.model");
+const User = require("../models/user.model");
 const Notification = require("../models/notification.model");
 const { bool2Int, generateTZTimeString, respondError } = require("../helpers/common.helpers");
 const { generateNotificationData } = require('../helpers/model.helpers');
@@ -15,32 +15,64 @@ exports.create = (req, res) => {
 exports.getById = (req, res) => {
   const { id } = req.params;
   return Notification.getById(id)
-    .then(post => res.json({ 
-      status: true,
-      message: 'success',
-      data: Notification.output(post)
-    }))
+    .then(noti => Promise.all([
+      noti,
+      User.getById(noti.sender_id),
+      User.getById(noti.receiver_id)
+    ]))
+    .then(([noti, sender, receiver]) => {
+      noti = Notification.output(noti);
+      return res.json({ 
+        status: true,
+        message: 'success',
+        data: { 
+          ...noti, 
+          sender: User.output(sender), 
+          receiver: User.output(receiver) 
+        }
+      });
+    })
     .catch((error) => respondError(res, error));
 }
 
 exports.pagination = (req, res) => {
   const { page, limit, sender_id, receiver_id } = req.body;
   const offset = page * limit;
+
+  let _notis = [], _total = 0, _users = {};
+
   return Promise.all([
     Notification.pagination({ limit, offset, receiver_id }),
-    Notification.getAll({ receiver_id }),
+    Notification.getCountOfNotifications({ receiver_id }),
   ])
-    .then(([notis, allNoti]) => {
+    .then(([notis, total]) => {
+      _notis = notis; _total = total;
+      let user_ids = [0];
+      notis.forEach(noti => {
+        user_ids.push(noti.sender_id);
+        user_ids.push(noti.receiver_id);
+      });
+      return User.getByIds(user_ids);
+    })
+    .then(users => {
+      users.forEach(user => _users[user.id] = user);
+      _notis = _notis.map(noti => Notification.output(noti));
+      _notis = _notis.map(item => ({
+        ...item,
+        sender: User.output(_users[item.sender_id]),
+        receiver: User.output(_users[item.receiver_id])
+      }));
+
       return res.json({
         status: true,
         message: 'success',
-        data: notis.map(item => Notification.output(item)),
+        data: _notis,
         pager: {
           page,
           limit,
-          total: allNoti.length
+          total: _total
         },
-        hadMore: (limit * page + notis.length) < allNoti.length
+        hadMore: (limit * page + _notis.length) < _total
       });
     })
     .catch((error) => respondError(res, error));
@@ -74,7 +106,7 @@ exports.updateById = (req, res) => {
 }
 
 exports.getAll = (req, res) => {
-  Post.getAll()
+  Notification.getAll()
     .then((langs) =>
       res.json({ status: true, message: "success", data: langs })
     )

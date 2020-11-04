@@ -43,6 +43,15 @@ Notification.getAll = ({ receiver_id = null }) => {
   });
 };
 
+Notification.getCountOfNotifications = ({ receiver_id = null }) => {
+  const strWhere = (receiver_id) ? ` WHERE receiver_id=${receiver_id}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM notifications ${strWhere}`, (err, res) => {
+			err ? reject(err) : resolve(res[0].total);
+    });
+  });
+};
+
 Notification.getById = (id) => {
   return new Promise((resolve, reject) => {
     sql.query("SELECT * FROM notifications WHERE id=? LIMIT 1", [id], (err, res) => {
@@ -52,6 +61,12 @@ Notification.getById = (id) => {
 }
 
 Notification.output = (noti) => {
+  let delKeys = ['create_time', 'update_time'];
+
+  // delete keys
+  delKeys.forEach((key, i) => {
+    if (noti[key]) delete noti[key];
+  });
   return noti;
 }
 
