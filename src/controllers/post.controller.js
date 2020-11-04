@@ -230,7 +230,7 @@ const likePost = ({ user_id, post_id, type }) => {
       return created && newPost;
     })
     .catch((error) => {
-      console.log('[Like Post]', error.message);
+      console.log('[Like Post]', error);
       return false
     });
 }
