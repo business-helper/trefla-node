@@ -23,26 +23,29 @@ exports.register = (req, res) => {
     .then(([user, token]) => res.json({
       status: true,
       message: 'success',
-      data: User.output(user),
+      data: User.output(user, 'PROFILE'),
       token
     }))
     .catch((error) => respondError(res, error));
 };
 
 exports.login = (req, res) => {
-  const userData = generateUserData(req.body);
-  return User.getByEmail(req.body.email)
-    .then(user => Promise.all([
-      user,
-      comparePassword(req.body.password, user.password),
-      genreateAuthToken(user)
+  return Promise.all([
+    User.getByEmail(req.body.email_username),
+    User.getByUserName(req.body.email_username),
+  ])
+    .then(([userByEmail, userByName]) => Promise.all([
+      userByEmail || userByName,
+      comparePassword(req.body.password, (userByEmail || userByName).password),
+      genreateAuthToken(userByEmail || userByName),
+      User.save({ ...(userByEmail || userByName), device_token: req.body.device_token })
     ]))
     .then(([ user, match, token ]) => {
       if (match) {
         return res.json({
           status: true,
           message: 'success',
-          data: User.output(user),
+          data: User.output(user, 'PROFILE'),
           token
         });
       } else {

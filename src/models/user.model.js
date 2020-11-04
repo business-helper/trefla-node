@@ -77,7 +77,7 @@ User.output = (user, mode = 'NORMAL') => {
   if (mode === 'NORMAL') {
     delKeys = ['email', 'password', 'language', 'bio', 'radiusAround', 'noti_num', 'location_array', 'postAroundCenterCoordinate', 'create_time', 'update_time']
   } else if (mode === 'PROFILE') {
-    const delKeys = ['password', 'create_time', 'update_time'];
+    delKeys = ['password', 'create_time', 'update_time'];
   }
   // delete the given keys
   delKeys.forEach(field => {

@@ -17,6 +17,7 @@ authRouters.post("/register", async (req, res) => {
     user_name: "required|minLength:4|maxLength:50",
     email: "required|email|minLength:5",
     password: "required|minLength:5|maxLength:50",
+    device_token: "required",
   });
 
   validator.addPostRule(async (provider) =>
@@ -57,18 +58,22 @@ authRouters.post("/register", async (req, res) => {
 
 authRouters.post("/login", async (req, res) => {
   const validator = new Validator(req.body, {
-    email: "required|email|minLength:5",
+    email_username: "required",
     password: "required|minLength:5|maxLength:50",
+    device_token: "required"
   });
 
   validator.addPostRule(async (provider) =>
-    Promise.all([User.getByEmail(provider.inputs.email)]).then(
-      ([userByEmail]) => {
-        if (!userByEmail) {
+    Promise.all([
+      User.getByEmail(provider.inputs.email_username),
+      User.getByUserName(provider.inputs.email_username)
+    ]).then(
+      ([userByEmail, userByName]) => {
+        if (!userByEmail && !userByName) {
           provider.error(
-            "email",
+            "email_username",
             "custom",
-            `User with email "${provider.inputs.email}" does not exist!`
+            `Account does not exist!`
           );
         }
       }
