@@ -6,6 +6,7 @@ const CommentLike = function (pl) {
 };
 
 CommentLike.create = (commentLike) => {
+  commentLike.id !== undefined ? delete commentLike.id : null;
   return new Promise((resolve, reject) => {
     sql.query("INSERT INTO comment_likes SET ?", commentLike, (err, res) => {
 			err ? reject(err) : resolve({ ...commentLike, id: res.insertId });

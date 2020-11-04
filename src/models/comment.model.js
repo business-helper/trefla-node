@@ -10,6 +10,7 @@ const Comment = function (lang) {
 };
 
 Comment.create = (comment) => {
+  comment.id !== undefined ? delete comment.id : '';
   return new Promise((resolve, reject) => {
     sql.query("INSERT INTO comments SET ?", comment, (err, res) => {
 			err ? reject(err) : resolve({ ...comment, id: res.insertId });

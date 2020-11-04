@@ -284,5 +284,42 @@ postRouters.patch('/:id', async (req, res) => {
   .catch((error) => respondValidateError(res, error));
 })
 
+postRouters.delete('/:id', async (req, res) => {
+  const { uid } = getTokenInfo(req);
+  const validator = new Validator({
+    id: req.params.id
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Post.getById(provider.inputs.id)
+    ]).then(([postById]) => {
+      if (!postById) {
+        provider.error(
+          "id",
+          "custom",
+          `Post with id "${provider.inputs.id}" does not exists!`
+        );
+      } else if (postById.user_id !== uid) {
+        provider.error("creator", "custom", "You can't delete post!");
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => postCtrl.deleteById(req, res))
+  .catch((error) => respondValidateError(res, error));
+})
 
 module.exports = postRouters;

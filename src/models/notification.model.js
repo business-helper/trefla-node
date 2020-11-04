@@ -9,6 +9,7 @@ const Notification = function (noti) {
 };
 
 Notification.create = (noti) => {
+  noti.id !== undefined ? delete noti.id : null;
   return new Promise((resolve, reject) => {
     sql.query("INSERT INTO notifications SET ?", noti, (err, res) => {
 			err ? reject(err) : resolve({ ...noti, id: res.insertId });

@@ -6,7 +6,7 @@ const PostLike = function (pl) {
 };
 
 PostLike.create = (postLikes) => {
-  delete postLikes.id;
+  postLikes.id !== undefined ? delete postLikes.id : null;
   return new Promise((resolve, reject) => {
     sql.query("INSERT INTO post_likes SET ?", postLikes, (err, res) => {
 			err ? reject(err) : resolve({ ...postLikes, id: res.insertId });

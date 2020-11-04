@@ -134,6 +134,10 @@ exports.updateById = (req, res) => {
     .catch((error) => respondError(res, error));
 }
 
+exports.deleteById = (req, res) => {
+  res.json({test: true})
+}
+
 exports.togglePostLike = (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
   const { id: post_id } = req.params;

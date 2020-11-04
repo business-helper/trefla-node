@@ -10,6 +10,7 @@ const User = function (user) {
 };
 
 User.create = (newUser) => {
+  newUser.id !== undefined ? delete newUser.id : null;
   return new Promise((resolve, reject) => {
     sql.query("INSERT INTO users SET ?", newUser, (err, res) => {
 			err ? reject(err) : resolve({ ...newUser, id: res.insertId });
