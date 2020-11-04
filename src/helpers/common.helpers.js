@@ -46,6 +46,7 @@ const int2Bool = (intVal) => {
 }
 
 const respondError = (res, error) => {
+  console.log(error);
   return res
     .status(500)
     .json({ status: false, message: error.message || ERR_MSG_NORMAL });

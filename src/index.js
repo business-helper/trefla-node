@@ -20,7 +20,8 @@ const langRouters = require('./routes/lang.routes');
 const notificationRouters = require('./routes/notification.routes');
 const postRouters = require('./routes/post.routes');
 const userRouters = require('./routes/user.routes');
-
+// Resolvers
+const { getInitData } = require('./resolvers');
 
 // simple route
 app.get("/health", (req, res) => {
@@ -34,6 +35,7 @@ appV1.use('/notification', notificationRouters);
 appV1.use('/post', postRouters);
 appV1.use('/user', userRouters);
 
+appV1.post('/init-data', getInitData);
 
 // Handle 404 Path
 app.use((req, res, next) => {
