@@ -218,15 +218,22 @@ postRouters.post('/:id/dislike', async (req, res) => {
 });
 
 postRouters.post("/", async (req, res) => {
-  const validator = new Validator(req.body, {
-    post_user_id: "required|integer",
-    type: "required",
-    feed: "required",
-    post_name: "required",
-    location_address: "required",
-    location_coordinate: "required",
-    city: "required",
-  });
+  const { uid: user_id } = getTokenInfo(req);
+  const validator = new Validator(
+    {
+      ...req.body,
+      post_user_id: user_id,
+    }, 
+    {
+      post_user_id: "required|integer",
+      type: "required",
+      feed: "required",
+      post_name: "required",
+      location_address: "required",
+      location_coordinate: "required",
+      city: "required",
+    }
+  );
 
   return validator
     .check()

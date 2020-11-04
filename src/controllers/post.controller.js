@@ -9,22 +9,43 @@ const { generatePostData, generatePostLikeData } = require('../helpers/model.hel
 
 
 exports.create = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
   let postData = generatePostData(req.body);
-  postData.user_id = req.body.post_user_id;
+  postData.user_id = user_id; // req.body.post_user_id;
   postData.post_time = req.body.post_time ? req.body.post_time : generateTZTimeString();
   return Post.create(postData)
-    .then((post) => res.json({ status: true, message: "success", data: Post.output(post) }))
+    .then(post => Promise.all([
+      post,
+      User.getById(post.user_id)
+    ]))
+    .then(([post, user]) => {
+      post = Post.output(post);
+      return res.json({ status: true, message: "success", data: { ...post, liked: 0, user: User.output(user) } })
+    })
     .catch((error) => respondError(res, error));
 };
 
 exports.getById = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
   const { id } = req.params;
   return Post.getById(id)
-    .then(post => res.json({ 
-      status: true,
-      message: 'success',
-      data: Post.output(post)
-    }))
+    .then(post => Promise.all([
+      post,
+      User.getById(post.user_id),
+      PostLike.postLikesOfUser({ post_id: id, user_id })
+    ]))
+    .then(([post, user, likes]) => {
+      post = Post.output(post);
+      return res.json({ 
+        status: true,
+        message: 'success',
+        data: {
+          ...post, 
+          liked: likes.length > 1 ? 1 : 0,
+          user: User.output(user)
+        }
+      })
+    })
     .catch((error) => respondError(res, error));
 }
 
