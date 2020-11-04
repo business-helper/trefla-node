@@ -6,7 +6,7 @@ const Notification = require("../models/notification.model");
 
 const { BearerMiddleware } = require('../middlewares/basic.middleware');
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { respondError } = require("../helpers/common.helpers");
+const { respondValidateError } = require("../helpers/common.helpers");
 
 const getPostSummary = async (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
@@ -65,7 +65,7 @@ const getInitDataWrapper = (req, res) => {
   return BearerMiddleware(req, res, () => {
     return getInitData(req, res)
       .then(result => res.json(result))
-      .catch(error => respondError(res, error))
+      .catch(error => respondValidateError(res, error))
   });
 }
 
@@ -101,7 +101,7 @@ const getInitData = (req, res) => {
         notifications: notis,
       };
     })
-    .catch(error => error);
+    // .catch(error => error);
 }
 
 module.exports = getInitDataWrapper;
