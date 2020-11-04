@@ -240,10 +240,12 @@ commentRouters.post("/", async (req, res) => {
     ]).then(([target]) => {
       if (!target) {
         provider.error(
-          "id",
+          "target_id",
           "custom",
           `Target post or comment with id "${provider.inputs.target_id}" does not exist!`
         );
+      } else if (target.type == 'COMMENT') {
+        provider.error('target_id', 'custom', "This action is not allowed!");
       }
     })
   );

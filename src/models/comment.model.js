@@ -72,6 +72,10 @@ Comment.getById = (id) => {
 
 Comment.output = (comment) => {
   // comment.isGuest = int2Bool(comment.isGuest);
+  const delKeys = ['create_time', 'update_time'];
+  delKeys.forEach(key => {
+    comment[key] !== undefined ? delete comment[key] : null;
+  })
   return comment;
 }
 

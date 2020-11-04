@@ -74,6 +74,54 @@ exports.pagination = (req, res) => {
         liked: commentLikedArray[i].length > 0 ? 1 : 0,
         user: User.output(_posters[comment.user_id])
       }));
+      if (type === 'POST') {
+        return Promise.all(_comments.map(comment => Comment.pagination({
+          limit: 3,
+          offset: 0,
+          target_id: comment.id,
+          type: 'COMMENT',
+        })));
+      } else {
+        return [];
+      }
+    })
+    .then(async (children_array) => {
+      
+      if (children_array.length > 0) {
+        let user_ids = [0];
+        let comment_ids = [0];
+        children_array.forEach(children => {
+          children.forEach(comment => {
+            user_ids.push(comment.user_id);
+            !comment_ids.includes(comment.id) ? comment_ids.push(comment.id) : null;
+          })
+        });
+
+        const users = await User.getByIds(user_ids);
+        let usersObj = {};
+        users.forEach(user => {
+          usersObj[user.id] = user;
+        });
+        const likeArray = await Promise.all(comment_ids.map(comment_id => CommentLike.commentLikesOfUser({ user_id: uid, comment_id }))); 
+        // console.log('[like array]', comment_ids, likeArray);
+        const likes = {};
+        likeArray.forEach((la, i) => {
+          likes[comment_ids[i]] = likeArray[i];
+        });
+
+        // transform children
+        children_array.forEach((children, i) => {
+          const cld = children.map(comment => ({
+            ...(Comment.output(comment)),
+            liked: likes[comment.id].length > 0,
+            user: User.output(usersObj[comment.user_id])
+          }));
+          _comments[i] = {
+            ...(_comments[i]),
+            children: cld,
+          }
+        });
+      }
 
       return res.json({
         status: true,
