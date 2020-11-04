@@ -26,21 +26,32 @@ Post.save = async (post) => {
   });
 }
 
-Post.pagination = async ({ limit, offset }) => {
+Post.pagination = async ({ limit, offset, type = null }) => {
+  const strWhere = type ? ` WHERE type='${type}'` : '';
   return new Promise((resolve, reject) => {
-    sql.query("SELECT * FROM posts LIMIT ? OFFSET ? ", [limit, offset], (err, res) => {
+    sql.query(`SELECT * FROM posts ${strWhere} LIMIT ? OFFSET ? `, [limit, offset], (err, res) => {
       err ? reject(err) : resolve(res);
     })
   });
 }
 
-Post.getAll = () => {
+Post.getAll = ({ type = null }) => {
+  const strWhere = type ? ` WHERE type='${type}'` : '';
   return new Promise((resolve, reject) => {
-    sql.query("SELECT * FROM posts", (err, res) => {
+    sql.query(`SELECT * FROM posts ${strWhere}`, (err, res) => {
 			err ? reject(err) : resolve(res);
     });
   });
 };
+
+Post.getCountOfPosts = ({ type = null }) => {
+  const strWhere = type ? ` WHERE type='${type}'` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM posts ${strWhere}`, (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    });
+  });
+}
 
 Post.getById = (id) => {
   return new Promise((resolve, reject) => {
@@ -52,7 +63,7 @@ Post.getById = (id) => {
 
 Post.output = (post) => {
   post.post_user_id = post.user_id;
-  delete post.user_id;
+  ['user_id', 'create_time', 'update_time'].map(key => delete post[key]);
   return post;
 }
 

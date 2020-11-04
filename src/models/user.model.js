@@ -42,6 +42,14 @@ User.getById = (id) => {
   });
 }
 
+User.getByIds = (ids) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM users WHERE id IN (?)", [ids], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
 User.getByEmail = (email) => {
 	return new Promise((resolve, reject) => {
 		sql.query("SELECT * FROM users WHERE email=? LIMIT 1", [email], (err, res) => {
@@ -58,8 +66,23 @@ User.getByUserName = (user_name) => {
 	});
 }
 
-User.output = (user) => {
-  user.location_array = JSON.parse(user.location_array);
+User.output = (user, mode = 'NORMAL') => {
+  try {
+    user.location_array = JSON.parse(user.location_array);
+  } catch (e) {
+    console.log('[la]', user.location_array);
+  }
+  // keys to delete
+  let delKeys = [];
+  if (mode === 'NORMAL') {
+    delKeys = ['email', 'password', 'language', 'bio', 'radiusAround', 'noti_num', 'location_array', 'postAroundCenterCoordinate', 'create_time', 'update_time']
+  } else if (mode === 'PROFILE') {
+    const delKeys = ['password', 'create_time', 'update_time'];
+  }
+  // delete the given keys
+  delKeys.forEach(field => {
+    delete user[field];
+  });
   return user;
 }
 

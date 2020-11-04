@@ -18,7 +18,7 @@ const genreateAuthToken = (user) => {
       iat: Math.floor(Date.now() / 1000) - 30,
     },
     appSecret,
-    { expiresIn: "24h" }
+    { expiresIn: "100h" }
   );
 };
 
@@ -60,11 +60,17 @@ const comparePassword = (plainPassword, hash) => {
 	});
 }
 
+const getTokenInfo = (req) => {
+  const bauth = (req.headers.authorization || '').split(' ')[1] || '';
+  return parseToken(bauth);
+}
+
 
 module.exports = {
   comparePassword,
   genreateAuthToken,
   generatePassword,
   generateUserData,
+  getTokenInfo,
 	parseToken,
 };

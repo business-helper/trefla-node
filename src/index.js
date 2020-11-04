@@ -20,7 +20,6 @@ const langRouters = require('./routes/lang.routes');
 const notificationRouters = require('./routes/notification.routes');
 const postRouters = require('./routes/post.routes');
 
-console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
 // simple route
 app.get("/health", (req, res) => {

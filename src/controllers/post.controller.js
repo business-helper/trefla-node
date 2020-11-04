@@ -1,6 +1,8 @@
 const { Validator } = require("node-input-validator");
 const Post = require("../models/post.model");
+const User = require("../models/user.model");
 const PostLike = require("../models/postLike.model");
+const { getTokenInfo } = require('../helpers/auth.helpers');
 const { generateTZTimeString, getTotalLikes, respondError } = require("../helpers/common.helpers");
 const { generatePostData, generatePostLikeData } = require('../helpers/model.helpers');
 
@@ -27,23 +29,48 @@ exports.getById = (req, res) => {
 }
 
 exports.pagination = (req, res) => {
-  const { page, limit } = req.body;
+  //const tokenInfo = getTokenInfo(req); //console.log('tokenInfo', tokenInfo);
+  const { uid } = getTokenInfo(req);
+  const { page, limit, type } = req.body;
   const offset = page * limit;
+  let _posts = [], _total = 0, _posters = {};
   return Promise.all([
-    Post.pagination({ limit, offset }),
-    Post.getAll(),
+    Post.pagination({ limit, offset, type }),
+    Post.getCountOfPosts({ type }),
   ])
-    .then(([posts, allPosts]) => {
+    .then(async ([posts, total]) => {
+      _posts = posts; _total = total;
+      const poster_ids = posts.map(post => post.user_id);
+      return User.getByIds(poster_ids);
+    })
+    .then(users => {
+      users.map(user => _posters[user.id] = user);
+      return Promise.all(_posts.map(post => PostLike.postLikesOfUser({ user_id: uid, post_id: post.id })))
+    })
+    .then((postLikedArray) => {
+      // console.log('[Liked]', uid, postLikedArray.map(a => a.length));
+      // console.log('[posters]', _posters);
+
+      postLikedArray.map((likesArr, i) => _posts[i].liked = likesArr.length > 0 ? 1 : 0 );
+
+      let posts = _posts.map(post => Post.output(post)); // filter keys
+
+      posts = posts.map(post => ({...post, user: _posters[post.user_id]})); // insert user object to each post
+
+      posts.forEach(post => {
+        post.user = User.output(_posters[post.post_user_id]);
+      });
+
       return res.json({
         status: true,
         message: 'success',
-        data: posts.map(item => Post.output(item)),
+        data: posts,
         pager: {
           page,
           limit,
-          total: allPosts.length
+          total: _total
         },
-        hadMore: (limit * page + posts.length) < allPosts.length
+        hadMore: (limit * page + posts.length) < _total
       });
     })
     .catch((error) => respondError(res, error));
@@ -51,8 +78,8 @@ exports.pagination = (req, res) => {
 
 exports.getAll = (req, res) => {
   Post.getAll()
-    .then((langs) =>
-      res.json({ status: true, message: "success", data: langs })
+    .then((posts) =>
+      res.json({ status: true, message: "success", data: posts })
     )
     .catch((error) =>
       res.status(500).json({
@@ -90,8 +117,9 @@ exports.updateById = (req, res) => {
 }
 
 exports.togglePostLike = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
   const { id: post_id } = req.params;
-  const { user_id, type } = req.body;
+  const { type } = req.body;
   return PostLike.userLikedPost({ user_id, post_id, type })
     .then(postLike => {
       return postLike ? dislikePost({ user_id, post_id, type }) : likePost({ user_id, post_id, type });
@@ -99,6 +127,44 @@ exports.togglePostLike = (req, res) => {
     .then(result => res.json({
       status: !!result,
       message: result ? 'success' : 'failed'
+    }))
+    .catch((error) => respondError(res, error));
+}
+
+exports.doLikePost = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { id: post_id } = req.params;
+  const { type } = req.body;
+  return PostLike.userLikedPost({ user_id, post_id, type })
+    .then(postLike => {
+      if (postLike) {
+        throw Object.assign(new Error('You already liked this post!'), { code: 400 });
+      } else {
+        return likePost({ user_id, post_id, type });
+      }
+    })
+    .then(result => res.json({
+      status: !!result,
+      message: result ? 'You liked this post!' : 'Failed to like post!'
+    }))
+    .catch((error) => respondError(res, error));
+}
+
+exports.disLikePost = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { id: post_id } = req.params;
+  const { type } = req.body;
+  return PostLike.userLikedPost({ user_id, post_id, type })
+    .then(postLike => {
+      if (postLike) {
+        return dislikePost({ user_id, post_id, type });
+      } else {
+        throw Object.assign(new Error('You never liked this post!'), { code: 400 });
+      }
+    })
+    .then(result => res.json({
+      status: !!result,
+      message: result ? 'You disliked this post!' : 'Failed to dislike post!'
     }))
     .catch((error) => respondError(res, error));
 }

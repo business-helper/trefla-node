@@ -30,6 +30,14 @@ PostLike.userLikedPost = async ({ user_id, post_id, type }) => {
   });
 }
 
+PostLike.postLikesOfUser = async ({ user_id, post_id }) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM post_likes WHERE user_id=? AND post_id=?", [user_id, post_id], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
 PostLike.pagination = async ({ limit, offset, receiver_id }) => {
   const strWhere = (receiver_id) ? ` WHERE receiver_id=${receiver_id}` : '';
   return new Promise((resolve, reject) => {
