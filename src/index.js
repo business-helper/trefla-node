@@ -45,4 +45,28 @@ app.use((req, res, next) => {
 	});
 })
 
+
+
+/////////////////////////////////////
+//   Socket IO
+//
+
+// const io = require('socket.io')(http);
+// const socketClient = require('socket.io-client')(`http://localhost:${appConfig.port}`);
+// app.locals.socketClient = socketClient;
+
+// io.on('connection', (socket) => {
+//   console.log('new connection', socket.id);
+
+//   socket.on('disconnect', () => {
+
+//   });
+
+//   socket.on('SMS_HEALTH', data => {
+//     console.log('[check health]', data);
+//     io.sockets.emit('STC_HEALTH', { ...data, message: "I'm healthy!" });
+//   });
+
+// })
+
 http.listen(appConfig.port, () => `Server running on port ${appConfig.port}`);

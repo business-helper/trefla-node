@@ -63,7 +63,7 @@ Post.getById = (id) => {
 
 Post.output = (post) => {
   post.post_user_id = post.user_id;
-  ['user_id', 'create_time', 'update_time'].map(key => delete post[key]);
+  ['user_id', 'create_time', 'update_time', 'city'].map(key => delete post[key]);
   return post;
 }
 
