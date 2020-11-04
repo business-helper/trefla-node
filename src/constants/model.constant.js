@@ -24,6 +24,7 @@ exports.DEFAULT_USER = {
   location_array: JSON.stringify([]),
   postAroundCenterCoordinate: '',
   city: '',
+  recovery_code: '',
   active: 0,
   create_time: timestamp(),
   update_time: timestamp()

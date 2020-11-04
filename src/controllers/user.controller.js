@@ -67,19 +67,23 @@ exports.forgotPassword = (req, res) => {
       const emailConsent = et.body
         .replace(new RegExp('%Username%'), user.user_name)
         .replace(new RegExp('%code%'), req.body.code);
-      return sendMail({
-        from: 'trefla <admin@trefla.com>',
-        to: user.email,
-        subject: et.subject,
-        body: emailConsent,
-      });
+      return Promise.all([
+        sendMail({
+          from: 'trefla <admin@trefla.com>',
+          to: user.email,
+          subject: et.subject,
+          body: emailConsent,
+        }),
+        User.save({ ...user, recovery_code: req.body.code })
+      ]);
     })
-    .then(info => {
+    .then(([info, saved]) => {
       if (info && info.messageId) {
         return res.json({
           status: true, 
           message: 'success', 
           data: {
+            code: req.body.code,
             messageId: info.messageId
           }
         });
@@ -100,8 +104,13 @@ exports.resetPassword = (req, res) => {
     generatePassword(req.body.password)
   ])
     .then(([ user, password ]) => {
-      user.password = password;
-      return User.save(user);
+      if (user.recovery_code !== req.body.code) {
+        throw Object.assign(new Error('Recovery code does not match!'), { code: 400 });
+      } else {
+        user.password = password;
+        user.recovery_code = '';
+        return User.save(user);
+      }
     })
     .then(user => res.json({
       status: true,

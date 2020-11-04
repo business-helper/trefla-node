@@ -97,7 +97,7 @@ authRouters.post("/login", async (req, res) => {
 authRouters.post("/forgot_password", async (req, res) => {
   const validator = new Validator(req.body, {
     email: "required|email|minLength:5",
-    user_id: "required|integer",
+    // user_id: "required|integer",
     code: "required",
   });
 
@@ -108,7 +108,7 @@ authRouters.post("/forgot_password", async (req, res) => {
           provider.error(
             "email",
             "custom",
-            `User with email "${provider.inputs.email}" does not exist!`
+            `User does not exist with the given email!`
           );
         }
       }
@@ -133,13 +133,14 @@ authRouters.post("/reset_password", async (req, res) => {
   const validator = new Validator(req.body, {
     email: "required|email|minLength:5",
     password: "required|minLength:5|maxLength:50",
+    code: "required",
   });
 
   validator.addPostRule(async (provider) =>
     Promise.all([User.getByEmail(provider.inputs.email)]).then(
       ([userByEmail]) => {
         if (!userByEmail) {
-          provider.error("email", "custom", `User with email "${provider.inputs.email}" does not exist!`);
+          provider.error("email", "custom", `User does not exist with the given email!`);
         }
       }
     )
