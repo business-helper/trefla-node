@@ -10,7 +10,7 @@ const Post = function (lang) {
 };
 
 Post.create = (post) => {
-  post.id !== undefined ? delete post.id : '';
+  delete post.id;
   return new Promise((resolve, reject) => {
     sql.query("INSERT INTO posts SET ?", post, (err, res) => {
 			err ? reject(err) : resolve({ id: res.insertId, ...post });
