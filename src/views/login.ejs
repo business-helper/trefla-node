@@ -4,35 +4,70 @@
 <head>
   <title>Login - Trefla Chat</title>
   <link rel="icon" type="image/png" href="/img/treflaapp.png" />
+  <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/plugins/toastr/toastr.min.css" />
   <link rel="stylesheet" href="/css/login.css" />
   <style>
     main {
-      max-width: 640px;
+      max-width: 480px;
       margin: auto;
-      background-color: #eff;
-      min-height: 100vh;
+      /* background-color: #eff; */
+      /* min-height: 100vh; */
+    }
+    #header {
+      margin-top: 15vh;
+    }
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+    }
+    #logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: auto;
+    }
+    h3.title {
+      color: #e31c79;
+      font-weight: 700;
     }
   </style>
+
+  <script src="/plugins/jquery.js"></script>
 </head>
 
 <body>
   <main>
-    <img src="/img/treflaapp.png" />
-    <form>
-      <label>
-      <input />
-      </label>
+    <div id="header">
+      <div class="logo-container">
+        <img id="logo" src="/img/treflaapp.png" />
+      </div>
+      <h3 class="title text-center mb-3">Trefla Chat</h3>
+    </div>
+    
+    <form class="px-3" id="login-form">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email or Username</label>
+        <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email or username" required />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" required />
+      </div>
+      <!-- <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div> -->
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
     </form>
   </main>
-  <ul id="messages"></ul>
-  <p id="typing-event"></p>
-  <form action="">
-    <input id="msg" autocomplete="off" />
-    <button>Send</button>
-  </form>
 </body>
-<script src="https://cdn.socket.io/socket.io-2.3.0.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="/plugins/socketio.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/plugins/toastr/toastr.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/login.js"></script>
 

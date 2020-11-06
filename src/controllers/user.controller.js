@@ -39,7 +39,7 @@ exports.login = (req, res) => {
       userByEmail || userByName,
       comparePassword(req.body.password, (userByEmail || userByName).password),
       genreateAuthToken(userByEmail || userByName),
-      User.save({ ...(userByEmail || userByName), device_token: req.body.device_token })
+      req.body.device_token !== undefined ? User.save({ ...(userByEmail || userByName), device_token: req.body.device_token }) : null
     ]))
     .then(([ user, match, token ]) => {
       if (match) {

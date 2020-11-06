@@ -60,7 +60,7 @@ authRouters.post("/login", async (req, res) => {
   const validator = new Validator(req.body, {
     email_username: "required",
     password: "required|minLength:5|maxLength:50",
-    device_token: "required"
+    // device_token: "required"
   });
 
   validator.addPostRule(async (provider) =>

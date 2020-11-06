@@ -1,9 +1,14 @@
 'use strict';
+
 var socket = io('http://localhost:3500/', {
   query: 'foo=bar',
   extraHeaders: {
     Authorization: "Bearer hey"
   }
+});
+
+$(function() {
+  checkAuthentication();
 });
 
 /*
