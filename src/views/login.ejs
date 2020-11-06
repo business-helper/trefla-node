@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Login - Trefla Chat</title>
+  <link rel="icon" type="image/png" href="/img/treflaapp.png" />
+  <link rel="stylesheet" href="/css/login.css" />
+  <style>
+    main {
+      max-width: 640px;
+      margin: auto;
+      background-color: #eff;
+      min-height: 100vh;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <img src="/img/treflaapp.png" />
+    <form>
+      <label>
+      <input />
+      </label>
+    </form>
+  </main>
+  <ul id="messages"></ul>
+  <p id="typing-event"></p>
+  <form action="">
+    <input id="msg" autocomplete="off" />
+    <button>Send</button>
+  </form>
+</body>
+<script src="https://cdn.socket.io/socket.io-2.3.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/login.js"></script>
+
+</html>

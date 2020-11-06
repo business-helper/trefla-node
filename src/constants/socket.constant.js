@@ -1,0 +1,1 @@
+exports.SKT_CHECK_HEALTH = "CHECK_HEALTH";

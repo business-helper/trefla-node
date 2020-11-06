@@ -8,9 +8,18 @@ const appConfig = require('./config/app.config');
 
 //  parse requests of content-type - application/json
 app.use(bodyParser.json());
-
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Static assets
+app.use(express.static('assets'));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+
+
+const pageRouters = require('./routes/page.routes');
+app.use('/page', pageRouters);
+
 app.use('/api/v1', appV1);
 
 // Routers
@@ -51,22 +60,22 @@ app.use((req, res, next) => {
 //   Socket IO
 //
 
-// const io = require('socket.io')(http);
+const io = require('socket.io')(http);
 // const socketClient = require('socket.io-client')(`http://localhost:${appConfig.port}`);
 // app.locals.socketClient = socketClient;
 
-// io.on('connection', (socket) => {
-//   console.log('new connection', socket.id);
+io.on('connection', (socket) => {
+  console.log('new connection', socket.id);
 
-//   socket.on('disconnect', () => {
+  socket.on('disconnect', () => {
+    console.log('[disconnect]', socket.id);
+  });
 
-//   });
+  socket.on('SMS_HEALTH', data => {
+    console.log('[check health]', data);
+    io.sockets.emit('STC_HEALTH', { ...data, message: "I'm healthy!" });
+  });
 
-//   socket.on('SMS_HEALTH', data => {
-//     console.log('[check health]', data);
-//     io.sockets.emit('STC_HEALTH', { ...data, message: "I'm healthy!" });
-//   });
+})
 
-// })
-
-http.listen(appConfig.port, () => `Server running on port ${appConfig.port}`);
+http.listen(Number(appConfig.port), () => `Server running on port ${appConfig.port}`);
