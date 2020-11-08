@@ -1,14 +1,11 @@
 'use strict';
-
+checkAuthentication();
 var socket = io('http://localhost:3500/', {
-  query: 'foo=bar',
-  extraHeaders: {
-    Authorization: "Bearer hey"
-  }
+  query: `token=${loadToken()}`
 });
 
 $(function() {
-  checkAuthentication();
+  
 });
 
 /*

@@ -1,4 +1,4 @@
-const { timestamp } = require('../helpers/common.helpers');
+const { generateTZTimeString, timestamp } = require('../helpers/common.helpers');
 
 exports.DEFAULT_USER = {
   id: 0,
@@ -25,6 +25,7 @@ exports.DEFAULT_USER = {
   postAroundCenterCoordinate: '',
   city: '',
   recovery_code: '',
+  online: 0,
   active: 0,
   create_time: timestamp(),
   update_time: timestamp()
@@ -71,7 +72,7 @@ exports.DEFAULT_COMMENT = {
   like_5_num: 0,
   like_6_num: 0,
   active: 1,
-  time: '',
+  time: generateTZTimeString(),
   create_time: timestamp(),
   update_time: timestamp(),
 };
@@ -81,8 +82,8 @@ exports.DEFAULT_NOTIFICATION = {
   sender_id: 0,
   receiver_id: 0,
   type: 0,
-  optional_val: 0,
-  time: '',
+  optional_val: '',
+  time: generateTZTimeString(),
   create_time: timestamp(),
   update_time: timestamp(),
 };
@@ -105,3 +106,31 @@ exports.DEFAULT_COMMENTLIKE = {
   update_time: timestamp(),
 }
 
+exports.DEFAULT_CHAT = {
+  id: '',
+  user_ids: "",
+  accept_status: 0,
+  isForCard: 0,
+  card_number: '',
+  unread_nums: '',
+  online_status: '',
+  last_messages: '',
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_MESSAGE = {
+  id: '',
+  chat_id: 0,
+  message: '',
+  sender_id: 0,
+  receiver_id: 0,
+  isOnlyEmoji: 0,
+  numEmoji: 0,
+  sizeEmoji: 0,
+  type: 0,
+  status: 1,
+  time: generateTZTimeString(),
+  create_time: timestamp(),
+  update_time: timestamp()
+};

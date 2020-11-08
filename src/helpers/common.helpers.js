@@ -53,6 +53,7 @@ const respondError = (res, error) => {
 };
 
 const respondValidateError = (res, error) => {
+  console.log('[Validation error]', error);
   return res.status(500).json({
 		status: false,
 		message: error.message || ERR_MSG_VALIDATE,

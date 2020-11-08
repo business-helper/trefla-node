@@ -68,6 +68,7 @@ User.getByUserName = (user_name) => {
 }
 
 User.output = (user, mode = 'NORMAL') => {
+  if (!user) return null;
   try {
     user.location_array = JSON.parse(user.location_array || "");
   } catch (e) {

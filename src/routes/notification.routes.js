@@ -76,7 +76,7 @@ notificationRouters.post("/", async (req, res) => {
     sender_id: "required|integer",
     receiver_id: "required|integer",
     type: "required|integer",
-    optional_val: "required|integer"
+    optional_val: "required"
   });
 
   validator.addPostRule(async (provider) =>
