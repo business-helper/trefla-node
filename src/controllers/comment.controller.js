@@ -76,7 +76,7 @@ exports.pagination = (req, res) => {
       }));
       if (type === 'POST') {
         return Promise.all(_comments.map(comment => Comment.pagination({
-          limit: 3,
+          limit: 10000,
           offset: 0,
           target_id: comment.id,
           type: 'COMMENT',
@@ -113,7 +113,7 @@ exports.pagination = (req, res) => {
         children_array.forEach((children, i) => {
           const cld = children.map(comment => ({
             ...(Comment.output(comment)),
-            liked: likes[comment.id].length > 0,
+            liked: likes[comment.id].length > 0 ? 1 : 0,
             user: User.output(usersObj[comment.user_id])
           }));
           _comments[i] = {

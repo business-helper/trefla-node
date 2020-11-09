@@ -51,6 +51,11 @@ userRouters.get('/me', async (req, res) => {
   .catch((error) => respondValidateError(res, error));
 })
 
+userRouters.post('/', async (req, res) => {
+  userCtrl.pagination(req, res)
+  .catch(error => respondValidateError(res, error));
+});
+
 userRouters.patch('/me', async (req, res) => {
   const { uid: id } = getTokenInfo(req);
   const validator = new Validator({
@@ -188,5 +193,7 @@ userRouters.patch('/:id', async (req, res) => {
   .then(() => postCtrl.updateById(req, res))
   .catch((error) => respondValidateError(res, error));
 })
+
+
 
 module.exports = userRouters;

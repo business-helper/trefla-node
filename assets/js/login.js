@@ -6,7 +6,7 @@ $(function() {
     const email_username = $('#email').val();
     const password = $('#password').val();
 
-    myRequest('/api/v1/auth/login', 'post', { email_username, password })
+    myBasicRequest('/api/v1/auth/login', 'post', { email_username, password })
       .then(result => {
         console.log('[success]', result);
         toastr.success('Login succeeded!');

@@ -68,3 +68,47 @@ exports.getById = async (req, res) => {
     .catch((error) => respondError(res, error));
 }
 
+exports.pendingChatrooms = async (req, res) => {
+  console.log('me');
+  const { uid } = getTokenInfo(req);
+  return Chat.pendingChatrooms(uid)
+    .then(chats => {
+      let user_ids = [0];
+      for (let chat of chats) {
+        let chat_users = JSON.parse(chat.user_ids);
+        if (chat_users.length > 1) {
+          user_ids.push(chat_users[0]);
+          user_ids.push(chat_users[chat_users.length - 1]);
+        }
+      }
+      const users = User.getByIds(user_ids);
+      return Promise.all([ chats, users ]);
+    })
+    .then(([ chats, users ]) => {
+      let _users = {};
+      users.forEach(user => {
+        _users[user.id] = User.output(user);
+      });
+      chats = chats.map(chat => Chat.output(chat))
+        .map(chat => {
+          let user_ids = [ chat.user_ids[0] ];
+          if (chat.user_ids.length > 1) {  
+            user_ids.push(chat.user_ids[chat.user_ids.length - 1]);
+          }
+
+          const partnerId = user_ids[0] === uid ? user_ids[1] : user_ids[0];
+          return {
+            ...chat,
+            isSent: user_ids[0] === uid,
+            user: _users[partnerId.toString()]
+          };
+        });
+      
+      return res.json({
+        status: true,
+        message: 'success',
+        data: chats,
+      });
+    })
+    .catch(error => respondError(res, error));
+}

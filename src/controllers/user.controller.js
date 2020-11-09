@@ -148,6 +148,25 @@ exports.getProfile = (req, res) => {
     .catch((error) => respondError(res, error));
 }
 
+exports.pagination = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  return Promise.all([
+    User.pagination({ limit: req.body.limit || 10, page: req.body.page || 0 }),
+    User.numberOfUsers()
+  ])
+    .then(([users, total]) => res.json({
+      status: true,
+      message: 'success',
+      data: users.map(user => User.output(user)), //.filter(user => user.id !== user_id)
+      pager: {
+        limit: req.body.limit || 10,
+        page: req.body.page || 0
+      },
+      hasMore: (req.body.page || 0) * (req.body.limit || 10) + users.length < total
+    }))
+    .catch(error => respondError(res, error));
+}
+
 exports.updateProfile = (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
   return User.getById(user_id)

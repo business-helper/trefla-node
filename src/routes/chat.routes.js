@@ -15,6 +15,14 @@ chatRouters.use((req, res, next) => {
   BearerMiddleware(req, res, next);
 });
 
+chatRouters.get('/pending', async (req, res) => {
+  return chatCtrl.pendingChatrooms(req, res);
+});
+
+chatRouters.get('/accepted', async (req, res) => {
+
+});
+
 chatRouters.get('/:id', async (req, res) => {
   const validator = new Validator({
     id: req.params.id
@@ -25,12 +33,12 @@ chatRouters.get('/:id', async (req, res) => {
   validator.addPostRule(async (provider) =>
     Promise.all([
       Chat.getById(provider.inputs.id)
-    ]).then(([commentById]) => {
-      if (!commentById) {
+    ]).then(([chatById]) => {
+      if (!chatById) {
         provider.error(
           "id",
           "custom",
-          `Comment with id "${provider.inputs.id}" does not exists!`
+          `Chatroom does not exists for the given id!`
         );
       }
     })
@@ -49,6 +57,10 @@ chatRouters.get('/:id', async (req, res) => {
   .then(() => chatCtrl.getById(req, res))
   .catch((error) => respondValidateError(res, error));
 })
+
+chatRouters.get('/', async (req,res) => {
+
+});
 
 chatRouters.post("/pagination", async (req, res) => {
   const validator = new Validator(req.body, {
@@ -69,153 +81,6 @@ chatRouters.post("/pagination", async (req, res) => {
     .then(() => commentCtrl.pagination(req, res))
     .catch((error) => respondValidateError(res, error));
 });
-
-chatRouters.post('/:id/toggle-like', async (req, res) => {
-  const { uid: user_id } = getTokenInfo(req);
-  const { type } = req.body;
-  const validator = new Validator({
-    id: req.params.id,
-    user_id,
-    type
-  }, {
-    id: "required|integer",
-    user_id: "required|integer",
-    type: "required|integer|between:1,6"
-  });
-
-  validator.addPostRule(async (provider) =>
-    Promise.all([
-      Comment.getById(provider.inputs.id),
-      User.getById(provider.inputs.user_id),
-    ]).then(([comment, user]) => {
-      if (!comment) {
-        provider.error(
-          "id",
-          "custom",
-          `Comment with id "${provider.inputs.id}" does not exists!`
-        );
-      }
-      if (!user) {
-        provider.error(
-          "id",
-          "custom",
-          `User with id "${provider.inputs.user_id}" does not exists!`
-        );
-      }
-    })
-  );
-
-  return validator
-  .check()
-  .then((matched) => {
-    if (!matched) {
-      throw Object.assign(new Error("Invalid request"), {
-        code: 400,
-        details: validator.errors,
-      });
-    }
-  })
-  .then(() => commentCtrl.toggleCommentLike(req, res))
-  .catch((error) => respondValidateError(res, error));
-})
-
-chatRouters.post('/:id/like', async (req, res) => {
-  const { uid: user_id } = getTokenInfo(req);
-  const { type } = req.body;
-  const validator = new Validator({
-    id: req.params.id,
-    user_id,
-    type
-  }, {
-    id: "required|integer",
-    user_id: "required|integer",
-    type: "required|integer|between:1,6"
-  });
-
-  validator.addPostRule(async (provider) =>
-    Promise.all([
-      Comment.getById(provider.inputs.id),
-      User.getById(provider.inputs.user_id),
-    ]).then(([comment, user]) => {
-      if (!comment) {
-        provider.error(
-          "id",
-          "custom",
-          `Target comment does not exist!`
-        );
-      }
-      if (!user) {
-        provider.error(
-          "id",
-          "custom",
-          `User does not exist!`
-        );
-      }
-    })
-  );
-
-  return validator
-  .check()
-  .then((matched) => {
-    if (!matched) {
-      throw Object.assign(new Error("Invalid request"), {
-        code: 400,
-        details: validator.errors,
-      });
-    }
-  })
-  .then(() => commentCtrl.doLikeComment(req, res))
-  .catch((error) => respondValidateError(res, error));
-})
-
-chatRouters.post('/:id/dislike', async (req, res) => {
-  const { uid: user_id } = getTokenInfo(req);
-  const { type } = req.body;
-  const validator = new Validator({
-    id: req.params.id,
-    user_id,
-    type
-  }, {
-    id: "required|integer",
-    user_id: "required|integer",
-    type: "required|integer|between:1,6"
-  });
-
-  validator.addPostRule(async (provider) =>
-    Promise.all([
-      Comment.getById(provider.inputs.id),
-      User.getById(provider.inputs.user_id),
-    ]).then(([comment, user]) => {
-      if (!comment) {
-        provider.error(
-          "id",
-          "custom",
-          `Target comment does not exist!`
-        );
-      }
-      if (!user) {
-        provider.error(
-          "id",
-          "custom",
-          `User does not exist!`
-        );
-      }
-    })
-  );
-
-  return validator
-  .check()
-  .then((matched) => {
-    if (!matched) {
-      throw Object.assign(new Error("Invalid request"), {
-        code: 400,
-        details: validator.errors,
-      });
-    }
-  })
-  .then(() => commentCtrl.dislikeComment(req, res))
-  .catch((error) => respondValidateError(res, error));
-})
 
 /**
  * @endpoint /normal

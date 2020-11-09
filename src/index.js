@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 		status: false,
 		message: `Can not process the request ${req.url}`
 	});
-})
+});
 
 
 const { bootstrapSocket } = require('./sockets');

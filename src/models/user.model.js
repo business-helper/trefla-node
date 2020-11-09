@@ -43,7 +43,7 @@ User.getById = (id) => {
   });
 }
 
-User.getByIds = (ids) => {
+User.getByIds = async (ids) => {
   return new Promise((resolve, reject) => {
     sql.query("SELECT * FROM users WHERE id IN (?)", [ids], (err, res) => {
       err ? reject(err) : resolve(res);
@@ -65,6 +65,23 @@ User.getByUserName = (user_name) => {
 			err ? reject(err) : resolve(res[0]);
 		});
 	});
+}
+
+User.pagination = ({ page, limit }) => {
+  const offset = page * limit;
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM users LIMIT ? OFFSET ?", [limit, offset], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+User.numberOfUsers = () => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT COUNT(id) as total FROM users", [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    });
+  });
 }
 
 User.output = (user, mode = 'NORMAL') => {

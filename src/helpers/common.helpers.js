@@ -54,9 +54,10 @@ const respondError = (res, error) => {
 
 const respondValidateError = (res, error) => {
   console.log('[Validation error]', error);
+  const details = error.details || {}; 
   return res.status(500).json({
 		status: false,
-		message: error.message || ERR_MSG_VALIDATE,
+		message: Object.keys(details).length > 0 ? details[Object.keys(details)[0]].message : (error.message || ERR_MSG_VALIDATE),
 		details: error.details || {}
 	});
 };

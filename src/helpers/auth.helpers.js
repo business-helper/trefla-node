@@ -18,7 +18,7 @@ const genreateAuthToken = (user) => {
       iat: Math.floor(Date.now() / 1000) - 30,
     },
     appSecret,
-    { expiresIn: "100h" }
+    { expiresIn: "100d" }
   );
 };
 

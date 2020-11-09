@@ -51,6 +51,14 @@ Chat.pagination = async ({ limit, offset, user_id = null, isForCard = null, card
   });
 }
 
+Chat.pendingChatrooms = async (user_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM chats WHERE JSON_SEARCH(user_ids, 'one', ?) IS NOT NULL`, [user_id], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
 Chat.getAll = ({ user_id = null, isForCard = null, card_number = null }) => {
   let where = [];
   if (user_id) {

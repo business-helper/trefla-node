@@ -40,7 +40,7 @@ Comment.pagination = async ({ limit, offset, target_id = null, type = null }) =>
   return new Promise((resolve, reject) => {
     sql.query(`SELECT * FROM comments ${strWhere} LIMIT ? OFFSET ? `, [limit, offset], (err, res) => {
       err ? reject(err) : resolve(res);
-    })
+    });
   });
 }
 

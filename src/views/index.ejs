@@ -4,19 +4,82 @@
 <head>
   <title>Trefla Chat</title>
   <link rel="icon" type="image/png" href="/img/treflaapp.png" />
+
+  <link rel="stylesheet" href="/plugins/toastr/toastr.min.css" />
   <link rel="stylesheet" href="/css/index.css" />
+
+  <script src="/plugins/jquery.js"></script>
 </head>
 
 <body>
-  <ul id="messages"></ul>
-  <p id="typing-event"></p>
-  <form action="">
-    <input id="msg" autocomplete="off" />
-    <button>Send</button>
-  </form>
+  <div class="p-3" id="header" style="padding: 15px;">
+    <span class="logo">Trefla</span>
+    <div style="float:right;">
+      <p>Logged in as <strong id="login-user"></strong></p>
+      <a class="link-item d-block" id="logout" style="float: right;">Lotout</a>
+    </div>
+  </div>
+  <div class="" id="page">
+    <!-- Contacts -->
+    <div class="" id="left-sidebar">
+      <!-- Chatrooms --->
+      <div class="mb-5" id="chatrooms">
+        <h3>Chatrooms</h3>
+        <ul id="chatrooms">
+          <li class="message-item">
+            <strong>test</strong> (alerk.starg.gmail.com)
+          </li>
+          <li class="message-item">
+            <strong>test</strong> (alerk.starg.gmail.com)
+          </li>
+          <li class="message-item">
+            <strong>test</strong> (alerk.starg.gmail.com)
+          </li>
+        </ul>
+      </div>
+
+      <div class="mb-5" id="incoming-pending">
+        <h3>Pending Chats</h3>
+        <ul id="pending-chats">
+          <li class="message-item">
+            No users...
+          </li>
+          <!-- <li class="message-item">
+            <strong>test</strong> (alerk.starg.gmail.com)
+          </li>
+          <li class="message-item">
+            <strong>test</strong> (alerk.starg.gmail.com)
+          </li>
+          <li class="message-item">
+            <strong>test</strong> (alerk.starg.gmail.com)
+          </li> -->
+        </ul>
+      </div>
+
+      <!---Online Users-->
+      <div class="" id="online-users">
+        <h3>Online Users</h3>
+        <ul>
+          <li class="message-item">
+            No users...
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Messenger -->
+    <div class="" id="messenger">
+      <ul id="messages"></ul>
+      <p id="typing-event"></p>
+      <form action="">
+        <input id="msg" autocomplete="off" />
+        <button>Send</button>
+      </form>
+    </div>
+  </div>
+
 </body>
 <script src="https://cdn.socket.io/socket.io-2.3.0.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="/plugins/toastr/toastr.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/chatroom.js"></script>
 
