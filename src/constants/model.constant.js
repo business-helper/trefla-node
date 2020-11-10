@@ -25,6 +25,7 @@ exports.DEFAULT_USER = {
   postAroundCenterCoordinate: '',
   city: '',
   recovery_code: '',
+  socket_id: "",
   online: 0,
   active: 0,
   create_time: timestamp(),
