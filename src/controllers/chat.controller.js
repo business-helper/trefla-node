@@ -69,7 +69,7 @@ exports.getById = async (req, res) => {
 }
 
 exports.pendingChatrooms = async (req, res) => {
-  const { uid } = getTokenInfo(req);
+  const { uid } = getTokenInfo(req); console.log('[uid]', uid);
   return Chat.pendingChatrooms(uid)
     .then(chats => {
       let user_ids = [0];
