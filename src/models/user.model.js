@@ -84,6 +84,14 @@ User.numberOfUsers = () => {
   });
 }
 
+User.updateSocketSession = ({ id, socketId }) => {
+  return new Promise((resolve, reject) => {
+    sql.query("UPDATE users SET socket_id=? WHERE id=?", [socketId, id], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
 User.output = (user, mode = 'NORMAL') => {
   if (!user) return null;
   try {

@@ -20,7 +20,7 @@ chatRouters.get('/pending', async (req, res) => {
 });
 
 chatRouters.get('/accepted', async (req, res) => {
-
+  return chatCtrl.availableChatrooms(req, res);
 });
 
 chatRouters.get('/:id', async (req, res) => {

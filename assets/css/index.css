@@ -8,6 +8,9 @@ body {
   font: 13px Helvetica, Arial;
 }
 
+.tm-hide { display: none; }
+.tm-show { display: block; }
+
 #header {
   padding: 15px;
 }
@@ -56,11 +59,33 @@ body {
 #left-sidebar .message-item {
   padding: 10px 0;
   cursor: pointer;
+  transition: all 0.3s;
+}
+
+#left-sidebar .message-item.hover:not(.selected):hover {
+  background-color: #eee;
+}
+
+#left-sidebar .message-item.selected {
+  background-color: #ddd;
 }
 
 #left-sidebar .message-item button {
   float: right;
 }
+
+#room-header {
+  padding: 0.5rem;
+  border-bottom: 1px solid #353535;
+}
+
+#partner-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #575757;
+}
+
+
 
 #messenger {
   background-color: #efe;
@@ -75,6 +100,9 @@ body {
   font-style: italic;
   padding: 5px 10px;
   color: rgb(169, 169, 169);
+  position: absolute;
+  bottom: 50px;
+  left: 1rem;
 }
 
 form {

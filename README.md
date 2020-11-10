@@ -17,3 +17,26 @@
 SELECT * FROM users WHERE JSON_SEARCH(bouquet, 'one', '3') IS NOT NULL
 ```
 
+## Socket.io
+
+### emit from server
+
+- return response
+
+```js
+  socket.emit('event_name', data);
+```
+
+- send to a single user
+```js
+  io.to(socket_id).emit('event_name' , data);
+```
+
+- send to room partners
+
+```js
+ socket.to(room_id).emit()
+```
+
+- send to all users in room
+  io.to(room_id).emit();

@@ -24,7 +24,7 @@ exports.create = async (req, res) => {
       User.getById(user_id),
       message ? Message.create({ ...message, chat_id: chat.id }) : null
     ]))
-    .then(([chat, sender]) => {
+    .then(([chat, sender, message]) => {
       chat = Chat.output(chat);
       chat.receiver = User.output(receiver);
       return res.json({
@@ -112,3 +112,80 @@ exports.pendingChatrooms = async (req, res) => {
     })
     .catch(error => respondError(res, error));
 }
+
+exports.availableChatrooms = async (req, res) => {
+  console.log('me');
+  const { uid } = getTokenInfo(req);
+  return Chat.myChatrooms(uid)
+    .then(chats => {
+      let user_ids = [0];
+      for (let chat of chats) {
+        let chat_users = JSON.parse(chat.user_ids);
+        if (chat_users.length > 1) {
+          user_ids.push(chat_users[0]);
+          user_ids.push(chat_users[chat_users.length - 1]);
+        }
+      }
+      const users = User.getByIds(user_ids);
+      return Promise.all([ chats, users ]);
+    })
+    .then(([ chats, users ]) => {
+      let _users = {};
+      users.forEach(user => {
+        _users[user.id] = User.output(user);
+      });
+      chats = chats.map(chat => Chat.output(chat))
+        .map(chat => {
+          let user_ids = [ chat.user_ids[0] ];
+          if (chat.user_ids.length > 1) {  
+            user_ids.push(chat.user_ids[chat.user_ids.length - 1]);
+          }
+
+          const partnerId = user_ids[0] === uid ? user_ids[1] : user_ids[0];
+          return {
+            ...chat,
+            // isSent: user_ids[0] === uid,
+            user: _users[partnerId.toString()]
+          };
+        });
+      
+      return res.json({
+        status: true,
+        message: 'success',
+        data: chats,
+      });
+    })
+    .catch(error => respondError(res, error));
+}
+
+exports.createNormalChatReq = async (user_id, payload) => {
+  const receiver = payload.receiver_id ? await User.getById(payload.receiver_id) : null;
+  let model = generateChatData(payload, user_id, receiver);
+  const message = payload.message ? generateMessageData({
+    ...payload,
+    sender_id: user_id,
+    receiver_id: receiver ? receiver.id : 0,
+    message: payload.message
+  }) : null;
+
+  return Chat.create(model)
+    .then(chat => Promise.all([
+      chat,
+      User.getById(user_id),
+      message ? Message.create({ ...message, chat_id: chat.id }) : null
+    ]))
+    .then(([chat, sender, message]) => {
+      chat = Chat.output(chat);
+      chat.user = User.output(receiver);
+      return ({
+        status: true,
+        message: 'Chat room created!',
+        data: chat
+      });
+    })
+    .catch((error) => ({
+      status: false,
+      message: error.message
+    }));
+}
+

@@ -16,7 +16,7 @@
     <span class="logo">Trefla</span>
     <div style="float:right;">
       <p>Logged in as <strong id="login-user"></strong></p>
-      <a class="link-item d-block" id="logout" style="float: right;">Lotout</a>
+      <a class="link-item d-block" id="logout" style="float: right;">Logout</a>
     </div>
   </div>
   <div class="" id="page">
@@ -25,8 +25,11 @@
       <!-- Chatrooms --->
       <div class="mb-5" id="chatrooms">
         <h3>Chatrooms</h3>
-        <ul id="chatrooms">
+        <ul id="chatroom-list">
           <li class="message-item">
+            No chatrooms...
+          </li>
+          <!-- <li class="message-item">
             <strong>test</strong> (alerk.starg.gmail.com)
           </li>
           <li class="message-item">
@@ -34,7 +37,7 @@
           </li>
           <li class="message-item">
             <strong>test</strong> (alerk.starg.gmail.com)
-          </li>
+          </li> -->
         </ul>
       </div>
 
@@ -42,7 +45,7 @@
         <h3>Pending Chats</h3>
         <ul id="pending-chats">
           <li class="message-item">
-            No users...
+            No pending chatrooms...
           </li>
           <!-- <li class="message-item">
             <strong>test</strong> (alerk.starg.gmail.com)
@@ -68,6 +71,9 @@
     </div>
     <!-- Messenger -->
     <div class="" id="messenger">
+      <div id="room-header">
+        <p id="partner-name">Martin</p>
+      </div>
       <ul id="messages"></ul>
       <p id="typing-event"></p>
       <form action="">
@@ -80,6 +86,7 @@
 </body>
 <script src="https://cdn.socket.io/socket.io-2.3.0.js"></script>
 <script src="/plugins/toastr/toastr.min.js"></script>
+<script type="text/javascript" src="/js/constants.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/chatroom.js"></script>
 
