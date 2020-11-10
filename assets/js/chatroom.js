@@ -10,6 +10,7 @@ let _pending_chats = [];
 
 var current_room = null;
 
+
 checkAuthentication();
 var socket = io("http://localhost:3500/", {
   query: `token=${loadToken()}`,
@@ -36,11 +37,16 @@ $(function () {
     // }
   });
 
+	// accept the connection request
+	$('#pending-chats').on('click', '.btn-accept', function() {
+		const chat_id = $(this).data('id');
+		socket.emit(SKT_CONNECT_ACCEPT, { chat_id });
+	});
+
   // select chat room
   $("#chatroom-list").on("click", ".message-item", function () {
     $("#chatroom-list .message-item")
-      .find(".message-item")
-      .each((elem) => {
+      .each((i, elem) => {
         $(elem).removeClass("selected");
       });
     $(this).addClass("selected");
@@ -261,7 +267,18 @@ function appendPendingChats(pcs) {
 }
 
 function chatroomSelected(room_id) {
-  current_room = room_id;
+	const [chatroom] = _chatrooms.filter(chatroom => chatroom.id === room_id);
+	if (!chatroom) {
+		console.log('[select room] not exist', room_id);
+	}
+	current_room = chatroom;
+	console.log('chatroom', chatroom);
+	$('#partner-name').text(chatroom.user.user_name);
+	$('#msg').attr('disabled', false);
+	// must load messages in chatroom
+
+	// init message list
+	$('#messages').html("");
 }
 
 function createChatroom(user_id, message = "") {
@@ -297,7 +314,7 @@ var _timeout = undefined;
 */
 function resetTyping() {
   _typing = false;
-  socket.emit("user typing", { room: current_room, typing: false });
+  socket.emit(SKT_USER_TYPING, { chat_id: current_room.id, typing: false });
 }
 
 /*
@@ -309,11 +326,11 @@ $("form").submit((e) => {
     toastr.error("Please select a chat room!");
     return;
   }
-  socket.emit("room message", {
+  socket.emit(SKT_SEND_MSG, {
     message: $("#msg").val(),
-    room: current_room,
+    chat_id: current_room.id,
   });
-  // $('#messages').append($("<li>").text($("#msg").val()));
+
   $("#msg").val("");
   return false;
 });
@@ -325,7 +342,7 @@ $("#msg").keypress((e) => {
   if (e.which !== 13) {
     if (_typing === false && $("#msg").is(":focus")) {
       _typing = true;
-      socket.emit("user typing", { room: current_room, typing: true });
+      socket.emit(SKT_USER_TYPING, { chat_id: current_room.id, typing: true });
       _timeout = setTimeout(resetTyping, 3000);
     } else {
       clearTimeout(_timeout);
@@ -365,6 +382,49 @@ socket.on(SKT_CONNECT_REQUESTED, (args) => {
 	}
 });
 
+// response of accept
+socket.on(SKT_CONNECT_ACCEPT, (args) => {
+	if (args.status) {
+		toastr.success(args.message);
+		try {
+			const chatroom = args.data;
+			$(`#pending-chat-${chatroom.id}`).remove();
+			appendChatrooms([chatroom]);
+		} catch(e) {}
+	} else {
+		toastr.error(args.message);
+	}
+});
+
+socket.on(SKT_CONNECT_ACCEPTED, (args) => {
+	if (args.status) {
+		toastr.info(args.message);
+		try {
+			const chatroom = args.data;
+			$(`#pending-chat-${chatroom.id}`).remove();
+			appendChatrooms([chatroom]);
+			socket.emit(SKT_CONNECT_ACCEPTED, { id: chatroom.id });
+		} catch(e) {}
+	} else {
+		toastr.error(args.message);
+	}
+});
+
+socket.on(SKT_USER_TYPING, ({ chat_id, typing }) => {
+  if (!typing) {
+    $("#typing-event").html("");
+  } else {
+    $("#typing-event").html(`typing...`);
+  }
+});
+
+socket.on(SKT_RECEIVE_MSG, ({ message, chat_id }) => {
+  console.log("new message in room" + chat_id, message);
+
+  $("#messages").append($("<li>").text(message));
+});
+
+
 socket.on("connected", () => {
   console.log("[Connected!]");
 });
@@ -375,12 +435,6 @@ socket.on("chat message", (msg) => {
   clearTimeout(_timeout);
   _timeout = setTimeout(resetTyping, 0);
   $("#messages").append($("<li>").text(msg));
-});
-
-socket.on("room message", ({ message, room }) => {
-  console.log("new message in room" + room, message);
-
-  $("#messages").append($("<li>").text(message));
 });
 
 socket.on("message", (data) => {
@@ -405,10 +459,4 @@ socket.on("user disconnected", (user) => {
   $("#messages").append($('<li class="event">').text(`${user} has left.`));
 });
 
-socket.on("user typing", ({ room, typing }) => {
-  if (!typing) {
-    $("#typing-event").html("");
-  } else {
-    $("#typing-event").html(`typing...`);
-  }
-});
+

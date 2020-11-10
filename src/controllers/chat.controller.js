@@ -69,7 +69,6 @@ exports.getById = async (req, res) => {
 }
 
 exports.pendingChatrooms = async (req, res) => {
-  console.log('me');
   const { uid } = getTokenInfo(req);
   return Chat.pendingChatrooms(uid)
     .then(chats => {
@@ -114,7 +113,6 @@ exports.pendingChatrooms = async (req, res) => {
 }
 
 exports.availableChatrooms = async (req, res) => {
-  console.log('me');
   const { uid } = getTokenInfo(req);
   return Chat.myChatrooms(uid)
     .then(chats => {
@@ -187,5 +185,44 @@ exports.createNormalChatReq = async (user_id, payload) => {
       status: false,
       message: error.message
     }));
+}
+
+exports.acceptChatConnectionReq = async (chat_id) => {
+  return Chat.getById(chat_id)
+    .then(chat => {
+      chat.accept_status = 1;
+      return Chat.save(chat);
+    })
+    .then(chat => {
+      return Chat.output(chat);      
+    })
+}
+
+exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => {
+  let _chat;
+  let _sender, _receiver;
+  return Promise.all([
+    User.getById(sender_id),
+    User.getById(receiver_id),
+  ])
+    .then(([sender, receiver]) => {
+      _sender = sender;
+      _receiver = receiver;
+
+      const message = generateMessageData({
+        sender_id,
+        receiver_id,
+        chat_id,
+        message: payload.message
+      });
+      return Message.create(message);
+    })
+    .then(message => {
+      console.log('message', message);
+      message = Message.output(message);
+      message.sender = User.output(_sender);
+      message.receiver = User.output(_receiver);
+      return message;
+    })
 }
 

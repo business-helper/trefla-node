@@ -122,6 +122,11 @@ form input {
   margin-right: .5%;
 }
 
+form input:disabled {
+  cursor: not-allowed;
+  background-color: #cacaca;
+}
+
 form button {
   width: 9%;
   background: rgb(130, 224, 255);

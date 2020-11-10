@@ -61,14 +61,93 @@ const bootstrapSocket = (io) => {
         })
     });
 
-    socket.on('room message', ({ message, room }) => {
-      console.log('room message in ' + room, message);
-      // socket.to(`chatroom_${room}`).emit('room message', { message, room });
-      io.to(`chatroom_${room}`).emit('room message', { message, room });
+    socket.on(CONSTS.SKT_CONNECT_ACCEPT, async ({ chat_id }) => {
+      const { uid } = helpers.auth.parseToken(token);
+      const chatroom = await models.chat.getById(chat_id);
+      if (chatroom) {
+        const user_ids = JSON.parse(chatroom.user_ids);
+        if (user_ids[0] === uid || !user_ids.includes(uid)) { // only requested user can accept it.
+          return false;
+        }
+        Promise.all([
+          models.user.getById(uid),
+          models.user.getById(user_ids[0]),
+          ctrls.chat.acceptChatConnectionReq(chat_id)
+        ])
+          .then(([me, sender, chat]) => {
+            if (sender.socket_id) {
+
+              io.to(sender.socket_id).emit(CONSTS.SKT_CONNECT_ACCEPTED, { status: true, message: `Chatroom with ${me.user_name} has been activated!`, data: { ...chat, user: me } });
+            }
+            socket.join(`chatroom_${chat.id}`);
+            console.log(`"${me.user_name}" joined "chatroom_${chat.id}"`);
+            socket.emit(CONSTS.SKT_CONNECT_ACCEPT, { status: true, message: `You activated the chatroom with ${sender.user_name}`, data: { ...chat, user: sender } });
+          })
+          .catch(error => {
+            console.log(error);
+            socket.emit(CONSTS.SKT_CONNECT_ACCEPT, { status: false, message: error.message });
+          })
+      }
     });
 
-    socket.on('user typing', ({ room, typing }) => {
-      socket.to(`chatroom_${room}`).emit('user typing', { room, typing });
+    socket.on(CONSTS.SKT_CONNECT_ACCEPTED, ({ id }) => {
+      const { uid } = helpers.auth.parseToken(token);
+      // some validation
+      socket.join(`chatroom_${id}`);
+      models.user.getById(uid)
+        .then(user => {
+          console.log(`"${user.user_name}" joined "chatroom_${id}"`);
+        });
+    })
+
+    socket.on(CONSTS.SKT_SEND_MSG, async ({ message, chat_id }) => {
+      const { uid } = helpers.auth.parseToken(token);
+      const chat = await models.chat.getById(chat_id);
+      const user_ids = JSON.parse(chat.user_ids);
+      const receiver_id = user_ids.length > 0 ? 
+        (user_ids[0] === uid ? user_ids[user_ids.length - 1] : user_ids[0] ): 
+        0;
+      Promise.all([
+        ctrls.chat.addMessageReq({
+          sender_id: uid,
+          receiver_id,
+          chat_id,
+          payload: {
+            message
+          }
+        }),
+        models.user.getById(uid),
+        models.user.getById(receiver_id)
+      ])
+        .then(([message, me, receiver]) => {
+          // io.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_RECEIVE_MSG, { message, chat_id });
+          // if (receiver.socket_id) {
+          //   io.to(receiver.socket_id).emit(CONSTS.SKT_RECEIVE_MSG, {
+          //     status: true,
+          //     message: `New message from "${sender.user_name}"`,
+          //     data: message,
+          //   })
+          // }
+          console.log(message);
+          io.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_RECEIVE_MSG, message);
+
+          socket.emit(CONSTS.SKT_SEND_MSG, {
+            status: true,
+            message: receiver ? `Message has sent to "${receiver.user_name}"!` : 'Message has been sent!',
+            data: message
+          })
+        })
+        .catch(error => {
+          console.log(error);
+          socket.emit(CONSTS.SKT_SEND_MSG, {
+            status: false,
+            message: error.message,
+          });
+        });
+    });
+
+    socket.on(CONSTS.SKT_USER_TYPING, ({ chat_id, typing }) => {
+      socket.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_USER_TYPING, { chat_id, typing });
     });
 
     socket.on('connect user', ({ receiver }) => {
