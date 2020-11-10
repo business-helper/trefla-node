@@ -21,7 +21,7 @@ function myBearerRequest(url, type, payload = "") {
     data: JSON.stringify(payload) || "",
     contentType: "application/json; charset=utf-8",
     beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', `Basic ${loadToken()}`)
+      xhr.setRequestHeader('Authorization', `Bearer ${loadToken()}`)
     },
     dataType: "json",
   });

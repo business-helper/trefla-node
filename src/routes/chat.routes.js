@@ -16,6 +16,7 @@ chatRouters.use((req, res, next) => {
 });
 
 chatRouters.get('/pending', async (req, res) => {
+  console.log('[GET] /chat/pending');
   return chatCtrl.pendingChatrooms(req, res);
 });
 
