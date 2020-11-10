@@ -134,6 +134,58 @@ chatRouters.post("/normal", async (req, res) => {
     .catch((error) => respondValidateError(res, error));
 });
 
+chatRouters.post('/:id/messages', async (req, res) => {
+  const { uid } = getTokenInfo(req);
+  const validator = new Validator({
+    ...req.body,
+    chat_id: req.params.id,
+  }, {
+    chat_id: "required|integer",
+    limit: "required|integer"
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Chat.getById(provider.inputs.chat_id)
+    ]).then(([chatById]) => {
+      if (!chatById) {
+        provider.error(
+          "id",
+          "custom",
+          `Chatroom does not exists for the given id!`
+        );
+      }
+    })
+  );
+
+  return validator
+    .check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => chatCtrl.loadMessageReq({
+      myId: uid,
+      chat_id: req.params.id,
+      last_id: req.body.last_id || null,
+      limit: req.body.limit
+    }))
+    .then(({ messages, minId, total }) => {
+      res.json({
+        status: true,
+        message: 'success',
+        data: messages,
+        hasMore: messages[0].id > minId ? 1 : 0,
+        total,
+      })
+    })
+    .catch(error => respondValidateError(res, error));
+})
+
 chatRouters.patch("/:id", async (req, res) => {
   const validator = new Validator({
     id: req.params.id,

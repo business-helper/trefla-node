@@ -32,14 +32,14 @@ Message.deleteById = async (id) => {
   })
 }
 
-Message.pagination = async ({ limit, last_id, chat_id }) => {
+Message.pagination = async ({ limit, last_id = null, chat_id }) => {
   let where = [`chat_id=${chat_id}`];
   if (last_id) {
     where.push(`id < ${last_id}`);
   }
   const strWhere = ' WHERE ' + where.join(' AND ');
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM messages ${strWhere} LIMIT ? ORDER BY create_time DESC`, [limit], (err, res) => {
+    sql.query(`SELECT * FROM messages ${strWhere} ORDER BY id DESC, create_time DESC LIMIT ?`, [limit], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
@@ -49,11 +49,20 @@ Message.getAll = ({ chat_id }) => {
   let where = [`chat_id=${chat_id}`];
   const strWhere = ' WHERE ' + where.join(' AND ');
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM messages ${strWhere}`, (err, res) => {
-			err ? reject(err) : resolve(res);
+    sql.query(`SELECT count(id) as total FROM messages ${strWhere}`, (err, res) => {
+			err ? reject(err) : resolve(res[0].total);
     });
   });
 };
+
+Message.getMinId = ({ chat_id }) => {
+  const strQuery = `SELECT id FROM messages WHERE chat_id=${chat_id} ORDER BY id ASC LIMIT 1`;
+  return new Promise((resolve, reject) => {
+    sql.query(strQuery, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].id || 0);
+    })
+  })
+}
 
 Message.getById = (id) => {
   return new Promise((resolve, reject) => {

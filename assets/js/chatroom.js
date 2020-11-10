@@ -9,6 +9,7 @@ let _chatrooms = [];
 let _pending_chats = [];
 
 var current_room = null;
+var last_id = null;
 
 
 checkAuthentication();
@@ -53,6 +54,11 @@ $(function () {
     const room_id = $(this).data("id");
     chatroomSelected(room_id);
   });
+
+	// load more
+	$('#load-more').on('click', function() {
+		loadMoreMessages();
+	});
 });
 
 function loadData() {
@@ -103,27 +109,6 @@ function loadUsers({ limit, page }) {
     myBearerRequest("/api/v1/user", "post", { limit, page })
       .then((result) => {
         return resolve(result);
-        // // console.log("user", result);
-        // const { data, status, hasMore, pager } = result;
-        // const profile = loadProfile();
-        // const users = data.filter((user) => user.id !== profile.id);
-        // if (status) {
-        // 	let existing_users = _users.map(user => user.id);
-        //   let strList = "";
-        //   for (const user of users) {
-        // 		if (existing_users.includes(user.id)) continue;
-        //     strList += `
-        //     <li class="message-item" id="online-${user.id}">
-        //       <strong>${user.user_name}</strong>
-        //       <button class="float-right btn-connect" id="connect-${user.id}" data-id="${user.id}" data-name="${user.user_name}">Connect</button>
-        //     </li>
-        // 		`;
-        // 		$("#online-users > ul").html(strList);
-        // 		_users.push(user);
-        // 	}
-        // } else {
-        //   toastr.error(result.message);
-        // }
       })
       .fail((error) => {
         console.log(error);
@@ -142,30 +127,9 @@ function loadPendingChats({ limit, page }) {
     myBearerRequest("/api/v1/chat/pending", "get")
       .then((res) => {
         return resolve(res);
-        // console.log(res);
-        // const { status, data, messag } = res;
-        // if (status) {
-        //   let strList = "";
-        //   for (let chat of data) {
-        //     const rightElem = chat.isSent
-        //       ? `<button class="btn-accept" style="float: right;" data-id="${chat.id}">Accept</button>`
-        //       : `<button style="float: right;">Waiting...</button>`;
-        //     strList += `
-        //     <li class="message-item">
-        // 			<strong>${chat.user ? chat.user.user_name : ""}</strong>
-        // 			${rightElem}
-        //     </li>
-        // 		`;
-        //   }
-        //   $("#pending-chats").html(strList);
-        // } else {
-        //   toastr.error(message);
-        // }
       })
       .fail((error) => {
         const { responseJSON } = error;
-        // console.log(responseJSON);
-        // toastr.error(responseJSON.message || "Something went wrong!");
         return reject(
           Object.assign(
             new Error(resopnseJSON.message || "Something went wrong!"),
@@ -181,25 +145,9 @@ function loadChatrooms(pager) {
     myBearerRequest("/api/v1/chat/accepted", "get")
       .then((res) => {
         return resolve(res);
-        // console.log(res);
-        // const { status, data, message } = res;
-        // if (status) {
-        //   let strList = "";
-        //   for (let chat of data) {
-        //     strList += `
-        //     <li class="message-item hover" data-id="${chat.id}" data-user="${chat.user.user_name}">
-        //       <strong>${chat.user.user_name}</strong>
-        //     </li>
-        // 		`;
-        //   }
-        //   $("#chatroom-list").html(strList);
-        // } else {
-        //   toastr.error(message);
-        // }
       })
       .fail((error) => {
         const { responseJSON } = error;
-        // toastr.error(resopnseJSON.message || "Something went wrong!");
         return reject(
           Object.assign(
             new Error(resopnseJSON.message || "Something went wrong!"),
@@ -208,6 +156,19 @@ function loadChatrooms(pager) {
         );
       });
   });
+}
+
+function loadMessagesOfChat({ chat_id, last_id = null, limit }) {
+	return new Promise((resolve, reject) => {
+		myBearerRequest(`/api/v1/chat/${chat_id}/messages`, 'post', { limit, last_id })
+			.then(res => {
+				return resolve(res);
+			})
+			.fail(error => {
+				const { responseJSON } = error;
+				return reject(Object.assign(new Error(responseJSON.message || 'Something went wrong!')));
+			});
+	});
 }
 
 function appendUsers(users) {
@@ -235,9 +196,12 @@ function appendChatrooms(chats) {
   }
 
   for (let chat of chats) {
+		const { last_messages } = chat; console.log(last_messages)
+		const last_message = last_messages.length > 0 ? last_messages[0].msg : '';
     const strItem = `
-            <li class="message-item hover" id="chatroom-${chat.id}" data-id="${chat.id}" data-user="${chat.user.user_name}">
-              <strong>${chat.user.user_name}</strong>
+            <li class="message-item message hover pl-1" id="chatroom-${chat.id}" data-id="${chat.id}" data-user="${chat.user.user_name}">
+							<p class="mb-1"><strong>${chat.user.user_name}</strong></p>
+							<span class="last-msg ellipsis" id="last-msg-${chat.id}">${last_message}</span>
             </li>
 						`;
 		_chatrooms.push(chat);
@@ -276,7 +240,42 @@ function chatroomSelected(room_id) {
 	$('#partner-name').text(chatroom.user.user_name);
 	$('#msg').attr('disabled', false);
 	// must load messages in chatroom
+	const profile = loadProfile();
+	loadMessagesOfChat({ chat_id: current_room.id, limit: 20 })
+		.then(res => {
+			console.log(res);
+			const { status, message, data, hasMore } = res;
+			if (status) {
+				let msgList = '';
+				// add messages to the list
+				for (let msg of data) {
+					const direction = profile.id === msg.user.id ? 'right' : 'left';
+					const d = string2Time(msg.time);
+					const time = d.toLocaleTimeString();
+					const datetime = d.toLocaleString();
+					msgList += `
+						<li class="msg-${direction}">
+							<span class="msg-time" title="${datetime}">${time}</span>
+							<p>${msg.message}</p>
+						<li>
+					`;
+				}
+				$('#messages').append(msgList);
+				$(`#last-msg-${current_room.id}`).text(data[data.length - 1].message);
 
+				last_id = data[0].id;
+				if (hasMore === 1) {
+					$('#load-more').show();
+				} else {
+					$('#load-more').hide();
+				}
+			} else {
+				toastr.error(message);
+			}
+		})
+		.catch(error => {
+			toastr.error(error.message);
+		});
 	// init message list
 	$('#messages').html("");
 }
@@ -300,6 +299,44 @@ function createChatroom(user_id, message = "") {
       console.log(responseJSON);
       toastr.error(responseJSON.message || "Something went wrong!");
     });
+}
+
+function loadMoreMessages() {
+	loadMessagesOfChat({ chat_id: current_room.id, limit: 20, last_id })
+	.then(res => {
+		console.log(res);
+		const { status, message, data, hasMore } = res;
+		const profile = loadProfile();
+		if (status) {
+			let msgList = '';
+			// add messages to the list
+			for (let msg of data) {
+				const direction = profile.id === msg.user.id ? 'right' : 'left';
+				const d = string2Time(msg.time);
+				const time = d.toLocaleTimeString();
+				const datetime = d.toLocaleString();
+				msgList += `
+					<li class="msg-${direction}">
+						<span class="msg-time" title="${datetime}">${time}</span>
+						<p>${msg.message}</p>
+					<li>
+				`;
+			}
+			$('#messages').prepend(msgList);
+
+			last_id = data[0].id;
+			if (hasMore === 1) {
+				$('#load-more').show();
+			} else {
+				$('#load-more').hide();
+			}
+		} else {
+			toastr.error(message);
+		}
+	})
+	.catch(error => {
+		toastr.error(error.message);
+	});
 }
 
 /*
@@ -418,10 +455,23 @@ socket.on(SKT_USER_TYPING, ({ chat_id, typing }) => {
   }
 });
 
-socket.on(SKT_RECEIVE_MSG, ({ message, chat_id }) => {
-  console.log("new message in room" + chat_id, message);
+socket.on(SKT_RECEIVE_MSG, ({ message, chat }) => {
+  console.log("new message in room" + chat.id, message);
 
-  $("#messages").append($("<li>").text(message));
+	const profile = loadProfile();
+	const direction = profile.id === message.user.id ? 'right' : 'left';
+	const d = string2Time(message.time);
+	const time = d.toLocaleTimeString();
+	const datetime = d.toLocaleString();
+	const msgItem = `
+		<li class="msg-${direction}">
+			<span class="msg-time" title="${datetime}">${time}</span>
+			<p>${message.message}</p>
+		<li>
+	`;
+
+	$("#messages").append(msgItem);
+	$(`#last-msg-${chat.id}`).text(message.message);
 });
 
 

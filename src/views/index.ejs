@@ -5,6 +5,7 @@
   <title>Trefla Chat</title>
   <link rel="icon" type="image/png" href="/img/treflaapp.png" />
 
+  <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/plugins/toastr/toastr.min.css" />
   <link rel="stylesheet" href="/css/index.css" />
 
@@ -24,44 +25,26 @@
     <div class="" id="left-sidebar">
       <!-- Chatrooms --->
       <div class="mb-5" id="chatrooms">
-        <h3>Chatrooms</h3>
+        <h4>Chatrooms</h4>
         <ul id="chatroom-list">
           <li class="message-item">
             No chatrooms...
           </li>
-          <!-- <li class="message-item">
-            <strong>test</strong> (alerk.starg.gmail.com)
-          </li>
-          <li class="message-item">
-            <strong>test</strong> (alerk.starg.gmail.com)
-          </li>
-          <li class="message-item">
-            <strong>test</strong> (alerk.starg.gmail.com)
-          </li> -->
         </ul>
       </div>
 
       <div class="mb-5" id="incoming-pending">
-        <h3>Pending Chats</h3>
+        <h4>Pending Chats</h4>
         <ul id="pending-chats">
           <li class="message-item">
             No pending chatrooms...
           </li>
-          <!-- <li class="message-item">
-            <strong>test</strong> (alerk.starg.gmail.com)
-          </li>
-          <li class="message-item">
-            <strong>test</strong> (alerk.starg.gmail.com)
-          </li>
-          <li class="message-item">
-            <strong>test</strong> (alerk.starg.gmail.com)
-          </li> -->
         </ul>
       </div>
 
       <!---Online Users-->
       <div class="" id="online-users">
-        <h3>Online Users</h3>
+        <h4>Online Users</h4>
         <ul>
           <li class="message-item">
             No users...
@@ -72,8 +55,9 @@
     <!-- Messenger -->
     <div class="" id="messenger">
       <div id="room-header">
-        <p id="partner-name"></p>
+        <p class="mb-0" id="partner-name"></p>
       </div>
+      <p id="load-more" class="text-center mb-3">Load More...</p>
       <ul id="messages"></ul>
       <p id="typing-event"></p>
       <form action="">
@@ -85,6 +69,7 @@
 
 </body>
 <script src="https://cdn.socket.io/socket.io-2.3.0.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="/plugins/toastr/toastr.min.js"></script>
 <script type="text/javascript" src="/js/constants.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>

@@ -119,23 +119,28 @@ const bootstrapSocket = (io) => {
         models.user.getById(uid),
         models.user.getById(receiver_id)
       ])
-        .then(([message, me, receiver]) => {
-          // io.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_RECEIVE_MSG, { message, chat_id });
-          // if (receiver.socket_id) {
-          //   io.to(receiver.socket_id).emit(CONSTS.SKT_RECEIVE_MSG, {
-          //     status: true,
-          //     message: `New message from "${sender.user_name}"`,
-          //     data: message,
-          //   })
-          // }
-          console.log(message);
-          io.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_RECEIVE_MSG, message);
-
-          socket.emit(CONSTS.SKT_SEND_MSG, {
-            status: true,
-            message: receiver ? `Message has sent to "${receiver.user_name}"!` : 'Message has been sent!',
-            data: message
+        .then(([{message, chat}, me, receiver]) => {
+          socket.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_RECEIVE_MSG, {
+            message: {
+              ...message,
+              user: me
+            },
+            chat: {
+              ...chat,
+              user: me
+            }
+          });
+          socket.emit(CONSTS.SKT_RECEIVE_MSG, {
+            message: {
+              ...message,
+              user: me
+            },
+            chat: {
+              ...chat,
+              user: receiver
+            }
           })
+
         })
         .catch(error => {
           console.log(error);

@@ -53,3 +53,13 @@ function checkAuthentication() {
     }
   }, 5000);
 }
+
+function string2Time(str) {
+  const arr1 = str.split(':');
+  const arr2 = str.split('-');
+
+  const stdStr = `${arr2[0]}-${arr2[1]}-${arr2[2]} ${arr2[3]}:${arr2[4]}:${arr2[5]}`;
+  let d = new Date(stdStr);
+  d.setTime(d.getTime() - arr1[1] * 60 * 1000 + d.getTimezoneOffset() * 60 * 1000);
+  return d;
+}

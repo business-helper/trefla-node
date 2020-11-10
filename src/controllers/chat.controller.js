@@ -202,12 +202,22 @@ exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => 
   let _chat;
   let _sender, _receiver;
   return Promise.all([
+    Chat.getById(chat_id),
     User.getById(sender_id),
     User.getById(receiver_id),
   ])
-    .then(([sender, receiver]) => {
+    .then(([chat, sender, receiver]) => {
       _sender = sender;
       _receiver = receiver;
+
+      let last_messages = JSON.parse(chat.last_messages);
+      const user_ids = JSON.parse(chat.user_ids);
+      const lastIndex = user_ids.length > 1 ? user_ids.length - 2 : 0;
+      last_messages[lastIndex] = {
+        msg: payload.message,
+        time: generateTZTimeString()
+      };
+      chat.last_messages = JSON.stringify(last_messages);
 
       const message = generateMessageData({
         sender_id,
@@ -215,14 +225,44 @@ exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => 
         chat_id,
         message: payload.message
       });
-      return Message.create(message);
+      return Promise.all([
+        Message.create(message),
+        Chat.save(chat)
+      ]);
     })
-    .then(message => {
-      console.log('message', message);
+    .then(([message, chat]) => {
       message = Message.output(message);
       message.sender = User.output(_sender);
       message.receiver = User.output(_receiver);
-      return message;
+      return { message, chat: Chat.output(chat) };
+    })
+}
+
+exports.loadMessageReq = async ({ myId = null, chat_id, last_id, limit }) => {
+  const chat = await Chat.getById(chat_id);
+  const uIds = JSON.parse(chat.user_ids);
+  const userIds = uIds.length > 1 ? [uIds[0], uIds[uIds.length - 1]] : uIds; // current member ids
+  // const [ partnerId ] = userIds.filter(id => id !== myId);
+
+
+  return Promise.all([
+    Message.pagination({ limit, last_id, chat_id }),
+    Message.getAll({ chat_id }),
+    Message.getMinId({ chat_id }),
+    User.getByIds(userIds)
+  ])
+    .then(([messages, total, minId, users]) => {
+      let userObj = {};
+      users.forEach(user => {
+        userObj[user.id.toString()] = User.output(user);
+      });
+      messages = messages.map(msg => Message.output(msg)).map(msg => {
+        return {
+          ...msg,
+          user: userObj[msg.sender_id]
+        };
+      }).reverse();
+      return { messages, minId, total };
     })
 }
 
