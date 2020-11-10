@@ -1,5 +1,5 @@
-const TOKEN_KEY = "TREFLACHAT3456TOKEN";
-const PROFILE_KEY = "TREFLACHAT3456PROFILE";
+const TOKEN_KEY = "LIVETREFLACHAT3456TOKEN";
+const PROFILE_KEY = "LIVETREFLACHAT3456PROFILE";
 
 function myBasicRequest(url, type, payload) {
   return $.ajax({

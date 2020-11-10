@@ -464,15 +464,15 @@ socket.on(SKT_RECEIVE_MSG, ({ message, chat }) => {
 	const time = d.toLocaleTimeString();
 	const datetime = d.toLocaleString();
 	if (current_room.id === chat.id) {
-	const msgItem = `
-		<li class="msg-${direction}">
-			<span class="msg-time" title="${datetime}">${time}</span>
-			<p>${message.message}</p>
-		<li>
-	`;
+		const msgItem = `
+			<li class="msg-${direction}">
+				<span class="msg-time" title="${datetime}">${time}</span>
+				<p>${message.message}</p>
+			<li>
+		`;
+		$("#messages").append(msgItem);
 	}
 
-	$("#messages").append(msgItem);
 	$(`#last-msg-${chat.id}`).text(message.message);
 });
 
