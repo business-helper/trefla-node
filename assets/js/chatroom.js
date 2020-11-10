@@ -463,7 +463,7 @@ socket.on(SKT_RECEIVE_MSG, ({ message, chat }) => {
 	const d = string2Time(message.time);
 	const time = d.toLocaleTimeString();
 	const datetime = d.toLocaleString();
-	if (current_room.id === chat.id) {
+	if (current_room.id === message.chat_id) {
 		const msgItem = `
 			<li class="msg-${direction}">
 				<span class="msg-time" title="${datetime}">${time}</span>
@@ -473,7 +473,7 @@ socket.on(SKT_RECEIVE_MSG, ({ message, chat }) => {
 		$("#messages").append(msgItem);
 	}
 
-	$(`#last-msg-${chat.id}`).text(message.message);
+	$(`#last-msg-${message.chat_id}`).text(message.message);
 });
 
 
