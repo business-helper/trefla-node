@@ -13,7 +13,7 @@ var last_id = null;
 
 
 checkAuthentication();
-var socket = io("http://localhost:3500/", {
+var socket = io("http://149.202.193.217:3500/", {
   query: `token=${loadToken()}`,
 });
 
