@@ -166,13 +166,25 @@ exports.createNormalChatReq = async (user_id, payload) => {
     message: payload.message
   }) : null;
 
-  return Chat.create(model)
-    .then(chat => Promise.all([
-      chat,
-      User.getById(user_id),
-      message ? Message.create({ ...message, chat_id: chat.id }) : null
-    ]))
-    .then(([chat, sender, message]) => {
+  let _chat;
+
+  if (receiver) {
+    // check existing chat room between two users
+    _chat = await Chat.getByUserIds({ sender_id: user_id, receiver_id: receiver.id, isForCard: 0 });
+  }
+
+  return Promise.all([
+    _chat ? _chat : Chat.create(model),
+    User.getById(user_id),
+    message ? Message.create({ ...message, chat_id: chat.id }) : null
+  ])
+  // return Chat.create(model)
+  //   .then(chat => Promise.all([
+  //     chat,
+  //     User.getById(user_id),
+  //     message ? Message.create({ ...message, chat_id: chat.id }) : null
+  //   ]))
+    .then(([chat, sender, msgObj]) => {
       chat = Chat.output(chat);
       chat.user = User.output(receiver);
       return ({
@@ -273,6 +285,17 @@ exports.loadMessageReq = async ({ myId = null, chat_id, last_id, limit }) => {
         };
       }).reverse();
       return { messages, minId, total };
+    })
+}
+
+exports.deleteByIdReq = async ({ id }) => {
+  return Chat.deleteById(id)
+    .then(deleted => {
+      // delete all message in chat room.
+      return Message.deleteByChatId(id);
+    })
+    .then(deleted => {
+      return true;
     })
 }
 

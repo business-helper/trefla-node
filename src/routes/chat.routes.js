@@ -224,6 +224,7 @@ chatRouters.patch("/:id", async (req, res) => {
 });
 
 chatRouters.delete("/:id", async (req, res) => {
+  const { uid } = getTokenInfo(req);
   const validator = new Validator({
     id: req.params.id
   }, {
@@ -232,14 +233,19 @@ chatRouters.delete("/:id", async (req, res) => {
 
   validator.addPostRule(async (provider) =>
     Promise.all([
-      Comment.getById(provider.inputs.id)
-    ]).then(([commentById]) => {
-      if (!commentById) {
+      Chat.getById(provider.inputs.id)
+    ]).then(([chatById]) => {
+      if (!chatById) {
         provider.error(
           "id",
           "custom",
-          `Comment does not exist!`
+          `Chat does not exist!`
         );
+      } else {
+        const user_ids = JSON.parse(chatById.user_ids);
+        if (!user_ids.includes(uid)) {
+          provider.error('id', 'custom', "You are not a member of this chat room!");
+        }
       }
     })
   );
@@ -253,8 +259,15 @@ chatRouters.delete("/:id", async (req, res) => {
         details: validator.errors,
       });
     }
+    return chatCtrl.deleteByIdReq({ id: req.params.id });
   })
-  .then(() => commentCtrl.deleteById(req, res))
+  .then(deleted => {
+    return res.json({
+      status: true,
+      message: 'Chat has been deleted'
+    });
+  })
+  // .then(() => chatCtrl.deleteById(req, res))
   .catch((error) => respondValidateError(res, error));
 });
 

@@ -32,6 +32,14 @@ Message.deleteById = async (id) => {
   })
 }
 
+Message.deleteByChatId = async (chat_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM messages WHERE chat_id=?", [chat_id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows > 0);
+    })
+  })
+}
+
 Message.pagination = async ({ limit, last_id = null, chat_id }) => {
   let where = [`chat_id=${chat_id}`];
   if (last_id) {

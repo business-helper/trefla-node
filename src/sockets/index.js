@@ -175,7 +175,7 @@ const bootstrapSocket = (io) => {
       Promise.all([
         models.user.save({ id: uid, current_chat: chat_id }),
         models.chat.myChatrooms(uid),
-      ])      
+      ])
         .then(([res, chats]) => {
           console.log(`User ${uid} entered chatroom ${chat_id}`);
           return Promise.all(chats.map(chat => {
