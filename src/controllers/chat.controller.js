@@ -170,7 +170,14 @@ exports.createNormalChatReq = async (user_id, payload) => {
 
   if (receiver) {
     // check existing chat room between two users
-    _chat = await Chat.getByUserIds({ sender_id: user_id, receiver_id: receiver.id, isForCard: 0 });
+    let chatrooms = await Chat.getByUserIds({ sender_id: user_id, receiver_id: receiver.id, isForCard: 0 });
+    chatrooms.filter(chat => {
+      const user_ids = JSON.parse(chat.user_ids);
+      return user_ids.length === 2;
+    })
+    if (chatrooms.length > 0) {
+      _chat = chatrooms[0];
+    }
   }
 
   return Promise.all([
@@ -193,10 +200,10 @@ exports.createNormalChatReq = async (user_id, payload) => {
         data: chat
       });
     })
-    .catch((error) => ({
-      status: false,
-      message: error.message
-    }));
+    // .catch((error) => ({
+    //   status: false,
+    //   message: error.message
+    // }));
 }
 
 exports.acceptChatConnectionReq = async (chat_id) => {
