@@ -221,8 +221,10 @@ const bootstrapSocket = (io) => {
 
     });
 
-    socket.on('check_health', args => {
+    socket.on(CONSTS.SKT_CHECK_HEALTH, args => {
       console.log('[check_health]', args);
+      const { uid } = helpers.auth.parseToken(token);
+      socket.emit(CONSTS.SKT_CHECK_HEALTH, { args, your_id: uid });
     });
   });
 }
