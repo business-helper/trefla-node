@@ -237,7 +237,7 @@ function appendUsers(users) {
     if (existing_users.includes(user.id)) continue;
     const strItem = `
 						<li class="message-item" id="online-${user.id}">
-							<span class="user-status offline" data-for="user-${chat.user.id}"></span>
+							<span class="user-status offline" data-for="user-${user.id}"></span>
               <strong class="ml-1">${user.user_name}</strong>
               <button class="float-right btn-connect" id="connect-${user.id}" data-id="${user.id}" data-name="${user.user_name}">Connect</button>
             </li>
