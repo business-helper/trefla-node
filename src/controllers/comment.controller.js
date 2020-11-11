@@ -14,14 +14,25 @@ exports.create = (req, res) => {
   commentData.time = req.body.time ? req.body.time : generateTZTimeString();
   // commentData.isGuest = bool2Int(req.body.isGuest);
 
+  const TargetModel = req.body.type === 'COMMENT' ? Comment : Post;
+  let _comment;
   return Comment.create(commentData)
-    .then(comment => Promise.all([
-      comment,
-      User.getById(comment.user_id)
-    ]))
-    .then(([comment, user]) => {
-      comment = Comment.output(comment);
-      return res.json({ status: true, message: "success", data: { ...comment, liked: 0, user: User.output(user) } });
+    .then(comment => {
+      _comment = comment;
+      return Promise.all([
+        TargetModel.getById(req.body.target_id),
+        Comment.commentNumber({ target_id: req.body.target_id, type: req.body.type })
+      ])
+    })
+    .then(([target, comment_num]) => {
+      return Promise.all([
+        User.getById(_comment.user_id),
+        TargetModel.save({ ...target, comment_num: comment_num })
+      ]);
+    })
+    .then(([user]) => {
+      _comment = Comment.output(_comment);
+      return res.json({ status: true, message: "success", data: { ..._comment, liked: 0, user: User.output(user) } });
     })
     .catch((error) => respondError(res, error));
 };
@@ -165,16 +176,23 @@ exports.updateById = (req, res) => {
     .catch((error) => respondError(res, error));
 }
 
-exports.deleteById = (req, res) => {
+exports.deleteById = async (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
   const { id: comment_id } = req.params;
+
+  const comment = await Comment.getById(comment_id);
+  const TargetModel = comment.type === 'COMMENT' ? Comment : Post;
+
   return Comment.deleteById(comment_id)
     .then(deleted => {
-      if (deleted) {
-        return CommentLike.deleteUserCommentLikes({ user_id, comment_id });
-      } else {
-        throw Object.assign(new Error('Failed to delete comment'), { code: 400 });
-      }
+      return Promise.all([
+        Comment.commentNumber({ type: comment.type, target_id: comment.target_id }),
+        TargetModel.getById(comment.target_id),
+        CommentLike.delete({ comment_id }),
+      ]);
+    })
+    .then(([comment_num, target, delRows]) => {
+      return TargetModel.save({ ...target, comment_num });
     })
     .then(() => {
       return res.json({

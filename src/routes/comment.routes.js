@@ -301,22 +301,21 @@ commentRouters.patch("/:id", async (req, res) => {
 });
 
 commentRouters.delete("/:id", async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
   const validator = new Validator({
     id: req.params.id
   }, {
     id: "required|integer",
   });
-
+  console.log('[Comment id]', req.params.id);
   validator.addPostRule(async (provider) =>
     Promise.all([
       Comment.getById(provider.inputs.id)
     ]).then(([commentById]) => {
       if (!commentById) {
-        provider.error(
-          "id",
-          "custom",
-          `Comment does not exist!`
-        );
+        provider.error("id", "custom", `Comment does not exist!`);
+      } else if (commentById.user_id !== user_id) {
+        provider.error('id', 'custom', 'You cannot delete this comment!');
       }
     })
   );

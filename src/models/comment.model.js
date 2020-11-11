@@ -62,6 +62,14 @@ Comment.getCountOfComments = ({ type = null, target_id = null }) => {
   });
 }
 
+Comment.commentNumber = ({ target_id, type }) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM comments WHERE type=? AND target_id=?`, [type, target_id], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    });
+  });
+}
+
 Comment.getById = (id) => {
   return new Promise((resolve, reject) => {
     sql.query("SELECT * FROM comments WHERE id=? LIMIT 1", [id], (err, res) => {
