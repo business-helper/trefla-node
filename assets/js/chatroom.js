@@ -344,7 +344,7 @@ function chatroomSelected(room_id) {
       }
     })
     .catch((error) => {
-      toastr.error(error.message);
+      // toastr.error(error.message);
     });
   // init message list
 	$("#messages").html("");
