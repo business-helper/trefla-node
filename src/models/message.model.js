@@ -59,7 +59,7 @@ Message.getMinId = ({ chat_id }) => {
   const strQuery = `SELECT id FROM messages WHERE chat_id=${chat_id} ORDER BY id ASC LIMIT 1`;
   return new Promise((resolve, reject) => {
     sql.query(strQuery, [], (err, res) => {
-      err ? reject(err) : resolve(res[0].id || 0);
+      err ? reject(err) : resolve(res.length > 0 ? res[0].id : 0);
     })
   })
 }
