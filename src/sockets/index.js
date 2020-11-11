@@ -47,6 +47,7 @@ const bootstrapSocket = (io) => {
 
     // connection request to a user.
     socket.on(CONSTS.SKT_CONNECT_TO_USER, ({ toId, message }) => {
+      console.log('[connection req]', toId);
       const { uid } = helpers.auth.parseToken(token);
       let _toUser, _fromUser;
       Promise.all([
