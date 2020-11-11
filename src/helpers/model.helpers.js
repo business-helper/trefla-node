@@ -65,7 +65,7 @@ const generateChatData = (basicData, sender_id, receiver = null) => {
   let user_ids = [sender_id];
   let online_status = {};
   let last_messages = [];
-  let unread_nums = [];
+  let unread_nums = [0,0];
 
   online_status[sender_id.toString()] = 1;
   if (basicData.receiver_id) {
@@ -75,12 +75,12 @@ const generateChatData = (basicData, sender_id, receiver = null) => {
   if (basicData.message) {
     unread_nums = [0, 1];
   }
-  if (basicData.message) {
+  // if (basicData.message) {
     last_messages.push({
       msg: basicData.message || "",
       time: generateTZTimeString()
     });
-  }
+  // }
   data.user_ids = JSON.stringify(user_ids);
   data.online_status = JSON.stringify(online_status);
   data.last_messages = JSON.stringify(last_messages);
