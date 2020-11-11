@@ -193,7 +193,7 @@ const bootstrapSocket = (io) => {
 
     socket.on('disconnecting', () => {
       const { uid } = helpers.auth.parseToken(token);
-      models.user.save({ id: uid, socket_id: '', current_chat: '' })
+      models.user.save({ id: uid, socket_id: '', current_chat: 0 })
         .then(res => {
           console.log(`User ${uid} has been disconnected...`);
           io.sockets.emit(CONSTS.SKT_UPDATE_ONLINE, {
