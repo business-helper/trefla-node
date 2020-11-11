@@ -1,5 +1,14 @@
-const TOKEN_KEY = "LIVETREFLACHAT3456TOKEN";
-const PROFILE_KEY = "LIVETREFLACHAT3456PROFILE";
+
+let TOKEN_KEY = '';
+let PROFILE_KEY = '';
+if (window.location.href.includes('localhost')) {
+  TOKEN_KEY = "TREFLACHAT3456TOKEN";
+  PROFILE_KEY = "TREFLACHAT3456PROFILE";   
+} else {
+  TOKEN_KEY = "LIVETREFLACHAT3456TOKEN";
+  PROFILE_KEY = "LIVETREFLACHAT3456PROFILE";
+}
+
 
 function myBasicRequest(url, type, payload) {
   return $.ajax({
@@ -46,12 +55,11 @@ function loadProfile() {
 }
 
 function checkAuthentication() {
-  setInterval(() => {
-    const token = loadToken();
-    if (!token) {
-      window.location.href = '/page/login';
-    }
-  }, 5000);
+  const token = loadToken();
+  if (!token) {
+    window.location.href = '/page/login';
+  }
+  setTimeout(checkAuthentication, 5000);
 }
 
 function string2Time(str) {

@@ -7,5 +7,6 @@ exports.SKT_CONNECT_ACCEPTED = 'socket.connect.accepted';
 exports.SKT_USER_ENTER_ROOM = 'socket.user.enter.room';
 exports.SKT_USER_TYPING = 'socket.user.typing';
 exports.SKT_ACCEPT_CONNECTION = 'socket.accepted.connection';
+exports.SKT_SELECT_CHAT = 'socket.select.chat';
 exports.SKT_SEND_MSG = 'socket.send.message';
 exports.SKT_RECEIVE_MSG = 'socket.receive.message';

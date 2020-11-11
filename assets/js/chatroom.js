@@ -13,7 +13,11 @@ var last_id = null;
 
 
 checkAuthentication();
-var socket = io("http://149.202.193.217:3500/", {
+let host = 'localhost';
+if (!window.location.href.includes('localhost')) {
+	host = '149.202.193.217';
+}
+var socket = io(`http://${host}:3500/`, {
   query: `token=${loadToken()}`,
 });
 
@@ -239,6 +243,9 @@ function chatroomSelected(room_id) {
 	console.log('chatroom', chatroom);
 	$('#partner-name').text(chatroom.user.user_name);
 	$('#msg').attr('disabled', false);
+
+	socket.emit(SKT_SELECT_CHAT, { chat_id: room_id });
+
 	// must load messages in chatroom
 	const profile = loadProfile();
 	loadMessagesOfChat({ chat_id: current_room.id, limit: 20 })

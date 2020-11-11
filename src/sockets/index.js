@@ -155,14 +155,22 @@ const bootstrapSocket = (io) => {
       socket.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_USER_TYPING, { chat_id, typing });
     });
 
+    socket.on(CONSTS.SKT_SELECT_CHAT, async ({ chat_id }) => {
+      const { uid } = helpers.auth.parseToken(token);
+      models.user.save({ id: uid, current_chat: '' })
+        .then(res => {
+          console.log(`User ${uid} entered chatroom ${chat_id}`);
+        });
+    });
+
     socket.on('connect user', ({ receiver }) => {
       console.log('connect', socket.id, receiver);
       socket.emit('connect user', { receiver });
     });
 
     socket.on('disconnecting', () => {
-      const { uid } = helpers.auth.parseToken(socket.request._query.token);
-      models.user.updateSocketSession({ id: uid, socketId: '' })
+      const { uid } = helpers.auth.parseToken(token);
+      models.user.save({ id: uid, socket_id: '', current_chat: '' })
         .then(res => {
           console.log(`User ${uid} has been disconnected...`);
         })
