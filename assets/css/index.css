@@ -200,3 +200,33 @@ form button {
   color: #565656;
   cursor: pointer;
 }
+
+.user-status {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.user-status.online {
+  background-color: #61d461;
+  border: 1px solid #bbbbbb;
+}
+
+.user-status.offline {
+  background-color: #f5b94b;
+  border: 1px solid #c3c3c3;
+}
+
+.unread {
+  padding: 3px 5px;
+  background-color: #29afef;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  float: right;
+}
+
+.unread.hidden {
+  visibility: hidden;
+}

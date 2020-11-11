@@ -24,8 +24,24 @@ const bootstrapSocket = (io) => {
           for (let chat of chats) {
             socket.join(`chatroom_${chat.id}`);
             console.log(`"${user.user_name}" joined "chatroom_${chat.id}"`);
+            // alert the online status to all users
+            io.sockets.emit(CONSTS.SKT_UPDATE_ONLINE, {
+              user_id: uid,
+              online: 1,
+            });
           }
+          return Promise.all(chats.map(chat => {
+            let onlines = JSON.parse(chat.online_status);
+            onlines[uid.toString()] = 1;
+            return models.chat.save({
+              ...chat,
+              online_status: JSON.stringify(onlines)
+            });
+          }));
         }
+      })
+      .then(() => {
+        console.log(`Updated online status of user ${uid} in chatrooms`);
       });
     }
 
@@ -119,10 +135,10 @@ const bootstrapSocket = (io) => {
         models.user.getById(uid),
         models.user.getById(receiver_id)
       ])
-        .then(([{message, chat}, me, receiver]) => {
+        .then(([{message: msg, chat}, me, receiver]) => {
           socket.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_RECEIVE_MSG, {
             message: {
-              ...message,
+              ...msg,
               user: me
             },
             chat: {
@@ -132,7 +148,7 @@ const bootstrapSocket = (io) => {
           });
           socket.emit(CONSTS.SKT_RECEIVE_MSG, {
             message: {
-              ...message,
+              ...msg,
               user: me
             },
             chat: {
@@ -140,7 +156,6 @@ const bootstrapSocket = (io) => {
               user: receiver
             }
           })
-
         })
         .catch(error => {
           console.log(error);
@@ -157,15 +172,23 @@ const bootstrapSocket = (io) => {
 
     socket.on(CONSTS.SKT_SELECT_CHAT, async ({ chat_id }) => {
       const { uid } = helpers.auth.parseToken(token);
-      models.user.save({ id: uid, current_chat: '' })
-        .then(res => {
+      Promise.all([
+        models.user.save({ id: uid, current_chat: chat_id }),
+        models.chat.myChatrooms(uid),
+      ])      
+        .then(([res, chats]) => {
           console.log(`User ${uid} entered chatroom ${chat_id}`);
-        });
-    });
-
-    socket.on('connect user', ({ receiver }) => {
-      console.log('connect', socket.id, receiver);
-      socket.emit('connect user', { receiver });
+          return Promise.all(chats.map(chat => {
+            const user_ids = JSON.parse(chat.user_ids);
+            let unread_nums = JSON.parse(chat.unread_nums);
+            const myIdx = user_ids.indexOf(uid);
+            unread_nums[myIdx] = 0;
+            return models.chat.save({ ...chat, unread_nums: JSON.stringify(unread_nums) });
+          }))
+        })
+        .then(() => {
+          console.log(`Updated unread nums of user ${uid}`);
+        })
     });
 
     socket.on('disconnecting', () => {
@@ -173,7 +196,25 @@ const bootstrapSocket = (io) => {
       models.user.save({ id: uid, socket_id: '', current_chat: '' })
         .then(res => {
           console.log(`User ${uid} has been disconnected...`);
+          io.sockets.emit(CONSTS.SKT_UPDATE_ONLINE, {
+            user_id: uid,
+            online: 0,
+          });
+          return models.chat.myChatrooms(uid);
         })
+        .then(chats => {
+          return Promise.all(chats.map(chat => {
+            let onlines = JSON.parse(chat.online_status) || {};
+            onlines[uid.toString()] = 0;
+            return models.chat.save({
+              ...chat,
+              online_status: JSON.stringify(onlines)
+            });
+          }))
+        })
+        .then(() => {
+          console.log(`Updated online status of user ${uid} in chatrooms`);
+        });
     });
 
     socket.on('disconnect', () => {

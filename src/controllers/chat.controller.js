@@ -219,12 +219,22 @@ exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => 
       };
       chat.last_messages = JSON.stringify(last_messages);
 
+      // check unread num
+      if (receiver && receiver.current_chat !== chat.id) { // receiver is not in the chat room
+        let unread_nums = JSON.parse(chat.unread_nums);
+        const senderIdx = user_ids.indexOf(receiver_id);
+        unread_nums[senderIdx] ++;
+        chat.unread_nums = JSON.stringify(unread_nums);
+      }
+
       const message = generateMessageData({
         sender_id,
         receiver_id,
         chat_id,
         message: payload.message
       });
+      
+      
       return Promise.all([
         Message.create(message),
         Chat.save(chat)

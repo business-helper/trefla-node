@@ -10,3 +10,4 @@ const SKT_ACCEPT_CONNECTION = 'socket.accepted.connection'; // ?
 const SKT_SELECT_CHAT = 'socket.select.chat';
 const SKT_SEND_MSG = 'socket.send.message';
 const SKT_RECEIVE_MSG = 'socket.receive.message';
+const SKT_UPDATE_ONLINE = 'socket.update.online';

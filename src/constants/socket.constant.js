@@ -10,3 +10,4 @@ exports.SKT_ACCEPT_CONNECTION = 'socket.accepted.connection';
 exports.SKT_SELECT_CHAT = 'socket.select.chat';
 exports.SKT_SEND_MSG = 'socket.send.message';
 exports.SKT_RECEIVE_MSG = 'socket.receive.message';
+exports.SKT_UPDATE_ONLINE = 'socket.update.online';
