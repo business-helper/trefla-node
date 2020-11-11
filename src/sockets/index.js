@@ -9,7 +9,7 @@ const INNER_CLIENT = 'INNER_CLIENT';
 
 const bootstrapSocket = (io) => {
   io.on('connection', socket => {
-    // console.log('[socket connect]', socket.request._query.token);
+    console.log('[socket connect]', socket.request._query.token);
     const token = socket.request._query.token;
     if (token !== INNER_CLIENT) {
       const { uid } = helpers.auth.parseToken(token);
@@ -53,7 +53,6 @@ const bootstrapSocket = (io) => {
         models.user.getById(toId),
         models.user.getById(uid)
       ])
-      
         .then(([toUser, fromUser]) => {
           if (!toUser) {
             throw Object.assign(new Error("User doesn't exist!"), { code: 400 });
