@@ -35,7 +35,7 @@ Chat.deleteById = async (id) => {
 Chat.pagination = async ({ limit, offset, user_id = null, isForCard = null, card_number = null }) => {
   let where = [];
   if (user_id) {
-    where.push(`JSON_SEARCH(user_ids, 'one', ${user_id}) IS NOT NULL`);
+    where.push(`JSON_CONTAINS(user_ids, '${user_id}', '$')=1`);
   }
   if (isForCard !== null && [0, 1].includes(isForCard)) {
     where.push(`isForCard=${isForCard}`);
@@ -53,7 +53,7 @@ Chat.pagination = async ({ limit, offset, user_id = null, isForCard = null, card
 
 Chat.pendingChatrooms = async (user_id) => {
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM chats WHERE (JSON_SEARCH(user_ids, 'one', ?) IS NOT NULL) AND accept_status=?`, [user_id, 0], (err, res) => {
+    sql.query(`SELECT * FROM chats WHERE (JSON_CONTAINS(user_ids, '?', '$')=1) AND accept_status=?`, [user_id, 0], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
@@ -61,7 +61,7 @@ Chat.pendingChatrooms = async (user_id) => {
 
 Chat.myChatrooms = async (user_id) => {
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM chats WHERE (JSON_SEARCH(user_ids, 'one', ?) IS NOT NULL) AND accept_status=?`, [user_id, 1], (err, res) => {
+    sql.query(`SELECT * FROM chats WHERE (JSON_CONTAINS(user_ids, '?', '$')=1) AND accept_status=?`, [user_id, 1], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
@@ -70,7 +70,7 @@ Chat.myChatrooms = async (user_id) => {
 Chat.getAll = ({ user_id = null, isForCard = null, card_number = null }) => {
   let where = [];
   if (user_id) {
-    where.push(`JSON_SEARCH(user_ids, 'one', ${user_id}) IS NOT NULL`);
+    where.push(`JSON_CONTAINS(user_ids, '${user_id}', '$')=1`);
   }
   if (isForCard !== null && [0, 1].includes(isForCard)) {
     where.push(`isForCard=${isForCard}`);
@@ -95,7 +95,7 @@ Chat.getById = (id) => {
 }
 
 Chat.getByUserIds = ({ sender_id, receiver_id, isForCard = 0 }) => {
-  let where = [sender_id, receiver_id].map(user_id => `(JSON_SEARCH(user_ids, 'one', ${user_id}) IS NOT NULL)`);
+  let where = [sender_id, receiver_id].map(user_id => `(JSON_CONTAINS(user_ids, '${user_id}', '$')=1)`);
   where.push(`isForCard = ${isForCard}`);
   const strWhere = ' WHERE ' + where.join(' AND ');
 
