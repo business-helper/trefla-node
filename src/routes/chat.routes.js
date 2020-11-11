@@ -180,7 +180,7 @@ chatRouters.post('/:id/messages', async (req, res) => {
         status: true,
         message: 'success',
         data: messages,
-        hasMore: messages[0].id > minId ? 1 : 0,
+        hasMore: (messages.length > 0 && messages[0].id > minId) ? 1 : 0,
         total,
       })
     })
