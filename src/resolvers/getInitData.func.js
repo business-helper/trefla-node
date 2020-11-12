@@ -4,6 +4,8 @@ const Post = require("../models/post.model");
 const PostLike = require("../models/postLike.model");
 const Notification = require("../models/notification.model");
 
+const models = require('../models/index');
+
 const { BearerMiddleware } = require('../middlewares/basic.middleware');
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { respondValidateError } = require("../helpers/common.helpers");
@@ -69,11 +71,57 @@ const getInitDataWrapper = (req, res) => {
   });
 }
 
+const getChatSummary = async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  // let _all_chats = [], _total = 0;
+  let _chatrooms;
+  return models.chat.myChatrooms(user_id)
+    .then(chatrooms => {
+      let idOfUsers = [0];
+      chatrooms = chatrooms.filter(chat => {
+        const user_ids = JSON.parse(chat.user_ids);
+        const myIndex = user_ids.indexOf(user_id);
+        if (myIndex > 0 && myIndex < user_ids.length - 1) return false; // this is the previous owner of the card
+
+        if (chat.accept_status === 1) {
+          idOfUsers.push(myIndex == 0 ? user_ids[user_ids.length - 1] : user_ids[0]);
+          return true;
+        } else {
+          myIndex === 0 ? null : idOfUsers.push(myIndex == 0 ? user_ids[user_ids.length - 1] : user_ids[0]);
+          return myIndex === 0 ? false : true;
+        }
+      });
+      _chatrooms = chatrooms;
+      return Promise.all(idOfUsers.map(user_id => models.user.getById(user_id)));
+    })
+    .then(users => {
+      users = users.filter(users => !!users);
+      let userObj = {};
+
+      users.forEach(user => {
+        userObj[user.id.toString()] = user;
+      });
+      _chatrooms = _chatrooms.map(chat => {
+        const user_ids = JSON.parse(chat.user_ids);
+        const myIndex = user_ids.indexOf(user_id);
+        const partnerId = myIndex == 0 ? user_ids[user_ids.length - 1] : user_ids[0];
+        return {
+          ...(models.chat.output(chat)),
+          user: models.user.output(userObj[partnerId])
+        };
+      });
+      return _chatrooms;
+    })
+
+
+}
+
 const getInitData = (req, res) => {
   const { uid } = getTokenInfo(req);
   const validator = new Validator(req.body, {
     posts: "required|integer",
     notifications: "required|integer",
+    // chat: "required|integer"
   });
 
   return validator
@@ -91,14 +139,16 @@ const getInitData = (req, res) => {
         User.getById(uid),
         getPostSummary(req, res),
         getNotificationSummary(req, res),
+        getChatSummary(req, res),
       ])
     })
-    .then(([ user, posts, notis ]) => {
+    .then(([ user, posts, notis, chats, ]) => {
       return {
         status: true,
         profile: user,
         posts,
         notifications: notis,
+        chats,
       };
     })
     // .catch(error => error);

@@ -16,7 +16,7 @@ const bootstrapSocket = (io) => {
 
       Promise.all([
         models.user.getById(uid),
-        models.chat.myChatrooms(uid),
+        models.chat.myChatrooms(uid, 1),
         models.user.updateSocketSession({ id: uid, socketId: socket.id })
       ])
       .then(([user, chats]) => {
@@ -174,7 +174,7 @@ const bootstrapSocket = (io) => {
       const { uid } = helpers.auth.parseToken(token);
       Promise.all([
         models.user.save({ id: uid, current_chat: chat_id }),
-        models.chat.myChatrooms(uid),
+        models.chat.myChatrooms(uid, 1),
       ])
         .then(([res, chats]) => {
           console.log(`User ${uid} entered chatroom ${chat_id}`);
@@ -200,7 +200,7 @@ const bootstrapSocket = (io) => {
             user_id: uid,
             online: 0,
           });
-          return models.chat.myChatrooms(uid);
+          return models.chat.myChatrooms(uid, 1);
         })
         .then(chats => {
           return Promise.all(chats.map(chat => {

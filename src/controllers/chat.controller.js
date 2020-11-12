@@ -114,7 +114,7 @@ exports.pendingChatrooms = async (req, res) => {
 
 exports.availableChatrooms = async (req, res) => {
   const { uid } = getTokenInfo(req);
-  return Chat.myChatrooms(uid)
+  return Chat.myChatrooms(uid, 1)
     .then(chats => {
       let user_ids = [0];
       for (let chat of chats) {

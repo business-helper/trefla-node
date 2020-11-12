@@ -59,9 +59,10 @@ Chat.pendingChatrooms = async (user_id) => {
   });
 }
 
-Chat.myChatrooms = async (user_id) => {
+Chat.myChatrooms = async (user_id, accepted = null) => {
+  const whereAccept = [0, 1].includes(accepted) ? ` AND accept_status = ${accepted}` : "";
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM chats WHERE (JSON_CONTAINS(user_ids, '?', '$')=1) AND accept_status=?`, [user_id, 1], (err, res) => {
+    sql.query(`SELECT * FROM chats WHERE (JSON_CONTAINS(user_ids, '?', '$')=1) ${whereAccept} ORDER BY update_time DESC`, [user_id], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
