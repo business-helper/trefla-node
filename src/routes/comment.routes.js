@@ -52,7 +52,7 @@ commentRouters.get('/:id', async (req, res) => {
 
 commentRouters.post("/pagination", async (req, res) => {
   const validator = new Validator(req.body, {
-    page: "required|integer",
+    // page: "required|integer",
     limit: "required|integer",
   });
 

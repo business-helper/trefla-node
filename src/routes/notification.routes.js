@@ -13,43 +13,74 @@ notificationRouters.use((req, res, next) => {
   BearerMiddleware(req, res, next);
 });
 
-notificationRouters.get('/:id', async (req, res) => {
+notificationRouters.get("/:id/read", async (req, res) => {
   const validator = new Validator(
     {
-      id: req.params.id
-    }, 
+      id: req.params.id,
+    },
     {
       id: "required|integer",
     }
   );
 
   validator.addPostRule(async (provider) =>
-    Promise.all([
-      Notification.getById(provider.inputs.id)
-    ]).then(([notiById]) => {
-      if (!notiById) {
-        provider.error(
-          "id",
-          "custom",
-          `Notification with id "${provider.inputs.id}" does not exists!`
-        );
+    Promise.all([Notification.getById(provider.inputs.id)]).then(
+      ([notiById]) => {
+        if (!notiById) {
+          provider.error("id", "custom", `Notification does not exist!`);
+        }
       }
-    })
+    )
+  );
+
+	return validator.check()
+		.then(matched => {
+			if (!matched) {
+				throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+			}
+		})
+		.then(() => notificationCtrl.markAsRead(req, res))
+		.catch((error) => respondValidateError(res, error));
+		
+});
+
+notificationRouters.get("/:id", async (req, res) => {
+  const validator = new Validator(
+    {
+      id: req.params.id,
+    },
+    {
+      id: "required|integer",
+    }
+  );
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([Notification.getById(provider.inputs.id)]).then(
+      ([notiById]) => {
+        if (!notiById) {
+          provider.error(
+            "id",
+            "custom",
+            `Notification with id "${provider.inputs.id}" does not exist!`
+          );
+        }
+      }
+    )
   );
 
   return validator
-  .check()
-  .then((matched) => {
-    if (!matched) {
-      throw Object.assign(new Error("Invalid request"), {
-        code: 400,
-        details: validator.errors,
-      });
-    }
-  })
-  .then(() => notificationCtrl.getById(req, res))
-  .catch((error) => respondValidateError(res, error));
-})
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => notificationCtrl.getById(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
 
 notificationRouters.post("/pagination", async (req, res) => {
   const validator = new Validator(req.body, {
@@ -76,13 +107,13 @@ notificationRouters.post("/", async (req, res) => {
     sender_id: "required|integer",
     receiver_id: "required|integer",
     type: "required|integer",
-    optional_val: "required"
+    optional_val: "required",
   });
 
   validator.addPostRule(async (provider) =>
     Promise.all([
       User.getById(provider.inputs.sender_id),
-      User.getById(provider.inputs.receiver_id)
+      User.getById(provider.inputs.receiver_id),
     ]).then(([sender, receiver]) => {
       if (!sender) {
         provider.error(

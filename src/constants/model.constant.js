@@ -86,6 +86,7 @@ exports.DEFAULT_NOTIFICATION = {
   type: 0,
   optional_val: '',
   time: generateTZTimeString(),
+  is_read: 0,
   create_time: timestamp(),
   update_time: timestamp(),
 };

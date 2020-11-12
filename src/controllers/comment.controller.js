@@ -58,16 +58,16 @@ exports.getById = (req, res) => {
 
 exports.pagination = (req, res) => {
   const { uid } = getTokenInfo(req);
-  const { page, limit, target_id, type } = req.body;
-  const offset = page * limit;
-  let _comments = [], _total = 0, _posters = {};
+  const { last_id, limit, target_id, type } = req.body;
+  let _comments = [], _total = 0, _posters = {}; _minId = 0;
 
   return Promise.all([
-    Comment.pagination({ limit, offset, target_id, type }),
+    Comment.pagination({ limit, last_id, target_id, type }),
     Comment.getCountOfComments({ target_id, type }),
+    Comment.minId({ target_id, type }),
   ])
-    .then(async ([comments, total]) => {
-      _comments = comments; _total = total;
+    .then(async ([comments, total, minId]) => {
+      _comments = comments; _total = total; _minId = minId;
       const poster_ids = comments.map(comment => comment.user_id);
       return User.getByIds(poster_ids);
     })
@@ -134,16 +134,19 @@ exports.pagination = (req, res) => {
         });
       }
 
+      cMinId = _comments.length > 0 ? _comments[_comments.length - 1].id : 0;
+
       return res.json({
         status: true,
         message: 'success',
         data: _comments,
         pager: {
-          page,
+          // page,
+          last_id: cMinId,
           limit,
           total: _total
         },
-        hadMore: (limit * page + _comments.length) < _total
+        hadMore: cMinId > _minId, //(limit * page + _comments.length) < _total
       });
     })
     .catch((error) => respondError(res, error));

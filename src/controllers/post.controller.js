@@ -71,7 +71,7 @@ exports.pagination = async (req, res) => {
       Post.getCountOfPosts({ type: post_type, user_id: uid }),
       Post.getMinIdOfPosts({ type: post_type, user_id: uid })
     ]);
-  } else {
+  } else { // AROUND
     // get config
     let [me, config] = await Promise.all([
       User.getById(uid),

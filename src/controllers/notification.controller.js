@@ -81,7 +81,7 @@ exports.pagination = (req, res) => {
 // to-do: only admin or creator can update
 exports.updateById = (req, res) => {
   const { id } = req.params;
-  return Comment.getById(id)
+  return Notification.getById(id)
     .then(comment => {
       // remove user id in update data
       let updateData = {};
@@ -95,12 +95,12 @@ exports.updateById = (req, res) => {
           comment[key] = req.body[key];
         }
       });
-      return Comment.save(comment);      
+      return Notification.save(comment);      
     })
     .then(newComment => res.json({
       status: true,
       message: 'success',
-      data: Comment.output(newComment)
+      data: Notification.output(newComment)
     }))
     .catch((error) => respondError(res, error));
 }
@@ -117,3 +117,24 @@ exports.getAll = (req, res) => {
       })
     );
 };
+
+exports.markAsRead = (req, res) => {
+  const { id } = req.params;
+  return this.markAsReadReq(id)
+    .then(noti => {
+      return res.json({
+        status: true,
+        message: 'Notification has been marked as read!',
+        data: Notification.output(noti)
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.markAsReadReq = (id) => {
+  return Notification.getById(id)
+    .then(noti => {
+      return Notification.save({ ...noti, is_read: 1 });
+    })
+    .then(noti => noti);
+}

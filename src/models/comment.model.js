@@ -35,10 +35,14 @@ Comment.deleteById = async (id) => {
   })
 }
 
-Comment.pagination = async ({ limit, offset, target_id = null, type = null }) => {
-  const strWhere = (target_id && type) ? ` WHERE target_id=${target_id} AND type="${type}"` : '';
+Comment.pagination = async ({ limit, last_id = null, target_id = null, type = null }) => {
+  let where = [];
+  last_id ? where.push(`id < ${last_id}`) : null;
+  (target_id && type) ? where.push(`target_id=${target_id} AND type="${type}"`) : null;
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM comments ${strWhere} LIMIT ? OFFSET ? `, [limit, offset], (err, res) => {
+    sql.query(`SELECT * FROM comments ${strWhere} ORDER BY id DESC LIMIT ? `, [limit], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
@@ -58,6 +62,15 @@ Comment.getCountOfComments = ({ type = null, target_id = null }) => {
   return new Promise((resolve, reject) => {
     sql.query(`SELECT COUNT(id) as total FROM comments ${strWhere}`, (err, res) => {
       err ? reject(err) : resolve(res[0].total);
+    });
+  });
+}
+
+Comment.minId = ({ type = null, target_id = null }) => {
+  const strWhere = type && target_id ? ` WHERE type='${type}' AND target_id=${target_id}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT id FROM comments ${strWhere} ORDER BY id ASC LIMIT 1`, (err, res) => {
+      err ? reject(err) : resolve(res.length > 0 ? res[0].id : 0);
     });
   });
 }
