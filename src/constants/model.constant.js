@@ -26,6 +26,7 @@ exports.DEFAULT_USER = {
   city: '',
   recovery_code: '',
   socket_id: "",
+  current_chat: 0,
   online: 0,
   active: 0,
   create_time: timestamp(),
