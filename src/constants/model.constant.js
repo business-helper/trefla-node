@@ -53,7 +53,7 @@ exports.DEFAULT_POST = {
   location_address: '',
   location_coordinate: '',
   city: '',
-  active: 0,
+  active: 1,
   post_time: '2020-01-01-00-00-00:180',
   create_time: timestamp(),
   update_time: timestamp(),
@@ -117,6 +117,15 @@ exports.DEFAULT_CHAT = {
   unread_nums: '',
   online_status: '',
   last_messages: '',
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_CONFIG = {
+  id: '',
+  admin_email: "",
+  aroundSearchPeriod: 100,
+  lang_version: "",
   create_time: timestamp(),
   update_time: timestamp(),
 };

@@ -7,7 +7,12 @@ const {
   DEFAULT_CHAT,
   DEFAULT_MESSAGE
 } = require('../constants/model.constant');
-const { generateTZTimeString } = require('./common.helpers');
+const { 
+  generateTZTimeString,
+  getDistanceFromLatLonInMeter,
+  string2Coordinate,
+  string2Timestamp,
+} = require('./common.helpers');
 
 
 const generateCommentData = (basicData) => {
@@ -105,7 +110,81 @@ const generateMessageData = basicData => {
   return data;
 }
 
+const checkPostLocationWithUser = (post, user, aroundSearchPeriod, locationIndex) => {
+  const postLocation = string2Coordinate(post.location_coordinate);
+  const postTime = string2Timestamp(post.post_time);
+  const userAroundRadius = user.radiusAround || 100;
+
+  user.location_array = JSON.parse(user.location_array || "[]");
+  if (!user.location_array || !user.location_array.length) return true;
+
+  if (locationIndex || locationIndex === 0) {
+    if (locationIndex < 0 || locationIndex > user.location_array.length - 1) {
+      return false;
+    }
+
+    const currentArray = user.location_array[locationIndex].split('&&');
+    let userLocation = string2Coordinate(currentArray[0]);
+
+    if ( getDistanceFromLatLonInMeter(postLocation, userLocation) > userAroundRadius ) {
+      return false;
+    }
+    const givenTime = string2Timestamp(currentArray[1]);
+    let nextLocationTime = Math.floor(new Date().getTime() / 1000);
+    if (locationIndex < user.location_array.length - 1) {
+      const nextArray = user.location_array[locationIndex + 1].split('&&');
+      nextLocationTime = string2Timestamp(nextArray[1]);
+    }
+    return givenTime <= postTime && postTime <= nextLocationTime;
+  } else {
+    for (let [index, locationItem] of user.location_array.entries()) {
+      const itemMembers = locationItem.split('&&');
+      // distance condition
+      let userLocation = string2Coordinate(itemMembers[0]);
+      // console.log(
+      //   'Distance is ',
+      //   getDistanceFromLatLonInMeter(postLocation, userLocation)
+      // );
+      if (
+        getDistanceFromLatLonInMeter(postLocation, userLocation) >
+        userAroundRadius
+      ) {
+        // console.log('[around] distance not match',);
+        // return false;
+        continue;
+      }
+      // console.log('[around] distance passed', getDistanceFromLatLonInMeter(postLocation, userLocation), userAroundRadius);
+      // time condition
+      const locationTime = string2Timestamp(itemMembers[1]);
+
+      // get next location time
+      let nextLocationTime = Math.floor(new Date().getTime() / 1000);
+      if (index < user.location_array.length - 1) {
+        const nextItemArray = user.location_array[index + 1].split('&&');
+        nextLocationTime = string2Timestamp(nextItemArray[1]);
+      }
+
+      // postTime > locationTime
+      if (locationTime <= postTime && postTime <= nextLocationTime) {
+        return true;
+      } else {
+        continue;
+      }
+      // if (
+      //   locationTime > postTime ||
+      //   locationTime < postTime - deltaTime * 86400
+      // ) {
+      //   // console.log('[around] time not passed', postTime - locationTime)
+      //   // return false;
+      //   continue;
+      // }
+      // return true;
+    }
+  }
+}
+
 module.exports = {
+  checkPostLocationWithUser,
   generateChatData,
   generateCommentData,
   generateCommentLikeData,

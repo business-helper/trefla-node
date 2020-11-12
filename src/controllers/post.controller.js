@@ -1,9 +1,10 @@
 const { Validator } = require("node-input-validator");
 const Post = require("../models/post.model");
 const User = require("../models/user.model");
+const Config = require("../models/config.model");
 const PostLike = require("../models/postLike.model");
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { generateTZTimeString, getTotalLikes, respondError } = require("../helpers/common.helpers");
+const { generateTZTimeString, getTimeAfter, getTotalLikes, respondError, timestamp } = require("../helpers/common.helpers");
 const { generatePostData, generatePostLikeData } = require('../helpers/model.helpers');
 
 
@@ -49,19 +50,49 @@ exports.getById = (req, res) => {
     .catch((error) => respondError(res, error));
 }
 
-exports.pagination = (req, res) => {
+exports.pagination = async (req, res) => {
   //const tokenInfo = getTokenInfo(req); //console.log('tokenInfo', tokenInfo);
   const { uid } = getTokenInfo(req);
-  const { page, limit, type } = req.body;
-  const offset = page * limit;
-  let _posts = [], _total = 0, _posters = {};
-  return Promise.all([
-    Post.pagination({ limit, offset, type }),
-    Post.getCountOfPosts({ type }),
-  ])
-    .then(async ([posts, total]) => {
-      _posts = posts; _total = total;
-      const poster_ids = posts.map(post => post.user_id);
+  const { limit, last_id, type, post_type } = req.body;
+  // const offset = page * limit;
+  let _posts = [], _total = 0, _posters = {}, _minId;
+
+  let promiseAll;
+
+  if (type === 'ALL') {
+    promiseAll = Promise.all([
+      Post.pagination({ limit, last_id, type: post_type }),
+      Post.getCountOfPosts({ type: post_type }),
+      Post.getMinIdOfPosts({ type: post_type })
+    ]);
+  } else if (type === 'ME') {
+    promiseAll = Promise.all([
+      Post.pagination({ limit, last_id, type: post_type, user_id: uid }),
+      Post.getCountOfPosts({ type: post_type, user_id: uid }),
+      Post.getMinIdOfPosts({ type: post_type, user_id: uid })
+    ]);
+  } else {
+    // get config
+    let [me, config] = await Promise.all([
+      User.getById(uid),
+      Config.get()
+    ]);
+    // const config = await Config.get();
+    const deltaDays = config.aroundSearchDays || 100;
+    const minTime = timestamp(getTimeAfter(new Date(), deltaDays));
+    const rawPosts = await Post.getAroundPosts({ last_id, minTime });
+
+    const aroundPosts = rawPosts.filter(post => checkPostLocationWithUser(post, me, config.aroundSearchPeriod, req.body.locationIndex));
+    const posts = aroundPosts.splice(0, limit || 20);
+    const minId = aroundPosts.length > 0 ? aroundPosts[aroundPosts.length - 1].id : 0;
+    const total = aroundPosts.length;
+    promiseAll = Promise.all([ posts, minId, total ]);
+  }
+
+  return promiseAll
+    .then(async ([posts, total, minId]) => {
+      _posts = posts; _total = total; _minId = minId;
+      let poster_ids = posts.map(post => post.user_id); poster_ids.push(0);
       return User.getByIds(poster_ids);
     })
     .then(users => {
@@ -79,16 +110,18 @@ exports.pagination = (req, res) => {
         user: User.output(_posters[post.post_user_id])
       }));
 
+      cLastId = posts.length > 0 ? posts[posts.length - 1].id : 0;
+
       return res.json({
         status: true,
         message: 'success',
         data: posts,
         pager: {
-          page,
+          last_id: cLastId,
           limit,
           total: _total
         },
-        hadMore: (limit * page + posts.length) < _total
+        hadMore: cLastId > _minId
       });
     })
     .catch((error) => respondError(res, error));

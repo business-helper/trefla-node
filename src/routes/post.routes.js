@@ -52,9 +52,23 @@ postRouters.get('/:id', async (req, res) => {
 
 postRouters.post("/pagination", async (req, res) => {
   const validator = new Validator(req.body, {
-    page: "required|integer",
+    // last_id: "required|integer",
+    type: 'required|string',
     limit: "required|integer",
   });
+
+  validator.addPostRule(async (provider) =>
+  Promise.all([
+    provider.inputs.type
+  ]).then(([type]) => {
+    if (!type) {
+      provider.error('type', 'custom', 'Type param is required!');
+    } else if (!['AROUND', 'ALL', 'ME'].includes(type)) {
+      provider.error("type", "custom", `Type param must be of of "AROUND", "ALL", "ME"!`);
+    }
+  })
+);
+
 
   return validator
     .check()

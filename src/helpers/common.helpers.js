@@ -37,6 +37,10 @@ const bool2Int = (boolVal) => {
   return boolVal ? 1 : 0;
 }
 
+const deg2rad = function (deg) {
+  return deg * (Math.PI / 180);
+};
+
 const getTime = () => {
   return new Date().getTime();
 };
@@ -74,8 +78,30 @@ const sendMail = ({ from, to, subject, body }) => {
   return transporter.sendMail(mailOptions);
 }
 
-const timestamp = () => {
-  return Math.floor(new Date().getTime() / 1000);
+const timestamp = (dt = null) => {
+  !dt ? dt = new Date() : null;
+  const time = dt.getTime();
+  return Math.floor(time / 1000);
+};
+
+const getDistanceFromLatLonInMeter = function (location1, location2) {
+  const lat1 = location1.lat;
+  const lon1 = location1.lng;
+  const lat2 = location2.lat;
+  const lon2 = location2.lng;
+
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2 - lat1); // deg2rad below
+  var dLon = deg2rad(lon2 - lon1);
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) *
+      Math.cos(deg2rad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c; // Distance in km
+  return d * 1000;
 };
 
 const getTotalLikes = (obj) => {
@@ -83,14 +109,58 @@ const getTotalLikes = (obj) => {
   return fields.reduce((total, field) => total + Number(obj[field]), 0);
 }
 
+/**
+ * @function getTimeAfterDelta
+ * @param {Date} nowDt
+ * @param {int} delta // days
+ * @return {Date}
+ */
+const getTimeAfter = (nowDt = null, delta = 0) => {
+  !nowDt ? nowDt = new Date() : null;
+  let time = nowDt.getTime();
+  return new Date(time + 86400 * 1000);
+}
+
+const string2Coordinate = function (str) {
+  try {
+    const tmp_arr = str.split(',');
+    return { lat: Number(tmp_arr[0]), lng: Number(tmp_arr[1]) };
+  } catch (error) {
+    return { lat: 0.0, lng: 0.0 };
+  }
+};
+
+const string2Timestamp = (str_time) => {
+  const arr1 = str_time.split(':');
+  const date_arr = arr1[0].split('-');
+  const dt = new Date(
+    Number(date_arr[0]),
+    Number(date_arr[1]) - 1,
+    Number(date_arr[2]),
+    Number(date_arr[3]),
+    Number(date_arr[4]),
+    Number(date_arr[5])
+  );
+  const my_timezone = -dt.getTimezoneOffset();
+  const time = dt.getTime();
+  const timezoneOffset = Number(arr1[1]);
+  const final_time =
+    Math.floor(time / 1000) - (my_timezone - timezoneOffset) * 60;
+  return final_time;
+};
+
 module.exports = {
   bool2Int,
   generateTZTimeString,
+  getDistanceFromLatLonInMeter,
   getTime,
+  getTimeAfter,
   getTotalLikes,
   int2Bool,
 	respondError,
   respondValidateError,
   sendMail,
+  string2Coordinate,
+  string2Timestamp,
   timestamp,
 };

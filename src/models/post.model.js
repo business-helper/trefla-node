@@ -35,17 +35,12 @@ Post.deleteById = async (id) => {
   })
 }
 
-Post.pagination = async ({ limit, offset, type = null }) => {
-  const strWhere = type ? ` WHERE type='${type}'` : '';
-  return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM posts ${strWhere} LIMIT ? OFFSET ? `, [limit, offset], (err, res) => {
-      err ? reject(err) : resolve(res);
-    })
-  });
-}
+Post.getAll = ({ type = null, user_id = null }) => {
+  const where = [];
+  type ? where.push(`type=${type}`) : null;
+  user_id ? where.push(`user_id=${user_id}`) : null;
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
 
-Post.getAll = ({ type = null }) => {
-  const strWhere = type ? ` WHERE type='${type}'` : '';
   return new Promise((resolve, reject) => {
     sql.query(`SELECT * FROM posts ${strWhere}`, (err, res) => {
 			err ? reject(err) : resolve(res);
@@ -53,11 +48,51 @@ Post.getAll = ({ type = null }) => {
   });
 };
 
-Post.getCountOfPosts = ({ type = null }) => {
-  const strWhere = type ? ` WHERE type='${type}'` : '';
+Post.pagination = async ({ limit, last_id, type = null, user_id = null }) => {
+  let where = [];
+  type ? where.push(`type='${type}'`) : null;
+  last_id ? where.push(`id < ${last_id}`) : null;
+  user_id ? where.push(`user_id=${user_id}`) : null;
+
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM posts ${strWhere} ORDER BY id DESC LIMIT ?  `, [limit], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Post.getCountOfPosts = ({ type = null, user_id = null }) => {
+  const where = [];
+  type ? where.push(`type=${type}`) : null;
+  user_id ? where.push(`user_id=${user_id}`) : null;
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+
   return new Promise((resolve, reject) => {
     sql.query(`SELECT COUNT(id) as total FROM posts ${strWhere}`, (err, res) => {
       err ? reject(err) : resolve(res[0].total);
+    });
+  });
+}
+
+Post.getMinIdOfPosts = ({ type = null }) => {
+  const strWhere = type ? ` WHERE type='${type}'` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT id from posts ${strWhere} ORDER BY id ASC LIMIT 1`, (err, res) => {
+      err ? reject(err) : resolve(res.length > 0 ? res[0].id : 0);
+    });
+  });
+}
+
+Post.getAroundPosts = ({ last_id, minTime }) => {
+  let where = [];
+  where.push(`create_time > '${minTime}'`);
+  last_id ? where.push(`id < ${last_id}`) : null;
+  
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM posts ${strWhere} ORDER BY id DESC`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
     });
   });
 }

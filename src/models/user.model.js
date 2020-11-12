@@ -44,6 +44,7 @@ User.getById = (id) => {
 }
 
 User.getByIds = async (ids) => {
+  ids.push(0);
   return new Promise((resolve, reject) => {
     sql.query("SELECT * FROM users WHERE id IN (?)", [ids], (err, res) => {
       err ? reject(err) : resolve(res);
