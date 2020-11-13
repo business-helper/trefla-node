@@ -96,7 +96,7 @@ User.updateSocketSession = ({ id, socketId }) => {
 User.output = (user, mode = 'NORMAL') => {
   if (!user) return null;
   try {
-    user.location_array = JSON.parse(user.location_array || "");
+    user.location_array = JSON.parse(user.location_array || "[]");
   } catch (e) {
     console.log('[location array]', user.location_array);
     user.location_array = [];

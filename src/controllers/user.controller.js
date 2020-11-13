@@ -174,7 +174,11 @@ exports.updateProfile = (req, res) => {
       const keys = Object.keys(user);
       keys.forEach(key => {
         if (req.body[key] !== undefined) {
-          user[key] = req.body[key];
+          if (['location_array'].includes(key)) {
+            user[key] = JSON.stringify(req.body[key]);
+          } else {
+            user[key] = req.body[key];
+          }
         }
       });
       return User.save(user);
