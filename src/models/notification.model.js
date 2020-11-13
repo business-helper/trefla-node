@@ -61,8 +61,24 @@ Notification.getById = (id) => {
 
 Notification.getByUserId = (user_id) => {
   return new Promise((resolve, reject) => {
-    sql.query("SELECT * FROM notifications WHERE receiver_id=? LIMIT 1", [user_id], (err, res) => {
+    sql.query("SELECT * FROM notifications WHERE receiver_id=?", [user_id], (err, res) => {
       err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Notification.deleteByUserId = (user_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM notifications WHERE receiver_id=?", [user_id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows > 0);
+    });
+  });
+}
+
+Notification.deleteById = (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM notifications WHERE id=?", [id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows > 0);
     });
   });
 }

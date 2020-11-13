@@ -177,4 +177,42 @@ notificationRouters.post("/", async (req, res) => {
     .catch((error) => respondValidateError(res, error));
 });
 
+notificationRouters.delete("/:id", async (req, res) => {
+  const validator = new Validator(
+    {
+      id: req.params.id,
+    },
+    {
+      id: "required|integer",
+    }
+  );
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([Notification.getById(provider.inputs.id)]).then(
+      ([notiById]) => {
+        if (!notiById) {
+          provider.error("id", "custom", `Notification with id "${provider.inputs.id}" does not exist!`);
+        }
+      }
+    )
+  );
+  
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => notificationCtrl.deleteById(req, res))
+    .catch(error => respondValidateError(res, error));
+});
+
+notificationRouters.delete('/', async (req, res) =>{
+  return notificationCtrl.deleteAll(req, res)
+  .catch(error => respondValidateError(res, error));
+})
+
 module.exports = notificationRouters;

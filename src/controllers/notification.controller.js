@@ -146,14 +146,14 @@ exports.markAllAsRead = (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
   return this.markAllAsReadReq({ user_id, socketClient })
     .then(result => {
-      res.json({
+      return res.json({
         status: true,
         message: 'success',
       })
     });
 }
 
-exports.markAllAsReadReq = async ({ user_id, socketClient }) => {
+exports.markAllAsReadReq = async ({ user_id, socketClient = null }) => {
   const user = await User.getById(user_id);
   return Notification.getByUserId(user_id)
     .then(notis => {
@@ -164,7 +164,7 @@ exports.markAllAsReadReq = async ({ user_id, socketClient }) => {
     })
     .then((notis) => {
       // send user noti_num = 0;
-      if (user && user.socket_id) {
+      if (socketClient && user && user.socket_id) {
         socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
           to: user.socket_id,
           event: CONSTS.SKT_NOTI_NUM_UPDATED,
@@ -173,4 +173,60 @@ exports.markAllAsReadReq = async ({ user_id, socketClient }) => {
       }
       return true;
     });
+}
+
+exports.deleteAll = async (req, res) => {
+  const socketClient = req.app.locals.socketClient;
+  const { uid: user_id } = getTokenInfo(req);
+  return this.deleteAllReq({ user_id, socketClient })
+    .then(result => {
+      return res.json({
+        status: true,
+        message: 'success'
+      });
+    });
+}
+
+exports.deleteAllReq = async ({ user_id, socketClient }) => {
+  const user = await User.getById(user_id);
+  return Notification.deleteByUserId(user_id)
+    .then(deleted => {
+      if (socketClient && user && user.socket_id) { 
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: user.socket_id,
+          event: CONSTS.SKT_NOTI_NUM_UPDATED,
+          args: { num: 0 }
+        });
+      }
+      return true;
+    })
+}
+
+exports.deleteById = async (req, res) => {
+  const socketClient = req.app.locals.socketClient;
+  const { uid: user_id } = getTokenInfo(req);
+  return this.deleteByIdReq({ user_id, socketClient, id: req.params.id })
+    .then(result => {
+      return res.json({
+        status: true,
+        message: 'success'
+      });
+    });
+}
+
+exports.deleteByIdReq = async ({ user_id, id, socketClient = null }) => {
+  const user = await User.getById(user_id);
+  return Notification.deleteById(user_id)
+    .then(deleted => Notification.getByUserId(user_id))
+    .then((notis) => {
+      const unread_notis = notis.filter(noti => noti.is_read === 0);
+      if (socketClient && user && user.socket_id) { 
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: user.socket_id,
+          event: CONSTS.SKT_NOTI_NUM_UPDATED,
+          args: { num: unread_notis.length }
+        });
+      }
+      return true;
+    })
 }
