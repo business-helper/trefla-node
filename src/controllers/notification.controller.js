@@ -1,6 +1,8 @@
 const { Validator } = require("node-input-validator");
+const CONSTS = require('../constants/socket.constant');
 const User = require("../models/user.model");
 const Notification = require("../models/notification.model");
+const { getTokenInfo } = require('../helpers/auth.helpers');
 const { bool2Int, generateTZTimeString, respondError } = require("../helpers/common.helpers");
 const { generateNotificationData } = require('../helpers/model.helpers');
 
@@ -140,10 +142,35 @@ exports.markAsReadReq = (id) => {
 }
 
 exports.markAllAsRead = (req, res) => {
+  const socketClient = req.app.locals.socketClient; //console.log('[socket.client]', socketClient);
   const { uid: user_id } = getTokenInfo(req);
-  return this.markAllAsReadReq({ user_id })
+  return this.markAllAsReadReq({ user_id, socketClient })
+    .then(result => {
+      res.json({
+        status: true,
+        message: 'success',
+      })
+    });
 }
 
-exports.markAllAsReadReq = ({ user_id }) => {
-  
+exports.markAllAsReadReq = async ({ user_id, socketClient }) => {
+  const user = await User.getById(user_id);
+  return Notification.getByUserId(user_id)
+    .then(notis => {
+      return Promise.all(notis.map(noti => {
+        noti.is_read = 1;
+        return Notification.save(noti);
+      }));
+    })
+    .then((notis) => {
+      // send user noti_num = 0;
+      if (user && user.socket_id) {
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: user.socket_id,
+          event: CONSTS.SKT_NOTI_NUM_UPDATED,
+          args: {num: 0}
+        });
+      }
+      return true;
+    });
 }

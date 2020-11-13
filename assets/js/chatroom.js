@@ -522,3 +522,12 @@ socket.on(SKT_UPDATE_ONLINE, ({ user_id, online }) => {
       .addClass("offline");
   }
 });
+
+
+socket.on(SKT_NOTI_NUM_UPDATED, (args) => {
+  console.log('[noti.num.updated]', args);
+});
+
+socket.on(SKT_UNREAD_MSG_UPDATED, (args) => {
+  console.log('[unread.msg.updated]', args);
+});

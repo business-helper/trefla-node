@@ -6,6 +6,7 @@ const notificationCtrl = require("../controllers/notification.controller");
 const Notification = require("../models/notification.model");
 const User = require("../models/user.model");
 const { BearerMiddleware } = require("../middlewares/basic.middleware");
+const { getTokenInfo } = require('../helpers/auth.helpers');
 const { respondValidateError } = require("../helpers/common.helpers");
 
 // Bearer authentication

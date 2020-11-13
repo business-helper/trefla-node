@@ -37,8 +37,8 @@ app.use((req, res, next) => {
 
 const { bootstrapSocket } = require('./sockets');
 const io = require('socket.io')(http);
-const socketClient = require('socket.io-client')(`http://localhost:${appConfig.port}`, {query: `token=INNER_CLIENT`});
-app.locals.socketClient = socketClient;
+// const socketClient = require('socket.io-client')(`http://localhost:${appConfig.port}`, {query: `token=INNER_CLIENT`});
+// app.locals.socketClient = socketClient;
 bootstrapSocket(io);
 
 http.listen(Number(appConfig.port), () => `Server running on port ${appConfig.port}`);

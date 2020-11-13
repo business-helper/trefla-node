@@ -1,5 +1,6 @@
 const express = require("express");
 const appV1 = express();
+const appConfig = require('./config/app.config');
 
 // Routers
 const authRouters = require('./routes/auth.routes');
@@ -22,5 +23,8 @@ appV1.use('/post', postRouters);
 appV1.use('/user', userRouters);
 
 appV1.post('/init-data', getInitData);
+
+const socketClient = require('socket.io-client')(`http://localhost:${appConfig.port}`, {query: `token=INNER_CLIENT`});
+appV1.locals.socketClient = socketClient;
 
 module.exports = appV1;

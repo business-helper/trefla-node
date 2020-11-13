@@ -24,14 +24,6 @@ Notification.save = async (noti) => {
   });
 }
 
-Notification.get = (where = {}) => {
-  return new Promise((resolve, reject) => {
-    sql.query("SELECT * FROM notifications WHERE id=? LIMIT 1", [id], (err, res) => {
-      err ? reject(err) : resolve(res[0]);
-    });
-  });
-}
-
 Notification.pagination = async ({ limit, offset, receiver_id }) => {
   const strWhere = (receiver_id) ? ` WHERE receiver_id=${receiver_id}` : '';
   return new Promise((resolve, reject) => {
@@ -63,6 +55,14 @@ Notification.getById = (id) => {
   return new Promise((resolve, reject) => {
     sql.query("SELECT * FROM notifications WHERE id=? LIMIT 1", [id], (err, res) => {
       err ? reject(err) : resolve(res[0]);
+    });
+  });
+}
+
+Notification.getByUserId = (user_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM notifications WHERE receiver_id=? LIMIT 1", [user_id], (err, res) => {
+      err ? reject(err) : resolve(res);
     });
   });
 }
