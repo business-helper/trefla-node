@@ -290,7 +290,7 @@ exports.loadMessageReq = async ({ myId = null, chat_id, last_id, limit }) => {
           ...msg,
           user: userObj[msg.sender_id]
         };
-      }).reverse();
+      }); //.reverse();
       return { messages, minId, total };
     })
 }
