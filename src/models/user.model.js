@@ -99,6 +99,7 @@ User.output = (user, mode = 'NORMAL') => {
     user.location_array = JSON.parse(user.location_array || "");
   } catch (e) {
     console.log('[location array]', user.location_array);
+    user.location_array = [];
   }
   // keys to delete
   let delKeys = [];

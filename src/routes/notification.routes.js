@@ -13,6 +13,36 @@ notificationRouters.use((req, res, next) => {
   BearerMiddleware(req, res, next);
 });
 
+notificationRouters.get("/read", async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const validator = new Validator(
+    {
+      user_id
+    },
+    {
+      user_id: "required|integer"
+    }
+  );
+
+  validator.addPostRule(async (provider) => {
+    User.getById(provider.inputs.user_id)
+    .then(user => {
+      if (!user) {
+        provider.error('user', 'custom', 'User does not exist!')
+      }
+    })
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+      }
+    })
+    .then(() => notificationCtrl.markAllAsRead(req, res))
+    .catch(error => respondValidateError(res, error));
+});
+
 notificationRouters.get("/:id/read", async (req, res) => {
   const validator = new Validator(
     {
@@ -145,41 +175,5 @@ notificationRouters.post("/", async (req, res) => {
     .then(() => notificationCtrl.create(req, res))
     .catch((error) => respondValidateError(res, error));
 });
-
-// notificationRouters.patch("/:id", async (req, res) => {
-//   const validator = new Validator({
-//     id: req.params.id,
-//     ...req.body
-//   }, {
-//     id: "required|integer",
-//   });
-
-//   validator.addPostRule(async (provider) =>
-//     Promise.all([
-//       Comment.getById(provider.inputs.id)
-//     ]).then(([commentById]) => {
-//       if (!commentById) {
-//         provider.error(
-//           "id",
-//           "custom",
-//           `Comment with id "${provider.inputs.id}" does not exists!`
-//         );
-//       }
-//     })
-//   );
-
-//   return validator
-//   .check()
-//   .then((matched) => {
-//     if (!matched) {
-//       throw Object.assign(new Error("Invalid request"), {
-//         code: 400,
-//         details: validator.errors,
-//       });
-//     }
-//   })
-//   .then(() => notificationCtrl.updateById(req, res))
-//   .catch((error) => respondValidateError(res, error));
-// });
 
 module.exports = notificationRouters;

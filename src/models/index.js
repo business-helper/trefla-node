@@ -6,6 +6,7 @@ const emailTemplate = require('./emailTemplate.model');
 const language = require('./lang.model');
 const message = require('./message.model');
 const notification = require('./notification.model');
+const photo = require('./photo.model');
 const post = require('./post.model');
 const postLike = require('./postLike.model');
 const user = require('./user.model');
@@ -20,6 +21,7 @@ module.exports = {
   language,
   message,
   notification,
+  photo,
   post,
   postLike,
   user

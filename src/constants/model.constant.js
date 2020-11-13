@@ -18,7 +18,8 @@ exports.DEFAULT_USER = {
   photo: '',
   radiusAround: 100,
   device_token: '',
-  noti_num: 0,
+  noti_num: 0,   // when add noti
+  unread_msg_num: 0,  // send message
   location_coordinate: '',
   location_address: '',
   location_array: JSON.stringify([]),
@@ -127,6 +128,14 @@ exports.DEFAULT_CONFIG = {
   admin_email: "",
   aroundSearchPeriod: 100,
   lang_version: "",
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_PHOTO = {
+  id: "",
+  user_id: 0,
+  url: '',
   create_time: timestamp(),
   update_time: timestamp(),
 };

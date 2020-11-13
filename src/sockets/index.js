@@ -188,7 +188,7 @@ const bootstrapSocket = (io) => {
         })
         .then(() => {
           console.log(`Updated unread nums of user ${uid}`);
-        })
+        });
     });
 
     socket.on('disconnecting', () => {

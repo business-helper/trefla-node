@@ -138,3 +138,12 @@ exports.markAsReadReq = (id) => {
     })
     .then(noti => noti);
 }
+
+exports.markAllAsRead = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  return this.markAllAsReadReq({ user_id })
+}
+
+exports.markAllAsReadReq = ({ user_id }) => {
+  
+}

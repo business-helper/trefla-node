@@ -2,8 +2,6 @@ const sql = require("./db");
 const { timestamp, int2Bool } = require("../helpers/common.helpers");
 
 const Notification = function (noti) {
-  this.sender_id = noti.sender_id;
-  this.receiver_id = noti.receiver_id;
   this.create_time = timestamp();
   this.update_time = timestamp();
 };
@@ -22,6 +20,14 @@ Notification.save = async (noti) => {
   return new Promise((resolve, reject) => {
     sql.query("UPDATE notifications SET ? WHERE id=?", [noti, noti.id], (err, res) => {
       err ? reject(err) : resolve(Notification.getById(noti.id));
+    });
+  });
+}
+
+Notification.get = (where = {}) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM notifications WHERE id=? LIMIT 1", [id], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
     });
   });
 }
