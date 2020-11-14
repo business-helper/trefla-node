@@ -238,8 +238,10 @@ exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => 
       };
       chat.last_messages = JSON.stringify(last_messages);
 
+      let unread_updated = false;
       // check unread num
       if (receiver && receiver.current_chat !== chat.id) { // receiver is not in the chat room
+        unread_updated = true;
         let unread_nums = JSON.parse(chat.unread_nums);
         const senderIdx = user_ids.indexOf(receiver_id);
         unread_nums[senderIdx] ++;
@@ -256,14 +258,15 @@ exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => 
       
       return Promise.all([
         Message.create(message),
-        Chat.save(chat)
+        Chat.save(chat),
+        unread_updated,
       ]);
     })
-    .then(([message, chat]) => {
+    .then(([message, chat, unread_updated]) => {
       message = Message.output(message);
       message.sender = User.output(_sender);
       message.receiver = User.output(_receiver);
-      return { message, chat: Chat.output(chat) };
+      return { message, chat: Chat.output(chat), unread_updated };
     })
 }
 
@@ -303,6 +306,30 @@ exports.deleteByIdReq = async ({ id }) => {
     })
     .then(deleted => {
       return true;
+    })
+}
+
+exports.getUnreadMsgInfo = async (user_id) => {
+  return Chat.myChatrooms(user_id)
+    .then(chatrooms => {
+      let unreads = {};
+      let total_unreads = 0;
+      chatrooms = chatrooms.filter(chat => {
+        const user_ids = JSON.parse(chat.user_ids);
+        const userPos = user_ids.indexOf(user_id);
+        const isForMe = (userPos === 0) || (userPos === user_ids.length - 1);
+        if (isForMe) {
+          const unread_nums = JSON.parse(chat.unread_nums) || [0,0];
+          const unread_num = unread_nums[userPos] || 0;
+          unread_num > 0 ? unreads[chat.id] = unread_num : null;
+          total_unreads += unread_num || 0;
+        }
+        return isForMe;
+      });
+      return {
+        total: total_unreads,
+        unread_nums: unreads,
+      };
     })
 }
 

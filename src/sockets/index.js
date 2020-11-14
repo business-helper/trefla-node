@@ -135,11 +135,11 @@ const bootstrapSocket = (io) => {
         models.user.getById(uid),
         models.user.getById(receiver_id)
       ])
-        .then(([{message: msg, chat}, me, receiver]) => {
+        .then(async ([{message: msg, chat, unread_updated}, me, receiver]) => {
           socket.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_RECEIVE_MSG, {
             message: {
               ...msg,
-              user: me
+              user: me // sender
             },
             chat: {
               ...chat,
@@ -149,13 +149,18 @@ const bootstrapSocket = (io) => {
           socket.emit(CONSTS.SKT_RECEIVE_MSG, {
             message: {
               ...msg,
-              user: me
+              user: me // sender
             },
             chat: {
               ...chat,
               user: receiver
             }
-          })
+          });
+          if (unread_updated && receiver.socket_id) {
+            // get unread msg info
+            const unreads = await ctrls.chat.getUnreadMsgInfo(receiver.id);
+            io.to(receiver.socket_id).emit(CONSTS.SKT_UNREAD_MSG_UPDATED, unreads);
+          }
         })
         .catch(error => {
           console.log(error);
