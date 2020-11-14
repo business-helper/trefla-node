@@ -118,7 +118,7 @@ const getTotalLikes = (obj) => {
 const getTimeAfter = (nowDt = null, delta = 0) => {
   !nowDt ? nowDt = new Date() : null;
   let time = nowDt.getTime();
-  return new Date(time + 86400 * 1000);
+  return new Date(time + 86400 * 1000 * delta);
 }
 
 const string2Coordinate = function (str) {

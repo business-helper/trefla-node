@@ -67,6 +67,14 @@ Notification.getByUserId = (user_id) => {
   });
 }
 
+Notification.getUnreadCount = (user_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT COUNT(id) as total FROM notifications WHERE receiver_id=? AND is_read=?", [user_id, 0], (err, res) => {
+      err ? reject(err) : resolve(res ? res[0].total : 0);
+    });
+  });
+}
+
 Notification.deleteByUserId = (user_id) => {
   return new Promise((resolve, reject) => {
     sql.query("DELETE FROM notifications WHERE receiver_id=?", [user_id], (err, res) => {

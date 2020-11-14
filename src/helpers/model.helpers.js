@@ -2,10 +2,11 @@ const {
   DEFAULT_COMMENT,
   DEFAULT_COMMENTLIKE,
   DEFAULT_NOTIFICATION,
+  DEFAULT_PHOTO,
   DEFAULT_POST,
   DEFAULT_POSTLIKE,
   DEFAULT_CHAT,
-  DEFAULT_MESSAGE
+  DEFAULT_MESSAGE,
 } = require('../constants/model.constant');
 const { 
   generateTZTimeString,
@@ -14,51 +15,6 @@ const {
   string2Timestamp,
 } = require('./common.helpers');
 
-
-const generateCommentData = (basicData) => {
-  const defaultKeys = Object.keys(DEFAULT_COMMENT);
-  let data = {};
-  for (let field of defaultKeys) {
-    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_COMMENT[field];
-  }
-  return data;
-}
-
-const generatePostData = (basicData) => {
-  const defaultKeys = Object.keys(DEFAULT_POST);
-  let data = {};
-  for (let field of defaultKeys) {
-    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_POST[field];
-  }
-  return data;
-}
-
-const generateNotificationData = (basicData) => {
-  const defaultKeys = Object.keys(DEFAULT_NOTIFICATION);
-  let data = {};
-  for (let field of defaultKeys) {
-    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_NOTIFICATION[field];
-  }
-  return data;
-}
-
-const generatePostLikeData = basicData => {
-  const defaultKeys = Object.keys(DEFAULT_POSTLIKE);
-  let data = {};
-  for (let field of defaultKeys) {
-    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_POSTLIKE[field];
-  }
-  return data;
-}
-
-const generateCommentLikeData = basicData => {
-  const defaultKeys = Object.keys(DEFAULT_COMMENTLIKE);
-  let data = {};
-  for (let field of defaultKeys) {
-    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_COMMENTLIKE[field];
-  }
-  return data;
-}
 
 const generateChatData = (basicData, sender_id, receiver = null) => {
   const defaultKeys = Object.keys(DEFAULT_CHAT);
@@ -101,6 +57,24 @@ const generateChatData = (basicData, sender_id, receiver = null) => {
   return data;
 }
 
+const generateCommentData = (basicData) => {
+  const defaultKeys = Object.keys(DEFAULT_COMMENT);
+  let data = {};
+  for (let field of defaultKeys) {
+    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_COMMENT[field];
+  }
+  return data;
+}
+
+const generateCommentLikeData = basicData => {
+  const defaultKeys = Object.keys(DEFAULT_COMMENTLIKE);
+  let data = {};
+  for (let field of defaultKeys) {
+    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_COMMENTLIKE[field];
+  }
+  return data;
+}
+
 const generateMessageData = basicData => {
   const defaultKeys = Object.keys(DEFAULT_MESSAGE);
   let data = {};
@@ -110,12 +84,49 @@ const generateMessageData = basicData => {
   return data;
 }
 
+const generateNotificationData = (basicData) => {
+  const defaultKeys = Object.keys(DEFAULT_NOTIFICATION);
+  let data = {};
+  for (let field of defaultKeys) {
+    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_NOTIFICATION[field];
+  }
+  return data;
+}
+
+const generatePhotoData = (basicData) => {
+  const defaultKeys = Object.keys(DEFAULT_PHOTO);
+  let data = {};
+  for (let field of defaultKeys) {
+    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_PHOTO[field];
+  }
+  return data;
+}
+
+const generatePostData = (basicData) => {
+  const defaultKeys = Object.keys(DEFAULT_POST);
+  let data = {};
+  for (let field of defaultKeys) {
+    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_POST[field];
+  }
+  return data;
+}
+
+const generatePostLikeData = basicData => {
+  const defaultKeys = Object.keys(DEFAULT_POSTLIKE);
+  let data = {};
+  for (let field of defaultKeys) {
+    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_POSTLIKE[field];
+  }
+  return data;
+}
+
+
+
 const checkPostLocationWithUser = (post, user, aroundSearchPeriod, locationIndex) => {
   const postLocation = string2Coordinate(post.location_coordinate);
   const postTime = string2Timestamp(post.post_time);
   const userAroundRadius = user.radiusAround || 100;
 
-  user.location_array = JSON.parse(user.location_array || "[]");
   if (!user.location_array || !user.location_array.length) return true;
 
   if (locationIndex || locationIndex === 0) {
@@ -190,6 +201,7 @@ module.exports = {
   generateCommentLikeData,
   generateMessageData,
   generateNotificationData,
+  generatePhotoData,
   generatePostData,
   generatePostLikeData,
 };

@@ -5,7 +5,7 @@ const Config = require("../models/config.model");
 const PostLike = require("../models/postLike.model");
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { generateTZTimeString, getTimeAfter, getTotalLikes, respondError, timestamp } = require("../helpers/common.helpers");
-const { generatePostData, generatePostLikeData } = require('../helpers/model.helpers');
+const { checkPostLocationWithUser, generatePostData, generatePostLikeData } = require('../helpers/model.helpers');
 
 
 
@@ -79,9 +79,10 @@ exports.pagination = async (req, res) => {
     ]);
     // const config = await Config.get();
     const deltaDays = config.aroundSearchDays || 100;
-    const minTime = timestamp(getTimeAfter(new Date(), deltaDays));
+    const minTime = timestamp(getTimeAfter(new Date(), -deltaDays));
     const rawPosts = await Post.getAroundPosts({ last_id, minTime });
-
+    // console.log('me', me);
+    me = User.output(me, 'PROFILE');
     const aroundPosts = rawPosts.filter(post => checkPostLocationWithUser(post, me, config.aroundSearchPeriod, req.body.locationIndex));
     const posts = aroundPosts.splice(0, limit || 20);
     const minId = aroundPosts.length > 0 ? aroundPosts[aroundPosts.length - 1].id : 0;

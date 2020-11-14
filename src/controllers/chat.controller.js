@@ -59,8 +59,8 @@ exports.getById = async (req, res) => {
         status: true,
         message: 'success',
         data: {
-          ...post, 
-          liked: likes.length > 1 ? 1 : 0,
+          ...chat, 
+          // liked: likes.length > 1 ? 1 : 0,
           user: User.output(user)
         }
       })
@@ -143,7 +143,7 @@ exports.availableChatrooms = async (req, res) => {
           return {
             ...chat,
             // isSent: user_ids[0] === uid,
-            user: _users[partnerId.toString()]
+            user: _users[partnerId.toString()] // partners info
           };
         });
       
@@ -309,11 +309,13 @@ exports.deleteByIdReq = async ({ id }) => {
     })
 }
 
-exports.getUnreadMsgInfo = async (user_id) => {
+exports.getUnreadMsgInfoReq = async (user_id) => {
+  let unreads = {};
+  let total_unreads = 0;
+  let _chatrooms;
   return Chat.myChatrooms(user_id)
     .then(chatrooms => {
-      let unreads = {};
-      let total_unreads = 0;
+      let partner_ids = [0];
       chatrooms = chatrooms.filter(chat => {
         const user_ids = JSON.parse(chat.user_ids);
         const userPos = user_ids.indexOf(user_id);
@@ -323,12 +325,33 @@ exports.getUnreadMsgInfo = async (user_id) => {
           const unread_num = unread_nums[userPos] || 0;
           unreads[chat.id] = unread_num;
           total_unreads += unread_num || 0;
+          partner_ids.push(user_ids.length > 0 ? user_ids[user_ids.length - 1 - userPos] : 0);
         }
         return isForMe;
       });
+
+      _chatrooms = chatrooms;
+      return User.getByIds(partner_ids);
+    })
+    .then(partners => {
+      let users = {};
+      partners.forEach(user => {
+        users[user.id.toString()] = User.output(user);
+      });
+      _chatrooms = _chatrooms.map(chat => {
+        const user_ids = JSON.parse(chat.user_ids);
+        const userPos = user_ids.indexOf(user_id);
+        const partnerId = user_ids[user_ids.length - 1 - userPos];
+        return {
+          ...(Chat.output(chat)),
+          user: User.output(users[partnerId]),
+        };
+      });
+
       return {
         total: total_unreads,
         unread_nums: unreads,
+        chats: _chatrooms,
       };
     })
 }

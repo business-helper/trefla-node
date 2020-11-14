@@ -8,6 +8,7 @@ const SKT_USER_ENTER_ROOM = 'socket.user.enter.room';
 const SKT_USER_TYPING = 'socket.user.typing';
 const SKT_ACCEPT_CONNECTION = 'socket.accepted.connection'; // ?
 const SKT_SELECT_CHAT = 'socket.select.chat';
+const SKT_LEAVE_CHAT = 'socket.select.chat';
 const SKT_SEND_MSG = 'socket.send.message';
 const SKT_RECEIVE_MSG = 'socket.receive.message';
 const SKT_UPDATE_ONLINE = 'socket.update.online';

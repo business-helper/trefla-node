@@ -7,11 +7,40 @@ const { bool2Int, generateTZTimeString, respondError } = require("../helpers/com
 const { generateNotificationData } = require('../helpers/model.helpers');
 
 exports.create = (req, res) => {
+  const { uid } = getTokenInfo(req);
+  const socketClient = req.app.locals.socketClient;
   let notiData = generateNotificationData(req.body);
   notiData.time = req.body.time ? req.body.time : generateTZTimeString();
-  return Notification.create(notiData)
-    .then((noti) => res.json({ status: true, message: "success", data: Notification.output(noti) }))
-    .catch((error) => respondError(res, error));
+
+  let _notification, _me, _receiver;
+  return Promise.all([
+    Notification.create(notiData),
+    User.getById(req.body.receiver_id),
+    User.getById(uid),
+  ])
+  .then(([ noti, receiver, me ]) => {
+    _notification = noti;
+    _receiver = receiver;
+    _me = me;
+    return Notification.getUnreadCount(req.body.receiver_id);
+  })
+  .then(count => {
+    const notification = {
+      ...(Notification.output(_notification)),
+      sender: User.output(_me),
+    };
+    if (_receiver && _receiver.socket_id) {
+      socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+        to: _receiver.socket_id,
+        event: CONSTS.SKT_NOTI_NUM_UPDATED,
+        args: { 
+          num: count,
+          notification
+        }
+      });
+    }
+    return res.json({ status: true, message: "success", data: notification });
+  });
 };
 
 exports.getById = (req, res) => {
@@ -191,13 +220,13 @@ exports.deleteAllReq = async ({ user_id, socketClient }) => {
   const user = await User.getById(user_id);
   return Notification.deleteByUserId(user_id)
     .then(deleted => {
-      if (socketClient && user && user.socket_id) { 
-        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
-          to: user.socket_id,
-          event: CONSTS.SKT_NOTI_NUM_UPDATED,
-          args: { num: 0 }
-        });
-      }
+      // if (socketClient && user && user.socket_id) { 
+      //   socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+      //     to: user.socket_id,
+      //     event: CONSTS.SKT_NOTI_NUM_UPDATED,
+      //     args: { num: 0 }
+      //   });
+      // }
       return true;
     })
 }

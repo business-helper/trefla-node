@@ -298,6 +298,7 @@ function appendPendingChats(pcs) {
 }
 
 function chatroomSelected(room_id) {
+  socket.emit(SKT_LEAVE_CHAT, { chat_id: current_room ? current_room.id : 0 });
   const [chatroom] = _chatrooms.filter((chatroom) => chatroom.id === room_id);
   if (!chatroom) {
     console.log("[select room] not exist", room_id);
@@ -487,7 +488,7 @@ socket.on(SKT_USER_TYPING, ({ chat_id, typing }) => {
 });
 
 socket.on(SKT_RECEIVE_MSG, ({ message, chat }) => {
-  console.log("new message in room" + chat.id, message);
+  console.log("new message in room" + chat.id, message, chat);
 
   const profile = loadProfile();
   const direction = profile.id === message.user.id ? "right" : "left";

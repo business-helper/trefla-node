@@ -9,7 +9,7 @@ const INNER_CLIENT = 'INNER_CLIENT';
 
 const bootstrapSocket = (io) => {
   io.on('connection', socket => {
-    console.log('[socket connect]', socket.request._query.token);
+    // console.log('[socket connect]', socket.request._query.token);
     const token = socket.request._query.token;
     if (token !== INNER_CLIENT) {
       const { uid } = helpers.auth.parseToken(token);
@@ -139,26 +139,26 @@ const bootstrapSocket = (io) => {
           socket.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_RECEIVE_MSG, {
             message: {
               ...msg,
-              user: me // sender
+              user: models.user.output(me) // sender
             },
             chat: {
               ...chat,
-              user: me
+              user: models.user.output(receiver)
             }
           });
           socket.emit(CONSTS.SKT_RECEIVE_MSG, {
             message: {
               ...msg,
-              user: me // sender
+              user: models.user.output(me) // sender
             },
             chat: {
               ...chat,
-              user: receiver
+              user: models.user.output(me)
             }
           });
           if (unread_updated && receiver.socket_id) {
             // get unread msg info
-            const unreads = await ctrls.chat.getUnreadMsgInfo(receiver.id);
+            const unreads = await ctrls.chat.getUnreadMsgInfoReq(receiver.id);
             io.to(receiver.socket_id).emit(CONSTS.SKT_UNREAD_MSG_UPDATED, unreads);
           }
         })
@@ -199,12 +199,20 @@ const bootstrapSocket = (io) => {
           // }));
         })
         .then(() => {
-          return ctrls.chat.getUnreadMsgInfo(uid);
+          return ctrls.chat.getUnreadMsgInfoReq(uid);
         })
         .then((unreads) => {
           socket.emit(CONSTS.SKT_UNREAD_MSG_UPDATED, unreads);
           console.log(`Updated unread nums of user ${uid}`);
         });
+    });
+
+    socket.on(CONSTS.SKT_LEAVE_CHAT, ({ chat_id }) => {
+      const { uid } = helpers.auth.parseToken(token);
+      models.user.save({ id: uid, current_chat: '' })
+        .then((user) => {
+          console.log(`"${user.user_name}" left chatroom No.${chat_id}`);
+        })
     });
 
     socket.on(CONSTS.SKT_LTS_SINGLE, ({ to, event, args }) => {
