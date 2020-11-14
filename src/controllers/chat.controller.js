@@ -321,7 +321,7 @@ exports.getUnreadMsgInfo = async (user_id) => {
         if (isForMe) {
           const unread_nums = JSON.parse(chat.unread_nums) || [0,0];
           const unread_num = unread_nums[userPos] || 0;
-          unread_num > 0 ? unreads[chat.id] = unread_num : null;
+          unreads[chat.id] = unread_num;
           total_unreads += unread_num || 0;
         }
         return isForMe;
