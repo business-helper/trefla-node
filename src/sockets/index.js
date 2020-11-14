@@ -180,18 +180,29 @@ const bootstrapSocket = (io) => {
       Promise.all([
         models.user.save({ id: uid, current_chat: chat_id }),
         models.chat.myChatrooms(uid, 1),
+        models.chat.getById(chat_id),
       ])
-        .then(([res, chats]) => {
+        .then(([res, chats, chat]) => {
           console.log(`User ${uid} entered chatroom ${chat_id}`);
-          return Promise.all(chats.map(chat => {
-            const user_ids = JSON.parse(chat.user_ids);
-            let unread_nums = JSON.parse(chat.unread_nums);
-            const myIdx = user_ids.indexOf(uid);
-            unread_nums[myIdx] = 0;
-            return models.chat.save({ ...chat, unread_nums: JSON.stringify(unread_nums) });
-          }))
+          const user_ids = JSON.parse(chat.user_ids);
+          let unread_nums = JSON.parse(chat.unread_nums);
+          const myIdx = user_ids.indexOf(uid);
+          myIdx > -1 ? unread_nums[myIdx] = 0 : null;
+          return models.chat.save({ ...chat, unread_nums: JSON.stringify(unread_nums) });
+          // return Promise.all(chats.map(chat => {
+          //   console.log('chats', chats);
+          //   const user_ids = JSON.parse(chat.user_ids);
+          //   let unread_nums = JSON.parse(chat.unread_nums);
+          //   const myIdx = user_ids.indexOf(uid);
+          //   myIdx > -1 ? unread_nums[myIdx] = 0 : null;
+          //   return models.chat.save({ ...chat, unread_nums: JSON.stringify(unread_nums) });
+          // }));
         })
         .then(() => {
+          return ctrls.chat.getUnreadMsgInfo(uid);
+        })
+        .then((unreads) => {
+          socket.emit(CONSTS.SKT_UNREAD_MSG_UPDATED, unreads);
           console.log(`Updated unread nums of user ${uid}`);
         });
     });
