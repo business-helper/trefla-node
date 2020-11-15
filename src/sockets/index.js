@@ -209,7 +209,7 @@ const bootstrapSocket = (io) => {
 
     socket.on(CONSTS.SKT_LEAVE_CHAT, ({ chat_id }) => {
       const { uid } = helpers.auth.parseToken(token);
-      models.user.save({ id: uid, current_chat: '' })
+      models.user.save({ id: uid, current_chat: 0 })
         .then((user) => {
           console.log(`"${user.user_name}" left chatroom No.${chat_id}`);
         })
