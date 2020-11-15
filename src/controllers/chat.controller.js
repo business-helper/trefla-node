@@ -249,10 +249,11 @@ exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => 
       }
 
       const message = generateMessageData({
+        ...payload,
         sender_id,
         receiver_id,
         chat_id,
-        message: payload.message
+        // message: payload.message
       });
       
       
