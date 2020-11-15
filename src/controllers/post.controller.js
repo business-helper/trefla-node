@@ -128,6 +128,56 @@ exports.pagination = async (req, res) => {
     .catch((error) => respondError(res, error));
 }
 
+exports.simplePagination = async (req, res) => {
+  //const tokenInfo = getTokenInfo(req); //console.log('tokenInfo', tokenInfo);
+  const { uid } = getTokenInfo(req);
+  let { limit, last_id, type, post_type } = req.query; limit = Number(limit);
+
+  let _posts = [], _total = 0, _posters = {}, _minId;
+
+  let promiseAll = Promise.all([
+    Post.pagination({ limit, last_id, type: post_type }),
+    Post.getCountOfPosts({ type: post_type }),
+    Post.getMinIdOfPosts({ type: post_type })
+  ]);
+
+  return promiseAll
+    .then(async ([posts, total, minId]) => {
+      _posts = posts; _total = total; _minId = minId;
+      let poster_ids = posts.map(post => post.user_id); poster_ids.push(0);
+      return User.getByIds(poster_ids);
+    })
+    .then(users => {
+      users.map(user => _posters[user.id] = user);
+      return true;
+    })
+    .then(() => {
+      // console.log('[Liked]', uid, postLikedArray.map(a => a.length));
+      // console.log('[posters]', _posters);
+      
+      let posts = _posts.map(post => Post.output(post)); // filter keys
+      posts = posts.map((post, i) => ({
+        ...post, 
+        user: User.output(_posters[post.post_user_id])
+      }));
+
+      cLastId = posts.length > 0 ? posts[posts.length - 1].id : 0;
+
+      return res.json({
+        status: true,
+        message: 'success',
+        data: posts,
+        pager: {
+          last_id: cLastId,
+          limit,
+          total: _total
+        },
+        hasMore: cLastId > _minId
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
 exports.getAll = (req, res) => {
   Post.getAll()
     .then((posts) =>

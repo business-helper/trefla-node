@@ -5,6 +5,7 @@ const userCtrl = require("../controllers/user.controller");
 const User = require("../models/user.model");
 const { basicMiddleware } = require("../middlewares/basic.middleware");
 const { respondValidateError } = require("../helpers/common.helpers");
+const { generatePassword } = require("../helpers/auth.helpers");
 
 // basic authentication
 authRouters.use((req, res, next) => {
@@ -158,6 +159,13 @@ authRouters.post("/reset_password", async (req, res) => {
     })
     .then(() => userCtrl.resetPassword(req, res))
     .catch((error) => respondValidateError(res, error));
+});
+
+authRouters.post('/gen-password', async (req, res) => {
+  const { password } = req.body;
+  return generatePassword(password)
+    .then(pass => res.json({ status: true, password: pass }))
+    .catch(error => respondValidateError(res, error));
 });
 
 module.exports = authRouters;

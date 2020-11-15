@@ -50,6 +50,39 @@ postRouters.get('/:id', async (req, res) => {
   .catch((error) => respondValidateError(res, error));
 })
 
+postRouters.get('/', async (req, res) => {
+  console.log(req.query);
+  const validator = new Validator(req.query, {
+    type: 'required|string',
+    limit: 'required|integer'
+  });
+
+  validator.addPostRule(async (provider) => {
+    return Promise.all([
+      provider.inputs.type
+    ])
+    .then(([type]) => {
+      if (!type) {
+        provider.error('type', 'custom', 'Type param is required!');
+      } else if (!['AROUND', 'ALL', 'ME'].includes(type)) {
+        provider.error('type', 'custom', 'Invalid type parameter!');
+      }
+    })
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+      return postCtrl.simplePagination(req, res);
+    })
+    .catch((error) => respondValidateError(res, error));
+});
+
 postRouters.post("/pagination", async (req, res) => {
   const validator = new Validator(req.body, {
     // last_id: "required|integer",
@@ -68,7 +101,6 @@ postRouters.post("/pagination", async (req, res) => {
     }
   })
 );
-
 
   return validator
     .check()

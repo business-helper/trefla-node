@@ -1,4 +1,5 @@
 const { 
+  DEFAULT_ADMIN,
   DEFAULT_COMMENT,
   DEFAULT_COMMENTLIKE,
   DEFAULT_NOTIFICATION,
@@ -15,6 +16,15 @@ const {
   string2Timestamp,
 } = require('./common.helpers');
 
+
+const generateAdminData = basicData => {
+  const defaultKeys = Object.keys(DEFAULT_ADMIN);
+  let data = {};
+  for (let field of defaultKeys) {
+    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_ADMIN[field];
+  }
+  return data;
+}
 
 const generateChatData = (basicData, sender_id, receiver = null) => {
   const defaultKeys = Object.keys(DEFAULT_CHAT);
@@ -196,6 +206,7 @@ const checkPostLocationWithUser = (post, user, aroundSearchPeriod, locationIndex
 
 module.exports = {
   checkPostLocationWithUser,
+  generateAdminData,
   generateChatData,
   generateCommentData,
   generateCommentLikeData,

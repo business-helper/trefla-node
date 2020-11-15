@@ -1,6 +1,16 @@
 const { generateTZTimeString, timestamp } = require('../helpers/common.helpers');
 
 
+exports.DEFAULT_ADMIN = {
+  id: '',
+  user_name: '',
+  email: '',
+  password: '',
+  avatar: '',
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
 exports.DEFAULT_CHAT = {
   id: '',
   user_ids: "",

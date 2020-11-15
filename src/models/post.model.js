@@ -49,6 +49,7 @@ Post.getAll = ({ type = null, user_id = null }) => {
 };
 
 Post.pagination = async ({ limit, last_id, type = null, user_id = null }) => {
+  limit = Number(limit);
   let where = [];
   type ? where.push(`type='${type}'`) : null;
   last_id ? where.push(`id < ${last_id}`) : null;

@@ -1,3 +1,4 @@
+const admin = require('./admin.controller');
 const chat = require('./chat.controller');
 const comment = require('./comment.controller');
 const language = require('./lang.controller');
@@ -8,6 +9,7 @@ const postLike = require('./postLike.controller');
 const user = require('./user.controller');
 
 module.exports = {
+  admin,
   chat,
   comment,
   language,

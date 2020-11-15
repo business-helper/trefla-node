@@ -1,3 +1,4 @@
+const admin = require('./admin.model');
 const chat = require('./chat.model');
 const comment = require('./comment.model');
 const commentLike = require('./commentLike.model');
@@ -13,6 +14,7 @@ const user = require('./user.model');
 
 
 module.exports = {
+  admin,
   chat,
   config,
   comment,

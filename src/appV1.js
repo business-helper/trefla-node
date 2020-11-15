@@ -1,8 +1,11 @@
 const express = require("express");
 const appV1 = express();
+const cors = require('cors');
+
 const appConfig = require('./config/app.config');
 
 // Routers
+const adminRouters = require('./routes/admin.routes');
 const authRouters = require('./routes/auth.routes');
 const chatRouters = require('./routes/chat.routes');
 const commentRouters = require('./routes/comment.routes');
@@ -14,7 +17,12 @@ const userRouters = require('./routes/user.routes');
 // Resolvers
 const { getInitData } = require('./resolvers');
 
+appV1.use(cors({
+  origin: '*',
+  optionsSuccessStatus: 200
+}));
 
+appV1.use('/admin', adminRouters);
 appV1.use('/lang', langRouters);
 appV1.use('/auth', authRouters);
 appV1.use('/chat', chatRouters);

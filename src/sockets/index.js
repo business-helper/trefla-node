@@ -143,7 +143,7 @@ const bootstrapSocket = (io) => {
             },
             chat: {
               ...chat,
-              user: models.user.output(receiver)
+              user: models.user.output(me)
             }
           });
           socket.emit(CONSTS.SKT_RECEIVE_MSG, {
@@ -153,7 +153,7 @@ const bootstrapSocket = (io) => {
             },
             chat: {
               ...chat,
-              user: models.user.output(me)
+              user: models.user.output(receiver)
             }
           });
           if (unread_updated && receiver.socket_id) {

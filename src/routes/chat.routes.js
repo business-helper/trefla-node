@@ -271,5 +271,4 @@ chatRouters.delete("/:id", async (req, res) => {
   .catch((error) => respondValidateError(res, error));
 });
 
-
 module.exports = chatRouters;
