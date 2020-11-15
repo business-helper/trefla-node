@@ -131,12 +131,12 @@ exports.pagination = async (req, res) => {
 exports.simplePagination = async (req, res) => {
   //const tokenInfo = getTokenInfo(req); //console.log('tokenInfo', tokenInfo);
   const { uid } = getTokenInfo(req);
-  let { limit, last_id, type, post_type } = req.query; limit = Number(limit);
+  let { limit, page, type, post_type } = req.query; limit = Number(limit);
 
   let _posts = [], _total = 0, _posters = {}, _minId;
 
   let promiseAll = Promise.all([
-    Post.pagination({ limit, last_id, type: post_type }),
+    Post.simplePagination({ limit, page, type: post_type }),
     Post.getCountOfPosts({ type: post_type }),
     Post.getMinIdOfPosts({ type: post_type })
   ]);
@@ -168,7 +168,7 @@ exports.simplePagination = async (req, res) => {
         message: 'success',
         data: posts,
         pager: {
-          last_id: cLastId,
+          // last_id: cLastId,
           limit,
           total: _total
         },

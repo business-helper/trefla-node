@@ -116,7 +116,7 @@ const bootstrapSocket = (io) => {
         });
     })
 
-    socket.on(CONSTS.SKT_SEND_MSG, async ({ message, chat_id }) => {
+    socket.on(CONSTS.SKT_SEND_MSG, async ({ message, chat_id, ...payload }) => {
       const { uid } = helpers.auth.parseToken(token);
       const chat = await models.chat.getById(chat_id);
       const user_ids = JSON.parse(chat.user_ids);
@@ -129,7 +129,8 @@ const bootstrapSocket = (io) => {
           receiver_id,
           chat_id,
           payload: {
-            message
+            message,
+            ...payload
           }
         }),
         models.user.getById(uid),
@@ -189,14 +190,6 @@ const bootstrapSocket = (io) => {
           const myIdx = user_ids.indexOf(uid);
           myIdx > -1 ? unread_nums[myIdx] = 0 : null;
           return models.chat.save({ ...chat, unread_nums: JSON.stringify(unread_nums) });
-          // return Promise.all(chats.map(chat => {
-          //   console.log('chats', chats);
-          //   const user_ids = JSON.parse(chat.user_ids);
-          //   let unread_nums = JSON.parse(chat.unread_nums);
-          //   const myIdx = user_ids.indexOf(uid);
-          //   myIdx > -1 ? unread_nums[myIdx] = 0 : null;
-          //   return models.chat.save({ ...chat, unread_nums: JSON.stringify(unread_nums) });
-          // }));
         })
         .then(() => {
           return ctrls.chat.getUnreadMsgInfoReq(uid);

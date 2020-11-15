@@ -54,7 +54,8 @@ postRouters.get('/', async (req, res) => {
   console.log(req.query);
   const validator = new Validator(req.query, {
     type: 'required|string',
-    limit: 'required|integer'
+    limit: 'required|integer',
+    page: "required|integer",
   });
 
   validator.addPostRule(async (provider) => {
