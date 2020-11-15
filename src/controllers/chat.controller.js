@@ -264,8 +264,8 @@ exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => 
     })
     .then(([message, chat, unread_updated]) => {
       message = Message.output(message);
-      message.sender = User.output(_sender);
-      message.receiver = User.output(_receiver);
+      // message.sender = User.output(_sender);
+      // message.receiver = User.output(_receiver);
       return { message, chat: Chat.output(chat), unread_updated };
     })
 }
