@@ -65,7 +65,7 @@ const bootstrapSocket = (io) => {
         .then(result => {
           const { status, message, data } = result;
           if (_toUser.socket_id) {
-            io.to(_toUser.socket_id).emit(CONSTS.SKT_CONNECT_REQUESTED, { status, message: `Connection request from ${_fromUser.user_name}`, data: { ...data, isSent: false, user: _fromUser } });
+            io.to(_toUser.socket_id).emit(CONSTS.SKT_CONNECT_REQUESTED, { status, message: `Connection request from ${_fromUser.user_name}`, data: { ...data, isSent: false, user: models.user.output(_fromUser) } });
           } else {
             console.log('[user is offline]', toId);
           }
@@ -101,7 +101,7 @@ const bootstrapSocket = (io) => {
         .then(result => {
           const { status, message, data } = result;
           if (_toUser && _toUser.socket_id) {
-            io.to(_toUser.socket_id).emit(CONSTS.SKT_CONNECT_REQUESTED, { status, message: `Connection request from ${_fromUser.user_name}`, data: { ...data, isSent: false, user: _fromUser } });
+            io.to(_toUser.socket_id).emit(CONSTS.SKT_CONNECT_REQUESTED, { status, message: `Connection request from ${_fromUser.user_name}`, data: { ...data, isSent: false, user: models.user.output(_fromUser) } });
           } else {
             console.log('[user is offline]', toId);
           }
@@ -129,11 +129,11 @@ const bootstrapSocket = (io) => {
           .then(([me, sender, chat]) => {
             if (sender.socket_id) {
 
-              io.to(sender.socket_id).emit(CONSTS.SKT_CONNECT_ACCEPTED, { status: true, message: `Chatroom with ${me.user_name} has been activated!`, data: { ...chat, user: me } });
+              io.to(sender.socket_id).emit(CONSTS.SKT_CONNECT_ACCEPTED, { status: true, message: `Chatroom with ${me.user_name} has been activated!`, data: { ...chat, user: models.user.output(me) } });
             }
             socket.join(`chatroom_${chat.id}`);
             console.log(`"${me.user_name}" joined "chatroom_${chat.id}"`);
-            socket.emit(CONSTS.SKT_CONNECT_ACCEPT, { status: true, message: `You activated the chatroom with ${sender.user_name}`, data: { ...chat, user: sender } });
+            socket.emit(CONSTS.SKT_CONNECT_ACCEPT, { status: true, message: `You activated the chatroom with ${sender.user_name}`, data: { ...chat, user: models.user.output(sender) } });
           })
           .catch(error => {
             console.log(error);
