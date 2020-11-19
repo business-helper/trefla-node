@@ -32,7 +32,6 @@ const generateTZTimeString = (strTime = '') => {
   return `${year}-${month}-${date}-${hh}-${mm}-${ss}:${tz}`;
 }
 
-
 const bool2Int = (boolVal) => {
   return boolVal ? 1 : 0;
 }
@@ -149,8 +148,19 @@ const string2Timestamp = (str_time) => {
   return final_time;
 };
 
+const chatPartnerId = (user_ids, my_id) => {
+  if (typeof user_ids === 'string') {
+    user_ids = JSON.parse(user_ids);
+  }
+  let myPosition = user_ids.indexOf(my_id);
+  myPosition = myPosition > -1 ? myPosition : 0;
+  const partnerPos = user_ids.length - 1 - myPosition;
+  return user_ids[partnerPos];
+}
+
 module.exports = {
   bool2Int,
+  chatPartnerId,
   generateTZTimeString,
   getDistanceFromLatLonInMeter,
   getTime,

@@ -3,7 +3,7 @@ const Chat = require("../models/chat.model");
 const User = require("../models/user.model");
 const Message = require('../models/message.model');
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { bool2Int, getTotalLikes, generateTZTimeString, respondError } = require("../helpers/common.helpers");
+const { bool2Int, chatPartnerId, getTotalLikes, generateTZTimeString, respondError } = require("../helpers/common.helpers");
 const { generateChatData, generateMessageData } = require('../helpers/model.helpers');
 
 
@@ -93,12 +93,9 @@ exports.pendingChatrooms = async (req, res) => {
       });
       chats = chats.map(chat => Chat.output(chat))
         .map(chat => {
-          let user_ids = [ chat.user_ids[0] ];
-          if (chat.user_ids.length > 1) {  
-            user_ids.push(chat.user_ids[chat.user_ids.length - 1]);
-          }
+          const user_ids = chat.user_ids;
 
-          const partnerId = user_ids[0] === uid ? user_ids[1] : user_ids[0];
+          const partnerId = chatPartnerId(chat.user_ids, uid);
           return {
             ...chat,
             isSent: user_ids[0] === uid,
@@ -405,4 +402,23 @@ exports.getUnreadMsgInfoReq = async (user_id) => {
         chats: _chatrooms,
       };
     })
+}
+
+exports.rejectChatReq = async ({ chat_id }) => {
+  let chat = await Chat.getById(chat_id);
+  if (!chat) {
+    return { 
+      status: false,
+      message: 'Chat does not exist!',
+    }
+  }
+
+  chat.accept_status = 2; // 2: rejected
+  return Chat.save(chat)
+    .then(chat => {
+      return {
+        status: true,
+        data: chat,
+      };
+    });
 }

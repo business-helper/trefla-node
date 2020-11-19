@@ -524,6 +524,9 @@ socket.on(SKT_UPDATE_ONLINE, ({ user_id, online }) => {
   }
 });
 
+socket.on(SKT_CONNECT_REJECT, (args) => {
+  console.log(`[${SKT_CONNECT_REJECT}]`, args);
+})
 
 socket.on(SKT_NOTI_NUM_UPDATED, (args) => {
   console.log('[noti.num.updated]', args);

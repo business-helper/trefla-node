@@ -152,6 +152,58 @@ const bootstrapSocket = (io) => {
         });
     })
 
+    socket.on(CONSTS.SKT_CONNECT_REJECT, ({ chat_id }) => {
+      console.log(CONSTS.SKT_CONNECT_REJECT, chat_id);
+      const { uid } = helpers.auth.parseToken(token);
+      let _chat;
+      ctrls.chat.rejectChatReq({ chat_id })
+        .then(async (result) => {
+          if (result.status) {
+
+            let { data: chat } = result;
+            _chat = chat;
+            const user_ids = JSON.parse(chat.user_ids);
+
+            const partnerIdx = helpers.common.chatPartnerId(user_ids, uid);
+            const partner = await models.user.getById(partnerIdx);
+            const me = await models.user.getById(uid);
+
+            socket.leave(`chatroom_${chat_id}`);
+            _chat = models.chat.output(_chat);
+            socket.emit(CONSTS.SKT_CONNECT_REJECT, {
+              status: true,
+              message: 'You rejected the chat!',
+              data: {
+                ..._chat,
+                user: models.user.output(partner)
+              }
+            });
+
+            if (partner && partner.socket_id) {
+              io.to(partner.socket_id).emit(CONSTS.SKT_CONNECT_REJECTED, {
+                status: true,
+                message: `${me.user_name} rejected a chat with you!`,
+                data: {
+                  ..._chat,
+                  user: models.user.output(me)
+                }
+              });
+            }
+          } else {
+            // socket.emit(CONSTS.SKT_CONNECT_REJECT, result);
+            throw Object.assign(new Error(result.message), { code: 400 });
+          }
+        })
+
+        .catch(error => {
+          console.log(`[${CONSTS.SKT_CONNECT_REJECT}]`, error)
+          socket.emit(CONSTS.SKT_CONNECT_REJECT, {
+            status: false,
+            message: error.message || 'Failed to reject chat...'
+          });
+        });
+    })
+
     socket.on(CONSTS.SKT_SEND_MSG, async ({ message, chat_id, ...payload }) => {
       const { uid } = helpers.auth.parseToken(token);
       const chat = await models.chat.getById(chat_id);
