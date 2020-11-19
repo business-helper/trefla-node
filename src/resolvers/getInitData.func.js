@@ -44,7 +44,7 @@ const getNotificationSummary = async (req, res) => {
   const offset = 0; //  as it's the first load
 
   let _notis = [], _users = {};
-  return Notification.pagination({ limit, offset, receiver_id: user_id })
+  return Notification.paginationByLastId({ limit, receiver_id: user_id })
     .then(notis => {
       _notis = notis;
       let user_ids = [0];

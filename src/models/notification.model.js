@@ -33,6 +33,21 @@ Notification.pagination = async ({ limit, offset, receiver_id }) => {
   });
 }
 
+Notification.paginationByLastId = async ({ limit, last_id = null, receiver_id }) => {
+  let where = [];
+  where.push(`receiver_id='${receiver_id}'`);
+  if (last_id) {
+    where.push(`id < ${last_id}`);
+  }
+  
+  const strWhere = (receiver_id) ? ` WHERE ${where.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM notifications ${strWhere} ORDER BY id DESC LIMIT ?`, [limit], (err, res) => {
+      err ? reject(err) : resolve(res);
+    })
+  });
+}
+
 Notification.getAll = ({ receiver_id = null }) => {
   const strWhere = (receiver_id) ? ` WHERE receiver_id=${receiver_id}` : '';
   return new Promise((resolve, reject) => {
@@ -50,6 +65,19 @@ Notification.getCountOfNotifications = ({ receiver_id = null }) => {
     });
   });
 };
+
+Notification.getMinIdtoUser = ({ receiver_id = null }) => {
+  let where = [];
+  if (receiver_id) {
+    where.push(`receiver_id = ${receiver_id}`);
+  }
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : "";
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total from notifications ${strWhere}`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    });
+  });
+}
 
 Notification.getById = (id) => {
   return new Promise((resolve, reject) => {

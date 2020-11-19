@@ -115,7 +115,7 @@ notificationRouters.get("/:id", async (req, res) => {
 
 notificationRouters.post("/pagination", async (req, res) => {
   const validator = new Validator(req.body, {
-    page: "required|integer",
+    // last_id: "required|integer",
     limit: "required|integer",
   });
 

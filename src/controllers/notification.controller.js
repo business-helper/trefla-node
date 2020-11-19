@@ -67,17 +67,18 @@ exports.getById = (req, res) => {
 }
 
 exports.pagination = (req, res) => {
-  const { page, limit, sender_id, receiver_id } = req.body;
-  const offset = page * limit;
+  const { last_id, limit, sender_id, receiver_id } = req.body;
+  // const offset = page * limit;
 
-  let _notis = [], _total = 0, _users = {};
+  let _notis = [], _total = 0, _users = {}, _minId;
 
   return Promise.all([
-    Notification.pagination({ limit, offset, receiver_id }),
+    Notification.paginationByLastId({ limit, last_id, receiver_id }),
     Notification.getCountOfNotifications({ receiver_id }),
+    Notification.getMinIdtoUser({ receiver_id }),
   ])
-    .then(([notis, total]) => {
-      _notis = notis; _total = total;
+    .then(([notis, total, minId]) => {
+      _notis = notis; _total = total; _minId = minId;
       let user_ids = [0];
       notis.forEach(noti => {
         user_ids.push(noti.sender_id);
@@ -94,16 +95,18 @@ exports.pagination = (req, res) => {
         receiver: User.output(_users[item.receiver_id])
       }));
 
+      const lastId = _notis[_notis.length - 1].id;
+
       return res.json({
         status: true,
         message: 'success',
         data: _notis,
         pager: {
-          page,
+          last_id: lastId,
           limit,
           total: _total
         },
-        hadMore: (limit * page + _notis.length) < _total
+        hadMore: lastId > _minId,
       });
     })
     .catch((error) => respondError(res, error));
