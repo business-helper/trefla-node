@@ -1,6 +1,7 @@
 exports.SKT_CHECK_HEALTH = "CHECK_HEALTH";
 // when user A enter chatroom 'AB', A emits to server. B receives emission from server with same event name.
 exports.SKT_CONNECT_TO_USER = 'socket.connect.to.user';
+exports.SKT_CONNECT_TO_CARD = 'socket.connect.to.card';
 exports.SKT_CONNECT_REQUESTED = 'socket.connect.requested';
 exports.SKT_CONNECT_ACCEPT = 'socket.connect.accept';
 exports.SKT_CONNECT_ACCEPTED = 'socket.connect.accepted';

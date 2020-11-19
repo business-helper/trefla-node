@@ -77,6 +77,42 @@ const bootstrapSocket = (io) => {
         })
     });
 
+    socket.on(CONSTS.SKT_CONNECT_TO_CARD, async ({ card_number, message, toId = 0 }) => {
+      console.log('[connection req]', toId);
+      const { uid } = helpers.auth.parseToken(token);
+      const cardUsers = await models.user.getByCard(card_number, 1);
+
+      let _toUser, _fromUser;
+      toId = cardUsers.length > 0 ? cardUsers[0].id : 0;
+
+      Promise.all([
+        models.user.getById(toId),
+        models.user.getById(uid),
+      ])
+        .then(([toUser, fromUser]) => {
+          if (!toUser) {
+            console.log(`[Create Card Chat] card "${card_number}" is not owned to any user...`);
+            // throw Object.assign(new Error("User doesn't exist!"), { code: 400 });
+          }
+          _toUser = toUser;
+          _fromUser = fromUser;
+          return ctrls.chat.createCardChatReq(uid, { receiver_id: toId, message, card_number, isForCard: 1 });
+        })
+        .then(result => {
+          const { status, message, data } = result;
+          if (_toUser && _toUser.socket_id) {
+            io.to(_toUser.socket_id).emit(CONSTS.SKT_CONNECT_REQUESTED, { status, message: `Connection request from ${_fromUser.user_name}`, data: { ...data, isSent: false, user: _fromUser } });
+          } else {
+            console.log('[user is offline]', toId);
+          }
+          socket.emit(CONSTS.SKT_CONNECT_TO_USER, { status, message, data: { ...data, isSent: true } });
+        })
+        .catch(error => {
+          console.log(error);
+          socket.emit(CONSTS.SKT_CONNECT_TO_USER, { status: false, message: error.message });
+        });
+    });
+
     socket.on(CONSTS.SKT_CONNECT_ACCEPT, async ({ chat_id }) => {
       const { uid } = helpers.auth.parseToken(token);
       const chatroom = await models.chat.getById(chat_id);

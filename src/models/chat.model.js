@@ -107,6 +107,19 @@ Chat.getByUserIds = ({ sender_id, receiver_id, isForCard = 0 }) => {
   });
 }
 
+Chat.getChatToCard = ({ card_number, user_id = null }) => {
+  let where = [`card_number='${card_number}' AND isForCard=1`];
+  if (user_id) {
+    where.push(`(JSON_CONTAINS(user_ids, '${user_id}', '$') = 1)`);
+  }
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM chats ${strWhere}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
 Chat.output = (model) => {
   // JSON parse
   model.unread_nums = JSON.parse(model.unread_nums || "");

@@ -43,11 +43,14 @@ exports.getById = async (req, res) => {
   const last_id = null;
   return Chat.getById(id)
     .then(chat => {
-      const user_ids = JSON.parse(chat.user_ids).filter( id => id !== user_id);
+      const user_ids = JSON.parse(chat.user_ids);
+      let myIdx = user_ids.indexOf(user_id);
+      if (myIdx === -1) { myIdx = 0; }
+      const partnerIdx = user_ids.length - myIdx - 1;
 
       return Promise.all([
         chat,
-        user_ids.length > 0 ? User.getById(user_ids[user_ids.length -1]) : null,
+        user_ids.length > 0 ? User.getById(user_ids[partnerIdx]) : null,
         Message.pagination({ limit, last_id, chat_id: chat.id }),
         // PostLike.postLikesOfUser({ post_id: id, user_id })
       ])
@@ -61,7 +64,7 @@ exports.getById = async (req, res) => {
         data: {
           ...chat, 
           // liked: likes.length > 1 ? 1 : 0,
-          user: User.output(user)
+          user: User.output(receiver)
         }
       })
     })
@@ -191,6 +194,53 @@ exports.createNormalChatReq = async (user_id, payload) => {
   //     User.getById(user_id),
   //     message ? Message.create({ ...message, chat_id: chat.id }) : null
   //   ]))
+    .then(([chat, sender, msgObj]) => {
+      chat = Chat.output(chat);
+      chat.user = User.output(receiver);
+      return ({
+        status: true,
+        message: 'Chat room created!',
+        data: chat
+      });
+    })
+    // .catch((error) => ({
+    //   status: false,
+    //   message: error.message
+    // }));
+}
+
+exports.createCardChatReq = async (user_id, payload) => {
+  const receiver = payload.receiver_id ? await User.getById(payload.receiver_id) : null;
+  let model = generateChatData(payload, user_id, receiver);
+  const message = payload.message ? generateMessageData({
+    ...payload,
+    sender_id: user_id,
+    receiver_id: receiver ? receiver.id : 0,
+    message: payload.message
+  }) : null;
+
+  let _chat;
+
+  // check existing chat room between two users
+  let chatrooms = await Chat.getChatToCard({ card_number: payload.card_number, user_id });
+
+  const fromMe = chatrooms.filter(chat => {
+    const user_ids = JSON.parse(chat.user_ids);
+    return user_ids[0] === user_id;
+  });
+  if (fromMe.length > 0) {
+    _chat = fromMe[0];
+  }
+
+  return Promise.all([
+    _chat ? _chat : Chat.create(model),
+    User.getById(user_id),
+    // message ? Message.create({ ...message, chat_id: _chat.id }) : null
+  ])
+  .then(([chat, sender]) => Promise.all([
+    chat, sender,
+    message ? Message.create({ ...message, chat_id: chat.id }) : null
+  ]))
     .then(([chat, sender, msgObj]) => {
       chat = Chat.output(chat);
       chat.user = User.output(receiver);

@@ -1,5 +1,5 @@
 const sql = require("./db");
-const { timestamp } = require("../helpers/common.helpers");
+const { bool2Int, timestamp } = require("../helpers/common.helpers");
 
 const User = function (user) {
   this.user_name = user.user_name;
@@ -66,6 +66,20 @@ User.getByUserName = (user_name) => {
 			err ? reject(err) : resolve(res[0]);
 		});
 	});
+}
+
+User.getByCard = (card_number, verified = null) => {
+  let where = [];
+  where.push(`card_number='${card_number}'`);
+  if ([0, 1, true, false].includes(verified)) {
+    where.push(`card_verified=${bool2Int(verified)}`);
+  }
+  const strWhere =  where.length > 0 ? ` WHERE ${where.join(' AND ')} ` : "";
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM users ${strWhere}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
 }
 
 User.pagination = ({ page, limit }) => {

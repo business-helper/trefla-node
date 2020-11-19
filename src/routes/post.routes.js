@@ -51,7 +51,6 @@ postRouters.get('/:id', async (req, res) => {
 })
 
 postRouters.get('/', async (req, res) => {
-  console.log(req.query);
   const validator = new Validator(req.query, {
     type: 'required|string',
     limit: 'required|integer',
@@ -332,7 +331,7 @@ postRouters.patch('/:id', async (req, res) => {
 })
 
 postRouters.delete('/:id', async (req, res) => {
-  const { uid } = getTokenInfo(req);
+  const { uid, role } = getTokenInfo(req);
   const validator = new Validator({
     id: req.params.id
   }, {
@@ -349,7 +348,7 @@ postRouters.delete('/:id', async (req, res) => {
           "custom",
           `Post with id "${provider.inputs.id}" does not exists!`
         );
-      } else if (postById.user_id !== uid) {
+      } else if (role !== 'ADMIN' && postById.user_id !== uid) {
         provider.error("creator", "custom", "You can't delete post!");
       }
     })
