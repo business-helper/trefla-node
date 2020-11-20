@@ -338,7 +338,10 @@ const bootstrapSocket = (io) => {
           if (receiver.socket_id) {
             io.to(receiver.socket_id).emit(CONSTS.SKT_NOTI_NUM_UPDATED, {
               num: notiCount,
-              notification: models.notification.output(noti),
+              notification: {
+                ...(models.notification.output(noti)),
+                sender: models.user.output(sender),
+              }
             })
           }
         });
