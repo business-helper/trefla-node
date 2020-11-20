@@ -535,3 +535,7 @@ socket.on(SKT_NOTI_NUM_UPDATED, (args) => {
 socket.on(SKT_UNREAD_MSG_UPDATED, (args) => {
   console.log('[unread.msg.updated]', args);
 });
+
+socket.on(SKT_CREATE_NOTIFICATION, (args) => {
+  console.log(`[${SKT_CREATE_NOTIFICATION}]`, args);
+})

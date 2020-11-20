@@ -296,6 +296,54 @@ const bootstrapSocket = (io) => {
         })
     });
 
+    socket.on(CONSTS.SKT_CREATE_NOTIFICATION, async ({ sender_id, receiver_id, type, optional_val }) => {
+      const users = await models.user.getByIds([sender_id, receiver_id]);
+
+      const [ sender ] = users.filter(user => user.id === sender_id); 
+      const [ receiver ] = users.filter(user => user.id === receiver_id);
+      
+      if (!sender) {
+        return socket.emit(CONSTS.SKT_CREATE_NOTIFICATION, {
+          status: false, message: 'Invalid sender!'
+        });
+      }
+      if (!receiver) {
+        return socket.emit(CONSTS.SKT_CREATE_NOTIFICATION, {
+          status: false, message: 'Invalid receiver!'
+        });
+      }
+      let notificationModel = helpers.model.generateNotificationData({
+        sender_id,
+        receiver_id,
+        type,
+        optional_val,
+        time: helpers.common.generateTZTimeString()
+      });
+      if (notificationModel.id !== undefined) { delete notificationModel.id; }
+
+      return models.notification.create(notificationModel)
+        .then(noti => {
+          return Promise.all([
+            noti,
+            models.notification.getUnreadCount(receiver_id)
+          ]);
+        })
+        .then(([noti, notiCount]) => {
+          socket.emit(CONSTS.SKT_CREATE_NOTIFICATION, {
+            status: true,
+            message: 'Notification has been created!',
+            notification: models.notification.output(noti),
+            receiver: models.user.output(receiver),
+          })
+          if (receiver.socket_id) {
+            io.to(receiver.socket_id).emit(CONSTS.SKT_NOTI_NUM_UPDATED, {
+              num: notiCount,
+              notification: models.notification.output(noti),
+            })
+          }
+        });
+    });
+
     socket.on(CONSTS.SKT_LTS_SINGLE, ({ to, event, args }) => {
       io.to(to).emit(event, args);
     });
