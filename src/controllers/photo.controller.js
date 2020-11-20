@@ -36,6 +36,18 @@ exports.getById = (req, res) => {
     // .catch((error) => respondError(res, error));
 }
 
+exports.getByUserIdReq = (req, res) => {
+  const { id: user_id } = req.params;
+  return Photo.getByUser(user_id)
+    .then(photos => {
+      return {
+        status: true,
+        message: 'success',
+        data: photos.map(photo => Photo.output(photo)),
+      };
+    });
+}
+
 exports.deleteById = (req, res) => {
   const { id } = req.params;
   return Photo.deleteById(id)
