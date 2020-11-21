@@ -108,6 +108,14 @@ User.updateSocketSession = ({ id, socketId }) => {
   });
 }
 
+User.deleteById = async (user_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM users WHERE id=?", [user_id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows > 0);
+    })
+  })
+}
+
 User.output = (user, mode = 'NORMAL') => {
   if (!user) return null;
   try {

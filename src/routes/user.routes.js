@@ -53,7 +53,6 @@ userRouters.get('/me', async (req, res) => {
 })
 
 userRouters.get('/:id', async (req, res) => {
-  console.log('[Home dir]', os.homedir());
   const validator = new Validator({
     id: req.params.id
   }, {
@@ -106,7 +105,6 @@ userRouters.get('/', async (req, res) => {
     })
     .catch((error) => respondValidateError(res, error));
 });
-
 
 userRouters.post('/', async (req, res) => {
   userCtrl.pagination(req, res)
@@ -182,6 +180,13 @@ userRouters.patch('/me', async (req, res) => {
 })
 
 userRouters.patch('/:id', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') {
+    return res.json({
+      status: false,
+      message: 'Permission error!'
+    })
+  }
   const validator = new Validator({
     id: req.params.id
   }, {
@@ -190,20 +195,15 @@ userRouters.patch('/:id', async (req, res) => {
 
   validator.addPostRule(async (provider) =>
     Promise.all([
-      Post.getById(provider.inputs.id)
-    ]).then(([postById]) => {
-      if (!postById) {
-        provider.error(
-          "id",
-          "custom",
-          `Post with id "${provider.inputs.id}" does not exists!`
-        );
+      User.getById(provider.inputs.id)
+    ]).then(([userById]) => {
+      if (!userById) {
+        provider.error("id", "custom", `User with id "${provider.inputs.id}" does not exist!`);
       }
     })
   );
 
-  return validator
-  .check()
+  return validator.check()
   .then((matched) => {
     if (!matched) {
       throw Object.assign(new Error("Invalid request"), {
@@ -212,10 +212,45 @@ userRouters.patch('/:id', async (req, res) => {
       });
     }
   })
-  .then(() => postCtrl.updateById(req, res))
+  .then(() => userCtrl.updateById(req, res))
   .catch((error) => respondValidateError(res, error));
 })
 
+userRouters.delete('/:id', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') {
+    return res.json({
+      status: false,
+      message: 'Permission Error!',
+    });
+  }
 
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: 'required|integer',
+  });
+
+  validator.addPostRule(async (provider) => {
+    Promise.all([
+      User.getById(provider.inputs.id)
+    ])
+      .then(([userById]) => {
+        if (!userById) {
+          provider.error('id', 'custom', `User with id "${provider.inputs.id}" does not exist!`);
+        }
+      })
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error('Invalid request!'), { code: 400, details: validators.errors });
+      }
+    })
+    .then(() => userCtrl.deleteByIdReq(req, res))
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
 
 module.exports = userRouters;

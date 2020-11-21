@@ -5,4 +5,5 @@ module.exports = {
   ba_username: process.env.BASIC_USERNAME,
   ba_password: process.env.BASIC_PASSWORD,
   appSecret: process.env.APP_SECRET,
+  domain: process.env.APP_DOMAIN,
 };

@@ -1,3 +1,4 @@
+const { v4: uuid } = require('uuid');
 const express = require("express");
 const { Validator } = require("node-input-validator");
 const photoRouters = express.Router();
@@ -6,6 +7,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
+const config = require('../config/app.config');
 const photoCtrl = require("../controllers/photo.controller");
 const Photo = require('../models/photo.model');
 const User = require('../models/user.model');
@@ -85,7 +87,10 @@ photoRouters.post('/upload', async (req, res) => {
   let form = formidable.IncomingForm();
   form.parse(req, function(err, fields, files) {
     let oldpath = files.file.path;
-    let newpath = path.join(path.resolve('assets/uploads'), 'test.png');
+    let ext = path.extname(files.file.name);// console.log('[old path]', oldpath, ext)
+    let newName = `${uuid()}${ext}`;
+
+    let newpath = path.join(path.resolve('assets/uploads'), newName);
     fs.readFile(oldpath, function(err, data) {
       if (err) {
         return res.json({
@@ -113,25 +118,11 @@ photoRouters.post('/upload', async (req, res) => {
         })
         return res.json({
           status: true,
-          message: 'File has been uploaded!'
+          message: 'File has been uploaded!',
+          url: `${config.domain}/uploads/${newName}`,
         })
       })
     });
-    // fs.rename(oldpath, newpath, function(err) {
-    //   if (err) {
-    //     return res.json({
-    //       status: false,
-    //       message: 'failed to upload file',
-    //       details: err.message,
-    //     });
-    //   } else {
-    //     return res.json({
-    //       status: true,
-    //       message: 'File has been uploaded!',
-    //       url: ('test.png')
-    //     });
-    //   }
-    // })
   })
 });
 

@@ -35,6 +35,14 @@ Post.deleteById = async (id) => {
   })
 }
 
+Post.deleteByUser = (user_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM posts WHERE user_id=?", [user_id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows);
+    })
+  })
+}
+
 Post.getAll = ({ type = null, user_id = null }) => {
   const where = [];
   type ? where.push(`type=${type}`) : null;

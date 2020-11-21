@@ -91,6 +91,22 @@ Comment.getById = (id) => {
   });
 }
 
+Comment.getByUser = (user_id) => {
+  return new Promise((resolve ,reject) => {
+    sql.query("SELECT * FROM comments WHERE user_id = ?", [user_id], (err, res) => {
+      err ? reject(err) : resolve(res);
+    })
+  })
+}
+
+Comment.deleteByUser = (user_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM comments WHERE user_id=?", [user_id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows);
+    });
+  });
+}
+
 Comment.output = (comment) => {
   // comment.isGuest = int2Bool(comment.isGuest);
   const delKeys = ['create_time', 'update_time'];

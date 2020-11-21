@@ -27,18 +27,10 @@ authRouters.post("/register", async (req, res) => {
       User.getByEmail(provider.inputs.email),
     ]).then(([userByUserName, userByEmail]) => {
       if (userByUserName) {
-        provider.error(
-          "user_name",
-          "custom",
-          `User with user_name "${provider.inputs.user_name}" already exists!`
-        );
+        provider.error("user_name", "custom", `User with user_name "${provider.inputs.user_name}" already exist!`);
       }
       if (userByEmail) {
-        provider.error(
-          "email",
-          "custom",
-          `User with email "${provider.inputs.email}" already exists!`
-        );
+        provider.error("email", "custom", `User with email "${provider.inputs.email}" already exist!`);
       }
     })
   );

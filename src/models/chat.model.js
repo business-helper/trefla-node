@@ -120,6 +120,24 @@ Chat.getChatToCard = ({ card_number, user_id = null }) => {
   });
 }
 
+Chat.deleteByUser = async (user_id) => {
+  return Chat.myChatrooms(user_id)
+    .then(chats => {
+      chats.filter(chat => {
+        if (!chat.isForCard) {
+          return true;
+        } else {
+          const user_ids = JSON.parse(chat.user_ids);
+          const userPosition = user_ids.indexOf(user_id);
+          return [0, user_ids.length - 1].includes(userPosition);
+        }
+      });
+
+      return Promise.all(chats.map(chat => this.deleteById(chat.id)));
+    })
+    .then(() => true);
+}
+
 Chat.output = (model) => {
   // JSON parse
   model.unread_nums = JSON.parse(model.unread_nums || "");

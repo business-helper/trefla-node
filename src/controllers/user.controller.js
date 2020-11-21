@@ -1,4 +1,5 @@
 const { Validator } = require("node-input-validator");
+const models = require("../models/index");
 const User = require("../models/user.model");
 const EmailTemplate = require("../models/emailTemplate.model");
 const { respondError, sendMail } = require("../helpers/common.helpers");
@@ -178,7 +179,7 @@ exports.updateProfile = (req, res) => {
           if (['location_array'].includes(key)) {
             user[key] = JSON.stringify(req.body[key]);
           } else {
-            user[key] = req.body[key];
+            user[key] = req.body[key] !== undefined ? req.body[key] : user[key];
           }
         }
       });
@@ -192,5 +193,56 @@ exports.updateProfile = (req, res) => {
       });
     })
     .catch((error) => respondError(res, error));
+}
+
+exports.updateById = (req, res) => {
+  const { id } = req.params;
+  const { uid, role } = getTokenInfo(req);
+
+  return User.getById(id)
+    .then(user => {
+      const keys = Object.keys(user);
+      keys.forEach(key => {
+        if (['location_array'].includes(key)) {
+          user[key] = req.body[key] ? JSON.stringify(req.body[key]) : user[key];
+        } else {
+          user[key] = req.body[key] !== undefined ? req.body[key] : user[key];
+        }
+      });
+      return User.save(user);
+    })
+    .then(newUser => {
+      return res.json({
+        status: true,
+        message: 'User has been updated!',
+        data: User.output(newUser, 'PROFILE'),
+      });
+    })
+
+}
+
+exports.deleteByIdReq = (req, res) => {
+  let user_id = Number(req.params.id);
+  const { chat, comment, friend, post, report } = req.body.options || {};
+  let _deleted = false;
+  return models.user.deleteById(user_id)
+    .then(deleted => {
+      _deleted = deleted
+      if (!deleted) {
+        throw Object.assign(new Error('Failed to delete user!'), { code: 400 });
+      }
+      return Promise.all([
+        chat ? models.chat.deleteByUser(user_id) : null,
+        comment ? models.comment.deleteByUser(user_id) : null,
+        post ? models.post.deleteByUser(user_id) : null,
+        // friend ? m
+      ]);
+    })
+    .then(([deleteChat, deleteComment, deletePost]) => {
+      return {
+        status: true,
+        message: 'User has been deleted!'
+      };
+    })
 }
 
