@@ -6,6 +6,8 @@
 package-lock.json
 UPDATE.md
 
+assets/uploads
+
 # testing
 /coverage
 

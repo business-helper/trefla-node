@@ -1,6 +1,10 @@
 const express = require("express");
 const { Validator } = require("node-input-validator");
 const photoRouters = express.Router();
+const formidable = require('formidable');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
 const photoCtrl = require("../controllers/photo.controller");
 const Photo = require('../models/photo.model');
@@ -75,6 +79,60 @@ photoRouters.get('/:id', async (req, res) => {
 photoRouters.get('/', async (req, res) => {
   return photoCtrl.getAllOfUser(req, res)
     .catch(error => respondValidateError(res, error));
+});
+
+photoRouters.post('/upload', async (req, res) => {
+  let form = formidable.IncomingForm();
+  form.parse(req, function(err, fields, files) {
+    let oldpath = files.file.path;
+    let newpath = path.join(path.resolve('assets/uploads'), 'test.png');
+    fs.readFile(oldpath, function(err, data) {
+      if (err) {
+        return res.json({
+          status: false,
+          message: 'Failed to read file...',
+          details: err.message,
+        });
+      }
+      fs.writeFile(newpath, data, function(err) {
+        if (err) {
+          return res.json({
+            status: false,
+            message: 'Failed to write file...',
+            details: err.message,
+          });
+        }
+        fs.unlink(oldpath, function(err) {
+          if (err) {
+            return res.json({
+              status: false,
+              message: 'Failed to delete file...',
+              details: err.message,
+            });
+          }
+        })
+        return res.json({
+          status: true,
+          message: 'File has been uploaded!'
+        })
+      })
+    });
+    // fs.rename(oldpath, newpath, function(err) {
+    //   if (err) {
+    //     return res.json({
+    //       status: false,
+    //       message: 'failed to upload file',
+    //       details: err.message,
+    //     });
+    //   } else {
+    //     return res.json({
+    //       status: true,
+    //       message: 'File has been uploaded!',
+    //       url: ('test.png')
+    //     });
+    //   }
+    // })
+  })
 });
 
 photoRouters.post('/', async (req, res) => {
