@@ -124,7 +124,7 @@ exports.getById = (req, res) => {
   const { id: user_id } = req.params;
   return User.getById(user_id)
     .then(user => {
-      user = User.output(user);
+      user = User.output(user, 'PROFILE');
       return res.json({
         status: true,
         message: 'success',
@@ -151,18 +151,19 @@ exports.getProfile = (req, res) => {
 exports.pagination = (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
   return Promise.all([
-    User.pagination({ limit: req.body.limit || 10, page: req.body.page || 0 }),
+    User.pagination({ limit: req.query.limit || 10, page: req.query.page || 0 }),
     User.numberOfUsers()
   ])
     .then(([users, total]) => res.json({
       status: true,
       message: 'success',
-      data: users.map(user => User.output(user)), //.filter(user => user.id !== user_id)
+      data: users.map(user => User.output(user, 'PROFILE')), //.filter(user => user.id !== user_id)
       pager: {
-        limit: req.body.limit || 10,
-        page: req.body.page || 0
+        limit: req.query.limit || 10,
+        page: req.query.page || 0,
+        total,
       },
-      hasMore: (req.body.page || 0) * (req.body.limit || 10) + users.length < total
+      hasMore: (req.query.page || 0) * (req.query.limit || 10) + users.length < total
     }))
     .catch(error => respondError(res, error));
 }

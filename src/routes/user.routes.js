@@ -1,6 +1,7 @@
 const express = require("express");
 const { Validator } = require("node-input-validator");
 const userRouters = express.Router();
+const os = require('os');
 
 const userCtrl = require("../controllers/user.controller");
 const Post = require("../models/post.model");
@@ -50,6 +51,62 @@ userRouters.get('/me', async (req, res) => {
   .then(() => userCtrl.getProfile(req, res))
   .catch((error) => respondValidateError(res, error));
 })
+
+userRouters.get('/:id', async (req, res) => {
+  console.log('[Home dir]', os.homedir());
+  const validator = new Validator({
+    id: req.params.id
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      User.getById(provider.inputs.id)
+    ]).then(([userById]) => {
+      if (!userById) {
+        provider.error(
+          "id",
+          "custom",
+          `User with id "${provider.inputs.id}" does not exists!`
+        );
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => userCtrl.getById(req, res))
+  .catch((error) => respondValidateError(res, error));
+})
+
+userRouters.get('/', async (req, res) => {
+  const validator = new Validator(req.query, {
+    limit: 'required|integer',
+    page: "required|integer",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+      return userCtrl.pagination(req, res);
+    })
+    .catch((error) => respondValidateError(res, error));
+});
+
 
 userRouters.post('/', async (req, res) => {
   userCtrl.pagination(req, res)
@@ -121,41 +178,6 @@ userRouters.patch('/me', async (req, res) => {
     }
   })
   .then(() => userCtrl.updateProfile(req, res))
-  .catch((error) => respondValidateError(res, error));
-})
-
-userRouters.get('/:id', async (req, res) => {
-  const validator = new Validator({
-    id: req.params.id
-  }, {
-    id: "required|integer",
-  });
-
-  validator.addPostRule(async (provider) =>
-    Promise.all([
-      User.getById(provider.inputs.id)
-    ]).then(([userById]) => {
-      if (!userById) {
-        provider.error(
-          "id",
-          "custom",
-          `User with id "${provider.inputs.id}" does not exists!`
-        );
-      }
-    })
-  );
-
-  return validator
-  .check()
-  .then((matched) => {
-    if (!matched) {
-      throw Object.assign(new Error("Invalid request"), {
-        code: 400,
-        details: validator.errors,
-      });
-    }
-  })
-  .then(() => userCtrl.getById(req, res))
   .catch((error) => respondValidateError(res, error));
 })
 

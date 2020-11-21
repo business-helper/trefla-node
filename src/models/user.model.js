@@ -83,7 +83,8 @@ User.getByCard = (card_number, verified = null) => {
 }
 
 User.pagination = ({ page, limit }) => {
-  const offset = page * limit;
+  limit = Number(limit);
+  const offset = Number(page * limit);
   return new Promise((resolve, reject) => {
     sql.query("SELECT * FROM users LIMIT ? OFFSET ?", [limit, offset], (err, res) => {
       err ? reject(err) : resolve(res);
