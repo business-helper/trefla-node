@@ -50,6 +50,29 @@ commentRouters.get('/:id', async (req, res) => {
   .catch((error) => respondValidateError(res, error));
 })
 
+/**
+ * @for admin
+ */
+commentRouters.get('/', async (req ,res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: 'Permission Error!' });
+
+  const validator = new Validator(req.query, {
+    limit: "required|integer",
+    page: "required|integer",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Validation Failed!"), { code: 400, details: validator.errors });
+      }
+    })
+    .then(() => commentCtrl.simplePagination(req, res))
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
 commentRouters.post("/pagination", async (req, res) => {
   const validator = new Validator(req.body, {
     // page: "required|integer",

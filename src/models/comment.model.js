@@ -38,11 +38,25 @@ Comment.deleteById = async (id) => {
 Comment.pagination = async ({ limit, last_id = null, target_id = null, type = null }) => {
   let where = [];
   last_id ? where.push(`id < ${last_id}`) : null;
-  (target_id && type) ? where.push(`target_id=${target_id} AND type="${type}"`) : null;
+  (target_id && type) ? where.push(`target_id=${target_id} AND type='${type}'`) : null;
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
 
   return new Promise((resolve, reject) => {
     sql.query(`SELECT * FROM comments ${strWhere} ORDER BY id DESC LIMIT ? `, [limit], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Comment.simplePagination = async ({ limit = 10, page = 0, target_id = null, type = null }) => {
+  let where = [];
+  target_id && type ? where.push(`(target_id=${target_id} AND type='${type}')`) : null;
+
+  const strWhere = where.length > 0 ? ` WHERE ${where.joni(' AND ')}` : '';
+
+  const offset = limit * page;
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM comments ${strWhere} ORDER BY id DESC LIMIT ? OFFSET ?`, [limit, offset], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });

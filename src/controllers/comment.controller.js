@@ -152,6 +152,26 @@ exports.pagination = (req, res) => {
     .catch((error) => respondError(res, error));
 }
 
+exports.simplePagination = async (req, res) => {
+  const { limit, page, target_id, type } = req.query;
+
+  let _comments, _total;
+  return Promise.all([
+    Comment.simplePagination({ limit, page, target_id, type }),
+    Comment.getCountOfComments({ target_id, type })
+  ])
+    .then(([comments, total]) => {
+      _comments = comments;
+      _total = total;
+      const post_ids = comments.filter(item => item.type === 'POST').map(item => item.target_id);
+      const comment_ids = comments.filter(item => item.type === 'COMMENT').map(item => item.id);
+      const user_ids = comment.map(item => item.user_id);
+      return Promise.all([
+        
+      ])
+    })
+}
+
 // to-do: only admin or creator can update
 exports.updateById = (req, res) => {
   const { id } = req.params;

@@ -158,6 +158,8 @@ exports.DEFAULT_USER = {
   location_array: JSON.stringify([]),
   postAroundCenterCoordinate: '',
   city: '',
+  ban_reason: "",
+  ban_reply: "",
   recovery_code: '',
   socket_id: "",
   current_chat: 0,
