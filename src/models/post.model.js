@@ -132,7 +132,17 @@ Post.getById = (id) => {
   });
 }
 
+Post.getByIds = (ids) => {
+  ids.length === 0 ? ids = [0] : null;
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM posts WHERE id IN (?)", [ids], (err, res) => {
+      err ? reject(err) : resolve(res);
+    })
+  });
+}
+
 Post.output = (post) => {
+  if (!post) return null;
   post.post_user_id = post.user_id;
   ['user_id', 'create_time', 'update_time', 'city'].map(key => delete post[key]);
   return post;

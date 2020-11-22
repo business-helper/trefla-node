@@ -105,6 +105,15 @@ Comment.getById = (id) => {
   });
 }
 
+Comment.getByIds = (ids) => {
+  ids.length === 0 ? ids = [0] : null;
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM comments WHERE id IN (?)", [ids], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
 Comment.getByUser = (user_id) => {
   return new Promise((resolve ,reject) => {
     sql.query("SELECT * FROM comments WHERE user_id = ?", [user_id], (err, res) => {
@@ -122,6 +131,7 @@ Comment.deleteByUser = (user_id) => {
 }
 
 Comment.output = (comment) => {
+  if (!comment) return null;
   // comment.isGuest = int2Bool(comment.isGuest);
   const delKeys = ['create_time', 'update_time'];
   delKeys.forEach(key => {

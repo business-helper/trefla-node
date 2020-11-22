@@ -153,7 +153,9 @@ exports.pagination = (req, res) => {
 }
 
 exports.simplePagination = async (req, res) => {
-  const { limit, page, target_id, type } = req.query;
+  let { limit, page, target_id, type } = req.query;
+  limit = Number(limit);
+  page = Number(page);
 
   let _comments, _total;
   return Promise.all([
@@ -164,22 +166,58 @@ exports.simplePagination = async (req, res) => {
       _comments = comments;
       _total = total;
       const post_ids = comments.filter(item => item.type === 'POST').map(item => item.target_id);
-      const comment_ids = comments.filter(item => item.type === 'COMMENT').map(item => item.id);
-      const user_ids = comment.map(item => item.user_id);
+      const comment_ids = comments.filter(item => item.type === 'COMMENT').map(item => item.target_id);
+      const user_ids = comments.map(item => item.user_id);
+      // console.log('ids', post_ids, comment_ids, user_ids)
       return Promise.all([
-        
-      ])
+        Post.getByIds(post_ids),
+        Comment.getByIds(comment_ids),
+        User.getByIds(user_ids),
+      ]);
+    })
+    .then(([posts, comments, users]) => {
+      let postsObj = {}, commentsObj = {}, usersObj = {};
+      posts.forEach(post => {
+        postsObj[post.id.toString()] = post;
+      });
+      comments.forEach(comment => {
+        commentsObj[comment.id.toString()] = comment;
+      });
+      users.forEach(user => {
+        usersObj[user.id.toString()] = user;
+      });
+      _comments = _comments.map(comment => {
+        const user = usersObj[comment.user_id.toString()];
+        const target = comment.type === 'COMMENT' ? Comment.output(commentsObj[comment.target_id.toString()]) : Post.output(postsObj[comment.target_id.toString()]);
+        return {
+          ...(Comment.output(comment)),
+          user: User.output(user),
+          target,
+        };
+      });
+      return {
+        status: true,
+        message: 'success',
+        data: _comments,
+        pager: {
+          limit,
+          page,
+          total: _total,
+        },
+        hasMore: (limit * page) + _comments.length < _total,
+      }
     })
 }
 
 // to-do: only admin or creator can update
-exports.updateById = (req, res) => {
+exports.updateById = async (req, res) => {
+  const { uid, role } = getTokenInfo(req);
   const { id } = req.params;
   return Comment.getById(id)
     .then(comment => {
       // remove user id in update data
       let updateData = {};
-      const disallowedKeys = ['id', 'user_id', 'target_id', 'type'];
+      const disallowedKeys = role === 'ADMIN' ? ['id', 'target_id', 'type'] : ['id', 'user_id', 'target_id', 'type'];
       Object.keys(req.body).forEach(key => {
         if (disallowedKeys.includes(key)) {
           // skip it

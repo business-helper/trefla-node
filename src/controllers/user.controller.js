@@ -158,10 +158,10 @@ exports.pagination = (req, res) => {
     .then(([users, total]) => res.json({
       status: true,
       message: 'success',
-      data: users.map(user => User.output(user, 'PROFILE')), //.filter(user => user.id !== user_id)
+      data: users.map(user => User.output(user, req.query.mode || 'PROFILE')), //.filter(user => user.id !== user_id)
       pager: {
-        limit: req.query.limit || 10,
-        page: req.query.page || 0,
+        limit: Number(req.query.limit || 10),
+        page: Number(req.query.page || 0),
         total,
       },
       hasMore: (req.query.page || 0) * (req.query.limit || 10) + users.length < total

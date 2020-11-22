@@ -85,8 +85,9 @@ User.getByCard = (card_number, verified = null) => {
 User.pagination = ({ page, limit }) => {
   limit = Number(limit);
   const offset = Number(page * limit);
+  const strLimit = limit > 0 ? ` LIMIT ${limit} OFFSET ?` : ""; 
   return new Promise((resolve, reject) => {
-    sql.query("SELECT * FROM users LIMIT ? OFFSET ?", [limit, offset], (err, res) => {
+    sql.query(`SELECT * FROM users ${strLimit}`, [ offset ], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
@@ -130,6 +131,13 @@ User.output = (user, mode = 'NORMAL') => {
     delKeys = ['email', 'password', 'language', 'bio', 'radiusAround', 'noti_num', 'location_array', 'postAroundCenterCoordinate', 'create_time', 'update_time', 'recovery_code'];
   } else if (mode === 'PROFILE') {
     delKeys = ['password', 'create_time', 'update_time', 'recovery_code'];
+  } else if (mode === 'SIMPLE') {
+    return { 
+      id: user.id,
+      user_name: user.user_name,
+      email: user.email,
+      sex: user.sex,
+    };
   }
   // delete the given keys
   delKeys.forEach(field => {

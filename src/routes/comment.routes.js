@@ -324,6 +324,7 @@ commentRouters.patch("/:id", async (req, res) => {
 });
 
 commentRouters.delete("/:id", async (req, res) => {
+  const { role } = getTokenInfo(req);
   const { uid: user_id } = getTokenInfo(req);
   const validator = new Validator({
     id: req.params.id
@@ -337,7 +338,7 @@ commentRouters.delete("/:id", async (req, res) => {
     ]).then(([commentById]) => {
       if (!commentById) {
         provider.error("id", "custom", `Comment does not exist!`);
-      } else if (commentById.user_id !== user_id) {
+      } else if (role !== 'ADMIN' && commentById.user_id !== user_id) {
         provider.error('id', 'custom', 'You cannot delete this comment!');
       }
     })

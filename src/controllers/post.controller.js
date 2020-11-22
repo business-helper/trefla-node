@@ -10,9 +10,9 @@ const { checkPostLocationWithUser, generatePostData, generatePostLikeData } = re
 
 
 exports.create = (req, res) => {
-  const { uid: user_id } = getTokenInfo(req);
+  const { uid: user_id, role } = getTokenInfo(req);
   let postData = generatePostData(req.body);
-  postData.user_id = user_id; // req.body.post_user_id;
+  role !== 'ADMIN' ? postData.user_id = user_id : null; // req.body.post_user_id;
   postData.post_time = req.body.post_time ? req.body.post_time : generateTZTimeString();
   return Post.create(postData)
     .then(post => Promise.all([
@@ -193,12 +193,13 @@ exports.getAll = (req, res) => {
 
 // to-do: permission check. only admin or creator can update it.
 exports.updateById = (req, res) => {
+  const { role } = getTokenInfo(req);
   const { id } = req.params;
   return Post.getById(id)
     .then(post => {
       // remove user id in update data
       let updateData = {};
-      const disallowedKeys = ['id', 'user_id'];
+      const disallowedKeys = role === 'ADMIN' ? ['id'] : ['id', 'user_id'];
       Object.keys(req.body).forEach(key => {
         if (disallowedKeys.includes(key)) {
           // skip it
