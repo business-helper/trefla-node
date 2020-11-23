@@ -4,7 +4,7 @@ const User = require("../models/user.model");
 
 const EmailTemplate = require("../models/emailTemplate.model");
 const { respondError, sendMail } = require("../helpers/common.helpers");
-const {  
+const {
   comparePassword,
   generateUserData,
   genreateAuthToken,
@@ -14,9 +14,19 @@ const {
 
 exports.register = (req, res) => {
   const userData = generateUserData(req.body);
+
+  let cardExists = false, verifiedUserWithCard = 0;
+
   return generatePassword(userData.password)
     .then(encPassword => ({ ...userData, password: encPassword }))
-    .then(user => User.create(user))
+    .then(async user => {
+      // check whether card number exists or not
+      if (req.body.card_number) {
+        const [verifiedUser] = await User.getByCard(req.body.card_number, 1);
+        if (verifiedUser) { cardExists = true; verifiedUserWithCard = verifiedUser.id; }
+      }
+      return User.create(user)
+    })
     .then(user => {
       return Promise.all([
         user,
@@ -27,7 +37,11 @@ exports.register = (req, res) => {
       status: true,
       message: 'success',
       data: User.output(user, 'PROFILE'),
-      token
+      token,
+      cardVerified: {
+        exists: cardExists,
+        user_id: verifiedUserWithCard,
+      },
     }))
     .catch((error) => respondError(res, error));
 };
@@ -194,6 +208,8 @@ exports.cardPagination = (req, res) => {
 
 exports.updateProfile = (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
+  let cardExists = false, verifiedUserWithCard = 0;
+
   return User.getById(user_id)
     .then(user => {
       const keys = Object.keys(user);
@@ -208,11 +224,19 @@ exports.updateProfile = (req, res) => {
       });
       return User.save(user);
     })
-    .then(newUser => {
+    .then(async newUser => {
+      if (req.body.card_number) {
+        const [verifiedUser] = await User.getByCard(req.body.card_number, 1);
+        if (verifiedUser) { cardExists = true; verifiedUserWithCard = verifiedUser.id; }
+      }
       return res.json({
         status: true,
         message: 'Profile has been updated!',
-        data: User.output(newUser, 'PROFILE')
+        data: User.output(newUser, 'PROFILE'),
+        cardVerified: {
+          exists: cardExists,
+          user_id: verifiedUserWithCard,
+        },
       });
     })
     .catch((error) => respondError(res, error));
@@ -390,6 +414,3 @@ const checkDuplicatedOwner = (data) => {
     last_messages: JSON.stringify(last_messages),
   };
 }
-
-
-
