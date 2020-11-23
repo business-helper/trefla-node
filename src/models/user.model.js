@@ -101,6 +101,28 @@ User.numberOfUsers = () => {
   });
 }
 
+User.cardPagination = ({ page, limit }) => {
+  page = Number(page);
+  limit = Number(limit);
+  const strWhere = `card_number != '' OR card_img_url != ''`;
+  const offset = page * limit;
+  const strLimit = limit === 0 ? '' : ` LIMIT ${limit} OFFSET ${offset}`;
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM users WHERE ${strWhere} ORDER BY id DESC ${strLimit}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  })
+}
+
+User.numberOfCard = () => {
+  const strWhere = `card_number != '' OR card_img_url != ''`;
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM users WHERE ${strWhere}`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    })
+  })
+}
+
 User.updateSocketSession = ({ id, socketId }) => {
   return new Promise((resolve, reject) => {
     sql.query("UPDATE users SET socket_id=? WHERE id=?", [socketId, id], (err, res) => {

@@ -80,6 +80,14 @@ Message.getById = (id) => {
   });
 }
 
+Message.lastMsgInChat = (chat_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM messages WHERE chat_id=? ORDER BY id DESC LIMIT 1", [chat_id], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    });
+  });
+}
+
 Message.output = (comment) => {
   const delKeys = ['create_time', 'update_time'];
   

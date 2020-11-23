@@ -52,6 +52,23 @@ userRouters.get('/me', async (req, res) => {
   .catch((error) => respondValidateError(res, error));
 })
 
+userRouters.get('/card', async (req, res) => {
+  const validator = new Validator(req.query, {
+    limit: "required|integer",
+    page: "required|integer",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalida request!"), { code: 400, details: validators.errors });
+      }
+      return userCtrl.cardPagination(req, res)
+    })
+    .catch((error) => respondValidateError(res, error))
+
+});
+
 userRouters.get('/:id', async (req, res) => {
   const validator = new Validator({
     id: req.params.id
@@ -105,6 +122,74 @@ userRouters.get('/', async (req, res) => {
     })
     .catch((error) => respondValidateError(res, error));
 });
+
+userRouters.post('/verify/:id', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: true, message: 'Permission error!' });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: 'required|integer',
+  });
+
+  validator.addPostRule(async (provider) => {
+    Promise.all([
+      User.getById(provider.inputs.id),
+    ])
+      .then(([ user ]) => {
+        if (!user) {
+          provider.error('id', 'custom', 'User does not exist!');
+        } else if (user.card_verified === 1) {
+          provider.error('user', 'custom', 'User is already verified now!');
+        }
+      })
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      }
+      return userCtrl.verifyUserReq(req, res);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+userRouters.post('/unverify/:id', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: true, message: 'Permission error!' });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: 'required|integer',
+  });
+
+  validator.addPostRule(async (provider) => {
+    Promise.all([
+      User.getById(provider.inputs.id),
+    ])
+      .then(([user]) => {
+        if (!user) {
+          provider.error('id', 'custom', 'User does not exist!');
+        } else if (user.card_verified === 0) {
+          provider.error('user', 'custom', 'User is already unverified!');
+        }
+      })
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      }
+      return userCtrl.unverifyUserReq(req, res);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidatorError(error));
+})
 
 userRouters.post('/', async (req, res) => {
   userCtrl.pagination(req, res)

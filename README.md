@@ -40,3 +40,10 @@ SELECT * FROM users WHERE JSON_SEARCH(bouquet, 'one', '3') IS NOT NULL
 
 - send to all users in room
   io.to(room_id).emit();
+
+## Chat
+
+- user ids : n
+- online_status: n
+- last_messages: n-1,
+- lastMsgIdOnTransfer: n-2
