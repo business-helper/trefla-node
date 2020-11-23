@@ -123,6 +123,22 @@ userRouters.get('/', async (req, res) => {
     .catch((error) => respondValidateError(res, error));
 });
 
+userRouters.post('/ban-reply', async (req, res) => {
+  const validator = new Validator(req.body, {
+    reply: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+      }
+      return userCtrl.banReplyReq(req, res);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidatorError(res, error));
+});
+
 userRouters.post('/verify/:id', async (req, res) => {
   const { role } = getTokenInfo(req);
   if (role !== 'ADMIN') return res.json({ status: true, message: 'Permission error!' });

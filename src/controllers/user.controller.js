@@ -339,6 +339,20 @@ exports.unverifyUserReq = (req, res) => {
     }));
 }
 
+exports.banReplyReq = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+
+  return User.getById(user_id)
+    .then(user => {
+      user.ban_reply = req.body.reply;
+      return User.save(user);
+    })
+    .then(user => ({
+      status: true,
+      message: "Thank you! We will get back to you soon."
+    }));
+}
+
 const manageVerificationStatusOfUsers = (users, user_id) => {
   const card_number = users[0].card_number;
   return Promise.all(users.map(user => User.save({
