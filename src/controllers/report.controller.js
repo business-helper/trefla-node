@@ -1,35 +1,58 @@
 const { Validator } = require("node-input-validator");
 const models = require('../models');
+const helpers = require('../helpers');
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { bool2Int, chatPartnerId, getTotalLikes, generateTZTimeString, respondError } = require("../helpers/common.helpers");
-const { generateChatData, generateMessageData } = require('../helpers/model.helpers');
+const { generateReportData, generateMessageData } = require('../helpers/model.helpers');
 
 
-exports.create = async (req, res) => {
+exports.createReq = async (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
-  const receiver = req.body.receiver_id ? await User.getById(req.body.receiver_id) : null;
-  let model = generateChatData(req.body, user_id, receiver);
-  const message = req.body.message ? generateMessageData({
-    ...req.body,
-    sender_id: user_id,
-    receiver_id: receiver ? receiver.id : 0,
-    message: req.body.message
-  }) : null;
 
-  return Chat.create(model)
-    .then(chat => Promise.all([
-      chat,
-      User.getById(user_id),
-      message ? Message.create({ ...message, chat_id: chat.id }) : null
+  const model = generateReportData({
+    ...req.body, user_id
+  });
+
+  return models.report.create(model)
+    .then(report => Promise.all([
+      report,
     ]))
-    .then(([chat, sender, message]) => {
-      chat = Chat.output(chat);
-      chat.receiver = User.output(receiver);
-      return res.json({
+    .then(([report]) => {
+      report = models.report.output(report);
+
+      return {
         status: true, 
-        message: 'Chat room created!',
-        data: chat
-      });
-    })
-    .catch((error) => respondError(res, error));
+        message: 'Report has been created!',
+        data: report,
+      };
+    });
 }
+
+exports.getById = async (id) => {
+  return models.report.getById(id)
+    .then(report => {
+      return {
+        status: true,
+        message: 'success',
+        data: models.report.output(report),
+      };
+    })
+}
+
+exports.updateById = async (id, data) => {
+  return models.report.getById(id)
+    .then(report => {
+      Object.keys(report).forEach(key => {
+        report[key] = data[key] !== undefined ? data[key] : report[key];
+      });
+      return models.report.save(report);
+    })
+    .then(report => {
+      return {
+        status: true,
+        message: 'Report has been updated!',
+        data: models.report.output(report),
+      };
+    });
+}
+

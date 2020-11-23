@@ -401,6 +401,7 @@ const processChatroomToCard = async (chats, user_id) => {
         card_number: chat.card_number,
       };
     }
+    updateData.id = chat.id;
     return models.chat.save(updateData);
   }))
   .then(saved => true)

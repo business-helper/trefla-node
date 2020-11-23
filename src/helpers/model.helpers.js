@@ -6,6 +6,7 @@ const {
   DEFAULT_PHOTO,
   DEFAULT_POST,
   DEFAULT_POSTLIKE,
+  DEFAULT_REPORT,
   DEFAULT_CHAT,
   DEFAULT_MESSAGE,
 } = require('../constants/model.constant');
@@ -130,7 +131,14 @@ const generatePostLikeData = basicData => {
   return data;
 }
 
-
+const generateReportData = basicData => {
+  const defaultKeys = Object.keys(DEFAULT_REPORT);
+  let data = {};
+  for (const field of defaultKeys) {
+    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_REPORT[field];
+  }
+  return data;
+}
 
 const checkPostLocationWithUser = (post, user, aroundSearchPeriod, locationIndex) => {
   const postLocation = string2Coordinate(post.location_coordinate);
@@ -215,4 +223,5 @@ module.exports = {
   generatePhotoData,
   generatePostData,
   generatePostLikeData,
+  generateReportData,
 };

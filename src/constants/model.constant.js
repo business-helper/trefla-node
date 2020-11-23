@@ -135,6 +135,17 @@ exports.DEFAULT_POSTLIKE = {
   update_time: timestamp(),
 }
 
+exports.DEFAULT_REPORT = {
+  id: '',
+  user_id: 0,
+  type: '',
+  target_id: 0,
+  reason: '',
+  time: generateTZTimeString(),
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
 exports.DEFAULT_USER = {
   id: 0,
   user_name: '',

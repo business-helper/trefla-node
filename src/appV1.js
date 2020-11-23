@@ -13,6 +13,7 @@ const langRouters = require('./routes/lang.routes');
 const notificationRouters = require('./routes/notification.routes');
 const photoRouters = require('./routes/photo.routes');
 const postRouters = require('./routes/post.routes');
+const reportRouters = require('./routes/report.routes');
 const userRouters = require('./routes/user.routes');
 // Resolvers
 const { getInitData } = require('./resolvers');
@@ -30,6 +31,7 @@ appV1.use('/comment', commentRouters);
 appV1.use('/notification', notificationRouters);
 appV1.use('/photo', photoRouters);
 appV1.use('/post', postRouters);
+appV1.use('/report', reportRouters);
 appV1.use('/user', userRouters);
 
 appV1.post('/init-data', getInitData);
