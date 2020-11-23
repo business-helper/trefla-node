@@ -539,3 +539,7 @@ socket.on(SKT_UNREAD_MSG_UPDATED, (args) => {
 socket.on(SKT_CREATE_NOTIFICATION, (args) => {
   console.log(`[${SKT_CREATE_NOTIFICATION}]`, args);
 })
+
+socket.on(SKT_CHAT_DELETED, args => {
+  console.log(`[${SKT_CHAT_DELETED}]`, args);
+})

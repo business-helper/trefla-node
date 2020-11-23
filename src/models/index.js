@@ -10,6 +10,7 @@ const notification = require('./notification.model');
 const photo = require('./photo.model');
 const post = require('./post.model');
 const postLike = require('./postLike.model');
+const report = require('./report.model');
 const user = require('./user.model');
 
 
@@ -26,5 +27,6 @@ module.exports = {
   photo,
   post,
   postLike,
+  report,
   user
 };

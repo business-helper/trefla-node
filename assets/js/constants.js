@@ -18,3 +18,4 @@ const SKT_UPDATE_ONLINE = 'socket.update.online';
 const SKT_NOTI_NUM_UPDATED = 'socket.noti.num.updated';
 const SKT_UNREAD_MSG_UPDATED = 'socket.unread.msg.updated';
 const SKT_CREATE_NOTIFICATION = 'socket.create.new.notification';
+const SKT_CHAT_DELETED = 'socket.chat.deleted';

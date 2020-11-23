@@ -224,6 +224,8 @@ chatRouters.patch("/:id", async (req, res) => {
 });
 
 chatRouters.delete("/:id", async (req, res) => {
+  const socketClient = req.app.locals.socketClient;
+
   const { uid } = getTokenInfo(req);
   const validator = new Validator({
     id: req.params.id
@@ -259,7 +261,7 @@ chatRouters.delete("/:id", async (req, res) => {
         details: validator.errors,
       });
     }
-    return chatCtrl.deleteByIdReq({ id: req.params.id });
+    return chatCtrl.deleteByIdReq({ id: req.params.id, user_id: uid, socketClient });
   })
   .then(deleted => {
     return res.json({

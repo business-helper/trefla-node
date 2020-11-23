@@ -34,7 +34,7 @@ exports.create = async (req, res) => {
       });
     })
     .catch((error) => respondError(res, error));
-};
+}
 
 exports.getById = async (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
@@ -346,13 +346,29 @@ exports.loadMessageReq = async ({ myId = null, chat_id, last_id, limit }) => {
     })
 }
 
-exports.deleteByIdReq = async ({ id }) => {
+exports.deleteByIdReq = async ({ id, user_id, socketClient }) => {
+  
+  const chat = await Chat.getById(id);
   return Chat.deleteById(id)
     .then(deleted => {
       // delete all message in chat room.
       return Message.deleteByChatId(id);
     })
-    .then(deleted => {
+    .then(async deleted => {
+      // notify the partner that chat is deleted.
+      const user_ids = JSON.parse(chat.user_ids);
+      const partnerId = chatPartnerId(user_ids, user_id);
+      if (partnerId && socketClient) {
+        partner = await User.getById(partnerId);
+        if (partner.socket_id) {
+          socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+            to: partner.socket_id,
+            event: CONSTS.SKT_CHAT_DELETED,
+            args: { chat_id: id }
+          });
+        }
+      }
+
       return true;
     })
 }

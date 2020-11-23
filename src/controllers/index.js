@@ -6,6 +6,7 @@ const notification = require('./notification.controller');
 const photo = require('./photo.controller');
 const post = require('./post.controller');
 const postLike = require('./postLike.controller');
+const report = require('./report.controller');
 const user = require('./user.controller');
 
 module.exports = {
@@ -17,5 +18,6 @@ module.exports = {
   photo,
   post,
   postLike,
+  report,
   user
 };
