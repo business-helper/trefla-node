@@ -1,4 +1,5 @@
 const { Validator } = require("node-input-validator");
+const CONSTS = require('../constants/socket.constant');
 const models = require("../models/index");
 const User = require("../models/user.model");
 
@@ -14,7 +15,6 @@ const {
 
 exports.register = (req, res) => {
   const userData = generateUserData(req.body);
-
   let cardExists = false, verifiedUserWithCard = 0;
 
   return generatePassword(userData.password)
@@ -27,7 +27,37 @@ exports.register = (req, res) => {
       }
       return User.create(user)
     })
-    .then(user => {
+    .then(async user => {
+      // check if user has card number, if true, notify to the chat creator to the card.
+      if (user.card_number) {
+        let _chats = [];
+        await models.chat.getChatToCard({ card_number: user.card_number })
+          .then(chats => {
+            _chats = chats;
+            const sender_ids = chats.map(chat => {
+              const user_ids = JSON.parse(chat.user_ids);
+              return user_ids[0];
+            });
+            return User.getByIds(sender_ids);
+          })
+          .then(senders => {
+            const socketClient = req.app.locals.socketClient;
+            senders.forEach((sender, i) => {
+              if (sender.socket_id) {
+                socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+                  to: sender.socket_id,
+                  event: CONSTS.SKT_REGISTER_WITH_CARD,
+                  args: {
+                    chat: {
+                      ...(models.chat.output(_chats[i])),
+                      user: models.user.output(user),
+                    }
+                  }
+                });
+              }
+            });
+          });
+      }
       return Promise.all([
         user,
         genreateAuthToken(user)
@@ -330,10 +360,19 @@ exports.unverifyUserReq = (req, res) => {
   let _user;
   return User.getById(user_id)
     .then(user => {
+      const { card_number, card_verified } = user;
       user.card_verified = 0;
-      return User.save(user);
+      return Promise.all([
+        User.save(user),
+        models.chat.getChatToCard(card_number),
+      ]);
     })
-    .then(user => ({
+    .then(([user, cardChats]) => {
+      if (cardChats.length) {
+        return Promise.all(cardChats.map(chat => models.card.save({ ...chat, card_verified: 0 })));
+      }
+    })
+    .then(() => ({
       status: true,
       message: 'User has been unverified!',
     }));
@@ -402,6 +441,7 @@ const processChatroomToCard = async (chats, user_id) => {
       };
     }
     updateData.id = chat.id;
+    updateData.card_verified = 1;
     return models.chat.save(updateData);
   }))
   .then(saved => true)

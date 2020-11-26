@@ -222,9 +222,13 @@ const bootstrapSocket = (io) => {
           }
         }),
         models.user.getById(uid),
-        models.user.getById(receiver_id)
+        models.user.getById(receiver_id),
+        (chat.isForCard === 1) ? models.user.getByCard(chat.card_number) : null,
       ])
-        .then(async ([{message: msg, chat, unread_updated}, me, receiver]) => {
+        .then(async ([{message: msg, chat, unread_updated}, me, receiver, cardUsers]) => {
+          /**
+           * @description send socket to receiver
+           */
           socket.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_RECEIVE_MSG, {
             message: {
               ...msg,
@@ -235,6 +239,9 @@ const bootstrapSocket = (io) => {
               user: models.user.output(me)
             }
           });
+          /**
+           * @description send socket to me.
+           */
           socket.emit(CONSTS.SKT_RECEIVE_MSG, {
             message: {
               ...msg,
@@ -245,11 +252,35 @@ const bootstrapSocket = (io) => {
               user: models.user.output(receiver)
             }
           });
-          if (unread_updated && receiver.socket_id) {
+
+          /**
+           * @deprecated
+           * @reason unread messages are calculated from chats list only
+           * @description send unread message status to receiver
+           * */ 
+          if (chat.isForCard === 0 && unread_updated && receiver.socket_id) {
             // get unread msg info
             const unreads = await ctrls.chat.getUnreadMsgInfoReq(receiver.id);
-            io.to(receiver.socket_id).emit(CONSTS.SKT_UNREAD_MSG_UPDATED, unreads);
-          }
+            io.to(receiver.socket_id).emit(CONSTS.SKT_UNREAD_MSG_UPDATED, unreads); // @deprecated
+          } 
+          
+          /**
+           * @description send message to card users for card chat
+           */
+          if (chat.isForCard === 1 && cardUsers.length) {
+            cardUsers.filter(item => item.socket_id).forEach(cardUser => {
+              io.to(cardUser.socket_id).emit(CONSTS.SKT_RECEIVE_MSG, {
+                message: {
+                  ...msg,
+                  user: models.user.output(me),
+                },
+                chat: {
+                  ...chat,
+                  user: models.user.output(me),
+                }
+              });
+            });
+          } 
         })
         .catch(error => {
           console.log(error);

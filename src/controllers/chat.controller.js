@@ -1,4 +1,5 @@
 const { Validator } = require("node-input-validator");
+const CONSTS = require('../constants/socket.constant');
 const Chat = require("../models/chat.model");
 const User = require("../models/user.model");
 const Message = require('../models/message.model');
@@ -446,3 +447,5 @@ exports.getAllChatsOfUser = async (user_id) => {
     .then(user => Chat.allChatsOfUser(user_id, user.card_number))
     .then(chats => chats);
 }
+
+

@@ -543,3 +543,7 @@ socket.on(SKT_CREATE_NOTIFICATION, (args) => {
 socket.on(SKT_CHAT_DELETED, args => {
   console.log(`[${SKT_CHAT_DELETED}]`, args);
 })
+
+socket.on(SKT_REGISTER_WITH_CARD, args => {
+  console.log(`[${SKT_REGISTER_WITH_CARD}]`, args);
+})

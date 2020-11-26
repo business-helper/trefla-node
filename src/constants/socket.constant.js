@@ -19,5 +19,6 @@ exports.SKT_NOTI_NUM_UPDATED = 'socket.noti.num.updated';
 exports.SKT_UNREAD_MSG_UPDATED = 'socket.unread.msg.updated';
 exports.SKT_CREATE_NOTIFICATION = 'socket.create.new.notification';
 exports.SKT_CHAT_DELETED = 'socket.chat.deleted';
+exports.SKT_REGISTER_WITH_CARD = 'socket.register.with.card';
 
 exports.SKT_LTS_SINGLE = 'socket.local2server.single';
