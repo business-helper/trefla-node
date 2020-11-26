@@ -22,9 +22,11 @@ exports.create = (req, res) => {
     _notification = noti;
     _receiver = receiver;
     _me = me;
-    return Notification.getUnreadCount(req.body.receiver_id);
+    receiver.noti_num ++;
+    return User.save(receiver);
+    // return Notification.getUnreadCount(req.body.receiver_id);
   })
-  .then(count => {
+  .then(receiver => {
     const notification = {
       ...(Notification.output(_notification)),
       sender: User.output(_me),
@@ -34,7 +36,7 @@ exports.create = (req, res) => {
         to: _receiver.socket_id,
         event: CONSTS.SKT_NOTI_NUM_UPDATED,
         args: { 
-          num: count,
+          num: receiver.noti_num,
           notification
         }
       });
