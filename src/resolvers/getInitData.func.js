@@ -8,7 +8,7 @@ const models = require('../models/index');
 
 const { BearerMiddleware } = require('../middlewares/basic.middleware');
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { respondValidateError } = require("../helpers/common.helpers");
+const { chatPartnerId, respondValidateError } = require("../helpers/common.helpers");
 
 const getPostSummary = async (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
@@ -112,8 +112,42 @@ const getChatSummary = async (req, res) => {
       });
       return _chatrooms;
     })
+}
 
+const getChatSummryV2 = async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  let _chatrooms;
 
+  const me = await models.user.getById(user_id);
+
+  return models.chat.allChatsOfUser(user_id, me.card_number)
+    .then(chats => {
+      _chatrooms = chats;
+      let idOfUsers = [ 0 ];
+      chats.forEach((chat, i) => {
+        const user_ids = JSON.parse(chat.user_ids);
+        const partnerId = chatPartnerId(user_ids, user_id);
+        partnerId ? idOfUsers.push(partnerId) : null;          
+      });
+      return models.user.getByIds(idOfUsers);
+    })
+    .then(users => {
+      let userObj = {};
+      users.forEach(user => {
+        if (user) {
+          userObj[user.id.toString()] = user;
+        }
+      });
+      _chatrooms = _chatrooms.map(chat => {
+        const user_ids = JSON.parse(chat.user_ids);
+        const partnerId = chatPartnerId(user_ids, user_id);
+        return {
+          ...(models.chat.output(chat)),
+          user: partnerId ? models.user.output(userObj[partnerId.toString()]) : null,
+        };
+      });
+      return _chatrooms;
+    });
 }
 
 const getInitData = (req, res) => {
@@ -139,7 +173,7 @@ const getInitData = (req, res) => {
         User.getById(uid),
         getPostSummary(req, res),
         getNotificationSummary(req, res),
-        getChatSummary(req, res),
+        getChatSummryV2(req, res),
       ])
     })
     .then(([ user, posts, notis, chats, ]) => {

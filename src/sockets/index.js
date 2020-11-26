@@ -46,7 +46,7 @@ const bootstrapSocket = (io) => {
     }
 
     // connection request to a user.
-    socket.on(CONSTS.SKT_CONNECT_TO_USER, ({ toId, message }) => {
+    socket.on(CONSTS.SKT_CONNECT_TO_USER, ({ toId, message, isGuest = true }) => {
       console.log('[connection req]', toId);
       const { uid } = helpers.auth.parseToken(token);
       let _toUser, _fromUser;
@@ -60,7 +60,7 @@ const bootstrapSocket = (io) => {
           }
           _toUser = toUser;
           _fromUser = fromUser;
-          return ctrls.chat.createNormalChatReq(uid, { receiver_id: toId, message });
+          return ctrls.chat.createNormalChatReq(uid, { receiver_id: toId, message }, isGuest);
         })
         .then(result => {
           const { status, message, data } = result;
@@ -77,7 +77,7 @@ const bootstrapSocket = (io) => {
         })
     });
 
-    socket.on(CONSTS.SKT_CONNECT_TO_CARD, async ({ card_number, message, toId = 0 }) => {
+    socket.on(CONSTS.SKT_CONNECT_TO_CARD, async ({ card_number, message, toId = 0, isGuest = true }) => {
       console.log('[connection req]', toId);
       const { uid } = helpers.auth.parseToken(token);
       const cardUsers = await models.user.getByCard(card_number, 1);
@@ -96,7 +96,7 @@ const bootstrapSocket = (io) => {
           }
           _toUser = toUser;
           _fromUser = fromUser;
-          return ctrls.chat.createCardChatReq(uid, { receiver_id: toId, message, card_number, isForCard: 1 });
+          return ctrls.chat.createCardChatReq(uid, { receiver_id: toId, message, card_number, isForCard: 1 }, isGuest);
         })
         .then(result => {
           const { status, message, data } = result;

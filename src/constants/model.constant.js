@@ -17,6 +17,7 @@ exports.DEFAULT_CHAT = {
   accept_status: 0,
   isForCard: 0,
   card_number: '',
+  card_verified: 0,
   unread_nums: JSON.stringify([]),
   online_status: JSON.stringify({}),
   last_messages: JSON.stringify([]),

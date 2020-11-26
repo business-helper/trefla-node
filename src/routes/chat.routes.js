@@ -60,7 +60,11 @@ chatRouters.get('/:id', async (req, res) => {
 })
 
 chatRouters.get('/', async (req,res) => {
+  const { uid: user_id } = getTokenInfo(req);
 
+  return chatCtrl.getAllChatsOfUser(user_id)
+    .then(chats => res.json(chats))
+    .catch(error => respondValidateError(res, error));
 });
 
 chatRouters.post("/pagination", async (req, res) => {

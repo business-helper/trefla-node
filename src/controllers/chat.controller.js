@@ -156,9 +156,10 @@ exports.availableChatrooms = async (req, res) => {
     .catch(error => respondError(res, error));
 }
 
-exports.createNormalChatReq = async (user_id, payload) => {
+exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
   const receiver = payload.receiver_id ? await User.getById(payload.receiver_id) : null;
   let model = generateChatData(payload, user_id, receiver);
+  model.accept_status = !isGuest ? 1 : 0;
   const message = payload.message ? generateMessageData({
     ...payload,
     sender_id: user_id,
@@ -206,9 +207,10 @@ exports.createNormalChatReq = async (user_id, payload) => {
     // }));
 }
 
-exports.createCardChatReq = async (user_id, payload) => {
+exports.createCardChatReq = async (user_id, payload, isGuest) => {
   const receiver = payload.receiver_id ? await User.getById(payload.receiver_id) : null;
   let model = generateChatData(payload, user_id, receiver);
+  model.accept_status = !isGuest ? 1 : 0;
   const message = payload.message ? generateMessageData({
     ...payload,
     sender_id: user_id,
@@ -437,4 +439,10 @@ exports.rejectChatReq = async ({ chat_id }) => {
         data: chat,
       };
     });
+}
+
+exports.getAllChatsOfUser = async (user_id) => {
+  return User.getById(user_id)
+    .then(user => Chat.allChatsOfUser(user_id, user.card_number))
+    .then(chats => chats);
 }

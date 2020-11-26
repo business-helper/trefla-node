@@ -77,10 +77,7 @@ authRouters.post("/login", async (req, res) => {
     .check()
     .then((matched) => {
       if (!matched) {
-        throw Object.assign(new Error("Invalid request"), {
-          code: 400,
-          details: validator.errors,
-        });
+        throw Object.assign(new Error("Invalid request"), { code: 400, details: validator.errors });
       }
     })
     .then(() => userCtrl.login(req, res))

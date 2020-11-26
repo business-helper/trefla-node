@@ -59,6 +59,7 @@ Chat.pendingChatrooms = async (user_id) => {
   });
 }
 
+// returns accepted && pending chats
 Chat.myChatrooms = async (user_id, accepted = null) => {
   const whereAccept = [0, 1].includes(accepted) ? ` AND accept_status = ${accepted}` : "";
   return new Promise((resolve, reject) => {
@@ -66,6 +67,16 @@ Chat.myChatrooms = async (user_id, accepted = null) => {
       err ? reject(err) : resolve(res);
     });
   });
+}
+
+// return all chat including card chat.
+Chat.allChatsOfUser = async (user_id, card_number) => {
+  const whereCard = card_number ? ` OR (isForCard=1 AND card_number='${card_number}')` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM chats WHERE (JSON_CONTAINS(user_ids, '?', '$')=1) ${whereCard}`, [user_id], (err, res) => {
+      err ? reject(err) : resolve(res);
+    })
+  })
 }
 
 Chat.getAll = ({ user_id = null, isForCard = null, card_number = null }) => {
