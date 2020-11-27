@@ -247,13 +247,10 @@ exports.createCardChatReq = async (user_id, payload, isGuest) => {
       return ({
         status: true,
         message: 'Chat room created!',
-        data: chat
+        data: chat,
+        msg: msgObj,
       });
-    })
-    // .catch((error) => ({
-    //   status: false,
-    //   message: error.message
-    // }));
+    });
 }
 
 exports.acceptChatConnectionReq = async (chat_id) => {
