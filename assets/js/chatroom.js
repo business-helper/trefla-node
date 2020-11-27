@@ -547,3 +547,7 @@ socket.on(SKT_CHAT_DELETED, args => {
 socket.on(SKT_REGISTER_WITH_CARD, args => {
   console.log(`[${SKT_REGISTER_WITH_CARD}]`, args);
 })
+
+socket.on(SKT_CARD_VERIFIED, args => {
+  console.log(`[${SKT_CARD_VERIFIED}]`, args);
+})

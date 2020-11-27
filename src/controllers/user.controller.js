@@ -345,12 +345,43 @@ exports.verifyUserReq = (req, res) => {
         processChatroomToCard(chats, user_id),
       ]);
     })
-    .then(([ verified, chatprocessed ]) => {
+    .then(async ([ users, chats ]) => {
+      // const [verifiedUser] = cardUsers.filter(user => user.id === user_id);
+      const sender_ids = chats.map(chat => {
+        const user_ids = JSON.parse(chat.user_ids);
+        return user_ids[0];
+      }).filter((item, i, ar) => ar.indexOf(item) === i);
+
+      await models.user.getByIds(sender_ids)
+        .then(senders => {
+          const socketClient = req.app.locals.socketClient;
+          senders.forEach((sender, i) => {
+            if (sender.socket_id) {
+              // get card chat sender triggered.
+              const [chat] = chats.filter(chat => {
+                const user_ids = typeof chat.user_ids === 'string' ? JSON.parse(chat.user_ids) : chat.user_ids;
+                return user_ids[0] === sender.id;
+              });
+
+              socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+                to: sender.socket_id,
+                event: CONSTS.SKT_CARD_VERIFIED,
+                args: {
+                  chat: {
+                    ...(models.chat.output(chat)),
+                    user: models.user.output(_user),
+                  },
+                  user: models.user.output(_user),
+                }
+              });
+            }
+          });
+        })
       return {
         status: true,
         message: 'success',
-        verified: verified,
-        chatrooms: chatprocessed,
+        verified: users,
+        chatrooms: chats,
       };
     });
 }
@@ -400,7 +431,7 @@ const manageVerificationStatusOfUsers = (users, user_id) => {
     card_number:  user.id === user_id ? card_number : '',
     card_img_url: user.id === user_id ? user.card_img_url : '',
   })))
-  .then(() => true)
+  .then((users) => users)
   .catch(error => {
     console.log('[Users verify status] error', error);
     return false
@@ -444,7 +475,7 @@ const processChatroomToCard = async (chats, user_id) => {
     updateData.card_verified = 1;
     return models.chat.save(updateData);
   }))
-  .then(saved => true)
+  .then(chats => chats)
   .catch(error => {
     console.log('[Process card chats] error', error);
     return false;
