@@ -363,6 +363,7 @@ exports.verifyUserReq = (req, res) => {
                 return user_ids[0] === sender.id;
               });
 
+              // notify the card chat creators that a user has been verified on interesting card number,
               socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
                 to: sender.socket_id,
                 event: CONSTS.SKT_CARD_VERIFIED,
@@ -370,8 +371,7 @@ exports.verifyUserReq = (req, res) => {
                   chat: {
                     ...(models.chat.output(chat)),
                     user: models.user.output(_user),
-                  },
-                  user: models.user.output(_user),
+                  }
                 }
               });
             }

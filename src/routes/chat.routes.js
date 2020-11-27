@@ -154,11 +154,7 @@ chatRouters.post('/:id/messages', async (req, res) => {
       Chat.getById(provider.inputs.chat_id)
     ]).then(([chatById]) => {
       if (!chatById) {
-        provider.error(
-          "id",
-          "custom",
-          `Chatroom does not exists for the given id!`
-        );
+        provider.error( "id", "custom", `Chatroom does not exists for the given id!` );
       }
     })
   );
