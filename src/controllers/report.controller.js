@@ -56,3 +56,72 @@ exports.updateById = async (id, data) => {
     });
 }
 
+exports.paginationReq = async ({ page, limit, type, target_id }) => {
+  [page, limit] = [page, limit].map(item => Number(item));
+
+  let _reports = [], _total = 0;
+
+  return Promise.all([
+    models.report.get({ page, limit, type, target_id }),
+    models.report.getTotal({ type, target_id }),
+  ])
+    .then(([reports, total]) => {
+      _reports = reports;
+      _total = total;
+      const user_ids = [0];
+      const comment_ids = [0];
+      const post_ids = [0];
+      
+      reports.forEach(report => {
+        const { user_id, type, target_id } = report;
+        user_ids.push(user_id);
+        type === 'COMMENT' ? comment_ids.push(target_id) : post_ids.push(target_id);
+      });
+
+      return Promise.all([
+        models.user.getByIds(user_ids),
+        models.post.getByIds(post_ids),
+        models.comment.getByIds(comment_ids),
+      ])
+    })
+    .then(([ users, posts, comments ]) => {
+      const userObj = {}, postObj = {}, commentObj = {};
+      users.forEach(user => userObj[user.id.toString()] = user);
+      posts.forEach(post => postObj[post.id.toString()] = post);
+      comments.forEach(comment => commentObj[comment.id.toString()] = comment);
+
+      _reports = _reports.map(report => ({
+        ...(models.report.output(report)),
+        user: models.user.output(userObj[report.user_id.toString()], 'SIMPLE'),
+        target: report.type === 'COMMENT' ? models.comment.output(commentObj[report.target_id.toString()]) : models.post.output(postObj[report.target_id.toString()])
+      }));
+
+      return {
+        status: true,
+        message: 'success',
+        data: _reports,
+        pager: {
+          limit,
+          page,
+          total: _total,
+        },
+        hasMore: page * limit + _reports.length < _total,
+      }
+    })
+}
+
+exports.deleteByIdReq = async ({ id }) => {
+  let _report;
+  return models.report.getById(id)
+    .then(report => {
+      _report = report;
+      return models.report.deleteById(id)
+    })
+    .then(deletedRows => {
+      return {
+        status: true,
+        message: 'Report has been deleted!',
+      };
+    })
+}
+

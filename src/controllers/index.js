@@ -1,6 +1,7 @@
 const admin = require('./admin.controller');
 const chat = require('./chat.controller');
 const comment = require('./comment.controller');
+const firebase = require('./firebase.controller');
 const language = require('./lang.controller');
 const notification = require('./notification.controller');
 const photo = require('./photo.controller');
@@ -13,6 +14,7 @@ module.exports = {
   admin,
   chat,
   comment,
+  firebase,
   language,
   notification,
   photo,

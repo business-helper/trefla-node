@@ -1,6 +1,6 @@
 const express = require("express");
 const { Validator } = require("node-input-validator");
-const chatRouters = express.Router();
+const adminRouters = express.Router();
 
 const ctrls = require("../controllers");
 const models = require("../models");
@@ -11,7 +11,7 @@ const { BearerMiddleware } = require("../middlewares/basic.middleware");
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { respondValidateError } = require("../helpers/common.helpers");
 
-chatRouters.post('/login', async (req, res) => {
+adminRouters.post('/login', async (req, res) => {
 
   middlewares.basicMiddleware(req, res, () => {
     const validator = new Validator(req.body, {
@@ -34,13 +34,69 @@ chatRouters.post('/login', async (req, res) => {
 });
 
 // Bearer authentication
-chatRouters.use((req, res, next) => {
+adminRouters.use((req, res, next) => {
   BearerMiddleware(req, res, next);
 });
 
-chatRouters.get('/pending', async (req, res) => {
-  console.log('[GET] /chat/pending');
-  return adminCtrl.pendingChatrooms(req, res);
+adminRouters.get('/firebase', async (req, res) => {
+  console.log('[GET] /admin/firebase');
+  return ctrls.firebase.test()
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
 });
 
-module.exports = chatRouters;
+adminRouters.post('/send-notification', async (req, res) => {
+  const { uid } = getTokenInfo(req);
+  const { user_id, title, body } = req.body;
+
+  const validator = new Validator(req.body, {
+    user_id: "required",
+    title: "required",
+    body: "required",
+  });
+
+  validator.addPostRule(async provider => 
+    Promise.all([
+      models.user.getById(user_id),
+    ])
+      .then(([ user ]) => {
+        if (!user) {
+          provider.error('user_id', 'custom', 'User does not exist with the given id!');
+        }
+      })  
+  );
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error('Invalid requset!'), { code: 400, details: validator.errors });
+      }
+      return ctrls.firebase.sendNotification2UserReq({ user_id, title, body });
+    })
+    .then(() => res.json({ status: true, message: 'Notification has been sent!' }))
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.post('/bulk-notifications', async (req, res) => {
+  const { uid, role } = getTokenInfo(req);
+  const { user_ids, title, body } = req.body;
+
+  const validator = new Validator(req.body, {
+    user_ids: "required",
+    title: "required",
+    body: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error('Invalid requset!'), { code: 400, details: validator.errors });
+      }
+      return ctrls.firebase.sendBulkNotificationReq({ user_ids, title, body });
+    })
+    .then(() => res.json({ status: true, message: 'Notifications have been sent!' }))
+    .catch(error => respondValidateError(res, error));
+});
+
+
+module.exports = adminRouters;
