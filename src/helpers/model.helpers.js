@@ -15,6 +15,7 @@ const {
   getDistanceFromLatLonInMeter,
   string2Coordinate,
   string2Timestamp,
+  timestamp,
 } = require('./common.helpers');
 
 
@@ -65,6 +66,8 @@ const generateChatData = (basicData, sender_id, receiver = null) => {
   if (basicData.card_number !== undefined) {
     data.card_number = basicData.card_number;
   }
+  data.create_time = timestamp();
+  data.update_time = timestamp();
   return data;
 }
 
@@ -74,6 +77,9 @@ const generateCommentData = (basicData) => {
   for (let field of defaultKeys) {
     data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_COMMENT[field];
   }
+  data.time = generateTZTimeString();
+  data.create_time = timestamp();
+  data.update_time = timestamp();
   return data;
 }
 
@@ -92,6 +98,9 @@ const generateMessageData = basicData => {
   for (let field of defaultKeys) {
     data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_MESSAGE[field];
   }
+  data.time = generateTZTimeString();
+  data.create_time = timestamp();
+  data.update_time = timestamp();
   return data;
 }
 
@@ -119,6 +128,9 @@ const generatePostData = (basicData) => {
   for (let field of defaultKeys) {
     data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_POST[field];
   }
+  data.post_time = generateTZTimeString();
+  data.create_time = timestamp();
+  data.update_time = timestamp();
   return data;
 }
 

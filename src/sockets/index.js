@@ -244,9 +244,15 @@ const bootstrapSocket = (io) => {
       const { uid } = helpers.auth.parseToken(token);
       const chat = await models.chat.getById(chat_id);
       const user_ids = JSON.parse(chat.user_ids);
-      const receiver_id = user_ids.length > 0 ? 
+      let receiver_id = user_ids.length > 0 ? 
         (user_ids[0] === uid ? user_ids[user_ids.length - 1] : user_ids[0] ): 
         0;
+      if (chat.isForCard === 1) {
+        if (!chat.card_verified) {
+          receiver_id = 0;
+        }
+      }
+      
       Promise.all([
         ctrls.chat.addMessageReq({
           sender_id: uid,
@@ -275,6 +281,10 @@ const bootstrapSocket = (io) => {
               user: models.user.output(me)
             }
           });
+
+
+
+
           /**
            * @description send socket to me.
            */
