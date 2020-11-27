@@ -40,8 +40,10 @@ Message.deleteByChatId = async (chat_id) => {
   })
 }
 
-Message.pagination = async ({ limit, last_id = null, chat_id }) => {
+Message.pagination = async ({ limit, last_id = null, chat_id, minId = 0, maxId = 0 }) => {
   let where = [`chat_id=${chat_id}`];
+  if (minId) where.push(`id > ${minId}`);
+  if (maxId) where.push(`id <= ${maxId}`);
   if (last_id) {
     where.push(`id < ${last_id}`);
   }
@@ -53,8 +55,10 @@ Message.pagination = async ({ limit, last_id = null, chat_id }) => {
   });
 }
 
-Message.getAll = ({ chat_id }) => {
+Message.getAll = ({ chat_id, minId = 0, maxId = 0 }) => {
   let where = [`chat_id=${chat_id}`];
+  if (minId) where.push(`id > ${minId}`);
+  if (maxId) where.push(`id <= ${maxId}`);
   const strWhere = ' WHERE ' + where.join(' AND ');
   return new Promise((resolve, reject) => {
     sql.query(`SELECT count(id) as total FROM messages ${strWhere}`, (err, res) => {

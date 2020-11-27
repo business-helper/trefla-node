@@ -321,15 +321,26 @@ exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => 
 exports.loadMessageReq = async ({ myId = null, chat_id, last_id, limit }) => {
   const chat = await Chat.getById(chat_id);
   const uIds = JSON.parse(chat.user_ids);
-  const userIds = uIds.length > 1 ? [uIds[0], uIds[uIds.length - 1]] : uIds; // current member ids
-  // const [ partnerId ] = userIds.filter(id => id !== myId);
+  const asSender = uIds[0] === myId;
 
+  let msgMaxId = 0, msgMinId = 0;
+  if (chat.isForCard && !asSender) {
+    const myPos = uIds.indexOf(myId);
+    if (myPos > 0 && myPos < uIds.length - 1) { // in the middle of verified users
+      // minId
+      const trasferMsgIds = JSON.parse(chat.lastMsgIdOnTransfer);
+      msgMinId = transferMsgIds[myPos - 1];
+    }
+    if (myPos > 0 && myPos < uIds.length - 2) {
+      msgMaxId = transferMsgIds[myPos];
+    }
+  }
 
   return Promise.all([
-    Message.pagination({ limit, last_id, chat_id }),
-    Message.getAll({ chat_id }),
+    Message.pagination({ limit, last_id, chat_id, minId: msgMinId, maxId: msgMaxId }),
+    Message.getAll({ chat_id, minId: msgMinId, maxId: msgMaxId }),
     Message.getMinId({ chat_id }),
-    User.getByIds(userIds)
+    User.getByIds(uIds)
   ])
     .then(([messages, total, minId, users]) => {
       let userObj = {};

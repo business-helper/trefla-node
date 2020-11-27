@@ -247,12 +247,13 @@ const bootstrapSocket = (io) => {
       let receiver_id = user_ids.length > 0 ? 
         (user_ids[0] === uid ? user_ids[user_ids.length - 1] : user_ids[0] ): 
         0;
+
       if (chat.isForCard === 1) {
         if (!chat.card_verified) {
           receiver_id = 0;
         }
       }
-      
+
       Promise.all([
         ctrls.chat.addMessageReq({
           sender_id: uid,
@@ -268,6 +269,7 @@ const bootstrapSocket = (io) => {
         (chat.isForCard === 1) ? models.user.getByCard(chat.card_number) : null,
       ])
         .then(async ([{message: msg, chat, unread_updated}, me, receiver, cardUsers]) => {
+          
           /**
            * @description send socket to receiver
            */
