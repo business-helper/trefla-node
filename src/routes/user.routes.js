@@ -3,6 +3,7 @@ const { Validator } = require("node-input-validator");
 const userRouters = express.Router();
 const os = require('os');
 
+const ctrls = require("../controllers");
 const userCtrl = require("../controllers/user.controller");
 const Post = require("../models/post.model");
 const User = require("../models/user.model");
@@ -207,6 +208,24 @@ userRouters.post('/unverify/:id', async (req, res) => {
     .catch(error => respondValidatorError(error));
 })
 
+userRouters.post('/transfer-request', async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const validator = new Validator({
+    ...req.body,
+    user_id
+  }, {
+    user_id: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) { throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors }); }
+      return userCtrl.createIDTransferReq(user_id);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
 userRouters.post('/', async (req, res) => {
   userCtrl.pagination(req, res)
   .catch(error => respondValidateError(res, error));
@@ -353,5 +372,6 @@ userRouters.delete('/:id', async (req, res) => {
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
 });
+
 
 module.exports = userRouters;

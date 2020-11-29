@@ -1,5 +1,5 @@
 const { generateTZTimeString, timestamp } = require('../helpers/common.helpers');
-
+const { ADMIN_NOTI_TYPES } = require("./notification.constant");
 
 exports.DEFAULT_ADMIN = {
   id: '',
@@ -7,6 +7,14 @@ exports.DEFAULT_ADMIN = {
   email: '',
   password: '',
   avatar: '',
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_ADMIN_NOTIFICATION = {
+  id: '',
+  type: ADMIN_NOTI_TYPES.ID_TRANSFER,
+  payload: JSON.stringify({}),
   create_time: timestamp(),
   update_time: timestamp(),
 };

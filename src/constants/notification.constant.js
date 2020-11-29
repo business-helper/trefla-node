@@ -15,3 +15,7 @@ exports.commentReactNotiType = 42;
 exports.newCommentNotiType = 43;
 exports.photoNotiType = 44;
 exports.updateCommentNotiType = 45;
+
+exports.ADMIN_NOTI_TYPES = {
+  ID_TRANSFER: 'ID_TRANSFER',
+};

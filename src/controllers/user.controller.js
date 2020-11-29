@@ -2,9 +2,11 @@ const { Validator } = require("node-input-validator");
 const CONSTS = require('../constants/socket.constant');
 const models = require("../models/index");
 const User = require("../models/user.model");
+const helpers = require('../helpers');
 
 const EmailTemplate = require("../models/emailTemplate.model");
 const { respondError, sendMail } = require("../helpers/common.helpers");
+const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
 const {
   comparePassword,
   generateUserData,
@@ -423,6 +425,43 @@ exports.banReplyReq = (req, res) => {
     }));
 }
 
+exports.createIDTransferReq = (user_id) => {
+  let _user;
+  return User.getById(user_id)
+    .then(user => {
+      _user = user;
+      if (!user) {
+        throw Object.assign(new Error('User does not exist!'));
+      } else if (!user.card_number) {
+        throw Object.assign(new Error('You have no card yet!'));
+      } else if (user.card_verified) {
+        throw Object.assign(new Error('You are already verified!'));
+      }
+      return User.getByCard(user.card_number, 1);
+    })
+    .then(([owner]) => {
+      if (!owner) throw Object.assign(new Error("Card is not owned by anyone!"));
+      console.log('[owner]', owner);
+      const model = helpers.model.generateAdminNotiData({ 
+        type: ADMIN_NOTI_TYPES.ID_TRANSFER, 
+        payload: {
+          from: owner.id,
+          to: _user.id,
+        }
+      });
+      return Promise.all([
+        models.adminNotification.create(model),
+        models.user.save({ ...owner, card_verified: 0 }),
+      ]);      
+    })
+    .then(([ adminNoti, owner ]) => {
+      return {
+        status: true,
+        message: 'You request has been received!'
+      };
+    });
+}
+
 const manageVerificationStatusOfUsers = (users, user_id) => {
   const card_number = users[0].card_number;
   return Promise.all(users.map(user => User.save({
@@ -500,3 +539,5 @@ const checkDuplicatedOwner = (data) => {
     last_messages: JSON.stringify(last_messages),
   };
 }
+
+

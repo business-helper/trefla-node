@@ -1,5 +1,6 @@
 const { 
   DEFAULT_ADMIN,
+  DEFAULT_ADMIN_NOTIFICATION,
   DEFAULT_COMMENT,
   DEFAULT_COMMENTLIKE,
   DEFAULT_NOTIFICATION,
@@ -25,6 +26,17 @@ const generateAdminData = basicData => {
   for (let field of defaultKeys) {
     data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_ADMIN[field];
   }
+  return data;
+}
+
+const generateAdminNotiData = basicData => {
+  const defaultKeys = Object.keys(DEFAULT_ADMIN_NOTIFICATION);
+  let data = {};
+  for (let field of defaultKeys) {
+    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_ADMIN_NOTIFICATION[field];
+  }
+  data.payload = JSON.stringify(data.payload || {});
+  data.create_time = data.update_time = timestamp();
   return data;
 }
 
@@ -227,6 +239,7 @@ const checkPostLocationWithUser = (post, user, aroundSearchPeriod, locationIndex
 module.exports = {
   checkPostLocationWithUser,
   generateAdminData,
+  generateAdminNotiData,
   generateChatData,
   generateCommentData,
   generateCommentLikeData,

@@ -58,7 +58,7 @@ const respondError = (res, error) => {
 const respondValidateError = (res, error) => {
   console.log('[Validation error]', error);
   const details = error.details || {}; 
-  return res.status(500).json({
+  return res.status(400).json({
 		status: false,
 		message: Object.keys(details).length > 0 ? details[Object.keys(details)[0]].message : (error.message || ERR_MSG_VALIDATE),
 		details: error.details || {}
@@ -161,6 +161,13 @@ const chatPartnerId = (user_ids, my_id) => {
   return user_ids[partnerPos] !== my_id ? user_ids[partnerPos] : 0;
 }
 
+const JSONParser = (data) => {
+  if (!data) return data;
+  if (typeof data === 'object') return data;
+
+  return JSON.parse(data);
+}
+
 module.exports = {
   bool2Int,
   chatPartnerId,
@@ -170,6 +177,7 @@ module.exports = {
   getTimeAfter,
   getTotalLikes,
   int2Bool,
+  JSONParser,
 	respondError,
   respondValidateError,
   sendMail,
