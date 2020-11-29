@@ -551,3 +551,11 @@ socket.on(SKT_REGISTER_WITH_CARD, args => {
 socket.on(SKT_CARD_VERIFIED, args => {
   console.log(`[${SKT_CARD_VERIFIED}]`, args);
 })
+
+socket.on(SKT_POST_CREATED, args => {
+  console.log(`[${SKT_POST_CREATED}]`, args);
+})
+
+socket.on(SKT_POST_UPDATED, args => {
+  console.log(`[${SKT_POST_UPDATED}]`, args);
+})

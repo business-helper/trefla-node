@@ -379,6 +379,10 @@ const bootstrapSocket = (io) => {
       io.to(to).emit(event, args);
     });
 
+    socket.on(CONSTS.SKT_LTS_BROADCAST, ({ event, args }) => {
+      io.sockets.emit(event, args);
+    })
+
     socket.on('disconnecting', () => {
       const { uid } = helpers.auth.parseToken(token);
       models.user.save({ id: uid, socket_id: '', current_chat: 0 })

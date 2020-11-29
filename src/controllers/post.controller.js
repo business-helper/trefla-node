@@ -1,4 +1,5 @@
 const { Validator } = require("node-input-validator");
+const CONSTS = require('../constants/socket.constant');
 const Post = require("../models/post.model");
 const User = require("../models/user.model");
 const Config = require("../models/config.model");
@@ -10,6 +11,8 @@ const { checkPostLocationWithUser, generatePostData, generatePostLikeData } = re
 
 
 exports.create = (req, res) => {
+  const socketClient = req.app.locals.socketClient;
+
   const { uid: user_id, role } = getTokenInfo(req);
   let postData = generatePostData(req.body);
   role !== 'ADMIN' ? postData.user_id = user_id : null; // req.body.post_user_id;
@@ -21,6 +24,10 @@ exports.create = (req, res) => {
     ]))
     .then(([post, user]) => {
       post = Post.output(post);
+      socketClient.emit(CONSTS.SKT_LTS_BROADCAST, {
+        event: CONSTS.SKT_POST_CREATED,
+        args: { ...post, liked: 0, user: User.output(user) }
+      })
       return res.json({ status: true, message: "success", data: { ...post, liked: 0, user: User.output(user) } })
     })
     .catch((error) => respondError(res, error));
@@ -193,6 +200,8 @@ exports.getAll = (req, res) => {
 
 // to-do: permission check. only admin or creator can update it.
 exports.updateById = (req, res) => {
+  const socketClient = req.app.locals.socketClient;
+
   const { role } = getTokenInfo(req);
   const { id } = req.params;
   return Post.getById(id)
@@ -209,13 +218,23 @@ exports.updateById = (req, res) => {
           post[key] = req.body[key];
         }
       });
-      return Post.save(post);      
+      return Promise.all([
+        Post.save(post),
+        User.getById(post.user_id),
+      ]);
     })
-    .then(newPost => res.json({
-      status: true,
-      message: 'success',
-      data: Post.output(newPost)
-    }))
+    .then(([newPost, user]) => {
+      socketClient.emit(CONSTS.SKT_LTS_BROADCAST, {
+        event: CONSTS.SKT_POST_UPDATED,
+        args: { ...newPost, user: User.output(user) }
+      });
+
+      return res.json({
+        status: true,
+        message: 'success',
+        data: Post.output(newPost)
+      });
+    })
     .catch((error) => respondError(res, error));
 }
 

@@ -21,3 +21,5 @@ const SKT_CREATE_NOTIFICATION = 'socket.create.new.notification';
 const SKT_CHAT_DELETED = 'socket.chat.deleted';
 const SKT_REGISTER_WITH_CARD = 'socket.register.with.card';
 const SKT_CARD_VERIFIED = 'socket.card.verified';
+const SKT_POST_CREATED = 'socket.post.created';
+const SKT_POST_UPDATED = 'socket.post.updated';
