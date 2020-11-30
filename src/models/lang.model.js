@@ -1,6 +1,8 @@
 const sql = require("./db");
 const { timestamp } = require("../helpers/common.helpers");
 
+const table = 'langs';
+
 const Language = function (lang) {
   this.code = lang.code;
   this.name = lang.name;
@@ -56,6 +58,32 @@ Language.getByName = (name) => {
 			err ? reject(err) : resolve(res[0]);
 		});
 	});
+}
+
+Language.pagination = ({ page, limit }) => {
+  const offset = page * limit;
+  const limitOffset = limit ? ` LIMIT ${limit} OFFSET ${offset}`: '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} ${limitOffset}`, [], (err, res) => {
+      err ? reject(err): resolve(res);
+    });
+  });
+}
+
+Language.deleteById = (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`DELETE FROM ${table} WHERE id=?`, [id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows);
+    });
+  })
+}
+
+Language.total = () => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM ${table}`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    });
+  });
 }
 
 module.exports = Language;

@@ -139,6 +139,14 @@ User.deleteById = async (user_id) => {
   })
 }
 
+User.total = () => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM users`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    })
+  })
+}
+
 User.output = (user, mode = 'NORMAL') => {
   if (!user) return null;
   try {

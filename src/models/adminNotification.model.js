@@ -28,6 +28,14 @@ AdminNotification.save = async (model) => {
   });
 }
 
+AdminNotification.getById = async (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} WHERE id=? LIMIT 1`, [id], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    });
+  })
+}
+
 AdminNotification.pagination = async ({ page = 0, limit = 0 }) => {
   const where = [];
   const offset = page * limit;
@@ -50,6 +58,14 @@ AdminNotification.total = async ({}) => {
       err ? reject(err) : resolve(res[0].total);
     });
   });
+}
+
+AdminNotification.deleteById = async (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`DELETE FROM ${table} WHERE id=?`, [id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows);
+    });
+  })
 }
 
 AdminNotification.output = (model) => {

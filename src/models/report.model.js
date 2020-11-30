@@ -72,6 +72,14 @@ Report.deleteById = (id) => {
   });
 }
 
+Report.total = () => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM reports`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    })
+  })
+}
+
 Report.output = (model) => {
   if (!model) return null;
   ['create_time', 'update_time'].map(key => delete model[key]);

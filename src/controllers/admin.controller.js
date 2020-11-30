@@ -3,8 +3,9 @@ const { Validator } = require("node-input-validator");
 const models = require("../models");
 const helpers = require("../helpers");
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { bool2Int, getTotalLikes, generateTZTimeString, JSONParser, respondError, timestamp } = require("../helpers/common.helpers");
+const { bool2Int, getTotalLikes, generateTZTimeString, JSONParser, respondError, sendMail, timestamp } = require("../helpers/common.helpers");
 const { generateAdminData, generateMessageData } = require('../helpers/model.helpers');
+const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
 
 // to-do
 exports.create = async (req, res) => {
@@ -114,6 +115,37 @@ exports.getIdTransfersReq = async ({ limit = 0, page = 0 }) => {
     })
 }
 
+exports.getIdTransferById = async (id) => {
+  let _noti;
+  return models.adminNotification.getById(id)
+    .then(adminNoti => {
+      _noti = adminNoti;
+      const payload = JSON.parse(adminNoti.payload);
+      return models.user.getByIds([ payload.from, payload.to ]);
+    })
+    .then(users => {
+      return {
+        status: true,
+        message: 'success',
+        data: {
+          ...(models.adminNotification.output(_noti)),
+          from: models.user.output(users[0]),
+          to: models.user.output(users[1]),
+        }
+      }
+    });
+}
+
+exports.deleteIdTransferById = async (id) => {
+  return models.adminNotification.deleteById(id)
+    .then(() => {
+      return {
+        status: true,
+        message: 'Data has been deleted',
+      };
+    })
+}
+
 exports.getEmailTemplateReq = async ({ limit = 0, page = 0 }) => {
   limit = Number(limit);
   page = Number(page);
@@ -200,4 +232,121 @@ exports.updateAdminPassword = async (id, { old_pass, password }) => {
         message: 'Password has been updated!',
       };
     })
+}
+
+exports.getAdminConfigReq = async () => {
+  return models.config.getById(1)
+    .then(config => {
+      return {
+        status: true,
+        message: 'success',
+        data: config,
+      };
+    })
+}
+
+exports.updateAdminConfigReq = async (data) => {
+  return models.config.getById(1)
+    .then(config => {
+      const keys = Object.keys(config);
+      keys.forEach(key => {
+        config[key] = data[key] !== undefined ? data[key]: config[key];
+      });
+      return models.config.save(config);
+    })
+    .then(config => {
+      return {
+        status: true,
+        message: 'Config has been updated!',
+        data: config,
+      };
+    })
+}
+
+exports.recentPosts4Stats = async () => {
+  let _posts;
+  return models.post.recentPosts()
+    .then(posts => {
+      _posts = posts;
+      const user_ids = posts.map(post => post.user_id); user_ids.push(0);
+      return models.user.getByIds(user_ids);
+    })
+    .then(users => {
+      const userObj = {};
+      users.forEach(user => {
+        userObj[user.id.toString()] = user;
+      });
+      return _posts.map(post => {
+        return {
+          ...post,
+          user: models.user.output(userObj[post.user_id.toString()]),
+        };
+      })
+    })
+}
+
+exports.totalResource4Stats = async () => {
+  return Promise.all([
+    models.post.total(),
+    models.comment.total(),
+    models.report.total(),
+    models.user.total(),
+  ])
+    .then(([ posts, comments, reports, users ]) => {
+      return { posts, comments, reports, users };
+    })
+}
+
+exports.last7DayPosts = async () => {
+  const time = timestamp();
+  const start_time = time - 86400 * 7;
+  let stats = [0, 0, 0, 0, 0, 0, 0];
+  return models.post.last7DayPosts(start_time)
+    .then(posts => {
+      posts.map(post => {
+        const deltaDay = Math.floor((time - Number(post.create_time)) / 86400);
+        console.log('diff', time, post.create_time);
+        stats[6 - deltaDay] ++;
+      });
+      return stats;
+    });
+}
+
+exports.sendConsentEmail4Transfer = async (noti_id) => {
+  let _noti;
+  return models.adminNotification.getById(noti_id)
+    .then(adminNoti => {
+      _noti = adminNoti;
+      const payload = JSONParser(adminNoti.payload);
+      return Promise.all([
+        models.emailTemplate.getByIdentifier('verify_consent'),
+        models.user.getByIds([payload.from, payload.to]),
+        models.config.get(),
+      ])
+    })
+    .then(([ template, users, config ]) => {
+      let htmlBody = template.body
+        .replace(new RegExp('%username%', 'g'), users[0].user_name)
+        .replace(new RegExp('%toUser%', 'g'), users[1].user_name)
+        .replace(new RegExp('%email%', 'g'), users[1].email);
+
+      sendMail({
+        from: `Trefla Admin <${config.admin_email}>`,
+        to: users[0].email,
+        subject: template.subject,
+        body: htmlBody,
+      })
+    })
+    .then(async info => {
+      const emails = JSONParser(_noti.emails || "[]");
+      emails.push(timestamp());
+      _noti.emails = JSON.stringify(emails);
+      return models.adminNotification.save(_noti);
+    })
+    .then(adminNoti => {
+      return {
+        status: true,
+        message: 'Email has been sent!',
+      };
+    });
 }

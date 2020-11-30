@@ -130,6 +130,14 @@ Comment.deleteByUser = (user_id) => {
   });
 }
 
+Comment.total = () => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM comments`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    })
+  })
+}
+
 Comment.output = (comment) => {
   if (!comment) return null;
   // comment.isGuest = int2Bool(comment.isGuest);

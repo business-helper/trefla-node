@@ -141,6 +141,33 @@ Post.getByIds = (ids) => {
   });
 }
 
+/**
+ * @description for stats
+ */
+Post.recentPosts = () => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM posts ORDER BY create_time DESC, id DESC LIMIT 7`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Post.last7DayPosts = (start_time) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT id, feed, create_time, update_time FROM posts WHERE create_time > ?`, [start_time], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  })
+}
+
+Post.total = () => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM posts`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    })
+  })
+}
+
 Post.output = (post) => {
   if (!post) return null;
   post.post_user_id = post.user_id;

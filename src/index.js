@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+// const cors = require('cors');
 const appV1 = require('./appV1');
 const http = require('http').Server(app);
 
@@ -10,6 +11,11 @@ const appConfig = require('./config/app.config');
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// appV1.use(cors({
+//   origin: '*',
+//   optionsSuccessStatus: 200
+// }));
 
 // Static assets
 app.use(express.static('assets'));

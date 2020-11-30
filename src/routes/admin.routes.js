@@ -10,6 +10,7 @@ const middlewares = require("../middlewares/basic.middleware");
 const { BearerMiddleware } = require("../middlewares/basic.middleware");
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { respondValidateError } = require("../helpers/common.helpers");
+const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
 
 adminRouters.post('/login', async (req, res) => {
 
@@ -53,9 +54,44 @@ adminRouters.get('/profile', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 })
 
+adminRouters.get('/config', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  return ctrls.admin.getAdminConfigReq()
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
 adminRouters.get('/firebase', async (req, res) => {
   console.log('[GET] /admin/firebase');
   return ctrls.firebase.test()
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.get('/id-transfers/:id', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.adminNotification.getById(provider.inputs.id)
+      .then(adminNoti => {
+        if (!adminNoti) provider.error('id', 'custom', 'Data does not exist!');
+      })
+  })
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.getIdTransferById(req.params.id);
+    })
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
 });
@@ -126,6 +162,94 @@ adminRouters.get('/email-templates', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+adminRouters.get('/langs/:id/content', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, messsage: "Permission denied!" });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required"
+  });
+
+  validator.addPostRule(provider => {
+    return models.language.getById(provider.inputs.id)
+      .then(lang => {
+        if (!lang) {
+          provider.error('id', 'custom', 'Lang does not exist!');
+        } else if (!lang.url) {
+          provider.error('url', 'custom', 'Language does not have url!');
+        }        
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.language.getFileContent(req.params.id);
+    })
+    .then(result => res.send(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.get('/langs/:id', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors});
+      return ctrls.language.getByIdReq(req.params.id)
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.get('/langs', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator(req.query, {
+    limit: "required|integer",
+    page: "required|integer",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors});
+      return ctrls.language.paginationReq(req.query)
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.get('/stats', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!" });
+
+  return Promise.all([
+    ctrls.admin.recentPosts4Stats(),
+    ctrls.admin.totalResource4Stats(),
+    ctrls.admin.last7DayPosts(),
+  ])
+    .then(([ recentPosts, total, stats4Post ]) => {
+      return res.json({
+        status: true,
+        message: 'success',
+        recentPosts,
+        total,
+        stats4Post,
+      });
+    })
+    .catch(error => respondValidateError(res, error));
+});
+
 adminRouters.post('/send-notification', async (req, res) => {
   const { uid } = getTokenInfo(req);
   const { user_id, title, body } = req.body;
@@ -176,6 +300,128 @@ adminRouters.post('/bulk-notifications', async (req, res) => {
       return ctrls.firebase.sendBulkNotificationReq({ user_ids, title, body });
     })
     .then(() => res.json({ status: true, message: 'Notifications have been sent!' }))
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.post('/langs/:id/sync', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.language.getById(provider.inputs.id)
+      .then(lang => {
+        if (!lang) provider.error('id', 'custom', 'Language does not exist!');
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.language.syncLangReq(req.params.id);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.post('/langs', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    ...req.body,
+  }, {
+    code: "required",
+    name: "required",
+    active: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors});
+      return ctrls.language.create(req, res);
+    })
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.post('/upload-lang/:langCode', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    langCode: req.params.langCode,
+  }, {
+    langCode: "required|string"
+  });
+
+  validator.addPostRule(provider => {
+    return models.language.getByCode(provider.inputs.langCode)
+      .then(lang => {
+        if (!lang) provider.error('langCode', `custom', 'Language with code "${provider.inputs.langCode}" does not exist!`);
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      // upload file
+      return ctrls.language.uploadLangFileReq(req);
+    })
+    .then(result => {
+      if (!result.status) throw Object.assign(new Error(result.message), { code: 400 });
+      return Promise.all([
+        result.url,
+        models.language.getByCode(req.params.langCode),
+      ]);
+    })
+    .then(([ url, lang ]) => {
+      return models.language.save({ ...lang, url });
+    })
+    .then(lang => {
+      return res.json({
+        status: true,
+        message: 'success',
+        data: lang
+      });
+    })  
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.post('/consent-email/:id', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.adminNotification.getById(provider.inputs.id)
+      .then(adminNoti => {
+        if (!adminNoti) provider.error('id', 'custom', 'Data does not exist!');
+        const payload = JSON.parse(adminNoti.payload);
+        if (!payload.from || !payload.to) {
+          provider.error('users', 'custom', 'Invalid user settings!');
+        }
+        if (adminNoti.type !== ADMIN_NOTI_TYPES.ID_TRANSFER) {
+          provider.error('type', 'custom', 'This is for only ID Transfer!');
+        }
+      })
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.sendConsentEmail4Transfer(req.params.id);
+    })
+    .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
 });
 
@@ -257,6 +503,90 @@ adminRouters.patch('/update-password', async (req, res) => {
     .then(matched => {
       if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors() });
       return ctrls.admin.updateAdminPassword(user_id, req.body);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.patch('/config', async (req, res) => {
+  return ctrls.admin.updateAdminConfigReq(req.body)
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.patch('/langs/:id', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(provider => {
+    return models.language.getById(provider.inputs.id)
+      .then(lang => {
+        if (!lang) provider.error('id', 'custom', `Language with id "${provider.inputs.id}" does not exist!`);
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors});
+      return ctrls.language.updateLangById(req.params.id, req.body);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+})
+
+adminRouters.delete('/langs/:id', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.language.getById(provider.inputs.id)
+      .then(lang => {
+        if (!lang) provider.error('id', 'custom', 'Language does not exist!');
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.language.deleteById(req.params.id);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+})
+
+adminRouters.delete('/id-transfers/:id', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.adminNotification.getById(provider.inputs.id)
+      .then(adminNoti => {
+        if (!adminNoti) provider.error('id', 'custom', 'Data does not exist!');
+      })
+  })
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.deleteIdTransferById(req.params.id);
     })
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
