@@ -36,6 +36,7 @@ const generateAdminNotiData = basicData => {
     data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_ADMIN_NOTIFICATION[field];
   }
   data.payload = JSON.stringify(data.payload || {});
+  data.emails = JSON.stringify(data.emails || []);
   data.create_time = data.update_time = timestamp();
   return data;
 }

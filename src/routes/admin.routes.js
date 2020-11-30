@@ -45,6 +45,72 @@ adminRouters.get('/firebase', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+adminRouters.get('/id-transfers', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    ...req.query,
+  }, {
+    page: "required|integer",
+    limit: "required|integer",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.getIdTransfersReq(req.query);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.get('/email-templates/:id', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    ...req.params,
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(provider => {
+    return models.emailTemplate.getById(provider.inputs.id)
+      .then(et => {
+        if (!et) provider.error('id', 'custom', 'Email template does not exist!');
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.getEmailTemplateById(req.params.id)
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+})
+
+adminRouters.get('/email-templates', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    ...req.query,
+  }, {
+    page: "required|integer",
+    limit: "required|integer",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors});
+      return ctrls.admin.getEmailTemplateReq(req.query);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
 adminRouters.post('/send-notification', async (req, res) => {
   const { uid } = getTokenInfo(req);
   const { user_id, title, body } = req.body;
@@ -97,6 +163,32 @@ adminRouters.post('/bulk-notifications', async (req, res) => {
     .then(() => res.json({ status: true, message: 'Notifications have been sent!' }))
     .catch(error => respondValidateError(res, error));
 });
+
+adminRouters.patch('/email-templates/:id', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    ...req.params,
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(provider => {
+    return models.emailTemplate.getById(provider.inputs.id)
+      .then(et => {
+        if (!et) provider.error('id', 'custom', `Email template with id "${provider.inputs.id}" does not exist!`);
+      })
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors});
+      return ctrls.admin.updateEmailTemplateById(req.params.id, req.body);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+})
 
 
 module.exports = adminRouters;

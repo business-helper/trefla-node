@@ -15,6 +15,7 @@ exports.DEFAULT_ADMIN_NOTIFICATION = {
   id: '',
   type: ADMIN_NOTI_TYPES.ID_TRANSFER,
   payload: JSON.stringify({}),
+  emails: JSON.stringify([]),
   create_time: timestamp(),
   update_time: timestamp(),
 };

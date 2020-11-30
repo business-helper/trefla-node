@@ -1,6 +1,7 @@
 const sql = require("./db");
 const { timestamp } = require("../helpers/common.helpers");
 
+const table = 'email_templates';
 const EmailTemplate = function (et) {
   this.identifier = et.identifier;
   this.body = user.body;
@@ -47,6 +48,25 @@ EmailTemplate.getByIdentifier = (identifier) => {
 			err ? reject(err) : resolve(res[0]);
 		});
 	})
+}
+
+EmailTemplate.pagination = ({ page, limit }) => {
+  const offset = page * limit;
+  const limitOffset = limit ? ` LIMIT ${limit} OFFSET ${offset}` : '';
+
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} ${limitOffset}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    })
+  })
+}
+
+EmailTemplate.total = ({}) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM ${table}`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    })
+  })
 }
 
 EmailTemplate.output = (et) => {

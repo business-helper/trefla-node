@@ -3,7 +3,7 @@ const { Validator } = require("node-input-validator");
 const models = require("../models");
 const helpers = require("../helpers");
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { bool2Int, getTotalLikes, generateTZTimeString, respondError } = require("../helpers/common.helpers");
+const { bool2Int, getTotalLikes, generateTZTimeString, JSONParser, respondError } = require("../helpers/common.helpers");
 const { generateAdminData, generateMessageData } = require('../helpers/model.helpers');
 
 // to-do
@@ -66,3 +66,93 @@ exports.loginReq = async (req, res) => {
     });
 }
 
+exports.getIdTransfersReq = async ({ limit = 0, page = 0 }) => {
+  limit = Number(limit);
+  page = Number(page);
+
+  let _total, _rows;
+  return Promise.all([
+    models.adminNotification.pagination({ page, limit }),
+    models.adminNotification.total({}),
+  ])
+    .then(([ rows, total ]) => {
+      _rows = rows; _total = total;
+      const userIds = [0];
+      rows.forEach(transfer => {
+        const payload = JSONParser(transfer.payload);
+        payload.from ? userIds.push(payload.from) : null;
+        payload.to ? userIds.push(payload.to) : null;
+      });
+      return models.user.getByIds(userIds);
+    })
+    .then(users => {
+      const userObj = {};
+      users.forEach(user => {
+        userObj[user.id.toString()] = user;
+      });
+
+      const hasMore = _rows.length + page * limit < _total;
+      const pager = { page, limit, total: _total };
+      return {
+        status: true,
+        message: 'success',
+        data: _rows.map(item => {
+          item = models.adminNotification.output(item);
+          return {
+            ...item,
+            from: models.user.output(userObj[item.payload.from]),
+            to: models.user.output(userObj[item.payload.to]),
+          }
+        }),
+        pager,
+        hasMore,
+      };
+    })
+}
+
+exports.getEmailTemplateReq = async ({ limit = 0, page = 0 }) => {
+  limit = Number(limit);
+  page = Number(page);
+
+  let _total, _rows;
+
+  return Promise.all([
+    models.emailTemplate.pagination({ page, limit }),
+    models.emailTemplate.total({}),
+  ])
+    .then(([ rows, total ]) => {
+      const hasMore = page * limit + rows.length < total;
+      const pager = { page, limit, total };
+      return {
+        status: true,
+        message: 'success',
+        data: rows.map(row => models.emailTemplate.output(row)),
+        pager,
+        hasMore,
+      }
+    })
+}
+
+exports.getEmailTemplateById = async (id) => {
+  return models.emailTemplate.getById(id)
+    .then(et => ({ status: true, message: 'success', data: et }));
+}
+
+exports.updateEmailTemplateById = async (id, data) => {
+  return models.emailTemplate.getById(id)
+    .then(template => {
+      const keys = Object.keys(template);
+      const jsonKeys = ['payload', 'emails'];
+      keys.forEach(key => {
+        template[key] = data[key] !== undefined ? (jsonKeys.includes(key) ? JSON.stringify(data[key]) : data[key]) : template[key];
+      });
+      return models.emailTemplate.save(template);
+    })
+    .then(et => {
+      return {
+        status: true,
+        message: 'success',
+        data: models.emailTemplate.output(et),
+      };
+    })
+}
