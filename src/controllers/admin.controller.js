@@ -3,7 +3,7 @@ const { Validator } = require("node-input-validator");
 const models = require("../models");
 const helpers = require("../helpers");
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { bool2Int, getTotalLikes, generateTZTimeString, JSONParser, respondError } = require("../helpers/common.helpers");
+const { bool2Int, getTotalLikes, generateTZTimeString, JSONParser, respondError, timestamp } = require("../helpers/common.helpers");
 const { generateAdminData, generateMessageData } = require('../helpers/model.helpers');
 
 // to-do
@@ -35,6 +35,10 @@ exports.create = async (req, res) => {
     })
     .catch((error) => respondError(res, error));
 };
+
+exports.getAdminById = async (id) => {
+  return models.admin.getById(id);
+}
 
 exports.loginReq = async (req, res) => {
   const { email_or_name, password } = req.body;
@@ -153,6 +157,47 @@ exports.updateEmailTemplateById = async (id, data) => {
         status: true,
         message: 'success',
         data: models.emailTemplate.output(et),
+      };
+    })
+}
+
+exports.updateProfileReq = async (id, data) => {
+  return models.admin.getById(id)
+    .then(admin => {
+      const keys = Object.keys(admin);
+      keys.forEach(key => {
+        admin[key] = data[key] !== undefined ? data[key]: admin[key];
+      });
+      admin.update_time = timestamp();
+      return models.admin.save(admin);
+    })
+    .then(admin => {
+      return {
+        status: true,
+        message: 'Profile has been updated!',
+        data: models.admin.output(admin),
+      };
+    })
+}
+
+exports.updateAdminPassword = async (id, { old_pass, password }) => {
+  let _admin;
+  return models.admin.getById(id)
+    .then(async admin => {
+      const matched = await helpers.auth.comparePassword(old_pass, admin.password);
+      if (!matched) throw Object.assign(new Error("Old password does not match!"), { code: 400 });
+      _admin = admin;
+      return helpers.auth.generatePassword(password);
+    })
+    .then(newHash => {
+      _admin.password = newHash;
+      _admin.update_time = timestamp();
+      return models.admin.save(_admin);
+    })
+    .then(admin => {
+      return {
+        status: true,
+        message: 'Password has been updated!',
       };
     })
 }

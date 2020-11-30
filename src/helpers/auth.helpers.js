@@ -42,7 +42,7 @@ const generateUserData = (basicData) => {
   return userObject;
 }
 
-const generatePassword = (strPassword) => {
+const generatePassword = async (strPassword) => {
   return new Promise((resolve, reject) => {
     bcrypt.hash(strPassword, psSaltRounds, (err, hash) => {
 			if (err) reject(err);

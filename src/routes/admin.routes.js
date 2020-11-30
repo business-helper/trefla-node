@@ -38,6 +38,21 @@ adminRouters.use((req, res, next) => {
   BearerMiddleware(req, res, next);
 });
 
+adminRouters.get('/profile', async (req, res) => {
+  const { uid: user_id, role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  return ctrls.admin.getAdminById(user_id)
+    .then(admin => {
+      return res.json({
+        status: true,
+        message: 'success',
+        data: models.admin.output(admin),
+      });
+    })
+    .catch(error => respondValidateError(res, error));
+})
+
 adminRouters.get('/firebase', async (req, res) => {
   console.log('[GET] /admin/firebase');
   return ctrls.firebase.test()
@@ -190,5 +205,61 @@ adminRouters.patch('/email-templates/:id', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 })
 
+adminRouters.patch('/profile', async (req, res) => {
+  const { uid: user_id, role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    user_id,
+    ...req.body,
+  }, {
+    user_id: "required|integer",
+    email: "required",
+    user_name: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.admin.getById(provider.inputs.user_id)
+      .then(admin => {
+        if (!admin) provider.error('id', 'custom', 'Admin does not exist with the given id!');
+      })
+  })
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors});
+      return ctrls.admin.updateProfileReq(user_id, req.body);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+})
+
+adminRouters.patch('/update-password', async (req, res) => {
+  const { role, uid: user_id } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    user_id,
+    ...req.body
+  }, {
+    old_pass: "required",
+    password: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.admin.getById(user_id)
+      .then(admin => {
+        if (!admin) provider.error('id', 'custom', 'Admin does not exist!');
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors() });
+      return ctrls.admin.updateAdminPassword(user_id, req.body);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
 
 module.exports = adminRouters;
