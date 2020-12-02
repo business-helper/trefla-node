@@ -1,6 +1,8 @@
 const sql = require("./db");
 const { timestamp, int2Bool } = require("../helpers/common.helpers");
 
+const table = 'messages';
+
 const Message = function (model = {}) {
   this.create_time = timestamp();
   this.update_time = timestamp();
@@ -88,6 +90,14 @@ Message.lastMsgInChat = (chat_id) => {
   return new Promise((resolve, reject) => {
     sql.query("SELECT * FROM messages WHERE chat_id=? ORDER BY id DESC LIMIT 1", [chat_id], (err, res) => {
       err ? reject(err) : resolve(res[0]);
+    });
+  });
+}
+
+Message.updateReceiverInCardChat = (chat_id, receiver_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`UPDATE ${table} SET receiver_id=? WHERE chat_id=? AND receiver_id=0`, [receiver_id, chat_id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows);
     });
   });
 }

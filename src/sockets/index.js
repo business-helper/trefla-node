@@ -244,7 +244,7 @@ const bootstrapSocket = (io) => {
       const { uid } = helpers.auth.parseToken(token);
       const chat = await models.chat.getById(chat_id);
       const user_ids = JSON.parse(chat.user_ids);
-      let receiver_id = user_ids.length > 0 ? 
+      let receiver_id = user_ids.length > 1 ? 
         (user_ids[0] === uid ? user_ids[user_ids.length - 1] : user_ids[0] ): 
         0;
 
@@ -272,6 +272,7 @@ const bootstrapSocket = (io) => {
           
           /**
            * @description send socket to receiver
+           * @for normal chat.
            */
           socket.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_RECEIVE_MSG, {
             message: {
@@ -306,17 +307,18 @@ const bootstrapSocket = (io) => {
            * @reason unread messages are calculated from chats list only
            * @description send unread message status to receiver
            * */ 
-          if (chat.isForCard === 0 && unread_updated && receiver.socket_id) {
-            // get unread msg info
-            const unreads = await ctrls.chat.getUnreadMsgInfoReq(receiver.id);
-            io.to(receiver.socket_id).emit(CONSTS.SKT_UNREAD_MSG_UPDATED, unreads); // @deprecated
-          } 
+          // if (chat.isForCard === 0 && unread_updated && receiver.socket_id) {
+          //   const unreads = await ctrls.chat.getUnreadMsgInfoReq(receiver.id);
+          //   io.to(receiver.socket_id).emit(CONSTS.SKT_UNREAD_MSG_UPDATED, unreads); // @deprecated
+          // } 
           
           /**
            * @description send message to card users for card chat
+           * @memo for card chat there is no accepted status. it would be unused.
            */
           if (chat.isForCard === 1 && cardUsers.length) {
-            cardUsers.filter(item => item.socket_id).forEach(cardUser => {
+            // if card chat is verified, then only to verified user, if not, then to all card users.
+            cardUsers.filter(item => item.socket_id && item.card_verified === chat.card_verified).forEach(cardUser => {
               io.to(cardUser.socket_id).emit(CONSTS.SKT_RECEIVE_MSG, {
                 message: {
                   ...msg,

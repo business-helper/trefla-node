@@ -237,6 +237,17 @@ const checkPostLocationWithUser = (post, user, aroundSearchPeriod, locationIndex
   }
 }
 
+const getLastMsgIndexOfChat = (chat) => {
+  const user_ids = JSON.parse(chat.user_ids);
+  let lastIdx;
+  if (!chat.isForCard) {  // 1:1 chat.
+    lastIdx = 0;
+  } else { // card chat.
+    lastIdx = chat.card_verified ? user_ids.length - 2 : user_ids.length - 1;
+  }
+  return lastIdx;
+}
+
 module.exports = {
   checkPostLocationWithUser,
   generateAdminData,
@@ -250,4 +261,5 @@ module.exports = {
   generatePostData,
   generatePostLikeData,
   generateReportData,
+  getLastMsgIndexOfChat,
 };

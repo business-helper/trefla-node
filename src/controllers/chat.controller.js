@@ -5,7 +5,7 @@ const User = require("../models/user.model");
 const Message = require('../models/message.model');
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { bool2Int, chatPartnerId, getTotalLikes, generateTZTimeString, respondError } = require("../helpers/common.helpers");
-const { generateChatData, generateMessageData } = require('../helpers/model.helpers');
+const { generateChatData, generateMessageData, getLastMsgIndexOfChat } = require('../helpers/model.helpers');
 
 
 exports.create = async (req, res) => {
@@ -272,26 +272,35 @@ exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => 
     User.getById(sender_id),
     User.getById(receiver_id),
   ])
-    .then(([chat, sender, receiver]) => {
+    .then(async ([chat, sender, receiver]) => {
       _sender = sender;
       _receiver = receiver;
 
+      // update chat.last_messages
       let last_messages = JSON.parse(chat.last_messages);
       const user_ids = JSON.parse(chat.user_ids);
-      const lastIndex = user_ids.length > 1 ? user_ids.length - 2 : 0;
+      // const lastIndex = user_ids.length > 1 ? user_ids.length - 2 : 0;
+      const lastIndex = getLastMsgIndexOfChat(chat);
       last_messages[lastIndex] = {
         msg: payload.message,
         time: generateTZTimeString()
       };
       chat.last_messages = JSON.stringify(last_messages);
 
+      // update unread_messages in chat.
       let unread_updated = false;
+      let unread_nums = JSON.parse(chat.unread_nums);
       // check unread num
       if (receiver && receiver.current_chat !== chat.id) { // receiver is not in the chat room
         unread_updated = true;
-        let unread_nums = JSON.parse(chat.unread_nums);
-        const senderIdx = user_ids.indexOf(receiver_id);
-        unread_nums[senderIdx] ++;
+        const receiverIdx = user_ids.indexOf(receiver_id);
+        unread_nums[receiverIdx] ++;
+        chat.unread_nums = JSON.stringify(unread_nums);
+      } else if (chat.isForCard && !chat.card_verified) { // for the unverified card chat.
+        unread_updated = true;
+        const lastUnreadIdx = user_ids.length;
+        unread_num = unread_nums[lastUnreadIdx] || 0;
+        unread_nums[lastUnreadIdx] = unread_num + 1;
         chat.unread_nums = JSON.stringify(unread_nums);
       }
 

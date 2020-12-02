@@ -158,7 +158,7 @@ userRouters.post('/verify/:id', async (req, res) => {
         if (!user) {
           provider.error('id', 'custom', 'User does not exist!');
         } else if (user.card_verified === 1) {
-          provider.error('user', 'custom', 'User is already verified now!');
+          provider.error('user', 'custom', 'User is already verified!');
         }
       })
   });

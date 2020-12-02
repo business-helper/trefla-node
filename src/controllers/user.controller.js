@@ -354,6 +354,7 @@ exports.verifyUserReq = (req, res) => {
         return user_ids[0];
       }).filter((item, i, ar) => ar.indexOf(item) === i);
 
+      // send socket message to the creator of card chat.
       await models.user.getByIds(sender_ids)
         .then(senders => {
           const socketClient = req.app.locals.socketClient;
@@ -512,9 +513,13 @@ const processChatroomToCard = async (chats, user_id) => {
     }
     updateData.id = chat.id;
     updateData.card_verified = 1;
-    return models.chat.save(updateData);
+
+    return Promise.all([
+      models.chat.save(updateData),
+      models.message.updateReceiverInCardChat(chat.id, user_id),
+    ]);
   }))
-  .then(chats => chats)
+  .then(([[chat]]) => [chat])
   .catch(error => {
     console.log('[Process card chats] error', error);
     return false;
@@ -539,5 +544,4 @@ const checkDuplicatedOwner = (data) => {
     last_messages: JSON.stringify(last_messages),
   };
 }
-
 
