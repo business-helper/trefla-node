@@ -473,6 +473,70 @@ exports.verifyUserReq = (req, res) => {
     });
 }
 
+exports.verifyUser = ({ user_id, socketClient }) => {
+  // const user_id = Number(req.params.id);
+  
+  let _user, _card_number;
+  return User.getById(user_id)
+    .then(user => {
+      if (!user.card_number && !user.card_img_url) {
+        throw Object.assign(new Error("User doesn't have card information!"), { code: 400 });
+      }
+      _user = user;
+      _card_number = user.card_number;
+      return Promise.all([
+        models.user.getByCard(user.card_number),
+        models.chat.getChatToCard({ card_number: user.card_number }),
+      ]);
+    })
+    .then(([users, chats]) => {
+      return Promise.all([
+        manageVerificationStatusOfUsers(users, user_id),
+        processChatroomToCard(chats, user_id),
+      ]);
+    })
+    .then(async ([ users, chats ]) => {
+      // const [verifiedUser] = cardUsers.filter(user => user.id === user_id);
+      const sender_ids = chats.map(chat => {
+        const user_ids = JSON.parse(chat.user_ids);
+        return user_ids[0];
+      }).filter((item, i, ar) => ar.indexOf(item) === i);
+
+      // send socket message to the creator of card chat.
+      await models.user.getByIds(sender_ids)
+        .then(senders => {
+          // const socketClient = req.app.locals.socketClient;
+          senders.forEach((sender, i) => {
+            if (sender.socket_id) {
+              // get card chat sender triggered.
+              const [chat] = chats.filter(chat => {
+                const user_ids = typeof chat.user_ids === 'string' ? JSON.parse(chat.user_ids) : chat.user_ids;
+                return user_ids[0] === sender.id;
+              });
+
+              // notify the card chat creators that a user has been verified on interesting card number,
+              socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+                to: sender.socket_id,
+                event: CONSTS.SKT_CARD_VERIFIED,
+                args: {
+                  chat: {
+                    ...(models.chat.output(chat)),
+                    user: models.user.output(_user),
+                  }
+                }
+              });
+            }
+          });
+        })
+      return {
+        status: true,
+        message: 'success',
+        verified: users,
+        chatrooms: chats,
+      };
+    });
+}
+
 exports.unverifyUserReq = (req, res) => {
   const { id: user_id } = req.params;
   let _user;
@@ -599,7 +663,7 @@ exports.replyToTransferRequest = async ({ user_id, noti_id, accept, socketClient
         models.user.save(_user),
       ]);
     })
-    .then(([sender, notification, adminNoti]) => {
+    .then(async ([sender, notification, adminNoti, me]) => {
       // socket to requester.
       if (sender.socket_id) {
         socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
@@ -614,6 +678,67 @@ exports.replyToTransferRequest = async ({ user_id, noti_id, accept, socketClient
           }
         });
       }
+
+      if (accept) {
+        sender.card_number = notification.optional.val;
+        await models.user.save(sender);
+        await this.verifyUser({ user_id, socketClient });
+
+        // check change of card chat list
+        if (_user.socket_id || sender.socket_id) {
+          await Promise.all([
+            _user.card_number ? models.chat.getChatToCard({ card_number: _user.card_number }) : [],
+            models.chat.getChatToCard({ card_number: notification.optional_val }),
+          ])
+            .then(([ oldChats, newChats ]) => {
+              const sender_ids = [0];
+              newChats.forEach(chat => {
+                const user_ids = JSON.parse(chat.user_ids);
+                sender_ids.push(user_ids[0]);
+              });
+              return Promise.all([
+                oldChats, newChats,
+                models.user.getByIds(sender_ids)
+              ]);
+            })
+            .then(([ oldChats, newChats, senders ]) => {
+              const userObj = {};
+              senders.forEach(user => {
+                userObj[user.id.toString()] = user;
+              });
+
+              // send socket to the requester
+              if (sender.socket_id) {
+                socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+                  to: sender.socket_id,
+                  event: CONSTS.SKT_CHATLIST_UPDATED,
+                  args: {
+                    added: newChats.map(chat => {
+                      const sender_id = JSON.parse(chat.user_ids)[0];
+                      return {
+                        ...(models.chat.output(chat)),
+                        user: models.user.output(userObj[sender_id.toString()]),
+                      };
+                    }),
+                    removed: oldChats.map(chat => chat.id),
+                  }
+                });
+              }
+
+              if (sender.socket_id) {
+                socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+                  to: sender.socket_id,
+                  event: CONSTS.SKT_CHATLIST_UPDATED,
+                  args: {
+                    added: [],
+                    removed: newChats.map(chat => chat.id),
+                  }
+                })
+              }
+            })
+        }
+      }
+
       return {
         status: true,
         message: "You replied to the card transfer request!",
