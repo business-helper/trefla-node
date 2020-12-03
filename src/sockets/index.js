@@ -277,16 +277,18 @@ const bootstrapSocket = (io) => {
            * @description send socket to receiver
            * @for normal chat.
            */
-          socket.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_RECEIVE_MSG, {
-            message: {
-              ...msg,
-              user: models.user.output(me) // sender
-            },
-            chat: {
-              ...chat,
-              user: models.user.output(me)
-            }
-          });
+          if (chat.isForCard === 0) {
+            socket.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_RECEIVE_MSG, {
+              message: {
+                ...msg,
+                user: models.user.output(me) // sender
+              },
+              chat: {
+                ...chat,
+                user: models.user.output(me)
+              }
+            });
+          }
 
 
           /**
