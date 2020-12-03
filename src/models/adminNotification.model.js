@@ -1,6 +1,7 @@
 const sql = require("./db");
 const { timestamp } = require("../helpers/common.helpers");
 const helpers = require("../helpers");
+const NOTI_TYPES = require("../constants/notification.constant");
 
 const table = 'admin_notifications';
 
@@ -36,6 +37,20 @@ AdminNotification.getById = async (id) => {
   })
 }
 
+AdminNotification.transferRequest = async ({ id, from, to }) => {
+  const where = [`type='${NOTI_TYPES.ADMIN_NOTI_TYPES.ID_TRANSFER}'`];
+  if (id) where.push(`id=${id}`);
+  if (from) where.push(`JSON_EXTRACT(payload, "$.from")=${from}`);
+  if (to) where.push(`JSON_EXTRACT(payload, "$.to")=${to}`);
+
+  const strWhere = where.length ? ` WHERE ${where.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} ${strWhere}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  })
+}
+
 AdminNotification.pagination = async ({ page = 0, limit = 0 }) => {
   const where = [];
   const offset = page * limit;
@@ -64,6 +79,20 @@ AdminNotification.deleteById = async (id) => {
   return new Promise((resolve, reject) => {
     sql.query(`DELETE FROM ${table} WHERE id=?`, [id], (err, res) => {
       err ? reject(err) : resolve(res.affectedRows);
+    });
+  })
+}
+
+AdminNotification.deleteTransferRequest = ({ id, from, to }) => {
+  const where = [`type='${NOTI_TYPES.ADMIN_NOTI_TYPES.ID_TRANSFER}'`];
+  if (id) where.push(`id=${id}`);
+  if (from) where.push(`JSON_EXTRACT(payload, "$.from")=${from}`);
+  if (to) where.push(`JSON_EXTRACT(payload, "$.to")=${to}`);
+
+  const strWhere = where.length ? ` WHERE ${where.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`DELETE FROM ${table} ${strWhere}`, [], (err, res) => {
+      err ? reject(err) : resolve(res.affectdRows);
     });
   })
 }

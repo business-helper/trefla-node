@@ -507,7 +507,10 @@ exports.createIDTransferReq = async ({ user_id, card_number, socketClient }) => 
           event: CONSTS.SKT_NOTI_NUM_UPDATED,
           args: { 
             num: verifiedUser.noti_num,
-            notification
+            notification: {
+              ...(models.notification.output(notification)),
+              sender: models.user.output(_user),
+            }
           }
         });
       }
@@ -516,6 +519,60 @@ exports.createIDTransferReq = async ({ user_id, card_number, socketClient }) => 
         message: "You request has been received!",
       }
     });
+}
+
+exports.replyToTransferRequest = async ({ user_id, noti_id, accept, socketClient, ...args }) => {
+  let _user, _notification;
+  return Promise.all([
+    models.user.getById(user_id),
+    models.notification.getById(noti_id),
+  ])
+    .then(([ user, notification ]) => {
+      _user = user; _notification = notification;
+      if (user.card_number !== notification.optional_val || notification.receiver_id !== user_id) {
+        throw Object.assign(new Error("You have no permission to reply this request!"));
+      }
+      return models.user.getById(notification.sender_id);
+    })
+    .then((sender) => {
+      if (!sender) throw Object.assign(new Error("Transfer requester has been deleted!"));
+      // notification
+      const notiModel = helpers.model.generateNotificationData({
+        sender_id: user_id,
+        receiver_id: sender.id,
+        type: accept ? NOTI_TYPES.cardTransferRequestAcceptNotiType : NOTI_TYPES.cardTransferRequestRejctNotiType,
+        optional_val: _notification.optional_val,
+      });
+
+      _user.noti_num ++;
+
+      return Promise.all([
+        sender,
+        models.notification.create(notiModel),
+        models.adminNotification.deleteTransferRequest({ from: sender.id, to: user_id }),
+        models.user.save(_user),
+      ]);
+    })
+    .then(([sender, notification, adminNoti]) => {
+      // socket to requester.
+      if (sender.socket_id) {
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: sender.socket_id,
+          event: CONSTS.SKT_NOTI_NUM_UPDATED,
+          args: { 
+            num: _user.noti_num,
+            notification: {
+              ...(models.notification.output(notification)),
+              sender: models.user.output(_user),
+            }
+          }
+        });
+      }
+      return {
+        status: true,
+        message: "You replied to the card transfer request!",
+      };
+    })
 }
 
 const manageVerificationStatusOfUsers = (users, user_id) => {

@@ -209,6 +209,34 @@ userRouters.post('/unverify/:id', async (req, res) => {
     .catch(error => respondValidatorError(error));
 })
 
+userRouters.post('/transfer-request/reply', async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const socketClient = req.app.locals.socketClient;
+  const validator = new Validator({
+    ...req.body,
+  }, {
+    noti_id: "required|integer",
+    accept: "required|boolean",
+  });
+
+  validator.addPostRule(provider => {
+    return Promise.all([
+      models.notification.getById(provider.inputs.noti_id),
+    ])
+      .then(([notification]) => {
+        if (!notification) provider.error('noti_id', 'custom', 'Notification does not exist!');
+      })
+  })
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+      return userCtrl.replyToTransferRequest({ ...req.body, user_id, socketClient });
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+})
+
 userRouters.post('/transfer-request', async (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
   const socketClient = req.app.locals.socketClient;

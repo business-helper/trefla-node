@@ -24,6 +24,7 @@ exports.SKT_CARD_VERIFIED = 'socket.card.verified';
 exports.SKT_POST_CREATED = 'socket.post.created';
 exports.SKT_POST_UPDATED = 'socket.post.updated';
 exports.SKT_FOUND_NEW_CARD_CHATS = 'socket.found.new.card.chats';
+exports.SKT_REPLIED_2_TRANSFER_REQUEST = 'socket.replied2.transfer.request';
 
 exports.SKT_LTS_SINGLE = 'socket.local2server.single';
 exports.SKT_LTS_BROADCAST = 'socket.local2server.broadcast';
