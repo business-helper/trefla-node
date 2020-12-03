@@ -17,9 +17,13 @@ let host = "localhost";
 if (!window.location.href.includes("localhost")) {
   host = "149.202.193.217";
 }
+
+const token = loadToken();
+
 var socket = io(`http://${host}:3500/`, {
   query: `token=${loadToken()}`,
 });
+console.log('[socket token]', token);
 
 /*
   Client stagit e configs

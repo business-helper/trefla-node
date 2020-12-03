@@ -23,8 +23,10 @@ const bootstrapSocket = (io) => {
         if (user) {
           console.log(`"${user.user_name}" is online now`);
           for (let chat of chats) {
-            socket.join(`chatroom_${chat.id}`);
-            console.log(`"${user.user_name}" joined "chatroom_${chat.id}"`);
+            if (!chat.isForCard) {
+              socket.join(`chatroom_${chat.id}`);
+              console.log(`"${user.user_name}" joined "chatroom_${chat.id}"`);
+            }
             // alert the online status to all users
             io.sockets.emit(CONSTS.SKT_UPDATE_ONLINE, {
               user_id: uid,
@@ -285,8 +287,6 @@ const bootstrapSocket = (io) => {
               user: models.user.output(me)
             }
           });
-
-
 
 
           /**
