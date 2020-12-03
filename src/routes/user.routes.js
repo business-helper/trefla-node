@@ -4,6 +4,7 @@ const userRouters = express.Router();
 const os = require('os');
 
 const ctrls = require("../controllers");
+const models = require("../models");
 const userCtrl = require("../controllers/user.controller");
 const Post = require("../models/post.model");
 const User = require("../models/user.model");
@@ -210,17 +211,27 @@ userRouters.post('/unverify/:id', async (req, res) => {
 
 userRouters.post('/transfer-request', async (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
+  const socketClient = req.app.locals.socketClient;
+
   const validator = new Validator({
     ...req.body,
-    user_id
+    user_id,
   }, {
     user_id: "required",
+    card_number: "required|minLength:5",
+  });
+
+  validator.addPostRule(provider => {
+    return models.user.getByCard(provider.inputs.card_number, 1)
+      .then(([verifiedUser]) => {
+        if (!verifiedUser) provider.error('card_number', 'custom', 'Card number is not verified!');
+      })
   });
 
   return validator.check()
     .then(matched => {
       if (!matched) { throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors }); }
-      return userCtrl.createIDTransferReq(user_id);
+      return userCtrl.createIDTransferReq({ user_id, card_number: req.body.card_number, socketClient });
     })
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));

@@ -16,24 +16,32 @@ const {
   getTokenInfo,
 } = require("../helpers/auth.helpers");
 
-exports.register = (req, res) => {
-  const userData = generateUserData(req.body);
+exports.register = async (req, res) => {
+  let verifiedUser = null, new_number;
+  new_number = req.body.card_number || "";
   let cardExists = false, verifiedUserWithCard = 0;
+
+  if (new_number) {
+    [verifiedUser] = await models.user.getByCard(new_number, 1);
+    if (verifiedUser) {
+      cardExists = true; verifiedUserWithCard = verifiedUser.id;
+    }
+  }
+
+  // if card is already verified, then user can't have that card.
+  const userData = generateUserData({ ...req.body, card_number: verifiedUser ? '' : new_number });
 
   return generatePassword(userData.password)
     .then(encPassword => ({ ...userData, password: encPassword }))
-    .then(async user => {
-      // check whether card number exists or not
-      if (req.body.card_number) {
-        const [verifiedUser] = await User.getByCard(req.body.card_number, 1);
-        if (verifiedUser) { cardExists = true; verifiedUserWithCard = verifiedUser.id; }
-      }
-      return User.create(user)
+    .then(async userModel => {
+      return User.create(userModel)
     })
     .then(async user => {
       // check if user has card number, if true, notify to the chat creator to the card.
-      if (user.card_number) {
+      if (new_number && !verifiedUser) {
         let _chats = [];
+
+        // notifies the card chat creators that a new user registered with card.
         await models.chat.getChatToCard({ card_number: user.card_number })
           .then(chats => {
             _chats = chats;
@@ -60,7 +68,7 @@ exports.register = (req, res) => {
               }
             });
           });
-      }
+      } 
       return Promise.all([
         user,
         genreateAuthToken(user)
@@ -288,37 +296,7 @@ exports.updateProfile = async (req, res) => {
     })
     .then(async newUser => {
       if (new_number && new_number !== old_number && verifiedUser) {
-        
-        // if new user want to have already verified card.
-        if (verifiedUser) { 
-          cardExists = true; verifiedUserWithCard = verifiedUser.id;
-
-          // add a notification for origin owner
-          const notiModel = helpers.model.generateNotificationData({
-            sender_id: user_id,
-            receiver_id: verifiedUser.id,
-            type: NOTI_TYPES.cardTransferRequestNotiType,
-            optional_val: new_number,
-          });
-          const notification = await models.notification.create(notiModel);
-
-          // increase noti_num of the verified user.
-          verifiedUser.noti_num ++;
-          await models.user.save(verifiedUser);
-
-          // send socket to owner
-          if (verifiedUser.socket_id) {
-            const socketClient = req.app.locals.socketClient;
-            socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
-              to: verifiedUser.socket_id,
-              event: CONSTS.SKT_NOTI_NUM_UPDATED,
-              args: { 
-                num: verifiedUser.noti_num,
-                notification
-              }
-            });
-          }
-        }
+        cardExists = true; verifiedUserWithCard = verifiedUser.id;
       }
 
       return res.json({
@@ -486,40 +464,57 @@ exports.banReplyReq = (req, res) => {
     }));
 }
 
-exports.createIDTransferReq = (user_id) => {
-  let _user;
+exports.createIDTransferReq = async ({ user_id, card_number, socketClient }) => {
+  let _user, verifiedUser;
+  [verifiedUser] = await models.user.getByCard(card_number, 1);
+
   return User.getById(user_id)
     .then(user => {
       _user = user;
-      if (!user) {
-        throw Object.assign(new Error('User does not exist!'));
-      } else if (!user.card_number) {
-        throw Object.assign(new Error('You have no card yet!'));
-      } else if (user.card_verified) {
-        throw Object.assign(new Error('You are already verified!'));
-      }
-      return User.getByCard(user.card_number, 1);
-    })
-    .then(([owner]) => {
-      if (!owner) throw Object.assign(new Error("Card is not owned by anyone!"));
-      console.log('[owner]', owner);
-      const model = helpers.model.generateAdminNotiData({ 
+
+      // add notification for admin.
+      const adminNotiModel = helpers.model.generateAdminNotiData({ 
         type: ADMIN_NOTI_TYPES.ID_TRANSFER, 
         payload: {
-          from: owner.id,
-          to: _user.id,
+          from: verifiedUser.id,
+          to: user.id,
+          card_number,
         }
       });
+
+      // add a notification for origin owner
+      const notiModel = helpers.model.generateNotificationData({
+        sender_id: user_id,
+        receiver_id: verifiedUser.id,
+        type: NOTI_TYPES.cardTransferRequestNotiType,
+        optional_val: card_number,
+      });
+      
+      // increase noti_num of the verified user.
+      verifiedUser.noti_num ++;
+      
       return Promise.all([
-        models.adminNotification.create(model),
-        models.user.save({ ...owner, card_verified: 0 }),
-      ]);      
+        models.user.save(verifiedUser),
+        models.notification.create(notiModel),
+        models.adminNotification.create(adminNotiModel),
+      ])
     })
-    .then(([ adminNoti, owner ]) => {
+    .then(([owner, notification, adminNoti]) => {
+      // send socket to owner
+      if (verifiedUser.socket_id) {
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: verifiedUser.socket_id,
+          event: CONSTS.SKT_NOTI_NUM_UPDATED,
+          args: { 
+            num: verifiedUser.noti_num,
+            notification
+          }
+        });
+      }
       return {
         status: true,
-        message: 'You request has been received!'
-      };
+        message: "You request has been received!",
+      }
     });
 }
 
