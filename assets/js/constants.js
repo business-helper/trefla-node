@@ -24,3 +24,4 @@ const SKT_CARD_VERIFIED = 'socket.card.verified';
 const SKT_POST_CREATED = 'socket.post.created';
 const SKT_POST_UPDATED = 'socket.post.updated';
 const SKT_FOUND_NEW_CARD_CHATS = 'socket.found.new.card.chats';
+const SKT_CHATLIST_UPDATED = 'socket.chatlist.updated';

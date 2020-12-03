@@ -285,6 +285,52 @@ exports.updateProfile = async (req, res) => {
       if (new_number !== old_number && !verifiedUser) {
         // when there is no verified user, it's possible to update card. But with unverified status.
         user.card_number = new_number;
+        
+        // update user with card chats changes;
+        if (user.socket_id) {
+          
+          const socketClient = req.app.locals.socketClient;
+          await Promise.all([
+            models.chat.getChatToCard({ card_number: old_number }),
+            models.chat.getChatToCard({ card_number: new_number }),
+          ])
+            .then(([oldChats, newChats]) => {
+              const sender_ids = [0];
+              newChats.forEach(chat => {
+                const user_ids = JSON.parse(chat.user_ids);
+                sender_ids.push(user_ids[0]);
+              });
+              return Promise.all([
+                oldChats, newChats,
+                models.user.getByIds(sender_ids),
+              ])
+            })
+            .then(([ oldChats, newChats, senders ]) => {
+              const userObj = {};
+              senders.forEach(user => {
+                userObj[user.id.toString()] = user;
+              });
+
+              const added = newChats.map(chat => {
+                const sender_id = JSON.parse(chat.user_ids)[0];
+                return {
+                ...(models.chat.output(chat)),
+                user: userObj[sender_id.toString()],
+              }});
+
+              const removed = oldChats.map(chat => chat.id);
+
+              socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+                to: user.socket_id,
+                event: CONSTS.SKT_CHATLIST_UPDATED,
+                args: {
+                  removed,
+                  added,
+                }
+              })
+            })
+        }
+
         // if user is already verified with other number, all related card chats will be unverified.
         if (user.card_verified) {
           await models.chat.unverifyChatsByCard({ card_number: old_number });
@@ -656,4 +702,6 @@ const checkDuplicatedOwner = (data) => {
     last_messages: JSON.stringify(last_messages),
   };
 }
+
+
 
