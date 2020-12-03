@@ -1,12 +1,13 @@
 const { Validator } = require("node-input-validator");
 const CONSTS = require('../constants/socket.constant');
+const NOTI_TYPES = require('../constants/notification.constant');
+const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
 const models = require("../models/index");
 const User = require("../models/user.model");
 const helpers = require('../helpers');
 
 const EmailTemplate = require("../models/emailTemplate.model");
 const { respondError, sendMail } = require("../helpers/common.helpers");
-const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
 const {
   comparePassword,
   generateUserData,
@@ -238,29 +239,88 @@ exports.cardPagination = (req, res) => {
     })
 }
 
-exports.updateProfile = (req, res) => {
+exports.updateProfile = async (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
   let cardExists = false, verifiedUserWithCard = 0;
 
+  
+  const new_number = req.body['card_number'] || "";
+  let old_number;
+  let verifiedUser = null;
+  let cardChats = [];
+
+  // get verified user except 
+  if (new_number) {
+    [verifiedUser] = await User.getByCard(new_number, 1);
+    verifiedUser = verifiedUser && verifiedUser.id !== user_id ? verifiedUser : null;
+  }
+
   return User.getById(user_id)
-    .then(user => {
+    .then(async user => {
+      old_number = user.card_number || "";
+      
       const keys = Object.keys(user);
       keys.forEach(key => {
-        if (req.body[key] !== undefined) {
+        // update fields except card number.
+        if (req.body[key] !== undefined && key !== "card_number") {
           if (['location_array'].includes(key)) {
             user[key] = JSON.stringify(req.body[key]);
+          } else if (key === 'card_number') { // skip it.
+              
           } else {
             user[key] = req.body[key] !== undefined ? req.body[key] : user[key];
           }
         }
       });
+      
+      // when user gonna update card_number
+      if (new_number !== old_number && !verifiedUser) {
+        // when there is no verified user, it's possible to update card. But with unverified status.
+        user.card_number = new_number;
+        // if user is already verified with other number, all related card chats will be unverified.
+        if (user.card_verified) {
+          await models.chat.unverifyChatsByCard({ card_number: old_number });
+        }
+        user.card_verified = 0;
+      }
+
       return User.save(user);
     })
     .then(async newUser => {
-      if (req.body.card_number) {
-        const [verifiedUser] = await User.getByCard(req.body.card_number, 1);
-        if (verifiedUser) { cardExists = true; verifiedUserWithCard = verifiedUser.id; }
+      if (new_number && new_number !== old_number && verifiedUser) {
+        
+        // if new user want to have already verified card.
+        if (verifiedUser) { 
+          cardExists = true; verifiedUserWithCard = verifiedUser.id;
+
+          // add a notification for origin owner
+          const notiModel = helpers.model.generateNotificationData({
+            sender_id: user_id,
+            receiver_id: verifiedUser.id,
+            type: NOTI_TYPES.cardTransferRequestNotiType,
+            optional_val: new_number,
+          });
+          const notification = await models.notification.create(notiModel);
+
+          // increase noti_num of the verified user.
+          verifiedUser.noti_num ++;
+          await models.user.save(verifiedUser);
+
+          // send socket to owner
+          if (verifiedUser.socket_id) {
+            const socketClient = req.app.locals.socketClient;
+            socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+              to: verifiedUser.socket_id,
+              event: CONSTS.SKT_NOTI_NUM_UPDATED,
+              args: { 
+                num: verifiedUser.noti_num,
+                notification
+              }
+            });
+          }
+        }
       }
+
       return res.json({
         status: true,
         message: 'Profile has been updated!',

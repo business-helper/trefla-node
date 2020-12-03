@@ -1,6 +1,8 @@
 const sql = require("./db");
 const { timestamp, int2Bool } = require("../helpers/common.helpers");
 
+const table = 'chats';
+
 const Chat = function (lang) {
   this.create_time = timestamp();
   this.update_time = timestamp();
@@ -127,6 +129,14 @@ Chat.getChatToCard = ({ card_number, user_id = null }) => {
   return new Promise((resolve, reject) => {
     sql.query(`SELECT * FROM chats ${strWhere}`, [], (err, res) => {
       err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Chat.unverifyChatsByCard = ({ card_number }) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`UPDATE ${table} SET card_verified=0 WHERE isForCard=1 AND card_number=?`, [card_number], (err, res) => {
+      return err ? reject(err) : resolve(res.affectedRows);
     });
   });
 }

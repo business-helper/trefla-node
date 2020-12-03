@@ -559,3 +559,7 @@ socket.on(SKT_POST_CREATED, args => {
 socket.on(SKT_POST_UPDATED, args => {
   console.log(`[${SKT_POST_UPDATED}]`, args);
 })
+
+socket.on(SKT_FOUND_NEW_CARD_CHATS, args => {
+  console.log(`[${SKT_FOUND_NEW_CARD_CHATS}]`, args);
+});

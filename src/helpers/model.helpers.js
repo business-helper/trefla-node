@@ -123,6 +123,9 @@ const generateNotificationData = (basicData) => {
   for (let field of defaultKeys) {
     data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_NOTIFICATION[field];
   }
+  data.time = generateTZTimeString();
+  data.create_time = timestamp();
+  data.update_time = timestamp();
   return data;
 }
 

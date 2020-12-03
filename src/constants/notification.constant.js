@@ -15,6 +15,9 @@ exports.commentReactNotiType = 42;
 exports.newCommentNotiType = 43;
 exports.photoNotiType = 44;
 exports.updateCommentNotiType = 45;
+exports.cardTransferRequestNotiType = 46;
+exports.cardTransferRequestAcceptNotiType = 47;
+exports.cardTransferRequestRejctNotiType = 48;
 
 exports.ADMIN_NOTI_TYPES = {
   ID_TRANSFER: 'ID_TRANSFER',
