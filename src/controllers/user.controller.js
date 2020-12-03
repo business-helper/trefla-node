@@ -315,7 +315,7 @@ exports.updateProfile = async (req, res) => {
                 const sender_id = JSON.parse(chat.user_ids)[0];
                 return {
                 ...(models.chat.output(chat)),
-                user: userObj[sender_id.toString()],
+                user: models.user.output(userObj[sender_id.toString()]),
               }});
 
               const removed = oldChats.map(chat => chat.id);
