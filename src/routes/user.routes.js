@@ -378,12 +378,12 @@ userRouters.patch('/:id', async (req, res) => {
 
 userRouters.delete('/:id', async (req, res) => {
   const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') {
-    return res.json({
-      status: false,
-      message: 'Permission Error!',
-    });
-  }
+  // if (role !== 'ADMIN') {
+  //   return res.json({
+  //     status: false,
+  //     message: 'Permission Error!',
+  //   });
+  // }
 
   const validator = new Validator({
     id: req.params.id,
