@@ -6,6 +6,15 @@
 - mysql
 - socket.io
 
+
+## Branches
+
+### verifyV1 (2020.12.05)
+
+- card chat: add user to user_ids in chat on each verification & card transfer
+
+
+
 ## MySQL tricks
 
 ## JSON ([documentation](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html))

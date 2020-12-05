@@ -333,17 +333,17 @@ exports.loadMessageReq = async ({ myId = null, chat_id, last_id, limit }) => {
   const asSender = uIds[0] === myId;
 
   let msgMaxId = 0, msgMinId = 0;
-  if (chat.isForCard && !asSender) {
-    const myPos = uIds.indexOf(myId);
-    if (myPos > 0 && myPos < uIds.length - 1) { // in the middle of verified users
-      // minId
-      const trasferMsgIds = JSON.parse(chat.lastMsgIdOnTransfer);
-      msgMinId = transferMsgIds[myPos - 1];
-    }
-    if (myPos > 0 && myPos < uIds.length - 2) {
-      msgMaxId = transferMsgIds[myPos];
-    }
-  }
+  // if (chat.isForCard && !asSender) {
+  //   const myPos = uIds.indexOf(myId);
+  //   if (myPos > 0 && myPos < uIds.length - 1) { // in the middle of verified users
+  //     // minId
+  //     const trasferMsgIds = JSON.parse(chat.lastMsgIdOnTransfer);
+  //     msgMinId = transferMsgIds[myPos - 1];
+  //   }
+  //   if (myPos > 0 && myPos < uIds.length - 2) {
+  //     msgMaxId = transferMsgIds[myPos];
+  //   }
+  // }
 
   return Promise.all([
     Message.pagination({ limit, last_id, chat_id, minId: msgMinId, maxId: msgMaxId }),
