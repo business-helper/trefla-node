@@ -8,7 +8,7 @@ const models = require('../models/index');
 
 const { BearerMiddleware } = require('../middlewares/basic.middleware');
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { chatPartnerId, respondValidateError } = require("../helpers/common.helpers");
+const { chatPartnerId, JSONParser, respondValidateError } = require("../helpers/common.helpers");
 
 const getPostSummary = async (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
@@ -119,10 +119,20 @@ const getChatSummryV2 = async (req, res) => {
   let _chatrooms;
 
   const me = await models.user.getById(user_id);
+  const card_number = me.card_number;
+  const [verifiedUser] = await models.user.getByCard(card_number, 1);
 
   return models.chat.allChatsOfUser(user_id, me.card_number)
     .then(chats => {
-      _chatrooms = chats;
+
+      _chatrooms = chats.filter(async chat => {
+        const user_ids = JSONParser(chat.user_ids);
+        if (!chat.isForCard) return true;  // allow all direct chats.
+        else if (user_ids[0] === user_id) return true; // sender access to self-created chats
+        else {
+          return (me.card_verified) || (!me.card_verified && !verifiedUser);  // verified or all unverified.
+        }
+      });
       let idOfUsers = [ 0 ];
       chats.forEach((chat, i) => {
         const user_ids = JSON.parse(chat.user_ids);
@@ -139,7 +149,7 @@ const getChatSummryV2 = async (req, res) => {
         }
       });
       _chatrooms = _chatrooms.map(chat => {
-        const user_ids = JSON.parse(chat.user_ids);
+        const user_ids = JSONParser(chat.user_ids);
         const partnerId = chatPartnerId(user_ids, user_id);
         return {
           ...(models.chat.output(chat)),

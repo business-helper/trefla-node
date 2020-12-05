@@ -154,10 +154,7 @@ const chatPartnerId = (user_ids, my_id) => {
   }
   let myPosition = user_ids.indexOf(my_id);
   myPosition = myPosition > -1 ? myPosition : 0;
-  if (myPosition > 0 && myPosition < user_ids.length - 1) { // in the middle of the users, in card chat.
-    return user_ids[0];
-  }
-  const partnerPos = user_ids.length - 1 - myPosition;
+  const partnerPos = 1 - myPosition;
   return user_ids[partnerPos] !== my_id ? user_ids[partnerPos] : 0;
 }
 
