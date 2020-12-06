@@ -500,6 +500,8 @@ exports.verifyUser = ({ user_id, socketClient }) => {
       ]);
     })
     .then(async ([ users, chats ]) => {
+      [_user] = users.filter(user => user.id === user_id); // update user after verification
+
       // const [verifiedUser] = cardUsers.filter(user => user.id === user_id);
       const sender_ids = chats.map(chat => {
         const user_ids = JSON.parse(chat.user_ids);
@@ -556,11 +558,14 @@ exports.verifyUser = ({ user_id, socketClient }) => {
 
       const senders = await models.user.getByIds(sender_ids.length ? sender_ids : [0]);
 
+      console.log('[chat.list.updated] --->');
       users.filter(user => user.socket_id).forEach(user => {
+        console.log('[chatlist]', user.id, user.user_name, user.card_verified);
         const removed = [];
         const added = [];
 
         if (user.id === user_id) {
+          console.log('[chat list]  added');
           socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
             to: user.socket_id,
             event: CONSTS.SKT_CHATLIST_UPDATED,
@@ -573,6 +578,7 @@ exports.verifyUser = ({ user_id, socketClient }) => {
             }
           })
         } else {
+          console.log('[chat list]  removed');
           socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
             to: user.socket_id,
             event: CONSTS.SKT_CHATLIST_UPDATED,
