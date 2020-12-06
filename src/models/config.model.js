@@ -13,7 +13,7 @@ Config.create = (config) => {
 			err ? reject(err) : resolve({ ...config, id: res.insertId });
     });
   });
-};
+}
 
 Config.save = async (config) => {
   config.update_time = timestamp();

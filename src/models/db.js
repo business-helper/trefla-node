@@ -9,6 +9,7 @@ try {
     password: dbConfig.PASSWORD,
     database: dbConfig.DB,
   });
+  console.log('[DB] connection created!')
 } catch (error) {
   console.log('[DB Connect]', error.message);
   process.exit(1);
