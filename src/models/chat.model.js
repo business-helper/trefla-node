@@ -1,5 +1,5 @@
 const sql = require("./db");
-const { timestamp, int2Bool } = require("../helpers/common.helpers");
+const { JSONParser, timestamp, int2Bool } = require("../helpers/common.helpers");
 
 const table = 'chats';
 
@@ -161,11 +161,11 @@ Chat.deleteByUser = async (user_id) => {
 
 Chat.output = (model) => {
   // JSON parse
-  model.unread_nums = JSON.parse(model.unread_nums || "");
-  model.online_status = JSON.parse(model.online_status || "");
-  model.last_messages = JSON.parse(model.last_messages || "");
-  model.user_ids = JSON.parse(model.user_ids || "");
-  model.lastMsgIdOnTransfer = JSON.parse(model.lastMsgIdOnTransfer || "");
+  model.unread_nums = JSONParser(model.unread_nums || "");
+  model.online_status = JSONParser(model.online_status || "");
+  model.last_messages = JSONParser(model.last_messages || "");
+  model.user_ids = JSONParser(model.user_ids || "");
+  model.lastMsgIdOnTransfer = JSONParser(model.lastMsgIdOnTransfer || "");
 
   const delKeys = ['create_time', 'update_time'];
 

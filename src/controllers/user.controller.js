@@ -529,11 +529,41 @@ exports.verifyUser = ({ user_id, socketClient }) => {
           }
         });
       }
+
+      const senders = await models.user.getByIds(sender_ids.length ? sender_ids : [0]);
+
+      users.filter(user => user.socket_id).forEach(user => {
+        const removed = [];
+        const added = [];
+
+        if (user.id === user_id) {
+          socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+            to: user.socket_id,
+            event: CONSTS.SKT_CHATLIST_UPDATED,
+            args: {
+              added: chats.map(chat => ({
+                ...(models.chat.output(chat)),
+                user: models.user.output(senders[JSONParser(chat.user_ids)[0].toString()]),
+              })),
+              removed: [],
+            }
+          })
+        } else {
+          socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+            to: user.socket_id,
+            event: CONSTS.SKT_CHATLIST_UPDATED,
+            args: {
+              removed: chats.map(chat => chat.id),
+              added: [],
+            }
+          })
+        }
+      });
       
 
       // send socket message to the creator of card chat.
-      await models.user.getByIds(sender_ids)
-        .then(senders => {
+      // await models.user.getByIds(sender_ids)
+      //   .then(senders => {
           // const socketClient = req.app.locals.socketClient;
           senders.forEach((sender, i) => {
             if (sender.socket_id) {
@@ -556,7 +586,7 @@ exports.verifyUser = ({ user_id, socketClient }) => {
               });
             }
           });
-        })
+        // })
       
         return {
         status: true,
