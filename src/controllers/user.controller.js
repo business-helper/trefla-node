@@ -7,7 +7,7 @@ const User = require("../models/user.model");
 const helpers = require('../helpers');
 
 const EmailTemplate = require("../models/emailTemplate.model");
-const { JSONParser, JSONStringify, respondError, sendMail } = require("../helpers/common.helpers");
+const { generateTZTimeString, JSONParser, JSONStringify, respondError, sendMail } = require("../helpers/common.helpers");
 const {
   comparePassword,
   generateUserData,
