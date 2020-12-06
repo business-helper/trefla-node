@@ -21,6 +21,7 @@ const bootstrapSocket = (io) => {
       ])
       .then(([user, chats]) => {
         if (user) {
+          console.log(`"${user.user_name}" is online now`);
           for (let chat of chats) {
             socket.join(`chatroom_${chat.id}`);
             console.log(`"${user.user_name}" joined "chatroom_${chat.id}"`);
