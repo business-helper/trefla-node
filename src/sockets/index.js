@@ -8,13 +8,13 @@ const CONSTS = require('../constants/socket.constant');
 const INNER_CLIENT = 'INNER_CLIENT';
 
 const bootstrapSocket = (io) => {
-  io.on('connection', socket => {
-    // console.log('[socket connect]', socket.request._query.token);
+  io.on('connection', async socket => {
+    console.log('[socket connect]', socket.request._query.token);
     const token = socket.request._query.token;
     if (token !== INNER_CLIENT) {
       const { uid } = helpers.auth.parseToken(token);
 
-      Promise.all([
+      await Promise.all([
         models.user.getById(uid),
         models.chat.myChatrooms(uid, 1),
         models.user.updateSocketSession({ id: uid, socketId: socket.id })
