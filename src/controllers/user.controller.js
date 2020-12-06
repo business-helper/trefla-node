@@ -482,6 +482,7 @@ exports.verifyUser = ({ user_id, socketClient }) => {
   let _user, _card_number;
   return User.getById(user_id)
     .then(user => {
+      console.log('[user]', user_id, user)
       if (!user.card_number && !user.card_img_url) {
         throw Object.assign(new Error("User doesn't have card information!"), { code: 400 });
       }
