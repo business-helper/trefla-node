@@ -136,7 +136,7 @@ const getChatSummryV2 = async (req, res) => {
       let idOfUsers = [ 0 ];
       chats.forEach((chat, i) => {
         const user_ids = JSON.parse(chat.user_ids);
-        const partnerId = chatPartnerId(user_ids, user_id);
+        const partnerId = user_ids[0] === user_id ? user_ids[1] || 0 : user_ids[0];
         partnerId ? idOfUsers.push(partnerId) : null;          
       });
       return models.user.getByIds(idOfUsers);
@@ -150,7 +150,7 @@ const getChatSummryV2 = async (req, res) => {
       });
       _chatrooms = _chatrooms.map(chat => {
         const user_ids = JSONParser(chat.user_ids);
-        const partnerId = chatPartnerId(user_ids, user_id);
+        const partnerId = user_ids[0] === user_id ? user_ids[1] || 0 : user_ids[0];
         return {
           ...(models.chat.output(chat)),
           user: partnerId ? models.user.output(userObj[partnerId.toString()]) : null,

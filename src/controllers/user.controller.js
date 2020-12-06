@@ -252,7 +252,7 @@ exports.updateProfile = async (req, res) => {
   let cardExists = false, verifiedUserWithCard = 0;
 
   
-  const new_number = req.body['card_number'] || "";
+  let new_number = req.body['card_number'] || "";
   let old_number;
   let verifiedUser = null;
   let cardChats = [];
@@ -266,6 +266,9 @@ exports.updateProfile = async (req, res) => {
   return User.getById(user_id)
     .then(async user => {
       old_number = user.card_number || "";
+      if (req.body.card_number === undefined) {
+        new_number = old_number;
+      }
       
       const keys = Object.keys(user);
       keys.forEach(key => {

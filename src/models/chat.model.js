@@ -165,6 +165,7 @@ Chat.output = (model) => {
   model.online_status = JSON.parse(model.online_status || "");
   model.last_messages = JSON.parse(model.last_messages || "");
   model.user_ids = JSON.parse(model.user_ids || "");
+  model.lastMsgIdOnTransfer = JSON.parse(model.lastMsgIdOnTransfer || "");
 
   const delKeys = ['create_time', 'update_time'];
 

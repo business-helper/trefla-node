@@ -153,7 +153,7 @@ const chatPartnerId = (user_ids, my_id) => {
     user_ids = JSON.parse(user_ids);
   }
   let myPosition = user_ids.indexOf(my_id);
-  myPosition = myPosition > -1 ? myPosition : 0;
+  if (myPosition === -1) { return 0; }
   const partnerPos = 1 - myPosition;
   return user_ids[partnerPos] !== my_id ? user_ids[partnerPos] : 0;
 }
