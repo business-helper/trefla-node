@@ -506,6 +506,31 @@ exports.verifyUser = ({ user_id, socketClient }) => {
         return user_ids[0];
       }).filter((item, i, ar) => ar.indexOf(item) === i);
 
+      // add notification to the new owner
+      const notiModel = helpers.model.generateNotificationData({
+        isFromAdmin: 1,
+        sender_id: 0,
+        receiver_id: user_id,
+        type: NOTI_TYPES.cardVerifyRequestAcceptNotiType,
+        optional_val: _card_number,
+        time: generateTZTimeString(),
+      });
+      const notification = await models.notification.create(notiModel);
+      _user.noti_num ++;
+      await models.user.save(_user);
+
+      if (_user.socket_id) {
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: _user.socket_id,
+          event: CONSTS.SKT_NOTI_NUM_UPDATED,
+          args: {
+            num: _user.noti_num,
+            notification,
+          }
+        });
+      }
+      
+
       // send socket message to the creator of card chat.
       await models.user.getByIds(sender_ids)
         .then(senders => {
@@ -532,7 +557,8 @@ exports.verifyUser = ({ user_id, socketClient }) => {
             }
           });
         })
-      return {
+      
+        return {
         status: true,
         message: 'success',
         verified: users,

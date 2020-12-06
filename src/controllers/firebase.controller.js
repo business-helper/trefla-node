@@ -35,10 +35,11 @@ exports.sendBulkNotificationReq = ({ user_ids, title, body }) => {
     })
 }
 
-const sendSingleNotification = async ({ title, body, token }) => {
+const sendSingleNotification = async ({ title, body, token, data = null }) => {
   const message = {
     token,
     notification: { title, body },
+    data,
   };
   return admin.messaging().send(message);
 }

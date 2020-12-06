@@ -18,6 +18,9 @@ exports.updateCommentNotiType = 45;
 exports.cardTransferRequestNotiType = 46;
 exports.cardTransferRequestAcceptNotiType = 47;
 exports.cardTransferRequestRejctNotiType = 48;
+exports.cardVerifyRequestNotiType = 51;
+exports.cardVerifyRequestAcceptNotiType = 52;
+exports.cardVerifyRequestRejectNotiType = 53;
 
 exports.ADMIN_NOTI_TYPES = {
   ID_TRANSFER: 'ID_TRANSFER',
