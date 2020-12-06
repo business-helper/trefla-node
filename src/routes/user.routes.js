@@ -170,7 +170,7 @@ userRouters.post('/verify/:id', async (req, res) => {
       if (!matched) {
         throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
       }
-      return userCtrl.verifyUser({ user_id: req.params.id, socketClient });
+      return userCtrl.verifyUser({ user_id: Number(req.params.id), socketClient });
     })
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
