@@ -21,4 +21,5 @@ exports.cardTransferRequestRejctNotiType = 48;
 
 exports.ADMIN_NOTI_TYPES = {
   ID_TRANSFER: 'ID_TRANSFER',
+  VERIFY_ID: 'VERIFY_ID',
 };

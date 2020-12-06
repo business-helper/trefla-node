@@ -266,6 +266,12 @@ userRouters.post('/transfer-request', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+userRouters.post('/verify-request', async (req, res) => {
+  return userCtrl.createVerifyIdReq(req, res)
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
 userRouters.post('/', async (req, res) => {
   userCtrl.pagination(req, res)
   .catch(error => respondValidateError(res, error));

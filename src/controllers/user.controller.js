@@ -746,6 +746,31 @@ exports.replyToTransferRequest = async ({ user_id, noti_id, accept, socketClient
     })
 }
 
+exports.createVerifyIdReq = async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  let _user;
+  return models.user.getById(user_id)
+    .then(user => {
+      if (!user) throw Object.assign(new Error('User does not exist!'), { code: 400 });
+      if (!user.card_number) throw Object.assign(new Error("No valid card number found!"), { code: 400 });
+      if (user.card_verified) throw Object.assign(new Error("You're already verified!"), { code: 400 });
+      _user = user;
+
+      const verifyReqModel = helpers.model.generateAdminNotiData({
+        type: ADMIN_NOTI_TYPES.VERIFY_ID,
+        payload: { user_id, card_number: user.card_number },
+        emails: [],
+      });
+      return models.adminNotification.create(verifyReqModel);
+    })
+    .then(adminNoti => {
+      return {
+        status: true,
+        message: 'We received your request!',
+      };
+    })
+}
+
 const manageVerificationStatusOfUsers = (users, user_id) => {
   const card_number = users[0].card_number;
   return Promise.all(users.map(user => User.save({

@@ -14,6 +14,7 @@ const {
 const { 
   generateTZTimeString,
   getDistanceFromLatLonInMeter,
+  JSONStringify,
   string2Coordinate,
   string2Timestamp,
   timestamp,
@@ -35,8 +36,8 @@ const generateAdminNotiData = basicData => {
   for (let field of defaultKeys) {
     data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_ADMIN_NOTIFICATION[field];
   }
-  data.payload = JSON.stringify(data.payload || {});
-  data.emails = JSON.stringify(data.emails || []);
+  data.payload = JSONStringify(data.payload || {});
+  data.emails = JSONStringify(data.emails || []);
   data.create_time = data.update_time = timestamp();
   return data;
 }

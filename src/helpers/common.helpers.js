@@ -165,6 +165,12 @@ const JSONParser = (data) => {
   return JSON.parse(data);
 }
 
+const JSONStringify = (data) => {
+  if (!data) return data;
+  if (typeof data === 'object') return JSON.stringify(data);
+  return data;  
+}
+
 module.exports = {
   bool2Int,
   chatPartnerId,
@@ -175,6 +181,7 @@ module.exports = {
   getTotalLikes,
   int2Bool,
   JSONParser,
+  JSONStringify,
 	respondError,
   respondValidateError,
   sendMail,
