@@ -96,7 +96,7 @@ Message.lastMsgInChat = (chat_id) => {
 
 Message.updateReceiverInCardChat = (chat_id, receiver_id) => {
   return new Promise((resolve, reject) => {
-    sql.query(`UPDATE ${table} SET receiver_id=? WHERE chat_id=? AND receiver_id=0`, [receiver_id, chat_id], (err, res) => {
+    sql.query(`UPDATE ${table} SET receiver_id=? WHERE chat_id=?`, [receiver_id, chat_id], (err, res) => {
       err ? reject(err) : resolve(res.affectedRows);
     });
   });

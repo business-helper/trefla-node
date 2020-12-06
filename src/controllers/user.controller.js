@@ -7,7 +7,7 @@ const User = require("../models/user.model");
 const helpers = require('../helpers');
 
 const EmailTemplate = require("../models/emailTemplate.model");
-const { respondError, sendMail } = require("../helpers/common.helpers");
+const { JSONParser, JSONStringify, respondError, sendMail } = require("../helpers/common.helpers");
 const {
   comparePassword,
   generateUserData,
@@ -554,7 +554,8 @@ exports.unverifyUserReq = (req, res) => {
     })
     .then(([user, cardChats]) => {
       if (cardChats.length) {
-        return Promise.all(cardChats.map(chat => models.card.save({ ...chat, card_verified: 0 })));
+        return unverifyCardChats(cardChats);
+        // return Promise.all(cardChats.map(chat => models.chat.save({ ...chat, card_verified: 0 })));
       }
     })
     .then(() => ({
@@ -794,7 +795,7 @@ const processChatroomToCard = async (chats, user_id) => {
 
   return Promise.all(chats.map(async chat => {
     const chat_users = JSON.parse(chat.user_ids);
-    const isTransfer = chat_users.length > 1;
+    const isTransfer = false; // chat_users.length > 1;
 
     let updateData = {};
     if (!isTransfer) {
@@ -854,6 +855,20 @@ const checkDuplicatedOwner = (data) => {
     lastMsgIdOnTransfer: JSON.stringify(lastMsgIdOnTransfer),
     last_messages: JSON.stringify(last_messages),
   };
+}
+
+const unverifyCardChats = (chats) => {
+  return Promise.all(chats.map(chat => {
+    chat.card_verified = 0;
+    const user_ids = JSONParser(chat.user_ids);
+    chat.user_ids = JSONStringify([user_ids[0]]);
+
+    return Promise.all([
+      models.chat.save(chat),
+      models.message.updateReceiverInCardChat(chat.id, 0),
+    ]);
+  }))
+  .then(([[chat, updated]]) => [chat]);
 }
 
 

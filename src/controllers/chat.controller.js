@@ -280,7 +280,7 @@ exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => 
       let last_messages = JSON.parse(chat.last_messages);
       const user_ids = JSON.parse(chat.user_ids);
       // const lastIndex = user_ids.length > 1 ? user_ids.length - 2 : 0;
-      const lastIndex = getLastMsgIndexOfChat(chat);
+      const lastIndex = 0; // getLastMsgIndexOfChat(chat);
       last_messages[lastIndex] = {
         msg: payload.message,
         time: generateTZTimeString()

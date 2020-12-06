@@ -143,7 +143,7 @@ userRouters.post('/ban-reply', async (req, res) => {
 
 userRouters.post('/verify/:id', async (req, res) => {
   const { role, uid: user_id } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: true, message: 'Permission error!' });
+  // if (role !== 'ADMIN') return res.json({ status: true, message: 'Permission error!' });
   const socketClient = req.app.locals.socketClient;
 
   const validator = new Validator({
@@ -170,7 +170,7 @@ userRouters.post('/verify/:id', async (req, res) => {
       if (!matched) {
         throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
       }
-      return userCtrl.verifyUser({ user_id,  });
+      return userCtrl.verifyUser({ user_id, socketClient });
     })
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
@@ -178,7 +178,7 @@ userRouters.post('/verify/:id', async (req, res) => {
 
 userRouters.post('/unverify/:id', async (req, res) => {
   const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: true, message: 'Permission error!' });
+  // if (role !== 'ADMIN') return res.json({ status: true, message: 'Permission error!' });
 
   const validator = new Validator({
     id: req.params.id,
