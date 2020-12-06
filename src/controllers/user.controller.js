@@ -530,6 +530,30 @@ exports.verifyUser = ({ user_id, socketClient }) => {
         });
       }
 
+      users.filter(user => user.id !== user_id).forEach(async user => {
+        const notiModel = helpers.model.generateNotificationData({
+          isFromAdmin: 1,
+          sender_id: 0,
+          receiver_id: user.id,
+          type: NOTI_TYPES.cardVerifyRequestRejectNotiType,
+          optional_val: _card_number,
+          time: generateTZTimeString(),
+        });
+        const notification = await models.notification.create(notiModel);
+        user.noti_num ++;
+        await models.user.save(user);
+        if (user.socket_id) {
+          socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+            to: user.socket_id,
+            event: COSNTS.SKT_NOTI_NUM_UPDATED,
+            args: {
+              num: user.noti_num,
+              notification,
+            }
+          })
+        }
+      })
+
       const senders = await models.user.getByIds(sender_ids.length ? sender_ids : [0]);
 
       users.filter(user => user.socket_id).forEach(user => {
@@ -559,6 +583,8 @@ exports.verifyUser = ({ user_id, socketClient }) => {
           })
         }
       });
+
+      
       
 
       // send socket message to the creator of card chat.
