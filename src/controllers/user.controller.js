@@ -545,7 +545,7 @@ exports.verifyUser = ({ user_id, socketClient }) => {
         if (user.socket_id) {
           socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
             to: user.socket_id,
-            event: COSNTS.SKT_NOTI_NUM_UPDATED,
+            event: CONSTS.SKT_NOTI_NUM_UPDATED,
             args: {
               num: user.noti_num,
               notification,
