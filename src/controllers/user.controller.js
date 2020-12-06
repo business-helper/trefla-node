@@ -575,6 +575,7 @@ exports.verifyUser = ({ user_id, socketClient }) => {
                 user: models.user.output(senders[JSONParser(chat.user_ids)[0].toString()]),
               })),
               removed: [],
+              your_name: user.user_name,
             }
           })
         } else {
@@ -585,6 +586,7 @@ exports.verifyUser = ({ user_id, socketClient }) => {
             args: {
               removed: chats.map(chat => chat.id),
               added: [],
+              your_name: user.user_name,
             }
           })
         }
