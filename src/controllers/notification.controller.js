@@ -1,1 +1,266 @@
-const _0x7f4a=['y3jLyxrL','D1vpv2i=','z1rqCwW=','shbPueC=','u29TzxrOAw5Nia==','lI4VBw9KzwXZlW==','DxnLCL9Pza==','mhW0Fdn8mNWX','z2v0qwXS','zgvSzxrLqNLvCW==','C2f2zq==','yLHRAem=','BwfYA0fZuMvHza==','ANnVBG==','zKTbrKi=','z2v0q291BNrpzG==','DgHLBG==','Dg90ywW=','zxjjza==','y29UC3rHBNq=','zwfK','CgfNAw5HDgLVBG==','C3vJy2vZCW==','zgf0yq==','CMvJzwL2zxi=','CgfNzxi=','l2f1DgGUAgvSCa==','Bg9JywXZ','vxnLCG==','zwfKuMvX','tKDmrq==','zgvSzxrLqwXSuG==','AufTrNK=','BwfYA0fSBefZuG==','BgLTAxq=','Aw5JBhvKzxm=','BuTkCKS=','CgfYyw1Z','BM90Av9UDw0=','CMvJzwL2zxjFAq==','z2v0twLUswr0BW==','uNLKC0q=','C29JA2v0q2XPzq==','BIbTyxjRzwqGyq==','lI4VAgvSCgvYCW==','lI4Vy29UC3rHBG==','vu1Fvvbeqvrfra==','zM9YrwfJAa==','DgLTzq==','DxnLCI5TB2rLBa==','D2vUDcb3CM9UzW==','BwvZC2fNzq==','DgfYz2v0x2LK','BwfW','BgvUz3rO','zgvSzxrLqNLjza==','B2TQqKG=','DhmVC29JA2v0lG==','AxnFCMvHza==','l2nVBw1VBI5Ozq==','C2vUzgvYx2LK','qNLmyxn0swq=','zMXsrvO=','C29JA2v0x2LK','CYbYzwfKiq==','AxnhDwvZDa==','u0Tux0Xuu19tsq==','zxjZ','zw1PDa==','y2f0y2G=','z2v0qNLvC2vYsq==','tM90AwzPy2f0Aq==','vfngEg8=','C2vUzgvY','z2v0qNLjza==','CgvYCW==','ChvZAa==','BhbLCNm=','zMLSDgvY','rvHIr1G=','yxbW','ywXS','DhLWzq==','zMDuuMG=','BNvT','BM90AwzPy2f0Aq==','uMvX','zuLMy0C=','u0Tux05pveLFtG==','lxzHBgLKyxrVCG==','B24UBw9KzwW=','sKzUtwm=','A2v5CW==','C3rHDhvZ','yM9KEq==','B3v0Chv0','BgfZDf9Pza==','C0fHtKe=','B25Z','z2v0qNLjzhm=','AgfKtw9Yzq=='];(function(_0x1f902d,_0x3681fd){const _0x4aa5d4=function(_0x4893c9){while(--_0x4893c9){_0x1f902d['push'](_0x1f902d['shift']());}};_0x4aa5d4(++_0x3681fd);}(_0x7f4a,-0x253e+-0xb3a+0x312e));const _0x10d6=function(_0x16e5ef,_0x3f2df5){_0x16e5ef=_0x16e5ef-(-0x253e+-0xb3a+0x3136);let _0xd11d33=_0x7f4a[_0x16e5ef];if(_0x10d6['lMlTOf']===undefined){var _0xa5c6f4=function(_0xec40a2){const _0x484e90='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=',_0x1ebe90=String(_0xec40a2)['replace'](/=+$/,'');let _0x1d6407='';for(let _0x1759e1=0x59*-0x26+0x596+0x7a0,_0x1900b2,_0x54614c,_0x5b1638=0x2*0x8ba+0x566*0x2+-0x40*0x71;_0x54614c=_0x1ebe90['charAt'](_0x5b1638++);~_0x54614c&&(_0x1900b2=_0x1759e1%(-0x16f*0x8+0x1*0xfad+-0x431)?_0x1900b2*(0x2*-0x818+-0x1d17+-0x50f*-0x9)+_0x54614c:_0x54614c,_0x1759e1++%(0x1*0xf4d+0x2*0x1c+-0xf81))?_0x1d6407+=String['fromCharCode'](0x856+0x9a2+-0x10f9&_0x1900b2>>(-(0x3f5+-0x37f+-0x3a*0x2)*_0x1759e1&0x2*0x125e+-0x16d*0x5+0x1d95*-0x1)):-0x1*0x17f+-0x18dc+0x1a5b){_0x54614c=_0x484e90['indexOf'](_0x54614c);}return _0x1d6407;};_0x10d6['sExZUT']=function(_0x5c92f6){const _0x515911=_0xa5c6f4(_0x5c92f6);let _0x201ca7=[];for(let _0x5eaeff=0x58+-0xaa3+0xa4b,_0x3c973a=_0x515911['length'];_0x5eaeff<_0x3c973a;_0x5eaeff++){_0x201ca7+='%'+('00'+_0x515911['charCodeAt'](_0x5eaeff)['toString'](-0x8*-0x67+-0xe2c*-0x1+-0x1154))['slice'](-(-0x36d*-0x5+-0x2581+0xa31*0x2));}return decodeURIComponent(_0x201ca7);},_0x10d6['fzxtUJ']={},_0x10d6['lMlTOf']=!![];}const _0x2d5ef2=_0x10d6['fzxtUJ'][_0x16e5ef];return _0x2d5ef2===undefined?(_0xd11d33=_0x10d6['sExZUT'](_0xd11d33),_0x10d6['fzxtUJ'][_0x16e5ef]=_0xd11d33):_0xd11d33=_0x2d5ef2,_0xd11d33;};const _0x5d31eb=_0x10d6,_0x1cac79=_0x10d6,{Validator}=require('node-input'+_0x5d31eb('0xc6')),CONSTS=require(_0x5d31eb('0xff')+_0x5d31eb('0x10b')+_0x1cac79('0xe5')),User=require(_0x1cac79('0xd7')+_0x1cac79('0x103')),Notification=require(_0x1cac79('0xd7')+'notificati'+_0x5d31eb('0xc7')),{getTokenInfo}=require(_0x1cac79('0xfe')+_0x5d31eb('0xec')+_0x1cac79('0x115')),{bool2Int,generateTZTimeString,respondError}=require(_0x1cac79('0xfe')+_0x1cac79('0x10d')+_0x5d31eb('0x11f')),{generateNotificationData}=require('../helpers'+'/model.hel'+_0x5d31eb('0x11d'));exports[_0x5d31eb('0xd2')]=(_0x373f7a,_0x292c77)=>{const _0x29c412=_0x5d31eb,_0x1f3547=_0x1cac79,_0x854383={};_0x854383[_0x29c412('0xe0')]=_0x29c412('0xd9'),_0x854383['JFnMc']=function(_0x4b3371,_0xa96f06){return _0x4b3371(_0xa96f06);},_0x854383[_0x29c412('0xdd')]=function(_0x6718e,_0xe22470){return _0x6718e(_0xe22470);};const _0x2150ca=_0x854383,{uid:_0x3e3dd0}=_0x2150ca[_0x1f3547('0xc8')](getTokenInfo,_0x373f7a),_0x123029=_0x373f7a['app']['locals'][_0x29c412('0xfc')+'nt'];let _0x57849e=_0x2150ca[_0x29c412('0xdd')](generateNotificationData,_0x373f7a[_0x29c412('0xcb')]);_0x57849e[_0x1f3547('0x102')]=_0x373f7a[_0x1f3547('0xcb')]['time']?_0x373f7a[_0x1f3547('0xcb')][_0x1f3547('0x102')]:generateTZTimeString();let _0x5b5c57,_0x2bb0e8,_0x1378ba;return Promise[_0x1f3547('0xbe')]([Notification['create'](_0x57849e),User[_0x1f3547('0x11c')](_0x373f7a[_0x1f3547('0xcb')][_0x29c412('0xf9')+'d']),User['getById'](_0x3e3dd0)])[_0x29c412('0xe2')](([_0xdec266,_0x3d5299,_0x5aa88e])=>{const _0x31c247=_0x1f3547,_0x3300ca=_0x29c412,_0x2f3a02=_0x2150ca[_0x31c247('0xe0')]['split']('|');let _0x3865ab=-0x448+0x17cb*-0x1+-0x1c13*-0x1;while(!![]){switch(_0x2f3a02[_0x3865ab++]){case'0':_0x5b5c57=_0xdec266;continue;case'1':return User[_0x31c247('0xdc')](_0x3d5299);case'2':_0x3d5299[_0x3300ca('0xf8')]++;continue;case'3':_0x2bb0e8=_0x5aa88e;continue;case'4':_0x1378ba=_0x3d5299;continue;}break;}})[_0x29c412('0xe2')](_0xb7e39d=>{const _0x55b3de=_0x1f3547,_0x2458c2=_0x29c412,_0x416f3a={...Notification[_0x55b3de('0xcc')](_0x5b5c57)};_0x416f3a[_0x2458c2('0x11b')]=User[_0x2458c2('0xcc')](_0x2bb0e8);const _0x1cd6b3=_0x416f3a;if(_0x1378ba&&_0x1378ba[_0x55b3de('0x111')]){const _0x4bad02={};_0x4bad02[_0x2458c2('0xc1')]=_0xb7e39d[_0x55b3de('0xf8')],_0x4bad02[_0x2458c2('0xc2')+'on']=_0x1cd6b3,_0x123029[_0x55b3de('0x116')](CONSTS[_0x55b3de('0x114')+'NGLE'],{'to':_0x1378ba[_0x55b3de('0x111')],'event':CONSTS['SKT_NOTI_N'+_0x2458c2('0x100')],'args':_0x4bad02});}const _0x1a97d8={};return _0x1a97d8['status']=!![],_0x1a97d8[_0x2458c2('0x105')]=_0x2458c2('0xe8'),_0x1a97d8[_0x55b3de('0xe9')]=_0x1cd6b3,_0x292c77[_0x2458c2('0xdf')](_0x1a97d8);});},exports[_0x1cac79('0x11c')]=(_0x5d62be,_0xdd87b)=>{const _0x5af523=_0x1cac79,_0x30aeda=_0x5d31eb,_0x4b0ce6={};_0x4b0ce6[_0x5af523('0xf6')]='success';const _0x5471a2=_0x4b0ce6,{id:_0x4fa9cd}=_0x5d62be[_0x30aeda('0xf7')];return Notification[_0x30aeda('0x11c')](_0x4fa9cd)[_0x30aeda('0xe2')](_0x145131=>Promise[_0x30aeda('0xbe')]([_0x145131,User[_0x5af523('0x11c')](_0x145131[_0x30aeda('0x10e')]),User['getById'](_0x145131[_0x5af523('0xf9')+'d'])]))[_0x30aeda('0xe2')](([_0x4acb6c,_0x27472b,_0x44c4f1])=>{const _0x298d8c=_0x30aeda,_0x3acafe=_0x30aeda;_0x4acb6c=Notification[_0x298d8c('0xcc')](_0x4acb6c);const _0x391662={..._0x4acb6c};_0x391662[_0x3acafe('0x11b')]=User[_0x3acafe('0xcc')](_0x27472b),_0x391662[_0x3acafe('0xea')]=User[_0x3acafe('0xcc')](_0x44c4f1);const _0x42f99d={};return _0x42f99d['status']=!![],_0x42f99d[_0x3acafe('0x105')]=_0x5471a2['mKJrK'],_0x42f99d['data']=_0x391662,_0xdd87b[_0x298d8c('0xdf')](_0x42f99d);})['catch'](_0x354041=>respondError(_0xdd87b,_0x354041));},exports['pagination']=(_0x38409a,_0x365faf)=>{const _0x16a584=_0x5d31eb,_0x223066=_0x1cac79,_0x11e749={};_0x11e749['ExoFP']=function(_0x2618fd,_0x18b237){return _0x2618fd-_0x18b237;},_0x11e749[_0x16a584('0xd4')]=_0x16a584('0xe8'),_0x11e749['eIfcG']=function(_0x2647e1,_0x567098){return _0x2647e1>_0x567098;};const _0xddb81=_0x11e749,{last_id:_0x27dba2,limit:_0x4606e2,sender_id:_0x5d744c,receiver_id:_0x2abddd}=_0x38409a[_0x223066('0xcb')];let _0xb3a72c=[],_0x4c2e5d=-0x1213*-0x2+0xda8+-0xfa*0x33,_0x11f485={},_0x44d4b7;const _0x5ad0f5={};_0x5ad0f5[_0x16a584('0xf4')]=_0x4606e2,_0x5ad0f5[_0x223066('0xcd')]=_0x27dba2,_0x5ad0f5['receiver_i'+'d']=_0x2abddd;const _0x37244d={};_0x37244d[_0x16a584('0xf9')+'d']=_0x2abddd;const _0x49dccd={};return _0x49dccd[_0x223066('0xf9')+'d']=_0x2abddd,Promise['all']([Notification[_0x16a584('0xe7')+_0x223066('0x10f')](_0x5ad0f5),Notification[_0x223066('0xe1')+_0x223066('0x119')+_0x223066('0xcf')](_0x37244d),Notification[_0x16a584('0xfa')+_0x223066('0xee')](_0x49dccd)])['then'](([_0x186f14,_0x23ae9c,_0x23f1b8])=>{const _0x219358=_0x16a584;_0xb3a72c=_0x186f14,_0x4c2e5d=_0x23ae9c,_0x44d4b7=_0x23f1b8;let _0xc7c28f=[0x6f5+0x15e6+0x1cdb*-0x1];return _0x186f14['forEach'](_0x1364d0=>{const _0x51267c=_0x10d6,_0x12cd65=_0x10d6;_0xc7c28f[_0x51267c('0x11e')](_0x1364d0[_0x12cd65('0x10e')]),_0xc7c28f[_0x51267c('0x11e')](_0x1364d0[_0x12cd65('0xf9')+'d']);}),User[_0x219358('0xd0')](_0xc7c28f);})[_0x16a584('0xe2')](_0x256721=>{const _0x2ff22d=_0x223066,_0x4e2a23=_0x223066;_0x256721[_0x2ff22d('0x101')](_0x2401f6=>_0x11f485[_0x2401f6['id']]=_0x2401f6),_0xb3a72c=_0xb3a72c[_0x2ff22d('0x107')](_0x302989=>Notification['output'](_0x302989)),_0xb3a72c=_0xb3a72c['map'](_0x5cf75a=>({..._0x5cf75a,'sender':User['output'](_0x11f485[_0x5cf75a['sender_id']]),'receiver':User[_0x2ff22d('0xcc')](_0x11f485[_0x5cf75a['receiver_i'+'d']])}));const _0x12bf30=_0xb3a72c[_0xddb81['ExoFP'](_0xb3a72c[_0x4e2a23('0x108')],-0xe07+0x261e+-0x1*0x1816)]['id'],_0x27d9c7={};_0x27d9c7[_0x4e2a23('0xcd')]=_0x12bf30,_0x27d9c7['limit']=_0x4606e2,_0x27d9c7[_0x2ff22d('0xe3')]=_0x4c2e5d;const _0x32d742={};return _0x32d742[_0x4e2a23('0xca')]=!![],_0x32d742['message']=_0xddb81[_0x2ff22d('0xd4')],_0x32d742[_0x4e2a23('0xe9')]=_0xb3a72c,_0x32d742[_0x2ff22d('0xeb')]=_0x27d9c7,_0x32d742[_0x2ff22d('0xd1')]=_0xddb81[_0x4e2a23('0xc4')](_0x12bf30,_0x44d4b7),_0x365faf[_0x2ff22d('0xdf')](_0x32d742);})[_0x16a584('0x117')](_0x2e4d13=>respondError(_0x365faf,_0x2e4d13));},exports['updateById']=(_0x5f15c1,_0x4874f3)=>{const _0x593e67=_0x1cac79,_0x488718=_0x1cac79,_0x1a080e={};_0x1a080e[_0x593e67('0xfb')]=_0x488718('0x113'),_0x1a080e[_0x488718('0x110')]=_0x593e67('0xbf');const _0x3c1229=_0x1a080e,{id:_0x4bb227}=_0x5f15c1[_0x488718('0xf7')];return Notification[_0x593e67('0x11c')](_0x4bb227)[_0x488718('0xe2')](_0x4112a2=>{const _0x2f3814=_0x488718,_0x33e446=_0x488718;let _0x5500a0={};const _0x15303c=['id','user_id',_0x2f3814('0x106'),_0x3c1229[_0x2f3814('0x110')]];return Object[_0x2f3814('0xc9')](_0x5f15c1['body'])['forEach'](_0x47497c=>{const _0xd89074=_0x2f3814,_0x589e6e=_0x33e446;if(_0x15303c[_0xd89074('0xf5')](_0x47497c)){}else{if(_0x47497c===_0x3c1229[_0x589e6e('0xfb')])_0x4112a2[_0xd89074('0x113')]=bool2Int(_0x5f15c1['body'][_0x589e6e('0x113')]);else _0x4112a2[_0x47497c]!==undefined&&(_0x4112a2[_0x47497c]=_0x5f15c1[_0x589e6e('0xcb')][_0x47497c]);}}),Notification[_0x2f3814('0xdc')](_0x4112a2);})['then'](_0x3fe290=>_0x4874f3[_0x488718('0xdf')]({'status':!![],'message':'success','data':Notification['output'](_0x3fe290)}))[_0x593e67('0x117')](_0x2aba0e=>respondError(_0x4874f3,_0x2aba0e));},exports[_0x5d31eb('0xda')]=(_0x4c8556,_0x2fd7e2)=>{const _0x29f905=_0x1cac79,_0x31cff7=_0x5d31eb;Notification['getAll']()[_0x29f905('0xe2')](_0x1c9709=>_0x2fd7e2['json']({'status':!![],'message':_0x31cff7('0xe8'),'data':_0x1c9709}))[_0x29f905('0x117')](_0x4a3350=>_0x2fd7e2['status'](0x18*-0x7a+-0x998+0x1*0x16fc)[_0x31cff7('0xdf')]({'status':![],'message':_0x4a3350[_0x29f905('0x105')]||_0x31cff7('0xd6')+_0x29f905('0x104')+'!'}));},exports[_0x5d31eb('0xde')]=(_0x2a8fd9,_0x2a09ab)=>{const _0x10af5a=_0x5d31eb,_0x4cb98d=_0x1cac79,_0x1cb67b={};_0x1cb67b[_0x10af5a('0xd5')]=_0x10af5a('0x119')+'on\x20has\x20bee'+_0x10af5a('0xfd')+_0x10af5a('0x112');const _0x38b521=_0x1cb67b,{id:_0x2f4a8d}=_0x2a8fd9[_0x10af5a('0xf7')];return this[_0x10af5a('0xde')+'Req'](_0x2f4a8d)['then'](_0x3ff3e5=>{const _0x234788=_0x4cb98d,_0x533105=_0x10af5a,_0x27c00e={};return _0x27c00e[_0x234788('0xca')]=!![],_0x27c00e[_0x533105('0x105')]=_0x38b521[_0x533105('0xd5')],_0x27c00e['data']=Notification[_0x533105('0xcc')](_0x3ff3e5),_0x2a09ab[_0x533105('0xdf')](_0x27c00e);})[_0x4cb98d('0x117')](_0x2e8b0a=>respondError(_0x2a09ab,_0x2e8b0a));},exports[_0x1cac79('0xde')+_0x1cac79('0xc3')]=_0x272dd5=>{const _0x5cce8b=_0x1cac79,_0x14c513=_0x5d31eb;return Notification[_0x5cce8b('0x11c')](_0x272dd5)[_0x14c513('0xe2')](_0x3c8ce7=>{const _0x58c390=_0x5cce8b,_0x3c7962={..._0x3c8ce7};return _0x3c7962['is_read']=0x1,Notification[_0x58c390('0xdc')](_0x3c7962);})[_0x5cce8b('0xe2')](_0x23a733=>_0x23a733);},exports[_0x1cac79('0xf3')+_0x1cac79('0xe6')]=(_0x53c76d,_0x688986)=>{const _0x4cc49d=_0x5d31eb,_0x401976=_0x1cac79,_0x1e8b9c={};_0x1e8b9c['EXbGX']=_0x4cc49d('0xe8'),_0x1e8b9c[_0x401976('0x10a')]=function(_0x4329aa,_0x5674de){return _0x4329aa(_0x5674de);};const _0x5ba5a1=_0x1e8b9c,_0x2bafd4=_0x53c76d[_0x4cc49d('0x122')][_0x401976('0xed')][_0x4cc49d('0xfc')+'nt'],{uid:_0x43bc46}=_0x5ba5a1[_0x4cc49d('0x10a')](getTokenInfo,_0x53c76d),_0x12e60e={};return _0x12e60e[_0x401976('0xd8')]=_0x43bc46,_0x12e60e[_0x401976('0xfc')+'nt']=_0x2bafd4,this[_0x4cc49d('0xf3')+_0x4cc49d('0xef')](_0x12e60e)[_0x401976('0xe2')](_0x514620=>{const _0x221b13=_0x401976,_0x433b25=_0x4cc49d,_0x261b4c={};return _0x261b4c[_0x221b13('0xca')]=!![],_0x261b4c[_0x221b13('0x105')]=_0x5ba5a1[_0x221b13('0x121')],_0x688986[_0x433b25('0xdf')](_0x261b4c);});},exports['markAllAsR'+_0x5d31eb('0xef')]=async({user_id:_0x40986,socketClient:socketClient=null})=>{const _0x87a5d0=_0x5d31eb,_0x11cbf2=_0x1cac79,_0x444762={};_0x444762[_0x87a5d0('0xc0')]=function(_0x2c35cb,_0x1cd3aa){return _0x2c35cb&&_0x1cd3aa;};const _0x15b8af=_0x444762,_0x5c8c9e=await User['getById'](_0x40986);return Notification[_0x87a5d0('0x118')+'d'](_0x40986)['then'](_0x18dc0d=>{const _0x3bf0c7=_0x11cbf2;return Promise[_0x3bf0c7('0xbe')](_0x18dc0d['map'](_0x13704e=>{const _0x43bd5a=_0x3bf0c7,_0x188fc3=_0x3bf0c7;return _0x13704e[_0x43bd5a('0x10c')]=-0x7c*-0x4c+-0x43*-0x27+-0x2f04,Notification[_0x43bd5a('0xdc')](_0x13704e);}));})[_0x11cbf2('0xe2')](_0x17300e=>{const _0x226118=_0x11cbf2,_0x447068=_0x87a5d0;if(_0x15b8af[_0x226118('0xc0')](socketClient,_0x5c8c9e)&&_0x5c8c9e[_0x226118('0x111')]){const _0x2f9fc5={};_0x2f9fc5[_0x447068('0xc1')]=0x0,socketClient[_0x226118('0x116')](CONSTS[_0x226118('0x114')+_0x447068('0xf0')],{'to':_0x5c8c9e[_0x447068('0x111')],'event':CONSTS[_0x226118('0xc5')+_0x226118('0x100')],'args':_0x2f9fc5});}return!![];});},exports['deleteAll']=async(_0x2f48c1,_0x25129e)=>{const _0x37e34a=_0x1cac79,_0x20693c=_0x1cac79,_0xe28043={};_0xe28043[_0x37e34a('0xd3')]=function(_0x30f256,_0xf5bc45){return _0x30f256(_0xf5bc45);};const _0x1dde7e=_0xe28043,_0x6caa06=_0x2f48c1[_0x20693c('0x122')][_0x37e34a('0xed')][_0x20693c('0xfc')+'nt'],{uid:_0x3b0550}=_0x1dde7e[_0x20693c('0xd3')](getTokenInfo,_0x2f48c1),_0x56c36b={};return _0x56c36b[_0x37e34a('0xd8')]=_0x3b0550,_0x56c36b[_0x37e34a('0xfc')+'nt']=_0x6caa06,this['deleteAllR'+'eq'](_0x56c36b)['then'](_0x1712d9=>{const _0x948aff=_0x20693c,_0x4bd8d7=_0x20693c,_0x1086a0={};return _0x1086a0[_0x948aff('0xca')]=!![],_0x1086a0['message']=_0x4bd8d7('0xe8'),_0x25129e[_0x948aff('0xdf')](_0x1086a0);});},exports[_0x5d31eb('0xf1')+'eq']=async({user_id:_0x1cdb7a,socketClient:_0x1983a4})=>{const _0x29904d=_0x1cac79,_0x28353e=_0x5d31eb,_0x550797=await User['getById'](_0x1cdb7a);return Notification[_0x29904d('0xdb')+_0x29904d('0xe4')](_0x1cdb7a)['then'](_0x193615=>{return!![];});},exports[_0x5d31eb('0x109')]=async(_0x2c8f85,_0xbdfe42)=>{const _0x3e070f=_0x1cac79,_0x44bf41=_0x5d31eb,_0x358900={};_0x358900[_0x3e070f('0xf2')]=_0x44bf41('0xe8'),_0x358900[_0x44bf41('0x11a')]=function(_0x50fffd,_0x541038){return _0x50fffd(_0x541038);};const _0x2c3c93=_0x358900,_0x16ef8d=_0x2c8f85[_0x3e070f('0x122')][_0x44bf41('0xed')][_0x3e070f('0xfc')+'nt'],{uid:_0x201869}=_0x2c3c93[_0x44bf41('0x11a')](getTokenInfo,_0x2c8f85),_0x2d825b={};return _0x2d825b['user_id']=_0x201869,_0x2d825b[_0x3e070f('0xfc')+'nt']=_0x16ef8d,_0x2d825b['id']=_0x2c8f85['params']['id'],this[_0x3e070f('0x109')+_0x3e070f('0xc3')](_0x2d825b)[_0x44bf41('0xe2')](_0x4cb952=>{const _0x1958b3=_0x44bf41,_0x1ebcbe=_0x3e070f,_0x2297fe={};return _0x2297fe[_0x1958b3('0xca')]=!![],_0x2297fe[_0x1958b3('0x105')]=_0x2c3c93[_0x1ebcbe('0xf2')],_0xbdfe42[_0x1958b3('0xdf')](_0x2297fe);});},exports['deleteById'+_0x1cac79('0xc3')]=async({user_id:_0x36a231,id:_0x1c253b,socketClient:socketClient=null})=>{const _0x5d6cd7=_0x1cac79,_0x3bade4=_0x1cac79,_0x2750af={};_0x2750af[_0x5d6cd7('0xce')]=function(_0x446d20,_0x338ad6){return _0x446d20&&_0x338ad6;};const _0x2c8b04=_0x2750af,_0x59aeca=await User[_0x3bade4('0x11c')](_0x36a231);return Notification[_0x5d6cd7('0x109')](_0x36a231)[_0x5d6cd7('0xe2')](_0x4dcdce=>Notification['getByUserI'+'d'](_0x36a231))['then'](_0x534a32=>{const _0x246bc9=_0x3bade4,_0x14693b=_0x3bade4,_0x5073e9=_0x534a32[_0x246bc9('0x120')](_0x293ac5=>_0x293ac5[_0x246bc9('0x10c')]===-0x1d16+-0x641*0x2+-0x1*-0x2998);if(_0x2c8b04[_0x14693b('0xce')](socketClient,_0x59aeca)&&_0x59aeca[_0x246bc9('0x111')]){const _0x5065ae={};_0x5065ae[_0x246bc9('0xc1')]=_0x5073e9['length'],socketClient[_0x246bc9('0x116')](CONSTS['SKT_LTS_SI'+_0x246bc9('0xf0')],{'to':_0x59aeca['socket_id'],'event':CONSTS['SKT_NOTI_N'+_0x246bc9('0x100')],'args':_0x5065ae});}return!![];});};
+const { Validator } = require("node-input-validator");
+const CONSTS = require('../constants/socket.constant');
+const User = require("../models/user.model");
+const Notification = require("../models/notification.model");
+const { getTokenInfo } = require('../helpers/auth.helpers');
+const { bool2Int, generateTZTimeString, respondError } = require("../helpers/common.helpers");
+const { generateNotificationData } = require('../helpers/model.helpers');
+
+exports.create = (req, res) => {
+  const { uid } = getTokenInfo(req);
+  const socketClient = req.app.locals.socketClient;
+  let notiData = generateNotificationData(req.body);
+  notiData.time = req.body.time ? req.body.time : generateTZTimeString();
+
+  let _notification, _me, _receiver;
+  return Promise.all([
+    Notification.create(notiData),
+    User.getById(req.body.receiver_id),
+    User.getById(uid),
+  ])
+  .then(([ noti, receiver, me ]) => {
+    _notification = noti;
+    _receiver = receiver;
+    _me = me;
+    receiver.noti_num ++;
+    return User.save(receiver);
+    // return Notification.getUnreadCount(req.body.receiver_id);
+  })
+  .then(receiver => {
+    const notification = {
+      ...(Notification.output(_notification)),
+      sender: User.output(_me),
+    };
+    if (_receiver && _receiver.socket_id) {
+      socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+        to: _receiver.socket_id,
+        event: CONSTS.SKT_NOTI_NUM_UPDATED,
+        args: { 
+          num: receiver.noti_num,
+          notification
+        }
+      });
+    }
+    return res.json({ status: true, message: "success", data: notification });
+  });
+};
+
+exports.getById = (req, res) => {
+  const { id } = req.params;
+  return Notification.getById(id)
+    .then(noti => Promise.all([
+      noti,
+      User.getById(noti.sender_id),
+      User.getById(noti.receiver_id)
+    ]))
+    .then(([noti, sender, receiver]) => {
+      noti = Notification.output(noti);
+      return res.json({ 
+        status: true,
+        message: 'success',
+        data: { 
+          ...noti, 
+          sender: User.output(sender), 
+          receiver: User.output(receiver) 
+        }
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.pagination = (req, res) => {
+  const { last_id, limit, sender_id, receiver_id } = req.body;
+  // const offset = page * limit;
+
+  let _notis = [], _total = 0, _users = {}, _minId;
+
+  return Promise.all([
+    Notification.paginationByLastId({ limit, last_id, receiver_id }),
+    Notification.getCountOfNotifications({ receiver_id }),
+    Notification.getMinIdtoUser({ receiver_id }),
+  ])
+    .then(([notis, total, minId]) => {
+      _notis = notis; _total = total; _minId = minId;
+      let user_ids = [0];
+      notis.forEach(noti => {
+        user_ids.push(noti.sender_id);
+        user_ids.push(noti.receiver_id);
+      });
+      return User.getByIds(user_ids);
+    })
+    .then(users => {
+      users.forEach(user => _users[user.id] = user);
+      _notis = _notis.map(noti => Notification.output(noti));
+      _notis = _notis.map(item => ({
+        ...item,
+        sender: User.output(_users[item.sender_id]),
+        receiver: User.output(_users[item.receiver_id])
+      }));
+
+      const lastId = _notis[_notis.length - 1].id;
+
+      return res.json({
+        status: true,
+        message: 'success',
+        data: _notis,
+        pager: {
+          last_id: lastId,
+          limit,
+          total: _total
+        },
+        hadMore: lastId > _minId,
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
+// to-do: only admin or creator can update
+exports.updateById = (req, res) => {
+  const { id } = req.params;
+  return Notification.getById(id)
+    .then(comment => {
+      // remove user id in update data
+      let updateData = {};
+      const disallowedKeys = ['id', 'user_id', 'target_id', 'type'];
+      Object.keys(req.body).forEach(key => {
+        if (disallowedKeys.includes(key)) {
+          // skip it
+        } else if (key === 'isGuest') {
+          comment.isGuest = bool2Int(req.body.isGuest);
+        } else if (comment[key] !== undefined) {
+          comment[key] = req.body[key];
+        }
+      });
+      return Notification.save(comment);      
+    })
+    .then(newComment => res.json({
+      status: true,
+      message: 'success',
+      data: Notification.output(newComment)
+    }))
+    .catch((error) => respondError(res, error));
+}
+
+exports.getAll = (req, res) => {
+  Notification.getAll()
+    .then((langs) =>
+      res.json({ status: true, message: "success", data: langs })
+    )
+    .catch((error) =>
+      res.status(500).json({
+        status: false,
+        message: error.message || "Something went wrong!",
+      })
+    );
+};
+
+exports.markAsRead = (req, res) => {
+  const { id } = req.params;
+  return this.markAsReadReq(id)
+    .then(noti => {
+      return res.json({
+        status: true,
+        message: 'Notification has been marked as read!',
+        data: Notification.output(noti)
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.markAsReadReq = (id) => {
+  return Notification.getById(id)
+    .then(noti => {
+      return Notification.save({ ...noti, is_read: 1 });
+    })
+    .then(noti => noti);
+}
+
+exports.markAllAsRead = (req, res) => {
+  const socketClient = req.app.locals.socketClient; //console.log('[socket.client]', socketClient);
+  const { uid: user_id } = getTokenInfo(req);
+  return this.markAllAsReadReq({ user_id, socketClient })
+    .then(result => {
+      return res.json({
+        status: true,
+        message: 'success',
+      })
+    });
+}
+
+exports.markAllAsReadReq = async ({ user_id, socketClient = null }) => {
+  const user = await User.getById(user_id);
+  return Notification.getByUserId(user_id)
+    .then(notis => {
+      return Promise.all(notis.map(noti => {
+        noti.is_read = 1;
+        return Notification.save(noti);
+      }));
+    })
+    .then((notis) => {
+      // send user noti_num = 0;
+      if (socketClient && user && user.socket_id) {
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: user.socket_id,
+          event: CONSTS.SKT_NOTI_NUM_UPDATED,
+          args: {num: 0}
+        });
+      }
+      return true;
+    });
+}
+
+exports.deleteAll = async (req, res) => {
+  const socketClient = req.app.locals.socketClient;
+  const { uid: user_id } = getTokenInfo(req);
+  return this.deleteAllReq({ user_id, socketClient })
+    .then(result => {
+      return res.json({
+        status: true,
+        message: 'success'
+      });
+    });
+}
+
+exports.deleteAllReq = async ({ user_id, socketClient }) => {
+  const user = await User.getById(user_id);
+  return Notification.deleteByUserId(user_id)
+    .then(deleted => {
+      // if (socketClient && user && user.socket_id) { 
+      //   socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+      //     to: user.socket_id,
+      //     event: CONSTS.SKT_NOTI_NUM_UPDATED,
+      //     args: { num: 0 }
+      //   });
+      // }
+      return true;
+    })
+}
+
+exports.deleteById = async (req, res) => {
+  const socketClient = req.app.locals.socketClient;
+  const { uid: user_id } = getTokenInfo(req);
+  return this.deleteByIdReq({ user_id, socketClient, id: req.params.id })
+    .then(result => {
+      return res.json({
+        status: true,
+        message: 'success'
+      });
+    });
+}
+
+exports.deleteByIdReq = async ({ user_id, id, socketClient = null }) => {
+  const user = await User.getById(user_id);
+  return Notification.deleteById(user_id)
+    .then(deleted => Notification.getByUserId(user_id))
+    .then((notis) => {
+      const unread_notis = notis.filter(noti => noti.is_read === 0);
+      if (socketClient && user && user.socket_id) { 
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: user.socket_id,
+          event: CONSTS.SKT_NOTI_NUM_UPDATED,
+          args: { num: unread_notis.length }
+        });
+      }
+      return true;
+    })
+}
