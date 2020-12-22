@@ -384,9 +384,17 @@ const bootstrapSocket = (io) => {
       io.to(to).emit(event, args);
     });
 
+    socket.on(CONSTS.SKT_LTS_MULTIPLE, ({ users, event, args }) => {
+      users.forEach(user => {
+        if (user.socket_id) {
+          io.to(user.socket_id).emit(event, args);
+        }
+      })
+    });
+
     socket.on(CONSTS.SKT_LTS_BROADCAST, ({ event, args }) => {
       io.sockets.emit(event, args);
-    })
+    });
 
     socket.on('disconnecting', () => {
       const { uid } = helpers.auth.parseToken(token);

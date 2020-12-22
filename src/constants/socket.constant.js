@@ -28,4 +28,5 @@ exports.SKT_REPLIED_2_TRANSFER_REQUEST = 'socket.replied2.transfer.request';  //
 exports.SKT_CHATLIST_UPDATED = 'socket.chatlist.updated';
 
 exports.SKT_LTS_SINGLE = 'socket.local2server.single';
+exports.SKT_LTS_MULTIPLE = 'socket.local2server.multiple';
 exports.SKT_LTS_BROADCAST = 'socket.local2server.broadcast';

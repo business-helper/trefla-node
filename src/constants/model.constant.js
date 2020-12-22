@@ -128,6 +128,7 @@ exports.DEFAULT_POST = {
   like_4_num: 0,
   like_5_num: 0,
   like_6_num: 0,
+  location_area: '',
   location_address: '',
   location_coordinate: '',
   city: '',
@@ -177,6 +178,7 @@ exports.DEFAULT_USER = {
   device_token: '',
   noti_num: 0,   // when add noti
   unread_msg_num: 0,  // send message
+  location_area: '',
   location_coordinate: '',
   location_address: '',
   location_array: JSON.stringify([]),

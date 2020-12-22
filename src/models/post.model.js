@@ -56,12 +56,13 @@ Post.getAll = ({ type = null, user_id = null }) => {
   });
 };
 
-Post.pagination = async ({ limit, last_id, type = null, user_id = null }) => {
+Post.pagination = async ({ limit, last_id, type = null, user_id = null, location_area = null }) => {
   limit = Number(limit);
   let where = [];
   type ? where.push(`type='${type}'`) : null;
   last_id ? where.push(`id < ${last_id}`) : null;
   user_id ? where.push(`user_id=${user_id}`) : null;
+  location_area ? where.push(`location_area='${location_area}'`) : null;
 
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
@@ -89,10 +90,12 @@ Post.simplePagination = async ({ limit, page, type = null, user_id = null }) => 
 }
 
 
-Post.getCountOfPosts = ({ type = null, user_id = null }) => {
+Post.getCountOfPosts = ({ type = null, user_id = null, location_area = null }) => {
   const where = [];
   type ? where.push(`type=${type}`) : null;
   user_id ? where.push(`user_id=${user_id}`) : null;
+  location_area ? where.push(`location_area='${location_area}'`) : null;
+
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
 
   return new Promise((resolve, reject) => {
@@ -102,8 +105,12 @@ Post.getCountOfPosts = ({ type = null, user_id = null }) => {
   });
 }
 
-Post.getMinIdOfPosts = ({ type = null }) => {
-  const strWhere = type ? ` WHERE type='${type}'` : '';
+Post.getMinIdOfPosts = ({ type = null, location_area = null }) => {
+  const where = [];
+  type ? where.push(`type='${type}'`) : null;
+  location_area ? where.push(`location_area='${location_area}'`) : null;
+
+  const strWhere = type ? ` WHERE '${where.join(' AND ')}'` : '';
   return new Promise((resolve, reject) => {
     sql.query(`SELECT id from posts ${strWhere} ORDER BY id ASC LIMIT 1`, (err, res) => {
       err ? reject(err) : resolve(res.length > 0 ? res[0].id : 0);
