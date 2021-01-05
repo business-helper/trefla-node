@@ -1,6 +1,7 @@
 const { 
   DEFAULT_ADMIN,
   DEFAULT_ADMIN_NOTIFICATION,
+  DEFAULT_BUG,
   DEFAULT_COMMENT,
   DEFAULT_COMMENTLIKE,
   DEFAULT_NOTIFICATION,
@@ -38,6 +39,16 @@ const generateAdminNotiData = basicData => {
   }
   data.payload = JSONStringify(data.payload || {});
   data.emails = JSONStringify(data.emails || []);
+  data.create_time = data.update_time = timestamp();
+  return data;
+}
+
+const generateBugData = basicData => {
+  const defaultKeys = Object.keys(DEFAULT_BUG);
+  let data = {};
+  for (let field of defaultKeys) {
+    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_BUG[field];
+  }
   data.create_time = data.update_time = timestamp();
   return data;
 }
@@ -256,6 +267,7 @@ module.exports = {
   checkPostLocationWithUser,
   generateAdminData,
   generateAdminNotiData,
+  generateBugData,
   generateChatData,
   generateCommentData,
   generateCommentLikeData,

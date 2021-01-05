@@ -20,6 +20,16 @@ exports.DEFAULT_ADMIN_NOTIFICATION = {
   update_time: timestamp(),
 };
 
+exports.DEFAULT_BUG = {
+  id: '',
+  user_id: 0,
+  device_model: '',
+  report: '',
+  fixed: 0,
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
 exports.DEFAULT_CHAT = {
   id: '',
   user_ids: "",
@@ -128,6 +138,7 @@ exports.DEFAULT_POST = {
   like_4_num: 0,
   like_5_num: 0,
   like_6_num: 0,
+  location_area: '',
   location_address: '',
   location_coordinate: '',
   city: '',
@@ -177,6 +188,7 @@ exports.DEFAULT_USER = {
   device_token: '',
   noti_num: 0,   // when add noti
   unread_msg_num: 0,  // send message
+  location_area: '',
   location_coordinate: '',
   location_address: '',
   location_array: JSON.stringify([]),
