@@ -571,3 +571,7 @@ socket.on(SKT_FOUND_NEW_CARD_CHATS, args => {
 socket.on(SKT_CHATLIST_UPDATED, args => {
   console.log(`[${SKT_CHATLIST_UPDATED}]`, args);
 })
+
+socket.on('get_token', args => {
+  console.log('[get token]', args);
+})

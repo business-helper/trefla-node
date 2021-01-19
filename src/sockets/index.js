@@ -5,13 +5,21 @@ const {
   SKT_CHECK_HEALTH  
 } = require('../constants/socket.constant');
 const CONSTS = require('../constants/socket.constant');
+const { auth } = require('firebase-admin');
 const INNER_CLIENT = 'INNER_CLIENT';
 
 const bootstrapSocket = (io) => {
   io.on('connection', async socket => {
-    console.log('[socket connect]', socket.request._query.token);
-    const token = socket.request._query.token;
-    if (token !== INNER_CLIENT) {
+    // console.log('[socket connect]', socket.request._query.token);
+
+    var token = "";
+
+    // const token = socket.request._query.token;
+
+    socket.on(CONSTS.SKT_AUTHENTICATE, async (args) => {
+      token = args.token;
+      if (token === INNER_CLIENT) return 0;
+
       const { uid } = helpers.auth.parseToken(token);
 
       await Promise.all([
@@ -46,7 +54,11 @@ const bootstrapSocket = (io) => {
       .then(() => {
         console.log(`Updated online status of user ${uid} in chatrooms`);
       });
-    }
+    })
+
+    socket.on('get_token', () => {
+      socket.emit('get_token', { token: socket_token || "" });
+    })
 
     // connection request to a user.
     socket.on(CONSTS.SKT_CONNECT_TO_USER, ({ toId, message, isGuest = true }) => {

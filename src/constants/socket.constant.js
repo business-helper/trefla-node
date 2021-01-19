@@ -26,6 +26,7 @@ exports.SKT_POST_UPDATED = 'socket.post.updated';
 exports.SKT_FOUND_NEW_CARD_CHATS = 'socket.found.new.card.chats';
 exports.SKT_REPLIED_2_TRANSFER_REQUEST = 'socket.replied2.transfer.request';  // unused;
 exports.SKT_CHATLIST_UPDATED = 'socket.chatlist.updated';
+exports.SKT_AUTHENTICATE = 'socket.authenticate';
 
 exports.SKT_LTS_SINGLE = 'socket.local2server.single';
 exports.SKT_LTS_MULTIPLE = 'socket.local2server.multiple';
