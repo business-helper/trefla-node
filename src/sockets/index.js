@@ -29,7 +29,7 @@ const bootstrapSocket = (io) => {
       ])
       .then(([user, chats]) => {
         if (user) {
-          console.log(`"${user.user_name}" is online now`);
+          console.log(`"${uid}.${user.user_name}" is online now`);
           for (let chat of chats) {
             if (!chat.isForCard) {
               socket.join(`chatroom_${chat.id}`);
