@@ -38,7 +38,7 @@ exports.create = (req, res) => {
     .then(async ([post, user]) => {
       post = Post.output(post);
       if (post.location_area) {
-        const aroundUsers = await User.getByLocationArea(post.location_area);
+        const areaUsers = await User.getByLocationArea(post.location_area);
 
         contents = {
           'EN': `${user.user_name} created a new post.`,
@@ -47,7 +47,7 @@ exports.create = (req, res) => {
         await activity.pushNotificationToAroundUsers({ post, areaUsers, contents });
 
         socketClient.emit(CONSTS.SKT_LTS_MULTIPLE, { 
-          users: aroundUsers, 
+          users: areaUsers, 
           event: CONSTS.SKT_POST_CREATED,
           args: { ...post, liked: 0, user: User.output(user) }
          });
