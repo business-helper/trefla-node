@@ -409,7 +409,13 @@ const bootstrapSocket = (io) => {
     });
 
     socket.on('disconnecting', () => {
+      if (!token) {
+        console.log('[Socket Disconnecting...] token not found!');
+      }
       const { uid } = helpers.auth.parseToken(token);
+      if (!uid) {
+        console.log('[Socket Disconnecting...] Invalid user');
+      }
       models.user.save({ id: uid, socket_id: '', current_chat: 0 })
         .then(res => {
           console.log(`User ${uid} has been disconnected...`);
