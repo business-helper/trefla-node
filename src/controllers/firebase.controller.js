@@ -1,1 +1,57 @@
-const _0x22a4=['Aw5PDgLHBgL6zufWCa==','yxnZAwDU','BwfW','Bg9N','C2vUza==','tM9UzsbVzIb1C2vYCYbJyw4GCMvJzwL2zsbUB3rPzMLJyxrPB24H','DgHLBG==','z2v0qNLjza==','BgvUz3rO','C2vUze11BhrPy2fZDa==','q2fUig5VDcbZzw5Kig5VDgLMAwnHDgLVBIb0BYb1C2vYiq==','C2vUzej1BgToB3rPzMLJyxrPB25szxe=','w1rVA2vUxq==','y3jLzgvUDgLHBa==','zMLSDgvY','lI4VBw9KzwXZl2LUzgv4','y2vYDa==','Ahr0Chm6lY90CMvMBgeUzMLYzwjHC2vPBY5JB20=','C2vUze5VDgLMAwnHDgLVBJjvC2vYuMvX','zgv2AwnLx3rVA2vU','zMLYzwjHC2uTywrTAw4=','DxnLCG==','BwvZC2fNAw5N'];(function(_0x2489a5,_0x1dbacd){const _0x22a434=function(_0x835ae5){while(--_0x835ae5){_0x2489a5['push'](_0x2489a5['shift']());}};_0x22a434(++_0x1dbacd);}(_0x22a4,0x19a));const _0x835a=function(_0x2489a5,_0x1dbacd){_0x2489a5=_0x2489a5-0x199;let _0x22a434=_0x22a4[_0x2489a5];if(_0x835a['IdMkJi']===undefined){var _0x835ae5=function(_0x1aab92){const _0x4e67ac='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=',_0x4d14e4=String(_0x1aab92)['replace'](/=+$/,'');let _0x265252='';for(let _0x2d4aa8=0x0,_0x22be72,_0x1e05b6,_0x52c8d7=0x0;_0x1e05b6=_0x4d14e4['charAt'](_0x52c8d7++);~_0x1e05b6&&(_0x22be72=_0x2d4aa8%0x4?_0x22be72*0x40+_0x1e05b6:_0x1e05b6,_0x2d4aa8++%0x4)?_0x265252+=String['fromCharCode'](0xff&_0x22be72>>(-0x2*_0x2d4aa8&0x6)):0x0){_0x1e05b6=_0x4e67ac['indexOf'](_0x1e05b6);}return _0x265252;};_0x835a['ktojCo']=function(_0x53d9b9){const _0x3cda79=_0x835ae5(_0x53d9b9);let _0x5367cc=[];for(let _0x4ccc78=0x0,_0x2026c7=_0x3cda79['length'];_0x4ccc78<_0x2026c7;_0x4ccc78++){_0x5367cc+='%'+('00'+_0x3cda79['charCodeAt'](_0x4ccc78)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x5367cc);},_0x835a['TnwvAf']={},_0x835a['IdMkJi']=!![];}const _0x56bed7=_0x835a['TnwvAf'][_0x2489a5];return _0x56bed7===undefined?(_0x22a434=_0x835a['ktojCo'](_0x22a434),_0x835a['TnwvAf'][_0x2489a5]=_0x22a434):_0x22a434=_0x56bed7,_0x22a434;};const _0x22699a=_0x835a,admin=require(_0x22699a(0x19a)),serviceAccount=require('../config/trefla-firebase-adminsdk-ic030-de756cf0e9.json'),models=require(_0x22699a(0x1ac));admin[_0x22699a(0x19d)]({'credential':admin[_0x22699a(0x1aa)][_0x22699a(0x1ad)](serviceAccount),'databaseURL':_0x22699a(0x1ae)}),exports[_0x22699a(0x1af)]=({user_id:_0x56bed7,title:_0x1aab92,body:_0x4e67ac})=>{const _0x22e669=_0x22699a;return models[_0x22e669(0x19b)][_0x22e669(0x1a4)](_0x56bed7)[_0x22e669(0x1a3)](_0x4d14e4=>{const _0x5a672a=_0x22e669;if(!_0x4d14e4||!_0x4d14e4[_0x5a672a(0x199)])throw Object[_0x5a672a(0x19e)](new Error(_0x5a672a(0x1a7)),{'code':0x190});const {device_token:_0x265252}=_0x4d14e4;return console[_0x5a672a(0x1a0)](_0x5a672a(0x1a9),_0x265252),sendSingleNotification({'token':_0x265252,'title':_0x1aab92,'body':_0x4e67ac});});},exports[_0x22699a(0x1a8)]=({user_ids:_0x2d4aa8,title:_0x22be72,body:_0x1e05b6})=>{const _0x1f94e2=_0x22699a;return models[_0x1f94e2(0x19b)]['getByIds'](_0x2d4aa8)['then'](_0x52c8d7=>{const _0x26b779=_0x1f94e2,_0x53d9b9=_0x52c8d7[_0x26b779(0x1ab)](_0x3cda79=>_0x3cda79[_0x26b779(0x199)])[_0x26b779(0x19f)](_0x5367cc=>_0x5367cc['device_token']);if(_0x53d9b9[_0x26b779(0x1a5)]===0x0)throw Object[_0x26b779(0x19e)](new Error(_0x26b779(0x1a2)),{'code':0x190});return sendMultiNotifications({'tokens':_0x53d9b9,'title':_0x22be72,'body':_0x1e05b6});});};const sendSingleNotification=async({title:_0x4ccc78,body:_0x2026c7,token:_0x18eb45,data:data=null})=>{const _0x3028b4=_0x22699a,_0x36f529={'token':_0x18eb45,'notification':{'title':_0x4ccc78,'body':_0x2026c7},'data':data};return admin[_0x3028b4(0x19c)]()[_0x3028b4(0x1a1)](_0x36f529);},sendMultiNotifications=async({title:_0x53f1cf,body:_0x4bd904,tokens:_0x1cd8eb})=>{const _0x34f1e7=_0x22699a,_0x40d52={'tokens':_0x1cd8eb,'notification':{'body':_0x4bd904,'title':_0x53f1cf}};return admin[_0x34f1e7(0x19c)]()[_0x34f1e7(0x1a6)](_0x40d52);};
+// const admin = require('firebase-admin');
+// const serviceAccount = require('../config/trefla-firebase-adminsdk-ic030-de756cf0e9.json');
+
+const models = require('../models/index');
+
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://trefla.firebaseio.com"
+// });
+
+
+exports.sendNotification2UserReq = ({ user_id, title, body }) => {
+  return true;
+  // return models.user.getById(user_id)
+  //   .then(user => {
+  //     if (!user || !user.device_token) {
+  //       throw Object.assign(new Error("Can not send notification to user!"), { code: 400 });
+  //     }
+
+  //     const { device_token: token } = user; console.log('[Token]', token);
+  //     return sendSingleNotification({
+  //       token, title, body
+  //     });
+  //   })
+}
+
+exports.sendBulkNotificationReq = ({ user_ids, title, body }) => {
+  return true;
+  // return models.user.getByIds(user_ids)
+  //   .then(users => {
+  //     const tokens = users.filter(user => user.device_token).map(user => user.device_token);
+  //     if (tokens.length === 0) {
+  //       throw Object.assign(new Error('None of users can receive notification!'), { code: 400 });
+  //     }
+
+  //     return sendMultiNotifications({ tokens, title, body });
+  //   })
+}
+
+const sendSingleNotification = async ({ title, body, token, data = null }) => {
+  return true;
+  // const message = {
+  //   token,
+  //   notification: { title, body },
+  //   data,
+  // };
+  // return admin.messaging().send(message);
+}
+
+const sendMultiNotifications = async ({ title, body, tokens }) => {
+  return true;
+  // const message = {
+  //   tokens,
+  //   notification: { body, title },
+  // };
+  // return admin.messaging().sendMulticast(message);
+}

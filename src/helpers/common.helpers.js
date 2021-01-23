@@ -1,9 +1,14 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');const admin = require('firebase-admin');
+const serviceAccount = require('../config/trefla-firebase-adminsdk-ic030-de756cf0e9.json');
 const { 
 	ERR_MSG_NORMAL,
 	ERR_MSG_VALIDATE
 } = require("../constants/common.constant");
 
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://trefla.firebaseio.com"
+});
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -171,9 +176,59 @@ const JSONStringify = (data) => {
   return data;  
 }
 
+const filterAroundUsers = (strPostCoord, users) => {
+  try {
+    const postPos = string2Coordinate(strPostCoord);
+    return users.filter(user => {
+      const userPos = getUserLastLocation(user);
+      const d = getDistanceFromLatLonInMeter(postPos, userPos);
+      const r = user.radiusAround || 100;
+      return d <= r;
+    });
+  }
+  catch(e) {
+    return [];
+  }
+}
+
+const getUserLastLocation = function (user) {
+  try {
+    location_array = JSONParser(user.location_array);
+    const locationItem = location_array[location_array.length - 1];
+    const tmp_arr = locationItem.split('&&');
+    return string2Coordinate(tmp_arr[0]);
+  } catch (error) {
+    return { lat: 0, lng: 0 };
+  }
+};
+
+const SendAllMultiNotifications = async function (messages) {
+  if (!messages || messages.length === 0) return false;
+  return admin.messaging().sendAll(messages);
+};
+
+const sendMultiNotifications = async ({ title, body, tokens }) => {
+  const message = {
+    tokens,
+    notification: { body, title },
+  };
+  return admin.messaging().sendMulticast(message);
+}
+
+const sendSingleNotification = async ({ title, body, token, data = null }) => {
+  const message = {
+    token,
+    notification: { title, body },
+    data,
+  };
+  return admin.messaging().send(message);
+}
+
+
 module.exports = {
   bool2Int,
   chatPartnerId,
+  filterAroundUsers,
   generateTZTimeString,
   getDistanceFromLatLonInMeter,
   getTime,
@@ -184,7 +239,9 @@ module.exports = {
   JSONStringify,
 	respondError,
   respondValidateError,
+  SendAllMultiNotifications,
   sendMail,
+  sendMultiNotifications,
   string2Coordinate,
   string2Timestamp,
   timestamp,
