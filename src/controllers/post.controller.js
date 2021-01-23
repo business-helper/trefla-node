@@ -44,7 +44,7 @@ exports.create = (req, res) => {
           'EN': `${user.user_name} created a new post.`,
           'RO': `${user.user_name} a creat o nouă postare.`,
         };
-        await activity.pushNotificationToAroundUsers({ post: newPost, areaUsers, contents });
+        await activity.pushNotificationToAroundUsers({ post, areaUsers, contents });
 
         socketClient.emit(CONSTS.SKT_LTS_MULTIPLE, { 
           users: aroundUsers, 
