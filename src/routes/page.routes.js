@@ -1,1 +1,41 @@
-const _0x8da6=['mJq5mdq3nLfJufnpEa','nJK2mwfLu0TJvW','z2v0','mZe0n05oz1jitW','uM91DgvY','mZyZovzetuTSzq','CMvUzgvY','Bg9NAw4','mZjzCw9tBK8','zxHWB3j0CW','otaYodGYA2TAwu1Q','mJGWntDPDeDVqLm','nZyZmda3D2LQv3nh','mty3uxDIrhLH','mtG3rwjuwxH2','Aw5KzxG','Cgf0Aa','muzKBvzhtG','zxHWCMvZCW','l2XVz2LU','l2HVBwu','mZa0zKv3DLnI'];const _0x39d0=function(_0x52d792,_0x3361ee){_0x52d792=_0x52d792-0x90;let _0x8da644=_0x8da6[_0x52d792];if(_0x39d0['gdZzGf']===undefined){var _0x39d077=function(_0x35902f){const _0x53c9a9='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x143d38='';for(let _0x429a10=0x0,_0x196b93,_0x1061d0,_0x4d3bf2=0x0;_0x1061d0=_0x35902f['charAt'](_0x4d3bf2++);~_0x1061d0&&(_0x196b93=_0x429a10%0x4?_0x196b93*0x40+_0x1061d0:_0x1061d0,_0x429a10++%0x4)?_0x143d38+=String['fromCharCode'](0xff&_0x196b93>>(-0x2*_0x429a10&0x6)):0x0){_0x1061d0=_0x53c9a9['indexOf'](_0x1061d0);}return _0x143d38;};_0x39d0['jnUsJm']=function(_0x16b856){const _0x9a5c86=_0x39d077(_0x16b856);let _0x4d1192=[];for(let _0x34346a=0x0,_0x4b001b=_0x9a5c86['length'];_0x34346a<_0x4b001b;_0x34346a++){_0x4d1192+='%'+('00'+_0x9a5c86['charCodeAt'](_0x34346a)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x4d1192);},_0x39d0['gShpgR']={},_0x39d0['gdZzGf']=!![];}const _0x273a09=_0x8da6[0x0],_0x98bd45=_0x52d792+_0x273a09,_0x20da9d=_0x39d0['gShpgR'][_0x98bd45];return _0x20da9d===undefined?(_0x8da644=_0x39d0['jnUsJm'](_0x8da644),_0x39d0['gShpgR'][_0x98bd45]=_0x8da644):_0x8da644=_0x20da9d,_0x8da644;};const _0x5bc149=_0x39d0;(function(_0x43f7be,_0x5b4d47){const _0x5ecd0a=_0x39d0;while(!![]){try{const _0x435e71=parseInt(_0x5ecd0a(0x98))*-parseInt(_0x5ecd0a(0xa1))+-parseInt(_0x5ecd0a(0x92))*parseInt(_0x5ecd0a(0x96))+parseInt(_0x5ecd0a(0x9d))+-parseInt(_0x5ecd0a(0x9f))+-parseInt(_0x5ecd0a(0xa0))*parseInt(_0x5ecd0a(0x94))+-parseInt(_0x5ecd0a(0x9e))*-parseInt(_0x5ecd0a(0x9b))+-parseInt(_0x5ecd0a(0x93))*-parseInt(_0x5ecd0a(0xa4));if(_0x435e71===_0x5b4d47)break;else _0x43f7be['push'](_0x43f7be['shift']());}catch(_0x8aa999){_0x43f7be['push'](_0x43f7be['shift']());}}}(_0x8da6,0xb1dbb));const express=require(_0x5bc149(0xa5)),path=require(_0x5bc149(0xa3)),pageRouters=express[_0x5bc149(0x97)](),{respondValidateError}=require('../helpers/common.helpers');pageRouters[_0x5bc149(0x95)](_0x5bc149(0x91),(_0x273a09,_0x98bd45)=>{const _0x5afccc=_0x5bc149;_0x98bd45[_0x5afccc(0x99)](_0x5afccc(0xa2));}),pageRouters['get'](_0x5bc149(0x90),(_0x20da9d,_0x35902f)=>{const _0x13f804=_0x5bc149;_0x35902f[_0x13f804(0x99)](_0x13f804(0x9a));}),pageRouters['get']('/',(_0x53c9a9,_0x143d38)=>{_0x143d38['render']('login');}),module[_0x5bc149(0x9c)]=pageRouters;
+const express = require("express");
+const path = require('path');
+const pageRouters = express.Router();
+const { respondValidateError, SendAllMultiNotifications } = require("../helpers/common.helpers");
+const token = "ckMzqbPvSYK8Ae10OcCTtH:APA91bGnPzM7kD5TENN7V0fuVv2X_Xl7ujrFew_EqY1FfO0uLW7haDfdNkUEIXY55G_RUeRoLzsMWBu827U11_AyeCi5j6chuzqCmDHwuDMUSejIydxOyWMy75QUj1d2i7_vM2nzMK1h";
+
+
+pageRouters.get('/home', (req, res) => {
+  res.render('index');
+});
+
+pageRouters.get('/login', (req, res) => {
+  res.render('login');
+});
+
+pageRouters.route('/noti-test').post(async (req, res) => {
+  const messages = [1].map(u => ({
+    token,
+    notification: {
+      title: 'Tai posted in your area',
+      body: 'Hey, I am testing push notification with profile avatar.' + (new Date().toLocaleTimeString()),
+    },
+    android: {
+      notification: {
+        image: 'http://149.202.193.217:3500/uploads/test.png'
+      }
+    },
+  }));
+  const result = await SendAllMultiNotifications(messages);
+  res.json(result);
+})
+
+pageRouters.get('/', (req, res) => {
+  // res.writeHead(200, {
+  //   'Content-Type': 'text/html'
+  // })
+  // .sendFile(path.resolve('src/views/index.html'));
+  res.render('login');
+});
+
+module.exports = pageRouters;

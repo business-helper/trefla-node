@@ -7,20 +7,51 @@ const PostLike = require("../models/postLike.model");
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { filterAroundUsers, generateTZTimeString, getTimeAfter, getTotalLikes, respondError, SendAllMultiNotifications, timestamp } = require("../helpers/common.helpers");
 const { checkPostLocationWithUser, generatePostData, generatePostLikeData } = require('../helpers/model.helpers');
-
+const appConfig = require('../config/app.config');
 
 const activity = {
-  pushNotificationToAroundUsers: async ({ contents, areaUsers, post }) => {
+  pushNotificationToAroundUsers: async ({ areaUsers, post, poster }) => {
     const aroundUsers = filterAroundUsers(post.location_coordinate, areaUsers); //.filter(el => el.id !== user.id));
+    const title = activity.generatePostNotiTitle({ name: post.post_name, isGuest: post.isGuest });
+    const body = activity.generatePostNotiBody(post.feed);
+
+    const avatar = activity.getUserAvatar(poster);
+
     const messages = aroundUsers.filter(u => u.device_token).map(u => ({
       token: u.device_token,
       notification: {
-        title: 'Trefla',
-        body: contents[(u.language && u.language.toLowerCase() === 'romanian') ? 'RO' : 'EN'],
+        title: title[u.language && u.language.toLowerCase() === 'romanian' ? 'RO' : "EN"],
+        body,
+      },
+      android: {
+        notification: {
+          image: avatar,
+        }
       },
     }));
     await SendAllMultiNotifications(messages);
-  }
+  },
+  generatePostNotiTitle: ({ name, isGuest }) => {
+    return {
+      'EN': `${isGuest ? 'Guest' : name} posted in your area`,
+      'RO': `${isGuest ? 'Oaspete' : name} postat în zona dvs.`
+    };
+  },
+  generatePostNotiBody: (feed, limit = 60) => {
+    return feed.length < limit ? feed : (feed || "").substring(0, limit) + "...";
+  },
+  getUserAvatar: ({ photo, avatarIndex, sex}) => {
+    sex = sex.toString();
+    if (photo) {
+      return photo;
+    }
+    if (avatarIndex !== undefined && avatarIndex !== '') {
+      return `${appConfig.domain}/img/avatar/${
+        sex === '1' ? 'girl' : 'boy'
+      }/${avatarIndex}.png`;
+    }
+    return `${appConfig.domain}/img/avatar/avatar_${sex === '1' ? 'girl2' : 'boy1'}.png`;
+  },
 }
 
 exports.create = (req, res) => {
@@ -40,11 +71,7 @@ exports.create = (req, res) => {
       if (post.location_area) {
         const areaUsers = await User.getByLocationArea(post.location_area);
 
-        contents = {
-          'EN': `${user.user_name} created a new post.`,
-          'RO': `${user.user_name} a creat o nouă postare.`,
-        };
-        await activity.pushNotificationToAroundUsers({ post, areaUsers, contents });
+        await activity.pushNotificationToAroundUsers({ post, areaUsers, poster: user });
 
         socketClient.emit(CONSTS.SKT_LTS_MULTIPLE, { 
           users: areaUsers, 
@@ -258,11 +285,7 @@ exports.updateById = (req, res) => {
       if (newPost.location_area) {
         const areaUsers = await User.getByLocationArea(newPost.location_area);
 
-        contents = {
-          'EN': `${user.user_name} updated a post.`,
-          'RO': `${user.user_name} și-a actualizat postarea.`,
-        };
-        await activity.pushNotificationToAroundUsers({ post: newPost, areaUsers, contents });
+        await activity.pushNotificationToAroundUsers({ post: newPost, areaUsers, poster: user });
 
         socketClient.emit(CONSTS.SKT_LTS_MULTIPLE, { 
           users: areaUsers, 
