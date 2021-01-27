@@ -15,7 +15,7 @@ const activity = {
     const title = activity.generatePostNotiTitle({ name: post.post_name, isGuest: post.isGuest });
     const body = activity.generatePostNotiBody(post.feed);
 
-    const avatar = activity.getUserAvatar(poster);
+    const avatar = "https://image.flaticon.com/icons/png/512/4094/4094736.png"; //activity.getUserAvatar(poster);
 
     console.log('[post avatar]', avatar);
 
