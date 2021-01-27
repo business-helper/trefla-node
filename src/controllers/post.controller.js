@@ -24,12 +24,13 @@ const activity = {
       notification: {
         title: title[u.language && u.language.toLowerCase() === 'romanian' ? 'RO' : "EN"],
         body,
+        image: avatar,
       },
-      android: {
-        notification: {
-          image: avatar,
-        }
-      },
+      // android: {
+      //   notification: {
+      //     image: avatar,
+      //   }
+      // },
     }));
     await SendAllMultiNotifications(messages);
   },
