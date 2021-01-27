@@ -15,7 +15,7 @@ const activity = {
     const title = activity.generatePostNotiTitle({ name: post.post_name, isGuest: post.isGuest });
     const body = activity.generatePostNotiBody(post.feed);
 
-    const avatar = "https://image.flaticon.com/icons/png/512/4094/4094736.png"; //activity.getUserAvatar(poster);
+    const avatar = activity.getUserAvatar(poster);
 
     console.log('[post avatar]', avatar);
 
@@ -48,12 +48,13 @@ const activity = {
     if (photo) {
       return photo;
     }
+    const domain = "https://admin.trefla.net/assets";
     if (avatarIndex !== undefined && avatarIndex !== '') {
-      return `${appConfig.domain}/img/avatar/${
+      return `${domain}/avatar/${
         sex === '1' ? 'girl' : 'boy'
       }/${avatarIndex}.png`;
     }
-    return `${appConfig.domain}/img/avatar/avatar_${sex === '1' ? 'girl2' : 'boy1'}.png`;
+    return `${domain}/avatar/avatar_${sex === '1' ? 'girl2' : 'boy1'}.png`;
   },
 }
 
