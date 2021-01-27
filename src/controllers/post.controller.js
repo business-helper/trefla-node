@@ -17,6 +17,8 @@ const activity = {
 
     const avatar = activity.getUserAvatar(poster);
 
+    console.log('[post avatar]', avatar);
+
     const messages = aroundUsers.filter(u => u.device_token).map(u => ({
       token: u.device_token,
       notification: {
