@@ -176,7 +176,7 @@ exports.pagination = async (req, res) => {
       let posts = _posts.map(post => Post.output(post)); // filter keys
       posts = posts.map((post, i) => ({
         ...post, 
-        liked: postLikedArray[i].length > 0 ? 1 : 0,
+        liked: postLikedArray[i].length > 0 ? postLikedArray[i][0].type : 0,
         user: User.output(_posters[post.post_user_id])
       }));
 
