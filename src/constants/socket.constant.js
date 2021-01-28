@@ -23,6 +23,7 @@ exports.SKT_REGISTER_WITH_CARD = 'socket.register.with.card';
 exports.SKT_CARD_VERIFIED = 'socket.card.verified';
 exports.SKT_POST_CREATED = 'socket.post.created';
 exports.SKT_POST_UPDATED = 'socket.post.updated';
+exports.SKT_POST_DELETED = 'socket.post.deleted';
 exports.SKT_FOUND_NEW_CARD_CHATS = 'socket.found.new.card.chats';
 exports.SKT_REPLIED_2_TRANSFER_REQUEST = 'socket.replied2.transfer.request';  // unused;
 exports.SKT_CHATLIST_UPDATED = 'socket.chatlist.updated';

@@ -324,6 +324,11 @@ exports.deleteById = (req, res) => {
       }
     })
     .then(() => {
+      const socketClient = req.app.locals.socketClient;
+      socketClient.emit(CONSTS.SKT_LTS_BROADCAST, {
+        event: CONSTS.SKT_POST_DELETED,
+        args: { id: post_id }
+      });
       return res.json({
         status: true,
         message: 'Post has been deleted!'
