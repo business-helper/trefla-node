@@ -159,7 +159,6 @@ exports.pagination = async (req, res) => {
     promiseAll = Promise.all([ posts, minId, total ]);
   }
 
-  
   return promiseAll
     .then(async ([posts, total, minId]) => {
       _posts = posts; _total = total; _minId = minId;
