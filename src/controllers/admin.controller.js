@@ -1,1 +1,357 @@
-const _0x5176=['mu1NwgHpza','BgvUz3rO','y3jLyxrL','Cgf5Bg9Hza','q2HHDcbYB29TignYzwf0zwqH','q29UzMLNigHHCYbIzwvUihvWzgf0zwqH','mte1otK5nNzdvNvzzG','uhjVzMLSzsbOyxmGyMvLBIb1CgrHDgvKiq','CMvWB3j0','y29TBwvUDa','zw1HAwXZ','lI4Vy29UC3rHBNrZl25VDgLMAwnHDgLVBI5JB25ZDgfUDa','C3rYAw5NAwz5','zM9YrwfJAa','Bg9N','nZuWotmWrgjmq2LZ','tg9NAw4GC3vJy2vZCYe','mZa0mJaZBfDeAKPU','ywrTAw5oB3rPzMLJyxrPB24','DxbKyxrLrw1HAwXuzw1WBgf0zuj5swq','zw1HAwXuzw1WBgf0zq','ywrTAw5Fzw1HAwW','qurnsu4','sw52ywXPzcb1C2vYBMfTzsbVCIbLBwfPBce','Cg9ZDa','ywXS','C2vUzenVBNnLBNrfBwfPBdruCMfUC2zLCG','mJiYmJe1Bgjby3fQ','jxvZzxjUyw1Ljq','DxnLCG','z2v0qwrTAw5dB25MAwDszxe','A2v5CW','DxbKyxrLuhjVzMLSzvjLCq','Aw5JBhvKzxm','mJe0mtqXmvvwzvbVyG','zgLMzG','z2v0qNLjzgvUDgLMAwvY','z2vUCMvHDgvbDxrOvg9Rzw4','lI4VAgvSCgvYCY9HDxrOlMHLBhbLCNm','ugfZC3DVCMqGAgfZigjLzw4GDxbKyxrLzce','vhjLzMXHiefKBwLUidW','yxv0Aa','zNjVBq','z2v0','mZCXoty4ugTUDfPP','CgfYC2u','mJa3mZGZtMjqD2zw','DgHLBG','z2v0qNLjza','Dg90ywW','C3vJy2vZCW','C2f2zq','Dg90ywXszxnVDxjJztrtDgf0CW','y29UzMLN','BwvZC2fNzq','DxbKyxrLqwrTAw5qyxnZD29Yza','BwfW','mvDHBvLHsG','t2XKihbHC3n3B3jKigrVzxmGBM90ig1HDgnOiq','lI4VAgvSCgvYCW','BgfZDdDeyxLqB3n0CW','zw1HAwW','CgfZC3DVCMq','BM9Kzs1PBNb1Dc12ywXPzgf0B3i','zgvSzxrLqNLjza','DxnLCL9Uyw1L','y2HHDa','ChvZAa','z2v0qwrTAw5cEuLK','y29TCgfYzvbHC3n3B3jK','ANnVBG','z2v0qNLfBwfPBa','z2v0swruCMfUC2zLCKj5swq','jxrVvxnLCIu','zMXVB3i','Dg9tDhjPBMC','ywrTAw4','yM9KEq','CgfNAw5HDgLVBG','y3jLyxrLx3rPBwu','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','CMvWBgfJzq','DxbKyxrLx3rPBwu','z2v0rw1HAwXuzw1WBgf0zuj5swq','z2v0qNLjzhm','jwvTywLSjq','yxnZAwDU','B3v0Chv0','DxnLCL9Pza','zgvSzxrLswruCMfUC2zLCKj5swq'];const _0x44c2=function(_0xdd18f8,_0x238cb4){_0xdd18f8=_0xdd18f8-0x1d7;let _0x517601=_0x5176[_0xdd18f8];if(_0x44c2['KAgrLz']===undefined){var _0x44c250=function(_0x22aff1){const _0x3dba1a='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x2951bf='';for(let _0x2274f2=0x0,_0x46f924,_0x5f58c7,_0x3606ae=0x0;_0x5f58c7=_0x22aff1['charAt'](_0x3606ae++);~_0x5f58c7&&(_0x46f924=_0x2274f2%0x4?_0x46f924*0x40+_0x5f58c7:_0x5f58c7,_0x2274f2++%0x4)?_0x2951bf+=String['fromCharCode'](0xff&_0x46f924>>(-0x2*_0x2274f2&0x6)):0x0){_0x5f58c7=_0x3dba1a['indexOf'](_0x5f58c7);}return _0x2951bf;};_0x44c2['SXGsRI']=function(_0x520b3d){const _0x2a8f51=_0x44c250(_0x520b3d);let _0x124528=[];for(let _0x396e4d=0x0,_0x5cda95=_0x2a8f51['length'];_0x396e4d<_0x5cda95;_0x396e4d++){_0x124528+='%'+('00'+_0x2a8f51['charCodeAt'](_0x396e4d)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x124528);},_0x44c2['momMnQ']={},_0x44c2['KAgrLz']=!![];}const _0x46d27d=_0x5176[0x0],_0x46ebed=_0xdd18f8+_0x46d27d,_0x4c3531=_0x44c2['momMnQ'][_0x46ebed];return _0x4c3531===undefined?(_0x517601=_0x44c2['SXGsRI'](_0x517601),_0x44c2['momMnQ'][_0x46ebed]=_0x517601):_0x517601=_0x4c3531,_0x517601;};const _0x1e8cc9=_0x44c2;(function(_0x382627,_0x313793){const _0x3e4102=_0x44c2;while(!![]){try{const _0x3b4570=-parseInt(_0x3e4102(0x20f))*parseInt(_0x3e4102(0x1e3))+-parseInt(_0x3e4102(0x1e1))+-parseInt(_0x3e4102(0x22a))+-parseInt(_0x3e4102(0x215))+-parseInt(_0x3e4102(0x220))*parseInt(_0x3e4102(0x1ee))+parseInt(_0x3e4102(0x21e))+parseInt(_0x3e4102(0x1d7));if(_0x3b4570===_0x313793)break;else _0x382627['push'](_0x382627['shift']());}catch(_0x1e4f4e){_0x382627['push'](_0x382627['shift']());}}}(_0x5176,0x98f90));const {Validator}=require(_0x1e8cc9(0x1f4)),models=require('../models'),helpers=require(_0x1e8cc9(0x1f0)),{getTokenInfo}=require(_0x1e8cc9(0x1db)),{bool2Int,getTotalLikes,generateTZTimeString,JSONParser,respondError,sendMail,timestamp}=require(_0x1e8cc9(0x205)),{generateAdminData,generateMessageData}=require('../helpers/model.helpers'),{ADMIN_NOTI_TYPES}=require(_0x1e8cc9(0x21a));exports[_0x1e8cc9(0x211)]=async(_0x46d27d,_0x46ebed)=>{const _0x1ed8ec=_0x1e8cc9,{uid:_0x4c3531}=getTokenInfo(_0x46d27d);let _0x22aff1=generateAdminData(_0x46d27d[_0x1ed8ec(0x202)],_0x4c3531,receiver);const _0x3dba1a=_0x46d27d['body']['message']?generateMessageData({..._0x46d27d[_0x1ed8ec(0x202)],'sender_id':_0x4c3531,'receiver_id':receiver?receiver['id']:0x0,'message':_0x46d27d[_0x1ed8ec(0x202)][_0x1ed8ec(0x1eb)]}):null;return models[_0x1ed8ec(0x201)][_0x1ed8ec(0x211)](_0x22aff1)[_0x1ed8ec(0x1e4)](_0x2951bf=>Promise[_0x1ed8ec(0x228)]([_0x2951bf,models[_0x1ed8ec(0x22c)][_0x1ed8ec(0x1e5)](_0x4c3531),_0x3dba1a?models[_0x1ed8ec(0x1eb)][_0x1ed8ec(0x211)]({..._0x3dba1a,'chat_id':_0x2951bf['id']}):null]))[_0x1ed8ec(0x1e4)](([_0x2274f2,_0x46f924,_0x5f58c7])=>{const _0x249519=_0x1ed8ec;return _0x2274f2=models[_0x249519(0x1f7)]['output'](_0x2274f2),_0x2274f2['receiver']=models[_0x249519(0x22c)][_0x249519(0x20c)](receiver),_0x46ebed[_0x249519(0x1fb)]({'status':!![],'message':_0x249519(0x213),'data':_0x2274f2});})['catch'](_0x3606ae=>respondError(_0x46ebed,_0x3606ae));},exports[_0x1e8cc9(0x1f9)]=async _0x520b3d=>{const _0x1b98d9=_0x1e8cc9;return models[_0x1b98d9(0x201)][_0x1b98d9(0x1e5)](_0x520b3d);},exports['loginReq']=async(_0x2a8f51,_0x124528)=>{const _0x44c6a9=_0x1e8cc9,{email_or_name:_0x396e4d,password:_0x5cda95}=_0x2a8f51[_0x44c6a9(0x202)];let _0x2eee83;return Promise[_0x44c6a9(0x228)]([models[_0x44c6a9(0x201)][_0x44c6a9(0x1fc)](_0x396e4d),models[_0x44c6a9(0x201)]['getByUsername'](_0x396e4d)])[_0x44c6a9(0x1e4)](([_0x12095d,_0x3397c9])=>{const _0x2a3996=_0x44c6a9;if(!_0x12095d&&!_0x3397c9)throw Object['assign'](new Error(_0x2a3996(0x226)),{'code':0x190});return _0x2eee83=_0x12095d||_0x3397c9,Promise[_0x2a3996(0x228)]([helpers[_0x2a3996(0x1de)][_0x2a3996(0x1fa)](_0x5cda95,_0x2eee83[_0x2a3996(0x1f3)]),helpers[_0x2a3996(0x1de)][_0x2a3996(0x1da)](_0x2eee83,_0x2a3996(0x225))]);})[_0x44c6a9(0x1e4)](([_0x5afaa5,_0x389627])=>{const _0x2965a4=_0x44c6a9;if(!_0x5afaa5)throw Object[_0x2965a4(0x20b)](new Error('Password\x20does\x20not\x20match!'),{'code':0x190});return{'status':!![],'message':_0x2965a4(0x21f),'data':models['admin']['output'](_0x2eee83),'token':_0x389627};});},exports['getIdTransfersReq']=async({limit:limit=0x0,page:page=0x0})=>{const _0x548b68=_0x1e8cc9;limit=Number(limit),page=Number(page);let _0x16a881,_0x1e142f;return Promise[_0x548b68(0x228)]([models[_0x548b68(0x221)][_0x548b68(0x203)]({'page':page,'limit':limit}),models[_0x548b68(0x221)][_0x548b68(0x1e6)]({})])[_0x548b68(0x1e4)](([_0x88872b,_0x26f69e])=>{const _0x36a237=_0x548b68;_0x1e142f=_0x88872b,_0x16a881=_0x26f69e;const _0xd906f3=[0x0];return _0x88872b[_0x36a237(0x21c)](_0x17ae83=>{const _0x2f93d8=_0x36a237,_0x135523=JSONParser(_0x17ae83[_0x2f93d8(0x212)]);_0x135523['from']?_0xd906f3[_0x2f93d8(0x1f8)](_0x135523[_0x2f93d8(0x1df)]):null,_0x135523['to']?_0xd906f3[_0x2f93d8(0x1f8)](_0x135523['to']):null;}),models[_0x36a237(0x22c)]['getByIds'](_0xd906f3);})['then'](_0x184f2b=>{const _0x519a95=_0x548b68,_0x4a003f={};_0x184f2b[_0x519a95(0x21c)](_0x29e8e1=>{const _0x3104bb=_0x519a95;_0x4a003f[_0x29e8e1['id'][_0x3104bb(0x200)]()]=_0x29e8e1;});const _0x42cd8d=_0x1e142f[_0x519a95(0x210)]+page*limit<_0x16a881,_0x45367e={'page':page,'limit':limit,'total':_0x16a881};return{'status':!![],'message':'success','data':_0x1e142f[_0x519a95(0x1ed)](_0x51306b=>{const _0x2874b9=_0x519a95;return _0x51306b=models[_0x2874b9(0x221)][_0x2874b9(0x20c)](_0x51306b),{..._0x51306b,'from':models[_0x2874b9(0x22c)][_0x2874b9(0x20c)](_0x4a003f[_0x51306b[_0x2874b9(0x212)]['from']]),'to':models[_0x2874b9(0x22c)]['output'](_0x4a003f[_0x51306b[_0x2874b9(0x212)]['to']])};}),'pager':_0x45367e,'hasMore':_0x42cd8d};});},exports[_0x1e8cc9(0x1fd)]=async _0x2a3cdd=>{const _0x2d1104=_0x1e8cc9;let _0x43e9f2;return models[_0x2d1104(0x221)][_0x2d1104(0x1e5)](_0x2a3cdd)[_0x2d1104(0x1e4)](_0x5e2965=>{const _0xe697ef=_0x2d1104;_0x43e9f2=_0x5e2965;const _0xe0c5d1=JSON[_0xe697ef(0x1e2)](_0x5e2965['payload']);return models['user'][_0xe697ef(0x209)]([_0xe0c5d1[_0xe697ef(0x1df)],_0xe0c5d1['to']]);})[_0x2d1104(0x1e4)](_0x424d68=>{const _0x18dbc5=_0x2d1104;return{'status':!![],'message':'success','data':{...models[_0x18dbc5(0x221)]['output'](_0x43e9f2),'from':models[_0x18dbc5(0x22c)]['output'](_0x424d68[0x0]),'to':models['user'][_0x18dbc5(0x20c)](_0x424d68[0x1])}};});},exports[_0x1e8cc9(0x20e)]=async _0x142e18=>{const _0xdcecec=_0x1e8cc9;return models[_0xdcecec(0x221)][_0xdcecec(0x1f5)](_0x142e18)[_0xdcecec(0x1e4)](()=>{return{'status':!![],'message':'Data\x20has\x20been\x20deleted'};});},exports['getEmailTemplateReq']=async({limit:limit=0x0,page:page=0x0})=>{const _0x5e694f=_0x1e8cc9;limit=Number(limit),page=Number(page);let _0x5cdfbb,_0x4d7650;return Promise[_0x5e694f(0x228)]([models[_0x5e694f(0x223)][_0x5e694f(0x203)]({'page':page,'limit':limit}),models[_0x5e694f(0x223)]['total']({})])[_0x5e694f(0x1e4)](([_0x303f12,_0x3d10b])=>{const _0x1ce49a=_0x5e694f,_0x231978=page*limit+_0x303f12[_0x1ce49a(0x210)]<_0x3d10b,_0x3fb430={'page':page,'limit':limit,'total':_0x3d10b};return{'status':!![],'message':_0x1ce49a(0x1e7),'data':_0x303f12[_0x1ce49a(0x1ed)](_0x4ab1fb=>models[_0x1ce49a(0x223)][_0x1ce49a(0x20c)](_0x4ab1fb)),'pager':_0x3fb430,'hasMore':_0x231978};});},exports[_0x1e8cc9(0x208)]=async _0x5b445d=>{const _0x9590f6=_0x1e8cc9;return models[_0x9590f6(0x223)][_0x9590f6(0x1e5)](_0x5b445d)[_0x9590f6(0x1e4)](_0x3980fc=>({'status':!![],'message':_0x9590f6(0x1e7),'data':_0x3980fc}));},exports[_0x1e8cc9(0x222)]=async(_0x1bc9f2,_0x5b64b2)=>{const _0x5be94a=_0x1e8cc9;return models[_0x5be94a(0x223)][_0x5be94a(0x1e5)](_0x1bc9f2)[_0x5be94a(0x1e4)](_0x162a40=>{const _0x17aaa3=_0x5be94a,_0x3483ed=Object[_0x17aaa3(0x22e)](_0x162a40),_0x33687b=[_0x17aaa3(0x212),'emails'];return _0x3483ed[_0x17aaa3(0x21c)](_0x4efa3a=>{const _0x309319=_0x17aaa3;_0x162a40[_0x4efa3a]=_0x5b64b2[_0x4efa3a]!==undefined?_0x33687b[_0x309319(0x230)](_0x4efa3a)?JSON['stringify'](_0x5b64b2[_0x4efa3a]):_0x5b64b2[_0x4efa3a]:_0x162a40[_0x4efa3a];}),models[_0x17aaa3(0x223)][_0x17aaa3(0x1e8)](_0x162a40);})['then'](_0x16c9df=>{const _0x17ea33=_0x5be94a;return{'status':!![],'message':_0x17ea33(0x1e7),'data':models[_0x17ea33(0x223)][_0x17ea33(0x20c)](_0x16c9df)};});},exports[_0x1e8cc9(0x22f)]=async(_0x41e2fe,_0x31519a)=>{const _0x1c3cb2=_0x1e8cc9;return models[_0x1c3cb2(0x201)][_0x1c3cb2(0x1e5)](_0x41e2fe)[_0x1c3cb2(0x1e4)](_0x4e3063=>{const _0x200c4a=_0x1c3cb2,_0x117e61=Object[_0x200c4a(0x22e)](_0x4e3063);return _0x117e61[_0x200c4a(0x21c)](_0x5e4e65=>{_0x4e3063[_0x5e4e65]=_0x31519a[_0x5e4e65]!==undefined?_0x31519a[_0x5e4e65]:_0x4e3063[_0x5e4e65];}),_0x4e3063[_0x200c4a(0x207)]=timestamp(),models[_0x200c4a(0x201)][_0x200c4a(0x1e8)](_0x4e3063);})['then'](_0x109d0a=>{const _0x4d227f=_0x1c3cb2;return{'status':!![],'message':_0x4d227f(0x216),'data':models[_0x4d227f(0x201)][_0x4d227f(0x20c)](_0x109d0a)};});},exports[_0x1e8cc9(0x1ec)]=async(_0x1dc1aa,{old_pass:_0x2787df,password:_0x549ae8})=>{const _0x4b69a5=_0x1e8cc9;let _0x2af3c3;return models['admin'][_0x4b69a5(0x1e5)](_0x1dc1aa)[_0x4b69a5(0x1e4)](async _0x339022=>{const _0x45ae26=_0x4b69a5,_0x2e469a=await helpers[_0x45ae26(0x1de)][_0x45ae26(0x1fa)](_0x2787df,_0x339022['password']);if(!_0x2e469a)throw Object[_0x45ae26(0x20b)](new Error(_0x45ae26(0x1ef)),{'code':0x190});return _0x2af3c3=_0x339022,helpers[_0x45ae26(0x1de)]['generatePassword'](_0x549ae8);})[_0x4b69a5(0x1e4)](_0x40504c=>{const _0x4e8f4c=_0x4b69a5;return _0x2af3c3[_0x4e8f4c(0x1f3)]=_0x40504c,_0x2af3c3[_0x4e8f4c(0x207)]=timestamp(),models[_0x4e8f4c(0x201)]['save'](_0x2af3c3);})[_0x4b69a5(0x1e4)](_0x372f02=>{const _0x24f49b=_0x4b69a5;return{'status':!![],'message':_0x24f49b(0x1dc)};});},exports[_0x1e8cc9(0x22d)]=async()=>{const _0x1c1ebe=_0x1e8cc9;return models[_0x1c1ebe(0x1ea)][_0x1c1ebe(0x1e5)](0x1)[_0x1c1ebe(0x1e4)](_0x259ed9=>{const _0x289f18=_0x1c1ebe;return{'status':!![],'message':_0x289f18(0x1e7),'data':_0x259ed9};});},exports['updateAdminConfigReq']=async _0x3de32f=>{const _0x517b93=_0x1e8cc9;return models[_0x517b93(0x1ea)]['getById'](0x1)[_0x517b93(0x1e4)](_0x4b69b9=>{const _0x557d4c=_0x517b93,_0x53001f=Object[_0x557d4c(0x22e)](_0x4b69b9);return _0x53001f[_0x557d4c(0x21c)](_0xf5b0c7=>{_0x4b69b9[_0xf5b0c7]=_0x3de32f[_0xf5b0c7]!==undefined?_0x3de32f[_0xf5b0c7]:_0x4b69b9[_0xf5b0c7];}),models[_0x557d4c(0x1ea)][_0x557d4c(0x1e8)](_0x4b69b9);})['then'](_0x436981=>{const _0x2950c3=_0x517b93;return{'status':!![],'message':_0x2950c3(0x214),'data':_0x436981};});},exports['recentPosts4Stats']=async()=>{const _0x103d29=_0x1e8cc9;let _0x4719f0;return models[_0x103d29(0x227)]['recentPosts']()[_0x103d29(0x1e4)](_0xc3ff8d=>{const _0x3876ad=_0x103d29;_0x4719f0=_0xc3ff8d;const _0x43dd15=_0xc3ff8d[_0x3876ad(0x1ed)](_0x3725e0=>_0x3725e0[_0x3876ad(0x20d)]);return _0x43dd15[_0x3876ad(0x1f8)](0x0),models[_0x3876ad(0x22c)]['getByIds'](_0x43dd15);})[_0x103d29(0x1e4)](_0x1ec096=>{const _0x35a55e=_0x103d29,_0x39d4bd={};return _0x1ec096[_0x35a55e(0x21c)](_0x3a898a=>{_0x39d4bd[_0x3a898a['id']['toString']()]=_0x3a898a;}),_0x4719f0[_0x35a55e(0x1ed)](_0x393d38=>{const _0x4de5b8=_0x35a55e;return{..._0x393d38,'user':models[_0x4de5b8(0x22c)][_0x4de5b8(0x20c)](_0x39d4bd[_0x393d38[_0x4de5b8(0x20d)]['toString']()])};});});},exports[_0x1e8cc9(0x1e9)]=async()=>{const _0x356005=_0x1e8cc9;return Promise[_0x356005(0x228)]([models['post'][_0x356005(0x1e6)](),models[_0x356005(0x218)]['total'](),models[_0x356005(0x217)][_0x356005(0x1e6)](),models[_0x356005(0x22c)][_0x356005(0x1e6)]()])[_0x356005(0x1e4)](([_0x256866,_0x31a1e5,_0x593390,_0x1f7d54])=>{return{'posts':_0x256866,'comments':_0x31a1e5,'reports':_0x593390,'users':_0x1f7d54};});},exports['last7DayPosts']=async()=>{const _0x47d76f=_0x1e8cc9,_0x51cb50=timestamp(),_0x77c75d=_0x51cb50-0x15180*0x7;let _0x2daf7d=[0x0,0x0,0x0,0x0,0x0,0x0,0x0];return models['post'][_0x47d76f(0x1f1)](_0x77c75d)[_0x47d76f(0x1e4)](_0x17022e=>{const _0x5ec135=_0x47d76f;return _0x17022e[_0x5ec135(0x1ed)](_0x30b8a5=>{const _0x475b9b=_0x5ec135,_0x35c56d=Math[_0x475b9b(0x1ff)]((_0x51cb50-Number(_0x30b8a5['create_time']))/0x15180);console[_0x475b9b(0x21d)](_0x475b9b(0x1d8),_0x51cb50,_0x30b8a5[_0x475b9b(0x204)]),_0x2daf7d[0x6-_0x35c56d]++;}),_0x2daf7d;});},exports[_0x1e8cc9(0x229)]=async _0x27712a=>{const _0x523c0e=_0x1e8cc9;let _0x1bfa26;return models[_0x523c0e(0x221)]['getById'](_0x27712a)['then'](_0x26c2c4=>{const _0x10e174=_0x523c0e;_0x1bfa26=_0x26c2c4;const _0x3d80be=JSONParser(_0x26c2c4['payload']);return Promise['all']([models[_0x10e174(0x223)][_0x10e174(0x1d9)]('verify_consent'),models[_0x10e174(0x22c)][_0x10e174(0x209)]([_0x3d80be[_0x10e174(0x1df)],_0x3d80be['to']]),models[_0x10e174(0x1ea)][_0x10e174(0x1e0)]()]);})[_0x523c0e(0x1e4)](([_0x598e25,_0x8da2aa,_0xf64208])=>{const _0x5d0412=_0x523c0e;let _0x569378=_0x598e25[_0x5d0412(0x202)][_0x5d0412(0x206)](new RegExp(_0x5d0412(0x22b),'g'),_0x8da2aa[0x0][_0x5d0412(0x1f6)])[_0x5d0412(0x206)](new RegExp(_0x5d0412(0x1fe),'g'),_0x8da2aa[0x1][_0x5d0412(0x1f6)])[_0x5d0412(0x206)](new RegExp(_0x5d0412(0x20a),'g'),_0x8da2aa[0x1]['email']);sendMail({'from':_0x5d0412(0x1dd)+_0xf64208[_0x5d0412(0x224)]+'>','to':_0x8da2aa[0x0][_0x5d0412(0x1f2)],'subject':_0x598e25['subject'],'body':_0x569378});})[_0x523c0e(0x1e4)](async _0x5e1ad8=>{const _0x366964=_0x523c0e,_0x547683=JSONParser(_0x1bfa26[_0x366964(0x219)]||'[]');return _0x547683[_0x366964(0x1f8)](timestamp()),_0x1bfa26['emails']=JSON[_0x366964(0x21b)](_0x547683),models['adminNotification'][_0x366964(0x1e8)](_0x1bfa26);})[_0x523c0e(0x1e4)](_0x5cec21=>{return{'status':!![],'message':'Email\x20has\x20been\x20sent!'};});};
+const { Validator } = require("node-input-validator");
+
+const models = require("../models");
+const helpers = require("../helpers");
+const { getTokenInfo } = require('../helpers/auth.helpers');
+const { bool2Int, getTotalLikes, generateTZTimeString, JSONParser, respondError, sendMail, timestamp } = require("../helpers/common.helpers");
+const { generateAdminData, generateMessageData } = require('../helpers/model.helpers');
+const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
+
+const activity = {
+
+}
+
+// to-do
+exports.create = async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+
+  let model = generateAdminData(req.body, user_id, receiver);
+  const message = req.body.message ? generateMessageData({
+    ...req.body,
+    sender_id: user_id,
+    receiver_id: receiver ? receiver.id : 0,
+    message: req.body.message
+  }) : null;
+
+  return models.admin.create(model)
+    .then(chat => Promise.all([
+      chat,
+      models.user.getById(user_id),
+      message ? models.message.create({ ...message, chat_id: chat.id }) : null
+    ]))
+    .then(([chat, sender, message]) => {
+      chat = models.chat.output(chat);
+      chat.receiver = models.user.output(receiver);
+      return res.json({
+        status: true, 
+        message: 'Chat room created!',
+        data: chat
+      });
+    })
+    .catch((error) => respondError(res, error));
+};
+
+exports.getAdminById = async (id) => {
+  return models.admin.getById(id);
+}
+
+exports.loginReq = async (req, res) => {
+  const { email_or_name, password } = req.body;
+  let _admin;
+  return Promise.all([
+    models.admin.getByEmail(email_or_name),
+    models.admin.getByUsername(email_or_name)
+  ])
+    .then(([ adminByEmail, adminByName ]) => {
+      if (!adminByEmail && !adminByName) {
+        throw Object.assign(new Error('Invalid username or email!'), { code: 400 });
+      }
+      _admin = adminByEmail || adminByName;
+      return Promise.all([
+        helpers.auth.comparePassword(password, _admin.password),
+        helpers.auth.genreateAuthToken(_admin, 'ADMIN'),
+        
+      ])
+    })
+    .then(([matched, token]) => {
+      if (!matched) {
+        throw Object.assign(new Error('Password does not match!'), { code: 400 });
+      }
+      return {
+        status: true,
+        message: "Login success!",
+        data: models.admin.output(_admin),
+        token,
+      };
+    });
+}
+
+exports.getIdTransfersReq = async ({ limit = 0, page = 0 }) => {
+  limit = Number(limit);
+  page = Number(page);
+
+  let _total, _rows;
+  return Promise.all([
+    models.adminNotification.pagination({ page, limit }),
+    models.adminNotification.total({}),
+  ])
+    .then(([ rows, total ]) => {
+      _rows = rows; _total = total;
+      const userIds = [0];
+      rows.forEach(transfer => {
+        const payload = JSONParser(transfer.payload);
+        payload.from ? userIds.push(payload.from) : null;
+        payload.to ? userIds.push(payload.to) : null;
+      });
+      return models.user.getByIds(userIds);
+    })
+    .then(users => {
+      const userObj = {};
+      users.forEach(user => {
+        userObj[user.id.toString()] = user;
+      });
+
+      const hasMore = _rows.length + page * limit < _total;
+      const pager = { page, limit, total: _total };
+      return {
+        status: true,
+        message: 'success',
+        data: _rows.map(item => {
+          item = models.adminNotification.output(item);
+          return {
+            ...item,
+            from: models.user.output(userObj[item.payload.from]),
+            to: models.user.output(userObj[item.payload.to]),
+          }
+        }),
+        pager,
+        hasMore,
+      };
+    })
+}
+
+exports.getIdTransferById = async (id) => {
+  let _noti;
+  return models.adminNotification.getById(id)
+    .then(adminNoti => {
+      _noti = adminNoti;
+      const payload = JSON.parse(adminNoti.payload);
+      return models.user.getByIds([ payload.from, payload.to ]);
+    })
+    .then(users => {
+      return {
+        status: true,
+        message: 'success',
+        data: {
+          ...(models.adminNotification.output(_noti)),
+          from: models.user.output(users[0]),
+          to: models.user.output(users[1]),
+        }
+      }
+    });
+}
+
+exports.deleteIdTransferById = async (id) => {
+  return models.adminNotification.deleteById(id)
+    .then(() => {
+      return {
+        status: true,
+        message: 'Data has been deleted',
+      };
+    })
+}
+
+exports.getEmailTemplateReq = async ({ limit = 0, page = 0 }) => {
+  limit = Number(limit);
+  page = Number(page);
+
+  let _total, _rows;
+
+  return Promise.all([
+    models.emailTemplate.pagination({ page, limit }),
+    models.emailTemplate.total({}),
+  ])
+    .then(([ rows, total ]) => {
+      const hasMore = page * limit + rows.length < total;
+      const pager = { page, limit, total };
+      return {
+        status: true,
+        message: 'success',
+        data: rows.map(row => models.emailTemplate.output(row)),
+        pager,
+        hasMore,
+      }
+    })
+}
+
+exports.getEmailTemplateById = async (id) => {
+  return models.emailTemplate.getById(id)
+    .then(et => ({ status: true, message: 'success', data: et }));
+}
+
+exports.updateEmailTemplateById = async (id, data) => {
+  return models.emailTemplate.getById(id)
+    .then(template => {
+      const keys = Object.keys(template);
+      const jsonKeys = ['payload', 'emails'];
+      keys.forEach(key => {
+        template[key] = data[key] !== undefined ? (jsonKeys.includes(key) ? JSON.stringify(data[key]) : data[key]) : template[key];
+      });
+      return models.emailTemplate.save(template);
+    })
+    .then(et => {
+      return {
+        status: true,
+        message: 'success',
+        data: models.emailTemplate.output(et),
+      };
+    })
+}
+
+exports.updateProfileReq = async (id, data) => {
+  return models.admin.getById(id)
+    .then(admin => {
+      const keys = Object.keys(admin);
+      keys.forEach(key => {
+        admin[key] = data[key] !== undefined ? data[key]: admin[key];
+      });
+      admin.update_time = timestamp();
+      return models.admin.save(admin);
+    })
+    .then(admin => {
+      return {
+        status: true,
+        message: 'Profile has been updated!',
+        data: models.admin.output(admin),
+      };
+    })
+}
+
+exports.updateAdminPassword = async (id, { old_pass, password }) => {
+  let _admin;
+  return models.admin.getById(id)
+    .then(async admin => {
+      const matched = await helpers.auth.comparePassword(old_pass, admin.password);
+      if (!matched) throw Object.assign(new Error("Old password does not match!"), { code: 400 });
+      _admin = admin;
+      return helpers.auth.generatePassword(password);
+    })
+    .then(newHash => {
+      _admin.password = newHash;
+      _admin.update_time = timestamp();
+      return models.admin.save(_admin);
+    })
+    .then(admin => {
+      return {
+        status: true,
+        message: 'Password has been updated!',
+      };
+    })
+}
+
+exports.getAdminConfigReq = async () => {
+  return models.config.getById(1)
+    .then(config => {
+      return {
+        status: true,
+        message: 'success',
+        data: config,
+      };
+    })
+}
+
+exports.updateAdminConfigReq = async (data) => {
+  return models.config.getById(1)
+    .then(config => {
+      const keys = Object.keys(config);
+      keys.forEach(key => {
+        config[key] = data[key] !== undefined ? data[key]: config[key];
+      });
+      return models.config.save(config);
+    })
+    .then(config => {
+      return {
+        status: true,
+        message: 'Config has been updated!',
+        data: config,
+      };
+    })
+}
+
+exports.recentPosts4Stats = async () => {
+  let _posts;
+  return models.post.recentPosts()
+    .then(posts => {
+      _posts = posts;
+      const user_ids = posts.map(post => post.user_id); user_ids.push(0);
+      return models.user.getByIds(user_ids);
+    })
+    .then(users => {
+      const userObj = {};
+      users.forEach(user => {
+        userObj[user.id.toString()] = user;
+      });
+      return _posts.map(post => {
+        return {
+          ...post,
+          user: models.user.output(userObj[post.user_id.toString()]),
+        };
+      })
+    })
+}
+
+exports.totalResource4Stats = async () => {
+  return Promise.all([
+    models.post.total(),
+    models.comment.total(),
+    models.report.total(),
+    models.user.total(),
+  ])
+    .then(([ posts, comments, reports, users ]) => {
+      return { posts, comments, reports, users };
+    })
+}
+
+exports.last7DayPosts = async () => {
+  const time = timestamp();
+  const start_time = time - 86400 * 7;
+  let stats = [0, 0, 0, 0, 0, 0, 0];
+  return models.post.last7DayPosts(start_time)
+    .then(posts => {
+      posts.map(post => {
+        const deltaDay = Math.floor((time - Number(post.create_time)) / 86400);
+        console.log('diff', time, post.create_time);
+        stats[6 - deltaDay] ++;
+      });
+      return stats;
+    });
+}
+
+exports.sendConsentEmail4Transfer = async (noti_id) => {
+  let _noti;
+  return models.adminNotification.getById(noti_id)
+    .then(adminNoti => {
+      _noti = adminNoti;
+      const payload = JSONParser(adminNoti.payload);
+      return Promise.all([
+        models.emailTemplate.getByIdentifier('verify_consent'),
+        models.user.getByIds([payload.from, payload.to]),
+        models.config.get(),
+      ])
+    })
+    .then(([ template, users, config ]) => {
+      let htmlBody = template.body
+        .replace(new RegExp('%username%', 'g'), users[0].user_name)
+        .replace(new RegExp('%toUser%', 'g'), users[1].user_name)
+        .replace(new RegExp('%email%', 'g'), users[1].email);
+
+      sendMail({
+        from: `Trefla Admin <${config.admin_email}>`,
+        to: users[0].email,
+        subject: template.subject,
+        body: htmlBody,
+      })
+    })
+    .then(async info => {
+      const emails = JSONParser(_noti.emails || "[]");
+      emails.push(timestamp());
+      _noti.emails = JSON.stringify(emails);
+      return models.adminNotification.save(_noti);
+    })
+    .then(adminNoti => {
+      return {
+        status: true,
+        message: 'Email has been sent!',
+      };
+    });
+}

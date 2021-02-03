@@ -129,10 +129,11 @@ exports.pagination = async (req, res) => {
 
   if (type === 'ALL') {
     const me = await User.getById(uid);
+    const location_area = req.body.location_area || me.location_area || null;
     promiseAll = Promise.all([
-      Post.pagination({ limit, last_id, type: post_type, location_area: me.location_area }),
-      Post.getCountOfPosts({ type: post_type, location_area: me.location_area }),
-      Post.getMinIdOfPosts({ type: post_type, location_area: me.location_area }),
+      Post.pagination({ limit, last_id, type: post_type, location_area }),
+      Post.getCountOfPosts({ type: post_type, location_area }),
+      Post.getMinIdOfPosts({ type: post_type, location_area }),
     ]);
   } else if (type === 'ME') {
     promiseAll = Promise.all([

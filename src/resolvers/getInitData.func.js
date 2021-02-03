@@ -1,1 +1,203 @@
-const _0x161f=['isForCard','length','exports','required|integer','sender_id','user_id','push','chat','map','myChatrooms','catch','card_verified','then','13MUYHIs','log','errors','144lzZDuc','check','../helpers/common.helpers','getByIds','paginationByLastId','../middlewares/basic.middleware','../models/index','../models/postLike.model','parse','793330jDWvbo','793325OKiURb','../models/notification.model','7132KgkgIJ','pagination','postLikesOfUser','../helpers/auth.helpers','filter','location_area','body','card_number','notifications','user','assign','../models/post.model','27061adTlgX','forEach','938185FIQekX','user_ids','posts','getById','allChatsOfUser','json','getByCard','indexOf','456857KvrJUo','65OJimli','toString','Invalid\x20request','output','all','3636CsWGBT','post_user_id'];const _0x555b=function(_0x2247c2,_0x1c3de8){_0x2247c2=_0x2247c2-0x98;let _0x161fd9=_0x161f[_0x2247c2];return _0x161fd9;};const _0x37122b=_0x555b;(function(_0x4b0cd8,_0x23ad38){const _0x3e0b81=_0x555b;while(!![]){try{const _0x8f9a7=-parseInt(_0x3e0b81(0xb1))+parseInt(_0x3e0b81(0xa1))+-parseInt(_0x3e0b81(0xce))*-parseInt(_0x3e0b81(0xaf))+-parseInt(_0x3e0b81(0xb9))+-parseInt(_0x3e0b81(0xbf))*-parseInt(_0x3e0b81(0xd1))+-parseInt(_0x3e0b81(0xa3))*parseInt(_0x3e0b81(0xba))+parseInt(_0x3e0b81(0xa0));if(_0x8f9a7===_0x23ad38)break;else _0x4b0cd8['push'](_0x4b0cd8['shift']());}catch(_0x1f07fb){_0x4b0cd8['push'](_0x4b0cd8['shift']());}}}(_0x161f,0x93512));const {Validator}=require('node-input-validator'),User=require('../models/user.model'),Post=require(_0x37122b(0xae)),PostLike=require(_0x37122b(0x9e)),Notification=require(_0x37122b(0xa2)),models=require(_0x37122b(0x9d)),{BearerMiddleware}=require(_0x37122b(0x9c)),{getTokenInfo}=require(_0x37122b(0xa6)),{chatPartnerId,JSONParser,respondValidateError}=require(_0x37122b(0x99)),getPostSummary=async(_0x4491d7,_0x584746)=>{const _0x413389=_0x37122b,{uid:_0x339945}=getTokenInfo(_0x4491d7),_0x5db92e=_0x4491d7[_0x413389(0xa9)][_0x413389(0xb3)]||0xa,_0x52d4fc=0x0,_0x11ef32=await models['user'][_0x413389(0xb4)](_0x339945);let _0x118da6=[],_0x32c872={};return Post[_0x413389(0xa4)]({'limit':_0x5db92e,'offset':_0x52d4fc,'location_area':_0x11ef32[_0x413389(0xa8)]})[_0x413389(0xcd)](_0x2fa7e0=>{const _0x15a196=_0x413389;_0x118da6=_0x2fa7e0;let _0x359ab4=_0x2fa7e0['map'](_0x4020ca=>_0x4020ca[_0x15a196(0xc6)]);return _0x359ab4[_0x15a196(0xc7)](0x0),User['getByIds'](_0x359ab4);})['then'](_0x2f54e3=>{const _0x118f0e=_0x413389;return _0x2f54e3[_0x118f0e(0xb0)](_0x259a3e=>_0x32c872[_0x259a3e['id']]=_0x259a3e),Promise['all'](_0x118da6['map'](_0x4998bb=>PostLike[_0x118f0e(0xa5)]({'user_id':_0x339945,'post_id':_0x4998bb['id']})));})[_0x413389(0xcd)](_0x390b7b=>{const _0x4dfd22=_0x413389;return _0x118da6=_0x118da6['map'](_0x33a399=>Post[_0x4dfd22(0xbd)](_0x33a399)),_0x118da6=_0x118da6[_0x4dfd22(0xc9)]((_0x2776f8,_0xc7bc56)=>({..._0x2776f8,'liked':_0x390b7b[_0xc7bc56][_0x4dfd22(0xc2)]>0x0?_0x390b7b[_0xc7bc56][0x0]['type']:0x0,'user':User[_0x4dfd22(0xbd)](_0x32c872[_0x2776f8[_0x4dfd22(0xc0)]])})),console[_0x4dfd22(0xcf)]('[posts]',_0x118da6[_0x4dfd22(0xc2)]),_0x118da6;});},getNotificationSummary=async(_0x5adab0,_0x271c7a)=>{const _0x37198e=_0x37122b,{uid:_0x44691d}=getTokenInfo(_0x5adab0),_0x26365a=_0x5adab0[_0x37198e(0xa9)][_0x37198e(0xab)]||0xa,_0x3d896c=0x0;let _0x48dab1=[],_0x5bddef={};return Notification[_0x37198e(0x9b)]({'limit':_0x26365a,'receiver_id':_0x44691d})['then'](_0x327734=>{const _0x582380=_0x37198e;_0x48dab1=_0x327734;let _0x7c31b3=[0x0];return _0x327734[_0x582380(0xb0)](_0x2b6273=>{const _0x139ed5=_0x582380;_0x7c31b3[_0x139ed5(0xc7)](_0x2b6273['sender_id']);}),User['getByIds'](_0x7c31b3);})['then'](_0x57e503=>{const _0x1dc85d=_0x37198e;return _0x57e503[_0x1dc85d(0xb0)](_0x5034a0=>_0x5bddef[_0x5034a0['id']]=_0x5034a0),_0x48dab1=_0x48dab1[_0x1dc85d(0xc9)](_0x25b34f=>Notification['output'](_0x25b34f)),_0x48dab1[_0x1dc85d(0xc9)](_0x399785=>({..._0x399785,'sender':User['output'](_0x5bddef[_0x399785[_0x1dc85d(0xc5)]])}));});},getInitDataWrapper=(_0x3ae9f9,_0x128b3e)=>{return BearerMiddleware(_0x3ae9f9,_0x128b3e,()=>{const _0x43ac12=_0x555b;return getInitData(_0x3ae9f9,_0x128b3e)[_0x43ac12(0xcd)](_0x485b65=>_0x128b3e[_0x43ac12(0xb6)](_0x485b65))[_0x43ac12(0xcb)](_0x1fb312=>respondValidateError(_0x128b3e,_0x1fb312));});},getChatSummary=async(_0x5bb467,_0x316363)=>{const _0x5f4d5b=_0x37122b,{uid:_0x594ab9}=getTokenInfo(_0x5bb467);let _0x29f4e3;return models['chat'][_0x5f4d5b(0xca)](_0x594ab9)[_0x5f4d5b(0xcd)](_0x4d205e=>{const _0x35837b=_0x5f4d5b;let _0x347f99=[0x0];return _0x4d205e=_0x4d205e[_0x35837b(0xa7)](_0x2e45ad=>{const _0x11cc97=_0x35837b,_0x5e061=JSON[_0x11cc97(0x9f)](_0x2e45ad['user_ids']),_0x4ecd42=_0x5e061[_0x11cc97(0xb8)](_0x594ab9);if(_0x4ecd42>0x0&&_0x4ecd42<_0x5e061[_0x11cc97(0xc2)]-0x1)return![];return _0x2e45ad['accept_status']===0x1?(_0x347f99[_0x11cc97(0xc7)](_0x4ecd42==0x0?_0x5e061[_0x5e061[_0x11cc97(0xc2)]-0x1]:_0x5e061[0x0]),!![]):(_0x4ecd42===0x0?null:_0x347f99[_0x11cc97(0xc7)](_0x4ecd42==0x0?_0x5e061[_0x5e061[_0x11cc97(0xc2)]-0x1]:_0x5e061[0x0]),_0x4ecd42===0x0?![]:!![]);}),_0x29f4e3=_0x4d205e,Promise['all'](_0x347f99[_0x35837b(0xc9)](_0x4fe9aa=>models[_0x35837b(0xac)][_0x35837b(0xb4)](_0x4fe9aa)));})[_0x5f4d5b(0xcd)](_0x1034f7=>{const _0x91b70a=_0x5f4d5b;_0x1034f7=_0x1034f7[_0x91b70a(0xa7)](_0x4925bb=>!!_0x4925bb);let _0x2b0c75={};return _0x1034f7[_0x91b70a(0xb0)](_0x9b8c00=>{const _0x1b203f=_0x91b70a;_0x2b0c75[_0x9b8c00['id'][_0x1b203f(0xbb)]()]=_0x9b8c00;}),_0x29f4e3=_0x29f4e3[_0x91b70a(0xc9)](_0xcd0ad=>{const _0x47ed81=_0x91b70a,_0x282094=JSON['parse'](_0xcd0ad[_0x47ed81(0xb2)]),_0x2ded57=_0x282094[_0x47ed81(0xb8)](_0x594ab9),_0x1dbbdb=_0x2ded57==0x0?_0x282094[_0x282094[_0x47ed81(0xc2)]-0x1]:_0x282094[0x0];return{...models['chat'][_0x47ed81(0xbd)](_0xcd0ad),'user':models[_0x47ed81(0xac)][_0x47ed81(0xbd)](_0x2b0c75[_0x1dbbdb])};}),_0x29f4e3;});},getChatSummryV2=async(_0x842cf6,_0x20561a)=>{const _0x291698=_0x37122b,{uid:_0x3b60ec}=getTokenInfo(_0x842cf6);let _0xb4a6b7;const _0x26efae=await models[_0x291698(0xac)]['getById'](_0x3b60ec),_0x48430d=_0x26efae[_0x291698(0xaa)],[_0x4c7016]=await models[_0x291698(0xac)][_0x291698(0xb7)](_0x48430d,0x1);return models['chat'][_0x291698(0xb5)](_0x3b60ec,_0x26efae['card_number'])[_0x291698(0xcd)](_0x1150b5=>{const _0x172628=_0x291698;_0xb4a6b7=_0x1150b5['filter'](async _0x478a8a=>{const _0x250401=_0x555b,_0x477119=JSONParser(_0x478a8a[_0x250401(0xb2)]);if(!_0x478a8a[_0x250401(0xc1)])return!![];else{if(_0x477119[0x0]===_0x3b60ec)return!![];else return _0x26efae[_0x250401(0xcc)]||!_0x26efae['card_verified']&&!_0x4c7016;}});let _0x395a4f=[0x0];return _0x1150b5['forEach']((_0x43c2f1,_0x1d2c74)=>{const _0x5130f3=_0x555b,_0x21dd22=JSON['parse'](_0x43c2f1['user_ids']),_0x1efe53=_0x21dd22[0x0]===_0x3b60ec?_0x21dd22[0x1]||0x0:_0x21dd22[0x0];_0x1efe53?_0x395a4f[_0x5130f3(0xc7)](_0x1efe53):null;}),models['user'][_0x172628(0x9a)](_0x395a4f);})['then'](_0xbad422=>{const _0x3f09e3=_0x291698;let _0x18e41c={};return _0xbad422[_0x3f09e3(0xb0)](_0x3bf379=>{_0x3bf379&&(_0x18e41c[_0x3bf379['id']['toString']()]=_0x3bf379);}),_0xb4a6b7=_0xb4a6b7[_0x3f09e3(0xc9)](_0x2844c5=>{const _0x6a69ec=_0x3f09e3,_0x2b920b=JSONParser(_0x2844c5['user_ids']),_0x7b202c=_0x2b920b[0x0]===_0x3b60ec?_0x2b920b[0x1]||0x0:_0x2b920b[0x0];return{...models[_0x6a69ec(0xc8)][_0x6a69ec(0xbd)](_0x2844c5),'user':_0x7b202c?models[_0x6a69ec(0xac)][_0x6a69ec(0xbd)](_0x18e41c[_0x7b202c[_0x6a69ec(0xbb)]()]):null};}),_0xb4a6b7;});},getInitData=(_0x13b40d,_0x15fff7)=>{const _0x510da0=_0x37122b,{uid:_0xfdf906}=getTokenInfo(_0x13b40d),_0x5be849=new Validator(_0x13b40d[_0x510da0(0xa9)],{'posts':_0x510da0(0xc4),'notifications':_0x510da0(0xc4)});return _0x5be849[_0x510da0(0x98)]()[_0x510da0(0xcd)](_0x1a5b0d=>{const _0x25197b=_0x510da0;if(!_0x1a5b0d)throw Object[_0x25197b(0xad)](new Error(_0x25197b(0xbc)),{'code':0x190,'details':_0x5be849[_0x25197b(0xd0)]});})[_0x510da0(0xcd)](()=>{const _0xaf4c2d=_0x510da0;return Promise[_0xaf4c2d(0xbe)]([User['getById'](_0xfdf906),getPostSummary(_0x13b40d,_0x15fff7),getNotificationSummary(_0x13b40d,_0x15fff7),getChatSummryV2(_0x13b40d,_0x15fff7)]);})[_0x510da0(0xcd)](([_0x4b6c0e,_0x2572ae,_0x2d4977,_0x7feee3])=>{return{'status':!![],'profile':_0x4b6c0e,'posts':_0x2572ae,'notifications':_0x2d4977,'chats':_0x7feee3};});};module[_0x37122b(0xc3)]=getInitDataWrapper;
+const { Validator } = require("node-input-validator");
+const User = require("../models/user.model");
+const Post = require("../models/post.model");
+const PostLike = require("../models/postLike.model");
+const Notification = require("../models/notification.model");
+
+const models = require('../models/index');
+
+const { BearerMiddleware } = require('../middlewares/basic.middleware');
+const { getTokenInfo } = require('../helpers/auth.helpers');
+const { chatPartnerId, JSONParser, respondValidateError } = require("../helpers/common.helpers");
+
+const getPostSummary = async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const limit = req.body.posts || 10;
+  const offset = 0;
+
+  const me = await models.user.getById(user_id);
+  const location_area = req.body.location_area || me.location_area || null;
+
+  let _posts = [], _users = {};
+  return Post.pagination({ limit, offset, location_area })
+    .then(posts => {
+      _posts = posts;
+      let user_ids = posts.map(post => post.user_id);  user_ids.push(0);
+      return User.getByIds(user_ids);
+    })
+    .then(users => {
+      users.forEach(user => _users[user.id] = user);
+      return Promise.all(_posts.map(post => PostLike.postLikesOfUser({ user_id, post_id: post.id })));
+    })
+    .then(likes => {
+      _posts = _posts.map(post => Post.output(post));
+      _posts = _posts.map((post, i) => ({
+        ...post,
+        liked: likes[i].length > 0 ? likes[i][0].type : 0,
+        user: User.output(_users[post.post_user_id])
+      }));
+      console.log('[posts]', _posts.length);
+      return _posts;
+    });
+}
+
+const getNotificationSummary = async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const limit = req.body.notifications || 10;
+  const offset = 0; //  as it's the first load
+
+  let _notis = [], _users = {};
+  return Notification.paginationByLastId({ limit, receiver_id: user_id })
+    .then(notis => {
+      _notis = notis;
+      let user_ids = [0];
+      notis.forEach(noti => {
+        user_ids.push(noti.sender_id);
+      });
+      return User.getByIds(user_ids);
+    })
+    .then(users => {
+      users.forEach(user => _users[user.id] = user);
+      _notis = _notis.map(noti => Notification.output(noti));
+      return _notis.map(noti => ({
+        ...noti,
+        sender: User.output(_users[noti.sender_id])
+      }));
+    });
+}
+
+const getInitDataWrapper = (req, res) => {
+  return BearerMiddleware(req, res, () => {
+    return getInitData(req, res)
+      .then(result => res.json(result))
+      .catch(error => respondValidateError(res, error))
+  });
+}
+
+const getChatSummary = async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  // let _all_chats = [], _total = 0;
+  let _chatrooms;
+  return models.chat.myChatrooms(user_id)
+    .then(chatrooms => {
+      let idOfUsers = [0];
+      chatrooms = chatrooms.filter(chat => {
+        const user_ids = JSON.parse(chat.user_ids);
+        const myIndex = user_ids.indexOf(user_id);
+        if (myIndex > 0 && myIndex < user_ids.length - 1) return false; // this is the previous owner of the card
+
+        if (chat.accept_status === 1) {
+          idOfUsers.push(myIndex == 0 ? user_ids[user_ids.length - 1] : user_ids[0]);
+          return true;
+        } else {
+          myIndex === 0 ? null : idOfUsers.push(myIndex == 0 ? user_ids[user_ids.length - 1] : user_ids[0]);
+          return myIndex === 0 ? false : true;
+        }
+      });
+      _chatrooms = chatrooms;
+      return Promise.all(idOfUsers.map(user_id => models.user.getById(user_id)));
+    })
+    .then(users => {
+      users = users.filter(users => !!users);
+      let userObj = {};
+
+      users.forEach(user => {
+        userObj[user.id.toString()] = user;
+      });
+      _chatrooms = _chatrooms.map(chat => {
+        const user_ids = JSON.parse(chat.user_ids);
+        const myIndex = user_ids.indexOf(user_id);
+        const partnerId = myIndex == 0 ? user_ids[user_ids.length - 1] : user_ids[0];
+        return {
+          ...(models.chat.output(chat)),
+          user: models.user.output(userObj[partnerId])
+        };
+      });
+      return _chatrooms;
+    })
+}
+
+const getChatSummryV2 = async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  let _chatrooms;
+
+  const me = await models.user.getById(user_id);
+  const card_number = me.card_number;
+  const [verifiedUser] = await models.user.getByCard(card_number, 1);
+
+  return models.chat.allChatsOfUser(user_id, me.card_number)
+    .then(chats => {
+
+      _chatrooms = chats.filter(async chat => {
+        const user_ids = JSONParser(chat.user_ids);
+        if (!chat.isForCard) return true;  // allow all direct chats.
+        else if (user_ids[0] === user_id) return true; // sender access to self-created chats
+        else {
+          return (me.card_verified) || (!me.card_verified && !verifiedUser);  // verified or all unverified.
+        }
+      });
+      let idOfUsers = [ 0 ];
+      chats.forEach((chat, i) => {
+        const user_ids = JSON.parse(chat.user_ids);
+        const partnerId = user_ids[0] === user_id ? user_ids[1] || 0 : user_ids[0];
+        partnerId ? idOfUsers.push(partnerId) : null;          
+      });
+      return models.user.getByIds(idOfUsers);
+    })
+    .then(users => {
+      let userObj = {};
+      users.forEach(user => {
+        if (user) {
+          userObj[user.id.toString()] = user;
+        }
+      });
+      _chatrooms = _chatrooms.map(chat => {
+        const user_ids = JSONParser(chat.user_ids);
+        const partnerId = user_ids[0] === user_id ? user_ids[1] || 0 : user_ids[0];
+        return {
+          ...(models.chat.output(chat)),
+          user: partnerId ? models.user.output(userObj[partnerId.toString()]) : null,
+        };
+      });
+      return _chatrooms;
+    });
+}
+
+const getInitData = (req, res) => {
+  const { uid } = getTokenInfo(req);
+  const validator = new Validator(req.body, {
+    posts: "required|integer",
+    notifications: "required|integer",
+    // chat: "required|integer"
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => {
+      return Promise.all([
+        User.getById(uid),
+        getPostSummary(req, res),
+        getNotificationSummary(req, res),
+        getChatSummryV2(req, res),
+      ])
+    })
+    .then(([ user, posts, notis, chats, ]) => {
+      return {
+        status: true,
+        profile: user,
+        posts,
+        notifications: notis,
+        chats,
+      };
+    })
+    // .catch(error => error);
+}
+
+module.exports = getInitDataWrapper;

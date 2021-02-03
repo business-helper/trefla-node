@@ -1,6 +1,7 @@
 const { 
   DEFAULT_ADMIN,
   DEFAULT_ADMIN_NOTIFICATION,
+  DEFAULT_ADMIN_PERMISSION,
   DEFAULT_BUG,
   DEFAULT_COMMENT,
   DEFAULT_COMMENTLIKE,
@@ -12,6 +13,7 @@ const {
   DEFAULT_CHAT,
   DEFAULT_MESSAGE,
 } = require('../constants/model.constant');
+const { ADMIN_ROLE } = require('../constants/common.constant');
 const { 
   generateTZTimeString,
   getDistanceFromLatLonInMeter,
@@ -41,6 +43,11 @@ const generateAdminNotiData = basicData => {
   data.emails = JSONStringify(data.emails || []);
   data.create_time = data.update_time = timestamp();
   return data;
+}
+
+const generateAdminPermission = (basicData, admin_role) => {
+  const isSuper = admin_role === ADMIN_ROLE.SUPER;
+
 }
 
 const generateBugData = basicData => {
