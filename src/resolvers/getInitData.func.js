@@ -1,8 +1,10 @@
 const { Validator } = require("node-input-validator");
+const utf8 = require('utf8');
 const User = require("../models/user.model");
 const Post = require("../models/post.model");
 const PostLike = require("../models/postLike.model");
 const Notification = require("../models/notification.model");
+const logger = require('../config/logger');
 
 const models = require('../models/index');
 
@@ -16,7 +18,9 @@ const getPostSummary = async (req, res) => {
   const offset = 0;
 
   const me = await models.user.getById(user_id);
-  const location_area = req.body.location_area || me.location_area || null;
+  // const location_area = utf8.encode(req.body.location_area || me.location_area || "");
+  const location_area = req.body.location_area || me.location_area || "";
+  logger.info(`[Init LArea] ${location_area}`)
 
   let _posts = [], _users = {};
   return Post.pagination({ limit, offset, location_area })
