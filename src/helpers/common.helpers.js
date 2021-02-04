@@ -1,5 +1,8 @@
+const path = require('path');
 const nodemailer = require('nodemailer');const admin = require('firebase-admin');
 const serviceAccount = require('../config/trefla-firebase-adminsdk-ic030-de756cf0e9.json');
+const logger = require('../config/logger');
+
 const { 
 	ERR_MSG_NORMAL,
 	ERR_MSG_VALIDATE
@@ -54,15 +57,18 @@ const int2Bool = (intVal) => {
 }
 
 const respondError = (res, error) => {
-  console.log(error);
+  // console.log(error);
+  logger.error(error);
   return res
     .status(500)
     .json({ status: false, message: error.message || ERR_MSG_NORMAL });
 };
 
 const respondValidateError = (res, error) => {
-  console.log('[Validation error]', error);
-  const details = error.details || {}; 
+  // console.log('[Validation error]', error);
+  logger.error(error);
+  const details = error.details || {}; //console.log(details);
+
   return res.status(400).json({
 		status: false,
 		message: Object.keys(details).length > 0 ? details[Object.keys(details)[0]].message : (error.message || ERR_MSG_VALIDATE),

@@ -1,1 +1,160 @@
-const _0x36a0=['mJm0mtu4swP6Be5W','mJuYmJmWmuPUEMPhuG','vxnLCIb3AxrOihvZzxjFBMfTzsaI','uM91DgvY','mJG1n2fcr1P0tW','CMvXDwLYzwr8BwLUtgvUz3rOoJv8Bwf4tgvUz3rOoJuW','mJiZotjVs0nzy3m','lI4Vy29UDhjVBgXLCNmVDxnLCI5JB250CM9SBgvY','l2DLBI1WyxnZD29Yza','BM9Kzs1PBNb1Dc12ywXPzgf0B3i','yM9KEq','lI4VAgvSCgvYCY9HDxrOlMHLBhbLCNm','zxjYB3jZ','mZqYug1dvgnk','ywrKug9ZDfj1Bgu','DgHLBG','Aw5WDxrZ','zw1HAwXFDxnLCM5HBwu','DxnLCL9Uyw1L','sw52ywXPzcbYzxf1zxn0','mZDIB3PNDhK','yxnZAwDU','l2XVz2LU','y2HLy2S','qwnJB3vUDcbKB2vZig5VDcbLEgLZDce','mwDUyuzOEq','ywXS','lI4VBwLKzgXLD2fYzxmVyMfZAwmUBwLKzgXLD2fYzq','Bg9NAw4','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','zxjYB3i','CMvXDwLYzwq','mu1bCxzzCG','nJu1odLSy3jVDNG','lI4VBw9KzwXZl3vZzxiUBw9KzwW','ANnVBG','vxnLCIb3AxrOigvTywLSici','zw1HAwW','DxnL','n2jTwvDpEa','vxnLCIbKB2vZig5VDcbLEgLZDcb3AxrOihrOzsbNAxzLBIbLBwfPBce','z2v0qNLfBwfPBa','l3jLz2LZDgvY','CMvXDwLYzwr8BwLUtgvUz3rOoJr8Bwf4tgvUz3rOoJuW','Cg9ZDa','y3vZDg9T','CMvXDwLYzwr8zw1HAwX8BwLUtgvUz3rOoJu','ndG4ntu5Cgfztg1W','iIbHBhjLywr5igv4Axn0iq','zxHWB3j0CW','zM9Yz290ugfZC3DVCMq','y2f0y2G','mJK5mtD1r0nMvhi'];const _0x5997=function(_0x1dd1ef,_0x417e48){_0x1dd1ef=_0x1dd1ef-0x193;let _0x36a0e1=_0x36a0[_0x1dd1ef];if(_0x5997['jCyvMu']===undefined){var _0x59978f=function(_0x1ddfa7){const _0x49eb9d='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x4aff8f='';for(let _0x7abdda=0x0,_0x1c90e6,_0x4616bb,_0x254762=0x0;_0x4616bb=_0x1ddfa7['charAt'](_0x254762++);~_0x4616bb&&(_0x1c90e6=_0x7abdda%0x4?_0x1c90e6*0x40+_0x4616bb:_0x4616bb,_0x7abdda++%0x4)?_0x4aff8f+=String['fromCharCode'](0xff&_0x1c90e6>>(-0x2*_0x7abdda&0x6)):0x0){_0x4616bb=_0x49eb9d['indexOf'](_0x4616bb);}return _0x4aff8f;};_0x5997['KxYbks']=function(_0x190b7f){const _0x1740cc=_0x59978f(_0x190b7f);let _0x472eee=[];for(let _0xeae171=0x0,_0x24be2f=_0x1740cc['length'];_0xeae171<_0x24be2f;_0xeae171++){_0x472eee+='%'+('00'+_0x1740cc['charCodeAt'](_0xeae171)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x472eee);},_0x5997['JaduHP']={},_0x5997['jCyvMu']=!![];}const _0xdeee51=_0x36a0[0x0],_0x3f0b70=_0x1dd1ef+_0xdeee51,_0x230490=_0x5997['JaduHP'][_0x3f0b70];return _0x230490===undefined?(_0x36a0e1=_0x5997['KxYbks'](_0x36a0e1),_0x5997['JaduHP'][_0x3f0b70]=_0x36a0e1):_0x36a0e1=_0x230490,_0x36a0e1;};const _0x4bba3d=_0x5997;(function(_0x297c8d,_0x1037c7){const _0x4b0154=_0x5997;while(!![]){try{const _0x53cfd0=parseInt(_0x4b0154(0x1be))*-parseInt(_0x4b0154(0x1c7))+-parseInt(_0x4b0154(0x1ba))+parseInt(_0x4b0154(0x19e))*parseInt(_0x4b0154(0x1a6))+-parseInt(_0x4b0154(0x1b4))*-parseInt(_0x4b0154(0x1a5))+-parseInt(_0x4b0154(0x1c0))*parseInt(_0x4b0154(0x1ac))+parseInt(_0x4b0154(0x1b9))*-parseInt(_0x4b0154(0x199))+parseInt(_0x4b0154(0x1bb));if(_0x53cfd0===_0x1037c7)break;else _0x297c8d['push'](_0x297c8d['shift']());}catch(_0x529d9a){_0x297c8d['push'](_0x297c8d['shift']());}}}(_0x36a0,0x92db4));const express=require('express'),{Validator}=require(_0x4bba3d(0x1c3)),authRouters=express[_0x4bba3d(0x1bd)](),userCtrl=require(_0x4bba3d(0x1c1)),User=require(_0x4bba3d(0x1a7)),{basicMiddleware}=require(_0x4bba3d(0x1a0)),{respondValidateError}=require(_0x4bba3d(0x1a2)),{generatePassword}=require(_0x4bba3d(0x1c5));authRouters[_0x4bba3d(0x1ab)]((_0xdeee51,_0x3f0b70,_0x230490)=>{basicMiddleware(_0xdeee51,_0x3f0b70,_0x230490);}),authRouters[_0x4bba3d(0x1b1)](_0x4bba3d(0x1af),async(_0x1ddfa7,_0x49eb9d)=>{const _0x2f407b=_0x4bba3d,_0x4aff8f=new Validator(_0x1ddfa7[_0x2f407b(0x1c4)],{'user_name':_0x2f407b(0x1b0),'email':_0x2f407b(0x1b3),'password':_0x2f407b(0x1bf),'device_token':_0x2f407b(0x1a4)});return _0x4aff8f['addPostRule'](async _0x7abdda=>Promise['all']([User['getByUserName'](_0x7abdda[_0x2f407b(0x195)][_0x2f407b(0x197)]),User['getByEmail'](_0x7abdda['inputs'][_0x2f407b(0x1aa)])])[_0x2f407b(0x194)](([_0x1c90e6,_0x4616bb])=>{const _0x15402f=_0x2f407b;_0x1c90e6&&_0x7abdda[_0x15402f(0x1a3)](_0x15402f(0x197),_0x15402f(0x1b2),_0x15402f(0x1bc)+_0x7abdda[_0x15402f(0x195)][_0x15402f(0x197)]+_0x15402f(0x1b5)),_0x4616bb&&_0x7abdda[_0x15402f(0x1a3)](_0x15402f(0x1aa),_0x15402f(0x1b2),_0x15402f(0x1a9)+_0x7abdda[_0x15402f(0x195)][_0x15402f(0x1aa)]+'\x22\x20already\x20exist!');})),_0x4aff8f['check']()['then'](_0x254762=>{const _0x3684f8=_0x2f407b;if(!_0x254762)throw Object[_0x3684f8(0x19a)](new Error(_0x3684f8(0x198)),{'code':0x190,'details':_0x4aff8f[_0x3684f8(0x1c6)]});})[_0x2f407b(0x194)](()=>userCtrl['register'](_0x1ddfa7,_0x49eb9d))['catch'](_0x190b7f=>respondValidateError(_0x49eb9d,_0x190b7f));}),authRouters[_0x4bba3d(0x1b1)](_0x4bba3d(0x19b),async(_0x1740cc,_0x472eee)=>{const _0x1ea108=_0x4bba3d,_0xeae171=new Validator(_0x1740cc[_0x1ea108(0x1c4)],{'email_username':_0x1ea108(0x1a4),'password':'required|minLength:5|maxLength:50'});return _0xeae171['addPostRule'](async _0x24be2f=>Promise[_0x1ea108(0x19f)]([User['getByEmail'](_0x24be2f[_0x1ea108(0x195)][_0x1ea108(0x196)]),User['getByUserName'](_0x24be2f['inputs'][_0x1ea108(0x196)])])[_0x1ea108(0x194)](([_0x9c4583,_0x3fc409])=>{const _0x12a12d=_0x1ea108;!_0x9c4583&&!_0x3fc409&&_0x24be2f[_0x12a12d(0x1a3)](_0x12a12d(0x196),_0x12a12d(0x1b2),_0x12a12d(0x19d));})),_0xeae171[_0x1ea108(0x19c)]()['then'](_0x507f98=>{const _0x3e9880=_0x1ea108;if(!_0x507f98)throw Object[_0x3e9880(0x19a)](new Error(_0x3e9880(0x198)),{'code':0x190,'details':_0xeae171['errors']});})[_0x1ea108(0x194)](()=>userCtrl[_0x1ea108(0x1a1)](_0x1740cc,_0x472eee))['catch'](_0x487758=>respondValidateError(_0x472eee,_0x487758));}),authRouters[_0x4bba3d(0x1b1)]('/forgot_password',async(_0x1c981d,_0x4b9754)=>{const _0x278141=_0x4bba3d,_0x3f6c25=new Validator(_0x1c981d['body'],{'email':_0x278141(0x1b3),'code':'required'});return _0x3f6c25[_0x278141(0x193)](async _0x8c87c3=>Promise['all']([User[_0x278141(0x1ae)](_0x8c87c3[_0x278141(0x195)][_0x278141(0x1aa)])])[_0x278141(0x194)](([_0x86096d])=>{const _0x262bc9=_0x278141;!_0x86096d&&_0x8c87c3[_0x262bc9(0x1a3)](_0x262bc9(0x1aa),_0x262bc9(0x1b2),_0x262bc9(0x1ad));})),_0x3f6c25[_0x278141(0x19c)]()[_0x278141(0x194)](_0xe937b2=>{const _0xbd5f03=_0x278141;if(!_0xe937b2)throw Object[_0xbd5f03(0x19a)](new Error(_0xbd5f03(0x198)),{'code':0x190,'details':_0x3f6c25[_0xbd5f03(0x1c6)]});})[_0x278141(0x194)](()=>userCtrl[_0x278141(0x1b7)](_0x1c981d,_0x4b9754))[_0x278141(0x1b8)](_0x397206=>respondValidateError(_0x4b9754,_0x397206));}),authRouters[_0x4bba3d(0x1b1)]('/reset_password',async(_0x3a4e63,_0x4ac183)=>{const _0x2ce875=_0x4bba3d,_0x5212e7=new Validator(_0x3a4e63[_0x2ce875(0x1c4)],{'email':_0x2ce875(0x1b3),'password':_0x2ce875(0x1bf),'code':_0x2ce875(0x1a4)});return _0x5212e7[_0x2ce875(0x193)](async _0x94d597=>Promise[_0x2ce875(0x19f)]([User[_0x2ce875(0x1ae)](_0x94d597[_0x2ce875(0x195)][_0x2ce875(0x1aa)])])['then'](([_0x17008e])=>{const _0x551659=_0x2ce875;!_0x17008e&&_0x94d597['error']('email',_0x551659(0x1b2),_0x551659(0x1ad));})),_0x5212e7[_0x2ce875(0x19c)]()[_0x2ce875(0x194)](_0x63096e=>{const _0x4f9ca0=_0x2ce875;if(!_0x63096e)throw Object[_0x4f9ca0(0x19a)](new Error(_0x4f9ca0(0x198)),{'code':0x190,'details':_0x5212e7[_0x4f9ca0(0x1c6)]});})[_0x2ce875(0x194)](()=>userCtrl['resetPassword'](_0x3a4e63,_0x4ac183))[_0x2ce875(0x1b8)](_0x5bc9f5=>respondValidateError(_0x4ac183,_0x5bc9f5));}),authRouters['post'](_0x4bba3d(0x1c2),async(_0x3ca53f,_0x2130e0)=>{const _0x34104b=_0x4bba3d,{password:_0x5862c1}=_0x3ca53f[_0x34104b(0x1c4)];return generatePassword(_0x5862c1)[_0x34104b(0x194)](_0x301d44=>_0x2130e0[_0x34104b(0x1a8)]({'status':!![],'password':_0x301d44}))[_0x34104b(0x1b8)](_0x407063=>respondValidateError(_0x2130e0,_0x407063));}),module[_0x4bba3d(0x1b6)]=authRouters;
+const express = require("express");
+const { Validator } = require("node-input-validator");
+const authRouters = express.Router();
+const userCtrl = require("../controllers/user.controller");
+const User = require("../models/user.model");
+const { basicMiddleware } = require("../middlewares/basic.middleware");
+const { respondValidateError } = require("../helpers/common.helpers");
+const { generatePassword } = require("../helpers/auth.helpers");
+
+// basic authentication
+authRouters.use((req, res, next) => {
+  basicMiddleware(req, res, next);
+});
+
+authRouters.post("/register", async (req, res) => {
+  // const { user_name, email, password, language, isGuest, guestName, location_address, location_coordinate, birthday, sex, avatarIndex, card_verified, card_number } = req.body;
+  const validator = new Validator(req.body, {
+    user_name: "required|minLength:4|maxLength:50",
+    email: "required|email|minLength:5",
+    password: "required|minLength:5|maxLength:50",
+    device_token: "required",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      User.getByUserName(provider.inputs.user_name),
+      User.getByEmail(provider.inputs.email),
+    ]).then(([userByUserName, userByEmail]) => {
+      if (userByUserName) {
+        provider.error("user_name", "custom", `User with user_name "${provider.inputs.user_name}" already exist!`);
+      }
+      if (userByEmail) {
+        provider.error("email", "custom", `User with email "${provider.inputs.email}" already exist!`);
+      }
+    })
+  );
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => userCtrl.register(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
+
+authRouters.post("/login", async (req, res) => {
+  const validator = new Validator(req.body, {
+    email_username: "required",
+    password: "required|minLength:5|maxLength:50",
+    // device_token: "required"
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      User.getByEmail(provider.inputs.email_username),
+      User.getByUserName(provider.inputs.email_username)
+    ]).then(
+      ([userByEmail, userByName]) => {
+        if (!userByEmail && !userByName) {
+          provider.error(
+            "email_username",
+            "custom",
+            `Account does not exist!`
+          );
+        }
+      }
+    )
+  );
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), { code: 400, details: validator.errors });
+      }
+    })
+    .then(() => userCtrl.login(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
+
+authRouters.post("/forgot_password", async (req, res) => {
+  const validator = new Validator(req.body, {
+    email: "required|email|minLength:5",
+    // user_id: "required|integer",
+    code: "required",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([User.getByEmail(provider.inputs.email)]).then(
+      ([userByEmail]) => {
+        if (!userByEmail) {
+          provider.error(
+            "email",
+            "custom",
+            `User does not exist with the given email!`
+          );
+        }
+      }
+    )
+  );
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => userCtrl.forgotPassword(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
+
+authRouters.post("/reset_password", async (req, res) => {
+  const validator = new Validator(req.body, {
+    email: "required|email|minLength:5",
+    password: "required|minLength:5|maxLength:50",
+    code: "required",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([User.getByEmail(provider.inputs.email)]).then(
+      ([userByEmail]) => {
+        if (!userByEmail) {
+          provider.error("email", "custom", `User does not exist with the given email!`);
+        }
+      }
+    )
+  );
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => userCtrl.resetPassword(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
+
+authRouters.post('/gen-password', async (req, res) => {
+  const { password } = req.body;
+  return generatePassword(password)
+    .then(pass => res.json({ status: true, password: pass }))
+    .catch(error => respondValidateError(res, error));
+});
+
+module.exports = authRouters;
