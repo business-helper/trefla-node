@@ -96,7 +96,11 @@ exports.login = (req, res) => {
       userByEmail || userByName,
       comparePassword(req.body.password, (userByEmail || userByName).password),
       genreateAuthToken(userByEmail || userByName),
-      req.body.device_token !== undefined ? User.save({ ...(userByEmail || userByName), device_token: req.body.device_token }) : null
+      req.body.device_token !== undefined ? User.save({ 
+        ...(userByEmail || userByName), 
+        device_token: req.body.device_token, 
+        location_area: req.body.location_area || (userByEmail || userByName).location_area,
+      }) : null
     ]))
     .then(([ user, match, token ]) => {
       if (match) {
