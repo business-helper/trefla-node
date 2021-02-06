@@ -9,6 +9,7 @@ exports.DEFAULT_ADMIN = {
   password: '',
   avatar: '',
   role: ADMIN_ROLE.ADMIN,
+  last_login: '',
   create_time: timestamp(),
   update_time: timestamp(),
 };

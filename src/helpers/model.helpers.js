@@ -45,9 +45,18 @@ const generateAdminNotiData = basicData => {
   return data;
 }
 
-const generateAdminPermission = (basicData, admin_role) => {
+/**
+ * basic data should contain object for each key.
+ */
+const generateAdminPermissionData = (basicData, admin_role = ADMIN_ROLE.ADMIN) => {
   const isSuper = admin_role === ADMIN_ROLE.SUPER;
-
+  const defaultKeys = Object.keys(DEFAULT_ADMIN_PERMISSION);
+  let data = {};
+  defaultKeys.forEach(key => {
+    data[key] = basicData[key] !== undefined ? basicData[key] : DEFAULT_ADMIN_PERMISSION[key];
+  })
+  data.create_time = data.update_time = timestamp();
+  return data;
 }
 
 const generateBugData = basicData => {
@@ -274,6 +283,7 @@ module.exports = {
   checkPostLocationWithUser,
   generateAdminData,
   generateAdminNotiData,
+  generateAdminPermissionData,
   generateBugData,
   generateChatData,
   generateCommentData,

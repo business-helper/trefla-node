@@ -3,9 +3,10 @@ const { Validator } = require("node-input-validator");
 const models = require("../models");
 const helpers = require("../helpers");
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { bool2Int, getTotalLikes, generateTZTimeString, JSONParser, respondError, sendMail, timestamp } = require("../helpers/common.helpers");
-const { generateAdminData, generateMessageData } = require('../helpers/model.helpers');
+const { bool2Int, getTotalLikes, generateTZTimeString, JSONParser, respondError, sendMail, stringifyModel, timestamp } = require("../helpers/common.helpers");
+const { generateAdminData, generateAdminPermissionData, generateMessageData } = require('../helpers/model.helpers');
 const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
+const { ADMIN_ROLE } = require('../constants/common.constant');
 
 const activity = {
 
@@ -354,4 +355,21 @@ exports.sendConsentEmail4Transfer = async (noti_id) => {
         message: 'Email has been sent!',
       };
     });
+}
+
+exports.addEmployee = async ({ email, user_name, password, avatar }) => {
+  const adminModel = generateAdminData({ email, user_name, avatar });
+  return helpers.auth.generatePassword(password)
+    .then(encPassword => {
+      adminModel.password = encPassword;
+      models.admin.create(adminModel)
+    })
+    .then(admin => {
+      adminPermissionData = generateAdminPermissionData({ admin_id: admin.id }, ADMIN_ROLE.ADMIN);
+      return models.adminPermission.create(stringifyModel(adminPermissionData))
+        .then(permission => ({ admin, permission }));
+    })
+    .then(({ admin, permission }) => {
+      return admin.permission = models.adminPermission.output(permission);
+    })
 }

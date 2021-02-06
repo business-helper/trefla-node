@@ -1,5 +1,6 @@
 const admin = require('./admin.model');
 const adminNotification = require("./adminNotification.model");
+const adminPermission = require('./adminPermission.model');
 const bug = require('./bug.model');
 const chat = require('./chat.model');
 const comment = require('./comment.model');
@@ -19,6 +20,7 @@ const user = require('./user.model');
 module.exports = {
   admin,
   adminNotification,
+  adminPermission,
   bug,
   chat,
   config,

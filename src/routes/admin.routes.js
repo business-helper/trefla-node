@@ -425,6 +425,37 @@ adminRouters.post('/consent-email/:id', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+adminRouters.route('/employee').post(async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    ...req.body,
+  }, {
+    email: "required",
+    user_name: "required",
+    password: "required",
+  });
+
+  validator.addPostRule(provider => Promise.all([
+    models.admin.getByEmail(req.body.email),
+    models.admin.getByUsername(req.body.user_name),
+  ])
+    .then(([ byEmail, byUserName ]) => {
+      if (byEmail) provider.error('email', 'custom', "Email alrady taken by other administrator!");
+      if (byUserName) provider.error('user_name', 'custom', 'User name already taken by other administrator!');
+    })
+  )
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.addEmployee(req.body);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidatorError(res, error))
+})
+
 adminRouters.patch('/email-templates/:id', async (req, res) => {
   const { role } = getTokenInfo(req);
   if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
@@ -591,5 +622,6 @@ adminRouters.delete('/id-transfers/:id', async (req, res) => {
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
 });
+
 
 module.exports = adminRouters;

@@ -11,7 +11,7 @@ const Admin = function (lang) {
 Admin.create = (model) => {
   model.id !== undefined ? delete model.id : '';
   return new Promise((resolve, reject) => {
-    sql.query("INSERT INTO admins SET ?", model, (err, res) => {
+    sql.query(`INSERT INTO ${table} SET ?`, model, (err, res) => {
 			err ? reject(err) : resolve({ ...model, id: res.insertId });
     });
   });

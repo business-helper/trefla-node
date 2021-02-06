@@ -182,6 +182,15 @@ const JSONStringify = (data) => {
   return data;  
 }
 
+const stringifyModel = (data) => {
+  Object.keys(data).forEach(key => {
+    if (typeof data[key] === 'object') {
+      data[key] = JSONStringify(data[key]);
+    }
+  })
+  return data;
+}
+
 const filterAroundUsers = (strPostCoord, users) => {
   try {
     const postPos = string2Coordinate(strPostCoord);
@@ -250,5 +259,6 @@ module.exports = {
   sendMultiNotifications,
   string2Coordinate,
   string2Timestamp,
+  stringifyModel,
   timestamp,
 };

@@ -1,5 +1,5 @@
 const sql = require("./db");
-const { timestamp } = require("../helpers/common.helpers");
+const { JSONParser, timestamp } = require("../helpers/common.helpers");
 
 const table = 'admin_permissions';
 
@@ -34,7 +34,14 @@ AdminPermission.getById = async (id) => {
 }
 
 AdminPermission.output = (model) => {
-  ['create_time', 'update_time'].map(key => delete model[key]);
+  // ['create_time', 'update_time'].map(key => delete model[key]);
+  
+  const noObjectKey = ['id', 'admin_id', 'create_time', 'update_time'];
+  Object.keys(model).forEach(key => {
+    if (!noObjectKey.includes(key)) {
+      model[key] = JSONParser(model[key]);
+    }
+  })
   return model;
 }
 
