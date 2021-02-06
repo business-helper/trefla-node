@@ -37,7 +37,7 @@ const generateUserData = (basicData) => {
   const userKeys = Object.keys(DEFAULT_USER);
   let userObject = {};
   for (let field of userKeys) {
-    userObject[field] = (basicData[field] !== undefined || basicData[field] !== null) ? basicData[field] : DEFAULT_USER[field];
+    userObject[field] = (basicData[field] !== undefined && basicData[field] !== null) ? basicData[field] : DEFAULT_USER[field];
   }
   if (!userObject.sex) userObject.sex = 0;
   if (!userObject.location_address) userObject.location_address = "";
