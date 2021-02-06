@@ -102,12 +102,12 @@ exports.login = (req, res) => {
         location_area: req.body.location_area || (userByEmail || userByName).location_area,
       }) : null
     ]))
-    .then(([ user, match, token ]) => {
+    .then(([ user, match, token, updatedUser ]) => {
       if (match) {
         return res.json({
           status: true,
           message: 'success',
-          data: User.output(user, 'PROFILE'),
+          data: User.output(updatedUser, 'PROFILE'),
           token
         });
       } else {
