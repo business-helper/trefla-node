@@ -6,6 +6,7 @@ const ctrls = require("../controllers");
 const models = require("../models");
 const helpers = require("../helpers");
 const middlewares = require("../middlewares/basic.middleware");
+const config = require('../config/app.config');
 
 const { BearerMiddleware } = require("../middlewares/basic.middleware");
 const { getTokenInfo } = require('../helpers/auth.helpers');

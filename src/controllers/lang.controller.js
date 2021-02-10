@@ -1,1 +1,242 @@
-const _0x3c48=['mJi5ndbOsLbkB04','DxrMoa','CMvHzezPBgvtEw5J','l3vWBg9HzhmVBgfUz3mV','C3rHDhvZ','yxnZzxrZ','C3vJy2vZCW','yxnZzxrZl3vWBg9HzhmVBgfUz3m','DgHLBG','AM9PBG','w1jLywqGvgfYz2v0ienVBNrLBNrD','BMfTzq','w2v4Df0','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','ndG4nZm4vNbpBNrJ','z2v0qNLdB2rL','rMfPBgvKihrVigrLBgv0zsbMAwXLlI4U','nZu2ndK3Au1ls1fS','n3Httu95sW','tgfUz3vHz2uGAgfZigjLzw4GzgvSzxrLzce','y3jLyxrL','zgvSzxrLqNLjza','zg9TywLU','zxH0BMfTzq','CgfYyw1Z','D3jPDgvgAwXLu3LUyW','yM9KEq','CMvZB2X2zq','z2v0qwXS','mte0mtK2BMLJrNLb','Bg9N','rMfPBgvKihrVihDYAxrLigzPBguUlI4','sw5ZDwzMAwnPzw50ihjLC291CMnLCYe','DxbSB2fKtgfUz0zPBgvszxe','ywn0AxzL','lI4Vy29UzMLNl2fWCc5JB25MAwC','rMLSzsbOyxmGyMvLBIb1CgXVywrLzce','y29Kzq','mZq1ndK2vMfKAxPL','Dw5SAw5R','tgfUz3vHz2uGBM90igzVDw5KihDPDgGGy29KzsaN','DxbKyxrLx3rPBwu','BgvUz3rO','igHHCYbIzwvUihn5BMnLzce','D3jPDgvgAwXL','BM9Kzs1PBNb1Dc12ywXPzgf0B3i','CgfNAw5HDgLVBG','mty3ndfbvgjvBgW','C3rYAw5NAwz5','CMvWBgfJzq','yxnZAwDU','DxjS','sw5JB21PBMDgB3jT','zM9YrwfJAa','lI4VBw9KzwXZl2XHBMCUBw9KzwW','lMPZB24','z2v0qNLoyw1L','Dg90ywW','z2v0qNLjza','CgfNAw5HDgLVBLjLCq','zM9YBwLKywjSzq','ywXS','y2f0y2G','ANnVBG','BwvZC2fNzq','mZq5nZy4vw9Kuwjd','CMvHzezPBgu','ohjRzhDzua','A2v5CW','CgfYC2u','Cgf0Aa','z2v0rMLSzunVBNrLBNq'];const _0x9ec1=function(_0x2c99a4,_0x15b1a4){_0x2c99a4=_0x2c99a4-0xc0;let _0x3c48d1=_0x3c48[_0x2c99a4];if(_0x9ec1['eUbmqw']===undefined){var _0x9ec14b=function(_0x1b09da){const _0xccfb6b='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x1f036f='';for(let _0x8b5a74=0x0,_0x374274,_0x316c62,_0x2ab92e=0x0;_0x316c62=_0x1b09da['charAt'](_0x2ab92e++);~_0x316c62&&(_0x374274=_0x8b5a74%0x4?_0x374274*0x40+_0x316c62:_0x316c62,_0x8b5a74++%0x4)?_0x1f036f+=String['fromCharCode'](0xff&_0x374274>>(-0x2*_0x8b5a74&0x6)):0x0){_0x316c62=_0xccfb6b['indexOf'](_0x316c62);}return _0x1f036f;};_0x9ec1['fbFBQN']=function(_0x56735e){const _0x1ddb33=_0x9ec14b(_0x56735e);let _0x867304=[];for(let _0x3b067a=0x0,_0x184404=_0x1ddb33['length'];_0x3b067a<_0x184404;_0x3b067a++){_0x867304+='%'+('00'+_0x1ddb33['charCodeAt'](_0x3b067a)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x867304);},_0x9ec1['PqiZCu']={},_0x9ec1['eUbmqw']=!![];}const _0x22f6de=_0x3c48[0x0],_0x560763=_0x2c99a4+_0x22f6de,_0xfdf6e2=_0x9ec1['PqiZCu'][_0x560763];return _0xfdf6e2===undefined?(_0x3c48d1=_0x9ec1['fbFBQN'](_0x3c48d1),_0x9ec1['PqiZCu'][_0x560763]=_0x3c48d1):_0x3c48d1=_0xfdf6e2,_0x3c48d1;};const _0x391389=_0x9ec1;(function(_0x3f2529,_0x40b694){const _0x364442=_0x9ec1;while(!![]){try{const _0x3ebf62=parseInt(_0x364442(0xf5))+-parseInt(_0x364442(0xdd))+parseInt(_0x364442(0xcb))*parseInt(_0x364442(0xdf))+-parseInt(_0x364442(0xf2))+parseInt(_0x364442(0xc2))+-parseInt(_0x364442(0x101))+-parseInt(_0x364442(0xe4))*-parseInt(_0x364442(0xf6));if(_0x3ebf62===_0x40b694)break;else _0x3f2529['push'](_0x3f2529['shift']());}catch(_0x54fbb6){_0x3f2529['push'](_0x3f2529['shift']());}}}(_0x3c48,0x6c597));const {Validator}=require(_0x391389(0xc9)),fs=require('fs'),path=require(_0x391389(0xe2)),formidable=require(_0x391389(0xd8)),Language=require(_0x391389(0xd2)),config=require(_0x391389(0x107)),{respondError,timestamp}=require(_0x391389(0xf1));exports[_0x391389(0xf8)]=(_0x22f6de,_0x560763)=>{const _0x540cbc=_0x391389,_0xfdf6e2=new Language({'code':_0x22f6de[_0x540cbc(0xfe)][_0x540cbc(0xc1)]['toLowerCase'](),'name':_0x22f6de[_0x540cbc(0xfe)][_0x540cbc(0xef)],'active':_0x22f6de[_0x540cbc(0xfe)][_0x540cbc(0x106)]});return Language[_0x540cbc(0xf8)](_0xfdf6e2)[_0x540cbc(0xec)](_0x1b09da=>_0x560763[_0x540cbc(0xdb)]({'status':!![],'message':_0x540cbc(0xea),'data':_0x1b09da}))[_0x540cbc(0xda)](_0xccfb6b=>respondError(_0x560763,_0xccfb6b));},exports[_0x391389(0x100)]=(_0x1f036f,_0x8b5a74)=>{const _0x582d85=_0x391389;Language['getAll']()['then'](_0x374274=>_0x8b5a74[_0x582d85(0xdb)]({'status':!![],'message':_0x582d85(0xea),'data':_0x374274}))[_0x582d85(0xda)](_0x316c62=>_0x8b5a74[_0x582d85(0xe8)](0x1f4)['json']({'status':![],'message':_0x316c62[_0x582d85(0xdc)]||'Something\x20went\x20wrong!'}));},exports[_0x391389(0xf3)]=(_0x2ab92e,_0x56735e)=>{const _0x36ec0d=_0x391389;Language[_0x36ec0d(0xf3)](_0x2ab92e[_0x36ec0d(0xfc)][_0x36ec0d(0xc1)])[_0x36ec0d(0xec)](_0x1ddb33=>{const _0x4338e5=_0x36ec0d;return!_0x1ddb33?_0x56735e[_0x4338e5(0xe8)](0x194)['json']({'status':![],'message':_0x4338e5(0xc4)+_0x2ab92e['params']['code']+'\x27'}):_0x56735e['json']({'status':!![],'message':'success','data':_0x1ddb33});})[_0x36ec0d(0xda)](_0x867304=>respondError(_0x56735e,_0x867304));},exports[_0x391389(0xd4)]=(_0x3b067a,_0x184404)=>{const _0x50944c=_0x391389;Language[_0x50944c(0xd4)](_0x3b067a[_0x50944c(0xfc)][_0x50944c(0xef)])[_0x50944c(0xec)](_0x5730ec=>{const _0x36cbde=_0x50944c;return!_0x5730ec?_0x184404[_0x36cbde(0xe8)](0x194)[_0x36cbde(0xdb)]({'status':![],'message':'Language\x20not\x20found\x20with\x20name\x20\x27'+_0x3b067a[_0x36cbde(0xfc)][_0x36cbde(0xef)]+'\x27'}):_0x184404[_0x36cbde(0xdb)]({'status':!![],'message':_0x36cbde(0xea),'data':_0x5730ec});})[_0x50944c(0xda)](_0x159cf9=>respondError(_0x184404,_0x159cf9));},exports['getByIdReq']=_0x43c128=>{const _0x365bbb=_0x391389;return Language['getById'](_0x43c128)[_0x365bbb(0xec)](_0x210913=>{const _0x46849d=_0x365bbb;return{'status':!![],'message':_0x46849d(0xea),'data':_0x210913};});},exports[_0x391389(0xd7)]=({page:page=0x0,limit:limit=0x0})=>{const _0x15e8cf=_0x391389;return page=Number(page),limit=Number(limit),Promise[_0x15e8cf(0xd9)]([Language[_0x15e8cf(0xca)]({'page':page,'limit':limit}),Language[_0x15e8cf(0xd5)]()])[_0x15e8cf(0xec)](([_0x87e660,_0x106a75])=>{const _0x19909f=_0x15e8cf,_0x43ea97=page*limit+_0x87e660[_0x19909f(0xc6)]<_0x106a75,_0x35fdd7={'page':page,'limit':limit};return{'status':!![],'message':_0x19909f(0xea),'data':_0x87e660,'pager':_0x35fdd7,'hasMore':_0x43ea97};});},exports[_0x391389(0x105)]=_0x1f23aa=>{const _0xb38d0f=_0x391389,_0x3eb193=_0x1f23aa[_0xb38d0f(0xfc)]['langCode'];return new Promise((_0x155182,_0x38803b)=>{const _0x578677=_0xb38d0f;let _0x158d44=formidable[_0x578677(0xd0)]();_0x158d44[_0x578677(0xe1)](_0x1f23aa,function(_0x394fef,_0x3b9980,_0x317c0c){const _0x517822=_0x578677;let _0x164080=_0x317c0c['file'][_0x517822(0xe2)],_0x45816a=path[_0x517822(0xfb)](_0x317c0c['file'][_0x517822(0xef)])||_0x517822(0xd3),_0x27f903=''+_0x3eb193+_0x45816a;console['log'](_0x517822(0xf0),_0x45816a);let _0x6b365c=path[_0x517822(0xed)](path['resolve'](_0x517822(0xeb)),_0x27f903);fs[_0x517822(0xde)](_0x164080,function(_0x2680b1,_0x555712){const _0xb6767d=_0x517822;_0x2680b1&&_0x38803b({'status':![],'message':'Failed\x20to\x20read\x20file...','details':_0x2680b1[_0xb6767d(0xdc)]}),fs[_0xb6767d(0xc8)](_0x6b365c,_0x555712,function(_0x4243e6){const _0x50f0aa=_0xb6767d;_0x4243e6&&_0x38803b({'status':![],'message':_0x50f0aa(0x103),'details':_0x4243e6[_0x50f0aa(0xdc)]}),fs[_0x50f0aa(0xc3)](_0x164080,function(_0xded765){const _0x36f5ac=_0x50f0aa;_0xded765&&_0x38803b({'status':![],'message':_0x36f5ac(0xf4),'details':_0xded765[_0x36f5ac(0xdc)]});}),_0x155182({'status':!![],'message':_0x50f0aa(0xc0),'url':config[_0x50f0aa(0xfa)]+'/uploads/langs/'+_0x27f903});});});});});},exports['updateLangById']=(_0x340dc1,_0xcec3c2)=>{const _0x1c7cf0=_0x391389;return Language[_0x1c7cf0(0xd6)](_0x340dc1)['then'](_0x1505f5=>{const _0x3a6310=_0x1c7cf0,_0x122c62=Object[_0x3a6310(0xe0)](_0x1505f5);return _0x122c62['forEach'](_0x1c9b88=>{_0x1505f5[_0x1c9b88]=_0xcec3c2[_0x1c9b88]!==undefined?_0xcec3c2[_0x1c9b88]:_0x1505f5[_0x1c9b88];}),_0x1505f5[_0x3a6310(0xc5)]=timestamp(),Language['save'](_0x1505f5);})[_0x1c7cf0(0xec)](_0x10a46f=>{return{'status':!![],'message':'Language\x20has\x20been\x20updated!','data':_0x10a46f};});},exports[_0x391389(0xe3)]=_0x20bb74=>{const _0x1c0410=_0x391389;return Language[_0x1c0410(0xd6)](_0x20bb74)['then'](_0x3eac9c=>{const _0x4e7835=_0x1c0410,_0x17afbe=_0x3eac9c[_0x4e7835(0xcf)][_0x4e7835(0xcd)](config['domain'],''),_0x577e5b=path[_0x4e7835(0xff)](_0x4e7835(0xe9)+_0x17afbe),_0x6cc812=fs['readFileSync'](_0x577e5b);return _0x6cc812;});},exports['syncLangReq']=_0x4fdf1c=>{const _0x65a7b3=_0x391389;return Promise[_0x65a7b3(0xd9)]([Language[_0x65a7b3(0xd6)](_0x4fdf1c),Language[_0x65a7b3(0xf3)]('en')])[_0x65a7b3(0xec)](([_0x3f6d27,_0x21f479])=>{const _0x444e18=_0x65a7b3;if(!_0x3f6d27||!_0x21f479)throw Object[_0x444e18(0xce)](new Error(_0x444e18(0x104)));if(_0x3f6d27['id']===_0x21f479['id'])throw Object['assign'](new Error('English\x20is\x20the\x20default\x20language,\x20so\x20it\x20can\x27t\x20be\x20synced!'));const _0x1cf17b=_0x21f479[_0x444e18(0xcf)][_0x444e18(0xcd)](config[_0x444e18(0xfa)],''),_0x1f9c92=path[_0x444e18(0xff)](_0x444e18(0xe9)+_0x1cf17b),_0x52a60d=fs[_0x444e18(0xe6)](_0x1f9c92,_0x444e18(0xe5)),_0x4add88=JSON[_0x444e18(0xe1)](_0x52a60d||'{}');let _0x1f5933='',_0x36e49e='',_0x1ae737='';if(!_0x3f6d27[_0x444e18(0xcf)])_0x3f6d27['url']=config[_0x444e18(0xfa)]+_0x444e18(0xe7)+_0x3f6d27[_0x444e18(0xc1)]+_0x444e18(0xd3);_0x1f5933=_0x3f6d27['url']['replace'](config[_0x444e18(0xfa)],''),_0x36e49e=path['resolve']('assets'+_0x1f5933);try{_0x1ae737=fs[_0x444e18(0xe6)](_0x36e49e,'utf8');}catch(_0x5213d1){console[_0x444e18(0x102)](_0x444e18(0xee),_0x5213d1),_0x1ae737='{}';}const _0x471ff9=JSON[_0x444e18(0xe1)](_0x1ae737),_0x38477e=Object[_0x444e18(0xe0)](_0x4add88);return _0x38477e[_0x444e18(0xd1)](_0x537748=>{_0x471ff9[_0x537748]=_0x471ff9[_0x537748]!==undefined?_0x471ff9[_0x537748]:_0x4add88[_0x537748];}),fs[_0x444e18(0xfd)](_0x36e49e,JSON[_0x444e18(0xcc)](_0x471ff9),_0x444e18(0xe5)),{'status':!![],'message':_0x3f6d27[_0x444e18(0xef)]+_0x444e18(0xc7)};});},exports[_0x391389(0xf9)]=_0x4f63cb=>{const _0x55e63b=_0x391389;let _0x1d2d8d;return Language['getById'](_0x4f63cb)[_0x55e63b(0xec)](_0x3dc2d5=>{const _0x5e7040=_0x55e63b;return _0x1d2d8d=_0x3dc2d5,Language[_0x5e7040(0xf9)](_0x4f63cb);})[_0x55e63b(0xec)](()=>{const _0x213731=_0x55e63b;if(_0x1d2d8d['url']){const _0x528ec9=_0x1d2d8d['url'][_0x213731(0xcd)](config[_0x213731(0xfa)],''),_0x3f0794=path[_0x213731(0xff)](_0x213731(0xe9)+_0x528ec9);fs['unlinkSync'](_0x3f0794);}return{'status':!![],'message':_0x213731(0xf7)};});};
+const { Validator } = require("node-input-validator");
+const fs = require('fs');
+const path = require('path');
+const formidable = require('formidable');
+const Language = require("../models/lang.model");
+const config = require('../config/app.config');
+const { respondError, timestamp } = require("../helpers/common.helpers");
+
+
+exports.create = (req, res) => {
+  const lang = new Language({
+    code: req.body.code.toLowerCase(),
+    name: req.body.name,
+    active: req.body.active,
+  });
+  return Language.create(lang)
+    .then((lang) => res.json({ status: true, message: "success", data: lang }))
+    .catch((error) => respondError(res, error));
+};
+
+exports.getAll = (req, res) => {
+  Language.getAll()
+    .then((langs) =>
+      res.json({ status: true, message: "success", data: langs })
+    )
+    .catch((error) =>
+      res.status(500).json({
+        status: false,
+        message: error.message || "Something went wrong!",
+      })
+    );
+};
+
+exports.getByCode = (req, res) => {
+  Language.getByCode(req.params.code)
+    .then((lang) => {
+      if (!lang) {
+        return res.status(404).json({
+          status: false,
+          message: `Language not found with code '${req.params.code}'`,
+        });
+      } else {
+        return res.json({
+          status: true,
+          message: "success",
+          data: lang,
+        });
+      }
+    })
+    .catch((error) => respondError(res, error));
+};
+
+exports.getByName = (req, res) => {
+  Language.getByName(req.params.name)
+    .then((lang) => {
+      if (!lang) {
+        return res.status(404).json({
+          status: false,
+          message: `Language not found with name '${req.params.name}'`,
+        });
+      } else {
+        return res.json({
+          status: true,
+          message: "success",
+          data: lang,
+        });
+      }
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.getByIdReq = (id) => {
+  return Language.getById(id)
+    .then(lang => {
+      return {
+        status: true, 
+        message: 'success',
+        data: lang,
+      };
+    })
+}
+
+exports.paginationReq = ({ page = 0, limit = 0 }) => {
+  page = Number(page); limit = Number(limit);
+
+  return Promise.all([
+    Language.pagination({ page, limit }),
+    Language.total(),
+  ])
+    .then(([ langs, total ]) => {
+      const hasMore = page * limit + langs.length < total;
+      const pager = { page, limit };
+      return {
+        status: true,
+        message: 'success',
+        data: langs,
+        pager,
+        hasMore,
+      };
+    });
+}
+
+exports.uploadLangFileReq = (req) => {
+  const langCode = req.params.langCode;
+
+  return new Promise((resolve, reject) => {
+    let form = formidable.IncomingForm();
+    form.parse(req, function(err, fields, files) {
+      let oldpath = files.file.path;
+      let ext = path.extname(files.file.name) || '.json';// console.log('[old path]', oldpath, ext)
+      let newName = `${langCode}${ext}`; console.log('[ext]', ext);
+
+      let newpath = path.join(path.resolve('assets/uploads/langs'), newName);
+      fs.readFile(oldpath, function(err, data) {
+        if (err) {
+          reject({
+            status: false,
+            message: 'Failed to read file...',
+            details: err.message,
+          });
+        }
+        fs.writeFile(newpath, data, function(err) {
+          if (err) {
+            reject({
+              status: false,
+              message: 'Failed to write file...',
+              details: err.message,
+            });
+          }
+          fs.unlink(oldpath, function(err) {
+            if (err) {
+              reject({
+                status: false,
+                message: 'Failed to delete file...',
+                details: err.message,
+              });
+            }
+          })
+          resolve({
+            status: true,
+            message: 'File has been uploaded!',
+            url: `/uploads/langs/${newName}`,
+            domain: config.domain,
+          })
+        })
+      });
+    })    
+  });
+}
+
+exports.updateLangById = (id, data) => {
+  return Language.getById(id)
+    .then(lang => {
+      const keys = Object.keys(lang);
+      keys.forEach(key => {
+        lang[key] = data[key] !== undefined ? data[key] : lang[key];
+      });
+      lang.update_time = timestamp();
+      return Language.save(lang);
+    })
+    .then(lang => {
+      return {
+        status: true,
+        message: 'Language has been updated!',
+        data: lang,
+      };
+    });
+}
+
+exports.getFileContent = (id) => {
+  return Language.getById(id)
+    .then(lang => {
+      const relPath = lang.url.replace(config.domain, '');
+      const localPath = path.resolve(`assets${relPath}`);
+
+      const content = fs.readFileSync(localPath);
+      return content;
+    })
+}
+
+exports.syncLangReq = (id) => {
+  return Promise.all([
+    Language.getById(id),
+    Language.getByCode('en'),
+  ])
+    .then(([target, en]) => {
+      if (!target || !en) {
+        throw Object.assign(new Error("Insufficient resources!"));
+      }
+      if (target.id === en.id) {
+        throw Object.assign(new Error("English is the default language, so it can't be synced!"));
+      }
+      const relPathEN = en.url.replace(config.domain, '');
+      const localPathEN = path.resolve(`assets${relPathEN}`);
+      const contentEN = fs.readFileSync(localPathEN, 'utf8');
+      const jsonEN = JSON.parse(contentEN || "{}");
+      
+      let realPathTarget = '', localPathTarget = '', contentTarget = '';
+      if (!target.url) target.url = `${config.domain}/uploads/langs/${target.code}.json`;
+
+      realPathTarget = target.url.replace(config.domain, '');
+      localPathTarget = path.resolve(`assets${realPathTarget}`);
+      try {
+        contentTarget = fs.readFileSync(localPathTarget, 'utf8');
+      } catch (e) {
+        console.log('[Read Target Content]', e);
+        contentTarget = "{}";
+      }
+      const jsonTarget = JSON.parse(contentTarget);
+
+      const keys = Object.keys(jsonEN);
+      keys.forEach(key => {
+        jsonTarget[key] = jsonTarget[key] !== undefined ? jsonTarget[key] : jsonEN[key];
+      });
+
+      fs.writeFileSync(localPathTarget, JSON.stringify(jsonTarget), 'utf8');
+      return {
+        status: true,
+        message: `${target.name} has been synced!`,
+      }
+    })
+}
+
+exports.deleteById = (id) => {
+  let _lang;
+  return Language.getById(id)
+    .then(lang => {
+      _lang = lang;
+      return Language.deleteById(id);
+    })
+    .then(() => {
+      if (_lang.url) {
+        const relPath = _lang.url.replace(config.domain, '');
+        const localPath = path.resolve(`assets${relPath}`);
+        fs.unlinkSync(localPath);
+      }
+      return {
+        status: true,
+        message: 'Language has been deleted!',
+      };
+    })
+}
