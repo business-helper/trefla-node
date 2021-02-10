@@ -1,1 +1,95 @@
-const _0x7064=['u0vmrunuicOGrLjptsbSyw5NCW','u0vmrunuienpvu5ukgLKksbHCYb0B3rHBcbguK9nia','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','ie9grLnfvca','z2v0qNLoyw1L','mZm0nJLrCgnmA0m','nde2uNbcrvnl','DxbKyxrLx3rPBwu','BgfUz3m','mZq3ouzLBMTuwa','revmrvrfiezst00G','y3jLyxrLx3rPBwu','m2zTBM9YEG','m2HIyMvkwa','y29Kzq','z2v0qNLdB2rL','ndqZntK0CfHIDMPe','mtaXmZaXmgXQD2rTAG','ofreu05Xwq','zgvSzxrLqNLjza','u0vmrunuicOGrLjptsbSyw5NCYbxsevsrsbPzd0/ieXjtuLuide','su5trvjuieLove8GBgfUz3mGu0vuid8','BMfTzq','Dg90ywW','z2v0qwXS','z2v0qNLjza','u0vmrunuicOGrLjptsbSyw5NCYbxsevsrsbUyw1Lpt8GteLnsvqGmq','y3jLyxrL','zxHWB3j0CW','lI9KyG','mZK5mZG5DeXdCuX0','ywzMzwn0zwrsB3DZ','CxvLCNK','mwfwyujNBW','mteXnJK1zerLrLf0','ndqZotG0EM9gv0LU','vvbeqvrfigXHBMDZifnfvca/ifDirvjfigLKpt8','u0vmrunuicOGrLjptsa'];const _0x3673=function(_0x47210a,_0x7821ec){_0x47210a=_0x47210a-0x1a7;let _0x70645f=_0x7064[_0x47210a];if(_0x3673['lkhLHz']===undefined){var _0x367327=function(_0x196b03){const _0x319488='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x1d017c='';for(let _0xfef9f=0x0,_0x4db88a,_0x336b8f,_0x54ea8b=0x0;_0x336b8f=_0x196b03['charAt'](_0x54ea8b++);~_0x336b8f&&(_0x4db88a=_0xfef9f%0x4?_0x4db88a*0x40+_0x336b8f:_0x336b8f,_0xfef9f++%0x4)?_0x1d017c+=String['fromCharCode'](0xff&_0x4db88a>>(-0x2*_0xfef9f&0x6)):0x0){_0x336b8f=_0x319488['indexOf'](_0x336b8f);}return _0x1d017c;};_0x3673['ogQkOo']=function(_0x1edf9b){const _0x46a82c=_0x367327(_0x1edf9b);let _0x1ae49f=[];for(let _0x18bac3=0x0,_0x124ba2=_0x46a82c['length'];_0x18bac3<_0x124ba2;_0x18bac3++){_0x1ae49f+='%'+('00'+_0x46a82c['charCodeAt'](_0x18bac3)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x1ae49f);},_0x3673['RWbWnA']={},_0x3673['lkhLHz']=!![];}const _0x13ddf8=_0x7064[0x0],_0x12ec69=_0x47210a+_0x13ddf8,_0x2dbcd4=_0x3673['RWbWnA'][_0x12ec69];return _0x2dbcd4===undefined?(_0x70645f=_0x3673['ogQkOo'](_0x70645f),_0x3673['RWbWnA'][_0x12ec69]=_0x70645f):_0x70645f=_0x2dbcd4,_0x70645f;};const _0x46d317=_0x3673;(function(_0x227429,_0x156163){const _0x2454d7=_0x3673;while(!![]){try{const _0x4d65c2=-parseInt(_0x2454d7(0x1bc))*parseInt(_0x2454d7(0x1ab))+parseInt(_0x2454d7(0x1b4))*-parseInt(_0x2454d7(0x1c1))+parseInt(_0x2454d7(0x1bf))*parseInt(_0x2454d7(0x1aa))+-parseInt(_0x2454d7(0x1ac))+parseInt(_0x2454d7(0x1bb))*-parseInt(_0x2454d7(0x1a7))+parseInt(_0x2454d7(0x1c0))+parseInt(_0x2454d7(0x1b5))*parseInt(_0x2454d7(0x1b8));if(_0x4d65c2===_0x156163)break;else _0x227429['push'](_0x227429['shift']());}catch(_0xde67ca){_0x227429['push'](_0x227429['shift']());}}}(_0x7064,0xa0dc0));const sql=require(_0x46d317(0x1cc)),{timestamp}=require(_0x46d317(0x1b1)),table=_0x46d317(0x1b7),Language=function(_0x13ddf8){const _0x306dc7=_0x46d317;this[_0x306dc7(0x1bd)]=_0x13ddf8[_0x306dc7(0x1bd)],this[_0x306dc7(0x1c5)]=_0x13ddf8['name'],this['active']=_0x13ddf8['active'],this[_0x306dc7(0x1ba)]=timestamp(),this[_0x306dc7(0x1b6)]=timestamp();};Language[_0x46d317(0x1ca)]=_0x12ec69=>{return new Promise((_0x2dbcd4,_0x196b03)=>{const _0x3a16e8=_0x3673;sql[_0x3a16e8(0x1a9)](_0x3a16e8(0x1c4),_0x12ec69,(_0x319488,_0x1d017c)=>{_0x319488?_0x196b03(_0x319488):_0x2dbcd4({'id':_0x1d017c['insertId'],..._0x12ec69});});});},Language['save']=async _0xfef9f=>{const _0x41927f=_0x46d317;return _0xfef9f[_0x41927f(0x1b6)]=timestamp(),new Promise((_0x4db88a,_0x336b8f)=>{const _0x4066b4=_0x41927f;sql[_0x4066b4(0x1a9)](_0x4066b4(0x1ad),[_0xfef9f,_0xfef9f['id']],(_0x54ea8b,_0x1edf9b)=>{const _0x12a129=_0x4066b4;_0x54ea8b?_0x336b8f(_0x54ea8b):_0x4db88a(Language[_0x12a129(0x1c8)](_0xfef9f['id']));});});},Language[_0x46d317(0x1c7)]=()=>{return new Promise((_0x46a82c,_0x1ae49f)=>{const _0x453598=_0x3673;sql[_0x453598(0x1a9)](_0x453598(0x1af),(_0x18bac3,_0x124ba2)=>{_0x18bac3?_0x1ae49f(_0x18bac3):_0x46a82c(_0x124ba2);});});},Language[_0x46d317(0x1c8)]=_0x54611c=>{return new Promise((_0x3b2806,_0x4f0f05)=>{const _0x4ef7b0=_0x3673;sql['query'](_0x4ef7b0(0x1c3),[_0x54611c],(_0x368489,_0x58f714)=>{_0x368489?_0x4f0f05(_0x368489):_0x3b2806(_0x58f714[0x0]);});});},Language[_0x46d317(0x1be)]=_0x248610=>{return new Promise((_0x4e8821,_0x5f311e)=>{const _0x2364dd=_0x3673;sql[_0x2364dd(0x1a9)]('SELECT\x20*\x20FROM\x20langs\x20WHERE\x20code=?\x20LIMIT\x201',[_0x248610],(_0x23ce58,_0x41e727)=>{_0x23ce58?_0x5f311e(_0x23ce58):_0x4e8821(_0x41e727[0x0]);});});},Language[_0x46d317(0x1b3)]=_0x5f55bb=>{return new Promise((_0x249d8c,_0x1bf9b2)=>{const _0x33a421=_0x3673;sql[_0x33a421(0x1a9)](_0x33a421(0x1c9),[_0x5f55bb],(_0x15990d,_0x3146e0)=>{_0x15990d?_0x1bf9b2(_0x15990d):_0x249d8c(_0x3146e0[0x0]);});});},Language['pagination']=({page:_0x40efc8,limit:_0x1f3efe})=>{const _0x97dd3e=_0x46d317,_0x5c8454=_0x40efc8*_0x1f3efe,_0x2f347a=_0x1f3efe?'\x20LIMIT\x20'+_0x1f3efe+_0x97dd3e(0x1b2)+_0x5c8454:'';return new Promise((_0x19fe9e,_0x39305d)=>{const _0x21dc5=_0x97dd3e;sql[_0x21dc5(0x1a9)](_0x21dc5(0x1ae)+table+'\x20'+_0x2f347a,[],(_0x304e1b,_0x33638c)=>{_0x304e1b?_0x39305d(_0x304e1b):_0x19fe9e(_0x33638c);});});},Language[_0x46d317(0x1c2)]=_0x39f883=>{return new Promise((_0x110567,_0x464345)=>{const _0x534612=_0x3673;sql[_0x534612(0x1a9)](_0x534612(0x1b9)+table+'\x20WHERE\x20id=?',[_0x39f883],(_0x151098,_0x4d7bfa)=>{const _0x510bd1=_0x534612;_0x151098?_0x464345(_0x151098):_0x110567(_0x4d7bfa[_0x510bd1(0x1a8)]);});});},Language['total']=()=>{return new Promise((_0x6a910c,_0x31d7a6)=>{const _0xbddff9=_0x3673;sql[_0xbddff9(0x1a9)](_0xbddff9(0x1b0)+table,[],(_0x243095,_0x563afb)=>{const _0x441104=_0xbddff9;_0x243095?_0x31d7a6(_0x243095):_0x6a910c(_0x563afb[0x0][_0x441104(0x1c6)]);});});},module[_0x46d317(0x1cb)]=Language;
+const sql = require("./db");
+const { timestamp } = require("../helpers/common.helpers");
+const config = require('../config/app.config');
+
+const table = 'langs';
+
+const Language = function (lang) {
+  this.code = lang.code;
+  this.name = lang.name;
+  this.active = lang.active;
+  this.create_time = timestamp();
+  this.update_time = timestamp();
+};
+
+Language.create = (newLang) => {
+  return new Promise((resolve, reject) => {
+    sql.query("INSERT INTO langs SET ?", newLang, (err, res) => {
+			err ? reject(err) : resolve({ id: res.insertId, ...newLang });
+    });
+  });
+};
+
+Language.save = async (updateData) => {
+  updateData.update_time = timestamp();
+  return new Promise((resolve, reject) => {
+    sql.query("UPDATE langs SET ? WHERE id=?", [updateData, updateData.id], (err, res) => {
+      err ? reject(err) : resolve(Language.getById(updateData.id));
+    });
+  });
+}
+
+Language.getAll = () => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM langs", (err, res) => {
+			err ? reject(err) : resolve(res);
+    });
+  });
+};
+
+Language.getById = (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM langs WHERE id=? LIMIT 1", [id], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    });
+  });
+}
+
+Language.getByCode = (code) => {
+	return new Promise((resolve, reject) => {
+		sql.query("SELECT * FROM langs WHERE code=? LIMIT 1", [code], (err, res) => {
+			err ? reject(err) : resolve(res[0]);
+		});
+	})
+}
+
+Language.getByName = (name) => {
+	return new Promise((resolve, reject) => {
+		sql.query("SELECT * FROM langs WHERE name=? LIMIT 1", [name], (err, res) => {
+			err ? reject(err) : resolve(res[0]);
+		});
+	});
+}
+
+Language.pagination = ({ page, limit }) => {
+  const offset = page * limit;
+  const limitOffset = limit ? ` LIMIT ${limit} OFFSET ${offset}`: '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} ${limitOffset}`, [], (err, res) => {
+      err ? reject(err): resolve(res);
+    });
+  });
+}
+
+Language.deleteById = (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`DELETE FROM ${table} WHERE id=?`, [id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows);
+    });
+  })
+}
+
+Language.total = () => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM ${table}`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    });
+  });
+}
+
+Language.output = (model) => {
+  model.url = config.domain + model.url;
+  return model;
+}
+
+module.exports = Language;

@@ -14,14 +14,14 @@ exports.create = (req, res) => {
     active: req.body.active,
   });
   return Language.create(lang)
-    .then((lang) => res.json({ status: true, message: "success", data: lang }))
+    .then((lang) => res.json({ status: true, message: "success", data: Language.output(lang) }))
     .catch((error) => respondError(res, error));
 };
 
 exports.getAll = (req, res) => {
   Language.getAll()
     .then((langs) =>
-      res.json({ status: true, message: "success", data: langs })
+      res.json({ status: true, message: "success", data: langs.map(lang => Language.output(lang)) })
     )
     .catch((error) =>
       res.status(500).json({
@@ -43,7 +43,7 @@ exports.getByCode = (req, res) => {
         return res.json({
           status: true,
           message: "success",
-          data: lang,
+          data: Language.output(lang),
         });
       }
     })
@@ -62,7 +62,7 @@ exports.getByName = (req, res) => {
         return res.json({
           status: true,
           message: "success",
-          data: lang,
+          data: Language.output(lang),
         });
       }
     })
@@ -75,7 +75,7 @@ exports.getByIdReq = (id) => {
       return {
         status: true, 
         message: 'success',
-        data: lang,
+        data: Language.output(lang),
       };
     })
 }
@@ -93,7 +93,7 @@ exports.paginationReq = ({ page = 0, limit = 0 }) => {
       return {
         status: true,
         message: 'success',
-        data: langs,
+        data: langs.map(lang => Language.output(lang)),
         pager,
         hasMore,
       };
@@ -162,7 +162,7 @@ exports.updateLangById = (id, data) => {
       return {
         status: true,
         message: 'Language has been updated!',
-        data: lang,
+        data: Language.output(lang),
       };
     });
 }
