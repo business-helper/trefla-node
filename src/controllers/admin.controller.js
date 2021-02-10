@@ -3,7 +3,7 @@ const { Validator } = require("node-input-validator");
 const models = require("../models");
 const helpers = require("../helpers");
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { bool2Int, getTotalLikes, generateTZTimeString, JSONParser, respondError, sendMail, stringifyModel, timestamp } = require("../helpers/common.helpers");
+const { bool2Int, getTotalLikes, generateTZTimeString, JSONParser, respondError, sendMail, sendSingleNotification, sendMultiNotifications, stringifyModel, timestamp } = require("../helpers/common.helpers");
 const { generateAdminData, generateAdminPermissionData, generateMessageData } = require('../helpers/model.helpers');
 const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
 const { ADMIN_ROLE } = require('../constants/common.constant');
@@ -371,5 +371,31 @@ exports.addEmployee = async ({ email, user_name, password, avatar }) => {
     })
     .then(({ admin, permission }) => {
       return admin.permission = models.adminPermission.output(permission);
+    })
+}
+
+exports.sendNotification2User = async ({ user_id, title, body }) => {
+  return models.user.getById(user_id)
+    .then(user => {
+      if (!user || !user.device_token) {
+        throw Object.assign(new Error("Can not send notification to user!"), { code: 400 });
+      }
+
+      const { device_token: token } = user; console.log('[Admin][Send Noti][Token]', token);
+      return sendSingleNotification({
+        token, title, body
+      });
+    })
+}
+
+exports.sendBulkNotification = ({ user_ids, title, body }) => {
+  return models.user.getByIds(user_ids)
+    .then(users => {
+      const tokens = users.filter(user => user.device_token).map(user => user.device_token);
+      if (tokens.length === 0) {
+        throw Object.assign(new Error('None of users can receive notification!'), { code: 400 });
+      }
+
+      return sendMultiNotifications({ tokens, title, body });
     })
 }

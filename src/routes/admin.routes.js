@@ -277,7 +277,7 @@ adminRouters.post('/send-notification', async (req, res) => {
       if (!matched) {
         throw Object.assign(new Error('Invalid requset!'), { code: 400, details: validator.errors });
       }
-      return ctrls.firebase.sendNotification2UserReq({ user_id, title, body });
+      return ctrls.admin.sendNotification2User({ user_id, title, body });
     })
     .then(() => res.json({ status: true, message: 'Notification has been sent!' }))
     .catch(error => respondValidateError(res, error));
@@ -298,7 +298,7 @@ adminRouters.post('/bulk-notifications', async (req, res) => {
       if (!matched) {
         throw Object.assign(new Error('Invalid requset!'), { code: 400, details: validator.errors });
       }
-      return ctrls.firebase.sendBulkNotificationReq({ user_ids, title, body });
+      return ctrls.admin.sendBulkNotification({ user_ids, title, body });
     })
     .then(() => res.json({ status: true, message: 'Notifications have been sent!' }))
     .catch(error => respondValidateError(res, error));

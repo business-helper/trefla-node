@@ -257,6 +257,7 @@ module.exports = {
   SendAllMultiNotifications,
   sendMail,
   sendMultiNotifications,
+  sendSingleNotification,
   string2Coordinate,
   string2Timestamp,
   stringifyModel,
