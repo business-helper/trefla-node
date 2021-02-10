@@ -230,7 +230,7 @@ const sendMultiNotifications = async ({ title, body, tokens }) => {
   return admin.messaging().sendMulticast(message);
 }
 
-const sendSingleNotification = async ({ title, body, token, data = null }) => {
+const sendSingleNotification = async ({ title, body, token, data = {} }) => {
   const message = {
     token,
     notification: { title, body },
