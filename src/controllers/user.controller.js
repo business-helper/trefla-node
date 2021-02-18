@@ -673,6 +673,55 @@ exports.banReplyReq = (req, res) => {
     }));
 }
 
+exports.blockUser = ({ fromId, toId }) => {
+  return models.user.getById(fromId)
+    .then(fromUser => {
+      let blackList = helpers.common.JSONParser(fromUser.black_list);
+      if (typeof blackList !== 'object') blackList = [];
+      if (!blackList.includes(toId)) blackList.push(toId);
+      fromUser.black_list = blackList;
+      return models.user.save(fromUser);      
+    })
+    .then(fromUser => {
+      let blackList = helpers.common.JSONParser(fromUser.black_list);
+      if (typeof blackList !== 'object') blackList = [];
+      return models.user.getByIds(blackList);
+    })
+    .then(blockers => {
+      const [blockee] = blockers.filter(user => user.id === toId)
+      return {
+        status: true,
+        message: `You blocked '${blockee.user_name}'`,
+        black_list: blockers.map(user => models.user.output(user))
+      }
+    })
+}
+
+exports.unblockUser = ({ fromId, toId }) => {
+  return models.user.getById(fromId)
+    .then(fromUser => {
+      let blackList = helpers.common.JSONParser(fromUser.black_list || '[]');
+      if (blackList.includes(toId)) blackList.splice(blackList.indexOf(toId), 1);
+      fromUser.black_list = blackList;
+      return models.user.save(fromUser);      
+    })
+    .then(fromUser => {
+      let blackList = helpers.common.JSONParser(fromUser.black_list);
+      if (typeof blackList !== 'object') blackList = [];
+      return Promise.all([
+        models.user.getByIds(blackList),
+        models.user.getById(toId),
+      ]);
+    })
+    .then(([blockers, blockee]) => {
+      return {
+        status: true,
+        message: `You unblocked '${blockee.user_name}'`,
+        black_list: blockers.map(user => models.user.output(user))
+      }
+    })
+}
+
 exports.createIDTransferReq = async ({ user_id, card_number, socketClient }) => {
   let _user, verifiedUser;
   [verifiedUser] = await models.user.getByCard(card_number, 1);

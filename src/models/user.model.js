@@ -1,5 +1,5 @@
 const sql = require("./db");
-const { bool2Int, timestamp } = require("../helpers/common.helpers");
+const { bool2Int, timestamp, JSONParser, stringifyModel } = require("../helpers/common.helpers");
 
 const User = function (user) {
   this.user_name = user.user_name;
@@ -19,6 +19,7 @@ User.create = (newUser) => {
 };
 
 User.save = async (updateData) => {
+  updateData = stringifyModel(updateData);
   updateData.update_time = timestamp();
   return new Promise((resolve, reject) => {
     sql.query("UPDATE users SET ? WHERE id=?", [updateData, updateData.id], (err, res) => {
@@ -168,12 +169,16 @@ User.output = (user, mode = 'NORMAL') => {
     // console.log('[location array]', user.location_array);
     user.location_array = [];
   }
+  
+  if (user.black_list === "") user.black_list = [];
+  else user.black_list = JSONParser(user.black_list);
+
   // keys to delete
   let delKeys = [];
   if (mode === 'NORMAL') {
-    delKeys = ['email', 'password', 'language', 'bio', 'radiusAround', 'noti_num', 'location_array', 'postAroundCenterCoordinate', 'create_time', 'update_time', 'recovery_code'];
+    delKeys = ['black_list', 'email', 'password', 'language', 'bio', 'radiusAround', 'noti_num', 'location_array', 'postAroundCenterCoordinate', 'create_time', 'update_time', 'recovery_code'];
   } else if (mode === 'PROFILE') {
-    delKeys = ['password', 'create_time', 'update_time', 'recovery_code'];
+    delKeys = ['black_list', 'password', 'create_time', 'update_time', 'recovery_code'];
   } else if (mode === 'SIMPLE') {
     return { 
       id: user.id,

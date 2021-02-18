@@ -69,7 +69,7 @@ exports.DEFAULT_ADMIN_PERMISSION = {
   settings: {
     emailTemplate: true,
     config: true,
-    admins: true,
+    // admins: true,
   },
   create_time: timestamp(),
   update_time: timestamp(),
@@ -242,6 +242,7 @@ exports.DEFAULT_USER = {
   birthday: '',
   language: 'English',
   bio: '',
+  black_list: JSON.stringify([]),
   isGuest: 0,
   guestName: '',
   card_number: '',
