@@ -167,6 +167,15 @@ const getChatSummryV2 = async (req, res) => {
     });
 }
 
+const getBlockList = async (user_id) => {
+  return models.user.getById(user_id)
+    .then(user => {
+      const blackList = JSON.parse(user.black_list || '[]');
+      return models.user.getByIds(blackList);
+    })
+    .then(users => users.map(user => models.user.output(user)));
+}
+
 const getInitData = (req, res) => {
   const { uid } = getTokenInfo(req);
   const validator = new Validator(req.body, {
@@ -190,15 +199,17 @@ const getInitData = (req, res) => {
         getPostSummary(req, res),
         getNotificationSummary(req, res),
         getChatSummryV2(req, res),
+        getBlockList(uid),
       ])
     })
-    .then(([ user, posts, notis, chats, ]) => {
+    .then(([ user, posts, notis, chats, black_list ]) => {
       return {
         status: true,
         profile: user,
         posts,
         notifications: notis,
         chats,
+        black_list,
       };
     })
     // .catch(error => error);
