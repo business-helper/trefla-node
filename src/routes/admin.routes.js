@@ -639,6 +639,7 @@ adminRouters.route('/employee/:id').get(async (req, res) => {
       data: models.admin.output(admin),
       permission: models.adminPermission.output(permission),
     }))
+    .catch(error => respondValidateError(res, error))
 });
 
 adminRouters.route('/employee').get(async (req, res) => {
