@@ -46,6 +46,10 @@ exports.getAdminById = async (id) => {
   return models.admin.getById(id);
 }
 
+exports.getPermissionOfAdmin = async (id) => {
+  return models.adminPermission.getByUserId(id);
+}
+
 exports.loginReq = async (req, res) => {
   const { email_or_name, password } = req.body;
   let _admin;
@@ -60,9 +64,8 @@ exports.loginReq = async (req, res) => {
       _admin = adminByEmail || adminByName;
       return Promise.all([
         helpers.auth.comparePassword(password, _admin.password),
-        helpers.auth.genreateAuthToken(_admin, 'ADMIN'),
-        
-      ])
+        helpers.auth.genreateAuthToken(_admin, 'ADMIN', _admin.role),
+      ]);
     })
     .then(([matched, token]) => {
       if (!matched) {
@@ -83,7 +86,7 @@ exports.getIdTransfersReq = async ({ limit = 0, page = 0 }) => {
 
   let _total, _rows;
   return Promise.all([
-    models.adminNotification.pagination({ page, limit }),
+    models.adminNotification.pagination({ page, limit, type: 'ID_TRANSFER' }),
     models.adminNotification.total({}),
   ])
     .then(([ rows, total ]) => {
@@ -359,18 +362,74 @@ exports.sendConsentEmail4Transfer = async (noti_id) => {
 
 exports.addEmployee = async ({ email, user_name, password, avatar }) => {
   const adminModel = generateAdminData({ email, user_name, avatar });
+
   return helpers.auth.generatePassword(password)
     .then(encPassword => {
       adminModel.password = encPassword;
-      models.admin.create(adminModel)
+      return models.admin.create(adminModel)
     })
     .then(admin => {
+      console.log('[Admin][Created]', admin);
       adminPermissionData = generateAdminPermissionData({ admin_id: admin.id }, ADMIN_ROLE.ADMIN);
       return models.adminPermission.create(stringifyModel(adminPermissionData))
         .then(permission => ({ admin, permission }));
     })
     .then(({ admin, permission }) => {
       return admin.permission = models.adminPermission.output(permission);
+    })
+}
+
+exports.updateEmployeePermission = async (id, permissionData) => {
+  return models.adminPermission.getByUserId(id)
+    .then(async permission => {
+      if (!permission) {
+        const defaultPermission = generateAdminPermissionData({ admin_id: id, ...permissionData }, ADMIN_ROLE.ADMIN);
+        return models.adminPermission.create(stringifyModel(adminPermissionData));
+      } else {
+        const newPermission = generateAdminPermissionData({ ...permission, ...permissionData });
+        return models.adminPermission.save(stringifyModel(newPermission));
+      }
+    })
+    .then(permission => {
+      return models.admin.getById(id)
+        .then(admin => {
+          return { 
+            admin: models.admin.output(admin), 
+            permission: models.adminPermission.output(permission) };
+        })
+    });
+}
+
+exports.adminList = async ({ page, limit }) => {
+  return Promise.all([
+    models.admin.paginattion({ page, limit }),
+    models.admin.numberOfEmployees(),
+  ])
+    .then(([list, total]) => {
+      const pager = { page, limit, total };
+      const hasMore = page * limit + list.length < total;
+      return {
+        status: true,
+        message: 'success',
+        data: list.map(admin => models.admin.output(admin)),
+        pager,
+        hasMore,
+      }
+    });
+}
+
+exports.deleteEmployee = async (id) => {
+  return Promise.all([
+    models.admin.deleteById(id),
+    models.adminPermission.deleteByUserId(id),
+  ])
+    .then(([adminDeleted, permissionDeleted]) => {
+      return {
+        status: true,
+        message: 'Success',
+        adminDeleted,
+        permissionDeleted,
+      };
     })
 }
 

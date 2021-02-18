@@ -12,6 +12,7 @@ const { BearerMiddleware } = require("../middlewares/basic.middleware");
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { respondValidateError } = require("../helpers/common.helpers");
 const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
+const { ADMIN_ROLE } = require('../constants/common.constant');
 
 adminRouters.post('/login', async (req, res) => {
 
@@ -426,37 +427,6 @@ adminRouters.post('/consent-email/:id', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
-adminRouters.route('/employee').post(async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!" });
-
-  const validator = new Validator({
-    ...req.body,
-  }, {
-    email: "required",
-    user_name: "required",
-    password: "required",
-  });
-
-  validator.addPostRule(provider => Promise.all([
-    models.admin.getByEmail(req.body.email),
-    models.admin.getByUsername(req.body.user_name),
-  ])
-    .then(([ byEmail, byUserName ]) => {
-      if (byEmail) provider.error('email', 'custom', "Email alrady taken by other administrator!");
-      if (byUserName) provider.error('user_name', 'custom', 'User name already taken by other administrator!');
-    })
-  )
-
-  return validator.check()
-    .then(matched => {
-      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
-      return ctrls.admin.addEmployee(req.body);
-    })
-    .then(result => res.json(result))
-    .catch(error => respondValidatorError(res, error))
-})
-
 adminRouters.patch('/email-templates/:id', async (req, res) => {
   const { role } = getTokenInfo(req);
   if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
@@ -623,6 +593,155 @@ adminRouters.delete('/id-transfers/:id', async (req, res) => {
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
 });
+
+
+
+
+
+adminRouters.route('/employee/:id').get(async (req, res) => {
+  const { role, role2 } = getTokenInfo(req);
+  if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER ))
+    return res.json({ status: false, message: 'Permission denied!' });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.admin.getById(provider.inputs.id)
+      .then(admin => {
+        if (!admin) provider.error('id', 'custom', 'Data does not exist!');
+      });
+  })
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return Promise.all([
+        ctrls.admin.getAdminById(req.params.id),
+        ctrls.admin.getPermissionOfAdmin(req.params.id),
+      ]);
+    })
+    .then(([admin, permission]) => res.json({
+      status: true,
+      message: 'success',
+      data: models.admin.output(admin),
+      permission: models.adminPermission.output(permission),
+    }))
+});
+
+adminRouters.route('/employee').get(async (req, res) => {
+  const { role, role2 } = getTokenInfo(req);
+  if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER)) res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator(req.query, {
+    limit: "required",
+    page: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.adminList({
+        page: Number(req.query.page),
+        limit: Number(req.query.limit),
+      })
+    })
+    .then(resl => res.json(resl))
+    .catch(error => respondValidateError(res, error))
+});
+
+adminRouters.route('/employee').post(async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    ...req.body,
+  }, {
+    email: "required",
+    user_name: "required",
+    password: "required",
+  });
+
+  validator.addPostRule(provider => Promise.all([
+    models.admin.getByEmail(req.body.email),
+    models.admin.getByUsername(req.body.user_name),
+  ])
+    .then(([ byEmail, byUserName ]) => {
+      if (byEmail) provider.error('email', 'custom', "Email already taken by other administrator!");
+      if (byUserName) provider.error('user_name', 'custom', 'User name already taken by other administrator!');
+    })
+  )
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.addEmployee(req.body);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error))
+})
+
+adminRouters.route('/employee/:id').delete(async (req, res) => {
+  const { role, role2 } = getTokenInfo(req);
+  if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER)) return res.json({ status: false, message: 'Permission denied!' });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => models.admin.getById(provider.inputs.id)
+    .then(admin => {
+      if (!admin) provider.error('id', 'custom', 'Employee does not exist with the given id!');
+    }))
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.deleteEmployee(req.params.id);
+    })
+    .then(resl => res.json(resl))
+    .catch(error => respondValidateError(res, error))
+})
+
+adminRouters.route('/employee/:id/permission').patch(async(req, res) => {
+  const { role, role2, uid: user_id } = getTokenInfo(req);
+  if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER)) return res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return Promise.all([
+      models.admin.getById(provider.inputs.id),
+      models.adminPermission.getByUserId(provider.inputs.id),
+    ])
+      .then(([admin, permission]) => {
+        if (!admin) provider.error('id', 'custom', 'Admin does not exist!');
+        // if (!permission) provider.error('permission', 'custom', 'Admin does not have permission!');
+      });
+  })
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.updateEmployeePermission(req.params.id, req.body.permission)      
+    })
+    .then(({ admin, permission }) => res.json({
+      status: true,
+      message: 'Permission has been updated!',
+      data: admin, permission
+    }))
+    .catch(error => respondValidateError(res, error))
+})
+
 
 
 module.exports = adminRouters;

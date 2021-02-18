@@ -1,5 +1,6 @@
 const sql = require("./db");
 const { timestamp } = require("../helpers/common.helpers");
+const { ADMIN_ROLE } = require('../constants/common.constant')
 
 const table = 'admins';
 
@@ -49,8 +50,36 @@ Admin.getById = async (id) => {
   });
 }
 
+Admin.paginattion = async ({ page = 0, limit = 10 }) => {
+  const skip = page * limit;
+  const where = [];
+  where.push(`role='${ADMIN_ROLE.ADMIN}'`);
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : "";
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} ${strWhere} ORDER BY id ASC LIMIT ? OFFSET ? `, [limit, skip], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Admin.numberOfEmployees = async () => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM ${table} WHERE role='${ADMIN_ROLE.ADMIN}'`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    })
+  })
+}
+
+Admin.deleteById = async (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`DELETE FROM ${table} WHERE id=?`, [id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows);
+    });
+  })
+}
+
 Admin.output = (model) => {
-  ['create_time', 'update_time'].map(key => delete model[key]);
+  ['password'].map(key => delete model[key]);
   return model;
 }
 

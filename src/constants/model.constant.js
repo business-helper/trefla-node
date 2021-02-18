@@ -30,6 +30,9 @@ exports.DEFAULT_ADMIN_PERMISSION = {
     },
     idTransfer: {
       show: true,
+      judge: true,
+      email: true,
+      delete: true,
     },
     sendNotification: {
       show: true,

@@ -7,7 +7,7 @@ const { DEFAULT_USER } = require('../constants/model.constant');
 const psSaltRounds = 10;
 
 
-const genreateAuthToken = (user, role = 'USER') => {
+const genreateAuthToken = (user, role = 'USER', role2 = 'USER') => {
   return jwt.sign(
     {
       foo: "bar",
@@ -15,6 +15,7 @@ const genreateAuthToken = (user, role = 'USER') => {
       email: user.email,
       user_name: user.user_name,
       role: role,
+      role2,
       iat: Math.floor(Date.now() / 1000) - 30,
     },
     appSecret,
