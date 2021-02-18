@@ -41,6 +41,15 @@ adminRouters.use((req, res, next) => {
   BearerMiddleware(req, res, next);
 });
 
+adminRouters.route('/authenticate-token').post(async (req, res) => {
+  const { uid: user_id, role } = getTokenInfo(req);
+  const token = (req.headers.authorization || '').split(' ')[1] || '';
+  return ctrls.admin.authenticateAdminToken(user_id) 
+    .then(resl => res.json({ ...resl, token }))
+    .catch(error => respondValidateError(res, error));
+});
+
+
 adminRouters.get('/profile', async (req, res) => {
   const { uid: user_id, role } = getTokenInfo(req);
   if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});

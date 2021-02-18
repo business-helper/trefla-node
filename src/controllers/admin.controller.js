@@ -67,17 +67,36 @@ exports.loginReq = async (req, res) => {
         helpers.auth.genreateAuthToken(_admin, 'ADMIN', _admin.role),
       ]);
     })
-    .then(([matched, token]) => {
+    .then(async ([matched, token]) => {
       if (!matched) {
         throw Object.assign(new Error('Password does not match!'), { code: 400 });
       }
+      _admin.last_login = timestamp(); console.log('[admin id]', _admin.id)
+      await models.admin.save(_admin);
+      const permission = await models.adminPermission.getByUserId(_admin.id);
       return {
         status: true,
         message: "Login success!",
         data: models.admin.output(_admin),
+        permission: permission ? models.adminPermission.output(permission) : {},
         token,
       };
     });
+}
+
+exports.authenticateAdminToken = async (admin_id) => {
+  return Promise.all([
+    models.admin.getById(admin_id),
+    models.adminPermission.getByUserId(admin_id),
+  ])
+    .then(([admin, permission]) => {
+      return {
+        status: true,
+        message: "Success",
+        data: models.admin.output(admin),
+        permission: permission ? models.adminPermission.output(permission) : {},
+      };
+    })
 }
 
 exports.getIdTransfersReq = async ({ limit = 0, page = 0 }) => {
@@ -369,13 +388,13 @@ exports.addEmployee = async ({ email, user_name, password, avatar }) => {
       return models.admin.create(adminModel)
     })
     .then(admin => {
-      console.log('[Admin][Created]', admin);
       adminPermissionData = generateAdminPermissionData({ admin_id: admin.id }, ADMIN_ROLE.ADMIN);
       return models.adminPermission.create(stringifyModel(adminPermissionData))
         .then(permission => ({ admin, permission }));
     })
     .then(({ admin, permission }) => {
-      return admin.permission = models.adminPermission.output(permission);
+      admin.permission = models.adminPermission.output(permission);
+      return { status: true, messaeg: 'success', data: admin };
     })
 }
 
