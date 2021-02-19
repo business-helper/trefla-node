@@ -269,6 +269,22 @@ const bootstrapSocket = (io) => {
         }
       }
 
+      const user_t = await models.user.getById(receiver_id); user_t.black_list = JSON.parse(user_t.black_list);
+      const user_f = await models.user.getById(uid); 
+      if (user_t.black_list.includes(uid)) {
+        socket.emit(CONSTS.SKT_MSG_FAILED, {
+          status: false,
+          message: `You're blocked by "${user_t.user_name}"`,
+          payload: {
+            message,
+            chat_id,
+            ...payload
+          }
+        });
+        return false;
+      }
+
+
       Promise.all([
         ctrls.chat.addMessageReq({
           sender_id: uid,

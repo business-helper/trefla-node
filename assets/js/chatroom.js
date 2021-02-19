@@ -33,6 +33,7 @@ var _timeout = undefined;
 // var _users = [];
 
 $(function () {
+  socket.emit(SKT_AUTHENTICATE, { token })
   updateHeader();
 	loadData();
 	
@@ -570,6 +571,10 @@ socket.on(SKT_FOUND_NEW_CARD_CHATS, args => {
 
 socket.on(SKT_CHATLIST_UPDATED, args => {
   console.log(`[${SKT_CHATLIST_UPDATED}]`, args);
+})
+
+socket.on(SKT_MSG_FAILED, args => {
+  console.log(`[${SKT_MSG_FAILED}]`, args)
 })
 
 socket.on('get_token', args => {
