@@ -673,7 +673,8 @@ exports.banReplyReq = (req, res) => {
     }));
 }
 
-exports.blockUser = ({ fromId, toId }) => {
+exports.blockUser = ({ fromId, toId, socketClient }) => {
+  let blocker;
   return models.user.getById(fromId)
     .then(fromUser => {
       let blackList = helpers.common.JSONParser(fromUser.black_list);
@@ -683,12 +684,23 @@ exports.blockUser = ({ fromId, toId }) => {
       return models.user.save(fromUser);      
     })
     .then(fromUser => {
+      blocker = fromUser;
       let blackList = helpers.common.JSONParser(fromUser.black_list);
       if (typeof blackList !== 'object') blackList = [];
       return models.user.getByIds(blackList);
     })
     .then(blockers => {
       const [blockee] = blockers.filter(user => user.id === toId)
+      if (blockee && blockee.socket_id) {
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, { 
+          users: blockee.socket_id, 
+          event: CONSTS.SKT_BLOCK_BLOCKED,
+          args: {
+            message: 'You got blocked!',
+            user: User.output(blocker)
+          }
+        });
+      }
       return {
         status: true,
         message: `You blocked '${blockee.user_name}'`,
@@ -697,7 +709,8 @@ exports.blockUser = ({ fromId, toId }) => {
     })
 }
 
-exports.unblockUser = ({ fromId, toId }) => {
+exports.unblockUser = ({ fromId, toId, socketClient }) => {
+  let blocker;
   return models.user.getById(fromId)
     .then(fromUser => {
       let blackList = helpers.common.JSONParser(fromUser.black_list || '[]');
@@ -706,6 +719,7 @@ exports.unblockUser = ({ fromId, toId }) => {
       return models.user.save(fromUser);      
     })
     .then(fromUser => {
+      blocker = fromUser;
       let blackList = helpers.common.JSONParser(fromUser.black_list);
       if (typeof blackList !== 'object') blackList = [];
       return Promise.all([
@@ -714,6 +728,16 @@ exports.unblockUser = ({ fromId, toId }) => {
       ]);
     })
     .then(([blockers, blockee]) => {
+      if (blockee && blockee.socket_id) {
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, { 
+          users: blockee.socket_id, 
+          event: CONSTS.SKT_BLOCK_BLOCKED,
+          args: {
+            message: "You got unblocked!",
+            user: User.output(blocker)
+          }
+        });
+      }
       return {
         status: true,
         message: `You unblocked '${blockee.user_name}'`,

@@ -27,3 +27,5 @@ const SKT_FOUND_NEW_CARD_CHATS = 'socket.found.new.card.chats';
 const SKT_CHATLIST_UPDATED = 'socket.chatlist.updated';
 const SKT_AUTHENTICATE = 'socket.authenticate';
 const SKT_MSG_FAILED = 'socket.message.failed';
+const SKT_BLOCK_BLOCKED = 'socket.block.blocked';
+const SKT_BLOCK_RELEASED = 'socket.block.released';

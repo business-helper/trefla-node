@@ -36,7 +36,8 @@ userRouters.route('/block/:id').post(async (req, res) => {
   return validator.check()
     .then(matched => {
       if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
-      return ctrls.user.blockUser({ fromId: Number(uid), toId: Number(req.params.id) });
+      const socketClient = req.app.locals.socketClient;
+      return ctrls.user.blockUser({ fromId: Number(uid), toId: Number(req.params.id), socketClient });
     })
     .then(resl => res.json(resl))
     .catch(error => respondValidateError(res, error))
@@ -68,7 +69,8 @@ userRouters.route('/unblock/:id').post(async (req, res) => {
   return validator.check()
     .then(matched => {
       if (!matched) throw Object.assign(new Error("Invalida request!"), { code: 400, details: validator.errors });
-      return userCtrl.unblockUser({ fromId: Number(uid), toId: Number(req.params.id) });
+      const socketClient = req.app.locals.socketClient;
+      return userCtrl.unblockUser({ fromId: Number(uid), toId: Number(req.params.id), socketClient });
     })
     .then(resl => res.json(resl))
     .catch(error => respondValidateError(res, error));
