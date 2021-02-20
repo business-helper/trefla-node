@@ -176,6 +176,11 @@ const getBlockList = async (user_id) => {
     .then(users => users.map(user => models.user.output(user)));
 }
 
+const getBlockerList = async (user_id) => {
+  return models.user.getBlockers(user_id)
+  .then(users => users.map(user => models.user.output(user)));
+}
+
 const getInitData = (req, res) => {
   const { uid } = getTokenInfo(req);
   const validator = new Validator(req.body, {
@@ -200,9 +205,10 @@ const getInitData = (req, res) => {
         getNotificationSummary(req, res),
         getChatSummryV2(req, res),
         getBlockList(uid),
+        getBlockerList(uid),
       ])
     })
-    .then(([ user, posts, notis, chats, black_list ]) => {
+    .then(([ user, posts, notis, chats, black_list, blocked ]) => {
       return {
         status: true,
         profile: user,
@@ -210,6 +216,7 @@ const getInitData = (req, res) => {
         notifications: notis,
         chats,
         black_list,
+        blocked,
       };
     })
     // .catch(error => error);

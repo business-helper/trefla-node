@@ -1,6 +1,8 @@
 const sql = require("./db");
 const { bool2Int, timestamp, JSONParser, stringifyModel } = require("../helpers/common.helpers");
 
+const table = 'users';
+
 const User = function (user) {
   this.user_name = user.user_name;
   this.email = user.email;
@@ -140,6 +142,20 @@ User.numberOfCard = () => {
 User.updateSocketSession = ({ id, socketId }) => {
   return new Promise((resolve, reject) => {
     sql.query("UPDATE users SET socket_id=? WHERE id=?", [socketId, id], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+User.getBlockers = (user_id) => {
+  // let where = [sender_id, receiver_id].map(user_id => `(JSON_CONTAINS(user_ids, '${user_id}', '$')=1)`);
+  where = [];
+  where.push(`(JSON_CONTAINS(black_list, '${user_id}', '$')=1)`);
+
+  const strWhere = ' WHERE ' + where.join(' AND ');
+
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} ${strWhere}`, [], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
