@@ -29,6 +29,8 @@ exports.SKT_REPLIED_2_TRANSFER_REQUEST = 'socket.replied2.transfer.request';  //
 exports.SKT_CHATLIST_UPDATED = 'socket.chatlist.updated';
 exports.SKT_AUTHENTICATE = 'socket.authenticate';
 exports.SKT_MSG_FAILED = 'socket.message.failed';
+exports.SKT_BLOCK_BLOCKED = 'socket.block.blocked';
+exports.SKT_BLOCK_RELEASED = 'socket.block.released';
 
 exports.SKT_LTS_SINGLE = 'socket.local2server.single';
 exports.SKT_LTS_MULTIPLE = 'socket.local2server.multiple';
