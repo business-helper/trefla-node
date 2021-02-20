@@ -1,1 +1,239 @@
-const _0x32d8=['delete','Invalid\x20request!','getById','required','2rzKgBT','user_id','../middlewares/basic.middleware','Router','../helpers/common.helpers','You\x20have\x20no\x20permission\x20to\x20update\x20this\x20report!','inputs','579207gFNvmi','create','Bug\x20report\x20does\x20not\x20exist\x20for\x20the\x20given\x20id!','4011MWRsQt','Permission\x20error!','user','patch','catch','../models/bug.model','get','check','required|integer','273SabBwe','common','params','update','json','then','errors','assign','use','sendMail','944399vgUned','addPostRule','custom','query','607766LmXXFe','error','deleteById','body','all','post','809980jzOAgp','1544VDTtAR','739ZFmtkm','Bug\x20report\x20with\x20the\x20given\x20id\x20does\x20not\x20exist!','Invalid\x20request','1389606xacNln','/:id','../models/index','ADMIN'];const _0x1283=function(_0x366f22,_0x1d1f4b){_0x366f22=_0x366f22-0x1db;let _0x32d85d=_0x32d8[_0x366f22];return _0x32d85d;};const _0x53f504=_0x1283;(function(_0x37b21b,_0x2f3b41){const _0x4292c9=_0x1283;while(!![]){try{const _0x38c6f1=parseInt(_0x4292c9(0x1e5))+parseInt(_0x4292c9(0x20e))+-parseInt(_0x4292c9(0x1e2))*-parseInt(_0x4292c9(0x1e1))+-parseInt(_0x4292c9(0x20a))+-parseInt(_0x4292c9(0x200))*parseInt(_0x4292c9(0x1f7))+parseInt(_0x4292c9(0x1e0))+parseInt(_0x4292c9(0x1f4))*-parseInt(_0x4292c9(0x1ed));if(_0x38c6f1===_0x2f3b41)break;else _0x37b21b['push'](_0x37b21b['shift']());}catch(_0x46ec3c){_0x37b21b['push'](_0x37b21b['shift']());}}}(_0x32d8,0xb73d8));const express=require('express'),{Validator}=require('node-input-validator'),bugRouters=express[_0x53f504(0x1f0)](),bugCtrl=require('../controllers/bug.controller'),Bug=require(_0x53f504(0x1fc)),User=require('../models/user.model'),ctrls=require('../controllers/index'),models=require(_0x53f504(0x1e7)),helpers=require('../helpers/index'),{BearerMiddleware}=require(_0x53f504(0x1ef)),{getTokenInfo}=require('../helpers/auth.helpers'),{respondValidateError}=require(_0x53f504(0x1f1));bugRouters[_0x53f504(0x208)]((_0x10510a,_0x5c60c5,_0x4414cd)=>{BearerMiddleware(_0x10510a,_0x5c60c5,_0x4414cd);}),bugRouters[_0x53f504(0x1fd)](_0x53f504(0x1e6),async(_0x4817e7,_0x2a35e7)=>{const _0x901ce6=_0x53f504,_0xf83cb1=new Validator({'id':_0x4817e7[_0x901ce6(0x202)]['id']},{'id':_0x901ce6(0x1ff)});return _0xf83cb1['addPostRule'](async _0xde36fb=>Promise[_0x901ce6(0x1de)]([Bug[_0x901ce6(0x1eb)](_0xde36fb[_0x901ce6(0x1f3)]['id'])])[_0x901ce6(0x205)](([_0x5f459e])=>{const _0x19b4ab=_0x901ce6;!_0x5f459e&&_0xde36fb['error']('id',_0x19b4ab(0x20c),_0x19b4ab(0x1f6));})),_0xf83cb1['check']()[_0x901ce6(0x205)](_0x1c1055=>{const _0xad6991=_0x901ce6;if(!_0x1c1055)throw Object[_0xad6991(0x207)](new Error(_0xad6991(0x1e4)),{'code':0x190,'details':_0xf83cb1['errors']});})[_0x901ce6(0x205)](()=>bugCtrl[_0x901ce6(0x1eb)](_0x4817e7,_0x2a35e7))['then'](_0x4ffa41=>_0x2a35e7[_0x901ce6(0x204)](_0x4ffa41))[_0x901ce6(0x1fb)](_0x38c29b=>respondValidateError(_0x2a35e7,_0x38c29b));}),bugRouters[_0x53f504(0x1fd)]('/',async(_0x458ded,_0x54347a)=>{const _0x125f89=_0x53f504,{role:_0x10c612}=getTokenInfo(_0x458ded),_0x23a662=new Validator({..._0x458ded[_0x125f89(0x20d)]},{'limit':_0x125f89(0x1ec),'page':_0x125f89(0x1ec)});return(_0x10c612===_0x125f89(0x1e8)?bugCtrl['loadBugs'](_0x458ded,_0x54347a):bugCtrl['loadBugByUser'](_0x458ded,_0x54347a))[_0x125f89(0x205)](_0x5c4fe3=>_0x54347a[_0x125f89(0x204)](_0x5c4fe3))['catch'](_0x2b97df=>respondValidateError(_0x54347a,_0x2b97df));}),bugRouters[_0x53f504(0x1df)]('/email/:id',async(_0x45a8da,_0x44fd32)=>{const _0x2ad13c=_0x53f504,{uid:_0x43efe3,email:_0x1ef05d,role:_0x4e35ac}=getTokenInfo(_0x45a8da);if(_0x4e35ac!==_0x2ad13c(0x1e8))return _0x44fd32[_0x2ad13c(0x204)]({'status':![],'message':_0x2ad13c(0x1f8)});const _0x247d00=new Validator({'id':_0x45a8da[_0x2ad13c(0x202)]['id'],..._0x45a8da[_0x2ad13c(0x1dd)]},{'id':_0x2ad13c(0x1ec),'subject':_0x2ad13c(0x1ec),'body':_0x2ad13c(0x1ec)});_0x247d00['addPostRule'](async _0x266d03=>Promise[_0x2ad13c(0x1de)]([Bug['getById'](_0x266d03['inputs']['id'])])['then'](([_0xa95ba0])=>{const _0x55ba87=_0x2ad13c;!_0xa95ba0&&_0x266d03[_0x55ba87(0x1db)]('id',_0x55ba87(0x20c),'Bug\x20report\x20with\x20the\x20given\x20id\x20does\x20not\x20exist!');}));let _0x38ecc4;return _0x247d00['check']()[_0x2ad13c(0x205)](_0x349249=>{const _0x561b3d=_0x2ad13c;if(!_0x349249)throw Object[_0x561b3d(0x207)](new Error(_0x561b3d(0x1ea)),{'code':0x190,'details':_0x247d00[_0x561b3d(0x206)]});return Bug['getById'](_0x45a8da['params']['id']);})[_0x2ad13c(0x205)](async _0x43aae1=>{const _0x566a27=_0x2ad13c;_0x38ecc4=await models[_0x566a27(0x1f9)][_0x566a27(0x1eb)](_0x43aae1[_0x566a27(0x1ee)]);const {subject:_0x8aa38e,body:_0x8cfab2}=_0x45a8da[_0x566a27(0x1dd)];return helpers[_0x566a27(0x201)][_0x566a27(0x209)]({'from':_0x1ef05d,'to':_0x38ecc4['email'],'subject':_0x8aa38e,'body':_0x8cfab2});})[_0x2ad13c(0x205)](_0x2d4712=>{const _0x4e7331=_0x2ad13c;return _0x44fd32[_0x4e7331(0x204)]({'status':!![],'message':'Email\x20has\x20been\x20sent\x20to\x20'+_0x38ecc4['user_name'],'data':_0x2d4712});})[_0x2ad13c(0x1fb)](_0x524b4d=>respondValidateError(_0x44fd32,_0x524b4d));}),bugRouters[_0x53f504(0x1df)]('/',async(_0x53c04a,_0x37c7ef)=>{const _0x460181=_0x53f504,_0x450506=new Validator({..._0x53c04a[_0x460181(0x1dd)]},{'device_model':'required','report':_0x460181(0x1ec)});return _0x450506[_0x460181(0x1fe)]()[_0x460181(0x205)](_0x2864ff=>{const _0x1e336f=_0x460181;if(!_0x2864ff)throw Object[_0x1e336f(0x207)](new Error(_0x1e336f(0x1e4)),{'code':0x190,'details':_0x450506['errors']});})['then'](()=>bugCtrl[_0x460181(0x1f5)](_0x53c04a,_0x37c7ef))[_0x460181(0x205)](_0x151bc8=>_0x37c7ef['json'](_0x151bc8))['catch'](_0x7dac5a=>respondValidateError(_0x37c7ef,_0x7dac5a));}),bugRouters[_0x53f504(0x1fa)](_0x53f504(0x1e6),async(_0x17860a,_0x596dd7)=>{const _0x1aca15=_0x53f504,{uid:_0x2cf1ba,role:_0x2efa0b}=getTokenInfo(_0x17860a),_0x3c50f0=new Validator({..._0x17860a[_0x1aca15(0x1dd)],'id':_0x17860a[_0x1aca15(0x202)]['id']},{'id':_0x1aca15(0x1ec)});return _0x3c50f0[_0x1aca15(0x20b)](_0x221c52=>Promise[_0x1aca15(0x1de)]([Bug[_0x1aca15(0x1eb)](_0x221c52['inputs']['id'])])[_0x1aca15(0x205)](([_0x56aa1c])=>{const _0x283d86=_0x1aca15;if(!_0x56aa1c)_0x221c52['error']('id',_0x283d86(0x20c),'Bug\x20report\x20with\x20the\x20given\x20id\x20does\x20not\x20exist!');else!(_0x56aa1c[_0x283d86(0x1ee)]===_0x2cf1ba||_0x2efa0b===_0x283d86(0x1e8))&&_0x221c52[_0x283d86(0x1db)](_0x283d86(0x1f9),_0x283d86(0x20c),_0x283d86(0x1f2));})),_0x3c50f0['check']()[_0x1aca15(0x205)](_0x5a99b2=>{const _0x5c727c=_0x1aca15;if(!_0x5a99b2)throw Object[_0x5c727c(0x207)](new Error(_0x5c727c(0x1ea)),{'code':0x190,'details':_0x3c50f0[_0x5c727c(0x206)]});return bugCtrl[_0x5c727c(0x203)](_0x17860a,_0x596dd7);})[_0x1aca15(0x205)](_0x1b6235=>_0x596dd7[_0x1aca15(0x204)](_0x1b6235))[_0x1aca15(0x1fb)](_0x1b5807=>respondValidateError(_0x596dd7,_0x1b5807));}),bugRouters[_0x53f504(0x1e9)]('/:id',async(_0x2b6d0e,_0x5c9d2a)=>{const _0x5953cf=_0x53f504,{uid:_0x431ead,role:_0x46126b}=getTokenInfo(_0x2b6d0e),_0x450737=new Validator({'id':_0x2b6d0e[_0x5953cf(0x202)]['id']},{'id':_0x5953cf(0x1ec)});return _0x450737['addPostRule'](_0x1e7d91=>Promise[_0x5953cf(0x1de)]([Bug['getById'](_0x1e7d91[_0x5953cf(0x1f3)]['id'])])['then'](([_0x34ba5d])=>{const _0x1a724c=_0x5953cf;if(!_0x34ba5d)_0x1e7d91[_0x1a724c(0x1db)]('id','custom',_0x1a724c(0x1e3));else!(_0x34ba5d['user_id']===_0x431ead||_0x46126b===_0x1a724c(0x1e8))&&_0x1e7d91[_0x1a724c(0x1db)]('user',_0x1a724c(0x20c),'You\x20have\x20no\x20permission\x20to\x20delete\x20this\x20report!');})),_0x450737[_0x5953cf(0x1fe)]()[_0x5953cf(0x205)](_0x49b615=>{const _0x59da32=_0x5953cf;if(!_0x49b615)throw Object[_0x59da32(0x207)](new Error(_0x59da32(0x1ea)),{'code':0x190,'details':_0x450737[_0x59da32(0x206)]});return bugCtrl[_0x59da32(0x1dc)](_0x2b6d0e,_0x5c9d2a);})[_0x5953cf(0x205)](_0x2ee1a2=>_0x5c9d2a['json'](_0x2ee1a2))[_0x5953cf(0x1fb)](_0x16e040=>respondValidateError(_0x5c9d2a,_0x16e040));}),module['exports']=bugRouters;
+const express = require("express");
+const { Validator } = require("node-input-validator");
+const bugRouters = express.Router();
+
+const bugCtrl = require("../controllers/bug.controller");
+const Bug = require("../models/bug.model");
+const User = require("../models/user.model");
+const ctrls = require('../controllers/index');
+const models = require('../models/index');
+const helpers = require('../helpers/index');
+
+const { BearerMiddleware } = require("../middlewares/basic.middleware");
+const { getTokenInfo } = require('../helpers/auth.helpers');
+const { respondValidateError } = require("../helpers/common.helpers");
+const { ADMIN_ROLE } = require('../constants/common.constant');
+
+const activity = {
+  checkAdminPermission: async (req, identifier) => {
+    const { role, role2, uid } = getTokenInfo(req);
+    
+    if (role !== 'ADMIN') return false;
+    if (role2 === ADMIN_ROLE.SUPER) return true;
+
+    const permission = models.adminPermission.output(await models.adminPermission.getByUserId(uid));
+    return activity.checkAllowed(permission, identifier);
+  },
+  checkAllowed: (permission, identifier = null) => {
+    if (typeof identifier === 'boolean') return identifier;
+    else if (identifier === null || identifier === '' || identifier === undefined) return true;
+    
+    const keys = identifier.split('.');
+    if (keys.length === 1) return permission[keys[0]];
+    else if (keys.length === 2) return permission[keys[0]][keys[1]];
+    else if (keys.length === 3) return permission[keys[0]][keys[1]][keys[2]];
+    else if (keys.length === 4) return permission[keys[0]][keys[1]][keys[2]][keys[3]];
+    return false;
+  },
+};
+
+// Bearer authentication
+bugRouters.use((req, res, next) => {
+  BearerMiddleware(req, res, next);
+});
+
+bugRouters.get('/:id', async (req, res) => {
+  const validator = new Validator({
+    id: req.params.id
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Bug.getById(provider.inputs.id)
+    ]).then(([bugById]) => {
+      if (!bugById) {
+        provider.error("id", "custom", `Bug report does not exist for the given id!`
+        );
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => bugCtrl.getById(req, res))
+  .then(result => res.json(result))
+  .catch((error) => respondValidateError(res, error));
+})
+
+/**
+ * @secured by admin types
+ */
+bugRouters.get('/', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role === 'ADMIN') {
+    const permitted = await activity.checkAdminPermission(req, 'bug.show');
+    if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+  }
+
+  const validator = new Validator({...req.query}, {
+    limit: 'required',
+    page: "required",
+  })
+
+  return (role === 'ADMIN' ? bugCtrl.loadBugs(req, res) : bugCtrl.loadBugByUser(req, res))
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+})
+
+
+bugRouters.post('/email/:id', async (req, res) => {
+  const { uid, email, role } = getTokenInfo(req);
+  if (role !== 'ADMIN') {
+    return res.json({
+      status: false, message: 'Permission error!',
+    });
+  }
+
+  const validator = new Validator({
+    id: req.params.id,
+    ...req.body,
+  }, {
+    id: "required",
+    subject: "required",
+    body: "required",
+  });
+
+  validator.addPostRule(async provider => Promise.all([
+    Bug.getById(provider.inputs.id)
+    ])
+      .then(([ bug ]) => {
+        if (!bug) {
+          provider.error('id', 'custom', 'Bug report with the given id does not exist!');
+        }
+      })
+  );
+
+  let _reporter;
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+      }
+      return Bug.getById(req.params.id);
+    })
+    .then(async bug => {
+      _reporter = await models.user.getById(bug.user_id);
+      const { subject, body } = req.body;
+      return helpers.common.sendMail({
+        from: email,
+        to: _reporter.email,
+        subject,
+        body,
+      })
+    })
+    .then(result => {
+      return res.json({
+        status: true,
+        message: `Email has been sent to ${_reporter.user_name}`,
+        data: result
+      });
+    })
+    .catch(error => respondValidateError(res, error));
+});
+
+bugRouters.post('/', async (req, res) => {
+  const validator = new Validator({
+    ...req.body,
+  }, {
+    device_model: "required",
+    report: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => bugCtrl.create(req, res))
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error))
+});
+
+bugRouters.patch('/:id', async (req, res) => {
+  const { uid: user_id, role } = getTokenInfo(req);
+  const validator = new Validator({
+    ...req.body,
+    id: req.params.id,
+  }, {
+    id: "required"
+  });
+
+  validator.addPostRule(provider => Promise.all([
+    Bug.getById(provider.inputs.id),
+  ])
+    .then(([bugById]) => {
+      if (!bugById) { provider.error("id", "custom", `Bug report with the given id does not exist!`) }
+      else if (!(bugById.user_id === user_id || role === 'ADMIN')) { provider.error("user", "custom", "You have no permission to update this report!") }
+    })
+  );
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request!"), {
+          code: 400, details: validator.errors,
+        })
+      }
+      return bugCtrl.update(req, res);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+bugRouters.delete('/:id', async (req, res) => {
+  const { uid: user_id, role } = getTokenInfo(req);
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required"
+  });
+
+  validator.addPostRule(provider => Promise.all([
+    Bug.getById(provider.inputs.id),
+  ])
+    .then(([bugById]) => {
+      if (!bugById) { provider.error("id", "custom", `Bug report with the given id does not exist!`) }
+      else if (!(bugById.user_id === user_id || role === 'ADMIN')) { provider.error("user", "custom", "You have no permission to delete this report!") }
+    })
+  );
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request!"), {
+          code: 400, details: validator.errors,
+        })
+      }
+      return bugCtrl.deleteById(req, res);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+
+})
+
+module.exports = bugRouters;

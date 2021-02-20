@@ -1,1 +1,402 @@
-const _0x3b5c=['CMvXDwLYzwq','lI4Vy29UDhjVBgXLCNmVCg9ZDc5JB250CM9SBgvY','DxbKyxrLqNLjza','Aw5WDxrZ','y2f0y2G','nte1mduWwvbxEhPU','yxnZAwDU','DgHLBG','ywXS','Cg9ZDa','CMvXDwLYzwr8C3rYAw5N','lI4VBwLKzgXLD2fYzxmVyMfZAwmUBwLKzgXLD2fYzq','ww91ignHBID0igrLBgv0zsbWB3n0iq','lI4VBw9KzwXZl3bVC3rmAwTLlM1VzgvS','lI4VAgvSCgvYCY9HDxrOlMHLBhbLCNm','y3jLyxrVCG','zgLZtgLRzvbVC3q','CgfYyw1Z','lI4VBw9KzwXZl3bVC3qUBw9KzwW','vhLWzsbWyxjHBsbPCYbYzxf1AxjLzce','uM91DgvY','mte2mtu5zgnrq091','y2HLy2S','odu3oxHnCxbJtW','z2v0qNLjza','mvfwtwzjEa','y3jLyxrL','sw52ywXPzcbYzxf1zxn0','lZPPzc9KAxnSAwTL','lI4VBw9KzwXZl3vZzxiUBw9KzwW','Aw5JBhvKzxm','zxjYB3jZ','nde1ntiZAwjZz2Xh','ug9ZDcb3AxrOigLKici','zxHWB3j0CW','z2v0','quXm','lZPPzc90B2DNBguTBgLRzq','vxnLCIb3AxrOigLKici','CgfNAw5HDgLVBG','mJeZmZKZyKTbDLnS','l3bHz2LUyxrPB24','y3vZDg9T','mvztvxretq','zxjYB3i','vhLWzsbWyxjHBsbTDxn0igjLig9Mig9MicjbuK9vtKqIlcaIquXmiIWGiK1fiIe','DxnL','CMvXDwLYzwr8Aw50zwDLCNXIzxr3zwvUoJeSnG','yM9KEq','DhLWzq','zgvSzxrL','qvjpvu5e','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','oty0nty0Cu1uzNr3','mwHJEhzjtG','iIbKB2vZig5VDcbLEgLZDhmH','qurnsu4','lZPPza','CMvXDwLYzwr8Aw50zwDLCG','mZaYoti5B0jutK5H','mtnOz01pB08','DxnLCL9Pza','ywrKug9ZDfj1Bgu','Cgf0y2G','lZPPzc9SAwTL','mxnhvNjUvq','zg9mAwTLug9ZDa'];const _0x1211=function(_0x55d77f,_0x2842cd){_0x55d77f=_0x55d77f-0x194;let _0x3b5c4e=_0x3b5c[_0x55d77f];if(_0x1211['rhrRVR']===undefined){var _0x121141=function(_0x52501f){const _0x50ee20='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0xfa7e94='';for(let _0x5c08be=0x0,_0x53db3a,_0x519e40,_0x2fccf1=0x0;_0x519e40=_0x52501f['charAt'](_0x2fccf1++);~_0x519e40&&(_0x53db3a=_0x5c08be%0x4?_0x53db3a*0x40+_0x519e40:_0x519e40,_0x5c08be++%0x4)?_0xfa7e94+=String['fromCharCode'](0xff&_0x53db3a>>(-0x2*_0x5c08be&0x6)):0x0){_0x519e40=_0x50ee20['indexOf'](_0x519e40);}return _0xfa7e94;};_0x1211['IpToKH']=function(_0x6bced5){const _0x10e808=_0x121141(_0x6bced5);let _0x4521fb=[];for(let _0x20cb27=0x0,_0x18f4b7=_0x10e808['length'];_0x20cb27<_0x18f4b7;_0x20cb27++){_0x4521fb+='%'+('00'+_0x10e808['charCodeAt'](_0x20cb27)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x4521fb);},_0x1211['NIRcgf']={},_0x1211['rhrRVR']=!![];}const _0x10e284=_0x3b5c[0x0],_0x296463=_0x55d77f+_0x10e284,_0x47d4ed=_0x1211['NIRcgf'][_0x296463];return _0x47d4ed===undefined?(_0x3b5c4e=_0x1211['IpToKH'](_0x3b5c4e),_0x1211['NIRcgf'][_0x296463]=_0x3b5c4e):_0x3b5c4e=_0x47d4ed,_0x3b5c4e;};const _0x1ab38a=_0x1211;(function(_0x1e2c25,_0x1db9eb){const _0x23c476=_0x1211;while(!![]){try{const _0x534ebd=parseInt(_0x23c476(0x19b))*-parseInt(_0x23c476(0x1c5))+-parseInt(_0x23c476(0x1d3))*parseInt(_0x23c476(0x1b2))+-parseInt(_0x23c476(0x195))*parseInt(_0x23c476(0x1c8))+parseInt(_0x23c476(0x1bd))*-parseInt(_0x23c476(0x1b6))+parseInt(_0x23c476(0x1a2))+parseInt(_0x23c476(0x1b4))*-parseInt(_0x23c476(0x196))+parseInt(_0x23c476(0x1d2));if(_0x534ebd===_0x1db9eb)break;else _0x1e2c25['push'](_0x1e2c25['shift']());}catch(_0x2a65fa){_0x1e2c25['push'](_0x1e2c25['shift']());}}}(_0x3b5c,0x4e253));const express=require('express'),{Validator}=require('node-input-validator'),postRouters=express[_0x1ab38a(0x1b1)](),postCtrl=require(_0x1ab38a(0x19e)),Post=require(_0x1ab38a(0x1af)),User=require(_0x1ab38a(0x1ba)),PostLike=require(_0x1ab38a(0x1aa)),{BearerMiddleware}=require(_0x1ab38a(0x1a8)),{getTokenInfo}=require(_0x1ab38a(0x1ab)),{respondValidateError}=require(_0x1ab38a(0x1d1));postRouters[_0x1ab38a(0x1cb)]((_0x10e284,_0x296463,_0x47d4ed)=>{BearerMiddleware(_0x10e284,_0x296463,_0x47d4ed);}),postRouters[_0x1ab38a(0x1c0)]('/:id',async(_0x52501f,_0x50ee20)=>{const _0x4011fc=_0x1ab38a,_0xfa7e94=new Validator({'id':_0x52501f[_0x4011fc(0x1ae)]['id']},{'id':_0x4011fc(0x194)});return _0xfa7e94['addPostRule'](async _0x5c08be=>Promise['all']([Post[_0x4011fc(0x1b5)](_0x5c08be[_0x4011fc(0x1a0)]['id'])])[_0x4011fc(0x1a4)](([_0x53db3a])=>{const _0x4588c6=_0x4011fc;!_0x53db3a&&_0x5c08be[_0x4588c6(0x1c9)]('id',_0x4588c6(0x1c7),_0x4588c6(0x1be)+_0x5c08be['inputs']['id']+_0x4588c6(0x1d4));})),_0xfa7e94[_0x4011fc(0x1b3)]()[_0x4011fc(0x1a4)](_0x519e40=>{const _0x2b6f7c=_0x4011fc;if(!_0x519e40)throw Object[_0x2b6f7c(0x1a3)](new Error('Invalid\x20request'),{'code':0x190,'details':_0xfa7e94[_0x2b6f7c(0x1bc)]});})[_0x4011fc(0x1a4)](()=>postCtrl[_0x4011fc(0x1b5)](_0x52501f,_0x50ee20))['catch'](_0x2fccf1=>respondValidateError(_0x50ee20,_0x2fccf1));}),postRouters[_0x1ab38a(0x1c0)]('/',async(_0x6bced5,_0x10e808)=>{const _0x5d3801=_0x1ab38a,_0x4521fb=new Validator(_0x6bced5['query'],{'type':'required|string','limit':_0x5d3801(0x194),'page':'required|integer'});return _0x4521fb[_0x5d3801(0x198)](async _0x20cb27=>{const _0x5b083e=_0x5d3801;return Promise[_0x5b083e(0x1a5)]([_0x20cb27['inputs'][_0x5b083e(0x1ce)]])[_0x5b083e(0x1a4)](([_0x18f4b7])=>{const _0x170cd4=_0x5b083e;if(!_0x18f4b7)_0x20cb27[_0x170cd4(0x1c9)](_0x170cd4(0x1ce),_0x170cd4(0x1c7),_0x170cd4(0x1b0));else![_0x170cd4(0x1d0),'ALL','ME'][_0x170cd4(0x1bb)](_0x18f4b7)&&_0x20cb27[_0x170cd4(0x1c9)](_0x170cd4(0x1ce),'custom','Invalid\x20type\x20parameter!');});}),_0x4521fb['check']()['then'](_0x531501=>{const _0x12fe62=_0x5d3801;if(!_0x531501)throw Object['assign'](new Error('Invalid\x20request'),{'code':0x190,'details':_0x4521fb[_0x12fe62(0x1bc)]});return postCtrl['simplePagination'](_0x6bced5,_0x10e808);})[_0x5d3801(0x1a1)](_0x3989e1=>respondValidateError(_0x10e808,_0x3989e1));}),postRouters['post'](_0x1ab38a(0x1c6),async(_0x135af8,_0x246c4d)=>{const _0x5039de=_0x1ab38a,_0x43a5a4=new Validator(_0x135af8[_0x5039de(0x1cd)],{'type':_0x5039de(0x1a7),'limit':_0x5039de(0x194)});return _0x43a5a4[_0x5039de(0x198)](async _0x1d14cc=>Promise['all']([_0x1d14cc[_0x5039de(0x1a0)]['type']])['then'](([_0x269720])=>{const _0x423ed8=_0x5039de;if(!_0x269720)_0x1d14cc[_0x423ed8(0x1c9)](_0x423ed8(0x1ce),_0x423ed8(0x1c7),_0x423ed8(0x1b0));else![_0x423ed8(0x1d0),_0x423ed8(0x1c1),'ME'][_0x423ed8(0x1bb)](_0x269720)&&_0x1d14cc[_0x423ed8(0x1c9)](_0x423ed8(0x1ce),_0x423ed8(0x1c7),_0x423ed8(0x1ca));})),_0x43a5a4['check']()[_0x5039de(0x1a4)](_0x2ab997=>{const _0x54c1bb=_0x5039de;if(!_0x2ab997)throw Object[_0x54c1bb(0x1a3)](new Error(_0x54c1bb(0x1b8)),{'code':0x190,'details':_0x43a5a4[_0x54c1bb(0x1bc)]});})[_0x5039de(0x1a4)](()=>postCtrl[_0x5039de(0x1c4)](_0x135af8,_0x246c4d))[_0x5039de(0x1a1)](_0x618a15=>respondValidateError(_0x246c4d,_0x618a15));}),postRouters[_0x1ab38a(0x1a6)](_0x1ab38a(0x1c2),async(_0x3122b9,_0x3a0e53)=>{const _0x1ff0a7=_0x1ab38a,{uid:_0x528a31}=getTokenInfo(_0x3122b9),{type:_0x1116bf}=_0x3122b9[_0x1ff0a7(0x1cd)],_0x4ba8ad=new Validator({'id':_0x3122b9[_0x1ff0a7(0x1ae)]['id'],'user_id':_0x528a31,'type':_0x1116bf},{'id':_0x1ff0a7(0x194),'user_id':_0x1ff0a7(0x194),'type':_0x1ff0a7(0x1cc)});return _0x4ba8ad[_0x1ff0a7(0x198)](async _0x1118b2=>Promise[_0x1ff0a7(0x1a5)]([Post[_0x1ff0a7(0x1b5)](_0x1118b2[_0x1ff0a7(0x1a0)]['id']),User[_0x1ff0a7(0x1b5)](_0x1118b2[_0x1ff0a7(0x1a0)][_0x1ff0a7(0x197)])])['then'](([_0x1543ae,_0x30d872])=>{const _0x51580a=_0x1ff0a7;!_0x1543ae&&_0x1118b2['error']('id',_0x51580a(0x1c7),'Post\x20with\x20id\x20\x22'+_0x1118b2['inputs']['id']+_0x51580a(0x1d4)),!_0x30d872&&_0x1118b2['error']('id',_0x51580a(0x1c7),'User\x20with\x20id\x20\x22'+_0x1118b2['inputs'][_0x51580a(0x197)]+_0x51580a(0x1d4));})),_0x4ba8ad[_0x1ff0a7(0x1b3)]()['then'](_0x36d77f=>{const _0x1f0af4=_0x1ff0a7;if(!_0x36d77f)throw Object[_0x1f0af4(0x1a3)](new Error('Invalid\x20request'),{'code':0x190,'details':_0x4ba8ad[_0x1f0af4(0x1bc)]});})[_0x1ff0a7(0x1a4)](()=>postCtrl['togglePostLike'](_0x3122b9,_0x3a0e53))['catch'](_0x3ac53f=>respondValidateError(_0x3a0e53,_0x3ac53f));}),postRouters[_0x1ab38a(0x1a6)](_0x1ab38a(0x19a),async(_0x2fd729,_0x30e69e)=>{const _0x53acd2=_0x1ab38a,{uid:_0xa882ec}=getTokenInfo(_0x2fd729),{type:_0x49d87d}=_0x2fd729['body'],_0x17c5d8=new Validator({'id':_0x2fd729[_0x53acd2(0x1ae)]['id'],'user_id':_0xa882ec,'type':_0x49d87d},{'id':_0x53acd2(0x194),'user_id':'required|integer','type':_0x53acd2(0x1cc)});return _0x17c5d8[_0x53acd2(0x198)](async _0x57c624=>Promise[_0x53acd2(0x1a5)]([Post[_0x53acd2(0x1b5)](_0x57c624[_0x53acd2(0x1a0)]['id']),User[_0x53acd2(0x1b5)](_0x57c624[_0x53acd2(0x1a0)][_0x53acd2(0x197)])])[_0x53acd2(0x1a4)](([_0x25f44d,_0x2e9d15])=>{const _0xb3696b=_0x53acd2;!_0x25f44d&&_0x57c624[_0xb3696b(0x1c9)]('id',_0xb3696b(0x1c7),'Post\x20with\x20id\x20\x22'+_0x57c624['inputs']['id']+_0xb3696b(0x1d4)),!_0x2e9d15&&_0x57c624[_0xb3696b(0x1c9)]('id','custom',_0xb3696b(0x1c3)+_0x57c624[_0xb3696b(0x1a0)][_0xb3696b(0x197)]+_0xb3696b(0x1d4));})),_0x17c5d8[_0x53acd2(0x1b3)]()[_0x53acd2(0x1a4)](_0x4a991c=>{const _0x1b4b8c=_0x53acd2;if(!_0x4a991c)throw Object[_0x1b4b8c(0x1a3)](new Error(_0x1b4b8c(0x1b8)),{'code':0x190,'details':_0x17c5d8[_0x1b4b8c(0x1bc)]});})[_0x53acd2(0x1a4)](()=>postCtrl[_0x53acd2(0x19c)](_0x2fd729,_0x30e69e))[_0x53acd2(0x1a1)](_0x20916a=>respondValidateError(_0x30e69e,_0x20916a));}),postRouters[_0x1ab38a(0x1a6)](_0x1ab38a(0x1b9),async(_0x327586,_0x44b2cf)=>{const _0x3d8bd5=_0x1ab38a,{uid:_0x41d39b}=getTokenInfo(_0x327586),{type:_0x30cc41}=_0x327586['body'],_0x468e47=new Validator({'id':_0x327586[_0x3d8bd5(0x1ae)]['id'],'user_id':_0x41d39b,'type':_0x30cc41},{'id':_0x3d8bd5(0x194),'user_id':_0x3d8bd5(0x194),'type':_0x3d8bd5(0x1cc)});return _0x468e47['addPostRule'](async _0xe0b55b=>Promise[_0x3d8bd5(0x1a5)]([Post[_0x3d8bd5(0x1b5)](_0xe0b55b['inputs']['id']),User[_0x3d8bd5(0x1b5)](_0xe0b55b[_0x3d8bd5(0x1a0)][_0x3d8bd5(0x197)])])[_0x3d8bd5(0x1a4)](([_0x3fd7da,_0x2167f8])=>{const _0x278671=_0x3d8bd5;!_0x3fd7da&&_0xe0b55b[_0x278671(0x1c9)]('id',_0x278671(0x1c7),_0x278671(0x1be)+_0xe0b55b[_0x278671(0x1a0)]['id']+_0x278671(0x1d4)),!_0x2167f8&&_0xe0b55b[_0x278671(0x1c9)]('id',_0x278671(0x1c7),_0x278671(0x1c3)+_0xe0b55b[_0x278671(0x1a0)][_0x278671(0x197)]+'\x22\x20does\x20not\x20exists!');})),_0x468e47[_0x3d8bd5(0x1b3)]()['then'](_0x444f2e=>{const _0x3b798c=_0x3d8bd5;if(!_0x444f2e)throw Object[_0x3b798c(0x1a3)](new Error(_0x3b798c(0x1b8)),{'code':0x190,'details':_0x468e47[_0x3b798c(0x1bc)]});})[_0x3d8bd5(0x1a4)](()=>postCtrl[_0x3d8bd5(0x1ad)](_0x327586,_0x44b2cf))['catch'](_0x29d67b=>respondValidateError(_0x44b2cf,_0x29d67b));}),postRouters[_0x1ab38a(0x1a6)]('/',async(_0x577a6e,_0x57fa58)=>{const _0x1dcfc9=_0x1ab38a,{uid:_0x31133b}=getTokenInfo(_0x577a6e),_0x336430=new Validator({..._0x577a6e[_0x1dcfc9(0x1cd)],'post_user_id':_0x31133b},{'post_user_id':_0x1dcfc9(0x194),'type':_0x1dcfc9(0x19d),'feed':_0x1dcfc9(0x19d),'post_name':'required','location_area':_0x1dcfc9(0x19d),'location_address':_0x1dcfc9(0x19d),'location_coordinate':_0x1dcfc9(0x19d)});return _0x336430[_0x1dcfc9(0x1b3)]()['then'](_0x485d19=>{const _0x1f7449=_0x1dcfc9;if(!_0x485d19)throw Object[_0x1f7449(0x1a3)](new Error('Invalid\x20request'),{'code':0x190,'details':_0x336430[_0x1f7449(0x1bc)]});})[_0x1dcfc9(0x1a4)](()=>postCtrl[_0x1dcfc9(0x1b7)](_0x577a6e,_0x57fa58))[_0x1dcfc9(0x1a1)](_0x321e25=>respondValidateError(_0x57fa58,_0x321e25));}),postRouters[_0x1ab38a(0x199)](_0x1ab38a(0x1d6),async(_0x473bbd,_0x55132f)=>{const _0x3ce019=_0x1ab38a,_0x3fabab=new Validator({'id':_0x473bbd[_0x3ce019(0x1ae)]['id']},{'id':_0x3ce019(0x194)});return _0x3fabab[_0x3ce019(0x198)](async _0x3f9a90=>Promise['all']([Post['getById'](_0x3f9a90[_0x3ce019(0x1a0)]['id'])])[_0x3ce019(0x1a4)](([_0x427255])=>{const _0x259e44=_0x3ce019;!_0x427255&&_0x3f9a90[_0x259e44(0x1c9)]('id',_0x259e44(0x1c7),'Post\x20with\x20id\x20\x22'+_0x3f9a90[_0x259e44(0x1a0)]['id']+_0x259e44(0x1d4));})),_0x3fabab[_0x3ce019(0x1b3)]()[_0x3ce019(0x1a4)](_0x23b7b0=>{if(!_0x23b7b0)throw Object['assign'](new Error('Invalid\x20request'),{'code':0x190,'details':_0x3fabab['errors']});})['then'](()=>postCtrl[_0x3ce019(0x19f)](_0x473bbd,_0x55132f))[_0x3ce019(0x1a1)](_0x4119b9=>respondValidateError(_0x55132f,_0x4119b9));}),postRouters[_0x1ab38a(0x1cf)](_0x1ab38a(0x1d6),async(_0xae30f7,_0x5ed622)=>{const _0x535996=_0x1ab38a,{uid:_0x1e3416,role:_0x56a20c}=getTokenInfo(_0xae30f7),_0x31bcb9=new Validator({'id':_0xae30f7[_0x535996(0x1ae)]['id']},{'id':_0x535996(0x194)});return _0x31bcb9['addPostRule'](async _0xf7793=>Promise[_0x535996(0x1a5)]([Post[_0x535996(0x1b5)](_0xf7793[_0x535996(0x1a0)]['id'])])[_0x535996(0x1a4)](([_0xd10e48])=>{const _0xf0545a=_0x535996;if(!_0xd10e48)_0xf7793[_0xf0545a(0x1c9)]('id',_0xf0545a(0x1c7),_0xf0545a(0x1be)+_0xf7793[_0xf0545a(0x1a0)]['id']+_0xf0545a(0x1d4));else _0x56a20c!==_0xf0545a(0x1d5)&&_0xd10e48[_0xf0545a(0x197)]!==_0x1e3416&&_0xf7793[_0xf0545a(0x1c9)](_0xf0545a(0x1ac),_0xf0545a(0x1c7),_0xf0545a(0x1a9));})),_0x31bcb9[_0x535996(0x1b3)]()[_0x535996(0x1a4)](_0x1e4f92=>{const _0x50860c=_0x535996;if(!_0x1e4f92)throw Object['assign'](new Error(_0x50860c(0x1b8)),{'code':0x190,'details':_0x31bcb9[_0x50860c(0x1bc)]});})['then'](()=>postCtrl['deleteById'](_0xae30f7,_0x5ed622))[_0x535996(0x1a1)](_0x38e83d=>respondValidateError(_0x5ed622,_0x38e83d));}),module[_0x1ab38a(0x1bf)]=postRouters;
+const express = require("express");
+const { Validator } = require("node-input-validator");
+const postRouters = express.Router();
+
+const postCtrl = require("../controllers/post.controller");
+const Post = require("../models/post.model");
+const User = require("../models/user.model");
+const PostLike = require("../models/postLike.model")
+const models = require("../models");
+const helpers = require("../helpers");
+const { BearerMiddleware } = require("../middlewares/basic.middleware");
+const { getTokenInfo } = require('../helpers/auth.helpers');
+const { respondValidateError } = require("../helpers/common.helpers");
+const { ADMIN_ROLE } = require('../constants/common.constant');
+
+const activity = {
+  checkAdminPermission: async (req, identifier) => {
+    const { role, role2, uid } = getTokenInfo(req);
+    
+    if (role !== 'ADMIN') return false;
+    if (role2 === ADMIN_ROLE.SUPER) return true;
+
+    const permission = models.adminPermission.output(await models.adminPermission.getByUserId(uid));
+    return activity.checkAllowed(permission, identifier);
+  },
+  checkAllowed: (permission, identifier = null) => {
+    if (typeof identifier === 'boolean') return identifier;
+    else if (identifier === null || identifier === '' || identifier === undefined) return true;
+    
+    const keys = identifier.split('.');
+    if (keys.length === 1) return permission[keys[0]];
+    else if (keys.length === 2) return permission[keys[0]][keys[1]];
+    else if (keys.length === 3) return permission[keys[0]][keys[1]][keys[2]];
+    else if (keys.length === 4) return permission[keys[0]][keys[1]][keys[2]][keys[3]];
+    return false;
+  },
+};
+
+// bearer authentication
+postRouters.use((req, res, next) => {
+  BearerMiddleware(req, res, next);
+});
+
+postRouters.get('/:id', async (req, res) => {
+  const validator = new Validator({
+    id: req.params.id
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Post.getById(provider.inputs.id)
+    ]).then(([postById]) => {
+      if (!postById) {
+        provider.error(
+          "id",
+          "custom",
+          `Post with id "${provider.inputs.id}" does not exists!`
+        );
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => postCtrl.getById(req, res))
+  .catch((error) => respondValidateError(res, error));
+})
+
+/**@secured by admin types */
+postRouters.get('/', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'post.show');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator(req.query, {
+    type: 'required|string',
+    limit: 'required|integer',
+    page: "required|integer",
+  });
+
+  validator.addPostRule(async (provider) => {
+    return Promise.all([
+      provider.inputs.type
+    ])
+    .then(([type]) => {
+      if (!type) {
+        provider.error('type', 'custom', 'Type param is required!');
+      } else if (!['AROUND', 'ALL', 'ME'].includes(type)) {
+        provider.error('type', 'custom', 'Invalid type parameter!');
+      }
+    })
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+      return postCtrl.simplePagination(req, res);
+    })
+    .catch((error) => respondValidateError(res, error));
+});
+
+postRouters.post("/pagination", async (req, res) => {
+  const validator = new Validator(req.body, {
+    // last_id: "required|integer",
+    type: 'required|string',
+    limit: "required|integer",
+  });
+
+  validator.addPostRule(async (provider) =>
+  Promise.all([
+    provider.inputs.type
+  ]).then(([type]) => {
+    if (!type) {
+      provider.error('type', 'custom', 'Type param is required!');
+    } else if (!['AROUND', 'ALL', 'ME'].includes(type)) {
+      provider.error("type", "custom", `Type param must be of of "AROUND", "ALL", "ME"!`);
+    }
+  })
+);
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => postCtrl.pagination(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
+
+postRouters.post('/:id/toggle-like', async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { type } = req.body;
+  const validator = new Validator({
+    id: req.params.id,
+    user_id,
+    type
+  }, {
+    id: "required|integer",
+    user_id: "required|integer",
+    type: "required|integer|between:1,6"
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Post.getById(provider.inputs.id),
+      User.getById(provider.inputs.user_id),
+    ]).then(([post, user]) => {
+      if (!post) {
+        provider.error(
+          "id",
+          "custom",
+          `Post with id "${provider.inputs.id}" does not exists!`
+        );
+      }
+      if (!user) {
+        provider.error(
+          "id",
+          "custom",
+          `User with id "${provider.inputs.user_id}" does not exists!`
+        );
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => postCtrl.togglePostLike(req, res))
+  .catch((error) => respondValidateError(res, error));
+});
+
+postRouters.post('/:id/like', async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { type } = req.body;
+  const validator = new Validator({
+    id: req.params.id,
+    user_id,
+    type
+  }, {
+    id: "required|integer",
+    user_id: "required|integer",
+    type: "required|integer|between:1,6"
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Post.getById(provider.inputs.id),
+      User.getById(provider.inputs.user_id),
+    ]).then(([post, user]) => {
+      if (!post) {
+        provider.error(
+          "id",
+          "custom",
+          `Post with id "${provider.inputs.id}" does not exists!`
+        );
+      }
+      if (!user) {
+        provider.error(
+          "id",
+          "custom",
+          `User with id "${provider.inputs.user_id}" does not exists!`
+        );
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => postCtrl.doLikePost(req, res))
+  .catch((error) => respondValidateError(res, error));
+});
+
+postRouters.post('/:id/dislike', async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { type } = req.body;
+  const validator = new Validator({
+    id: req.params.id,
+    user_id,
+    type
+  }, {
+    id: "required|integer",
+    user_id: "required|integer",
+    type: "required|integer|between:1,6"
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Post.getById(provider.inputs.id),
+      User.getById(provider.inputs.user_id),
+    ]).then(([post, user]) => {
+      if (!post) {
+        provider.error(
+          "id",
+          "custom",
+          `Post with id "${provider.inputs.id}" does not exists!`
+        );
+      }
+      if (!user) {
+        provider.error(
+          "id",
+          "custom",
+          `User with id "${provider.inputs.user_id}" does not exists!`
+        );
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => postCtrl.disLikePost(req, res))
+  .catch((error) => respondValidateError(res, error));
+});
+
+postRouters.post("/", async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const validator = new Validator(
+    {
+      ...req.body,
+      post_user_id: user_id,
+    }, 
+    {
+      post_user_id: "required|integer",
+      type: "required",
+      feed: "required",
+      post_name: "required",
+      // location_area: "required",
+      location_address: "required",
+      location_coordinate: "required",
+      // city: "required",
+    }
+  );
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => postCtrl.create(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
+
+postRouters.patch('/:id', async (req, res) => {
+  const validator = new Validator({
+    id: req.params.id
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Post.getById(provider.inputs.id)
+    ]).then(([postById]) => {
+      if (!postById) {
+        provider.error(
+          "id",
+          "custom",
+          `Post with id "${provider.inputs.id}" does not exists!`
+        );
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => postCtrl.updateById(req, res))
+  .catch((error) => respondValidateError(res, error));
+})
+
+postRouters.delete('/:id', async (req, res) => {
+  const { uid, role } = getTokenInfo(req);
+  const validator = new Validator({
+    id: req.params.id
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Post.getById(provider.inputs.id)
+    ]).then(([postById]) => {
+      if (!postById) {
+        provider.error(
+          "id",
+          "custom",
+          `Post with id "${provider.inputs.id}" does not exists!`
+        );
+      } else if (role !== 'ADMIN' && postById.user_id !== uid) {
+        provider.error("creator", "custom", "You can't delete post!");
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => postCtrl.deleteById(req, res))
+  .catch((error) => respondValidateError(res, error));
+})
+
+module.exports = postRouters;

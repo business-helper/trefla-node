@@ -14,6 +14,30 @@ const { respondValidateError } = require("../helpers/common.helpers");
 const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
 const { ADMIN_ROLE } = require('../constants/common.constant');
 
+const activity = {
+  checkAdminPermission: async (req, identifier) => {
+    const { role, role2, uid } = getTokenInfo(req);
+    
+    if (role !== 'ADMIN') return false;
+    if (role2 === ADMIN_ROLE.SUPER) return true;
+
+    const permission = models.adminPermission.output(await models.adminPermission.getByUserId(uid));
+    return activity.checkAllowed(permission, identifier);
+  },
+  checkAllowed: (permission, identifier = null) => {
+    if (typeof identifier === 'boolean') return identifier;
+    else if (identifier === null || identifier === '' || identifier === undefined) return true;
+    
+    const keys = identifier.split('.');
+    if (keys.length === 1) return permission[keys[0]];
+    else if (keys.length === 2) return permission[keys[0]][keys[1]];
+    else if (keys.length === 3) return permission[keys[0]][keys[1]][keys[2]];
+    else if (keys.length === 4) return permission[keys[0]][keys[1]][keys[2]][keys[3]];
+    return false;
+  },
+};
+
+
 adminRouters.post('/login', async (req, res) => {
 
   middlewares.basicMiddleware(req, res, () => {
@@ -43,6 +67,7 @@ adminRouters.use((req, res, next) => {
 
 adminRouters.route('/authenticate-token').post(async (req, res) => {
   const { uid: user_id, role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
   const token = (req.headers.authorization || '').split(' ')[1] || '';
   return ctrls.admin.authenticateAdminToken(user_id) 
     .then(resl => res.json({ ...resl, token }))
@@ -65,15 +90,19 @@ adminRouters.get('/profile', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 })
 
+/**@secured by admin types */
 adminRouters.get('/config', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+  const permitted = await activity.checkAdminPermission(req, 'settings.config');
+  if (!permitted) return res.json({ status: false, message: "Permission denied!" });
 
   return ctrls.admin.getAdminConfigReq()
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
 });
 
+/**
+ * @for test only
+ */
 adminRouters.get('/firebase', async (req, res) => {
   console.log('[GET] /admin/firebase');
   return ctrls.firebase.test()
@@ -81,9 +110,11 @@ adminRouters.get('/firebase', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/**@secured by admin types */
 adminRouters.get('/id-transfers/:id', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+  const permitted = await activity.checkAdminPermission(req, 'user.idTransfer.show');
+  if (!permitted) return res.json({ status: false, message: "Permission denied!" });
+
 
   const validator = new Validator({
     id: req.params.id,
@@ -107,9 +138,10 @@ adminRouters.get('/id-transfers/:id', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/** @secrued by admin types */
 adminRouters.get('/id-transfers', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+  const permitted = await activity.checkAdminPermission(req, 'user.idTransfer.show');
+  if (!permitted) return res.json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator({
     ...req.query,
@@ -127,9 +159,10 @@ adminRouters.get('/id-transfers', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/** @secured by admin types  */
 adminRouters.get('/email-templates/:id', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!" });
+  const permitted = await activity.checkAdminPermission(req, 'settings.emailTemplate');
+  if (!permitted) return res.json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator({
     ...req.params,
@@ -153,9 +186,10 @@ adminRouters.get('/email-templates/:id', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 })
 
+/**@secured by admin types */
 adminRouters.get('/email-templates', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+  const permitted = await activity.checkAdminPermission(req, 'settings.emailTemplate');
+  if (!permitted) return res.json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator({
     ...req.query,
@@ -173,9 +207,10 @@ adminRouters.get('/email-templates', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/**@secured by admin types */
 adminRouters.get('/langs/:id/content', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, messsage: "Permission denied!" });
+  const permitted = await activity.checkAdminPermission(req, 'lang.edit');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator({
     id: req.params.id,
@@ -203,9 +238,10 @@ adminRouters.get('/langs/:id/content', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/**@secured by admin types */
 adminRouters.get('/langs/:id', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+  const permitted = await activity.checkAdminPermission(req, 'lang.edit');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator({
     id: req.params.id,
@@ -222,9 +258,10 @@ adminRouters.get('/langs/:id', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/**@secured by admin types */
 adminRouters.get('/langs', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!" });
+  const permitted = await activity.checkAdminPermission(req, 'lang.show');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator(req.query, {
     limit: "required|integer",
@@ -261,7 +298,11 @@ adminRouters.get('/stats', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/**@secured by admin types */
 adminRouters.post('/send-notification', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'user.sendNotification.show');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
   const { uid } = getTokenInfo(req);
   const { user_id, title, body } = req.body;
 
@@ -293,7 +334,11 @@ adminRouters.post('/send-notification', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/**@secured by admin types */
 adminRouters.post('/bulk-notifications', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'user.sendNotification.show');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
   const { uid, role } = getTokenInfo(req);
   const { user_ids, title, body } = req.body;
 
@@ -314,9 +359,10 @@ adminRouters.post('/bulk-notifications', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/**@secured by admin types */
 adminRouters.post('/langs/:id/sync', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+  const permitted = await activity.checkAdminPermission(req, 'lang.async');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator({
     id: req.params.id,
@@ -340,9 +386,10 @@ adminRouters.post('/langs/:id/sync', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/**@secured by admin types */
 adminRouters.post('/langs', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!" });
+  const permitted = await activity.checkAdminPermission(req, 'lang.add');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator({
     ...req.body,
@@ -403,9 +450,10 @@ adminRouters.post('/upload-lang/:langCode', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/**@secured by admin types */
 adminRouters.post('/consent-email/:id', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+  const permitted = await activity.checkAdminPermission(req, 'user.idTransfer.show');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator({
     id: req.params.id,
@@ -436,9 +484,10 @@ adminRouters.post('/consent-email/:id', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/**@secured by admin types */
 adminRouters.patch('/email-templates/:id', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+  const permitted = await activity.checkAdminPermission(req, 'settings.emailTemplate');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator({
     ...req.params,
@@ -519,15 +568,20 @@ adminRouters.patch('/update-password', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/**@secured by admin types */
 adminRouters.patch('/config', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'settings.config');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
   return ctrls.admin.updateAdminConfigReq(req.body)
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
 });
 
+/**@secured by admin types */
 adminRouters.patch('/langs/:id', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+  const permitted = await activity.checkAdminPermission(req, 'lang.edit');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator({
     id: req.params.id,
@@ -551,9 +605,10 @@ adminRouters.patch('/langs/:id', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 })
 
+/**@secured by admin types */
 adminRouters.delete('/langs/:id', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+  const permitted = await activity.checkAdminPermission(req, 'lang.delete');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator({
     id: req.params.id,
@@ -577,9 +632,10 @@ adminRouters.delete('/langs/:id', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 })
 
+/**@secured by admin types */
 adminRouters.delete('/id-transfers/:id', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+  const permitted = await activity.checkAdminPermission(req, 'user.idTransfer.show');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator({
     id: req.params.id,
@@ -606,7 +662,7 @@ adminRouters.delete('/id-transfers/:id', async (req, res) => {
 
 
 
-
+/**@secured by admin types */
 adminRouters.route('/employee/:id').get(async (req, res) => {
   const { role, role2 } = getTokenInfo(req);
   if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER ))
@@ -642,6 +698,7 @@ adminRouters.route('/employee/:id').get(async (req, res) => {
     .catch(error => respondValidateError(res, error))
 });
 
+/**@secured by admin types */
 adminRouters.route('/employee').get(async (req, res) => {
   const { role, role2 } = getTokenInfo(req);
   if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER)) res.json({ status: false, message: "Permission denied!" });
@@ -663,9 +720,10 @@ adminRouters.route('/employee').get(async (req, res) => {
     .catch(error => respondValidateError(res, error))
 });
 
+/**@secured by admin types */
 adminRouters.route('/employee').post(async (req, res) => {
   const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!" });
+  if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER)) return res.json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator({
     ...req.body,
@@ -694,6 +752,9 @@ adminRouters.route('/employee').post(async (req, res) => {
     .catch(error => respondValidateError(res, error))
 })
 
+/**
+ * @secured by admin types
+ */
 adminRouters.route('/employee/:id').delete(async (req, res) => {
   const { role, role2 } = getTokenInfo(req);
   if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER)) return res.json({ status: false, message: 'Permission denied!' });
@@ -718,6 +779,9 @@ adminRouters.route('/employee/:id').delete(async (req, res) => {
     .catch(error => respondValidateError(res, error))
 })
 
+/**
+ * @secured by admin types
+ */
 adminRouters.route('/employee/:id/permission').patch(async(req, res) => {
   const { role, role2, uid: user_id } = getTokenInfo(req);
   if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER)) return res.json({ status: false, message: "Permission denied!" });

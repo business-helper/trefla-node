@@ -69,6 +69,7 @@ const getTokenInfo = (req) => {
 }
 
 
+
 module.exports = {
   comparePassword,
   genreateAuthToken,

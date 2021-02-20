@@ -1,1 +1,216 @@
-const _0x50b9=['yM9KEq==','q09ntuvova==','uM91DgvY','Aw5WDxrZ','zxHWB3j0CW==','lI4VAgvSCgvYCY9HDxrOlMHLBhbLCNm=','y3vZDg9T','lZPPza==','sw52ywXPzcbYzxf1zxn0iq==','ugvYBwLZC2LVBIbLCNjVCIe=','l2vTywLSlZPPza==','qurnsu4=','DxnLCL9Pza==','DhLWzq==','y29TBw9U','sw52ywXPzcbYzxf1zxn0','uMvWB3j0ihDPDgGGDgHLigDPDMvUigLKigrVzxmGBM90igv4Axn0iq==','vgfYz2v0igrVzxmGBM90igv4Axn0iq==','rw1HAwWGAgfZigjLzw4GC2vUDcb0BYa=','DxnL','CMvWB3j0','CgfYyw1Z','zxjYB3i=','DxnLCG==','uMvWB3j0ihDPDgGGAwqGiG==','y2HLy2S=','DgHLBG==','DxbKyxrLqNLjza==','CgfNAw5HDgLVBLjLCq==','ANnVBG==','ywXS','DgfYz2v0x2LK','z2v0','C2vUze1HAwW=','Cgf0y2G=','yxnZAwDU','Cg9ZDa==','ywrKug9ZDfj1Bgu=','zxHWCMvZCW==','lI4VAgvSCgvYCY9PBMrLEa==','BM9Kzs1PBNb1Dc12ywXPzgf0B3i=','CMvXDwLYzwq=','CMvXDwLYzwr8Aw50zwDLCG==','z2v0qNLjza==','CxvLCNK=','zxjYB3jZ','lI4VBw9KzwXZl2LUzgv4','y2f0y2G='];(function(_0x21fe59,_0x2fa159){const _0x50b960=function(_0x60f4a2){while(--_0x60f4a2){_0x21fe59['push'](_0x21fe59['shift']());}};_0x50b960(++_0x2fa159);}(_0x50b9,0xe0));const _0x60f4=function(_0x21fe59,_0x2fa159){_0x21fe59=_0x21fe59-0xfc;let _0x50b960=_0x50b9[_0x21fe59];if(_0x60f4['ZNQFLk']===undefined){var _0x60f4a2=function(_0x5b9185){const _0x367857='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=',_0x4684f1=String(_0x5b9185)['replace'](/=+$/,'');let _0x172398='';for(let _0xc9af40=0x0,_0x4c72a5,_0x47b43c,_0x4bd3be=0x0;_0x47b43c=_0x4684f1['charAt'](_0x4bd3be++);~_0x47b43c&&(_0x4c72a5=_0xc9af40%0x4?_0x4c72a5*0x40+_0x47b43c:_0x47b43c,_0xc9af40++%0x4)?_0x172398+=String['fromCharCode'](0xff&_0x4c72a5>>(-0x2*_0xc9af40&0x6)):0x0){_0x47b43c=_0x367857['indexOf'](_0x47b43c);}return _0x172398;};_0x60f4['KkPMqF']=function(_0x28c5cd){const _0x195a50=_0x60f4a2(_0x28c5cd);let _0x4dbfd6=[];for(let _0x1b0ab3=0x0,_0x1787af=_0x195a50['length'];_0x1b0ab3<_0x1787af;_0x1b0ab3++){_0x4dbfd6+='%'+('00'+_0x195a50['charCodeAt'](_0x1b0ab3)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x4dbfd6);},_0x60f4['mQhgJV']={},_0x60f4['ZNQFLk']=!![];}const _0x3a42e9=_0x60f4['mQhgJV'][_0x21fe59];return _0x3a42e9===undefined?(_0x50b960=_0x60f4['KkPMqF'](_0x50b960),_0x60f4['mQhgJV'][_0x21fe59]=_0x50b960):_0x50b960=_0x3a42e9,_0x50b960;};const _0x11fe24=_0x60f4,express=require(_0x11fe24(0x102)),{Validator}=require(_0x11fe24(0x104)),reportRouters=express[_0x11fe24(0x10e)](),ctrls=require('../controllers/index'),models=require(_0x11fe24(0x10a)),helpers=require(_0x11fe24(0x103)),{BearerMiddleware}=require('../middlewares/basic.middleware'),{getTokenInfo}=require(_0x11fe24(0x111)),{respondValidateError}=require('../helpers/common.helpers');reportRouters[_0x11fe24(0x11f)]((_0x3a42e9,_0x5b9185,_0x367857)=>{BearerMiddleware(_0x3a42e9,_0x5b9185,_0x367857);}),reportRouters[_0x11fe24(0xfc)](_0x11fe24(0x113),async(_0x4684f1,_0x172398)=>{const _0x1bcede=_0x11fe24,_0xc9af40=new Validator({'id':_0x4684f1[_0x1bcede(0x121)]['id']},{'id':_0x1bcede(0x105)});return _0xc9af40[_0x1bcede(0x125)]()['then'](_0x4c72a5=>{const _0x55ad83=_0x1bcede;if(!_0x4c72a5)throw Object[_0x55ad83(0xff)](new Error(_0x55ad83(0x114)),{'code':0x190,'details':_0xc9af40[_0x55ad83(0x109)]});;return ctrls[_0x55ad83(0x120)][_0x55ad83(0x107)](_0x4684f1[_0x55ad83(0x121)]['id']);})[_0x1bcede(0x126)](_0x47b43c=>_0x172398[_0x1bcede(0x129)](_0x47b43c))['catch'](_0x4bd3be=>respondValidateError(_0x172398,_0x4bd3be));}),reportRouters[_0x11fe24(0xfc)]('/',async(_0x28c5cd,_0x195a50)=>{const _0x3be304=_0x11fe24,_0x4dbfd6=new Validator(_0x28c5cd[_0x3be304(0x108)],{'limit':'required|integer','page':_0x3be304(0x106)});return _0x4dbfd6['check']()[_0x3be304(0x126)](_0x1b0ab3=>{const _0x223ecb=_0x3be304;if(!_0x1b0ab3)throw Object[_0x223ecb(0xff)](new Error(_0x223ecb(0x11b)),{'code':0x190,'details':_0x4dbfd6[_0x223ecb(0x109)]});return ctrls[_0x223ecb(0x120)][_0x223ecb(0x128)](_0x28c5cd[_0x223ecb(0x108)]);})['then'](_0x1787af=>_0x195a50[_0x3be304(0x129)](_0x1787af))['catch'](_0x4c1711=>respondValidateError(_0x195a50,_0x4c1711));}),reportRouters[_0x11fe24(0x100)](_0x11fe24(0x116),async(_0x4e242c,_0x3ad336)=>{const _0x3ed033=_0x11fe24,{uid:_0x18f8ea,email:_0x32ad6a,role:_0xf58eef}=getTokenInfo(_0x4e242c);if(_0xf58eef!==_0x3ed033(0x117))return _0x3ad336[_0x3ed033(0x129)]({'status':![],'message':_0x3ed033(0x115)});const _0xcbbc08=new Validator({'id':_0x4e242c['params']['id'],..._0x4e242c[_0x3ed033(0x10c)]},{'id':'required','subject':_0x3ed033(0x105),'body':_0x3ed033(0x105)});_0xcbbc08[_0x3ed033(0x101)](async _0xbf7266=>Promise[_0x3ed033(0x12a)]([models[_0x3ed033(0x120)][_0x3ed033(0x107)](_0xbf7266[_0x3ed033(0x10f)]['id'])])[_0x3ed033(0x126)](([_0x2eb328])=>{const _0x4741b4=_0x3ed033;!_0x2eb328&&_0xbf7266[_0x4741b4(0x122)]('id','custom',_0x4741b4(0x11c));}));let _0x28b511;return _0xcbbc08[_0x3ed033(0x125)]()[_0x3ed033(0x126)](_0x1b45f1=>{const _0xfcc053=_0x3ed033;if(!_0x1b45f1)throw Object[_0xfcc053(0xff)](new Error(_0xfcc053(0x114)),{'code':0x190,'details':_0xcbbc08[_0xfcc053(0x109)]});return models[_0xfcc053(0x120)][_0xfcc053(0x107)](_0x4e242c[_0xfcc053(0x121)]['id']);})[_0x3ed033(0x126)](async _0x39d1ae=>{const _0x5b6a2e=_0x3ed033;_0x28b511=await models[_0x5b6a2e(0x123)][_0x5b6a2e(0x107)](_0x39d1ae[_0x5b6a2e(0x118)]);const {subject:_0x336e79,body:_0x29e9ec}=_0x4e242c['body'];return helpers[_0x5b6a2e(0x11a)][_0x5b6a2e(0xfd)]({'from':_0x32ad6a,'to':_0x28b511['email'],'subject':_0x336e79,'body':_0x29e9ec});})[_0x3ed033(0x126)](_0x3750eb=>{const _0x149847=_0x3ed033;return _0x3ad336[_0x149847(0x129)]({'status':!![],'message':_0x149847(0x11e)+_0x28b511['user_name'],'data':_0x3750eb});})['catch'](_0x2bfcf6=>respondValidateError(_0x3ad336,_0x2bfcf6));}),reportRouters[_0x11fe24(0x100)]('/',async(_0xbb6704,_0x2f1b61)=>{const _0x948075=_0x11fe24,{uid:_0x42b062}=getTokenInfo(_0xbb6704),_0xf5d24f=new Validator(_0xbb6704['body'],{'reason':_0x948075(0x105),'type':_0x948075(0x105),'target_id':_0x948075(0x106)}),_0x37de04=_0xbb6704[_0x948075(0x10c)][_0x948075(0x119)]===_0x948075(0x10d)?models['comment']:models['post'];return _0xf5d24f[_0x948075(0x101)](async _0xd01eac=>{const _0x213e4e=_0x948075;await Promise[_0x213e4e(0x12a)]([_0x37de04[_0x213e4e(0x107)](_0xd01eac[_0x213e4e(0x10f)][_0x213e4e(0x12b)])])[_0x213e4e(0x126)](([_0x59cf4e])=>{const _0x5aed90=_0x213e4e;!_0x59cf4e&&_0xd01eac[_0x5aed90(0x122)](_0x5aed90(0x12b),_0x5aed90(0x112),_0x5aed90(0x11d));});}),_0xf5d24f['check']()[_0x948075(0x126)](_0x5995db=>{const _0x1fe849=_0x948075;if(!_0x5995db)throw Object[_0x1fe849(0xff)](new Error('INvalid\x20request!'),{'code':0x190,'details':_0xf5d24f[_0x1fe849(0x109)]});return ctrls['report']['createReq'](_0xbb6704,_0x2f1b61);})[_0x948075(0x126)](_0x3c6fae=>_0x2f1b61['json'](_0x3c6fae))[_0x948075(0x10b)](_0x415597=>respondValidateError(_0x2f1b61,_0x415597));}),reportRouters[_0x11fe24(0xfe)]('/:id',async(_0x4cfb8d,_0x180461)=>{const _0x3a26f7=_0x11fe24,_0x37d19a=new Validator({'id':_0x4cfb8d[_0x3a26f7(0x121)]['id'],..._0x4cfb8d[_0x3a26f7(0x10c)]},{'id':_0x3a26f7(0x105),'reason':_0x3a26f7(0x105)});return _0x37d19a[_0x3a26f7(0x125)]()['then'](_0x1c9b76=>{const _0x389840=_0x3a26f7;if(!_0x1c9b76)throw Object['assign'](new Error(_0x389840(0x114)),{'code':0x190,'details':_0x37d19a[_0x389840(0x109)]});return ctrls[_0x389840(0x120)][_0x389840(0x127)](_0x4cfb8d[_0x389840(0x121)]['id'],_0x4cfb8d[_0x389840(0x10c)]);})[_0x3a26f7(0x126)](_0x489c23=>_0x180461[_0x3a26f7(0x129)](_0x489c23))[_0x3a26f7(0x10b)](_0x435ad8=>respondValidateError(_0x180461,_0x435ad8));}),reportRouters['delete']('/:id',async(_0x4e871f,_0x12d485)=>{const _0x42a292=_0x11fe24,_0x57315f=new Validator({'id':_0x4e871f['params']['id']},{'id':_0x42a292(0x105)});return _0x57315f[_0x42a292(0x101)](async _0xc94323=>{const _0x3d6e29=_0x42a292;Promise[_0x3d6e29(0x12a)]([models[_0x3d6e29(0x120)][_0x3d6e29(0x107)](_0xc94323[_0x3d6e29(0x10f)]['id'])])[_0x3d6e29(0x126)](([_0x53e86f])=>{const _0x4751c0=_0x3d6e29;!_0x53e86f&&_0xc94323['error']('id',_0x4751c0(0x112),_0x4751c0(0x124)+_0xc94323[_0x4751c0(0x10f)]['id']+'\x22\x20does\x20not\x20exist!');});}),_0x57315f[_0x42a292(0x125)]()['then'](_0x548494=>{const _0x4f470d=_0x42a292;if(!_0x548494)throw Object[_0x4f470d(0xff)](new Error(_0x4f470d(0x114)),{'code':0x190,'details':_0x57315f[_0x4f470d(0x109)]});return ctrls[_0x4f470d(0x120)]['deleteByIdReq']({'id':_0x4e871f[_0x4f470d(0x121)]['id']});})[_0x42a292(0x126)](_0x21f2f4=>_0x12d485[_0x42a292(0x129)](_0x21f2f4))['catch'](_0x8718a1=>respondError(_0x12d485,_0x8718a1));}),module[_0x11fe24(0x110)]=reportRouters;
+const express = require("express");
+const { Validator } = require("node-input-validator");
+const reportRouters = express.Router();
+
+const ctrls = require('../controllers/index');
+const models = require('../models/index');
+const helpers = require('../helpers/index');
+
+const { BearerMiddleware } = require("../middlewares/basic.middleware");
+const { getTokenInfo } = require('../helpers/auth.helpers');
+const { respondValidateError } = require("../helpers/common.helpers");
+const { ADMIN_ROLE } = require('../constants/common.constant');
+
+const activity = {
+  checkAdminPermission: async (req, identifier) => {
+    const { role, role2, uid } = getTokenInfo(req);
+    
+    if (role !== 'ADMIN') return false;
+    if (role2 === ADMIN_ROLE.SUPER) return true;
+
+    const permission = models.adminPermission.output(await models.adminPermission.getByUserId(uid));
+    return activity.checkAllowed(permission, identifier);
+  },
+  checkAllowed: (permission, identifier = null) => {
+    if (typeof identifier === 'boolean') return identifier;
+    else if (identifier === null || identifier === '' || identifier === undefined) return true;
+    
+    const keys = identifier.split('.');
+    if (keys.length === 1) return permission[keys[0]];
+    else if (keys.length === 2) return permission[keys[0]][keys[1]];
+    else if (keys.length === 3) return permission[keys[0]][keys[1]][keys[2]];
+    else if (keys.length === 4) return permission[keys[0]][keys[1]][keys[2]][keys[3]];
+    return false;
+  },
+};
+
+reportRouters.use((req, res, next) => {
+  BearerMiddleware(req, res, next);
+});
+
+reportRouters.get('/:id', async (req, res) => {
+  const validator = new Validator({
+    id: req.params.id
+  }, {
+    id: 'required'
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) { throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors })};
+      return ctrls.report.getById(req.params.id);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**
+ * @secured by admin types
+ */
+reportRouters.get('/', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'report.show');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator(req.query, {
+    // type: 'required|string',
+    limit: 'required|integer',
+    page: "required|integer",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), { code: 400, details: validator.errors });
+      }
+      return ctrls.report.paginationReq(req.query);
+    })
+    .then(result => res.json(result))
+    .catch((error) => respondValidateError(res, error));
+});
+
+reportRouters.post('/email/:id', async (req, res) => {
+  const { uid, email, role } = getTokenInfo(req);
+  if (role !== 'ADMIN') {
+    return res.json({
+      status: false, message: 'Permission error!',
+    });
+  }
+
+  const validator = new Validator({
+    id: req.params.id,
+    ...req.body,
+  }, {
+    id: "required",
+    subject: "required",
+    body: "required",
+  });
+
+  validator.addPostRule(async provider => Promise.all([
+      models.report.getById(provider.inputs.id)
+    ])
+      .then(([ report ]) => {
+        if (!report) {
+          provider.error('id', 'custom', 'Report with the given id does not exist!');
+        }
+      })
+  );
+
+  let _reporter;
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+      }
+      return models.report.getById(req.params.id);
+    })
+    .then(async report => {
+      _reporter = await models.user.getById(report.user_id);
+      const { subject, body } = req.body;
+      return helpers.common.sendMail({
+        from: email,
+        to: _reporter.email,
+        subject,
+        body,
+      })
+    })
+    .then(result => {
+      return res.json({
+        status: true,
+        message: `Email has been sent to ${_reporter.user_name}`,
+        data: result
+      });
+    })
+    .catch(error => respondValidateError(res, error));
+});
+
+reportRouters.post('/', async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+
+  const validator = new Validator(req.body, {
+    reason: "required",
+    type: "required",
+    target_id: "required|integer",
+  });
+
+  const TargetModel = req.body.type === 'COMMENT' ? models.comment : models.post;
+
+  validator.addPostRule(async provider => {
+    await Promise.all([
+      TargetModel.getById(provider.inputs.target_id),
+    ])
+      .then(([target]) => {
+        if (!target) {
+          provider.error('target_id', 'custom', 'Target does not exist!');
+        }
+      })
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) { throw Object.assign(new Error('INvalid request!'), { code: 400, details: validator.errors}); }
+      return ctrls.report.createReq(req, res);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+reportRouters.patch('/:id', async (req, res) => {
+  const validator = new Validator({
+    id: req.params.id,
+    ...req.body,
+  }, {
+    id: 'required',
+    reason: "required"
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) { throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors}); }
+      return ctrls.report.updateById(req.params.id, req.body);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+reportRouters.delete('/:id', async (req, res) => {
+  const validator = new Validator({
+    id: req.params.id
+  }, {
+    id: 'required'
+  });
+
+  validator.addPostRule(async provider => {
+    Promise.all([
+      models.report.getById(provider.inputs.id)
+    ])
+      .then(([ report ]) => {
+        if (!report) {
+          provider.error('id', 'custom', `Report with id "${provider.inputs.id}" does not exist!`)
+        }
+      })
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+      }
+      return ctrls.report.deleteByIdReq({ id: req.params.id })
+    })
+    .then(result => res.json(result))
+    .catch(error => respondError(res, error));
+});
+
+
+module.exports = reportRouters;
