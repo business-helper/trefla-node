@@ -1,5 +1,6 @@
 const sql = require("./db");
 const { timestamp } = require("../helpers/common.helpers");
+const { default_zones } = require('../config/app.config');
 
 const Post = function (lang) {
   this.code = lang.code;
@@ -62,7 +63,16 @@ Post.pagination = async ({ limit, last_id, type = null, user_id = null, location
   type ? where.push(`type='${type}'`) : null;
   last_id ? where.push(`id < ${last_id}`) : null;
   user_id ? where.push(`user_id=${user_id}`) : null;
-  location_area ? where.push(`location_area='${location_area}'`) : null;
+  
+  console.log('[default zones]', default_zones)
+  let zones = default_zones;
+  location_area ? zones.push(location_area) : null;
+  zones.length === 0 ? zones.push('__0__') : null;
+  zones = zones.map(zone => `'${zone}'`);
+  const strZones = zones.join(','); console.log('[zone]', strZones)
+
+  where.push(`location_area IN (${strZones})`);
+  // location_area ? where.push(`location_area='${location_area}'`) : null;
 
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
