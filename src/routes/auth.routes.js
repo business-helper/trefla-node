@@ -14,7 +14,8 @@ authRouters.use((req, res, next) => {
 
 authRouters.post("/register", async (req, res) => {
   // const { user_name, email, password, language, isGuest, guestName, location_address, location_coordinate, birthday, sex, avatarIndex, card_verified, card_number } = req.body;
-  const validator = new Validator(req.body, {
+
+  const validator = new Validator({...req.body}, {
     user_name: "required|minLength:4|maxLength:50",
     email: "required|email|minLength:5",
     password: "required|minLength:5|maxLength:50",
@@ -24,13 +25,13 @@ authRouters.post("/register", async (req, res) => {
   validator.addPostRule(async (provider) =>
     Promise.all([
       User.getByUserName(provider.inputs.user_name),
-      User.getByEmail(provider.inputs.email),
-    ]).then(([userByUserName, userByEmail]) => {
+      User.duplicatedByEmailSocial(provider.inputs.email, req.body.login_mode),
+    ]).then(([userByUserName, duplicated]) => {
       if (userByUserName) {
         provider.error("user_name", "custom", `User with user_name "${provider.inputs.user_name}" already exist!`);
       }
-      if (userByEmail) {
-        provider.error("email", "custom", `User with email "${provider.inputs.email}" already exist!`);
+      if (duplicated) {
+        provider.error("email", "custom", `Account already exists!`);
       }
     })
   );
@@ -58,7 +59,7 @@ authRouters.post("/login", async (req, res) => {
 
   validator.addPostRule(async (provider) =>
     Promise.all([
-      User.getByEmail(provider.inputs.email_username),
+      User.duplicatedByEmailSocial(provider.inputs.email_username, req.body.login_mode),
       User.getByUserName(provider.inputs.email_username)
     ]).then(
       ([userByEmail, userByName]) => {

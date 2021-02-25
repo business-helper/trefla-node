@@ -5,3 +5,10 @@ exports.ADMIN_ROLE = {
   SUPER: "SUPER_ADMIN",
   ADMIN: "ADMIN",
 }
+
+exports.LOGIN_MODE = {
+  NORMAL: "NORMAL",
+  GOOGLE: "GOOGLE",
+  FACEBOOK: "FACEBOOK",
+  APPLE: "APPLE",
+};

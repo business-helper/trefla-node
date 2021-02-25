@@ -64,12 +64,11 @@ Post.pagination = async ({ limit, last_id, type = null, user_id = null, location
   last_id ? where.push(`id < ${last_id}`) : null;
   user_id ? where.push(`user_id=${user_id}`) : null;
   
-  console.log('[default zones]', default_zones)
   let zones = default_zones;
   location_area ? zones.push(location_area) : null;
   zones.length === 0 ? zones.push('__0__') : null;
   zones = zones.map(zone => `'${zone}'`);
-  const strZones = zones.join(','); console.log('[zone]', strZones)
+  const strZones = zones.join(',');
 
   where.push(`location_area IN (${strZones})`);
   // location_area ? where.push(`location_area='${location_area}'`) : null;

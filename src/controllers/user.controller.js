@@ -89,7 +89,7 @@ exports.register = async (req, res) => {
 
 exports.login = (req, res) => {
   return Promise.all([
-    User.getByEmail(req.body.email_username),
+    User.duplicatedByEmailSocial(req.body.email_username, req.body.login_mode),
     User.getByUserName(req.body.email_username),
   ])
     .then(([userByEmail, userByName]) => Promise.all([

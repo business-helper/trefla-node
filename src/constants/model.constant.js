@@ -1,6 +1,6 @@
 const { generateTZTimeString, timestamp } = require('../helpers/common.helpers');
 const { ADMIN_NOTI_TYPES } = require("./notification.constant");
-const { ADMIN_ROLE } = require('./common.constant');
+const { ADMIN_ROLE, LOGIN_MODE } = require('./common.constant');
 
 exports.DEFAULT_ADMIN = {
   id: '',
@@ -238,6 +238,7 @@ exports.DEFAULT_USER = {
   user_name: '',
   email: '',
   password: '',
+  login_mode: LOGIN_MODE.NORMAL,
   sex: 0,
   birthday: '',
   language: 'English',

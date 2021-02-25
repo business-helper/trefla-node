@@ -1,5 +1,6 @@
 const sql = require("./db");
 const { bool2Int, timestamp, JSONParser, stringifyModel } = require("../helpers/common.helpers");
+const { LOGIN_MODE } = require('../constants/common.constant');
 
 const table = 'users';
 
@@ -58,6 +59,14 @@ User.getByIds = async (ids) => {
 User.getByEmail = (email) => {
 	return new Promise((resolve, reject) => {
 		sql.query("SELECT * FROM users WHERE email=? LIMIT 1", [email], (err, res) => {
+			err ? reject(err) : resolve(res[0]);
+		});
+	})
+}
+
+User.duplicatedByEmailSocial = (email, login_mode = LOGIN_MODE.NORMAL) => {
+	return new Promise((resolve, reject) => {
+		sql.query(`SELECT * FROM ${table} WHERE email=? AND login_mode=? LIMIT 1`, [email, login_mode], (err, res) => {
 			err ? reject(err) : resolve(res[0]);
 		});
 	})
