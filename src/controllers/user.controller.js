@@ -277,7 +277,7 @@ exports.updateProfile = async (req, res) => {
       const keys = Object.keys(user);
       keys.forEach(key => {
         // update fields except card number.
-        if (req.body[key] !== undefined && key !== "card_number") {
+        if (req.body[key] !== undefined && ["card_number", 'login_mode'].includes(key)) {
           if (['location_array'].includes(key)) {
             user[key] = JSON.stringify(req.body[key]);
           } else if (key === 'card_number') { // skip it.

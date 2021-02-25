@@ -361,8 +361,9 @@ userRouters.patch('/me', async (req, res) => {
     validator.addPostRule(async (provider) =>
       Promise.all([
         User.getByEmail(req.body.email),
-      ]).then(([userByEmail]) => {
-        if (userByEmail && userByEmail.id !== id) {
+        User.getById(id),
+      ]).then(([userByEmail, me]) => {
+        if (userByEmail && userByEmail.id !== id && userByEmail.login_mode === me.login_mode) {
           provider.error(
             "id",
             "custom",
