@@ -201,9 +201,9 @@ User.output = (user, mode = 'NORMAL') => {
   // keys to delete
   let delKeys = [];
   if (mode === 'NORMAL') {
-    delKeys = ['black_list', 'email', 'password', 'language', 'bio', 'radiusAround', 'noti_num', 'location_array', 'postAroundCenterCoordinate', 'create_time', 'update_time', 'recovery_code'];
+    delKeys = ['black_list', 'email', 'password', 'social_pass', 'language', 'bio', 'radiusAround', 'noti_num', 'location_array', 'postAroundCenterCoordinate', 'create_time', 'update_time', 'recovery_code'];
   } else if (mode === 'PROFILE') {
-    delKeys = ['black_list', 'password', 'create_time', 'update_time', 'recovery_code'];
+    delKeys = ['black_list', 'password', 'social_pass', 'create_time', 'update_time', 'recovery_code'];
   } else if (mode === 'SIMPLE') {
     return { 
       id: user.id,
