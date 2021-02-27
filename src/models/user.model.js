@@ -107,6 +107,15 @@ User.getByLocationArea = (location_area) => {
   })
 }
 
+User.getBySocialPass = (pass) => {
+  const social = 'GOOGLE';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} WHERE JSON_EXTRACT(social_pass, "$.${social}")=?`, [pass], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    })
+  })
+}
+
 User.pagination = ({ page, limit }) => {
   limit = Number(limit);
   const offset = Number(page * limit);

@@ -12,6 +12,12 @@ const { BearerMiddleware } = require("../middlewares/basic.middleware");
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { respondValidateError } = require("../helpers/common.helpers");
 
+userRouters.route('/test').post(async (req, res) => {
+  return User.getBySocialPass(req.body.pass)
+    .then(user => res.json(user))
+    .catch(error => respondValidateError(res, error))
+})
+
 // bearer authentication
 userRouters.use((req, res, next) => {
   BearerMiddleware(req, res, next);
