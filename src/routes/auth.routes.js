@@ -6,11 +6,19 @@ const User = require("../models/user.model");
 const { basicMiddleware } = require("../middlewares/basic.middleware");
 const { respondValidateError } = require("../helpers/common.helpers");
 const { generatePassword } = require("../helpers/auth.helpers");
+const { LOGIN_MODE } = require('../constants/common.constant');
 
 // basic authentication
 authRouters.use((req, res, next) => {
   basicMiddleware(req, res, next);
 });
+
+
+const activity = {
+  generateUsername: async ({ email, user }) => {
+
+  },
+};
 
 authRouters.post("/register", async (req, res) => {
   // const { user_name, email, password, language, isGuest, guestName, location_address, location_coordinate, birthday, sex, avatarIndex, card_verified, card_number } = req.body;
@@ -63,7 +71,7 @@ authRouters.post("/login", async (req, res) => {
       User.getByUserName(provider.inputs.email_username)
     ]).then(
       ([userByEmail, userByName]) => {
-        if (!userByEmail && !userByName) {
+        if (!userByEmail && !userByName && req.body.login_mode === LOGIN_MODE.NORMAL) {
           provider.error(
             "email_username",
             "custom",
@@ -71,6 +79,7 @@ authRouters.post("/login", async (req, res) => {
           );
         }
       }
+      
     )
   );
 
@@ -81,7 +90,16 @@ authRouters.post("/login", async (req, res) => {
         throw Object.assign(new Error("Invalid request"), { code: 400, details: validator.errors });
       }
     })
-    .then(() => userCtrl.login(req, res))
+    .then(async () => {
+      const exists = await User.duplicatedByEmailSocial(req.body.email_username, req.body.login_mode);
+
+      if (req.body.login_mode === LOGIN_MODE.NORMAL || exists) {
+        return userCtrl.login(req, res);
+      } else { // for social mode(register);
+        req.body.user_name
+        return userCtrl.register(req, res);
+      }
+    })
     .catch((error) => respondValidateError(res, error));
 });
 

@@ -238,6 +238,7 @@ exports.DEFAULT_USER = {
   user_name: '',
   email: '',
   password: '',
+  social_pass: '{}',
   login_mode: LOGIN_MODE.NORMAL,
   sex: 0,
   birthday: '',
