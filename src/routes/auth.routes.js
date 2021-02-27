@@ -23,6 +23,10 @@ const activity = {
 authRouters.post("/register", async (req, res) => {
   // const { user_name, email, password, language, isGuest, guestName, location_address, location_coordinate, birthday, sex, avatarIndex, card_verified, card_number } = req.body;
 
+  if (!req.body.user_name) {
+    req.body.user_name = await userCtrl.generateUsername(req.body.email);
+  }
+
   const validator = new Validator({...req.body}, {
     user_name: "required|minLength:4|maxLength:50",
     email: "required|email|minLength:5",
@@ -33,13 +37,14 @@ authRouters.post("/register", async (req, res) => {
   validator.addPostRule(async (provider) =>
     Promise.all([
       User.getByUserName(provider.inputs.user_name),
-      User.duplicatedByEmailSocial(provider.inputs.email, req.body.login_mode),
+      // User.duplicatedByEmailSocial(provider.inputs.email, req.body.login_mode),
+      User.getByEmail(provider.inputs.email),
     ]).then(([userByUserName, duplicated]) => {
       if (userByUserName) {
         provider.error("user_name", "custom", `User with user_name "${provider.inputs.user_name}" already exist!`);
       }
       if (duplicated) {
-        provider.error("email", "custom", `Account already exists!`);
+        provider.error("email", "custom", `Account already exists with the email!`);
       }
     })
   );
@@ -59,27 +64,31 @@ authRouters.post("/register", async (req, res) => {
 });
 
 authRouters.post("/login", async (req, res) => {
+  req.body.login_mode = req.body.login_mode || LOGIN_MODE.NORMAL;
   const validator = new Validator(req.body, {
     email_username: "required",
     password: "required|minLength:5|maxLength:50",
+    login_mode: "required",
     // device_token: "required"
   });
 
   validator.addPostRule(async (provider) =>
     Promise.all([
-      User.duplicatedByEmailSocial(provider.inputs.email_username, req.body.login_mode),
+      User.getByEmail(provider.inputs.email_username),
       User.getByUserName(provider.inputs.email_username)
     ]).then(
       ([userByEmail, userByName]) => {
-        if (!userByEmail && !userByName && req.body.login_mode === LOGIN_MODE.NORMAL) {
+        if (!userByEmail && !userByName) {
           provider.error(
             "email_username",
             "custom",
             `Account does not exist!`
           );
         }
+        if (!Object.keys(LOGIN_MODE).includes(req.body.login_mode)) {
+          provider.error('login_mode', 'custom', 'Invalid login mode!');
+        }
       }
-      
     )
   );
 
@@ -91,14 +100,7 @@ authRouters.post("/login", async (req, res) => {
       }
     })
     .then(async () => {
-      const exists = await User.duplicatedByEmailSocial(req.body.email_username, req.body.login_mode);
-
-      if (req.body.login_mode === LOGIN_MODE.NORMAL || exists) {
-        return userCtrl.login(req, res);
-      } else { // for social mode(register);
-        req.body.user_name
-        return userCtrl.register(req, res);
-      }
+      return userCtrl.login(req, res);
     })
     .catch((error) => respondValidateError(res, error));
 });

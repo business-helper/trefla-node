@@ -1,6 +1,7 @@
 const { Validator } = require("node-input-validator");
 const CONSTS = require('../constants/socket.constant');
 const NOTI_TYPES = require('../constants/notification.constant');
+const { LOGIN_MODE } = require('../constants/common.constant');
 const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
 const models = require("../models/index");
 const User = require("../models/user.model");
@@ -32,7 +33,19 @@ exports.register = async (req, res) => {
   const userData = generateUserData({ ...req.body, card_number: verifiedUser ? '' : new_number });
 
   return generatePassword(userData.password)
-    .then(encPassword => ({ ...userData, password: encPassword }))
+    .then(encPassword => {
+      if (req.body.login_mode !== LOGIN_MODE.NORMAL && Object.keys(LOGIN_MODE).includes(req.body.login_mode)) {
+        // social register.
+        return {
+          ...userData,
+          password: '',
+          social_pass: JSON.stringify({[req.body.login_mode]: encPassword}),
+        };
+      } else {
+        req.body.login_mode = LOGIN_MODE.NORMAL;
+        return { ...userData, password: encPassword }
+      }
+    })
     .then(async userModel => {
       return User.create(userModel)
     })
@@ -84,24 +97,46 @@ exports.register = async (req, res) => {
         user_id: verifiedUserWithCard,
       },
     }))
-    .catch((error) => respondError(res, error));
 };
 
 exports.login = (req, res) => {
   return Promise.all([
-    User.duplicatedByEmailSocial(req.body.email_username, req.body.login_mode),
+    User.getByEmail(req.body.email_username),
     User.getByUserName(req.body.email_username),
   ])
-    .then(([userByEmail, userByName]) => Promise.all([
-      userByEmail || userByName,
-      comparePassword(req.body.password, (userByEmail || userByName).password),
-      genreateAuthToken(userByEmail || userByName),
-      req.body.device_token !== undefined ? User.save({ 
-        ...(userByEmail || userByName), 
-        device_token: req.body.device_token, 
-        location_area: req.body.location_area || (userByEmail || userByName).location_area,
-      }) : null
-    ]))
+    .then(async ([userByEmail, userByName]) => {
+      const user = userByEmail || userByName;
+      // process password.
+      let password;
+      if (req.body.login_mode === LOGIN_MODE.NORMAL) {
+        password = user.password;
+      } else {
+        const social_pass = JSON.parse(user.social_pass);
+        password = social_pass[req.body.login_mode];
+
+        if (password === undefined) {
+          user.social_pass = JSON.stringify({
+            ...social_pass,
+            [req.body.login_mode]: await generatePassword(req.body.password),
+          })
+        }
+      }
+      // update some data.
+      if (req.body.device_token) user.device_token = req.body.device_token;
+      if (req.body.location_area) user.location_area = req.body.location_area;
+
+      return Promise.all([
+        user,
+        (req.body.login_mode !== LOGIN_MODE.NORMAL && !password) ? true : comparePassword(req.body.password, password),
+        genreateAuthToken(user),
+        User.save(user),
+        // req.body.device_token !== undefined ? User.save({ 
+        //   ...user, 
+        //   device_token: req.body.device_token, 
+        //   location_area: req.body.location_area || user.location_area,
+        // }) : null
+      ]);
+    })
     .then(([ user, match, token, updatedUser ]) => {
       if (match) {
         return res.json({
@@ -1038,6 +1073,18 @@ const unverifyCardChats = (chats) => {
   }))
   .then(([[chat, updated]]) => [chat]);
 }
+
+const generateUsername = async (username) => {
+  if (username.includes('@')) username = username.split('@')[0];
+
+  return User.getByUserName(username)
+    .then(user => {
+      if (!user) return username;
+      else return generateUsername(username + helpers.common.generateRandomString(3));
+    })
+}
+
+exports.generateUsername = generateUsername;
 
 
 

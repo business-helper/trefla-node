@@ -14,6 +14,7 @@ const User = function (user) {
 
 User.create = (newUser) => {
   newUser.id !== undefined ? delete newUser.id : null;
+  newUser = stringifyModel(newUser);
   return new Promise((resolve, reject) => {
     sql.query("INSERT INTO users SET ?", newUser, (err, res) => {
 			err ? reject(err) : resolve({ ...newUser, id: res.insertId });
@@ -107,10 +108,9 @@ User.getByLocationArea = (location_area) => {
   })
 }
 
-User.getBySocialPass = (pass) => {
-  const social = 'GOOGLE';
+User.getBySocialPass = ({ platform, pass }) => {
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM ${table} WHERE JSON_EXTRACT(social_pass, "$.${social}")=?`, [pass], (err, res) => {
+    sql.query(`SELECT * FROM ${table} WHERE JSON_EXTRACT(social_pass, "$.${platform}")=?`, [pass], (err, res) => {
       err ? reject(err) : resolve(res[0]);
     })
   })
@@ -210,9 +210,9 @@ User.output = (user, mode = 'NORMAL') => {
   // keys to delete
   let delKeys = [];
   if (mode === 'NORMAL') {
-    delKeys = ['black_list', 'email', 'password', 'social_pass', 'language', 'bio', 'radiusAround', 'noti_num', 'location_array', 'postAroundCenterCoordinate', 'create_time', 'update_time', 'recovery_code'];
+    delKeys = ['black_list', 'email', 'password', 'social_pass', 'login_mode', 'language', 'bio', 'radiusAround', 'noti_num', 'location_array', 'postAroundCenterCoordinate', 'create_time', 'update_time', 'recovery_code'];
   } else if (mode === 'PROFILE') {
-    delKeys = ['black_list', 'password', 'social_pass', 'create_time', 'update_time', 'recovery_code'];
+    delKeys = ['black_list', 'password', 'social_pass', 'login_mode', 'create_time', 'update_time', 'recovery_code'];
   } else if (mode === 'SIMPLE') {
     return { 
       id: user.id,
