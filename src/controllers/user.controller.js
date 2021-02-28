@@ -313,13 +313,13 @@ exports.updateProfile = async (req, res) => {
       keys.forEach(key => {
         // update fields except card number.
         if (req.body[key] !== undefined && ["card_number", 'login_mode'].includes(key)) {
-          if (['location_array'].includes(key)) {
-            user[key] = JSON.stringify(req.body[key]);
-          } else if (key === 'card_number') { // skip it.
-              
-          } else {
-            user[key] = req.body[key] !== undefined ? req.body[key] : user[key];
-          }
+          // skip these field.
+        } else if (req.body[key] !== undefined && ['location_array'].includes(key)) {
+          user[key] = JSON.stringify(req.body[key]);
+        } else if (key === 'profile_done') {
+          user.profile_done = req.body.profile_done !== undefined ? Number(req.body.profile_done) : user.profile_done;
+        } else {
+          user[key] = req.body[key] !== undefined ? req.body[key] : user[key];
         }
       });
       

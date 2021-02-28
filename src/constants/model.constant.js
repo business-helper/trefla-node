@@ -269,6 +269,7 @@ exports.DEFAULT_USER = {
   current_chat: 0,
   online: 0,
   active: 0,
+  profile_done: 0,
   create_time: timestamp(),
   update_time: timestamp()
 };
