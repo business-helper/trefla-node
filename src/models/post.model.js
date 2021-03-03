@@ -64,7 +64,7 @@ Post.pagination = async ({ limit, last_id, type = null, user_id = null, location
   last_id ? where.push(`id < ${last_id}`) : null;
   user_id ? where.push(`user_id=${user_id}`) : null;
   
-  let zones = default_zones;
+  let zones = [...default_zones];
   location_area ? zones.push(location_area) : null;
   zones.length === 0 ? zones.push('__0__') : null;
   zones = zones.map(zone => `'${zone}'`);
