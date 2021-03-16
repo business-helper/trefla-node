@@ -15,8 +15,9 @@ checkAuthentication();
 
 let host = "localhost";
 if (!window.location.href.includes("localhost")) {
-  host = "149.202.193.217";
+  host = "54.36.121.53";
 }
+
 
 const token = loadToken();
 
