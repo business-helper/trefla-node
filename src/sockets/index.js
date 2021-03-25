@@ -61,9 +61,9 @@ const bootstrapSocket = (io) => {
     })
 
     // connection request to a user.
-    socket.on(CONSTS.SKT_CONNECT_TO_USER, ({ toId, message, isGuest = true }) => {
-      console.log('[connection req]', toId);
+    socket.on(CONSTS.SKT_CONNECT_TO_USER, ({ toId, message, isGuest = true, from_where = 'NONE', target_id = '0' }) => {
       const { uid } = helpers.auth.parseToken(token);
+      console.log('[connection req]', toId, uid);
       let _toUser, _fromUser;
       Promise.all([
         models.user.getById(toId),
@@ -75,7 +75,7 @@ const bootstrapSocket = (io) => {
           }
           _toUser = toUser;
           _fromUser = fromUser;
-          return ctrls.chat.createNormalChatReq(uid, { receiver_id: toId, message }, isGuest);
+          return ctrls.chat.createNormalChatReq(uid, { receiver_id: toId, message, from_where, target_id }, isGuest);
         })
         .then(result => {
           const { status, message, data } = result;
@@ -92,7 +92,7 @@ const bootstrapSocket = (io) => {
         })
     });
 
-    socket.on(CONSTS.SKT_CONNECT_TO_CARD, async ({ card_number, message, toId = 0, isGuest = true }) => {
+    socket.on(CONSTS.SKT_CONNECT_TO_CARD, async ({ card_number, message, toId = 0, isGuest = true, from_where = 'CARD' }) => {
       const { uid } = helpers.auth.parseToken(token);
       let _chat, _message;
 
@@ -105,7 +105,14 @@ const bootstrapSocket = (io) => {
       toId = verifiedUser ? verifiedUser.id : 0;
       console.log('[connection req]', toId);
 
-      ctrls.chat.createCardChatReq(uid, { receiver_id: toId, message, card_number, isForCard: 1, card_verified: verifiedUser ? 1 : 0 }, isGuest)
+      ctrls.chat.createCardChatReq(uid, {
+          receiver_id: toId,
+          message, card_number,
+          isForCard: 1,
+          card_verified: verifiedUser ? 1 : 0,
+          from_where,
+          target_id: card_number,
+         }, isGuest)
         .then(({ status, message, data: chat, msg }) => {
           _chat = chat; _message = msg;
           // process the sender

@@ -1,1 +1,151 @@
-const _0xb095=['ywn0AxzL','ieforcb0ExbLpsi','ywzMzwn0zwrsB3DZ','ifDirvjfia','y3jLyxrLx3rPBwu','u0vmrunuienpvu5ukgLKksbHCYb0B3rHBcbguK9nignVBw1LBNrZia','AM9UAq','ie9srevsiejzigLKieftqYbmsu1jvcaX','ifDirvjfihr5Cgu9jW','u0vmrunuigLKiezst00Gy29TBwvUDhmG','y29Kzq','u0vmrunuicOGrLjptsbJB21Tzw50CYa','mtLHBgXZBwS','ie9srevsiejzigLKierfu0mGteLnsvqGpYa','mJq5mJuZn1fWBLHpBW','CgfNAw5HDgLVBG','mJuXmdrRyxzSDgG','ndm0mZa5D293uK9S','ChvZAa','z2v0qNLvC2vY','BwLUswq','y29TBwvUDe51BwjLCG','z2v0qNLjzhm','u0vmrunuicOGrLjptsbJB21Tzw50CYbxsevsrsb1C2vYx2LKid0GpW','BgvUz3rO','Dg90ywW','ieforcb0ExbLpsC','y3jLyxrL','DxbKyxrLx3rPBwu','ifDirvjfihrHCMDLDf9Pzd0','z2v0qwXS','ntm2nZi1sKHxD2vA','khrHCMDLDf9Pzd0','DxnLCL9Pza','su5trvjuieLove8Gy29TBwvUDhmGu0vuid8','jYbbtKqGDgfYz2v0x2LKpq','mtC0mLfrA0jMrq','ieforca','mZC3nJfkzgzZB1K','zM9YrwfJAa','C2LTCgXLugfNAw5HDgLVBG','lI9KyG','mZfyrhPXre4','u0vmrunuienpvu5ukgLKksbHCYb0B3rHBcbguK9nignVBw1LBNrZ','zxHWB3j0CW','CxvLCNK','revmrvrfiezst00Gy29TBwvUDhmGv0HfuKuGAwq9pW','mtL4uvjKzMK','BMfTzq','zgvSzxrLqNLvC2vY','mZK0sM1cAw1s','zgvSzxrLqNLjza','Aw5Zzxj0swq','u0vmrunuicOGrLjptsbJB21Tzw50CYbxsevsrsbPzd0/ieXjtuLuide','mtqZmJz5CvPJveu','u0vmrunuicOGrLjptsbJB21Tzw50CYbxsevsrsbPzcbjtIaOpYK','vvbeqvrfignVBw1LBNrZifnfvca/ifDirvjfigLKpt8','ie9srevsiejzigLKierfu0mGteLnsvqGpYbprKztrvqGpW','revmrvrfiezst00Gy29TBwvUDhmGv0HfuKuGDxnLCL9Pzd0/','z2v0qNLjza','u0vmrunuienpvu5ukgLKksbHCYb0B3rHBcbguK9nignVBw1LBNrZifDirvjfihr5Cgu9pYbbtKqGDgfYz2v0x2LKpt8'];const _0x44f2=function(_0x3148ac,_0x4e7cd7){_0x3148ac=_0x3148ac-0x1b5;let _0xb095e=_0xb095[_0x3148ac];if(_0x44f2['LPHjCf']===undefined){var _0x44f275=function(_0x239a98){const _0x834fcb='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0xaa5b84='';for(let _0x3a5cd0=0x0,_0x3bd5a7,_0x3c6221,_0x14749a=0x0;_0x3c6221=_0x239a98['charAt'](_0x14749a++);~_0x3c6221&&(_0x3bd5a7=_0x3a5cd0%0x4?_0x3bd5a7*0x40+_0x3c6221:_0x3c6221,_0x3a5cd0++%0x4)?_0xaa5b84+=String['fromCharCode'](0xff&_0x3bd5a7>>(-0x2*_0x3a5cd0&0x6)):0x0){_0x3c6221=_0x834fcb['indexOf'](_0x3c6221);}return _0xaa5b84;};_0x44f2['zYyixb']=function(_0x4968ba){const _0x4d2b36=_0x44f275(_0x4968ba);let _0x4ea96b=[];for(let _0x3e320f=0x0,_0x19553c=_0x4d2b36['length'];_0x3e320f<_0x19553c;_0x3e320f++){_0x4ea96b+='%'+('00'+_0x4d2b36['charCodeAt'](_0x3e320f)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x4ea96b);},_0x44f2['jnmusT']={},_0x44f2['LPHjCf']=!![];}const _0x315a99=_0xb095[0x0],_0x2111ab=_0x3148ac+_0x315a99,_0xc7750b=_0x44f2['jnmusT'][_0x2111ab];return _0xc7750b===undefined?(_0xb095e=_0x44f2['zYyixb'](_0xb095e),_0x44f2['jnmusT'][_0x2111ab]=_0xb095e):_0xb095e=_0xc7750b,_0xb095e;};const _0x2f4120=_0x44f2;(function(_0x5aa720,_0x1eddf1){const _0x3608dd=_0x44f2;while(!![]){try{const _0x28155d=-parseInt(_0x3608dd(0x1cc))+-parseInt(_0x3608dd(0x1b9))*parseInt(_0x3608dd(0x1d3))+parseInt(_0x3608dd(0x1df))*parseInt(_0x3608dd(0x1d1))+parseInt(_0x3608dd(0x1e3))*-parseInt(_0x3608dd(0x1dc))+-parseInt(_0x3608dd(0x1be))+-parseInt(_0x3608dd(0x1d7))*parseInt(_0x3608dd(0x1bd))+parseInt(_0x3608dd(0x1bb));if(_0x28155d===_0x1eddf1)break;else _0x5aa720['push'](_0x5aa720['shift']());}catch(_0x38bcf2){_0x5aa720['push'](_0x5aa720['shift']());}}}(_0xb095,0x6b6a6));const sql=require(_0x2f4120(0x1d6)),{timestamp,int2Bool}=require('../helpers/common.helpers'),Comment=function(_0x315a99){const _0x3b4255=_0x2f4120;this[_0x3b4255(0x1ce)]=_0x315a99[_0x3b4255(0x1b7)],this['comment']=_0x315a99[_0x3b4255(0x1dd)],this[_0x3b4255(0x1ea)]=_0x315a99[_0x3b4255(0x1ea)],this[_0x3b4255(0x1ee)]=timestamp(),this['update_time']=timestamp();};Comment[_0x2f4120(0x1c8)]=_0x2111ab=>{return _0x2111ab['id']!==undefined?delete _0x2111ab['id']:'',new Promise((_0xc7750b,_0x239a98)=>{const _0x4a16c7=_0x44f2;sql['query'](_0x4a16c7(0x1cf),_0x2111ab,(_0x834fcb,_0xaa5b84)=>{const _0x523708=_0x4a16c7;_0x834fcb?_0x239a98(_0x834fcb):_0xc7750b({..._0x2111ab,'id':_0xaa5b84[_0x523708(0x1e1)]});});});},Comment['save']=async _0x3a5cd0=>{const _0x52c8dd=_0x2f4120;return _0x3a5cd0[_0x52c8dd(0x1c9)]=timestamp(),new Promise((_0x3bd5a7,_0x3c6221)=>{const _0x23fb4e=_0x52c8dd;sql['query'](_0x23fb4e(0x1e5),[_0x3a5cd0,_0x3a5cd0['id']],(_0x14749a,_0x4968ba)=>{const _0x2b3269=_0x23fb4e;_0x14749a?_0x3c6221(_0x14749a):_0x3bd5a7(Comment[_0x2b3269(0x1e8)](_0x3a5cd0['id']));});});},Comment[_0x2f4120(0x1e0)]=async _0x4d2b36=>{return new Promise((_0x4ea96b,_0x3e320f)=>{const _0x4c639=_0x44f2;sql[_0x4c639(0x1da)](_0x4c639(0x1db),[_0x4d2b36],(_0x19553c,_0x4867de)=>{const _0x2582ce=_0x4c639;_0x19553c?_0x3e320f(_0x19553c):_0x4ea96b(_0x4867de[_0x2582ce(0x1ec)]>0x0);});});},Comment[_0x2f4120(0x1bc)]=async({limit:_0x3f2c40,last_id:last_id=null,target_id:target_id=null,type:type=null})=>{const _0x59fc6b=_0x2f4120;let _0x43d338=[];last_id?_0x43d338['push']('id\x20<\x20'+last_id):null,target_id&&type?_0x43d338[_0x59fc6b(0x1bf)]('target_id='+target_id+_0x59fc6b(0x1c7)+type+'\x27'):null;const _0x148016=_0x43d338['length']>0x0?_0x59fc6b(0x1ed)+_0x43d338['join'](_0x59fc6b(0x1d2)):'';return new Promise((_0x3e506e,_0x4cf2e)=>{const _0x3d2339=_0x59fc6b;sql['query'](_0x3d2339(0x1b8)+_0x148016+_0x3d2339(0x1ba),[_0x3f2c40],(_0xc2f6d4,_0x3efce6)=>{_0xc2f6d4?_0x4cf2e(_0xc2f6d4):_0x3e506e(_0x3efce6);});});},Comment[_0x2f4120(0x1d5)]=async({limit:limit=0xa,page:page=0x0,target_id:target_id=null,type:type=null})=>{const _0x2bf92e=_0x2f4120;let _0x1da816=[];target_id&&type?_0x1da816['push'](_0x2bf92e(0x1cd)+target_id+_0x2bf92e(0x1c7)+type+'\x27)'):null;const _0x3f77a5=_0x1da816['length']>0x0?_0x2bf92e(0x1ed)+_0x1da816[_0x2bf92e(0x1f0)]('\x20AND\x20'):'',_0xb434c7=limit*page;return new Promise((_0x490322,_0x4ccd44)=>{const _0x4cd576=_0x2bf92e;sql['query']('SELECT\x20*\x20FROM\x20comments\x20'+_0x3f77a5+_0x4cd576(0x1e6),[limit,_0xb434c7],(_0xf6985b,_0x4bd607)=>{_0xf6985b?_0x4ccd44(_0xf6985b):_0x490322(_0x4bd607);});});},Comment[_0x2f4120(0x1cb)]=({target_id:target_id=null,type:type=null})=>{const _0x390dd7=_0x2f4120,_0x56515b=target_id&&type?_0x390dd7(0x1ca)+target_id+_0x390dd7(0x1eb)+type+'\x22':'';return new Promise((_0x12a7ed,_0x209ea0)=>{const _0x26af0f=_0x390dd7;sql['query'](_0x26af0f(0x1b8)+_0x56515b,(_0x2c711c,_0x4502bc)=>{_0x2c711c?_0x209ea0(_0x2c711c):_0x12a7ed(_0x4502bc);});});},Comment['getCountOfComments']=({type:type=null,target_id:target_id=null})=>{const _0x4ef3ed=_0x2f4120,_0x3d0e90=type&&target_id?_0x4ef3ed(0x1b5)+type+_0x4ef3ed(0x1d0)+target_id:'';return new Promise((_0x2006da,_0x31732a)=>{const _0xa32fa8=_0x4ef3ed;sql[_0xa32fa8(0x1da)](_0xa32fa8(0x1ef)+_0x3d0e90,(_0x462450,_0x24b6a8)=>{const _0x2d8d4b=_0xa32fa8;_0x462450?_0x31732a(_0x462450):_0x2006da(_0x24b6a8[0x0][_0x2d8d4b(0x1c6)]);});});},Comment[_0x2f4120(0x1c1)]=({type:type=null,target_id:target_id=null})=>{const _0x4b600a=_0x2f4120,_0x153226=type&&target_id?_0x4b600a(0x1b5)+type+'\x27\x20AND\x20target_id='+target_id:'';return new Promise((_0x9c3063,_0x3f5812)=>{const _0x27e9a3=_0x4b600a;sql[_0x27e9a3(0x1da)](_0x27e9a3(0x1b6)+_0x153226+_0x27e9a3(0x1f1),(_0x29aaab,_0x3673d1)=>{const _0x1ad971=_0x27e9a3;_0x29aaab?_0x3f5812(_0x29aaab):_0x9c3063(_0x3673d1[_0x1ad971(0x1c5)]>0x0?_0x3673d1[0x0]['id']:0x0);});});},Comment[_0x2f4120(0x1c2)]=({target_id:_0x229c2d,type:_0x586856})=>{return new Promise((_0x4ba595,_0x44c5b5)=>{const _0x28d396=_0x44f2;sql['query'](_0x28d396(0x1e9),[_0x586856,_0x229c2d],(_0x555e62,_0x2b07a8)=>{const _0x56a6d1=_0x28d396;_0x555e62?_0x44c5b5(_0x555e62):_0x4ba595(_0x2b07a8[0x0][_0x56a6d1(0x1c6)]);});});},Comment['getById']=_0x493d9b=>{return new Promise((_0x35b3d2,_0x285d1b)=>{const _0x1ad24a=_0x44f2;sql[_0x1ad24a(0x1da)](_0x1ad24a(0x1e2),[_0x493d9b],(_0x5c4647,_0x45461d)=>{_0x5c4647?_0x285d1b(_0x5c4647):_0x35b3d2(_0x45461d[0x0]);});});},Comment[_0x2f4120(0x1c3)]=_0x1f581b=>{const _0x139e53=_0x2f4120;return _0x1f581b[_0x139e53(0x1c5)]===0x0?_0x1f581b=[0x0]:null,new Promise((_0x445550,_0x5b44f0)=>{const _0x14c89f=_0x139e53;sql[_0x14c89f(0x1da)](_0x14c89f(0x1e4),[_0x1f581b],(_0x970b56,_0x3ea4d8)=>{_0x970b56?_0x5b44f0(_0x970b56):_0x445550(_0x3ea4d8);});});},Comment[_0x2f4120(0x1c0)]=_0x41b449=>{return new Promise((_0x2eaace,_0x14ba87)=>{const _0x48f657=_0x44f2;sql['query'](_0x48f657(0x1c4),[_0x41b449],(_0x362a0e,_0x377703)=>{_0x362a0e?_0x14ba87(_0x362a0e):_0x2eaace(_0x377703);});});},Comment[_0x2f4120(0x1de)]=_0x3f923d=>{return new Promise((_0x349cee,_0x3d20ae)=>{const _0x41af0d=_0x44f2;sql[_0x41af0d(0x1da)](_0x41af0d(0x1e7),[_0x3f923d],(_0x3330f8,_0x4295ca)=>{const _0x23b4db=_0x41af0d;_0x3330f8?_0x3d20ae(_0x3330f8):_0x349cee(_0x4295ca[_0x23b4db(0x1ec)]);});});},Comment[_0x2f4120(0x1c6)]=()=>{return new Promise((_0x44a73d,_0x42adde)=>{const _0x2d0c27=_0x44f2;sql[_0x2d0c27(0x1da)](_0x2d0c27(0x1d8),[],(_0x430956,_0x12048d)=>{const _0x49761e=_0x2d0c27;_0x430956?_0x42adde(_0x430956):_0x44a73d(_0x12048d[0x0][_0x49761e(0x1c6)]);});});},Comment['output']=_0x558abf=>{const _0x2c18f0=_0x2f4120;if(!_0x558abf)return null;const _0x2c9148=[_0x2c18f0(0x1ee),_0x2c18f0(0x1c9)];return _0x2c9148[_0x2c18f0(0x1d4)](_0x15e168=>{_0x558abf[_0x15e168]!==undefined?delete _0x558abf[_0x15e168]:null;}),_0x558abf;},module[_0x2f4120(0x1d9)]=Comment;
+const sql = require("./db");
+const { timestamp, int2Bool } = require("../helpers/common.helpers");
+
+const Comment = function (lang) {
+  this.user_id = lang.code;
+  this.comment = lang.name;
+  this.active = lang.active;
+  this.create_time = timestamp();
+  this.update_time = timestamp();
+};
+
+Comment.create = (comment) => {
+  comment.id !== undefined ? delete comment.id : '';
+  return new Promise((resolve, reject) => {
+    sql.query("INSERT INTO comments SET ?", comment, (err, res) => {
+			err ? reject(err) : resolve({ ...comment, id: res.insertId });
+    });
+  });
+};
+
+Comment.save = async (comment) => {
+  comment.update_time = timestamp();
+  return new Promise((resolve, reject) => {
+    sql.query("UPDATE comments SET ? WHERE id=?", [comment, comment.id], (err, res) => {
+      err ? reject(err) : resolve(Comment.getById(comment.id));
+    });
+  });
+}
+
+Comment.deleteById = async (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM comments WHERE id=?", [id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows > 0);
+    })
+  })
+}
+
+Comment.pagination = async ({ limit, last_id = null, target_id = null, type = null }) => {
+  let where = [];
+  last_id ? where.push(`id < ${last_id}`) : null;
+  (target_id && type) ? where.push(`target_id=${target_id} AND type='${type}'`) : null;
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM comments ${strWhere} ORDER BY id DESC LIMIT ? `, [limit], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Comment.simplePagination = async ({ limit = 10, page = 0, target_id = null, type = null }) => {
+  let where = [];
+  target_id && type ? where.push(`(target_id=${target_id} AND type='${type}')`) : null;
+
+  const strWhere = where.length > 0 ? ` WHERE ${where.joni(' AND ')}` : '';
+
+  const offset = limit * page;
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM comments ${strWhere} ORDER BY id DESC LIMIT ? OFFSET ?`, [limit, offset], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Comment.getAll = ({ target_id = null, type = null }) => {
+  const strWhere = (target_id && type) ? ` WHERE target_id=${target_id} AND type="${type}"` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM comments ${strWhere}`, (err, res) => {
+			err ? reject(err) : resolve(res);
+    });
+  });
+};
+
+Comment.getCountOfComments = ({ type = null, target_id = null }) => {
+  const strWhere = type && target_id ? ` WHERE type='${type}' AND target_id=${target_id}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM comments ${strWhere}`, (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    });
+  });
+}
+
+Comment.minId = ({ type = null, target_id = null }) => {
+  const strWhere = type && target_id ? ` WHERE type='${type}' AND target_id=${target_id}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT id FROM comments ${strWhere} ORDER BY id ASC LIMIT 1`, (err, res) => {
+      err ? reject(err) : resolve(res.length > 0 ? res[0].id : 0);
+    });
+  });
+}
+
+Comment.commentNumber = ({ target_id, type }) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM comments WHERE type=? AND target_id=?`, [type, target_id], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    });
+  });
+}
+
+Comment.getById = (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM comments WHERE id=? LIMIT 1", [id], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    });
+  });
+}
+
+Comment.getByIds = (ids) => {
+  ids.length === 0 ? ids = [0] : null;
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM comments WHERE id IN (?)", [ids], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Comment.getByUser = (user_id) => {
+  return new Promise((resolve ,reject) => {
+    sql.query("SELECT * FROM comments WHERE user_id = ?", [user_id], (err, res) => {
+      err ? reject(err) : resolve(res);
+    })
+  })
+}
+
+Comment.deleteByUser = (user_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM comments WHERE user_id=?", [user_id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows);
+    });
+  });
+}
+
+Comment.total = () => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM comments`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    })
+  })
+}
+
+Comment.output = (comment) => {
+  if (!comment) return null;
+  // comment.isGuest = int2Bool(comment.isGuest);
+  const delKeys = ['create_time', 'update_time'];
+  delKeys.forEach(key => {
+    comment[key] !== undefined ? delete comment[key] : null;
+  })
+  return comment;
+}
+
+module.exports = Comment;

@@ -432,6 +432,11 @@ function resetTyping() {
 
 // socket.join('asf');
 
+socket.on('connect', () => {
+  console.log('[Socket] connected');
+  socket.emit(SKT_AUTHENTICATE, { token })
+})
+
 socket.on(SKT_CONNECT_TO_USER, (args) => {
   console.log("ConnectReq result", args);
   // delete user
@@ -576,6 +581,10 @@ socket.on(SKT_CHATLIST_UPDATED, args => {
 
 socket.on(SKT_MSG_FAILED, args => {
   console.log(`[${SKT_MSG_FAILED}]`, args)
+})
+
+socket.on(SKT_CHECK_HEALTH, args => {
+  console.log(`[${SKT_CHECK_HEALTH}]`, args)
 })
 
 socket.on('get_token', args => {

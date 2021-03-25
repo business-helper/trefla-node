@@ -148,21 +148,37 @@ const getChatSummryV2 = async (req, res) => {
       });
       return models.user.getByIds(idOfUsers);
     })
-    .then(users => {
+    .then(async users => {
       let userObj = {};
       users.forEach(user => {
         if (user) {
           userObj[user.id.toString()] = user;
         }
       });
-      _chatrooms = _chatrooms.map(chat => {
+      _chatrooms = await Promise.all(_chatrooms.map(async chat => {
         const user_ids = JSONParser(chat.user_ids);
         const partnerId = user_ids[0] === user_id ? user_ids[1] || 0 : user_ids[0];
+        chat = models.chat.output(chat);
+
+        if (['COMMENT', 'POST'].includes(chat.from_where)) {
+          const modelName = chat.from_where.toLowerCase();
+          const target = await models[modelName].getById(chat.target_id);
+          const target_user = await models.user.getById(target.user_id);
+          chat = {
+            ...chat,
+            preview_data: {
+              ...models[modelName].output(target),
+              user: models.user.output(target_user),
+            }
+          }
+        }
+
         return {
-          ...(models.chat.output(chat)),
+          // ...(models.chat.output(chat)),
+          ...chat,
           user: partnerId ? models.user.output(userObj[partnerId.toString()]) : null,
         };
-      });
+      }));
       return _chatrooms;
     });
 }
