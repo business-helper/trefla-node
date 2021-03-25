@@ -193,8 +193,11 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
       chat.user = User.output(receiver);
       if (['POST', 'COMMENT'].includes(payload.from_where) && payload.target_id) {
         const modelName = payload.from_where.toLowerCase();
-        const target = await models[modelName].getById(payload.target_id);
-        if (target) chat.preview_data = models[modelName].output(target);
+        let target = await models[modelName].getById(payload.target_id);
+        target = models[modelName].output(target);
+        const target_user = await models.user.getById(target.post_user_id);
+        target.user = models.user.output(target_user);
+        if (target) chat.preview_data = target;
       }
       return ({
         status: true,
