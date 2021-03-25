@@ -431,6 +431,11 @@ function resetTyping() {
 
 // socket.join('asf');
 
+socket.on('connect', () => {
+  console.log('[Socket] connected');
+  socket.emit(SKT_AUTHENTICATE, { token })
+})
+
 socket.on(SKT_CONNECT_TO_USER, (args) => {
   console.log("ConnectReq result", args);
   // delete user
