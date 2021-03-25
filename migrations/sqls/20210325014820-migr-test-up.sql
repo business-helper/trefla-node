@@ -1,0 +1,1 @@
+UPDATE admins SET role='ADMIN' WHERE id!=1;

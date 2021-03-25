@@ -102,6 +102,8 @@ exports.DEFAULT_CHAT = {
   isForCard: 0,
   card_number: '',
   card_verified: 0,
+  from_where: 'NONE',
+  target_id: "0",
   unread_nums: JSON.stringify([]),
   online_status: JSON.stringify({}),
   last_messages: JSON.stringify([]),
