@@ -187,12 +187,6 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
     _chat ? _chat : Chat.create(model),
     User.getById(user_id),
   ])
-  // return Chat.create(model)
-  //   .then(chat => Promise.all([
-  //     chat,
-  //     User.getById(user_id),
-  //     message ? Message.create({ ...message, chat_id: chat.id }) : null
-  //   ]))
     .then(async ([chat, sender]) => {
       const msgObj = message ? Message.create({ ...message, chat_id: chat.id }) : null
       chat = Chat.output(chat);
@@ -200,7 +194,7 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
       if (['POST', 'COMMENT'].includes(payload.from_where) && payload.target_id) {
         const modelName = payload.from_where.toLowerCase();
         const target = await models[modelName].getById(payload.target_id);
-        if (target) chat.preview_info = models[modelName].output(target);
+        if (target) chat.preview_data = models[modelName].output(target);
       }
       return ({
         status: true,
@@ -222,7 +216,7 @@ exports.createCardChatReq = async (user_id, payload, isGuest) => {
     ...payload,
     sender_id: user_id,
     receiver_id: receiver ? receiver.id : 0,
-    message: payload.message
+    message: payload.message,
   }) : null;
 
   let _chat;

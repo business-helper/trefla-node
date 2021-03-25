@@ -92,7 +92,7 @@ const bootstrapSocket = (io) => {
         })
     });
 
-    socket.on(CONSTS.SKT_CONNECT_TO_CARD, async ({ card_number, message, toId = 0, isGuest = true }) => {
+    socket.on(CONSTS.SKT_CONNECT_TO_CARD, async ({ card_number, message, toId = 0, isGuest = true, from_where = 'CARD' }) => {
       const { uid } = helpers.auth.parseToken(token);
       let _chat, _message;
 
@@ -105,7 +105,14 @@ const bootstrapSocket = (io) => {
       toId = verifiedUser ? verifiedUser.id : 0;
       console.log('[connection req]', toId);
 
-      ctrls.chat.createCardChatReq(uid, { receiver_id: toId, message, card_number, isForCard: 1, card_verified: verifiedUser ? 1 : 0 }, isGuest)
+      ctrls.chat.createCardChatReq(uid, {
+          receiver_id: toId,
+          message, card_number,
+          isForCard: 1,
+          card_verified: verifiedUser ? 1 : 0,
+          from_where,
+          target_id: card_number,
+         }, isGuest)
         .then(({ status, message, data: chat, msg }) => {
           _chat = chat; _message = msg;
           // process the sender
