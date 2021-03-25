@@ -61,9 +61,9 @@ const bootstrapSocket = (io) => {
     })
 
     // connection request to a user.
-    socket.on(CONSTS.SKT_CONNECT_TO_USER, ({ toId, message, isGuest = true }) => {
-      console.log('[connection req]', toId);
+    socket.on(CONSTS.SKT_CONNECT_TO_USER, ({ toId, message, isGuest = true, from_where = 'NONE', target_id = '0' }) => {
       const { uid } = helpers.auth.parseToken(token);
+      console.log('[connection req]', toId, uid);
       let _toUser, _fromUser;
       Promise.all([
         models.user.getById(toId),
@@ -75,7 +75,7 @@ const bootstrapSocket = (io) => {
           }
           _toUser = toUser;
           _fromUser = fromUser;
-          return ctrls.chat.createNormalChatReq(uid, { receiver_id: toId, message }, isGuest);
+          return ctrls.chat.createNormalChatReq(uid, { receiver_id: toId, message, from_where, target_id }, isGuest);
         })
         .then(result => {
           const { status, message, data } = result;

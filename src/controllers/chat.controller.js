@@ -1,1 +1,474 @@
-const _0x1468=['C2f2zq','C3vJy2vZCW','Dg9tDhjPBMC','z2v0qwXS','zM9YrwfJAa','ywXSq2HHDhnpzLvZzxi','zgvSzxrLqNLdAgf0swq','lI4VBw9KzwXZl21LC3nHz2uUBw9KzwW','mtbPwhzgz1O','lI4VBw9KzwXZl3vZzxiUBw9KzwW','nJe0muHRvMPvwq','ywnJzxb0q2HHDenVBM5Ly3rPB25szxe','lI4VBw9KzwXZl2nOyxqUBw9KzwW','z2v0qNLjzhm','z2v0twLUswq','DgHLBG','w3vPzf0','y2f0y2G','ANnVBG','BgvUz3rO','z2v0q2HHDfrVq2fYza','mZq3qLvtzvn5','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','Bg9N','CgvUzgLUz0nOyxrYB29TCW','ywnJzxb0x3n0yxr1CW','z2v0qwXSq2HHDhnpzLvZzxi','zgvSzxrLqNLjza','CgfNAw5HDgLVBG','z2v0qNLvC2vYswrZ','DxnLCG','y3jLyxrL','q2HHDcbKB2vZig5VDcbLEgLZDce','nJK3otvOqMTvrhu','q2HHDcbYB29TignYzwf0zwqH','ntCWoti3zuHMAM9X','C29JA2v0x2LK','BwfW','y3jLyxrLtM9YBwfSq2HHDfjLCq','ntzmteTyEgC','nZCXnJK1wfLHCuz5','C3rYAw5NAwz5','u0Tux0Xuu19tsu5hteu','Dw5YzwfKx251Bxm','mtvzz1DXv0y','nte1mta2tMzIBfzf','lI4Vy29UC3rHBNrZl3nVy2TLDc5JB25ZDgfUDa','BwvZC2fNzq','C2vUzgvYx2LK','BxLdAgf0CM9VBxm','CgfYC2u','zMLSDgvY','BM9Kzs1PBNb1Dc12ywXPzgf0B3i','y2fYzf9UDw1Izxi','Aw5KzxHpzG','lI4VAgvSCgvYCY9HDxrOlMHLBhbLCNm','CMvJzwL2zxjFAwq','CgfYyw1Z','mtGYng1HEwflsa','ywXS','zw1PDa','z2v0qNLjza','BgfZDf9TzxnZywDLCW','yM9KEq','DxnLCL9Pzhm','ChvZAa','B3v0Chv0'];const _0x4c6e=function(_0x483459,_0x3f5d98){_0x483459=_0x483459-0xd0;let _0x1468af=_0x1468[_0x483459];if(_0x4c6e['tTDEnt']===undefined){var _0x4c6e0a=function(_0x4a100c){const _0x157628='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x36f84d='';for(let _0x2fc5d9=0x0,_0x5f295e,_0x480c96,_0x421fa9=0x0;_0x480c96=_0x4a100c['charAt'](_0x421fa9++);~_0x480c96&&(_0x5f295e=_0x2fc5d9%0x4?_0x5f295e*0x40+_0x480c96:_0x480c96,_0x2fc5d9++%0x4)?_0x36f84d+=String['fromCharCode'](0xff&_0x5f295e>>(-0x2*_0x2fc5d9&0x6)):0x0){_0x480c96=_0x157628['indexOf'](_0x480c96);}return _0x36f84d;};_0x4c6e['fqeByE']=function(_0x23d309){const _0x269e5b=_0x4c6e0a(_0x23d309);let _0x259e92=[];for(let _0x7fafc4=0x0,_0x1d4c5e=_0x269e5b['length'];_0x7fafc4<_0x1d4c5e;_0x7fafc4++){_0x259e92+='%'+('00'+_0x269e5b['charCodeAt'](_0x7fafc4)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x259e92);},_0x4c6e['mnHnwY']={},_0x4c6e['tTDEnt']=!![];}const _0x1bd7e7=_0x1468[0x0],_0x5e8ee7=_0x483459+_0x1bd7e7,_0x573674=_0x4c6e['mnHnwY'][_0x5e8ee7];return _0x573674===undefined?(_0x1468af=_0x4c6e['fqeByE'](_0x1468af),_0x4c6e['mnHnwY'][_0x5e8ee7]=_0x1468af):_0x1468af=_0x573674,_0x1468af;};const _0x1bdfc4=_0x4c6e;(function(_0x232a32,_0x34a685){const _0x423c11=_0x4c6e;while(!![]){try{const _0x2bb463=-parseInt(_0x423c11(0xe4))+parseInt(_0x423c11(0xe9))+parseInt(_0x423c11(0xf6))*parseInt(_0x423c11(0xe3))+parseInt(_0x423c11(0x107))*-parseInt(_0x423c11(0x109))+-parseInt(_0x423c11(0xd1))*parseInt(_0x423c11(0xe8))+parseInt(_0x423c11(0xdd))+parseInt(_0x423c11(0xdf));if(_0x2bb463===_0x34a685)break;else _0x232a32['push'](_0x232a32['shift']());}catch(_0x2bda28){_0x232a32['push'](_0x232a32['shift']());}}}(_0x1468,0x6674e));const {Validator}=require(_0x1bdfc4(0xf0)),CONSTS=require(_0x1bdfc4(0xea)),Chat=require(_0x1bdfc4(0x10b)),User=require(_0x1bdfc4(0x108)),Message=require(_0x1bdfc4(0x106)),{getTokenInfo}=require(_0x1bdfc4(0xf3)),{bool2Int,chatPartnerId,getTotalLikes,generateTZTimeString,respondError}=require(_0x1bdfc4(0xd2)),{generateChatData,generateMessageData,getLastMsgIndexOfChat}=require('../helpers/model.helpers');exports[_0x1bdfc4(0xdb)]=async(_0x1bd7e7,_0x5e8ee7)=>{const _0x348f87=_0x1bdfc4,{uid:_0x573674}=getTokenInfo(_0x1bd7e7),_0x4a100c=_0x1bd7e7['body'][_0x348f87(0xf4)]?await User[_0x348f87(0xf9)](_0x1bd7e7[_0x348f87(0xfb)][_0x348f87(0xf4)]):null;let _0x157628=generateChatData(_0x1bd7e7['body'],_0x573674,_0x4a100c);const _0x36f84d=_0x1bd7e7[_0x348f87(0xfb)][_0x348f87(0xeb)]?generateMessageData({..._0x1bd7e7[_0x348f87(0xfb)],'sender_id':_0x573674,'receiver_id':_0x4a100c?_0x4a100c['id']:0x0,'message':_0x1bd7e7[_0x348f87(0xfb)][_0x348f87(0xeb)]}):null;return Chat[_0x348f87(0xdb)](_0x157628)[_0x348f87(0x10e)](_0x2fc5d9=>Promise['all']([_0x2fc5d9,User[_0x348f87(0xf9)](_0x573674),_0x36f84d?Message['create']({..._0x36f84d,'chat_id':_0x2fc5d9['id']}):null]))[_0x348f87(0x10e)](([_0x5f295e,_0x480c96,_0x421fa9])=>{const _0x38334a=_0x348f87;return _0x5f295e=Chat['output'](_0x5f295e),_0x5f295e['receiver']=User[_0x38334a(0xfe)](_0x4a100c),_0x5e8ee7[_0x38334a(0x111)]({'status':!![],'message':_0x38334a(0xde),'data':_0x5f295e});})[_0x348f87(0x110)](_0x23d309=>respondError(_0x5e8ee7,_0x23d309));},exports['getById']=async(_0x269e5b,_0x259e92)=>{const _0x4a408d=_0x1bdfc4,{uid:_0x7fafc4}=getTokenInfo(_0x269e5b),{id:_0x1d4c5e}=_0x269e5b[_0x4a408d(0xf5)],_0x4528a8=0x1e,_0x38b707=null;return Chat[_0x4a408d(0xf9)](_0x1d4c5e)['then'](_0x314356=>{const _0x2743de=_0x4a408d,_0x2d6e08=JSON[_0x2743de(0xee)](_0x314356['user_ids']);let _0x281e42=_0x2d6e08[_0x2743de(0xf2)](_0x7fafc4);_0x281e42===-0x1&&(_0x281e42=0x0);const _0x17e48c=_0x2d6e08[_0x2743de(0x112)]-_0x281e42-0x1;return Promise['all']([_0x314356,_0x2d6e08[_0x2743de(0x112)]>0x0?User[_0x2743de(0xf9)](_0x2d6e08[_0x17e48c]):null,Message[_0x2743de(0xd8)]({'limit':_0x4528a8,'last_id':_0x38b707,'chat_id':_0x314356['id']})]);})[_0x4a408d(0x10e)](([_0x400495,_0x1261af,_0x5d2c5d])=>{const _0x39d51b=_0x4a408d;return _0x400495=Chat[_0x39d51b(0xfe)](_0x400495),_0x259e92[_0x39d51b(0x111)]({'status':!![],'message':_0x39d51b(0x100),'data':{..._0x400495,'user':User[_0x39d51b(0xfe)](_0x1261af)}});})[_0x4a408d(0x110)](_0x4836e0=>respondError(_0x259e92,_0x4836e0));},exports[_0x1bdfc4(0xd4)]=async(_0x255e76,_0x226678)=>{const _0x32cfe0=_0x1bdfc4,{uid:_0x570694}=getTokenInfo(_0x255e76);return console[_0x32cfe0(0xd3)](_0x32cfe0(0x10f),_0x570694),Chat[_0x32cfe0(0xd4)](_0x570694)[_0x32cfe0(0x10e)](_0x1ce364=>{const _0xe1e696=_0x32cfe0;let _0x23c394=[0x0];for(let _0x249e63 of _0x1ce364){let _0x5194ad=JSON[_0xe1e696(0xee)](_0x249e63[_0xe1e696(0xfc)]);_0x5194ad[_0xe1e696(0x112)]>0x1&&(_0x23c394['push'](_0x5194ad[0x0]),_0x23c394['push'](_0x5194ad[_0x5194ad[_0xe1e696(0x112)]-0x1]));}const _0x34303c=User[_0xe1e696(0x10c)](_0x23c394);return Promise[_0xe1e696(0xf7)]([_0x1ce364,_0x34303c]);})[_0x32cfe0(0x10e)](([_0x568a30,_0xf184a5])=>{const _0x34d87c=_0x32cfe0;let _0x54f6a5={};return _0xf184a5['forEach'](_0x4e92f5=>{const _0x1648b2=_0x4c6e;_0x54f6a5[_0x4e92f5['id']]=User[_0x1648b2(0xfe)](_0x4e92f5);}),_0x568a30=_0x568a30[_0x34d87c(0xe1)](_0x10ed32=>Chat[_0x34d87c(0xfe)](_0x10ed32))[_0x34d87c(0xe1)](_0x4c164f=>{const _0x5d424a=_0x34d87c,_0x4678a0=_0x4c164f[_0x5d424a(0xfc)],_0x3109ac=chatPartnerId(_0x4c164f[_0x5d424a(0xfc)],_0x570694);return{..._0x4c164f,'isSent':_0x4678a0[0x0]===_0x570694,'user':_0x54f6a5[_0x3109ac[_0x5d424a(0x101)]()]};}),_0x226678[_0x34d87c(0x111)]({'status':!![],'message':_0x34d87c(0x100),'data':_0x568a30});})['catch'](_0x1693da=>respondError(_0x226678,_0x1693da));},exports['availableChatrooms']=async(_0x19b660,_0x138ba8)=>{const _0x3a62bb=_0x1bdfc4,{uid:_0x394804}=getTokenInfo(_0x19b660);return Chat['myChatrooms'](_0x394804,0x1)[_0x3a62bb(0x10e)](_0x5d40a5=>{const _0x213bb2=_0x3a62bb;let _0x3fba14=[0x0];for(let _0x355181 of _0x5d40a5){let _0x4b8ee3=JSON[_0x213bb2(0xee)](_0x355181[_0x213bb2(0xfc)]);_0x4b8ee3[_0x213bb2(0x112)]>0x1&&(_0x3fba14[_0x213bb2(0xfd)](_0x4b8ee3[0x0]),_0x3fba14[_0x213bb2(0xfd)](_0x4b8ee3[_0x4b8ee3[_0x213bb2(0x112)]-0x1]));}const _0x208873=User[_0x213bb2(0x10c)](_0x3fba14);return Promise['all']([_0x5d40a5,_0x208873]);})[_0x3a62bb(0x10e)](([_0x4119e8,_0x532b8b])=>{const _0x14c717=_0x3a62bb;let _0x26279a={};return _0x532b8b[_0x14c717(0x103)](_0x5a12b5=>{const _0x2a05f4=_0x14c717;_0x26279a[_0x5a12b5['id']]=User[_0x2a05f4(0xfe)](_0x5a12b5);}),_0x4119e8=_0x4119e8[_0x14c717(0xe1)](_0x2ba4dc=>Chat['output'](_0x2ba4dc))[_0x14c717(0xe1)](_0x552a05=>{const _0x53cba6=_0x14c717;let _0x185472=[_0x552a05['user_ids'][0x0]];_0x552a05[_0x53cba6(0xfc)]['length']>0x1&&_0x185472[_0x53cba6(0xfd)](_0x552a05[_0x53cba6(0xfc)][_0x552a05[_0x53cba6(0xfc)][_0x53cba6(0x112)]-0x1]);const _0x289c71=_0x185472[0x0]===_0x394804?_0x185472[0x1]:_0x185472[0x0];return{..._0x552a05,'user':_0x26279a[_0x289c71[_0x53cba6(0x101)]()]};}),_0x138ba8[_0x14c717(0x111)]({'status':!![],'message':'success','data':_0x4119e8});})['catch'](_0x262155=>respondError(_0x138ba8,_0x262155));},exports[_0x1bdfc4(0xe2)]=async(_0x24daf1,_0x1fcaf3,_0x5b1465=!![])=>{const _0x3a8751=_0x1bdfc4,_0x50e5eb=_0x1fcaf3[_0x3a8751(0xf4)]?await User[_0x3a8751(0xf9)](_0x1fcaf3[_0x3a8751(0xf4)]):null;let _0x48d45c=generateChatData(_0x1fcaf3,_0x24daf1,_0x50e5eb);_0x48d45c[_0x3a8751(0xd5)]=!_0x5b1465?0x1:0x0;const _0x356fa4=_0x1fcaf3[_0x3a8751(0xeb)]?generateMessageData({..._0x1fcaf3,'sender_id':_0x24daf1,'receiver_id':_0x50e5eb?_0x50e5eb['id']:0x0,'message':_0x1fcaf3[_0x3a8751(0xeb)]}):null;let _0x20a0ed;if(_0x50e5eb){let _0xd74566=await Chat[_0x3a8751(0xd9)]({'sender_id':_0x24daf1,'receiver_id':_0x50e5eb['id'],'isForCard':0x0});_0xd74566[_0x3a8751(0xef)](_0x8bffb9=>{const _0x463ae8=_0x3a8751,_0x399327=JSON[_0x463ae8(0xee)](_0x8bffb9[_0x463ae8(0xfc)]);return _0x399327['length']===0x2;}),_0xd74566[_0x3a8751(0x112)]>0x0&&(_0x20a0ed=_0xd74566[0x0]);}return Promise[_0x3a8751(0xf7)]([_0x20a0ed?_0x20a0ed:Chat[_0x3a8751(0xdb)](_0x48d45c),User[_0x3a8751(0xf9)](_0x24daf1),_0x356fa4?Message[_0x3a8751(0xdb)]({..._0x356fa4,'chat_id':chat['id']}):null])[_0x3a8751(0x10e)](([_0x49aeef,_0x2fc761,_0x590b32])=>{const _0x472a4a=_0x3a8751;return _0x49aeef=Chat[_0x472a4a(0xfe)](_0x49aeef),_0x49aeef['user']=User[_0x472a4a(0xfe)](_0x50e5eb),{'status':!![],'message':_0x472a4a(0xde),'data':_0x49aeef};});},exports['createCardChatReq']=async(_0x584609,_0x514cb2,_0x4cf596)=>{const _0xba98e3=_0x1bdfc4,_0x13be95=_0x514cb2[_0xba98e3(0xf4)]?await User[_0xba98e3(0xf9)](_0x514cb2[_0xba98e3(0xf4)]):null;let _0x3b9fa1=generateChatData(_0x514cb2,_0x584609,_0x13be95);_0x3b9fa1[_0xba98e3(0xd5)]=!_0x4cf596?0x1:0x0;const _0xf50708=_0x514cb2['message']?generateMessageData({..._0x514cb2,'sender_id':_0x584609,'receiver_id':_0x13be95?_0x13be95['id']:0x0,'message':_0x514cb2[_0xba98e3(0xeb)]}):null;let _0x59857c,_0x3114de=await Chat[_0xba98e3(0xd0)]({'card_number':_0x514cb2[_0xba98e3(0xf1)],'user_id':_0x584609});const _0x207efd=_0x3114de[_0xba98e3(0xef)](_0x33ac1c=>{const _0x1d248d=_0xba98e3,_0x531277=JSON[_0x1d248d(0xee)](_0x33ac1c[_0x1d248d(0xfc)]);return _0x531277[0x0]===_0x584609;});return _0x207efd['length']>0x0&&(_0x59857c=_0x207efd[0x0]),Promise['all']([_0x59857c?_0x59857c:Chat['create'](_0x3b9fa1),User[_0xba98e3(0xf9)](_0x584609)])[_0xba98e3(0x10e)](([_0x77f24f,_0x3471f0])=>Promise[_0xba98e3(0xf7)]([_0x77f24f,_0x3471f0,_0xf50708?Message[_0xba98e3(0xdb)]({..._0xf50708,'chat_id':_0x77f24f['id']}):null]))[_0xba98e3(0x10e)](([_0x2a4b8e,_0x2bffc2,_0x9e0d5])=>{const _0x12ec74=_0xba98e3;return _0x2a4b8e=Chat[_0x12ec74(0xfe)](_0x2a4b8e),_0x2a4b8e[_0x12ec74(0xda)]=User[_0x12ec74(0xfe)](_0x13be95),{'status':!![],'message':_0x12ec74(0xde),'data':_0x2a4b8e,'msg':_0x9e0d5};});},exports[_0x1bdfc4(0x10a)]=async _0x334592=>{const _0x5aa922=_0x1bdfc4;return Chat[_0x5aa922(0xf9)](_0x334592)['then'](_0x3ffd31=>{const _0x3a6858=_0x5aa922;return _0x3ffd31[_0x3a6858(0xd5)]=0x1,Chat['save'](_0x3ffd31);})[_0x5aa922(0x10e)](_0x5d1441=>{const _0x5cb99a=_0x5aa922;return Chat[_0x5cb99a(0xfe)](_0x5d1441);});},exports['addMessageReq']=async({sender_id:_0x95a05e,receiver_id:_0x16df17,chat_id:_0x4e2eb9,payload:_0x14bff2})=>{const _0x4dca39=_0x1bdfc4;let _0x472fd3,_0x58bf8a,_0x3c5a20;return Promise[_0x4dca39(0xf7)]([Chat[_0x4dca39(0xf9)](_0x4e2eb9),User[_0x4dca39(0xf9)](_0x95a05e),User[_0x4dca39(0xf9)](_0x16df17)])['then'](async([_0x332830,_0x281722,_0x7b85e2])=>{const _0x1e7118=_0x4dca39;_0x58bf8a=_0x281722,_0x3c5a20=_0x7b85e2;let _0x818412=JSON[_0x1e7118(0xee)](_0x332830[_0x1e7118(0xfa)]);const _0x487a01=JSON[_0x1e7118(0xee)](_0x332830['user_ids']),_0x453595=0x0;_0x818412[_0x453595]={'msg':_0x14bff2['message'],'time':generateTZTimeString()},_0x332830['last_messages']=JSON[_0x1e7118(0xe5)](_0x818412);let _0x2580b5=![],_0x1be652=JSON[_0x1e7118(0xee)](_0x332830[_0x1e7118(0xe7)]);if(_0x7b85e2&&_0x7b85e2['current_chat']!==_0x332830['id']){_0x2580b5=!![];const _0x4bb106=_0x487a01[_0x1e7118(0xf2)](_0x16df17);_0x1be652[_0x4bb106]++,_0x332830[_0x1e7118(0xe7)]=JSON[_0x1e7118(0xe5)](_0x1be652);}else{if(_0x332830['isForCard']&&!_0x332830['card_verified']){_0x2580b5=!![];const _0x338252=_0x487a01['length'];unread_num=_0x1be652[_0x338252]||0x0,_0x1be652[_0x338252]=unread_num+0x1,_0x332830['unread_nums']=JSON[_0x1e7118(0xe5)](_0x1be652);}}const _0xb7f30b=generateMessageData({..._0x14bff2,'sender_id':_0x95a05e,'receiver_id':_0x16df17,'chat_id':_0x4e2eb9});return Promise[_0x1e7118(0xf7)]([Message['create'](_0xb7f30b),Chat[_0x1e7118(0xff)](_0x332830),_0x2580b5]);})['then'](([_0x3cdb91,_0xe5375,_0x347573])=>{const _0x5c5829=_0x4dca39;return _0x3cdb91=Message[_0x5c5829(0xfe)](_0x3cdb91),{'message':_0x3cdb91,'chat':Chat['output'](_0xe5375),'unread_updated':_0x347573};});},exports['loadMessageReq']=async({myId:myId=null,chat_id:_0x5d202f,last_id:_0x34e534,limit:_0x17be5a})=>{const _0x565218=_0x1bdfc4,_0x12e950=await Chat['getById'](_0x5d202f),_0x32d86d=JSON[_0x565218(0xee)](_0x12e950[_0x565218(0xfc)]),_0x4e98fa=_0x32d86d[0x0]===myId;let _0x598317=0x0,_0x5522f8=0x0;return Promise[_0x565218(0xf7)]([Message[_0x565218(0xd8)]({'limit':_0x17be5a,'last_id':_0x34e534,'chat_id':_0x5d202f,'minId':_0x5522f8,'maxId':_0x598317}),Message[_0x565218(0x102)]({'chat_id':_0x5d202f,'minId':_0x5522f8,'maxId':_0x598317}),Message[_0x565218(0x10d)]({'chat_id':_0x5d202f}),User['getByIds'](_0x32d86d)])[_0x565218(0x10e)](([_0x59d4a4,_0x1713e1,_0x2d35e6,_0x225c92])=>{const _0x5aa0dd=_0x565218;let _0x2288ec={};return _0x225c92[_0x5aa0dd(0x103)](_0x24ee60=>{const _0x8e18c8=_0x5aa0dd;_0x2288ec[_0x24ee60['id']['toString']()]=User[_0x8e18c8(0xfe)](_0x24ee60);}),_0x59d4a4=_0x59d4a4[_0x5aa0dd(0xe1)](_0xc60bbf=>Message['output'](_0xc60bbf))['map'](_0x34200d=>{const _0x2842b8=_0x5aa0dd;return{..._0x34200d,'user':_0x2288ec[_0x34200d[_0x2842b8(0xec)]]};}),{'messages':_0x59d4a4,'minId':_0x2d35e6,'total':_0x1713e1};});},exports['deleteByIdReq']=async({id:_0x373225,user_id:_0x10032a,socketClient:_0x2b83ec})=>{const _0xd90e7a=_0x1bdfc4,_0x5af313=await Chat[_0xd90e7a(0xf9)](_0x373225);return Chat[_0xd90e7a(0xd7)](_0x373225)[_0xd90e7a(0x10e)](_0x65a2fb=>{const _0x45d07e=_0xd90e7a;return Message[_0x45d07e(0x105)](_0x373225);})[_0xd90e7a(0x10e)](async _0x79aabd=>{const _0x2d2168=_0xd90e7a,_0x34e5f7=JSON[_0x2d2168(0xee)](_0x5af313[_0x2d2168(0xfc)]),_0x21de35=chatPartnerId(_0x34e5f7,_0x10032a);return _0x21de35&&_0x2b83ec&&(partner=await User[_0x2d2168(0xf9)](_0x21de35),partner[_0x2d2168(0xe0)]&&_0x2b83ec[_0x2d2168(0xf8)](CONSTS[_0x2d2168(0xe6)],{'to':partner[_0x2d2168(0xe0)],'event':CONSTS['SKT_CHAT_DELETED'],'args':{'chat_id':_0x373225}})),!![];});},exports['getUnreadMsgInfoReq']=async _0x41ef4e=>{const _0x220eba=_0x1bdfc4;let _0x178a61={},_0x395144=0x0,_0x13758a;return Chat[_0x220eba(0xed)](_0x41ef4e)[_0x220eba(0x10e)](_0xe2917e=>{const _0x36bba1=_0x220eba;let _0x550f95=[0x0];return _0xe2917e=_0xe2917e['filter'](_0x21e3cb=>{const _0x48257d=_0x4c6e,_0x493bb6=JSON[_0x48257d(0xee)](_0x21e3cb[_0x48257d(0xfc)]),_0x5d6d0d=_0x493bb6['indexOf'](_0x41ef4e),_0x1dfc21=_0x5d6d0d===0x0||_0x5d6d0d===_0x493bb6['length']-0x1;if(_0x1dfc21){const _0x307cfe=JSON[_0x48257d(0xee)](_0x21e3cb[_0x48257d(0xe7)])||[0x0,0x0],_0x49e633=_0x307cfe[_0x5d6d0d]||0x0;_0x178a61[_0x21e3cb['id']]=_0x49e633,_0x395144+=_0x49e633||0x0,_0x550f95[_0x48257d(0xfd)](_0x493bb6['length']>0x0?_0x493bb6[_0x493bb6[_0x48257d(0x112)]-0x1-_0x5d6d0d]:0x0);}return _0x1dfc21;}),_0x13758a=_0xe2917e,User[_0x36bba1(0x10c)](_0x550f95);})[_0x220eba(0x10e)](_0xac5ade=>{const _0x22392c=_0x220eba;let _0x34aef6={};return _0xac5ade['forEach'](_0x57e9f8=>{const _0x3c16e1=_0x4c6e;_0x34aef6[_0x57e9f8['id']['toString']()]=User[_0x3c16e1(0xfe)](_0x57e9f8);}),_0x13758a=_0x13758a[_0x22392c(0xe1)](_0x17b053=>{const _0x538ad5=_0x22392c,_0x2ab30c=JSON[_0x538ad5(0xee)](_0x17b053['user_ids']),_0x50cf3a=_0x2ab30c[_0x538ad5(0xf2)](_0x41ef4e),_0x57da3b=_0x2ab30c[_0x2ab30c[_0x538ad5(0x112)]-0x1-_0x50cf3a];return{...Chat[_0x538ad5(0xfe)](_0x17b053),'user':User[_0x538ad5(0xfe)](_0x34aef6[_0x57da3b])};}),{'total':_0x395144,'unread_nums':_0x178a61,'chats':_0x13758a};});},exports['rejectChatReq']=async({chat_id:_0x480001})=>{const _0x2032bb=_0x1bdfc4;let _0x28c34b=await Chat[_0x2032bb(0xf9)](_0x480001);if(!_0x28c34b)return{'status':![],'message':_0x2032bb(0xdc)};return _0x28c34b[_0x2032bb(0xd5)]=0x2,Chat[_0x2032bb(0xff)](_0x28c34b)[_0x2032bb(0x10e)](_0x1c74bc=>{return{'status':!![],'data':_0x1c74bc};});},exports[_0x1bdfc4(0xd6)]=async _0x3fae51=>{const _0x1c0879=_0x1bdfc4;return User[_0x1c0879(0xf9)](_0x3fae51)['then'](_0x19020f=>Chat[_0x1c0879(0x104)](_0x3fae51,_0x19020f[_0x1c0879(0xf1)]))[_0x1c0879(0x10e)](_0x39674e=>_0x39674e);};
+const { Validator } = require("node-input-validator");
+const CONSTS = require('../constants/socket.constant');
+const Chat = require("../models/chat.model");
+const User = require("../models/user.model");
+const Message = require('../models/message.model');
+const models = require('../models');
+const { getTokenInfo } = require('../helpers/auth.helpers');
+const { bool2Int, chatPartnerId, getTotalLikes, generateTZTimeString, respondError } = require("../helpers/common.helpers");
+const { generateChatData, generateMessageData, getLastMsgIndexOfChat } = require('../helpers/model.helpers');
+
+
+exports.create = async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const receiver = req.body.receiver_id ? await User.getById(req.body.receiver_id) : null;
+  let model = generateChatData(req.body, user_id, receiver);
+  const message = req.body.message ? generateMessageData({
+    ...req.body,
+    sender_id: user_id,
+    receiver_id: receiver ? receiver.id : 0,
+    message: req.body.message
+  }) : null;
+
+  return Chat.create(model)
+    .then(chat => Promise.all([
+      chat,
+      User.getById(user_id),
+      message ? Message.create({ ...message, chat_id: chat.id }) : null
+    ]))
+    .then(([chat, sender, message]) => {
+      chat = Chat.output(chat);
+      chat.receiver = User.output(receiver);
+      return res.json({
+        status: true, 
+        message: 'Chat room created!',
+        data: chat
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.getById = async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { id } = req.params;
+  const limit = 30;
+  const last_id = null;
+  return Chat.getById(id)
+    .then(chat => {
+      const user_ids = JSON.parse(chat.user_ids);
+      let myIdx = user_ids.indexOf(user_id);
+      if (myIdx === -1) { myIdx = 0; }
+      const partnerIdx = user_ids.length - myIdx - 1;
+
+      return Promise.all([
+        chat,
+        user_ids.length > 0 ? User.getById(user_ids[partnerIdx]) : null,
+        Message.pagination({ limit, last_id, chat_id: chat.id }),
+        // PostLike.postLikesOfUser({ post_id: id, user_id })
+      ])
+    })
+    .then(([chat, receiver, messages]) => {
+      chat = Chat.output(chat);
+
+      return res.json({ 
+        status: true,
+        message: 'success',
+        data: {
+          ...chat, 
+          // liked: likes.length > 1 ? 1 : 0,
+          user: User.output(receiver)
+        }
+      })
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.pendingChatrooms = async (req, res) => {
+  const { uid } = getTokenInfo(req); console.log('[uid]', uid);
+  return Chat.pendingChatrooms(uid)
+    .then(chats => {
+      let user_ids = [0];
+      for (let chat of chats) {
+        let chat_users = JSON.parse(chat.user_ids);
+        if (chat_users.length > 1) {
+          user_ids.push(chat_users[0]);
+          user_ids.push(chat_users[chat_users.length - 1]);
+        }
+      }
+      const users = User.getByIds(user_ids);
+      return Promise.all([ chats, users ]);
+    })
+    .then(([ chats, users ]) => {
+      let _users = {};
+      users.forEach(user => {
+        _users[user.id] = User.output(user);
+      });
+      chats = chats.map(chat => Chat.output(chat))
+        .map(chat => {
+          const user_ids = chat.user_ids;
+
+          const partnerId = chatPartnerId(chat.user_ids, uid);
+          return {
+            ...chat,
+            isSent: user_ids[0] === uid,
+            user: _users[partnerId.toString()]
+          };
+        });
+      
+      return res.json({
+        status: true,
+        message: 'success',
+        data: chats,
+      });
+    })
+    .catch(error => respondError(res, error));
+}
+
+exports.availableChatrooms = async (req, res) => {
+  const { uid } = getTokenInfo(req);
+  return Chat.myChatrooms(uid, 1)
+    .then(chats => {
+      let user_ids = [0];
+      for (let chat of chats) {
+        let chat_users = JSON.parse(chat.user_ids);
+        if (chat_users.length > 1) {
+          user_ids.push(chat_users[0]);
+          user_ids.push(chat_users[chat_users.length - 1]);
+        }
+      }
+      const users = User.getByIds(user_ids);
+      return Promise.all([ chats, users ]);
+    })
+    .then(([ chats, users ]) => {
+      let _users = {};
+      users.forEach(user => {
+        _users[user.id] = User.output(user);
+      });
+      chats = chats.map(chat => Chat.output(chat))
+        .map(chat => {
+          let user_ids = [ chat.user_ids[0] ];
+          if (chat.user_ids.length > 1) {  
+            user_ids.push(chat.user_ids[chat.user_ids.length - 1]);
+          }
+
+          const partnerId = user_ids[0] === uid ? user_ids[1] : user_ids[0];
+          return {
+            ...chat,
+            // isSent: user_ids[0] === uid,
+            user: _users[partnerId.toString()] // partners info
+          };
+        });
+      
+      return res.json({
+        status: true,
+        message: 'success',
+        data: chats,
+      });
+    })
+    .catch(error => respondError(res, error));
+}
+
+exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
+  const receiver = payload.receiver_id ? await User.getById(payload.receiver_id) : null;
+  let model = generateChatData(payload, user_id, receiver);
+  model.accept_status = !isGuest ? 1 : 0;
+  const message = payload.message ? generateMessageData({
+    ...payload,
+    sender_id: user_id,
+    receiver_id: receiver ? receiver.id : 0,
+    message: payload.message
+  }) : null;
+
+  let _chat;
+
+  if (receiver) {
+    // check existing chat room between two users
+    let chatrooms = await Chat.getByUserIds({ sender_id: user_id, receiver_id: receiver.id, isForCard: 0 });
+    chatrooms.filter(chat => {
+      const user_ids = JSON.parse(chat.user_ids);
+      return user_ids.length === 2;
+    })
+    if (chatrooms.length > 0) {
+      _chat = chatrooms[0];
+    }
+  }
+
+  return Promise.all([
+    _chat ? _chat : Chat.create(model),
+    User.getById(user_id),
+  ])
+  // return Chat.create(model)
+  //   .then(chat => Promise.all([
+  //     chat,
+  //     User.getById(user_id),
+  //     message ? Message.create({ ...message, chat_id: chat.id }) : null
+  //   ]))
+    .then(async ([chat, sender]) => {
+      const msgObj = message ? Message.create({ ...message, chat_id: chat.id }) : null
+      chat = Chat.output(chat);
+      chat.user = User.output(receiver);
+      if (['POST', 'COMMENT'].includes(payload.from_where) && payload.target_id) {
+        const modelName = payload.from_where.toLowerCase();
+        const target = await models[modelName].getById(payload.target_id);
+        if (target) chat.preview_info = models[modelName].output(target);
+      }
+      return ({
+        status: true,
+        message: 'Chat room created!',
+        data: chat
+      });
+    })
+    // .catch((error) => ({
+    //   status: false,
+    //   message: error.message
+    // }));
+}
+
+exports.createCardChatReq = async (user_id, payload, isGuest) => {
+  const receiver = payload.receiver_id ? await User.getById(payload.receiver_id) : null;
+  let model = generateChatData(payload, user_id, receiver);
+  model.accept_status = !isGuest ? 1 : 0;
+  const message = payload.message ? generateMessageData({
+    ...payload,
+    sender_id: user_id,
+    receiver_id: receiver ? receiver.id : 0,
+    message: payload.message
+  }) : null;
+
+  let _chat;
+
+  // check existing chat room between two users
+  let chatrooms = await Chat.getChatToCard({ card_number: payload.card_number, user_id });
+
+  const fromMe = chatrooms.filter(chat => {
+    const user_ids = JSON.parse(chat.user_ids);
+    return user_ids[0] === user_id;
+  });
+  if (fromMe.length > 0) {
+    _chat = fromMe[0];
+  }
+
+  return Promise.all([
+    _chat ? _chat : Chat.create(model),
+    User.getById(user_id),
+    // message ? Message.create({ ...message, chat_id: _chat.id }) : null
+  ])
+  .then(([chat, sender]) => Promise.all([
+    chat, sender,
+    message ? Message.create({ ...message, chat_id: chat.id }) : null
+  ]))
+    .then(([chat, sender, msgObj]) => {
+      chat = Chat.output(chat);
+      chat.user = User.output(receiver);
+      return ({
+        status: true,
+        message: 'Chat room created!',
+        data: chat,
+        msg: msgObj,
+      });
+    });
+}
+
+exports.acceptChatConnectionReq = async (chat_id) => {
+  return Chat.getById(chat_id)
+    .then(chat => {
+      chat.accept_status = 1;
+      return Chat.save(chat);
+    })
+    .then(chat => {
+      return Chat.output(chat);      
+    })
+}
+
+exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => {
+  let _chat;
+  let _sender, _receiver;
+  return Promise.all([
+    Chat.getById(chat_id),
+    User.getById(sender_id),
+    User.getById(receiver_id),
+  ])
+    .then(async ([chat, sender, receiver]) => {
+      _sender = sender;
+      _receiver = receiver;
+
+      // update chat.last_messages
+      let last_messages = JSON.parse(chat.last_messages);
+      const user_ids = JSON.parse(chat.user_ids);
+      // const lastIndex = user_ids.length > 1 ? user_ids.length - 2 : 0;
+      const lastIndex = 0; // getLastMsgIndexOfChat(chat);
+      last_messages[lastIndex] = {
+        msg: payload.message,
+        time: generateTZTimeString()
+      };
+      chat.last_messages = JSON.stringify(last_messages);
+
+      // update unread_messages in chat.
+      let unread_updated = false;
+      let unread_nums = JSON.parse(chat.unread_nums);
+      // check unread num
+      if (receiver && receiver.current_chat !== chat.id) { // receiver is not in the chat room
+        unread_updated = true;
+        const receiverIdx = user_ids.indexOf(receiver_id);
+        unread_nums[receiverIdx] ++;
+        chat.unread_nums = JSON.stringify(unread_nums);
+      } else if (chat.isForCard && !chat.card_verified) { // for the unverified card chat.
+        unread_updated = true;
+        const lastUnreadIdx = user_ids.length;
+        unread_num = unread_nums[lastUnreadIdx] || 0;
+        unread_nums[lastUnreadIdx] = unread_num + 1;
+        chat.unread_nums = JSON.stringify(unread_nums);
+      }
+
+      const message = generateMessageData({
+        ...payload,
+        sender_id,
+        receiver_id,
+        chat_id,
+        // message: payload.message
+      });
+      
+      
+      return Promise.all([
+        Message.create(message),
+        Chat.save(chat),
+        unread_updated,
+      ]);
+    })
+    .then(([message, chat, unread_updated]) => {
+      message = Message.output(message);
+      // message.sender = User.output(_sender);
+      // message.receiver = User.output(_receiver);
+      return { message, chat: Chat.output(chat), unread_updated };
+    })
+}
+
+exports.loadMessageReq = async ({ myId = null, chat_id, last_id, limit }) => {
+  const chat = await Chat.getById(chat_id);
+  const uIds = JSON.parse(chat.user_ids);
+  const asSender = uIds[0] === myId;
+
+  let msgMaxId = 0, msgMinId = 0;
+  // if (chat.isForCard && !asSender) {
+  //   const myPos = uIds.indexOf(myId);
+  //   if (myPos > 0 && myPos < uIds.length - 1) { // in the middle of verified users
+  //     // minId
+  //     const trasferMsgIds = JSON.parse(chat.lastMsgIdOnTransfer);
+  //     msgMinId = transferMsgIds[myPos - 1];
+  //   }
+  //   if (myPos > 0 && myPos < uIds.length - 2) {
+  //     msgMaxId = transferMsgIds[myPos];
+  //   }
+  // }
+
+  return Promise.all([
+    Message.pagination({ limit, last_id, chat_id, minId: msgMinId, maxId: msgMaxId }),
+    Message.getAll({ chat_id, minId: msgMinId, maxId: msgMaxId }),
+    Message.getMinId({ chat_id }),
+    User.getByIds(uIds)
+  ])
+    .then(([messages, total, minId, users]) => {
+      let userObj = {};
+      users.forEach(user => {
+        userObj[user.id.toString()] = User.output(user);
+      });
+      messages = messages.map(msg => Message.output(msg)).map(msg => {
+        return {
+          ...msg,
+          user: userObj[msg.sender_id]
+        };
+      }); //.reverse();
+      return { messages, minId, total };
+    })
+}
+
+exports.deleteByIdReq = async ({ id, user_id, socketClient }) => {
+  
+  const chat = await Chat.getById(id);
+  return Chat.deleteById(id)
+    .then(deleted => {
+      // delete all message in chat room.
+      return Message.deleteByChatId(id);
+    })
+    .then(async deleted => {
+      // notify the partner that chat is deleted.
+      const user_ids = JSON.parse(chat.user_ids);
+      const partnerId = chatPartnerId(user_ids, user_id);
+      if (partnerId && socketClient) {
+        partner = await User.getById(partnerId);
+        if (partner.socket_id) {
+          socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+            to: partner.socket_id,
+            event: CONSTS.SKT_CHAT_DELETED,
+            args: { chat_id: id }
+          });
+        }
+      }
+
+      return true;
+    })
+}
+
+exports.getUnreadMsgInfoReq = async (user_id) => {
+  let unreads = {};
+  let total_unreads = 0;
+  let _chatrooms;
+  return Chat.myChatrooms(user_id)
+    .then(chatrooms => {
+      let partner_ids = [0];
+      chatrooms = chatrooms.filter(chat => {
+        const user_ids = JSON.parse(chat.user_ids);
+        const userPos = user_ids.indexOf(user_id);
+        const isForMe = (userPos === 0) || (userPos === user_ids.length - 1);
+        if (isForMe) {
+          const unread_nums = JSON.parse(chat.unread_nums) || [0,0];
+          const unread_num = unread_nums[userPos] || 0;
+          unreads[chat.id] = unread_num;
+          total_unreads += unread_num || 0;
+          partner_ids.push(user_ids.length > 0 ? user_ids[user_ids.length - 1 - userPos] : 0);
+        }
+        return isForMe;
+      });
+
+      _chatrooms = chatrooms;
+      return User.getByIds(partner_ids);
+    })
+    .then(partners => {
+      let users = {};
+      partners.forEach(user => {
+        users[user.id.toString()] = User.output(user);
+      });
+      _chatrooms = _chatrooms.map(chat => {
+        const user_ids = JSON.parse(chat.user_ids);
+        const userPos = user_ids.indexOf(user_id);
+        const partnerId = user_ids[user_ids.length - 1 - userPos];
+        return {
+          ...(Chat.output(chat)),
+          user: User.output(users[partnerId]),
+        };
+      });
+
+      return {
+        total: total_unreads,
+        unread_nums: unreads,
+        chats: _chatrooms,
+      };
+    })
+}
+
+exports.rejectChatReq = async ({ chat_id }) => {
+  let chat = await Chat.getById(chat_id);
+  if (!chat) {
+    return { 
+      status: false,
+      message: 'Chat does not exist!',
+    }
+  }
+
+  chat.accept_status = 2; // 2: rejected
+  return Chat.save(chat)
+    .then(chat => {
+      return {
+        status: true,
+        data: chat,
+      };
+    });
+}
+
+exports.getAllChatsOfUser = async (user_id) => {
+  return User.getById(user_id)
+    .then(user => Chat.allChatsOfUser(user_id, user.card_number))
+    .then(chats => chats);
+}
+
+

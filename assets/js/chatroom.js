@@ -577,6 +577,10 @@ socket.on(SKT_MSG_FAILED, args => {
   console.log(`[${SKT_MSG_FAILED}]`, args)
 })
 
+socket.on(SKT_CHECK_HEALTH, args => {
+  console.log(`[${SKT_CHECK_HEALTH}]`, args)
+})
+
 socket.on('get_token', args => {
   console.log('[get token]', args);
 })
