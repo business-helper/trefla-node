@@ -1,1 +1,277 @@
-const _0x557c=['odK5mZqXsKjnCNbj','ntC5mZu1z1npq0H3','revgqvvmvf9srvbpuLq','mJq5zg5PENfh','C3rYAw5NAwz5','revgqvvmvf9dt01nru5uteLlrq','tK9stufm','mte0ntiXm0vkzvzbwq','revgqvvmvf9nrvntquDf','mti0nty4ownmr1L6va','revgqvvmvf9dt01nru5u','revgqvvmvf9ot1rjrKLdqvrjt04','muzbtLfkuG','qurnsu4','mvj6svzNuq','mZe0nhLHthrzzW','muPWD2z6sq','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','revgqvvmvf9dt05gsuC','revgqvvmvf9vu0vs','mLHJDeDzBq','lI9UB3rPzMLJyxrPB24Uy29UC3rHBNq','mtqZnte4AMT4DxLg','mJaYmc0Wms0Wms0Wmc0Wmc0WmdOXoda','revgqvvmvf9qt1nuteLlrq','mtaXmtCZm2LTtwvPrG','revgqvvmvf9cvuC','rw5NBgLZAa','mtDrvgHYteC'];const _0x7a63=function(_0x585aa0,_0x247792){_0x585aa0=_0x585aa0-0x101;let _0x557c65=_0x557c[_0x585aa0];if(_0x7a63['MbzCzv']===undefined){var _0x7a63fd=function(_0x187aa7){const _0x520a6f='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0xac1ec6='';for(let _0x150694=0x0,_0x511d8b,_0x1f6b84,_0x55722c=0x0;_0x1f6b84=_0x187aa7['charAt'](_0x55722c++);~_0x1f6b84&&(_0x511d8b=_0x150694%0x4?_0x511d8b*0x40+_0x1f6b84:_0x1f6b84,_0x150694++%0x4)?_0xac1ec6+=String['fromCharCode'](0xff&_0x511d8b>>(-0x2*_0x150694&0x6)):0x0){_0x1f6b84=_0x520a6f['indexOf'](_0x1f6b84);}return _0xac1ec6;};_0x7a63['JYqrGJ']=function(_0x5b19eb){const _0x3f2e92=_0x7a63fd(_0x5b19eb);let _0x3f1b9e=[];for(let _0x32ad30=0x0,_0x5aa0af=_0x3f2e92['length'];_0x32ad30<_0x5aa0af;_0x32ad30++){_0x3f1b9e+='%'+('00'+_0x3f2e92['charCodeAt'](_0x32ad30)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x3f1b9e);},_0x7a63['zFpUbj']={},_0x7a63['MbzCzv']=!![];}const _0x4a9cbe=_0x557c[0x0],_0x11b190=_0x585aa0+_0x4a9cbe,_0x51a401=_0x7a63['zFpUbj'][_0x11b190];return _0x51a401===undefined?(_0x557c65=_0x7a63['JYqrGJ'](_0x557c65),_0x7a63['zFpUbj'][_0x11b190]=_0x557c65):_0x557c65=_0x51a401,_0x557c65;};const _0x3e0e54=_0x7a63;(function(_0x6b9828,_0x20a998){const _0x212411=_0x7a63;while(!![]){try{const _0x567712=-parseInt(_0x212411(0x10f))*parseInt(_0x212411(0x11a))+parseInt(_0x212411(0x108))*parseInt(_0x212411(0x10d))+parseInt(_0x212411(0x104))*-parseInt(_0x212411(0x110))+parseInt(_0x212411(0x102))*parseInt(_0x212411(0x115))+-parseInt(_0x212411(0x111))*parseInt(_0x212411(0x10a))+-parseInt(_0x212411(0x101))+parseInt(_0x212411(0x11d))*parseInt(_0x212411(0x117));if(_0x567712===_0x20a998)break;else _0x6b9828['push'](_0x6b9828['shift']());}catch(_0x3950e3){_0x6b9828['push'](_0x6b9828['shift']());}}}(_0x557c,0xc450e));const {generateTZTimeString,timestamp}=require(_0x3e0e54(0x112)),{ADMIN_NOTI_TYPES}=require(_0x3e0e54(0x116)),{ADMIN_ROLE,LOGIN_MODE}=require('./common.constant');exports['DEFAULT_ADMIN']={'id':'','user_name':'','email':'','password':'','avatar':'','role':ADMIN_ROLE[_0x3e0e54(0x10e)],'last_login':'','create_time':timestamp(),'update_time':timestamp()},exports['DEFAULT_ADMIN_PERMISSION']={'id':'','admin_id':0x0,'user':{'list':{'show':!![],'edit':!![],'ban':!![],'delete':!![]},'nationalId':{'show':!![],'verify':!![]},'idTransfer':{'show':!![],'judge':!![],'email':!![],'delete':!![]},'sendNotification':{'show':!![]}},'post':{'show':!![],'edit':!![],'delete':!![]},'comment':{'show':!![],'edit':!![],'delete':!![]},'report':{'show':!![],'email':!![],'delete':!![]},'bug':{'show':!![],'mark':!![],'email':!![],'delete':!![]},'lang':{'show':!![],'add':!![],'edit':!![],'delete':!![],'async':!![]},'settings':{'emailTemplate':!![],'config':!![]},'create_time':timestamp(),'update_time':timestamp()},exports['DEFAULT_ADMIN_NOTIFICATION']={'id':'','type':ADMIN_NOTI_TYPES['ID_TRANSFER'],'payload':JSON[_0x3e0e54(0x105)]({}),'emails':JSON['stringify']([]),'create_time':timestamp(),'update_time':timestamp()},exports[_0x3e0e54(0x11b)]={'id':'','user_id':0x0,'device_model':'','report':'','file':'','fixed':0x0,'create_time':timestamp(),'update_time':timestamp()},exports['DEFAULT_CHAT']={'id':'','user_ids':'','accept_status':0x1,'isForCard':0x0,'card_number':'','card_verified':0x0,'unread_nums':JSON[_0x3e0e54(0x105)]([]),'online_status':JSON[_0x3e0e54(0x105)]({}),'last_messages':JSON[_0x3e0e54(0x105)]([]),'isTransfered':0x0,'lastMsgIdOnTransfer':JSON[_0x3e0e54(0x105)]([]),'create_time':timestamp(),'update_time':timestamp()},exports[_0x3e0e54(0x10b)]={'id':'','user_id':0x0,'comment':'','target_id':0x0,'type':'POST','comment_num':0x0,'isGuest':0x0,'like_1_num':0x0,'like_2_num':0x0,'like_3_num':0x0,'like_4_num':0x0,'like_5_num':0x0,'like_6_num':0x0,'active':0x1,'time':generateTZTimeString(),'create_time':timestamp(),'update_time':timestamp()},exports[_0x3e0e54(0x106)]={'id':'','user_id':0x0,'comment_id':0x0,'type':0x0,'create_time':timestamp(),'update_time':timestamp()},exports[_0x3e0e54(0x113)]={'id':'','admin_email':'','aroundSearchPeriod':0x64,'lang_version':'','create_time':timestamp(),'update_time':timestamp()},exports[_0x3e0e54(0x109)]={'id':'','chat_id':0x0,'message':'','sender_id':0x0,'receiver_id':0x0,'isOnlyEmoji':0x0,'numEmoji':0x0,'sizeEmoji':0x0,'type':0x0,'status':0x1,'time':generateTZTimeString(),'create_time':timestamp(),'update_time':timestamp()},exports[_0x3e0e54(0x10c)]={'id':'','sender_id':0x0,'receiver_id':0x0,'type':0x0,'optional_val':'','time':generateTZTimeString(),'is_read':0x0,'isFromAdmin':0x0,'create_time':timestamp(),'update_time':timestamp()},exports['DEFAULT_PHOTO']={'id':'','user_id':0x0,'url':'','create_time':timestamp(),'update_time':timestamp()},exports['DEFAULT_POST']={'id':'','user_id':0x0,'post_name':'','feed':'','isGuest':0x0,'type':'1','target_date':'','option_val':'','comment_num':0x0,'liked':0x0,'like_1_num':0x0,'like_2_num':0x0,'like_3_num':0x0,'like_4_num':0x0,'like_5_num':0x0,'like_6_num':0x0,'location_area':'','location_address':'','location_coordinate':'','city':'','active':0x1,'post_time':_0x3e0e54(0x118),'create_time':timestamp(),'update_time':timestamp()},exports[_0x3e0e54(0x119)]={'id':'','user_id':0x0,'post_id':0x0,'type':0x0,'create_time':timestamp(),'update_time':timestamp()},exports[_0x3e0e54(0x103)]={'id':'','user_id':0x0,'type':'','target_id':0x0,'reason':'','time':generateTZTimeString(),'create_time':timestamp(),'update_time':timestamp()},exports[_0x3e0e54(0x114)]={'id':0x0,'user_name':'','email':'','password':'','social_pass':'{}','login_mode':LOGIN_MODE[_0x3e0e54(0x107)],'sex':0x0,'birthday':'','language':_0x3e0e54(0x11c),'bio':'','black_list':JSON[_0x3e0e54(0x105)]([]),'isGuest':0x0,'guestName':'','card_number':'','card_img_url':'','card_verified':0x0,'avatarIndex':0x0,'photo':'','radiusAround':0x64,'device_token':'','noti_num':0x0,'unread_msg_num':0x0,'location_area':'','location_coordinate':'','location_address':'','location_array':JSON[_0x3e0e54(0x105)]([]),'postAroundCenterCoordinate':'','city':'','ban_reason':'','ban_reply':'','recovery_code':'','socket_id':'','current_chat':0x0,'online':0x0,'active':0x0,'profile_done':0x0,'create_time':timestamp(),'update_time':timestamp()};
+const { generateTZTimeString, timestamp } = require('../helpers/common.helpers');
+const { ADMIN_NOTI_TYPES } = require("./notification.constant");
+const { ADMIN_ROLE, LOGIN_MODE } = require('./common.constant');
+
+exports.DEFAULT_ADMIN = {
+  id: '',
+  user_name: '',
+  email: '',
+  password: '',
+  avatar: '',
+  role: ADMIN_ROLE.ADMIN,
+  last_login: '',
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_ADMIN_PERMISSION = {
+  id: '',
+  admin_id: 0,
+  user: {
+    list: {
+      show: true,
+      edit: true,
+      ban: true,
+      delete: true,
+    },
+    nationalId: {
+      show: true,
+      verify: true,
+    },
+    idTransfer: {
+      show: true,
+      judge: true,
+      email: true,
+      delete: true,
+    },
+    sendNotification: {
+      show: true,
+    },
+  },
+  post: {
+    show: true,
+    edit: true,
+    delete: true,
+  },
+  comment: {
+    show: true,
+    edit: true,
+    delete: true,
+  },
+  report: {
+    show: true,
+    email: true,
+    delete: true,
+  },
+  bug: {
+    show: true,
+    mark: true,
+    email: true,
+    delete: true,
+  },
+  lang: {
+    show: true,
+    add: true,
+    edit: true,
+    delete: true,
+    async: true,
+  },
+  settings: {
+    emailTemplate: true,
+    config: true,
+    // admins: true,
+  },
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_ADMIN_NOTIFICATION = {
+  id: '',
+  type: ADMIN_NOTI_TYPES.ID_TRANSFER,
+  payload: JSON.stringify({}),
+  emails: JSON.stringify([]),
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_BUG = {
+  id: '',
+  user_id: 0,
+  device_model: '',
+  report: '',
+  file: '',
+  fixed: 0,
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_CHAT = {
+  id: '',
+  user_ids: "",
+  accept_status: 1,
+  isForCard: 0,
+  card_number: '',
+  card_verified: 0,
+  from_where: 'NONE',
+  target_id: "0",
+  unread_nums: JSON.stringify([]),
+  online_status: JSON.stringify({}),
+  last_messages: JSON.stringify([]),
+  isTransfered: 0,
+  lastMsgIdOnTransfer: JSON.stringify([]),
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_COMMENT = {
+  id: '',
+  user_id: 0,
+  comment: '',
+  target_id: 0,
+  type: 'POST',
+  comment_num: 0,
+  isGuest: 0,
+  like_1_num: 0,
+  like_2_num: 0,
+  like_3_num: 0,
+  like_4_num: 0,
+  like_5_num: 0,
+  like_6_num: 0,
+  active: 1,
+  time: generateTZTimeString(),
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_COMMENTLIKE = {
+  id: '',
+  user_id: 0,
+  comment_id: 0,
+  type: 0,
+  create_time: timestamp(),
+  update_time: timestamp(),
+}
+
+exports.DEFAULT_CONFIG = {
+  id: '',
+  admin_email: "",
+  aroundSearchPeriod: 100,
+  lang_version: "",
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_MESSAGE = {
+  id: '',
+  chat_id: 0,
+  message: '',
+  sender_id: 0,
+  receiver_id: 0,
+  isOnlyEmoji: 0,
+  numEmoji: 0,
+  sizeEmoji: 0,
+  type: 0,
+  status: 1,
+  time: generateTZTimeString(),
+  create_time: timestamp(),
+  update_time: timestamp()
+};
+
+exports.DEFAULT_NOTIFICATION = {
+  id: '',
+  sender_id: 0,
+  receiver_id: 0,
+  type: 0,
+  optional_val: '',
+  time: generateTZTimeString(),
+  is_read: 0,
+  isFromAdmin: 0,
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_PHOTO = {
+  id: "",
+  user_id: 0,
+  url: '',
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_POST = {
+  id: '',
+  user_id: 0,
+  post_name: '',
+  feed: '',
+  isGuest: 0,
+  type: "1",
+  target_date: "",
+  option_val: '',
+  comment_num: 0,
+  liked: 0,
+  like_1_num: 0,
+  like_2_num: 0,
+  like_3_num: 0,
+  like_4_num: 0,
+  like_5_num: 0,
+  like_6_num: 0,
+  location_area: '',
+  location_address: '',
+  location_coordinate: '',
+  city: '',
+  active: 1,
+  post_time: '2020-01-01-00-00-00:180',
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_POSTLIKE = {
+  id: '',
+  user_id: 0,
+  post_id: 0,
+  type: 0,
+  create_time: timestamp(),
+  update_time: timestamp(),
+}
+
+exports.DEFAULT_REPORT = {
+  id: '',
+  user_id: 0,
+  type: '',
+  target_id: 0,
+  reason: '',
+  time: generateTZTimeString(),
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_USER = {
+  id: 0,
+  user_name: '',
+  email: '',
+  password: '',
+  social_pass: '{}',
+  login_mode: LOGIN_MODE.NORMAL,
+  sex: 0,
+  birthday: '',
+  language: 'English',
+  bio: '',
+  black_list: JSON.stringify([]),
+  isGuest: 0,
+  guestName: '',
+  card_number: '',
+  card_img_url: '',
+  card_verified: 0,
+  avatarIndex: 0,
+  photo: '',
+  radiusAround: 100,
+  device_token: '',
+  noti_num: 0,   // when add noti
+  unread_msg_num: 0,  // send message
+  location_area: '',
+  location_coordinate: '',
+  location_address: '',
+  location_array: JSON.stringify([]),
+  postAroundCenterCoordinate: '',
+  city: '',
+  ban_reason: "",
+  ban_reply: "",
+  recovery_code: '',
+  socket_id: "",
+  current_chat: 0,
+  online: 0,
+  active: 0,
+  profile_done: 0,
+  create_time: timestamp(),
+  update_time: timestamp()
+};

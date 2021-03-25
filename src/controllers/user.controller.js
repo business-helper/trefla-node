@@ -1,1 +1,1090 @@
-const _0x776d=['y2HHDa','B3b0Aw9UCW','yMfUx3jLCgX5','ANnVBG','CgfNzq','BwfW','zMLSDgvY','rMfPBgvKihrVigrLBgv0zsb1C2vYiq','yMfUuMvWBhLszxe','Bg9JyxrPB25FyxjLyq','vxnLCIbOyxmGyMvLBIb1BNzLCMLMAwvKiq','z2vUzxjHDgvvC2vYBMfTzq','tM8GDMfSAwqGy2fYzcbUDw1IzxiGzM91BMqH','zw1PDa','mtmXnvzOrezorq','w0LeifrYyw5ZzMvYxsbHy2nLChrHyMXL','DxnLCL9Pzhm','z2vUzxjHDgvbzg1PBK5VDgLeyxrH','C3rYAw5NAwz5','vxnLCIbKB2vZBID0igHHDMuGy2fYzcbPBMzVCM1HDgLVBIe','C2f2zq','surFvfjbtLngrvi','CMvJB3zLCNLFy29Kzq','mta3ntC2mxrny0n0sa','lI4VBw9KzwXZl3vZzxiUBw9KzwW','vhjHBNnMzxiGCMvXDwvZDgvYigHHCYbIzwvUigrLBgv0zwqH','C3bSAwnL','mJC4uKLQANrj','vKvssuzzx0Le','C29JAwfSx3bHC3m','lI4VBw9KzwXZl2vTywLSvgvTCgXHDguUBw9KzwW','yxnZAwDU','DxnLCL9Uyw1L','z2v0uhjVzMLSzq','DMvYAwz5vxnLCLjLCq','mtvMCeLiAui','B3b0Aw9UywXFDMfS','CgfYyw1Z','z2v0qNLdyxjK','ntCYmJa0uu9pwKzs','w2nOyxrSAxn0xq','zw1HAwXFDxnLCM5HBwu','Aw5KzxHpzG','yM9KEq','zM9Yz290ugfZC3DVCMq','u0Tux05pveLFtLvnx1vqrefuruq','y3jLyxrL','BwvZC2fNzuLK','u0Tux0niqvrmsvnux1vqrefuruq','zgvSzxrLqNLvC2vY','y2fYzf9UDw1Izxi','y2fYzfzLCMLMEvjLCxvLC3rby2nLChroB3rPvhLWzq','zgvSzxrLqNLjzfjLCq','CMvJzwL2zxjFAwq','z2vUzxjHDgvsyw5KB21tDhjPBMC','y2fYzfzLCMLMEvjLCxvLC3rszwPLy3roB3rPvhLWzq','ww91ihvUyMXVy2TLzcaN','u0Tux0Xuu19tsu5hteu','ufjprKLmrq','DxnLCG','DgLTzq','z2v0q2HHDfrVq2fYza','zM9YrwfJAa','mxbyALPbBW','y2fYzf92zxjPzMLLza','BM90Av9UDw0','y2fYzfbHz2LUyxrPB24','CgfZC3DVCMq','CgfYC2u','lI4VBw9KzwXZl2LUzgv4','B3b0Aw9UywW','ugfZC3DVCMqGzg9LCYbUB3qGBwf0y2GH','C3rHDhvZ','Dg9tDhjPBMC','BNvTyMvYt2zvC2vYCW','Cg9ZDa','A2v5CW','v2uGCMvJzwL2zwqGEw91CIbYzxf1zxn0iq','Aw5JBhvKzxm','vxnLCIbOyxmGyMvLBIbKzwXLDgvKiq','Bg9N','CMvZzxrqyxnZD29Yza','Dw52zxjPzNLvC2vYuMvX','DxbKyxrLuMvJzwL2zxjjBKnHCMrdAgf0','ww91j3jLigfSCMvHzhKGDMvYAwzPzwqH','ww91ihjLCxvLC3qGAgfZigjLzw4GCMvJzwL2zwqH','DhjLzMXHidXHzg1PBKb0CMvMBgeUy29TpG','CxvLCNK','Dw52zxjPzNLdAgf0C0j5q2fYza','z2v0qNLvC2vYtMfTzq','Bw9Kzq','Bw9KzwW','z2v0qNLfBwfPBa','ywrTAw5oB3rPzMLJyxrPB24','y2fYzf9PBwDFDxjS','tK9stufm','oduYotDArvjwDM8','y2fYzfrYyw5ZzMvYuMvXDwvZDefJy2vWDe5VDgLuExbL','yMXVy2TvC2vY','Bg9JyxrPB25FyxjYyxK','BwvZC2fNzq','lI4VAgvSCgvYCW','Bg9NAw5FBw9Kzq','DxbKyxrLuhjVzMLSzq','w1bYB2nLC3mGy2fYzcbJAgf0C10GzxjYB3i','jwnVzguL','B3v0Chv0','uMvJB3zLCNKGy29KzsbKB2vZig5VDcbTyxrJAce','y29Kzq','BgLTAxq','u0Tux0jmt0nlx0jmt0nlruq','DMfS','yxbW','BgvUz3rO','BM9Kzs1PBNb1Dc12ywXPzgf0B3i','z2v0qNLjza','C2vUzgvYx2LK','zw1HAwW','u0Tux0nbuKrFvKvssuzjruq','CMvNAxn0zxi','DxbKyxrLqNLjza','BM90AwzPy2f0Aw9U','B2jQzwn0','w2nOyxqGBgLZDf0GigfKzgvK','sLnptLbHCNnLCG','z2v0qNLjzhm','ChvZAa','C29JA2v0q2XPzw50','C29JA2v0x2LK','w0LeihrYyw5ZzMvYxsbZyw1LigLKihDPDgGGBgfZDcbVD25LCIe','nJm1nZzbC3bQDw8','yMXHy2TFBgLZDa','ww91igDVDcb1BMjSB2nRzwqH','mKnSAgjRDG','AwrZ','mJK5B2Det29s','Dw5IBg9JA1vZzxi','vxnLCIbOyxmGyMvLBIb1CgrHDgvKiq','BNvTyMvYt2zdyxjK','CMvWBgfJzq','C3vJy2vZCW','DgHLBG','Bg9NAw4','BgfZDe1Zz0LKt25uCMfUC2zLCG','zgvSzxrLqNLjza','Bg9JywXZ','ywXS','CgfNAw5HDgLVBG','CMvWBhK','vgHHBMSGEw91isbxzsb3AwXSigDLDcbIywnRihrVihLVDsbZB29UlG','ww91igHHDMuGBM8GCgvYBwLZC2LVBIb0BYbYzxbSEsb0AgLZihjLCxvLC3qH','y29TBw9U','jvvZzxjUyw1Ljq','lI4Vy29UC3rHBNrZl2nVBw1VBI5JB25ZDgfUDa','C3rYAw5N','DMvYAwz5vxnLCG','C3bSAxq','y29TBwvUDa','vxnLCIbKB2vZig5VDcbLEgLZDce','zMfPBgvK','y3jLyxrLsuruCMfUC2zLCLjLCq','uhjVzMLSzsbOyxmGyMvLBIb1CgrHDgvKiq','BgfZDf9TzxnZywDLCW','z2vUzxjHDgvoB3rPzMLJyxrPB25eyxrH','lI4Vy29UC3rHBNrZl25VDgLMAwnHDgLVBI5JB25ZDgfUDa','y2fYzfrYyw5ZzMvYuMvXDwvZDfjLAMn0tM90Avr5Cgu','mZmWmxL3D0rfEq','ChjVzMLSzv9KB25L','C3vIAMvJDa','mtqYody3mw9ry0vfCq','lI4Vy29UC3rHBNrZl3nVy2TLDc5JB25ZDgfUDa','y2f0y2G','y2fYzfrYyw5ZzMvYuMvXDwvZDe5VDgLuExbL'];const _0x2cdb=function(_0x2fd15c,_0x1b38fd){_0x2fd15c=_0x2fd15c-0x157;let _0x776dbb=_0x776d[_0x2fd15c];if(_0x2cdb['AuHLfd']===undefined){var _0x2cdb16=function(_0x6ad275){const _0x55aaa1='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x500240='';for(let _0x173ac4=0x0,_0x458360,_0x1db286,_0x2eb58f=0x0;_0x1db286=_0x6ad275['charAt'](_0x2eb58f++);~_0x1db286&&(_0x458360=_0x173ac4%0x4?_0x458360*0x40+_0x1db286:_0x1db286,_0x173ac4++%0x4)?_0x500240+=String['fromCharCode'](0xff&_0x458360>>(-0x2*_0x173ac4&0x6)):0x0){_0x1db286=_0x55aaa1['indexOf'](_0x1db286);}return _0x500240;};_0x2cdb['OmRUtp']=function(_0xfa66b1){const _0x471543=_0x2cdb16(_0xfa66b1);let _0x5a39b9=[];for(let _0x5574b7=0x0,_0x1c4bce=_0x471543['length'];_0x5574b7<_0x1c4bce;_0x5574b7++){_0x5a39b9+='%'+('00'+_0x471543['charCodeAt'](_0x5574b7)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x5a39b9);},_0x2cdb['btUXui']={},_0x2cdb['AuHLfd']=!![];}const _0x59024f=_0x776d[0x0],_0x94487c=_0x2fd15c+_0x59024f,_0x4f6b51=_0x2cdb['btUXui'][_0x94487c];return _0x4f6b51===undefined?(_0x776dbb=_0x2cdb['OmRUtp'](_0x776dbb),_0x2cdb['btUXui'][_0x94487c]=_0x776dbb):_0x776dbb=_0x4f6b51,_0x776dbb;};const _0x145517=_0x2cdb;(function(_0x153bb0,_0x10284a){const _0x2a1816=_0x2cdb;while(!![]){try{const _0x3272f3=-parseInt(_0x2a1816(0x176))*parseInt(_0x2a1816(0x173))+-parseInt(_0x2a1816(0x1c5))+-parseInt(_0x2a1816(0x197))*-parseInt(_0x2a1816(0x178))+-parseInt(_0x2a1816(0x19a))*parseInt(_0x2a1816(0x1dd))+parseInt(_0x2a1816(0x1b5))+parseInt(_0x2a1816(0x1b9))*-parseInt(_0x2a1816(0x1ac))+parseInt(_0x2a1816(0x1fe))*parseInt(_0x2a1816(0x1c1));if(_0x3272f3===_0x10284a)break;else _0x153bb0['push'](_0x153bb0['shift']());}catch(_0xe6d3fe){_0x153bb0['push'](_0x153bb0['shift']());}}}(_0x776d,0xcf2ea));const {Validator}=require(_0x145517(0x163)),CONSTS=require(_0x145517(0x19b)),NOTI_TYPES=require(_0x145517(0x195)),{LOGIN_MODE}=require(_0x145517(0x18a)),{ADMIN_NOTI_TYPES}=require(_0x145517(0x195)),models=require(_0x145517(0x1e3)),User=require(_0x145517(0x1b6)),helpers=require(_0x145517(0x203)),EmailTemplate=require(_0x145517(0x1bc)),{generateTZTimeString,JSONParser,JSONStringify,respondError,sendMail}=require('../helpers/common.helpers'),{comparePassword,generateUserData,genreateAuthToken,generatePassword,getTokenInfo}=require('../helpers/auth.helpers');exports[_0x145517(0x168)]=async(_0x59024f,_0x94487c)=>{const _0x2ddf05=_0x145517;let _0x4f6b51=null,_0x6ad275;_0x6ad275=_0x59024f[_0x2ddf05(0x1c9)][_0x2ddf05(0x1d0)]||'';let _0x55aaa1=![],_0x500240=0x0;_0x6ad275&&([_0x4f6b51]=await models[_0x2ddf05(0x1d9)][_0x2ddf05(0x1c4)](_0x6ad275,0x1),_0x4f6b51&&(_0x55aaa1=!![],_0x500240=_0x4f6b51['id']));const _0x173ac4=generateUserData({..._0x59024f[_0x2ddf05(0x1c9)],'card_number':_0x4f6b51?'':_0x6ad275});return generatePassword(_0x173ac4[_0x2ddf05(0x1e1)])[_0x2ddf05(0x17e)](_0x458360=>{const _0xc2dc35=_0x2ddf05;return _0x59024f[_0xc2dc35(0x1c9)][_0xc2dc35(0x157)]!==LOGIN_MODE[_0xc2dc35(0x1fd)]&&Object[_0xc2dc35(0x1ea)](LOGIN_MODE)['includes'](_0x59024f['body'][_0xc2dc35(0x157)])?{..._0x173ac4,'password':'','social_pass':JSON[_0xc2dc35(0x1b0)]({[_0x59024f[_0xc2dc35(0x1c9)][_0xc2dc35(0x157)]]:_0x458360})}:(_0x59024f['body'][_0xc2dc35(0x157)]=LOGIN_MODE['NORMAL'],{..._0x173ac4,'password':_0x458360});})[_0x2ddf05(0x17e)](async _0x1db286=>{const _0x3501d5=_0x2ddf05;return User[_0x3501d5(0x1cc)](_0x1db286);})[_0x2ddf05(0x17e)](async _0x2eb58f=>{const _0x4e134e=_0x2ddf05;if(_0x6ad275&&!_0x4f6b51){let _0xfa66b1=[];await models[_0x4e134e(0x19e)][_0x4e134e(0x1db)]({'card_number':_0x2eb58f[_0x4e134e(0x1d0)]})['then'](_0x471543=>{const _0x31c0e0=_0x4e134e;_0xfa66b1=_0x471543;const _0x5a39b9=_0x471543[_0x31c0e0(0x1a3)](_0x5574b7=>{const _0x10d4f8=_0x31c0e0,_0x1c4bce=JSON[_0x10d4f8(0x1e2)](_0x5574b7['user_ids']);return _0x1c4bce[0x0];});return User[_0x31c0e0(0x16e)](_0x5a39b9);})[_0x4e134e(0x17e)](_0x524fa1=>{const _0x512bc2=_0x4e134e,_0xc3a615=_0x59024f[_0x512bc2(0x161)][_0x512bc2(0x182)][_0x512bc2(0x170)];_0x524fa1[_0x512bc2(0x1dc)]((_0x4fa8c5,_0x10d6f1)=>{const _0x7e6594=_0x512bc2;_0x4fa8c5['socket_id']&&_0xc3a615[_0x7e6594(0x1ab)](CONSTS[_0x7e6594(0x1d7)],{'to':_0x4fa8c5[_0x7e6594(0x171)],'event':CONSTS['SKT_REGISTER_WITH_CARD'],'args':{'chat':{...models[_0x7e6594(0x19e)]['output'](_0xfa66b1[_0x10d6f1]),'user':models['user'][_0x7e6594(0x15b)](_0x2eb58f)}}});});});}return Promise[_0x4e134e(0x183)]([_0x2eb58f,genreateAuthToken(_0x2eb58f)]);})[_0x2ddf05(0x17e)](([_0x5111fd,_0xef486f])=>_0x94487c[_0x2ddf05(0x1a1)]({'status':!![],'message':'success','data':User[_0x2ddf05(0x15b)](_0x5111fd,_0x2ddf05(0x1d8)),'token':_0xef486f,'cardVerified':{'exists':_0x55aaa1,'user_id':_0x500240}}));},exports[_0x145517(0x17f)]=(_0x4e560c,_0x4f44d6)=>{const _0x46fb31=_0x145517;return Promise[_0x46fb31(0x183)]([User[_0x46fb31(0x1fa)](_0x4e560c[_0x46fb31(0x1c9)][_0x46fb31(0x1c7)]),User[_0x46fb31(0x1f7)](_0x4e560c['body']['email_username'])])[_0x46fb31(0x17e)](async([_0x59f521,_0x58c25f])=>{const _0x7395a3=_0x46fb31,_0xe12148=_0x59f521||_0x58c25f;let _0x401ac4;if(_0x4e560c[_0x7395a3(0x1c9)]['login_mode']===LOGIN_MODE['NORMAL'])_0x401ac4=_0xe12148[_0x7395a3(0x1e1)];else{const _0x94f0b6=JSON[_0x7395a3(0x1e2)](_0xe12148['social_pass']);_0x401ac4=_0x94f0b6[_0x4e560c[_0x7395a3(0x1c9)][_0x7395a3(0x157)]],_0x401ac4===undefined&&(_0xe12148[_0x7395a3(0x1bb)]=JSON[_0x7395a3(0x1b0)]({..._0x94f0b6,[_0x4e560c[_0x7395a3(0x1c9)][_0x7395a3(0x157)]]:await generatePassword(_0x4e560c['body']['password'])}));}if(_0x4e560c[_0x7395a3(0x1c9)]['device_token'])_0xe12148['device_token']=_0x4e560c['body']['device_token'];if(_0x4e560c[_0x7395a3(0x1c9)][_0x7395a3(0x1a7)])_0xe12148[_0x7395a3(0x1a7)]=_0x4e560c[_0x7395a3(0x1c9)][_0x7395a3(0x1a7)];return Promise[_0x7395a3(0x183)]([_0xe12148,_0x4e560c[_0x7395a3(0x1c9)][_0x7395a3(0x157)]!==LOGIN_MODE['NORMAL']&&!_0x401ac4?!![]:comparePassword(_0x4e560c[_0x7395a3(0x1c9)][_0x7395a3(0x1e1)],_0x401ac4),genreateAuthToken(_0xe12148),User[_0x7395a3(0x1b2)](_0xe12148)]);})[_0x46fb31(0x17e)](([_0x4aa0b3,_0x291ea7,_0x53c6f6,_0x24af99])=>{const _0x170d26=_0x46fb31;return _0x291ea7?_0x4f44d6[_0x170d26(0x1a1)]({'status':!![],'message':_0x170d26(0x17d),'data':User[_0x170d26(0x15b)](_0x24af99,_0x170d26(0x1d8)),'token':_0x53c6f6}):_0x4f44d6[_0x170d26(0x1e6)](0x190)['json']({'status':![],'message':_0x170d26(0x1e5)});})[_0x46fb31(0x19c)](_0x5b5eac=>respondError(_0x4f44d6,_0x5b5eac));},exports[_0x145517(0x1ca)]=(_0x3faa1c,_0x3991ed)=>{const _0x26c131=_0x145517;return Promise[_0x26c131(0x183)]([User['getByEmail'](_0x3faa1c[_0x26c131(0x1c9)][_0x26c131(0x166)]),EmailTemplate['getByIdentifier']('forgot_password')])[_0x26c131(0x17e)](([_0x45889d,_0x22b250])=>{const _0x3752c3=_0x26c131,_0x363ecf=_0x22b250[_0x3752c3(0x1c9)][_0x3752c3(0x17c)](new RegExp(_0x3752c3(0x189)),_0x45889d[_0x3752c3(0x1be)])[_0x3752c3(0x17c)](new RegExp(_0x3752c3(0x15a)),_0x3faa1c['body'][_0x3752c3(0x15d)]);return Promise[_0x3752c3(0x183)]([sendMail({'from':_0x3752c3(0x1f4),'to':_0x45889d[_0x3752c3(0x166)],'subject':_0x22b250[_0x3752c3(0x199)],'body':_0x363ecf}),User[_0x3752c3(0x1b2)]({..._0x45889d,'recovery_code':_0x3faa1c[_0x3752c3(0x1c9)][_0x3752c3(0x15d)]})]);})[_0x26c131(0x17e)](([_0x4378e5,_0x2d87f2])=>{const _0x24545d=_0x26c131;return _0x4378e5&&_0x4378e5[_0x24545d(0x1cd)]?_0x3991ed[_0x24545d(0x1a1)]({'status':!![],'message':_0x24545d(0x17d),'data':{'code':_0x3faa1c['body'][_0x24545d(0x15d)],'messageId':_0x4378e5[_0x24545d(0x1cd)]}}):_0x3991ed[_0x24545d(0x1a1)]({'status':![],'message':_0x24545d(0x190),'data':_0x4378e5});})[_0x26c131(0x19c)](_0x54f449=>respondError(_0x3991ed,_0x54f449));},exports[_0x145517(0x1ef)]=(_0x16e4ed,_0x50591a)=>{const _0x28ac9d=_0x145517;return Promise[_0x28ac9d(0x183)]([User['getByEmail'](_0x16e4ed[_0x28ac9d(0x1c9)][_0x28ac9d(0x166)]),generatePassword(_0x16e4ed[_0x28ac9d(0x1c9)]['password'])])[_0x28ac9d(0x17e)](([_0x3756a7,_0x52e45d])=>{const _0x4db7d9=_0x28ac9d;if(_0x3756a7[_0x4db7d9(0x1b4)]!==_0x16e4ed[_0x4db7d9(0x1c9)][_0x4db7d9(0x15d)])throw Object[_0x4db7d9(0x1bd)](new Error(_0x4db7d9(0x15c)),{'code':0x190});else return _0x3756a7[_0x4db7d9(0x1e1)]=_0x52e45d,_0x3756a7['recovery_code']='',User[_0x4db7d9(0x1b2)](_0x3756a7);})[_0x28ac9d(0x17e)](_0x5ea478=>_0x50591a[_0x28ac9d(0x1a1)]({'status':!![],'message':_0x28ac9d(0x17d)}))['catch'](_0x2ce73c=>respondError(_0x50591a,_0x2ce73c));},exports[_0x145517(0x164)]=(_0x46bbbd,_0xa16339)=>{const _0x3f92b9=_0x145517,{id:_0xc3786c}=_0x46bbbd[_0x3f92b9(0x1c3)];return User[_0x3f92b9(0x164)](_0xc3786c)['then'](_0x16011c=>{const _0x453e63=_0x3f92b9;return _0x16011c=User[_0x453e63(0x15b)](_0x16011c,_0x453e63(0x1d8)),_0xa16339[_0x453e63(0x1a1)]({'status':!![],'message':_0x453e63(0x17d),'data':_0x16011c});})['catch'](_0x2ac0fa=>respondError(_0xa16339,_0x2ac0fa));},exports[_0x145517(0x1bf)]=(_0x59ab3f,_0x5d0ce3)=>{const _0x10a194=_0x145517,{uid:_0x445099}=getTokenInfo(_0x59ab3f);return User[_0x10a194(0x164)](_0x445099)[_0x10a194(0x17e)](_0x343de0=>{const _0x708971=_0x10a194;return _0x343de0=User['output'](_0x343de0,_0x708971(0x1d8)),_0x5d0ce3[_0x708971(0x1a1)]({'status':!![],'message':_0x708971(0x17d),'data':_0x343de0});})[_0x10a194(0x19c)](_0x705160=>respondError(_0x5d0ce3,_0x705160));},exports['pagination']=(_0x2654d1,_0x1064a5)=>{const _0x5ad07a=_0x145517,{uid:_0x340ad4}=getTokenInfo(_0x2654d1);return Promise[_0x5ad07a(0x183)]([User[_0x5ad07a(0x184)]({'limit':_0x2654d1[_0x5ad07a(0x1f5)][_0x5ad07a(0x15e)]||0xa,'page':_0x2654d1['query']['page']||0x0}),User[_0x5ad07a(0x1e8)]()])['then'](([_0x1e92a2,_0x5d056f])=>_0x1064a5[_0x5ad07a(0x1a1)]({'status':!![],'message':_0x5ad07a(0x17d),'data':_0x1e92a2[_0x5ad07a(0x1a3)](_0x3919f2=>User[_0x5ad07a(0x15b)](_0x3919f2,_0x2654d1[_0x5ad07a(0x1f5)][_0x5ad07a(0x1f8)]||_0x5ad07a(0x1d8))),'pager':{'limit':Number(_0x2654d1[_0x5ad07a(0x1f5)][_0x5ad07a(0x15e)]||0xa),'page':Number(_0x2654d1[_0x5ad07a(0x1f5)][_0x5ad07a(0x1a2)]||0x0),'total':_0x5d056f},'hasMore':(_0x2654d1['query'][_0x5ad07a(0x1a2)]||0x0)*(_0x2654d1[_0x5ad07a(0x1f5)][_0x5ad07a(0x15e)]||0xa)+_0x1e92a2[_0x5ad07a(0x162)]<_0x5d056f}))[_0x5ad07a(0x19c)](_0x189ac0=>respondError(_0x1064a5,_0x189ac0));},exports[_0x145517(0x1e0)]=(_0x48fdce,_0x57ccc2)=>{const _0x132f57=_0x145517,{uid:_0x35aac6,role:_0x50fd35}=getTokenInfo(_0x48fdce);let {limit:_0x5a6f87,page:_0x4c4788}=_0x48fdce['query'];return _0x4c4788=Number(_0x4c4788),_0x5a6f87=Number(_0x5a6f87),Promise[_0x132f57(0x183)]([User['cardPagination']({'limit':_0x5a6f87,'page':_0x4c4788}),User[_0x132f57(0x17b)]()])[_0x132f57(0x17e)](([_0x4b704b,_0x1b7d9a])=>{const _0x4bbd7b=_0x132f57,_0x3af899=_0x4c4788*_0x5a6f87+_0x4b704b['length']<_0x1b7d9a;return _0x57ccc2[_0x4bbd7b(0x1a1)]({'status':!![],'message':_0x4bbd7b(0x17d),'data':_0x4b704b['map'](_0x144a79=>User[_0x4bbd7b(0x15b)](_0x144a79)),'pager':{'page':_0x4c4788,'limit':_0x5a6f87,'total':_0x1b7d9a},'hasMore':_0x3af899});});},exports[_0x145517(0x158)]=async(_0x3fbb52,_0x3a07ff)=>{const _0x123b9f=_0x145517,{uid:_0xf0c777}=getTokenInfo(_0x3fbb52);let _0x1d1665=![],_0x9eee46=0x0,_0x1a94e3=_0x3fbb52[_0x123b9f(0x1c9)]['card_number']||'',_0x1d9a1d,_0x40ebe4=null,_0x1eb764=[];return _0x1a94e3&&([_0x40ebe4]=await User[_0x123b9f(0x1c4)](_0x1a94e3,0x1),_0x40ebe4=_0x40ebe4&&_0x40ebe4['id']!==_0xf0c777?_0x40ebe4:null),User[_0x123b9f(0x164)](_0xf0c777)[_0x123b9f(0x17e)](async _0x4f902c=>{const _0x34e609=_0x123b9f;_0x1d9a1d=_0x4f902c[_0x34e609(0x1d0)]||'';_0x3fbb52['body'][_0x34e609(0x1d0)]===undefined&&(_0x1a94e3=_0x1d9a1d);const _0x52e4b6=Object[_0x34e609(0x1ea)](_0x4f902c);_0x52e4b6[_0x34e609(0x1dc)](_0x5a4ba8=>{const _0x121b5a=_0x34e609;if(_0x3fbb52[_0x121b5a(0x1c9)][_0x5a4ba8]!==undefined&&[_0x121b5a(0x1d0),_0x121b5a(0x157)][_0x121b5a(0x1ec)](_0x5a4ba8)){}else{if(_0x3fbb52[_0x121b5a(0x1c9)][_0x5a4ba8]!==undefined&&[_0x121b5a(0x201)][_0x121b5a(0x1ec)](_0x5a4ba8))_0x4f902c[_0x5a4ba8]=JSON[_0x121b5a(0x1b0)](_0x3fbb52[_0x121b5a(0x1c9)][_0x5a4ba8]);else _0x5a4ba8===_0x121b5a(0x198)?_0x4f902c[_0x121b5a(0x198)]=_0x3fbb52[_0x121b5a(0x1c9)][_0x121b5a(0x198)]!==undefined?Number(_0x3fbb52[_0x121b5a(0x1c9)][_0x121b5a(0x198)]):_0x4f902c[_0x121b5a(0x198)]:_0x4f902c[_0x5a4ba8]=_0x3fbb52[_0x121b5a(0x1c9)][_0x5a4ba8]!==undefined?_0x3fbb52['body'][_0x5a4ba8]:_0x4f902c[_0x5a4ba8];}});if(_0x1a94e3!==_0x1d9a1d&&!_0x40ebe4){_0x4f902c['card_number']=_0x1a94e3;if(_0x4f902c[_0x34e609(0x171)]){const _0x59c298=_0x3fbb52[_0x34e609(0x161)][_0x34e609(0x182)][_0x34e609(0x170)];await Promise[_0x34e609(0x183)]([models[_0x34e609(0x19e)]['getChatToCard']({'card_number':_0x1d9a1d}),models['chat'][_0x34e609(0x1db)]({'card_number':_0x1a94e3})])[_0x34e609(0x17e)](([_0x12c110,_0x21af40])=>{const _0x28fa3a=_0x34e609,_0x67651a=[0x0];return _0x21af40[_0x28fa3a(0x1dc)](_0x23d572=>{const _0xee1ce8=_0x28fa3a,_0x20e2d8=JSON['parse'](_0x23d572[_0xee1ce8(0x1ae)]);_0x67651a[_0xee1ce8(0x16f)](_0x20e2d8[0x0]);}),Promise[_0x28fa3a(0x183)]([_0x12c110,_0x21af40,models[_0x28fa3a(0x1d9)][_0x28fa3a(0x16e)](_0x67651a)]);})[_0x34e609(0x17e)](([_0x419e96,_0x3ab752,_0x28ddab])=>{const _0x326886=_0x34e609,_0x887132={};_0x28ddab[_0x326886(0x1dc)](_0x543fdd=>{const _0x422ef8=_0x326886;_0x887132[_0x543fdd['id'][_0x422ef8(0x1e7)]()]=_0x543fdd;});const _0x25c85e=_0x3ab752['map'](_0x3e4945=>{const _0x237306=_0x326886,_0x5c1d36=JSON[_0x237306(0x1e2)](_0x3e4945[_0x237306(0x1ae)])[0x0];return{...models[_0x237306(0x19e)]['output'](_0x3e4945),'user':models[_0x237306(0x1d9)]['output'](_0x887132[_0x5c1d36[_0x237306(0x1e7)]()])};}),_0xbb6ae5=_0x419e96['map'](_0xb5c86a=>_0xb5c86a['id']);_0x59c298[_0x326886(0x1ab)](CONSTS[_0x326886(0x1d7)],{'to':_0x4f902c[_0x326886(0x171)],'event':CONSTS['SKT_CHATLIST_UPDATED'],'args':{'removed':_0xbb6ae5,'added':_0x25c85e}});});}_0x4f902c[_0x34e609(0x1de)]&&await models[_0x34e609(0x19e)][_0x34e609(0x1f6)]({'card_number':_0x1d9a1d}),_0x4f902c[_0x34e609(0x1de)]=0x0;}return User['save'](_0x4f902c);})[_0x123b9f(0x17e)](async _0x4a96a7=>{const _0x3a248d=_0x123b9f;return _0x1a94e3&&_0x1a94e3!==_0x1d9a1d&&_0x40ebe4&&(_0x1d1665=!![],_0x9eee46=_0x40ebe4['id']),_0x3a07ff[_0x3a248d(0x1a1)]({'status':!![],'message':_0x3a248d(0x192),'data':User[_0x3a248d(0x15b)](_0x4a96a7,_0x3a248d(0x1d8)),'cardVerified':{'exists':_0x1d1665,'user_id':_0x9eee46}});})[_0x123b9f(0x19c)](_0x3af778=>respondError(_0x3a07ff,_0x3af778));},exports[_0x145517(0x169)]=(_0x5a2973,_0x499bef)=>{const _0x1f3a19=_0x145517,{id:_0x33cb89}=_0x5a2973[_0x1f3a19(0x1c3)],{uid:_0x46aff3,role:_0x8fe077}=getTokenInfo(_0x5a2973);return User[_0x1f3a19(0x164)](_0x33cb89)['then'](_0x19d153=>{const _0x4976a7=_0x1f3a19,_0x53f376=Object[_0x4976a7(0x1ea)](_0x19d153);return _0x53f376['forEach'](_0xe0ab2f=>{const _0x1dc64c=_0x4976a7;[_0x1dc64c(0x201)][_0x1dc64c(0x1ec)](_0xe0ab2f)?_0x19d153[_0xe0ab2f]=_0x5a2973[_0x1dc64c(0x1c9)][_0xe0ab2f]?JSON[_0x1dc64c(0x1b0)](_0x5a2973[_0x1dc64c(0x1c9)][_0xe0ab2f]):_0x19d153[_0xe0ab2f]:_0x19d153[_0xe0ab2f]=_0x5a2973[_0x1dc64c(0x1c9)][_0xe0ab2f]!==undefined?_0x5a2973['body'][_0xe0ab2f]:_0x19d153[_0xe0ab2f];}),User[_0x4976a7(0x1b2)](_0x19d153);})[_0x1f3a19(0x17e)](_0x3dba4c=>{const _0x11a549=_0x1f3a19;return _0x499bef[_0x11a549(0x1a1)]({'status':!![],'message':_0x11a549(0x17a),'data':User['output'](_0x3dba4c,'PROFILE')});});},exports[_0x145517(0x1d2)]=(_0x10c86c,_0x8e6039)=>{const _0x29affb=_0x145517;let _0x486d43=Number(_0x10c86c[_0x29affb(0x1c3)]['id']);const {chat:_0x2a0980,comment:_0x1f7837,friend:_0x47c615,post:_0x138000,report:_0x173251}=_0x10c86c[_0x29affb(0x1c9)][_0x29affb(0x19f)]||{};let _0x1ca495=![];return models[_0x29affb(0x1d9)][_0x29affb(0x181)](_0x486d43)['then'](_0x421573=>{const _0x1f30c2=_0x29affb;_0x1ca495=_0x421573;if(!_0x421573)throw Object[_0x1f30c2(0x1bd)](new Error(_0x1f30c2(0x1a5)),{'code':0x190});return Promise[_0x1f30c2(0x183)]([_0x2a0980?models[_0x1f30c2(0x19e)][_0x1f30c2(0x1cf)](_0x486d43):null,_0x1f7837?models[_0x1f30c2(0x18e)][_0x1f30c2(0x1cf)](_0x486d43):null,_0x138000?models[_0x1f30c2(0x1e9)][_0x1f30c2(0x1cf)](_0x486d43):null]);})[_0x29affb(0x17e)](([_0x118b69,_0x54cdc4,_0x2abe1b])=>{const _0x1527a2=_0x29affb;return{'status':!![],'message':_0x1527a2(0x1ed)};});},exports[_0x145517(0x1c0)]=(_0x484d78,_0x4dead0)=>{const _0x3ceaca=_0x145517,_0x3aeb75=Number(_0x484d78['params']['id']);let _0x1de720,_0x51b045;return User['getById'](_0x3aeb75)[_0x3ceaca(0x17e)](_0x2472bb=>{const _0x1b23e0=_0x3ceaca;if(!_0x2472bb[_0x1b23e0(0x1d0)]&&!_0x2472bb['card_img_url'])throw Object[_0x1b23e0(0x1bd)](new Error('User\x20doesn\x27t\x20have\x20card\x20information!'),{'code':0x190});return _0x1de720=_0x2472bb,_0x51b045=_0x2472bb[_0x1b23e0(0x1d0)],Promise[_0x1b23e0(0x183)]([models[_0x1b23e0(0x1d9)]['getByCard'](_0x2472bb['card_number']),models[_0x1b23e0(0x19e)]['getChatToCard']({'card_number':_0x2472bb['card_number']})]);})[_0x3ceaca(0x17e)](([_0x53e705,_0x58b9dc])=>{const _0x453e5f=_0x3ceaca;return Promise[_0x453e5f(0x183)]([manageVerificationStatusOfUsers(_0x53e705,_0x3aeb75),processChatroomToCard(_0x58b9dc,_0x3aeb75)]);})[_0x3ceaca(0x17e)](async([_0x3bf3a0,_0x55d67c])=>{const _0x2d44f1=_0x3ceaca,_0x437dc0=_0x55d67c[_0x2d44f1(0x1a3)](_0xddffee=>{const _0x2919ae=_0x2d44f1,_0x303858=JSON[_0x2919ae(0x1e2)](_0xddffee[_0x2919ae(0x1ae)]);return _0x303858[0x0];})[_0x2d44f1(0x1a4)]((_0x5767db,_0x547785,_0x639cd2)=>_0x639cd2[_0x2d44f1(0x1c8)](_0x5767db)===_0x547785);return await models['user'][_0x2d44f1(0x16e)](_0x437dc0)['then'](_0xed81be=>{const _0x2ff338=_0x2d44f1,_0x72584a=_0x484d78['app'][_0x2ff338(0x182)][_0x2ff338(0x170)];_0xed81be[_0x2ff338(0x1dc)]((_0x4a21ca,_0x4a467e)=>{const _0x552bc4=_0x2ff338;if(_0x4a21ca['socket_id']){const [_0x89b05e]=_0x55d67c[_0x552bc4(0x1a4)](_0x452a6e=>{const _0x59f99d=_0x552bc4,_0xeec5f4=typeof _0x452a6e[_0x59f99d(0x1ae)]===_0x59f99d(0x18b)?JSON[_0x59f99d(0x1e2)](_0x452a6e[_0x59f99d(0x1ae)]):_0x452a6e['user_ids'];return _0xeec5f4[0x0]===_0x4a21ca['id'];});_0x72584a[_0x552bc4(0x1ab)](CONSTS[_0x552bc4(0x1d7)],{'to':_0x4a21ca[_0x552bc4(0x171)],'event':CONSTS['SKT_CARD_VERIFIED'],'args':{'chat':{...models[_0x552bc4(0x19e)]['output'](_0x89b05e),'user':models[_0x552bc4(0x1d9)]['output'](_0x1de720)}}});}});}),{'status':!![],'message':_0x2d44f1(0x17d),'verified':_0x3bf3a0,'chatrooms':_0x55d67c};});},exports[_0x145517(0x18c)]=({user_id:_0x327da5,socketClient:_0x4f3704})=>{const _0x5f4ac0=_0x145517;let _0x9ad068,_0x455526;return User[_0x5f4ac0(0x164)](_0x327da5)['then'](_0x5674ba=>{const _0x3b49ce=_0x5f4ac0;console[_0x3b49ce(0x1ee)]('[verifying\x20user]',_0x327da5);if(!_0x5674ba[_0x3b49ce(0x1d0)]&&!_0x5674ba['card_img_url'])throw Object[_0x3b49ce(0x1bd)](new Error(_0x3b49ce(0x1b1)),{'code':0x190});return _0x9ad068=_0x5674ba,_0x455526=_0x5674ba[_0x3b49ce(0x1d0)],Promise[_0x3b49ce(0x183)]([models[_0x3b49ce(0x1d9)][_0x3b49ce(0x1c4)](_0x5674ba[_0x3b49ce(0x1d0)]),models[_0x3b49ce(0x19e)]['getChatToCard']({'card_number':_0x5674ba[_0x3b49ce(0x1d0)]})]);})['then'](([_0x3e59f7,_0x4bfdfa])=>{const _0x5a75ab=_0x5f4ac0;return Promise[_0x5a75ab(0x183)]([manageVerificationStatusOfUsers(_0x3e59f7,_0x327da5),processChatroomToCard(_0x4bfdfa,_0x327da5)]);})['then'](async([_0x2d55f7,_0x4fa203])=>{const _0xbc3518=_0x5f4ac0;[_0x9ad068]=_0x2d55f7[_0xbc3518(0x1a4)](_0x508cbb=>_0x508cbb['id']===_0x327da5);const _0x1bebf2=_0x4fa203[_0xbc3518(0x1a3)](_0x378bb4=>{const _0x5bfdc3=_0xbc3518,_0x247e75=JSON['parse'](_0x378bb4[_0x5bfdc3(0x1ae)]);return _0x247e75[0x0];})[_0xbc3518(0x1a4)]((_0x3b4399,_0x303515,_0x471668)=>_0x471668[_0xbc3518(0x1c8)](_0x3b4399)===_0x303515),_0x43c06f=helpers['model'][_0xbc3518(0x194)]({'isFromAdmin':0x1,'sender_id':0x0,'receiver_id':_0x327da5,'type':NOTI_TYPES[_0xbc3518(0x1d1)],'optional_val':_0x455526,'time':generateTZTimeString()}),_0x29eb47=await models[_0xbc3518(0x16a)]['create'](_0x43c06f);_0x9ad068['noti_num']++,await models[_0xbc3518(0x1d9)][_0xbc3518(0x1b2)](_0x9ad068);_0x9ad068[_0xbc3518(0x171)]&&_0x4f3704[_0xbc3518(0x1ab)](CONSTS[_0xbc3518(0x1d7)],{'to':_0x9ad068['socket_id'],'event':CONSTS[_0xbc3518(0x1cb)],'args':{'num':_0x9ad068['noti_num'],'notification':_0x29eb47}});_0x2d55f7[_0xbc3518(0x1a4)](_0x53aafd=>_0x53aafd['id']!==_0x327da5)[_0xbc3518(0x1dc)](async _0x4fa678=>{const _0x3428f7=_0xbc3518,_0x4f3b67=helpers['model'][_0x3428f7(0x194)]({'isFromAdmin':0x1,'sender_id':0x0,'receiver_id':_0x4fa678['id'],'type':NOTI_TYPES[_0x3428f7(0x1d5)],'optional_val':_0x455526,'time':generateTZTimeString()}),_0x152647=await models[_0x3428f7(0x16a)]['create'](_0x4f3b67);_0x4fa678[_0x3428f7(0x1df)]++,await models['user'][_0x3428f7(0x1b2)](_0x4fa678),_0x4fa678[_0x3428f7(0x171)]&&_0x4f3704['emit'](CONSTS[_0x3428f7(0x1d7)],{'to':_0x4fa678[_0x3428f7(0x171)],'event':CONSTS[_0x3428f7(0x1cb)],'args':{'num':_0x4fa678['noti_num'],'notification':_0x152647}});});const _0xc3239d=await models[_0xbc3518(0x1d9)][_0xbc3518(0x16e)](_0x1bebf2[_0xbc3518(0x162)]?_0x1bebf2:[0x0]);return console[_0xbc3518(0x1ee)]('[chat.list.updated]\x20--->'),_0x2d55f7['filter'](_0x38d5a4=>_0x38d5a4[_0xbc3518(0x171)])['forEach'](_0x29f716=>{const _0x15bcca=_0xbc3518;console[_0x15bcca(0x1ee)](_0x15bcca(0x1c6),_0x29f716['id'],_0x29f716[_0x15bcca(0x1be)],_0x29f716['card_verified']);const _0x1a2feb=[],_0x2e8af4=[];_0x29f716['id']===_0x327da5?(console[_0x15bcca(0x1ee)](_0x15bcca(0x16c)),_0x4f3704[_0x15bcca(0x1ab)](CONSTS['SKT_LTS_SINGLE'],{'to':_0x29f716[_0x15bcca(0x171)],'event':CONSTS[_0x15bcca(0x1ce)],'args':{'added':_0x4fa203['map'](_0x368470=>({...models[_0x15bcca(0x19e)][_0x15bcca(0x15b)](_0x368470),'user':models[_0x15bcca(0x1d9)]['output'](_0xc3239d[JSONParser(_0x368470[_0x15bcca(0x1ae)])[0x0][_0x15bcca(0x1e7)]()])})),'removed':[],'your_name':_0x29f716[_0x15bcca(0x1be)]}})):(console['log']('[chat\x20list]\x20\x20removed'),_0x4f3704['emit'](CONSTS[_0x15bcca(0x1d7)],{'to':_0x29f716['socket_id'],'event':CONSTS['SKT_CHATLIST_UPDATED'],'args':{'removed':_0x4fa203[_0x15bcca(0x1a3)](_0x3939c6=>_0x3939c6['id']),'added':[],'your_name':_0x29f716[_0x15bcca(0x1be)]}}));}),_0xc3239d[_0xbc3518(0x1dc)]((_0x1902ab,_0x49fd08)=>{const _0x146855=_0xbc3518;if(_0x1902ab[_0x146855(0x171)]){const [_0x51885a]=_0x4fa203[_0x146855(0x1a4)](_0x206ae8=>{const _0x3d397d=_0x146855,_0x3af1f2=typeof _0x206ae8[_0x3d397d(0x1ae)]==='string'?JSON['parse'](_0x206ae8[_0x3d397d(0x1ae)]):_0x206ae8[_0x3d397d(0x1ae)];return _0x3af1f2[0x0]===_0x1902ab['id'];});_0x4f3704[_0x146855(0x1ab)](CONSTS[_0x146855(0x1d7)],{'to':_0x1902ab[_0x146855(0x171)],'event':CONSTS[_0x146855(0x167)],'args':{'chat':{...models[_0x146855(0x19e)][_0x146855(0x15b)](_0x51885a),'user':models[_0x146855(0x1d9)]['output'](_0x9ad068)}}});}}),{'status':!![],'message':_0xbc3518(0x17d),'verified':_0x2d55f7,'chatrooms':_0x4fa203};});},exports[_0x145517(0x1f0)]=(_0x1d25b8,_0x58209b)=>{const _0x2004fa=_0x145517,{id:_0x57a3b9}=_0x1d25b8['params'];let _0x52ac42;return User[_0x2004fa(0x164)](_0x57a3b9)[_0x2004fa(0x17e)](_0x2d141f=>{const _0x171141=_0x2004fa,{card_number:_0x5060cf,card_verified:_0x2df70e}=_0x2d141f;return _0x2d141f[_0x171141(0x1de)]=0x0,Promise[_0x171141(0x183)]([User['save'](_0x2d141f),models[_0x171141(0x19e)][_0x171141(0x1db)](_0x5060cf)]);})['then'](([_0x26e799,_0x34bdf8])=>{const _0x17aa55=_0x2004fa;if(_0x34bdf8[_0x17aa55(0x162)])return unverifyCardChats(_0x34bdf8);})[_0x2004fa(0x17e)](()=>({'status':!![],'message':_0x2004fa(0x1a8)}));},exports[_0x145517(0x1a6)]=(_0x4db5da,_0xd2aa2d)=>{const _0x51e87f=_0x145517,{uid:_0xb5fe57}=getTokenInfo(_0x4db5da);return User[_0x51e87f(0x164)](_0xb5fe57)['then'](_0x340db5=>{const _0x32a885=_0x51e87f;return _0x340db5[_0x32a885(0x1a0)]=_0x4db5da[_0x32a885(0x1c9)][_0x32a885(0x185)],User['save'](_0x340db5);})[_0x51e87f(0x17e)](_0x532236=>({'status':!![],'message':_0x51e87f(0x186)}));},exports[_0x145517(0x200)]=({fromId:_0x5d2580,toId:_0x182447,socketClient:_0x22536b})=>{const _0x5e101d=_0x145517;let _0x4c4183;return models['user']['getById'](_0x5d2580)[_0x5e101d(0x17e)](_0x75496e=>{const _0x4699e9=_0x5e101d;let _0xcff670=helpers['common'][_0x4699e9(0x16d)](_0x75496e['black_list']);if(typeof _0xcff670!==_0x4699e9(0x16b))_0xcff670=[];if(!_0xcff670[_0x4699e9(0x1ec)](_0x182447))_0xcff670[_0x4699e9(0x16f)](_0x182447);return _0x75496e[_0x4699e9(0x174)]=_0xcff670,models[_0x4699e9(0x1d9)][_0x4699e9(0x1b2)](_0x75496e);})['then'](_0x2c0924=>{const _0x3690a3=_0x5e101d;_0x4c4183=_0x2c0924;let _0x5538b7=helpers['common'][_0x3690a3(0x16d)](_0x2c0924[_0x3690a3(0x174)]);if(typeof _0x5538b7!==_0x3690a3(0x16b))_0x5538b7=[];return models[_0x3690a3(0x1d9)][_0x3690a3(0x16e)](_0x5538b7);})[_0x5e101d(0x17e)](_0x237cde=>{const _0x22010d=_0x5e101d,[_0x38c004]=_0x237cde[_0x22010d(0x1a4)](_0x2e898d=>_0x2e898d['id']===_0x182447);return _0x38c004&&_0x38c004['socket_id']&&_0x22536b[_0x22010d(0x1ab)](CONSTS['SKT_LTS_SINGLE'],{'users':_0x38c004[_0x22010d(0x171)],'event':CONSTS['SKT_BLOCK_BLOCKED'],'args':{'message':'You\x20got\x20blocked!','user':User[_0x22010d(0x15b)](_0x4c4183)}}),{'status':!![],'message':'You\x20blocked\x20\x27'+_0x38c004[_0x22010d(0x1be)]+'\x27','black_list':_0x237cde[_0x22010d(0x1a3)](_0x259867=>models[_0x22010d(0x1d9)][_0x22010d(0x15b)](_0x259867))};});},exports[_0x145517(0x179)]=({fromId:_0x1daec9,toId:_0x20468b,socketClient:_0x3f0655})=>{const _0x59d32a=_0x145517;let _0x5a5caf;return models['user'][_0x59d32a(0x164)](_0x1daec9)['then'](_0x17328b=>{const _0x207ee4=_0x59d32a;let _0x1671fe=helpers[_0x207ee4(0x188)][_0x207ee4(0x16d)](_0x17328b[_0x207ee4(0x174)]||'[]');if(_0x1671fe[_0x207ee4(0x1ec)](_0x20468b))_0x1671fe[_0x207ee4(0x1b8)](_0x1671fe[_0x207ee4(0x1c8)](_0x20468b),0x1);return _0x17328b[_0x207ee4(0x174)]=_0x1671fe,models[_0x207ee4(0x1d9)][_0x207ee4(0x1b2)](_0x17328b);})[_0x59d32a(0x17e)](_0x12a669=>{const _0x5a40d4=_0x59d32a;_0x5a5caf=_0x12a669;let _0x2a985f=helpers['common'][_0x5a40d4(0x16d)](_0x12a669['black_list']);if(typeof _0x2a985f!==_0x5a40d4(0x16b))_0x2a985f=[];return Promise['all']([models[_0x5a40d4(0x1d9)]['getByIds'](_0x2a985f),models[_0x5a40d4(0x1d9)][_0x5a40d4(0x164)](_0x20468b)]);})['then'](([_0x29d8f9,_0x1341a4])=>{const _0x3b0996=_0x59d32a;return _0x1341a4&&_0x1341a4[_0x3b0996(0x171)]&&_0x3f0655['emit'](CONSTS[_0x3b0996(0x1d7)],{'users':_0x1341a4[_0x3b0996(0x171)],'event':CONSTS[_0x3b0996(0x15f)],'args':{'message':_0x3b0996(0x175),'user':User[_0x3b0996(0x15b)](_0x5a5caf)}}),{'status':!![],'message':_0x3b0996(0x1d6)+_0x1341a4[_0x3b0996(0x1be)]+'\x27','black_list':_0x29d8f9['map'](_0x14837d=>models[_0x3b0996(0x1d9)]['output'](_0x14837d))};});},exports[_0x145517(0x191)]=async({user_id:_0x4f0b57,card_number:_0x332e3c,socketClient:_0x56448e})=>{const _0x50e6ae=_0x145517;let _0x5202a6,_0x1a3454;return[_0x1a3454]=await models[_0x50e6ae(0x1d9)]['getByCard'](_0x332e3c,0x1),User['getById'](_0x4f0b57)[_0x50e6ae(0x17e)](_0x5c1fd1=>{const _0x352708=_0x50e6ae;_0x5202a6=_0x5c1fd1;const _0x489943=helpers[_0x352708(0x1f9)][_0x352708(0x1af)]({'type':ADMIN_NOTI_TYPES[_0x352708(0x1b3)],'payload':{'from':_0x1a3454['id'],'to':_0x5c1fd1['id'],'card_number':_0x332e3c}}),_0x5a4db0=helpers['model'][_0x352708(0x194)]({'sender_id':_0x4f0b57,'receiver_id':_0x1a3454['id'],'type':NOTI_TYPES[_0x352708(0x19d)],'optional_val':_0x332e3c});return _0x1a3454[_0x352708(0x1df)]++,Promise[_0x352708(0x183)]([models[_0x352708(0x1d9)][_0x352708(0x1b2)](_0x1a3454),models['notification'][_0x352708(0x1cc)](_0x5a4db0),models['adminNotification']['create'](_0x489943)]);})[_0x50e6ae(0x17e)](([_0x24cf2a,_0x45bb9c,_0x825b7b])=>{const _0x5efe4e=_0x50e6ae;return _0x1a3454[_0x5efe4e(0x171)]&&_0x56448e[_0x5efe4e(0x1ab)](CONSTS['SKT_LTS_SINGLE'],{'to':_0x1a3454['socket_id'],'event':CONSTS[_0x5efe4e(0x1cb)],'args':{'num':_0x1a3454[_0x5efe4e(0x1df)],'notification':{...models[_0x5efe4e(0x16a)][_0x5efe4e(0x15b)](_0x45bb9c),'sender':models['user'][_0x5efe4e(0x15b)](_0x5202a6)}}}),{'status':!![],'message':_0x5efe4e(0x1f3)};});},exports['replyToTransferRequest']=async({user_id:_0x515a27,noti_id:_0x4b1978,accept:_0x50b792,socketClient:_0x123ec0,..._0x42797a})=>{const _0x587e56=_0x145517;let _0x26a6f6,_0x17c952;return Promise[_0x587e56(0x183)]([models[_0x587e56(0x1d9)][_0x587e56(0x164)](_0x515a27),models['notification'][_0x587e56(0x164)](_0x4b1978)])['then'](([_0x540966,_0x3f7035])=>{const _0x1e5f93=_0x587e56;_0x26a6f6=_0x540966,_0x17c952=_0x3f7035;if(_0x540966[_0x1e5f93(0x1d0)]!==_0x3f7035[_0x1e5f93(0x1c2)]||_0x3f7035[_0x1e5f93(0x1d3)]!==_0x515a27)throw Object['assign'](new Error(_0x1e5f93(0x187)));return models['user']['getById'](_0x3f7035[_0x1e5f93(0x165)]);})[_0x587e56(0x17e)](_0x44d109=>{const _0x5f35e4=_0x587e56;if(!_0x44d109)throw Object['assign'](new Error(_0x5f35e4(0x1b7)));const _0x29a483=helpers[_0x5f35e4(0x1f9)]['generateNotificationData']({'sender_id':_0x515a27,'receiver_id':_0x44d109['id'],'type':_0x50b792?NOTI_TYPES[_0x5f35e4(0x1ff)]:NOTI_TYPES[_0x5f35e4(0x196)],'optional_val':_0x17c952[_0x5f35e4(0x1c2)]});return _0x26a6f6['noti_num']++,Promise[_0x5f35e4(0x183)]([_0x44d109,models['notification'][_0x5f35e4(0x1cc)](_0x29a483),models[_0x5f35e4(0x1fb)]['deleteTransferRequest']({'from':_0x44d109['id'],'to':_0x515a27}),models[_0x5f35e4(0x1d9)][_0x5f35e4(0x1b2)](_0x26a6f6)]);})[_0x587e56(0x17e)](async([_0x4e72d9,_0x7d44cc,_0x35c140,_0x3fb278])=>{const _0x3f6d57=_0x587e56;return _0x4e72d9['socket_id']&&_0x123ec0[_0x3f6d57(0x1ab)](CONSTS['SKT_LTS_SINGLE'],{'to':_0x4e72d9[_0x3f6d57(0x171)],'event':CONSTS['SKT_NOTI_NUM_UPDATED'],'args':{'num':_0x26a6f6[_0x3f6d57(0x1df)],'notification':{...models['notification'][_0x3f6d57(0x15b)](_0x7d44cc),'sender':models[_0x3f6d57(0x1d9)][_0x3f6d57(0x15b)](_0x26a6f6)}}}),_0x50b792&&(_0x4e72d9[_0x3f6d57(0x1d0)]=_0x7d44cc[_0x3f6d57(0x1e4)][_0x3f6d57(0x160)],await models[_0x3f6d57(0x1d9)][_0x3f6d57(0x1b2)](_0x4e72d9),await this[_0x3f6d57(0x18c)]({'user_id':_0x515a27,'socketClient':_0x123ec0}),(_0x26a6f6['socket_id']||_0x4e72d9[_0x3f6d57(0x171)])&&await Promise[_0x3f6d57(0x183)]([_0x26a6f6[_0x3f6d57(0x1d0)]?models['chat'][_0x3f6d57(0x1db)]({'card_number':_0x26a6f6[_0x3f6d57(0x1d0)]}):[],models[_0x3f6d57(0x19e)][_0x3f6d57(0x1db)]({'card_number':_0x7d44cc[_0x3f6d57(0x1c2)]})])[_0x3f6d57(0x17e)](([_0x332f65,_0x569228])=>{const _0x391719=_0x3f6d57,_0x59ab4d=[0x0];return _0x569228[_0x391719(0x1dc)](_0x2eebf0=>{const _0x24c57f=JSON['parse'](_0x2eebf0['user_ids']);_0x59ab4d['push'](_0x24c57f[0x0]);}),Promise[_0x391719(0x183)]([_0x332f65,_0x569228,models['user'][_0x391719(0x16e)](_0x59ab4d)]);})['then'](([_0x58703f,_0x600bd1,_0x4e0937])=>{const _0xc663ce=_0x3f6d57,_0x19d5e5={};_0x4e0937[_0xc663ce(0x1dc)](_0x442697=>{_0x19d5e5[_0x442697['id']['toString']()]=_0x442697;}),_0x4e72d9['socket_id']&&_0x123ec0[_0xc663ce(0x1ab)](CONSTS[_0xc663ce(0x1d7)],{'to':_0x4e72d9['socket_id'],'event':CONSTS[_0xc663ce(0x1ce)],'args':{'added':_0x600bd1[_0xc663ce(0x1a3)](_0x5c109b=>{const _0x3098fb=_0xc663ce,_0x5aff05=JSON[_0x3098fb(0x1e2)](_0x5c109b[_0x3098fb(0x1ae)])[0x0];return{...models[_0x3098fb(0x19e)][_0x3098fb(0x15b)](_0x5c109b),'user':models[_0x3098fb(0x1d9)][_0x3098fb(0x15b)](_0x19d5e5[_0x5aff05['toString']()])};}),'removed':_0x58703f[_0xc663ce(0x1a3)](_0x11b8c5=>_0x11b8c5['id'])}}),_0x4e72d9[_0xc663ce(0x171)]&&_0x123ec0[_0xc663ce(0x1ab)](CONSTS['SKT_LTS_SINGLE'],{'to':_0x4e72d9[_0xc663ce(0x171)],'event':CONSTS[_0xc663ce(0x1ce)],'args':{'added':[],'removed':_0x600bd1[_0xc663ce(0x1a3)](_0x5cd5ec=>_0x5cd5ec['id'])}});})),{'status':!![],'message':'You\x20replied\x20to\x20the\x20card\x20transfer\x20request!'};});},exports['createVerifyIdReq']=async(_0x3348ee,_0x10a5f4)=>{const _0x11b070=_0x145517,{uid:_0x2ffe67}=getTokenInfo(_0x3348ee);let _0x19421b;return models[_0x11b070(0x1d9)][_0x11b070(0x164)](_0x2ffe67)[_0x11b070(0x17e)](_0xce37a0=>{const _0x388dcd=_0x11b070;if(!_0xce37a0)throw Object[_0x388dcd(0x1bd)](new Error(_0x388dcd(0x18f)),{'code':0x190});if(!_0xce37a0[_0x388dcd(0x1d0)])throw Object[_0x388dcd(0x1bd)](new Error(_0x388dcd(0x1aa)),{'code':0x190});if(_0xce37a0[_0x388dcd(0x1de)])throw Object[_0x388dcd(0x1bd)](new Error(_0x388dcd(0x1f2)),{'code':0x190});_0x19421b=_0xce37a0;const _0x17a97e=helpers['model']['generateAdminNotiData']({'type':ADMIN_NOTI_TYPES[_0x388dcd(0x1ba)],'payload':{'user_id':_0x2ffe67,'card_number':_0xce37a0['card_number']},'emails':[]});return models[_0x388dcd(0x1fb)][_0x388dcd(0x1cc)](_0x17a97e);})['then'](_0x2a7e18=>{const _0x5d9094=_0x11b070;return{'status':!![],'message':_0x5d9094(0x1eb)};});};const manageVerificationStatusOfUsers=(_0x463d75,_0x31eb9f)=>{const _0xb260cf=_0x145517,_0x145261=_0x463d75[0x0]['card_number'];return Promise['all'](_0x463d75[_0xb260cf(0x1a3)](_0xbe07b4=>User[_0xb260cf(0x1b2)]({..._0xbe07b4,'card_verified':_0xbe07b4['id']===_0x31eb9f?0x1:0x0,'card_number':_0xbe07b4['id']===_0x31eb9f?_0x145261:'','card_img_url':_0xbe07b4['id']===_0x31eb9f?_0xbe07b4[_0xb260cf(0x1fc)]:''})))[_0xb260cf(0x17e)](_0x31b0c3=>_0x31b0c3)[_0xb260cf(0x19c)](_0x3492ab=>{return console['log']('[Users\x20verify\x20status]\x20error',_0x3492ab),![];});},processChatroomToCard=async(_0x484d71,_0x1e3b73)=>{const _0x439e2a=_0x145517,_0x30d7b9=await User[_0x439e2a(0x164)](_0x1e3b73);return Promise['all'](_0x484d71[_0x439e2a(0x1a3)](async _0x4834ab=>{const _0x35ed5c=_0x439e2a,_0x57d2d9=JSON[_0x35ed5c(0x1e2)](_0x4834ab[_0x35ed5c(0x1ae)]),_0x5cca58=![];let _0x3e5f48={};if(!_0x5cca58)_0x3e5f48={'user_ids':JSON['stringify']([_0x57d2d9[0x0],_0x1e3b73])};else{if(_0x57d2d9[_0x57d2d9[_0x35ed5c(0x162)]-0x1]!==_0x1e3b73){console['log'](_0x35ed5c(0x1ad));const _0x42f968=await models[_0x35ed5c(0x202)]['lastMsgInChat'](_0x4834ab['id']),_0x5af0e8=JSON['parse'](_0x4834ab[_0x35ed5c(0x180)]||'[]'),_0x130040=JSON[_0x35ed5c(0x1e2)](_0x4834ab[_0x35ed5c(0x193)]||'[]');_0x3e5f48=checkDuplicatedOwner({'user_ids':[..._0x57d2d9,_0x1e3b73],'isTransfered':!![],'lastMsgIdOnTransfer':[..._0x5af0e8,_0x42f968?_0x42f968['id']:0x0],'last_messages':[..._0x130040,{'msg':_0x42f968[_0x35ed5c(0x202)],'time':_0x42f968[_0x35ed5c(0x1da)]}]});}else console[_0x35ed5c(0x1ee)](_0x35ed5c(0x172)),_0x3e5f48={'card_number':_0x4834ab[_0x35ed5c(0x1d0)]};}return _0x3e5f48['id']=_0x4834ab['id'],_0x3e5f48[_0x35ed5c(0x1de)]=0x1,Promise['all']([models[_0x35ed5c(0x19e)][_0x35ed5c(0x1b2)](_0x3e5f48),models[_0x35ed5c(0x202)][_0x35ed5c(0x1f1)](_0x4834ab['id'],_0x1e3b73)]);}))[_0x439e2a(0x17e)](([[_0x35c8dc]])=>[_0x35c8dc])[_0x439e2a(0x19c)](_0x1eb1c4=>{const _0x31bc28=_0x439e2a;return console[_0x31bc28(0x1ee)](_0x31bc28(0x159),_0x1eb1c4),![];});},checkDuplicatedOwner=_0x4da246=>{const _0x94e57a=_0x145517;let {user_ids:_0x62d321,isTransfered:_0x789645,lastMsgIdOnTransfer:_0x2229a7,last_messages:_0x5cff82}=_0x4da246;const _0x54427e=_0x62d321[_0x62d321[_0x94e57a(0x162)]-0x1];if(_0x62d321[_0x94e57a(0x162)]>0x3){let _0x27ebd6=_0x62d321['indexOf'](_0x54427e);_0x27ebd6>0x0&&_0x27ebd6<_0x62d321[_0x94e57a(0x162)]-0x1&&(user[_0x94e57a(0x177)][_0x94e57a(0x1b8)](_0x27ebd6,0x1),_0x2229a7[_0x94e57a(0x1b8)](_0x27ebd6-0x2,0x1),_0x5cff82[_0x94e57a(0x1b8)](_0x27ebd6-0x1,0x1));}return{'user_ids':JSON[_0x94e57a(0x1b0)](_0x62d321),'isTransfered':_0x789645,'lastMsgIdOnTransfer':JSON[_0x94e57a(0x1b0)](_0x2229a7),'last_messages':JSON[_0x94e57a(0x1b0)](_0x5cff82)};},unverifyCardChats=_0x5f0700=>{const _0x3cbb98=_0x145517;return Promise[_0x3cbb98(0x183)](_0x5f0700[_0x3cbb98(0x1a3)](_0x2c8f9b=>{const _0x228040=_0x3cbb98;_0x2c8f9b[_0x228040(0x1de)]=0x0;const _0x12bdcf=JSONParser(_0x2c8f9b[_0x228040(0x1ae)]);return _0x2c8f9b[_0x228040(0x1ae)]=JSONStringify([_0x12bdcf[0x0]]),Promise[_0x228040(0x183)]([models[_0x228040(0x19e)][_0x228040(0x1b2)](_0x2c8f9b),models[_0x228040(0x202)][_0x228040(0x1f1)](_0x2c8f9b['id'],0x0)]);}))[_0x3cbb98(0x17e)](([[_0x3ab683,_0x40c7c6]])=>[_0x3ab683]);},generateUsername=async _0x5c51cc=>{const _0x4b44ba=_0x145517;if(_0x5c51cc[_0x4b44ba(0x1ec)]('@'))_0x5c51cc=_0x5c51cc[_0x4b44ba(0x18d)]('@')[0x0];return User[_0x4b44ba(0x1f7)](_0x5c51cc)[_0x4b44ba(0x17e)](_0x83a468=>{const _0x2619cb=_0x4b44ba;if(!_0x83a468)return _0x5c51cc;else return generateUsername(_0x5c51cc+helpers[_0x2619cb(0x188)][_0x2619cb(0x1d4)](0x3));});};exports[_0x145517(0x1a9)]=generateUsername;
+const { Validator } = require("node-input-validator");
+const CONSTS = require('../constants/socket.constant');
+const NOTI_TYPES = require('../constants/notification.constant');
+const { LOGIN_MODE } = require('../constants/common.constant');
+const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
+const models = require("../models/index");
+const User = require("../models/user.model");
+const helpers = require('../helpers');
+
+const EmailTemplate = require("../models/emailTemplate.model");
+const { generateTZTimeString, JSONParser, JSONStringify, respondError, sendMail } = require("../helpers/common.helpers");
+const {
+  comparePassword,
+  generateUserData,
+  genreateAuthToken,
+  generatePassword,
+  getTokenInfo,
+} = require("../helpers/auth.helpers");
+
+exports.register = async (req, res) => {
+  let verifiedUser = null, new_number;
+  new_number = req.body.card_number || "";
+  let cardExists = false, verifiedUserWithCard = 0;
+
+  if (new_number) {
+    [verifiedUser] = await models.user.getByCard(new_number, 1);
+    if (verifiedUser) {
+      cardExists = true; verifiedUserWithCard = verifiedUser.id;
+    }
+  }
+
+  // if card is already verified, then user can't have that card.
+  const userData = generateUserData({ ...req.body, card_number: verifiedUser ? '' : new_number });
+
+  return generatePassword(userData.password)
+    .then(encPassword => {
+      if (req.body.login_mode !== LOGIN_MODE.NORMAL && Object.keys(LOGIN_MODE).includes(req.body.login_mode)) {
+        // social register.
+        return {
+          ...userData,
+          password: '',
+          social_pass: JSON.stringify({[req.body.login_mode]: encPassword}),
+        };
+      } else {
+        req.body.login_mode = LOGIN_MODE.NORMAL;
+        return { ...userData, password: encPassword }
+      }
+    })
+    .then(async userModel => {
+      return User.create(userModel)
+    })
+    .then(async user => {
+      // check if user has card number, if true, notify to the chat creator to the card.
+      if (new_number && !verifiedUser) {
+        let _chats = [];
+
+        // notifies the card chat creators that a new user registered with card.
+        await models.chat.getChatToCard({ card_number: user.card_number })
+          .then(chats => {
+            _chats = chats;
+            const sender_ids = chats.map(chat => {
+              const user_ids = JSON.parse(chat.user_ids);
+              return user_ids[0];
+            });
+            return User.getByIds(sender_ids);
+          })
+          .then(senders => {
+            const socketClient = req.app.locals.socketClient;
+            senders.forEach((sender, i) => {
+              if (sender.socket_id) {
+                socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+                  to: sender.socket_id,
+                  event: CONSTS.SKT_REGISTER_WITH_CARD,
+                  args: {
+                    chat: {
+                      ...(models.chat.output(_chats[i])),
+                      user: models.user.output(user),
+                    }
+                  }
+                });
+              }
+            });
+          });
+      } 
+      return Promise.all([
+        user,
+        genreateAuthToken(user)
+      ]);
+    })
+    .then(([user, token]) => res.json({
+      status: true,
+      message: 'success',
+      data: User.output(user, 'PROFILE'),
+      token,
+      cardVerified: {
+        exists: cardExists,
+        user_id: verifiedUserWithCard,
+      },
+    }))
+};
+
+exports.login = (req, res) => {
+  return Promise.all([
+    User.getByEmail(req.body.email_username),
+    User.getByUserName(req.body.email_username),
+  ])
+    .then(async ([userByEmail, userByName]) => {
+      const user = userByEmail || userByName;
+      // process password.
+      let password;
+      if (req.body.login_mode === LOGIN_MODE.NORMAL) {
+        password = user.password;
+      } else {
+        const social_pass = JSON.parse(user.social_pass);
+        password = social_pass[req.body.login_mode];
+
+        if (password === undefined) {
+          user.social_pass = JSON.stringify({
+            ...social_pass,
+            [req.body.login_mode]: await generatePassword(req.body.password),
+          })
+        }
+      }
+      // update some data.
+      if (req.body.device_token) user.device_token = req.body.device_token;
+      if (req.body.location_area) user.location_area = req.body.location_area;
+
+      return Promise.all([
+        user,
+        (req.body.login_mode !== LOGIN_MODE.NORMAL && !password) ? true : comparePassword(req.body.password, password),
+        genreateAuthToken(user),
+        User.save(user),
+        // req.body.device_token !== undefined ? User.save({ 
+        //   ...user, 
+        //   device_token: req.body.device_token, 
+        //   location_area: req.body.location_area || user.location_area,
+        // }) : null
+      ]);
+    })
+    .then(([ user, match, token, updatedUser ]) => {
+      if (match) {
+        return res.json({
+          status: true,
+          message: 'success',
+          data: User.output(updatedUser, 'PROFILE'),
+          token
+        });
+      } else {
+        return res.status(400).json({
+          status: false,
+          message: 'Password does not match!',
+        });
+      }
+    })
+    .catch((error) => respondError(res, error));
+};
+
+exports.forgotPassword = (req, res) => {
+  return Promise.all([
+    User.getByEmail(req.body.email),
+    EmailTemplate.getByIdentifier('forgot_password')
+  ])
+    .then(([user, et]) => {
+      const emailConsent = et.body
+        .replace(new RegExp('%Username%'), user.user_name)
+        .replace(new RegExp('%code%'), req.body.code);
+      return Promise.all([
+        sendMail({
+          from: 'trefla <admin@trefla.com>',
+          to: user.email,
+          subject: et.subject,
+          body: emailConsent,
+        }),
+        User.save({ ...user, recovery_code: req.body.code })
+      ]);
+    })
+    .then(([info, saved]) => {
+      if (info && info.messageId) {
+        return res.json({
+          status: true, 
+          message: 'success', 
+          data: {
+            code: req.body.code,
+            messageId: info.messageId
+          }
+        });
+      } else {
+        return res.json({
+          status: false,
+          message: 'failed',
+          data: info
+        });
+      }
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.resetPassword = (req, res) => {
+  return Promise.all([
+    User.getByEmail(req.body.email),
+    generatePassword(req.body.password)
+  ])
+    .then(([ user, password ]) => {
+      if (user.recovery_code !== req.body.code) {
+        throw Object.assign(new Error('Recovery code does not match!'), { code: 400 });
+      } else {
+        user.password = password;
+        user.recovery_code = '';
+        return User.save(user);
+      }
+    })
+    .then(user => res.json({
+      status: true,
+      message: 'success',
+    }))
+    .catch((error) => respondError(res, error));
+}
+
+exports.getById = (req, res) => {
+  const { id: user_id } = req.params;
+  return User.getById(user_id)
+    .then(user => {
+      user = User.output(user, 'PROFILE');
+      return res.json({
+        status: true,
+        message: 'success',
+        data: user
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.getProfile = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  return User.getById(user_id)
+    .then(user => {
+      user = User.output(user, 'PROFILE');
+      return res.json({
+        status: true,
+        message: 'success',
+        data: user
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.pagination = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  return Promise.all([
+    User.pagination({ limit: req.query.limit || 10, page: req.query.page || 0 }),
+    User.numberOfUsers()
+  ])
+    .then(([users, total]) => res.json({
+      status: true,
+      message: 'success',
+      data: users.map(user => User.output(user, req.query.mode || 'PROFILE')), //.filter(user => user.id !== user_id)
+      pager: {
+        limit: Number(req.query.limit || 10),
+        page: Number(req.query.page || 0),
+        total,
+      },
+      hasMore: (req.query.page || 0) * (req.query.limit || 10) + users.length < total
+    }))
+    .catch(error => respondError(res, error));
+}
+
+exports.cardPagination = (req, res) => {
+  const { uid, role } = getTokenInfo(req);
+  let { limit, page } = req.query;
+  page = Number(page); limit = Number(limit);
+  return Promise.all([
+    User.cardPagination({ limit, page }),
+    User.numberOfCard(),
+  ])
+    .then(([users, total]) => {
+      const hasMore = page * limit + users.length < total;
+      return res.json({
+        status: true,
+        message: 'success',
+        data: users.map(user => User.output(user)),
+        pager: {
+          page, limit, total,
+        },
+        hasMore,
+      });
+    })
+}
+
+exports.updateProfile = async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  let cardExists = false, verifiedUserWithCard = 0;
+
+  
+  let new_number = req.body['card_number'] || "";
+  let old_number;
+  let verifiedUser = null;
+  let cardChats = [];
+
+  // get verified user except 
+  if (new_number) {
+    [verifiedUser] = await User.getByCard(new_number, 1);
+    verifiedUser = verifiedUser && verifiedUser.id !== user_id ? verifiedUser : null;
+  }
+
+  return User.getById(user_id)
+    .then(async user => {
+      old_number = user.card_number || "";
+      if (req.body.card_number === undefined) {
+        new_number = old_number;
+      }
+      
+      const keys = Object.keys(user);
+      keys.forEach(key => {
+        // update fields except card number.
+        if (req.body[key] !== undefined && ["card_number", 'login_mode'].includes(key)) {
+          // skip these field.
+        } else if (req.body[key] !== undefined && ['location_array'].includes(key)) {
+          user[key] = JSON.stringify(req.body[key]);
+        } else if (key === 'profile_done') {
+          user.profile_done = req.body.profile_done !== undefined ? Number(req.body.profile_done) : user.profile_done;
+        } else {
+          user[key] = req.body[key] !== undefined ? req.body[key] : user[key];
+        }
+      });
+      
+      // when user gonna update card_number
+      if (new_number !== old_number && !verifiedUser) {
+        // when there is no verified user, it's possible to update card. But with unverified status.
+        user.card_number = new_number;
+        
+        // update user with card chats changes;
+        if (user.socket_id) {
+          
+          const socketClient = req.app.locals.socketClient;
+          await Promise.all([
+            models.chat.getChatToCard({ card_number: old_number }),
+            models.chat.getChatToCard({ card_number: new_number }),
+          ])
+            .then(([oldChats, newChats]) => {
+              const sender_ids = [0];
+              newChats.forEach(chat => {
+                const user_ids = JSON.parse(chat.user_ids);
+                sender_ids.push(user_ids[0]);
+              });
+              return Promise.all([
+                oldChats, newChats,
+                models.user.getByIds(sender_ids),
+              ])
+            })
+            .then(([ oldChats, newChats, senders ]) => {
+              const userObj = {};
+              senders.forEach(user => {
+                userObj[user.id.toString()] = user;
+              });
+
+              const added = newChats.map(chat => {
+                const sender_id = JSON.parse(chat.user_ids)[0];
+                return {
+                ...(models.chat.output(chat)),
+                user: models.user.output(userObj[sender_id.toString()]),
+              }});
+
+              const removed = oldChats.map(chat => chat.id);
+
+              socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+                to: user.socket_id,
+                event: CONSTS.SKT_CHATLIST_UPDATED,
+                args: {
+                  removed,
+                  added,
+                }
+              })
+            })
+        }
+
+        // if user is already verified with other number, all related card chats will be unverified.
+        if (user.card_verified) {
+          await models.chat.unverifyChatsByCard({ card_number: old_number });
+        }
+        user.card_verified = 0;
+      }
+
+      return User.save(user);
+    })
+    .then(async newUser => {
+      if (new_number && new_number !== old_number && verifiedUser) {
+        cardExists = true; verifiedUserWithCard = verifiedUser.id;
+      }
+
+      return res.json({
+        status: true,
+        message: 'Profile has been updated!',
+        data: User.output(newUser, 'PROFILE'),
+        cardVerified: {
+          exists: cardExists,
+          user_id: verifiedUserWithCard,
+        },
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.updateById = (req, res) => {
+  const { id } = req.params;
+  const { uid, role } = getTokenInfo(req);
+
+  return User.getById(id)
+    .then(user => {
+      const keys = Object.keys(user);
+      keys.forEach(key => {
+        if (['location_array'].includes(key)) {
+          user[key] = req.body[key] ? JSON.stringify(req.body[key]) : user[key];
+        } else {
+          user[key] = req.body[key] !== undefined ? req.body[key] : user[key];
+        }
+      });
+      return User.save(user);
+    })
+    .then(newUser => {
+      return res.json({
+        status: true,
+        message: 'User has been updated!',
+        data: User.output(newUser, 'PROFILE'),
+      });
+    })
+
+}
+
+exports.deleteByIdReq = (req, res) => {
+  let user_id = Number(req.params.id);
+  const { chat, comment, friend, post, report } = req.body.options || {};
+  let _deleted = false;
+  return models.user.deleteById(user_id)
+    .then(deleted => {
+      _deleted = deleted
+      if (!deleted) {
+        throw Object.assign(new Error('Failed to delete user!'), { code: 400 });
+      }
+      return Promise.all([
+        chat ? models.chat.deleteByUser(user_id) : null,
+        comment ? models.comment.deleteByUser(user_id) : null,
+        post ? models.post.deleteByUser(user_id) : null,
+        // friend ? m
+      ]);
+    })
+    .then(([deleteChat, deleteComment, deletePost]) => {
+      return {
+        status: true,
+        message: 'User has been deleted!'
+      };
+    })
+}
+
+exports.verifyUserReq = (req, res) => {
+  const user_id = Number(req.params.id);
+  
+  let _user, _card_number;
+  return User.getById(user_id)
+    .then(user => {
+      if (!user.card_number && !user.card_img_url) {
+        throw Object.assign(new Error("User doesn't have card information!"), { code: 400 });
+      }
+      _user = user;
+      _card_number = user.card_number;
+      return Promise.all([
+        models.user.getByCard(user.card_number),
+        models.chat.getChatToCard({ card_number: user.card_number }),
+      ]);
+    })
+    .then(([users, chats]) => {
+      return Promise.all([
+        manageVerificationStatusOfUsers(users, user_id),
+        processChatroomToCard(chats, user_id),
+      ]);
+    })
+    .then(async ([ users, chats ]) => {
+      // const [verifiedUser] = cardUsers.filter(user => user.id === user_id);
+      const sender_ids = chats.map(chat => {
+        const user_ids = JSON.parse(chat.user_ids);
+        return user_ids[0];
+      }).filter((item, i, ar) => ar.indexOf(item) === i);
+
+      // send socket message to the creator of card chat.
+      await models.user.getByIds(sender_ids)
+        .then(senders => {
+          const socketClient = req.app.locals.socketClient;
+          senders.forEach((sender, i) => {
+            if (sender.socket_id) {
+              // get card chat sender triggered.
+              const [chat] = chats.filter(chat => {
+                const user_ids = typeof chat.user_ids === 'string' ? JSON.parse(chat.user_ids) : chat.user_ids;
+                return user_ids[0] === sender.id;
+              });
+
+              // notify the card chat creators that a user has been verified on interesting card number,
+              socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+                to: sender.socket_id,
+                event: CONSTS.SKT_CARD_VERIFIED,
+                args: {
+                  chat: {
+                    ...(models.chat.output(chat)),
+                    user: models.user.output(_user),
+                  }
+                }
+              });
+            }
+          });
+        })
+      return {
+        status: true,
+        message: 'success',
+        verified: users,
+        chatrooms: chats,
+      };
+    });
+}
+
+exports.verifyUser = ({ user_id, socketClient }) => {
+  // const user_id = Number(req.params.id);
+  
+  let _user, _card_number;
+  return User.getById(user_id)
+    .then(user => {
+      console.log('[verifying user]', user_id)
+      if (!user.card_number && !user.card_img_url) {
+        throw Object.assign(new Error("User doesn't have card information!"), { code: 400 });
+      }
+      _user = user;
+      _card_number = user.card_number;
+      return Promise.all([
+        models.user.getByCard(user.card_number),
+        models.chat.getChatToCard({ card_number: user.card_number }),
+      ]);
+    })
+    .then(([users, chats]) => {
+      return Promise.all([
+        manageVerificationStatusOfUsers(users, user_id),
+        processChatroomToCard(chats, user_id),
+      ]);
+    })
+    .then(async ([ users, chats ]) => {
+      [_user] = users.filter(user => user.id === user_id); // update user after verification
+
+      // const [verifiedUser] = cardUsers.filter(user => user.id === user_id);
+      const sender_ids = chats.map(chat => {
+        const user_ids = JSON.parse(chat.user_ids);
+        return user_ids[0];
+      }).filter((item, i, ar) => ar.indexOf(item) === i);
+
+      // add notification to the new owner
+      const notiModel = helpers.model.generateNotificationData({
+        isFromAdmin: 1,
+        sender_id: 0,
+        receiver_id: user_id,
+        type: NOTI_TYPES.cardVerifyRequestAcceptNotiType,
+        optional_val: _card_number,
+        time: generateTZTimeString(),
+      });
+      const notification = await models.notification.create(notiModel);
+      _user.noti_num ++;
+      await models.user.save(_user);
+
+      if (_user.socket_id) {
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: _user.socket_id,
+          event: CONSTS.SKT_NOTI_NUM_UPDATED,
+          args: {
+            num: _user.noti_num,
+            notification,
+          }
+        });
+      }
+
+      users.filter(user => user.id !== user_id).forEach(async user => {
+        const notiModel = helpers.model.generateNotificationData({
+          isFromAdmin: 1,
+          sender_id: 0,
+          receiver_id: user.id,
+          type: NOTI_TYPES.cardVerifyRequestRejectNotiType,
+          optional_val: _card_number,
+          time: generateTZTimeString(),
+        });
+        const notification = await models.notification.create(notiModel);
+        user.noti_num ++;
+        await models.user.save(user);
+        if (user.socket_id) {
+          socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+            to: user.socket_id,
+            event: CONSTS.SKT_NOTI_NUM_UPDATED,
+            args: {
+              num: user.noti_num,
+              notification,
+            }
+          })
+        }
+      })
+
+      const senders = await models.user.getByIds(sender_ids.length ? sender_ids : [0]);
+
+      console.log('[chat.list.updated] --->');
+      users.filter(user => user.socket_id).forEach(user => {
+        console.log('[chatlist]', user.id, user.user_name, user.card_verified);
+        const removed = [];
+        const added = [];
+
+        if (user.id === user_id) {
+          console.log('[chat list]  added');
+          socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+            to: user.socket_id,
+            event: CONSTS.SKT_CHATLIST_UPDATED,
+            args: {
+              added: chats.map(chat => ({
+                ...(models.chat.output(chat)),
+                user: models.user.output(senders[JSONParser(chat.user_ids)[0].toString()]),
+              })),
+              removed: [],
+              your_name: user.user_name,
+            }
+          })
+        } else {
+          console.log('[chat list]  removed');
+          socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+            to: user.socket_id,
+            event: CONSTS.SKT_CHATLIST_UPDATED,
+            args: {
+              removed: chats.map(chat => chat.id),
+              added: [],
+              your_name: user.user_name,
+            }
+          })
+        }
+      });
+
+      
+      
+
+      // send socket message to the creator of card chat.
+      // await models.user.getByIds(sender_ids)
+      //   .then(senders => {
+          // const socketClient = req.app.locals.socketClient;
+          senders.forEach((sender, i) => {
+            if (sender.socket_id) {
+              // get card chat sender triggered.
+              const [chat] = chats.filter(chat => {
+                const user_ids = typeof chat.user_ids === 'string' ? JSON.parse(chat.user_ids) : chat.user_ids;
+                return user_ids[0] === sender.id;
+              });
+
+              // notify the card chat creators that a user has been verified on interesting card number,
+              socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+                to: sender.socket_id,
+                event: CONSTS.SKT_CARD_VERIFIED,
+                args: {
+                  chat: {
+                    ...(models.chat.output(chat)),
+                    user: models.user.output(_user),
+                  }
+                }
+              });
+            }
+          });
+        // })
+      
+        return {
+        status: true,
+        message: 'success',
+        verified: users,
+        chatrooms: chats,
+      };
+    });
+}
+
+exports.unverifyUserReq = (req, res) => {
+  const { id: user_id } = req.params;
+  let _user;
+  return User.getById(user_id)
+    .then(user => {
+      const { card_number, card_verified } = user;
+      user.card_verified = 0;
+      return Promise.all([
+        User.save(user),
+        models.chat.getChatToCard(card_number),
+      ]);
+    })
+    .then(([user, cardChats]) => {
+      if (cardChats.length) {
+        return unverifyCardChats(cardChats);
+        // return Promise.all(cardChats.map(chat => models.chat.save({ ...chat, card_verified: 0 })));
+      }
+    })
+    .then(() => ({
+      status: true,
+      message: 'User has been unverified!',
+    }));
+}
+
+exports.banReplyReq = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+
+  return User.getById(user_id)
+    .then(user => {
+      user.ban_reply = req.body.reply;
+      return User.save(user);
+    })
+    .then(user => ({
+      status: true,
+      message: "Thank you! We will get back to you soon."
+    }));
+}
+
+exports.blockUser = ({ fromId, toId, socketClient }) => {
+  let blocker;
+  return models.user.getById(fromId)
+    .then(fromUser => {
+      let blackList = helpers.common.JSONParser(fromUser.black_list);
+      if (typeof blackList !== 'object') blackList = [];
+      if (!blackList.includes(toId)) blackList.push(toId);
+      fromUser.black_list = blackList;
+      return models.user.save(fromUser);      
+    })
+    .then(fromUser => {
+      blocker = fromUser;
+      let blackList = helpers.common.JSONParser(fromUser.black_list);
+      if (typeof blackList !== 'object') blackList = [];
+      return models.user.getByIds(blackList);
+    })
+    .then(blockers => {
+      const [blockee] = blockers.filter(user => user.id === toId)
+      if (blockee && blockee.socket_id) {
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, { 
+          users: blockee.socket_id, 
+          event: CONSTS.SKT_BLOCK_BLOCKED,
+          args: {
+            message: 'You got blocked!',
+            user: User.output(blocker)
+          }
+        });
+      }
+      return {
+        status: true,
+        message: `You blocked '${blockee.user_name}'`,
+        black_list: blockers.map(user => models.user.output(user))
+      }
+    })
+}
+
+exports.unblockUser = ({ fromId, toId, socketClient }) => {
+  let blocker;
+  return models.user.getById(fromId)
+    .then(fromUser => {
+      let blackList = helpers.common.JSONParser(fromUser.black_list || '[]');
+      if (blackList.includes(toId)) blackList.splice(blackList.indexOf(toId), 1);
+      fromUser.black_list = blackList;
+      return models.user.save(fromUser);      
+    })
+    .then(fromUser => {
+      blocker = fromUser;
+      let blackList = helpers.common.JSONParser(fromUser.black_list);
+      if (typeof blackList !== 'object') blackList = [];
+      return Promise.all([
+        models.user.getByIds(blackList),
+        models.user.getById(toId),
+      ]);
+    })
+    .then(([blockers, blockee]) => {
+      if (blockee && blockee.socket_id) {
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, { 
+          users: blockee.socket_id, 
+          event: CONSTS.SKT_BLOCK_BLOCKED,
+          args: {
+            message: "You got unblocked!",
+            user: User.output(blocker)
+          }
+        });
+      }
+      return {
+        status: true,
+        message: `You unblocked '${blockee.user_name}'`,
+        black_list: blockers.map(user => models.user.output(user))
+      }
+    })
+}
+
+exports.createIDTransferReq = async ({ user_id, card_number, socketClient }) => {
+  let _user, verifiedUser;
+  [verifiedUser] = await models.user.getByCard(card_number, 1);
+
+  return User.getById(user_id)
+    .then(user => {
+      _user = user;
+
+      // add notification for admin.
+      const adminNotiModel = helpers.model.generateAdminNotiData({ 
+        type: ADMIN_NOTI_TYPES.ID_TRANSFER, 
+        payload: {
+          from: verifiedUser.id,
+          to: user.id,
+          card_number,
+        }
+      });
+
+      // add a notification for origin owner
+      const notiModel = helpers.model.generateNotificationData({
+        sender_id: user_id,
+        receiver_id: verifiedUser.id,
+        type: NOTI_TYPES.cardTransferRequestNotiType,
+        optional_val: card_number,
+      });
+      
+      // increase noti_num of the verified user.
+      verifiedUser.noti_num ++;
+      
+      return Promise.all([
+        models.user.save(verifiedUser),
+        models.notification.create(notiModel),
+        models.adminNotification.create(adminNotiModel),
+      ])
+    })
+    .then(([owner, notification, adminNoti]) => {
+      // send socket to owner
+      if (verifiedUser.socket_id) {
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: verifiedUser.socket_id,
+          event: CONSTS.SKT_NOTI_NUM_UPDATED,
+          args: { 
+            num: verifiedUser.noti_num,
+            notification: {
+              ...(models.notification.output(notification)),
+              sender: models.user.output(_user),
+            }
+          }
+        });
+      }
+      return {
+        status: true,
+        message: "You request has been received!",
+      }
+    });
+}
+
+exports.replyToTransferRequest = async ({ user_id, noti_id, accept, socketClient, ...args }) => {
+  let _user, _notification;
+  return Promise.all([
+    models.user.getById(user_id),
+    models.notification.getById(noti_id),
+  ])
+    .then(([ user, notification ]) => {
+      _user = user; _notification = notification;
+      if (user.card_number !== notification.optional_val || notification.receiver_id !== user_id) {
+        throw Object.assign(new Error("You have no permission to reply this request!"));
+      }
+      return models.user.getById(notification.sender_id);
+    })
+    .then((sender) => {
+      if (!sender) throw Object.assign(new Error("Transfer requester has been deleted!"));
+      // notification
+      const notiModel = helpers.model.generateNotificationData({
+        sender_id: user_id,
+        receiver_id: sender.id,
+        type: accept ? NOTI_TYPES.cardTransferRequestAcceptNotiType : NOTI_TYPES.cardTransferRequestRejctNotiType,
+        optional_val: _notification.optional_val,
+      });
+
+      _user.noti_num ++;
+
+      return Promise.all([
+        sender,
+        models.notification.create(notiModel),
+        models.adminNotification.deleteTransferRequest({ from: sender.id, to: user_id }),
+        models.user.save(_user),
+      ]);
+    })
+    .then(async ([sender, notification, adminNoti, me]) => {
+      // socket to requester.
+      if (sender.socket_id) {
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: sender.socket_id,
+          event: CONSTS.SKT_NOTI_NUM_UPDATED,
+          args: { 
+            num: _user.noti_num,
+            notification: {
+              ...(models.notification.output(notification)),
+              sender: models.user.output(_user),
+            }
+          }
+        });
+      }
+
+      if (accept) {
+        sender.card_number = notification.optional.val;
+        await models.user.save(sender);
+        await this.verifyUser({ user_id, socketClient });
+
+        // check change of card chat list
+        if (_user.socket_id || sender.socket_id) {
+          await Promise.all([
+            _user.card_number ? models.chat.getChatToCard({ card_number: _user.card_number }) : [],
+            models.chat.getChatToCard({ card_number: notification.optional_val }),
+          ])
+            .then(([ oldChats, newChats ]) => {
+              const sender_ids = [0];
+              newChats.forEach(chat => {
+                const user_ids = JSON.parse(chat.user_ids);
+                sender_ids.push(user_ids[0]);
+              });
+              return Promise.all([
+                oldChats, newChats,
+                models.user.getByIds(sender_ids)
+              ]);
+            })
+            .then(([ oldChats, newChats, senders ]) => {
+              const userObj = {};
+              senders.forEach(user => {
+                userObj[user.id.toString()] = user;
+              });
+
+              // send socket to the requester
+              if (sender.socket_id) {
+                socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+                  to: sender.socket_id,
+                  event: CONSTS.SKT_CHATLIST_UPDATED,
+                  args: {
+                    added: newChats.map(chat => {
+                      const sender_id = JSON.parse(chat.user_ids)[0];
+                      return {
+                        ...(models.chat.output(chat)),
+                        user: models.user.output(userObj[sender_id.toString()]),
+                      };
+                    }),
+                    removed: oldChats.map(chat => chat.id),
+                  }
+                });
+              }
+
+              if (sender.socket_id) {
+                socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+                  to: sender.socket_id,
+                  event: CONSTS.SKT_CHATLIST_UPDATED,
+                  args: {
+                    added: [],
+                    removed: newChats.map(chat => chat.id),
+                  }
+                })
+              }
+            })
+        }
+      }
+
+      return {
+        status: true,
+        message: "You replied to the card transfer request!",
+      };
+    })
+}
+
+exports.createVerifyIdReq = async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  let _user;
+  return models.user.getById(user_id)
+    .then(user => {
+      if (!user) throw Object.assign(new Error('User does not exist!'), { code: 400 });
+      if (!user.card_number) throw Object.assign(new Error("No valid card number found!"), { code: 400 });
+      if (user.card_verified) throw Object.assign(new Error("You're already verified!"), { code: 400 });
+      _user = user;
+
+      const verifyReqModel = helpers.model.generateAdminNotiData({
+        type: ADMIN_NOTI_TYPES.VERIFY_ID,
+        payload: { user_id, card_number: user.card_number },
+        emails: [],
+      });
+      return models.adminNotification.create(verifyReqModel);
+    })
+    .then(adminNoti => {
+      return {
+        status: true,
+        message: 'We received your request!',
+      };
+    })
+}
+
+const manageVerificationStatusOfUsers = (users, user_id) => {
+  const card_number = users[0].card_number;
+  return Promise.all(users.map(user => User.save({
+    ...user,
+    card_verified: user.id === user_id ? 1 : 0,
+    card_number:  user.id === user_id ? card_number : '',
+    card_img_url: user.id === user_id ? user.card_img_url : '',
+  })))
+  .then((users) => users)
+  .catch(error => {
+    console.log('[Users verify status] error', error);
+    return false
+  });
+}
+
+const processChatroomToCard = async (chats, user_id) => {
+  const user = await User.getById(user_id);
+
+  return Promise.all(chats.map(async chat => {
+    const chat_users = JSON.parse(chat.user_ids);
+    const isTransfer = false; // chat_users.length > 1;
+
+    let updateData = {};
+    if (!isTransfer) {
+      updateData = {
+        user_ids: JSON.stringify([chat_users[0], user_id])
+      };
+
+    } else if (chat_users[chat_users.length -1] !== user_id) {
+      console.log('[ID Transfer] acceptable');
+      const lastMsg = await models.message.lastMsgInChat(chat.id);
+      const lastMsgIdOnTransfer = JSON.parse(chat.lastMsgIdOnTransfer || '[]');
+      const last_messages = JSON.parse(chat.last_messages || '[]');
+      updateData = checkDuplicatedOwner({
+        user_ids: [...chat_users, user_id],
+        isTransfered: true,
+        lastMsgIdOnTransfer: [...lastMsgIdOnTransfer, lastMsg ? lastMsg.id : 0],
+        last_messages: [...last_messages, {
+          msg: lastMsg.message,
+          time: lastMsg.time,
+        }]
+      });
+    } else {
+      console.log('[ID transfer] same id with last owner!')
+      updateData = {
+        card_number: chat.card_number,
+      };
+    }
+    updateData.id = chat.id;
+    updateData.card_verified = 1;
+
+    return Promise.all([
+      models.chat.save(updateData),
+      models.message.updateReceiverInCardChat(chat.id, user_id),
+    ]);
+  }))
+  .then(([[chat]]) => [chat])
+  .catch(error => {
+    console.log('[Process card chats] error', error);
+    return false;
+  });
+}
+
+const checkDuplicatedOwner = (data) => {
+  let { user_ids, isTransfered, lastMsgIdOnTransfer, last_messages } = data;
+  const current_owner = user_ids[user_ids.length - 1];
+  if (user_ids.length > 3) {
+    let dupId = user_ids.indexOf(current_owner);
+    if (dupId > 0 && dupId < user_ids.length - 1) {
+      user.ids.splice(dupId, 1);
+      lastMsgIdOnTransfer.splice(dupId - 2, 1);
+      last_messages.splice(dupId - 1, 1);
+    }
+  }
+  return {
+    user_ids: JSON.stringify(user_ids),
+    isTransfered,
+    lastMsgIdOnTransfer: JSON.stringify(lastMsgIdOnTransfer),
+    last_messages: JSON.stringify(last_messages),
+  };
+}
+
+const unverifyCardChats = (chats) => {
+  return Promise.all(chats.map(chat => {
+    chat.card_verified = 0;
+    const user_ids = JSONParser(chat.user_ids);
+    chat.user_ids = JSONStringify([user_ids[0]]);
+
+    return Promise.all([
+      models.chat.save(chat),
+      models.message.updateReceiverInCardChat(chat.id, 0),
+    ]);
+  }))
+  .then(([[chat, updated]]) => [chat]);
+}
+
+const generateUsername = async (username) => {
+  if (username.includes('@')) username = username.split('@')[0];
+
+  return User.getByUserName(username)
+    .then(user => {
+      if (!user) return username;
+      else return generateUsername(username + helpers.common.generateRandomString(3));
+    })
+}
+
+exports.generateUsername = generateUsername;
+
+
+

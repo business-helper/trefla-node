@@ -1,1 +1,44 @@
-const _0x34cc=['C29JA2v0q2XPzw50','Bg9JywXZ','Ahr0CdOVl2XVy2fSAg9ZDdO','lI9YzxnVBhzLCNm','Dg9Rzw49su5orvjFq0Xjru5u','l2nOyxq','mJuXwLrUAujm','l3bOB3rV','mtm4mtK2m1zvD1vIuW','lI9YB3v0zxmVBgfUzY5YB3v0zxm','l3jLCg9YDa','otzUuxrwDLK','C29JA2v0lMLVlwnSAwvUDa','ndC2nZeZq2Xtv3Le','l2fKBwLU','lI9YB3v0zxmVCMvWB3j0lNjVDxrLCW','lI9YB3v0zxmVCg9ZDc5YB3v0zxm','ndqXmJK3yNPNEMv3','l2j1zW','zxHWB3j0CW','mu9QuLDjAG','y29YCW','DxnL','mMvKCfzwuG','nZmXndm0rLDIEhfQ','mwfMBNbJCa','l3vZzxi','lI9YB3v0zxmVCgHVDg8UCM91DgvZ','mtq4ntK4mxb4tvDsua','lI9YB3v0zxmVDxnLCI5YB3v0zxm','lI9YB3v0zxmVywrTAw4UCM91DgvZ','l2LUAxqTzgf0yq','lI9YB3v0zxmVy2HHDc5YB3v0zxm','lI9JB25MAwCVyxbWlMnVBMzPzW','lI9YB3v0zxmVyNvNlNjVDxrLCW','l25VDgLMAwnHDgLVBG','lI9YB3v0zxmVy29TBwvUDc5YB3v0zxm','mtiYodm3ovL1EwPWsq','zxHWCMvZCW'];const _0x19b2=function(_0x28e974,_0x37b75e){_0x28e974=_0x28e974-0xd5;let _0x34cc56=_0x34cc[_0x28e974];if(_0x19b2['QBepqg']===undefined){var _0x19b2fb=function(_0xe6d2a9){const _0x44ee6d='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x121f7d='';for(let _0x537441=0x0,_0x1c0cda,_0x3f7d31,_0x170740=0x0;_0x3f7d31=_0xe6d2a9['charAt'](_0x170740++);~_0x3f7d31&&(_0x1c0cda=_0x537441%0x4?_0x1c0cda*0x40+_0x3f7d31:_0x3f7d31,_0x537441++%0x4)?_0x121f7d+=String['fromCharCode'](0xff&_0x1c0cda>>(-0x2*_0x537441&0x6)):0x0){_0x3f7d31=_0x44ee6d['indexOf'](_0x3f7d31);}return _0x121f7d;};_0x19b2['RheETT']=function(_0x3e9663){const _0x2c2464=_0x19b2fb(_0x3e9663);let _0x40ec5a=[];for(let _0x5d33d6=0x0,_0x364a2e=_0x2c2464['length'];_0x5d33d6<_0x364a2e;_0x5d33d6++){_0x40ec5a+='%'+('00'+_0x2c2464['charCodeAt'](_0x5d33d6)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x40ec5a);},_0x19b2['ZXvEqO']={},_0x19b2['QBepqg']=!![];}const _0x5e5bbb=_0x34cc[0x0],_0x3b2990=_0x28e974+_0x5e5bbb,_0x3044b8=_0x19b2['ZXvEqO'][_0x3b2990];return _0x3044b8===undefined?(_0x34cc56=_0x19b2['RheETT'](_0x34cc56),_0x19b2['ZXvEqO'][_0x3b2990]=_0x34cc56):_0x34cc56=_0x3044b8,_0x34cc56;};const _0x344e38=_0x19b2;(function(_0x224424,_0x14b939){const _0x482ecb=_0x19b2;while(!![]){try{const _0x3b89b8=parseInt(_0x482ecb(0xe3))+-parseInt(_0x482ecb(0xdc))*-parseInt(_0x482ecb(0xe1))+-parseInt(_0x482ecb(0xef))*parseInt(_0x482ecb(0xde))+-parseInt(_0x482ecb(0xe7))*-parseInt(_0x482ecb(0xed))+-parseInt(_0x482ecb(0xfb))*parseInt(_0x482ecb(0xea))+parseInt(_0x482ecb(0xf2))+parseInt(_0x482ecb(0xee));if(_0x3b89b8===_0x14b939)break;else _0x224424['push'](_0x224424['shift']());}catch(_0x5bdc84){_0x224424['push'](_0x224424['shift']());}}}(_0x34cc,0xf1d0c));const express=require(_0x344e38(0xd5)),appV1=express(),cors=require(_0x344e38(0xeb)),appConfig=require(_0x344e38(0xf7)),adminRouters=require(_0x344e38(0xf4)),authRouters=require('./routes/auth.routes'),bugRouters=require(_0x344e38(0xf8)),chatRouters=require(_0x344e38(0xf6)),commentRouters=require(_0x344e38(0xfa)),langRouters=require(_0x344e38(0xdf)),notificationRouters=require('./routes/notification.routes'),photoRouters=require(_0x344e38(0xf1)),postRouters=require(_0x344e38(0xe6)),reportRouters=require(_0x344e38(0xe5)),userRouters=require(_0x344e38(0xf3)),{getInitData}=require(_0x344e38(0xd9));appV1['use'](cors({'origin':'*','optionsSuccessStatus':0xc8})),appV1[_0x344e38(0xec)](_0x344e38(0xe4),adminRouters),appV1[_0x344e38(0xec)]('/lang',langRouters),appV1[_0x344e38(0xec)]('/auth',authRouters),appV1['use'](_0x344e38(0xe8),bugRouters),appV1[_0x344e38(0xec)](_0x344e38(0xdb),chatRouters),appV1[_0x344e38(0xec)]('/comment',commentRouters),appV1['use'](_0x344e38(0xf9),notificationRouters),appV1['use'](_0x344e38(0xdd),photoRouters),appV1[_0x344e38(0xec)]('/post',postRouters),appV1['use'](_0x344e38(0xe0),reportRouters),appV1['use'](_0x344e38(0xf0),userRouters),appV1['post'](_0x344e38(0xf5),getInitData);const socketClient=require(_0x344e38(0xe2))(_0x344e38(0xd8)+appConfig['port'],{'query':_0x344e38(0xda)});appV1[_0x344e38(0xd7)][_0x344e38(0xd6)]=socketClient,module[_0x344e38(0xe9)]=appV1;
+const express = require("express");
+const appV1 = express();
+const cors = require('cors');
+
+const appConfig = require('./config/app.config');
+
+// Routers
+const adminRouters = require('./routes/admin.routes');
+const authRouters = require('./routes/auth.routes');
+const bugRouters = require('./routes/bug.routes');
+const chatRouters = require('./routes/chat.routes');
+const commentRouters = require('./routes/comment.routes');
+const langRouters = require('./routes/lang.routes');
+const notificationRouters = require('./routes/notification.routes');
+const photoRouters = require('./routes/photo.routes');
+const postRouters = require('./routes/post.routes');
+const reportRouters = require('./routes/report.routes');
+const userRouters = require('./routes/user.routes');
+// Resolvers
+const { getInitData } = require('./resolvers');
+
+appV1.use(cors({
+  origin: '*',
+  optionsSuccessStatus: 200
+}));
+
+appV1.use('/admin', adminRouters);
+appV1.use('/lang', langRouters);
+appV1.use('/auth', authRouters);
+appV1.use('/bug', bugRouters);
+appV1.use('/chat', chatRouters);
+appV1.use('/comment', commentRouters);
+appV1.use('/notification', notificationRouters);
+appV1.use('/photo', photoRouters);
+appV1.use('/post', postRouters);
+appV1.use('/report', reportRouters);
+appV1.use('/user', userRouters);
+
+appV1.post('/init-data', getInitData);
+
+const socketClient = require('socket.io-client')(`http://localhost:${appConfig.port}`, {query: `token=INNER_CLIENT`});
+appV1.locals.socketClient = socketClient;
+
+module.exports = appV1;
