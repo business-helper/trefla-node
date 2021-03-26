@@ -176,9 +176,7 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
     let chatrooms = await Chat.getByUserIds({ sender_id: user_id, receiver_id: receiver.id, isForCard: 0 });
     chatrooms = chatrooms.filter(chat => {
       const user_ids = JSON.parse(chat.user_ids);
-      return ['COMMENT', 'POST'].includes(payload.from_where) 
-        ?  (user_ids.length === 2) && (chat.from_where === payload.from_where) && (chat.target_id === payload.target_id)
-        : user_ids.length === 2;
+      return ['COMMENT', 'POST', 'NONE'].includes(chat.from_where) && (user_ids.length === 2);
     })
     if (chatrooms.length > 0) {
       _chat = chatrooms[0];
@@ -193,11 +191,11 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
       const msgObj = message ? Message.create({ ...message, chat_id: chat.id }) : null
       chat = Chat.output(chat);
       chat.user = User.output(receiver);
-      if (['POST', 'COMMENT'].includes(payload.from_where) && payload.target_id) {
-        const modelName = payload.from_where.toLowerCase();
-        let target = await models[modelName].getById(payload.target_id);
+      if (['POST', 'COMMENT'].includes(chat.from_where) && chat.target_id) {
+        const modelName = chat.from_where.toLowerCase();
+        let target = await models[modelName].getById(chat.target_id);
+        const target_user = await models.user.getById(target.user_id);
         target = models[modelName].output(target);
-        const target_user = await models.user.getById(target.post_user_id);
         target.user = models.user.output(target_user);
         if (target) chat.preview_data = target;
       }
@@ -207,10 +205,6 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
         data: chat
       });
     })
-    // .catch((error) => ({
-    //   status: false,
-    //   message: error.message
-    // }));
 }
 
 exports.createCardChatReq = async (user_id, payload, isGuest) => {

@@ -163,14 +163,22 @@ const getChatSummryV2 = async (req, res) => {
         if (['COMMENT', 'POST'].includes(chat.from_where)) {
           const modelName = chat.from_where.toLowerCase();
           const target = await models[modelName].getById(chat.target_id);
-          const target_user = await models.user.getById(target.user_id);
-          chat = {
-            ...chat,
-            preview_data: {
-              ...models[modelName].output(target),
-              user: models.user.output(target_user),
+          if (target) {
+            const target_user = await models.user.getById(target.user_id);
+            chat = {
+              ...chat,
+              preview_data: {
+                ...models[modelName].output(target),
+                user: models.user.output(target_user),
+              }
+            }
+          } else {
+            chat = {
+              ...chat,
+              preview_data: null,
             }
           }
+
         }
 
         return {
