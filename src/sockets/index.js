@@ -313,7 +313,17 @@ const bootstrapSocket = (io) => {
            * @for normal chat.
            */
           if (chat.isForCard === 0) {
-            socket.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_RECEIVE_MSG, {
+            // socket.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_RECEIVE_MSG, {
+            //   message: {
+            //     ...msg,
+            //     user: models.user.output(me) // sender
+            //   },
+            //   chat: {
+            //     ...chat,
+            //     user: models.user.output(me)
+            //   }
+            // });
+            io.to(receiver.socket_id).emit(CONSTS.SKT_RECEIVE_MSG, {
               message: {
                 ...msg,
                 user: models.user.output(me) // sender
