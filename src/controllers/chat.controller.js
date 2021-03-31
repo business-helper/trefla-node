@@ -339,7 +339,9 @@ exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => 
       message = Message.output(message);
       // message.sender = User.output(_sender);
       // message.receiver = User.output(_receiver);
-      return { message, chat: Chat.output(chat), unread_updated };
+      chat = Chat.output(chat);
+      chat.preview_data = helpers.common.populateChatSource(chat.sources, models);
+      return { message, chat, unread_updated };
     })
 }
 
