@@ -251,7 +251,7 @@ const generateRandomString = (length) => {
 
 const populateChatSource = async (sources = [], models) => {
   return Promise.all(sources.map(async source => {
-    const { from_where, target_id } = source;
+    const { from_where, target_id, last_msg_id } = source;
     if (from_where && target_id && ['POST', 'COMMENT'].includes(from_where)) {
       const modelName = from_where.toLowerCase();
       const target = await models[modelName].getById(target_id);
@@ -262,7 +262,7 @@ const populateChatSource = async (sources = [], models) => {
 
       return {
         data: { ...(models[modelName].output(target)), user: models.user.output(user) },        
-        from_where, target_id,
+        from_where, target_id, last_msg_id,
       };
     } else {
       return null;
