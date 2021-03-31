@@ -4,9 +4,29 @@ const Chat = require("../models/chat.model");
 const User = require("../models/user.model");
 const Message = require('../models/message.model');
 const models = require('../models');
+const helpers = require('../helpers');
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { bool2Int, chatPartnerId, getTotalLikes, generateTZTimeString, respondError } = require("../helpers/common.helpers");
 const { generateChatData, generateMessageData, getLastMsgIndexOfChat } = require('../helpers/model.helpers');
+
+const activity = {
+  processChatSource: ({ chat, from_where, target_id }) => {
+    if (from_where && target_id && ['POST', 'COMMENT'].includes(from_where)) {
+      const sources = JSON.parse(chat.sources || '[]');
+      let lastIndex = -1;
+      sources.forEach((source, i) => {
+        if (source.from_where === from_where && source.target_id === target_id.toString()) {
+          lastIndex = i;
+        }
+      });
+      if (lastIndex < sources.length - 1) {
+        sources.push({ from_where, target_id });
+      }
+      chat.sources = JSON.stringify(sources);
+    }
+    return chat;
+  },
+}
 
 
 exports.create = async (req, res) => {
@@ -180,25 +200,22 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
     })
     if (chatrooms.length > 0) {
       _chat = chatrooms[0];
+      _chat = activity.processChatSource({ chat: _chat, ...payload });
+      _chat.accept_status = !isGuest ? 1 : 0;
     }
   }
 
   return Promise.all([
-    _chat ? _chat : Chat.create(model),
+    _chat ? Chat.save(_chat) : Chat.create(model),
     User.getById(user_id),
   ])
     .then(async ([chat, sender]) => {
       const msgObj = message ? Message.create({ ...message, chat_id: chat.id }) : null
       chat = Chat.output(chat);
       chat.user = User.output(receiver);
-      if (['POST', 'COMMENT'].includes(chat.from_where) && chat.target_id) {
-        const modelName = chat.from_where.toLowerCase();
-        let target = await models[modelName].getById(chat.target_id);
-        const target_user = await models.user.getById(target.user_id);
-        target = models[modelName].output(target);
-        target.user = models.user.output(target_user);
-        if (target) chat.preview_data = target;
-      }
+
+      chat.preview_data = await helpers.common.populateChatSource(chat.sources, models);
+
       return ({
         status: true,
         message: 'Chat room created!',

@@ -57,7 +57,7 @@ const bootstrapSocket = (io) => {
     })
 
     socket.on('get_token', () => {
-      socket.emit('get_token', { token: socket_token || "" });
+      socket.emit('get_token', { token: token || "" });
     })
 
     // connection request to a user.

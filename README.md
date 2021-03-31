@@ -1,5 +1,26 @@
 # Trefla Back-End(npm)
 
+
+## Database Migration
+
+- [package](https://www.npmjs.com/package/db-migrate)
+- [documentation](https://db-migrate.readthedocs.io/en/latest/)
+
+- [Data Types](https://github.com/db-migrate/shared/blob/master/data_type.js)
+
+### Installation
+```bash
+npm install -g db-migrate
+
+```
+
+### Commands
+```bash
+db-migrate create migrate-in-table
+db-migrate up
+```
+
+
 ## Tech stacks
 
 - node.js
@@ -12,6 +33,7 @@
 ### verifyV1 (2020.12.05)
 
 - card chat: add user to user_ids in chat on each verification & card transfer
+
 
 
 
