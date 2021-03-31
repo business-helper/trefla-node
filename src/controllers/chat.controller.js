@@ -10,7 +10,7 @@ const { bool2Int, chatPartnerId, getTotalLikes, generateTZTimeString, respondErr
 const { generateChatData, generateMessageData, getLastMsgIndexOfChat } = require('../helpers/model.helpers');
 
 const activity = {
-  processChatSource: ({ chat, from_where, target_id }) => {
+  processChatSource: ({ chat, from_where, target_id, last_msg_id = 0 }) => {
     if (from_where && target_id && ['POST', 'COMMENT'].includes(from_where)) {
       const sources = JSON.parse(chat.sources || '[]');
       let lastIndex = -1;
@@ -20,7 +20,7 @@ const activity = {
         }
       });
       if (lastIndex < sources.length - 1) {
-        sources.push({ from_where, target_id });
+        sources.push({ from_where, target_id, last_msg_id });
       }
       chat.sources = JSON.stringify(sources);
     }
@@ -180,8 +180,10 @@ exports.availableChatrooms = async (req, res) => {
 
 exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
   const receiver = payload.receiver_id ? await User.getById(payload.receiver_id) : null;
+  payload.last_msg_id = 0; // inital msg id on create chat.
   let model = generateChatData(payload, user_id, receiver);
   model.accept_status = !isGuest ? 1 : 0;
+
   const message = payload.message ? generateMessageData({
     ...payload,
     sender_id: user_id,
@@ -198,10 +200,14 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
       const user_ids = JSON.parse(chat.user_ids);
       return ['COMMENT', 'POST', 'NONE'].includes(chat.from_where) && (user_ids.length === 2);
     })
+    // if there exists chat between two users;
     if (chatrooms.length > 0) {
       _chat = chatrooms[0];
-      _chat = activity.processChatSource({ chat: _chat, ...payload });
       _chat.accept_status = !isGuest ? 1 : 0;
+      const lastMsg = await models.message.lastMsgInChat(_chat.id);
+      const last_msg_id = lastMsg ? lastMsg.id : 0;
+      _chat = activity.processChatSource({ chat: _chat, ...payload, last_msg_id });
+      
     }
   }
 

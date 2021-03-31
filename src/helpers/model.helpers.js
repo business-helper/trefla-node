@@ -102,7 +102,8 @@ const generateChatData = (basicData, sender_id, receiver = null) => {
   data.from_where = basicData.from_where;
   data.target_id = basicData.target_id;
   if (basicData.from_where && basicData.target_id) {
-    data.sources = JSON.stringify([{ from_where: basicData.from_where, target_id: basicData.target_id }]);
+    const { from_where, target_id, last_msg_id } = basicData;
+    data.sources = JSON.stringify([{ from_where, target_id, last_msg_id }]);
   }
 
   // id chat
