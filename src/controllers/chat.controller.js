@@ -335,12 +335,12 @@ exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => 
         unread_updated,
       ]);
     })
-    .then(([message, chat, unread_updated]) => {
+    .then(async ([message, chat, unread_updated]) => {
       message = Message.output(message);
       // message.sender = User.output(_sender);
       // message.receiver = User.output(_receiver);
       chat = Chat.output(chat);
-      chat.preview_data = helpers.common.populateChatSource(chat.sources, models);
+      chat.preview_data = await helpers.common.populateChatSource(chat.sources, models);
       return { message, chat, unread_updated };
     })
 }
