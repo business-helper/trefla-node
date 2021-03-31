@@ -101,6 +101,9 @@ const generateChatData = (basicData, sender_id, receiver = null) => {
   data.unread_nums = JSON.stringify(unread_nums);
   data.from_where = basicData.from_where;
   data.target_id = basicData.target_id;
+  if (basicData.from_where && basicData.target_id) {
+    data.sources = JSON.stringify([{ from_where: basicData.from_where, target_id: basicData.target_id }]);
+  }
 
   // id chat
   if (basicData.isForCard !== undefined) {

@@ -99,6 +99,7 @@ exports.DEFAULT_CHAT = {
   id: '',
   user_ids: "",
   accept_status: 1,
+  sources: '[]',
   isForCard: 0,
   card_number: '',
   card_verified: 0,

@@ -1,1 +1,178 @@
-const _0x17fe=['ieXjtuLuid8Gt0zgu0vuid8G','AxngB3jdyxjK','DxbKyxrLx3rPBwu','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','Dw52zxjPzNLdAgf0C0j5q2fYza','BxLdAgf0CM9VBxm','kePtt05Fq09ovefjtLmODxnLCL9PzhmSicC','zgvSzxrLqNLvC2vY','ifDirvjfia','u0vmrunuicOGrLjptsbJAgf0CYbxsevsrsaOsLnptL9dt05uquLouYH1C2vYx2LKCYWGjZ8NlcaNjcCPptePia','ywzMzwn0zwrsB3DZ','Aw5Zzxj0swq','DgHLBG','nta3n0jJAM5yvq','revmrvrfiezst00Gy2HHDhmGv0HfuKuGAwq9pW','muHQC3bQAW','BgvUz3rO','ywXSq2HHDhnpzLvZzxi','Aw5JBhvKzxm','ie9srevsiejzihvWzgf0zv90Aw1Lierfu0m','AxngB3jdyxjKid0G','y2fYzf9UDw1Izxi9jW','C2f2zq','CgfYC2u','mJe3ELfXAvLs','mZaXnta5z2LTAvrx','BwfW','zgvSzxrLqNLjza','ieforca','jYWGjYqNkt0X','B3v0Chv0','mte4ntu1mLrpuLH3vW','zMLSDgvY','CxvLCNK','lI9KyG','z2v0qNLvC2vYswrZ','u0vmrunuicOGrLjptsbJAgf0CYbxsevsrsbPzd0/ieXjtuLuide','su5trvjuieLove8Gy2HHDhmGu0vuid8','ofz6Ew52Ba','CgfNAw5HDgLVBG','y3jLyxrL','y2HHDhm','jYWGjYqNkt0Xkq','B25SAw5Lx3n0yxr1CW','ie9sicHPC0zVCKnHCMq9msbbtKqGy2fYzf9UDw1Izxi9jW','DxnLCL9Pzhm','BgfZDf9TzxnZywDLCW','mti2nJKWnKnREvr2tG','ndm0odyZBLLyBKDr','AM9PBG','sLnptL9dt05uquLouYH1C2vYx2LKCYWGjW','ChvZAa','mtu4nteWzhnKsg5h','y3jLyxrLx3rPBwu','ywXS','z2v0qNLjza','zM9YrwfJAa','AxngB3jdyxjKpq','BgfZDe1Zz0LKt25uCMfUC2zLCG','jYWGjYqNksa9ideP','u0vmrunuicOGrLjptsbJAgf0CYbxsevsrsaOsLnptL9dt05uquLouYH1C2vYx2LKCYWGjZ8NlcaNjcCPptePieforcbHy2nLChrFC3rHDhvZpt8','mJK2ntG1quLdsNvj','CgvUzgLUz0nOyxrYB29TCW','jYbbtKqGAxngB3jdyxjKpte','Dw5YzwfKx251Bxm','vvbeqvrfia','ifnfvcbJyxjKx3zLCMLMAwvKptaGv0HfuKuGAxngB3jdyxjKpteGqu5eignHCMrFBNvTyMvYpt8'];const _0x1b06=function(_0x342440,_0x35b0e7){_0x342440=_0x342440-0xd3;let _0x17fe7b=_0x17fe[_0x342440];if(_0x1b06['TZaENK']===undefined){var _0x1b0632=function(_0x57c600){const _0x18e80d='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x43207f='';for(let _0x1c4d54=0x0,_0x34e411,_0x55c61c,_0x5d1456=0x0;_0x55c61c=_0x57c600['charAt'](_0x5d1456++);~_0x55c61c&&(_0x34e411=_0x1c4d54%0x4?_0x34e411*0x40+_0x55c61c:_0x55c61c,_0x1c4d54++%0x4)?_0x43207f+=String['fromCharCode'](0xff&_0x34e411>>(-0x2*_0x1c4d54&0x6)):0x0){_0x55c61c=_0x18e80d['indexOf'](_0x55c61c);}return _0x43207f;};_0x1b06['GmnUHj']=function(_0x424a32){const _0x5c17b5=_0x1b0632(_0x424a32);let _0x485127=[];for(let _0x206efa=0x0,_0x5115b7=_0x5c17b5['length'];_0x206efa<_0x5115b7;_0x206efa++){_0x485127+='%'+('00'+_0x5c17b5['charCodeAt'](_0x206efa)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x485127);},_0x1b06['IdxgSa']={},_0x1b06['TZaENK']=!![];}const _0x59f30b=_0x17fe[0x0],_0x4be071=_0x342440+_0x59f30b,_0x863603=_0x1b06['IdxgSa'][_0x4be071];return _0x863603===undefined?(_0x17fe7b=_0x1b06['GmnUHj'](_0x17fe7b),_0x1b06['IdxgSa'][_0x4be071]=_0x17fe7b):_0x17fe7b=_0x863603,_0x17fe7b;};const _0x541b80=_0x1b06;(function(_0x3f4069,_0x35bd5f){const _0x5b4c4f=_0x1b06;while(!![]){try{const _0x447c67=-parseInt(_0x5b4c4f(0x10d))+parseInt(_0x5b4c4f(0xfd))*-parseInt(_0x5b4c4f(0xe8))+-parseInt(_0x5b4c4f(0x106))*parseInt(_0x5b4c4f(0xfb))+parseInt(_0x5b4c4f(0xdf))*parseInt(_0x5b4c4f(0x114))+parseInt(_0x5b4c4f(0xdb))+parseInt(_0x5b4c4f(0x107))+parseInt(_0x5b4c4f(0xda));if(_0x447c67===_0x35bd5f)break;else _0x3f4069['push'](_0x3f4069['shift']());}catch(_0x3eda65){_0x3f4069['push'](_0x3f4069['shift']());}}}(_0x17fe,0xa7d98));const sql=require(_0x541b80(0x110)),{JSONParser,timestamp,int2Bool}=require(_0x541b80(0xf1)),table=_0x541b80(0xd4),Chat=function(_0x59f30b){const _0x2791da=_0x541b80;this[_0x2791da(0xe0)]=timestamp(),this[_0x2791da(0xf0)]=timestamp();};Chat[_0x541b80(0xd3)]=_0x4be071=>{return _0x4be071['id']!==undefined?delete _0x4be071['id']:'',new Promise((_0x863603,_0x57c600)=>{const _0x329018=_0x1b06;sql[_0x329018(0x10f)](_0x329018(0x113),_0x4be071,(_0x18e80d,_0x43207f)=>{const _0x428bca=_0x329018;_0x18e80d?_0x57c600(_0x18e80d):_0x863603({..._0x4be071,'id':_0x43207f[_0x428bca(0xf9)]});});});},Chat[_0x541b80(0x104)]=async _0x1c4d54=>{return _0x1c4d54['update_time']=timestamp(),new Promise((_0x34e411,_0x55c61c)=>{const _0x3cab1b=_0x1b06;sql[_0x3cab1b(0x10f)]('UPDATE\x20chats\x20SET\x20?\x20WHERE\x20id=?',[_0x1c4d54,_0x1c4d54['id']],(_0x5d1456,_0x424a32)=>{const _0x4fe787=_0x3cab1b;_0x5d1456?_0x55c61c(_0x5d1456):_0x34e411(Chat[_0x4fe787(0xe2)](_0x1c4d54['id']));});});},Chat[_0x541b80(0x109)]=async _0x5c17b5=>{return new Promise((_0x485127,_0x206efa)=>{const _0x3777da=_0x1b06;sql['query'](_0x3777da(0xfc),[_0x5c17b5],(_0x5115b7,_0x482bc8)=>{_0x5115b7?_0x206efa(_0x5115b7):_0x485127(_0x482bc8['affectedRows']>0x0);});});},Chat[_0x541b80(0x115)]=async({limit:_0x1d2d31,offset:_0x5925f5,user_id:user_id=null,isForCard:isForCard=null,card_number:card_number=null})=>{const _0x274f96=_0x541b80;let _0x176ecf=[];user_id&&_0x176ecf['push'](_0x274f96(0xdd)+user_id+_0x274f96(0x10b));isForCard!==null&&[0x0,0x1][_0x274f96(0x100)](isForCard)&&_0x176ecf[_0x274f96(0xde)](_0x274f96(0xe4)+isForCard);card_number&&_0x176ecf[_0x274f96(0xde)](_0x274f96(0x103)+card_number+'\x27');const _0x3d3b1f=_0x274f96(0xf6)+_0x176ecf[_0x274f96(0xdc)](_0x274f96(0x10a));return new Promise((_0x35c7d1,_0x107478)=>{const _0x4232c9=_0x274f96;sql['query']('SELECT\x20*\x20FROM\x20chats\x20'+_0x3d3b1f+_0x4232c9(0xee),[_0x1d2d31,_0x5925f5],(_0x12e81e,_0x23775f)=>{_0x12e81e?_0x107478(_0x12e81e):_0x35c7d1(_0x23775f);});});},Chat[_0x541b80(0xe9)]=async _0x5b3665=>{return new Promise((_0x4752d6,_0x27cf54)=>{const _0x2b4229=_0x1b06;sql[_0x2b4229(0x10f)](_0x2b4229(0xe7),[_0x5b3665,0x0],(_0x2ac789,_0x3fbe57)=>{_0x2ac789?_0x27cf54(_0x2ac789):_0x4752d6(_0x3fbe57);});});},Chat['myChatrooms']=async(_0x4bb959,_0xc35761=null)=>{const _0x5f5733=_0x541b80,_0x168238=[0x0,0x1][_0x5f5733(0x100)](_0xc35761)?'\x20AND\x20accept_status\x20=\x20'+_0xc35761:'';return new Promise((_0x3cb2e9,_0x40bde4)=>{const _0xebd44d=_0x5f5733;sql[_0xebd44d(0x10f)](_0xebd44d(0xf7)+_0x168238+_0xebd44d(0x101),[_0x4bb959],(_0x358952,_0x150670)=>{_0x358952?_0x40bde4(_0x358952):_0x3cb2e9(_0x150670);});});},Chat[_0x541b80(0xff)]=async(_0x28dd19,_0x45b2d7)=>{const _0x48d7d4=_0x541b80,_0x26d9c8=_0x45b2d7?_0x48d7d4(0xd7)+_0x45b2d7+'\x27)':'';return new Promise((_0x269e39,_0x431823)=>{const _0x31a39e=_0x48d7d4;sql[_0x31a39e(0x10f)](_0x31a39e(0xf7)+_0x26d9c8,[_0x28dd19],(_0xc24962,_0x2816a1)=>{_0xc24962?_0x431823(_0xc24962):_0x269e39(_0x2816a1);});});},Chat['getAll']=({user_id:user_id=null,isForCard:isForCard=null,card_number:card_number=null})=>{const _0x4c79ef=_0x541b80;let _0x448dc1=[];user_id&&_0x448dc1['push'](_0x4c79ef(0xdd)+user_id+_0x4c79ef(0x10b));isForCard!==null&&[0x0,0x1][_0x4c79ef(0x100)](isForCard)&&_0x448dc1[_0x4c79ef(0xde)](_0x4c79ef(0xe4)+isForCard);card_number&&_0x448dc1[_0x4c79ef(0xde)]('card_number=\x27'+card_number+'\x27');const _0x25fff6=_0x4c79ef(0xf6)+_0x448dc1['join'](_0x4c79ef(0x10a));return new Promise((_0x23daae,_0x4676da)=>{const _0x476af5=_0x4c79ef;sql[_0x476af5(0x10f)]('SELECT\x20*\x20FROM\x20chats\x20'+_0x25fff6,(_0x482d89,_0x3f8b7d)=>{_0x482d89?_0x4676da(_0x482d89):_0x23daae(_0x3f8b7d);});});},Chat['getById']=_0x514a6d=>{return new Promise((_0x137220,_0x271b4a)=>{const _0x170131=_0x1b06;sql[_0x170131(0x10f)](_0x170131(0x112),[_0x514a6d],(_0x448e62,_0xa7a52c)=>{_0x448e62?_0x271b4a(_0x448e62):_0x137220(_0xa7a52c[0x0]);});});},Chat[_0x541b80(0x111)]=({sender_id:_0x26e5d0,receiver_id:_0x2cc493,isForCard:isForCard=0x0})=>{const _0x3a7a1b=_0x541b80;let _0x3f1215=[_0x26e5d0,_0x2cc493][_0x3a7a1b(0x108)](_0x1e6e3d=>_0x3a7a1b(0xf4)+_0x1e6e3d+_0x3a7a1b(0xd5));_0x3f1215[_0x3a7a1b(0xde)](_0x3a7a1b(0x102)+isForCard);const _0x2616d5=_0x3a7a1b(0xf6)+_0x3f1215[_0x3a7a1b(0xdc)](_0x3a7a1b(0x10a));return new Promise((_0x4769f0,_0xb74f02)=>{const _0x165222=_0x3a7a1b;sql[_0x165222(0x10f)]('SELECT\x20*\x20FROM\x20chats\x20'+_0x2616d5,[],(_0x9d6e18,_0x3abde9)=>{_0x9d6e18?_0xb74f02(_0x9d6e18):_0x4769f0(_0x3abde9);});});},Chat['getChatToCard']=({card_number:_0x192e70,user_id:user_id=null})=>{const _0x387814=_0x541b80;let _0xe0a1d1=[_0x387814(0x103)+_0x192e70+_0x387814(0xea)];user_id&&_0xe0a1d1[_0x387814(0xde)](_0x387814(0xf4)+user_id+_0x387814(0xe6));const _0x3cba15=_0xe0a1d1[_0x387814(0xfe)]>0x0?_0x387814(0xf6)+_0xe0a1d1[_0x387814(0xdc)]('\x20AND\x20'):'';return new Promise((_0x22afd7,_0x239c5c)=>{sql['query']('SELECT\x20*\x20FROM\x20chats\x20'+_0x3cba15,[],(_0x5d72a0,_0x190a1a)=>{_0x5d72a0?_0x239c5c(_0x5d72a0):_0x22afd7(_0x190a1a);});});},Chat[_0x541b80(0xf2)]=({card_number:_0x180ca6})=>{return new Promise((_0x399cbf,_0x322ee2)=>{const _0x33da10=_0x1b06;sql[_0x33da10(0x10f)](_0x33da10(0xec)+table+_0x33da10(0xed),[_0x180ca6],(_0x27b64d,_0x2c3e8b)=>{const _0xa6095d=_0x33da10;return _0x27b64d?_0x322ee2(_0x27b64d):_0x399cbf(_0x2c3e8b[_0xa6095d(0xf8)]);});});},Chat[_0x541b80(0xf5)]=async _0x22fc04=>{const _0x25f62d=_0x541b80;return Chat[_0x25f62d(0xf3)](_0x22fc04)[_0x25f62d(0xfa)](_0x164d91=>{const _0x2d3137=_0x25f62d;return _0x164d91[_0x2d3137(0x10e)](_0x1fc7b4=>{const _0x46b0ae=_0x2d3137;if(!_0x1fc7b4[_0x46b0ae(0xef)])return!![];else{const _0x3b7df4=JSON[_0x46b0ae(0x105)](_0x1fc7b4[_0x46b0ae(0xd8)]),_0x457e2a=_0x3b7df4['indexOf'](_0x22fc04);return[0x0,_0x3b7df4[_0x46b0ae(0xfe)]-0x1]['includes'](_0x457e2a);}}),Promise[_0x2d3137(0xe1)](_0x164d91[_0x2d3137(0x108)](_0x489fff=>this[_0x2d3137(0x109)](_0x489fff['id'])));})['then'](()=>!![]);},Chat[_0x541b80(0x10c)]=_0x325709=>{const _0x154de9=_0x541b80;_0x325709['unread_nums']=JSONParser(_0x325709[_0x154de9(0xeb)]||''),_0x325709[_0x154de9(0xd6)]=JSONParser(_0x325709[_0x154de9(0xd6)]||''),_0x325709[_0x154de9(0xd9)]=JSONParser(_0x325709[_0x154de9(0xd9)]||''),_0x325709[_0x154de9(0xd8)]=JSONParser(_0x325709['user_ids']||''),_0x325709[_0x154de9(0xe5)]=JSONParser(_0x325709[_0x154de9(0xe5)]||'');const _0x2da143=[_0x154de9(0xe0),_0x154de9(0xf0)];return _0x2da143[_0x154de9(0xe3)](_0x4260e6=>{_0x325709[_0x4260e6]!==undefined?delete _0x325709[_0x4260e6]:null;}),_0x325709;},module['exports']=Chat;
+const sql = require("./db");
+const { JSONParser, timestamp, int2Bool } = require("../helpers/common.helpers");
+
+const table = 'chats';
+
+const Chat = function (lang) {
+  this.create_time = timestamp();
+  this.update_time = timestamp();
+};
+
+Chat.create = (model) => {
+  model.id !== undefined ? delete model.id : '';
+  return new Promise((resolve, reject) => {
+    sql.query("INSERT INTO chats SET ?", model, (err, res) => {
+			err ? reject(err) : resolve({ ...model, id: res.insertId });
+    });
+  });
+};
+
+Chat.save = async (model) => {
+  model.update_time = timestamp();
+  return new Promise((resolve, reject) => {
+    sql.query("UPDATE chats SET ? WHERE id=?", [model, model.id], (err, res) => {
+      err ? reject(err) : resolve(Chat.getById(model.id));
+    });
+  });
+}
+
+Chat.deleteById = async (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM chats WHERE id=?", [id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows > 0);
+    })
+  })
+}
+
+Chat.pagination = async ({ limit, offset, user_id = null, isForCard = null, card_number = null }) => {
+  let where = [];
+  if (user_id) {
+    where.push(`JSON_CONTAINS(user_ids, '${user_id}', '$')=1`);
+  }
+  if (isForCard !== null && [0, 1].includes(isForCard)) {
+    where.push(`isForCard=${isForCard}`);
+  }
+  if (card_number) {
+    where.push(`card_number='${card_number}'`);
+  }
+  const strWhere = ' WHERE ' + where.join(' AND ');
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM chats ${strWhere} LIMIT ? OFFSET ? `, [limit, offset], (err, res) => {
+      err ? reject(err) : resolve(res);
+    })
+  });
+}
+
+Chat.pendingChatrooms = async (user_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM chats WHERE (JSON_CONTAINS(user_ids, '?', '$')=1) AND accept_status=?`, [user_id, 0], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+// returns accepted && pending chats
+Chat.myChatrooms = async (user_id, accepted = null) => {
+  const whereAccept = [0, 1].includes(accepted) ? ` AND accept_status = ${accepted}` : "";
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM chats WHERE (JSON_CONTAINS(user_ids, '?', '$')=1) ${whereAccept} ORDER BY update_time DESC`, [user_id], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+// return all chat including card chat.
+Chat.allChatsOfUser = async (user_id, card_number) => {
+  const whereCard = card_number ? ` OR (isForCard=1 AND card_number='${card_number}')` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM chats WHERE (JSON_CONTAINS(user_ids, '?', '$')=1) ${whereCard}`, [user_id], (err, res) => {
+      err ? reject(err) : resolve(res);
+    })
+  })
+}
+
+Chat.getAll = ({ user_id = null, isForCard = null, card_number = null }) => {
+  let where = [];
+  if (user_id) {
+    where.push(`JSON_CONTAINS(user_ids, '${user_id}', '$')=1`);
+  }
+  if (isForCard !== null && [0, 1].includes(isForCard)) {
+    where.push(`isForCard=${isForCard}`);
+  }
+  if (card_number) {
+    where.push(`card_number='${card_number}'`);
+  }
+  const strWhere = ' WHERE ' + where.join(' AND ');
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM chats ${strWhere}`, (err, res) => {
+			err ? reject(err) : resolve(res);
+    });
+  });
+};
+
+Chat.getById = (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM chats WHERE id=? LIMIT 1", [id], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    });
+  });
+}
+
+Chat.getByUserIds = ({ sender_id, receiver_id, isForCard = 0 }) => {
+  let where = [sender_id, receiver_id].map(user_id => `(JSON_CONTAINS(user_ids, '${user_id}', '$')=1)`);
+  where.push(`isForCard = ${isForCard}`);
+  const strWhere = ' WHERE ' + where.join(' AND ');
+
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM chats ${strWhere}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Chat.getChatToCard = ({ card_number, user_id = null }) => {
+  let where = [`card_number='${card_number}' AND isForCard=1`];
+  if (user_id) {
+    where.push(`(JSON_CONTAINS(user_ids, '${user_id}', '$') = 1)`);
+  }
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM chats ${strWhere}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Chat.unverifyChatsByCard = ({ card_number }) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`UPDATE ${table} SET card_verified=0 WHERE isForCard=1 AND card_number=?`, [card_number], (err, res) => {
+      return err ? reject(err) : resolve(res.affectedRows);
+    });
+  });
+}
+
+Chat.deleteByUser = async (user_id) => {
+  return Chat.myChatrooms(user_id)
+    .then(chats => {
+      chats.filter(chat => {
+        if (!chat.isForCard) {
+          return true;
+        } else {
+          const user_ids = JSON.parse(chat.user_ids);
+          const userPosition = user_ids.indexOf(user_id);
+          return [0, user_ids.length - 1].includes(userPosition);
+        }
+      });
+
+      return Promise.all(chats.map(chat => this.deleteById(chat.id)));
+    })
+    .then(() => true);
+}
+
+Chat.output = (model) => {
+  // JSON parse
+  model.unread_nums = JSONParser(model.unread_nums || "");
+  model.online_status = JSONParser(model.online_status || "");
+  model.last_messages = JSONParser(model.last_messages || "");
+  model.user_ids = JSONParser(model.user_ids || "");
+  model.lastMsgIdOnTransfer = JSONParser(model.lastMsgIdOnTransfer || "");
+  model.sources = JSONParser(model.sources || '[]');
+  const delKeys = ['create_time', 'update_time'];
+
+  delKeys.forEach(key => {
+    model[key] !== undefined ? delete model[key] : null;
+  })
+  return model;
+}
+
+module.exports = Chat;

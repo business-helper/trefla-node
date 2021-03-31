@@ -7,6 +7,7 @@ const Notification = require("../models/notification.model");
 const logger = require('../config/logger');
 
 const models = require('../models/index');
+const helpers = require('../helpers');
 
 const { BearerMiddleware } = require('../middlewares/basic.middleware');
 const { getTokenInfo } = require('../helpers/auth.helpers');
@@ -160,26 +161,7 @@ const getChatSummryV2 = async (req, res) => {
         const partnerId = user_ids[0] === user_id ? user_ids[1] || 0 : user_ids[0];
         chat = models.chat.output(chat);
 
-        if (['COMMENT', 'POST'].includes(chat.from_where)) {
-          const modelName = chat.from_where.toLowerCase();
-          const target = await models[modelName].getById(chat.target_id);
-          if (target) {
-            const target_user = await models.user.getById(target.user_id);
-            chat = {
-              ...chat,
-              preview_data: {
-                ...models[modelName].output(target),
-                user: models.user.output(target_user),
-              }
-            }
-          } else {
-            chat = {
-              ...chat,
-              preview_data: null,
-            }
-          }
-
-        }
+        chat.preview_data = await helpers.common.populateChatSource(chat.sources, models);
 
         return {
           // ...(models.chat.output(chat)),

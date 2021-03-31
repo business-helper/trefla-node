@@ -249,6 +249,28 @@ const generateRandomString = (length) => {
   return result;
 }
 
+const populateChatSource = async (sources = [], models) => {
+  return Promise.all(sources.map(async source => {
+    const { from_where, target_id } = source;
+    if (from_where && target_id && ['POST', 'COMMENT'].includes(from_where)) {
+      const modelName = from_where.toLowerCase();
+      const target = await models[modelName].getById(target_id);
+      if (!target) return null;
+      
+      const { user_id } = target;
+      const user = await models.user.getById(user_id);
+
+      return {
+        data: { ...(models[modelName].output(target)), user: models.user.output(user) },        
+        from_where, target_id,
+      };
+    } else {
+      return null;
+    }
+  }))
+    .then((targets) => targets.filter(target => target));
+}
+
 module.exports = {
   bool2Int,
   chatPartnerId,
@@ -262,6 +284,7 @@ module.exports = {
   int2Bool,
   JSONParser,
   JSONStringify,
+  populateChatSource,
 	respondError,
   respondValidateError,
   SendAllMultiNotifications,
