@@ -1,1 +1,473 @@
-const _0x220d=['target_id','liked','../helpers/model.helpers','map','push','../helpers/auth.helpers','forEach','commentLikesOfUser','assign','json','getById','ADMIN','filter','commentNumber','You\x20liked\x20it\x20already!','output','save','doLikeComment','body','142879rpZjMp','3yCQdpn','node-input-validator','length','pagination','like_','params','message','includes','all','828969hReSKF','simplePagination','getCountOfComments','updateById','../helpers/common.helpers','POST','deleteById','minId','You\x20liked\x20the\x20comment!','userLikedComment','You\x20disliked\x20it\x20already!','[Like\x20Comment]','Failed\x20to\x20dislike\x20the\x20comment!','status','catch','_num','success','1dvZhIs','user_id','579144bjOigc','433PESMwM','You\x20disliked\x20the\x20comment!','2881998XSXqid','time','toString','create','COMMENT','type','failed','Failed\x20to\x20like\x20the\x20comment!','1803sgwXbF','getByIds','getAll','142011hjfItI','log','../models/comment.model','then','toggleCommentLike','isGuest','172169oGLENk'];const _0x3924=function(_0x27b912,_0x52ec82){_0x27b912=_0x27b912-0xeb;let _0x220dd4=_0x220d[_0x27b912];return _0x220dd4;};const _0x42bebe=_0x3924;(function(_0x157442,_0x15925e){const _0x1e9b75=_0x3924;while(!![]){try{const _0x3e7688=parseInt(_0x1e9b75(0x10e))*-parseInt(_0x1e9b75(0x104))+parseInt(_0x1e9b75(0x12c))*-parseInt(_0x1e9b75(0x117))+parseInt(_0x1e9b75(0x101))*-parseInt(_0x1e9b75(0x103))+parseInt(_0x1e9b75(0x12b))+-parseInt(_0x1e9b75(0xf0))+parseInt(_0x1e9b75(0x111))+parseInt(_0x1e9b75(0x106));if(_0x3e7688===_0x15925e)break;else _0x157442['push'](_0x157442['shift']());}catch(_0x23019c){_0x157442['push'](_0x157442['shift']());}}}(_0x220d,0x70b01));const {Validator}=require(_0x42bebe(0x12d)),User=require('../models/user.model'),Post=require('../models/post.model'),Comment=require(_0x42bebe(0x113)),CommentLike=require('../models/commentLike.model'),{getTokenInfo}=require(_0x42bebe(0x11d)),{bool2Int,getTotalLikes,generateTZTimeString,respondError}=require(_0x42bebe(0xf4)),{generateCommentData,generateCommentLikeData}=require(_0x42bebe(0x11a));exports[_0x42bebe(0x109)]=(_0x283e2d,_0x3054d0)=>{const _0xcf9606=_0x42bebe,{uid:_0x5c3784}=getTokenInfo(_0x283e2d);let _0x246e86=generateCommentData(_0x283e2d[_0xcf9606(0x12a)]);_0x246e86[_0xcf9606(0x102)]=_0x5c3784,_0x246e86[_0xcf9606(0x107)]=_0x283e2d[_0xcf9606(0x12a)][_0xcf9606(0x107)]?_0x283e2d[_0xcf9606(0x12a)]['time']:generateTZTimeString();const _0x360301=_0x283e2d[_0xcf9606(0x12a)][_0xcf9606(0x10b)]===_0xcf9606(0x10a)?Comment:Post;let _0x1a841d;return Comment['create'](_0x246e86)[_0xcf9606(0x114)](_0x2c582c=>{const _0x1e3c99=_0xcf9606;return _0x1a841d=_0x2c582c,Promise[_0x1e3c99(0xef)]([_0x360301['getById'](_0x283e2d['body']['target_id']),Comment[_0x1e3c99(0x125)]({'target_id':_0x283e2d['body'][_0x1e3c99(0x118)],'type':_0x283e2d[_0x1e3c99(0x12a)]['type']})]);})['then'](([_0x235dcc,_0x5e5103])=>{const _0x4293a8=_0xcf9606;return Promise[_0x4293a8(0xef)]([User['getById'](_0x1a841d[_0x4293a8(0x102)]),_0x360301[_0x4293a8(0x128)]({..._0x235dcc,'comment_num':_0x5e5103})]);})[_0xcf9606(0x114)](([_0x1f1aaf])=>{const _0x24b527=_0xcf9606;return _0x1a841d=Comment[_0x24b527(0x127)](_0x1a841d),_0x3054d0[_0x24b527(0x121)]({'status':!![],'message':_0x24b527(0x100),'data':{..._0x1a841d,'liked':0x0,'user':User[_0x24b527(0x127)](_0x1f1aaf)}});})[_0xcf9606(0xfe)](_0x31eccb=>respondError(_0x3054d0,_0x31eccb));},exports[_0x42bebe(0x122)]=(_0x4965f0,_0x23df8f)=>{const _0xd74aeb=_0x42bebe,{id:_0x2a0ca5}=_0x4965f0['params'];return Comment[_0xd74aeb(0x122)](_0x2a0ca5)[_0xd74aeb(0x114)](_0x10da52=>Promise['all']([_0x10da52,User['getById'](_0x10da52[_0xd74aeb(0x102)]),CommentLike[_0xd74aeb(0x11f)]({'comment_id':_0x2a0ca5,'user_id':_0x10da52[_0xd74aeb(0x102)]})]))['then'](([_0x2db654,_0x2ca022,_0x189b82])=>{const _0x4e22e5=_0xd74aeb;return console[_0x4e22e5(0x112)]('[Likes]',_0x189b82),_0x2db654=Comment[_0x4e22e5(0x127)](_0x2db654),_0x23df8f[_0x4e22e5(0x121)]({'status':!![],'message':_0x4e22e5(0x100),'data':{..._0x2db654,'liked':_0x189b82[_0x4e22e5(0x12e)]>0x1?0x1:0x0,'user':User[_0x4e22e5(0x127)](_0x2ca022)}});})['catch'](_0x1b842a=>respondError(_0x23df8f,_0x1b842a));},exports[_0x42bebe(0x12f)]=(_0x1636fd,_0x216ab9)=>{const _0x490455=_0x42bebe,{uid:_0x2c1288}=getTokenInfo(_0x1636fd),{last_id:_0x18519d,limit:_0x5d2e72,target_id:_0x407180,type:_0x1aacb1}=_0x1636fd['body'];let _0x4381d2=[],_0x11dc65=0x0,_0x36ef3c={};return _minId=0x0,Promise[_0x490455(0xef)]([Comment['pagination']({'limit':_0x5d2e72,'last_id':_0x18519d,'target_id':_0x407180,'type':_0x1aacb1}),Comment[_0x490455(0xf2)]({'target_id':_0x407180,'type':_0x1aacb1}),Comment[_0x490455(0xf7)]({'target_id':_0x407180,'type':_0x1aacb1})])['then'](async([_0x3261eb,_0x421369,_0x387778])=>{const _0xa92088=_0x490455;_0x4381d2=_0x3261eb,_0x11dc65=_0x421369,_minId=_0x387778;const _0x28547c=_0x3261eb[_0xa92088(0x11b)](_0x5a3ce1=>_0x5a3ce1['user_id']);return User[_0xa92088(0x10f)](_0x28547c);})[_0x490455(0x114)](_0xb1ffb=>{const _0x58df51=_0x490455;return _0xb1ffb['map'](_0x5e9380=>_0x36ef3c[_0x5e9380['id']]=_0x5e9380),Promise[_0x58df51(0xef)](_0x4381d2[_0x58df51(0x11b)](_0x1ea066=>CommentLike[_0x58df51(0x11f)]({'user_id':_0x2c1288,'comment_id':_0x1ea066['id']})));})[_0x490455(0x114)](_0x3ce2a1=>{const _0x256cb9=_0x490455;return _0x4381d2=_0x4381d2[_0x256cb9(0x11b)](_0x55c57b=>Comment[_0x256cb9(0x127)](_0x55c57b)),_0x4381d2=_0x4381d2['map']((_0x3774f9,_0x1ef75d)=>({..._0x3774f9,'liked':_0x3ce2a1[_0x1ef75d][_0x256cb9(0x12e)]>0x0?_0x3ce2a1[_0x1ef75d][0x0][_0x256cb9(0x10b)]:0x0,'user':User[_0x256cb9(0x127)](_0x36ef3c[_0x3774f9[_0x256cb9(0x102)]])})),_0x1aacb1===_0x256cb9(0xf5)?Promise[_0x256cb9(0xef)](_0x4381d2[_0x256cb9(0x11b)](_0x22e211=>Comment[_0x256cb9(0x12f)]({'limit':0x2710,'offset':0x0,'target_id':_0x22e211['id'],'type':_0x256cb9(0x10a)}))):[];})[_0x490455(0x114)](async _0x24384d=>{const _0x65cdd9=_0x490455;if(_0x24384d['length']>0x0){let _0x5a2000=[0x0],_0x3961ba=[0x0];_0x24384d['forEach'](_0x295fbb=>{const _0x3e3b59=_0x3924;_0x295fbb[_0x3e3b59(0x11e)](_0x44fa76=>{const _0x162e0b=_0x3e3b59;_0x5a2000[_0x162e0b(0x11c)](_0x44fa76[_0x162e0b(0x102)]),!_0x3961ba['includes'](_0x44fa76['id'])?_0x3961ba[_0x162e0b(0x11c)](_0x44fa76['id']):null;});});const _0x2e5111=await User[_0x65cdd9(0x10f)](_0x5a2000);let _0x584994={};_0x2e5111['forEach'](_0x386d3c=>{_0x584994[_0x386d3c['id']]=_0x386d3c;});const _0x48eece=await Promise['all'](_0x3961ba[_0x65cdd9(0x11b)](_0x3d3d5a=>CommentLike[_0x65cdd9(0x11f)]({'user_id':_0x2c1288,'comment_id':_0x3d3d5a}))),_0x349b79={};_0x48eece['forEach']((_0x46dafe,_0x577dbe)=>{_0x349b79[_0x3961ba[_0x577dbe]]=_0x48eece[_0x577dbe];}),_0x24384d[_0x65cdd9(0x11e)]((_0x23eb44,_0x355fa0)=>{const _0x56dfc5=_0x65cdd9,_0x101e77=_0x23eb44[_0x56dfc5(0x11b)](_0xcafd11=>({...Comment[_0x56dfc5(0x127)](_0xcafd11),'liked':_0x349b79[_0xcafd11['id']]['length']>0x0?0x1:0x0,'user':User['output'](_0x584994[_0xcafd11[_0x56dfc5(0x102)]])}));_0x4381d2[_0x355fa0]={..._0x4381d2[_0x355fa0],'children':_0x101e77};});}return cMinId=_0x4381d2[_0x65cdd9(0x12e)]>0x0?_0x4381d2[_0x4381d2['length']-0x1]['id']:0x0,_0x216ab9['json']({'status':!![],'message':_0x65cdd9(0x100),'data':_0x4381d2,'pager':{'last_id':cMinId,'limit':_0x5d2e72,'total':_0x11dc65},'hadMore':cMinId>_minId});})[_0x490455(0xfe)](_0x3cbd52=>respondError(_0x216ab9,_0x3cbd52));},exports[_0x42bebe(0xf1)]=async(_0x46b7ea,_0x563a89)=>{const _0x4cd69f=_0x42bebe;let {limit:_0x13ccfa,page:_0x2bd740,target_id:_0x1101d6,type:_0x46017a}=_0x46b7ea['query'];_0x13ccfa=Number(_0x13ccfa),_0x2bd740=Number(_0x2bd740);let _0x3c99a3,_0x2009e6;return Promise[_0x4cd69f(0xef)]([Comment[_0x4cd69f(0xf1)]({'limit':_0x13ccfa,'page':_0x2bd740,'target_id':_0x1101d6,'type':_0x46017a}),Comment[_0x4cd69f(0xf2)]({'target_id':_0x1101d6,'type':_0x46017a})])[_0x4cd69f(0x114)](([_0x57f1e7,_0xa3169a])=>{const _0x2f8d53=_0x4cd69f;_0x3c99a3=_0x57f1e7,_0x2009e6=_0xa3169a;const _0x1edda3=_0x57f1e7[_0x2f8d53(0x124)](_0x3ded1e=>_0x3ded1e[_0x2f8d53(0x10b)]===_0x2f8d53(0xf5))['map'](_0x4f02bb=>_0x4f02bb[_0x2f8d53(0x118)]),_0x22023e=_0x57f1e7[_0x2f8d53(0x124)](_0xce857a=>_0xce857a['type']==='COMMENT')[_0x2f8d53(0x11b)](_0x3a90c3=>_0x3a90c3['target_id']),_0x2fbb7d=_0x57f1e7[_0x2f8d53(0x11b)](_0x5b9a79=>_0x5b9a79[_0x2f8d53(0x102)]);return Promise[_0x2f8d53(0xef)]([Post[_0x2f8d53(0x10f)](_0x1edda3),Comment['getByIds'](_0x22023e),User[_0x2f8d53(0x10f)](_0x2fbb7d)]);})['then'](([_0x424ea8,_0x436c64,_0x491b8d])=>{const _0x43142e=_0x4cd69f;let _0x218709={},_0x3353f8={},_0x16f861={};return _0x424ea8[_0x43142e(0x11e)](_0x47fb86=>{const _0x283013=_0x43142e;_0x218709[_0x47fb86['id'][_0x283013(0x108)]()]=_0x47fb86;}),_0x436c64[_0x43142e(0x11e)](_0x2681e0=>{const _0x13d875=_0x43142e;_0x3353f8[_0x2681e0['id'][_0x13d875(0x108)]()]=_0x2681e0;}),_0x491b8d[_0x43142e(0x11e)](_0x1eb7e3=>{const _0x4b6f7=_0x43142e;_0x16f861[_0x1eb7e3['id'][_0x4b6f7(0x108)]()]=_0x1eb7e3;}),_0x3c99a3=_0x3c99a3[_0x43142e(0x11b)](_0x2b2f4f=>{const _0x15a89c=_0x43142e,_0x114f09=_0x16f861[_0x2b2f4f[_0x15a89c(0x102)][_0x15a89c(0x108)]()],_0x2d743a=_0x2b2f4f['type']==='COMMENT'?Comment['output'](_0x3353f8[_0x2b2f4f[_0x15a89c(0x118)][_0x15a89c(0x108)]()]):Post[_0x15a89c(0x127)](_0x218709[_0x2b2f4f[_0x15a89c(0x118)][_0x15a89c(0x108)]()]);return{...Comment[_0x15a89c(0x127)](_0x2b2f4f),'user':User[_0x15a89c(0x127)](_0x114f09),'target':_0x2d743a};}),{'status':!![],'message':'success','data':_0x3c99a3,'pager':{'limit':_0x13ccfa,'page':_0x2bd740,'total':_0x2009e6},'hasMore':_0x13ccfa*_0x2bd740+_0x3c99a3['length']<_0x2009e6};});},exports[_0x42bebe(0xf3)]=async(_0x3ecd46,_0x592052)=>{const _0x555ffe=_0x42bebe,{uid:_0x3fdd82,role:_0x477b5d}=getTokenInfo(_0x3ecd46),{id:_0x2f4fc9}=_0x3ecd46['params'];return Comment[_0x555ffe(0x122)](_0x2f4fc9)[_0x555ffe(0x114)](_0x26e8c6=>{const _0x231c7e=_0x555ffe;let _0x49c7c8={};const _0x474252=_0x477b5d===_0x231c7e(0x123)?['id',_0x231c7e(0x118),_0x231c7e(0x10b)]:['id',_0x231c7e(0x102),_0x231c7e(0x118),_0x231c7e(0x10b)];return Object['keys'](_0x3ecd46[_0x231c7e(0x12a)])['forEach'](_0x44756b=>{const _0x40501e=_0x231c7e;if(_0x474252[_0x40501e(0xee)](_0x44756b)){}else{if(_0x44756b===_0x40501e(0x116))_0x26e8c6[_0x40501e(0x116)]=bool2Int(_0x3ecd46[_0x40501e(0x12a)][_0x40501e(0x116)]);else _0x26e8c6[_0x44756b]!==undefined&&(_0x26e8c6[_0x44756b]=_0x3ecd46['body'][_0x44756b]);}}),Comment[_0x231c7e(0x128)](_0x26e8c6);})[_0x555ffe(0x114)](_0x3a1354=>_0x592052[_0x555ffe(0x121)]({'status':!![],'message':_0x555ffe(0x100),'data':Comment['output'](_0x3a1354)}))['catch'](_0x194011=>respondError(_0x592052,_0x194011));},exports[_0x42bebe(0xf6)]=async(_0x1aed0c,_0x357e04)=>{const _0x239c3a=_0x42bebe,{uid:_0x3e16aa}=getTokenInfo(_0x1aed0c),{id:_0x4737ee}=_0x1aed0c[_0x239c3a(0xec)],_0x462f89=await Comment[_0x239c3a(0x122)](_0x4737ee),_0x4844c6=_0x462f89['type']==='COMMENT'?Comment:Post;return Comment[_0x239c3a(0xf6)](_0x4737ee)[_0x239c3a(0x114)](_0x123910=>{const _0x5854f3=_0x239c3a;return Promise['all']([Comment['commentNumber']({'type':_0x462f89[_0x5854f3(0x10b)],'target_id':_0x462f89[_0x5854f3(0x118)]}),_0x4844c6[_0x5854f3(0x122)](_0x462f89['target_id']),CommentLike['delete']({'comment_id':_0x4737ee})]);})['then'](([_0x21488b,_0x59b7e3,_0x21fae9])=>{const _0x564410=_0x239c3a;return _0x4844c6[_0x564410(0x128)]({..._0x59b7e3,'comment_num':_0x21488b});})['then'](()=>{const _0x53b852=_0x239c3a;return _0x357e04[_0x53b852(0x121)]({'status':!![],'message':'Comment\x20has\x20been\x20deleted!'});})['catch'](_0x1e48a6=>respondError(_0x357e04,_0x1e48a6));},exports[_0x42bebe(0x110)]=(_0x1f4fdf,_0x5c3259)=>{const _0x384e45=_0x42bebe;Post['getAll']()['then'](_0x3ed33b=>_0x5c3259[_0x384e45(0x121)]({'status':!![],'message':_0x384e45(0x100),'data':_0x3ed33b}))[_0x384e45(0xfe)](_0xfa3ae0=>_0x5c3259[_0x384e45(0xfd)](0x1f4)[_0x384e45(0x121)]({'status':![],'message':_0xfa3ae0['message']||'Something\x20went\x20wrong!'}));},exports[_0x42bebe(0x115)]=(_0x1b3991,_0x2f7005)=>{const _0x448105=_0x42bebe,{uid:_0x278ca4}=getTokenInfo(_0x1b3991),{id:_0x5132b3}=_0x1b3991[_0x448105(0xec)],{type:_0x16a539}=_0x1b3991[_0x448105(0x12a)];return CommentLike[_0x448105(0xf9)]({'user_id':_0x278ca4,'comment_id':_0x5132b3,'type':_0x16a539})[_0x448105(0x114)](_0x1367ca=>{return _0x1367ca?dislikeComment({'user_id':_0x278ca4,'comment_id':_0x5132b3,'type':_0x16a539}):likeComment({'user_id':_0x278ca4,'comment_id':_0x5132b3,'type':_0x16a539});})[_0x448105(0x114)](_0x10cfd3=>_0x2f7005[_0x448105(0x121)]({'status':!!_0x10cfd3,'message':_0x10cfd3?_0x448105(0x100):_0x448105(0x10c)}))[_0x448105(0xfe)](_0x421b66=>respondError(_0x2f7005,_0x421b66));},exports[_0x42bebe(0x129)]=(_0x3b4b6a,_0x2bc7a6)=>{const _0xa38f38=_0x42bebe,{uid:_0x57101c}=getTokenInfo(_0x3b4b6a),{id:_0xc0f466}=_0x3b4b6a['params'],{type:_0xfcefe5}=_0x3b4b6a[_0xa38f38(0x12a)];return CommentLike[_0xa38f38(0xf9)]({'user_id':_0x57101c,'comment_id':_0xc0f466,'type':_0xfcefe5})[_0xa38f38(0x114)](_0x43072e=>{const _0x315a04=_0xa38f38;if(_0x43072e)throw Object[_0x315a04(0x120)](new Error(_0x315a04(0x126)),{'code':0x190});else return likeComment({'user_id':_0x57101c,'comment_id':_0xc0f466,'type':_0xfcefe5});})[_0xa38f38(0x114)](_0x139553=>_0x2bc7a6['json']({'status':!!_0x139553,'message':_0x139553?_0xa38f38(0xf8):_0xa38f38(0x10d)}))[_0xa38f38(0xfe)](_0x5202a4=>respondError(_0x2bc7a6,_0x5202a4));},exports['dislikeComment']=(_0x1dffcb,_0xdf8f41)=>{const _0x388dc8=_0x42bebe,{uid:_0x374656}=getTokenInfo(_0x1dffcb),{id:_0x23f63d}=_0x1dffcb[_0x388dc8(0xec)],{type:_0x372426}=_0x1dffcb['body'];return CommentLike[_0x388dc8(0xf9)]({'user_id':_0x374656,'comment_id':_0x23f63d,'type':_0x372426})['then'](_0x51a463=>{const _0x46cd8f=_0x388dc8;if(_0x51a463)return dislikeComment({'user_id':_0x374656,'comment_id':_0x23f63d,'type':_0x372426});else throw Object[_0x46cd8f(0x120)](new Error(_0x46cd8f(0xfa)),{'code':0x190});})[_0x388dc8(0x114)](_0xf33d6b=>_0xdf8f41[_0x388dc8(0x121)]({'status':!!_0xf33d6b,'message':_0xf33d6b?_0x388dc8(0x105):_0x388dc8(0xfc)}))['catch'](_0x5ef0a3=>respondError(_0xdf8f41,_0x5ef0a3));};const dislikeComment=({user_id:_0x4dd352,comment_id:_0x5a5531,type:_0x583764})=>{const _0x16ccab=_0x42bebe;return Promise[_0x16ccab(0xef)]([Comment[_0x16ccab(0x122)](_0x5a5531),CommentLike[_0x16ccab(0xf9)]({'user_id':_0x4dd352,'comment_id':_0x5a5531,'type':_0x583764})])[_0x16ccab(0x114)](([_0x116e76,_0x38d29a])=>{const _0x49da4b=_0x16ccab,_0x11d550=_0x49da4b(0xeb)+_0x583764+_0x49da4b(0xff);return _0x116e76[_0x11d550]=_0x116e76[_0x11d550]?_0x116e76[_0x11d550]-0x1:0x0,_0x116e76[_0x49da4b(0x119)]=getTotalLikes(_0x116e76),Promise[_0x49da4b(0xef)]([CommentLike[_0x49da4b(0xf6)](_0x38d29a['id']),Comment['save'](_0x116e76)]);})[_0x16ccab(0x114)](([_0x441407,_0x5cb589])=>{return _0x441407&&_0x5cb589;})[_0x16ccab(0xfe)](_0x3ab6c3=>![]);},likeComment=({user_id:_0x496357,comment_id:_0x435062,type:_0x28d703})=>{const _0xa2b50f=_0x42bebe;return Promise['all']([Comment[_0xa2b50f(0x122)](_0x435062),CommentLike[_0xa2b50f(0xf9)]({'user_id':_0x496357,'comment_id':_0x435062,'type':_0x28d703})])['then'](([_0x55d39a,_0x474f19])=>{const _0x563a61=_0xa2b50f;if(_0x474f19){throw Object['assign'](new Error('You\x20liked\x20this\x20comment\x20already!'),{'code':0x190});return;}const _0x275932=_0x563a61(0xeb)+_0x28d703+_0x563a61(0xff);_0x55d39a[_0x275932]=_0x55d39a[_0x275932]+0x1,_0x55d39a['liked']=getTotalLikes(_0x55d39a);const _0x5293d7=generateCommentLikeData({'user_id':_0x496357,'comment_id':_0x435062,'type':_0x28d703});return Promise[_0x563a61(0xef)]([CommentLike[_0x563a61(0x109)](_0x5293d7),Comment[_0x563a61(0x128)](_0x55d39a)]);})[_0xa2b50f(0x114)](([_0x3fc183,_0x305551])=>{return _0x3fc183&&_0x305551;})[_0xa2b50f(0xfe)](_0x59ab48=>{const _0x150d54=_0xa2b50f;return console[_0x150d54(0x112)](_0x150d54(0xfb),_0x59ab48[_0x150d54(0xed)]),![];});};
+const { Validator } = require("node-input-validator");
+const User = require("../models/user.model");
+const Post = require("../models/post.model");
+const Comment = require("../models/comment.model");
+const CommentLike = require("../models/commentLike.model");
+const EVENT = require('../constants/socket.constant');
+const { getTokenInfo } = require('../helpers/auth.helpers');
+const { bool2Int, getTotalLikes, generateTZTimeString, respondError, sendSingleNotification } = require("../helpers/common.helpers");
+const { generateCommentData, generateCommentLikeData } = require('../helpers/model.helpers');
+
+const activity = {
+  notifyNewComment: async ({ user, target_user, target, target_type, isGuest, comment, action = 'CREATE' }) => {
+    const titleMap = activity.generateNotiTitle({ name: user.user_name, isGuest, target_type, action });
+    const body = activity.generateCommentNotiBody(comment.comment);
+    const title = titleMap[target_user.language.toLowerCase() === 'romanian' ? 'RO' : 'EN'];
+    const avatar = activity.getUserAvatar(user);
+    if (target_user.device_token) {
+      await sendSingleNotification({ title, body, token: target_user.device_token })
+        .then(() => {})
+        .catch((error) => console.log('[Notify][Comment]', error.message));
+    }
+    return true;
+  },
+  generateNotiTitle: ({ name, isGuest, target_type = 'POST', action }) => {
+    const target = target_type.toLowerCase();
+    return {
+      'EN': `${isGuest ? 'A guest' : name} ${action === 'UPDATE' ? 'updated comment' : 'commented'} on your ${target_type === 'POST' ? 'post' : 'comment'}`,
+      'RO': `${isGuest ? 'Un oaspete' : name} ${action === 'UPDATE' ? 'a actualizat un comentariu la' : 'a comentat'} ${target_type === 'POST' ? 'postul' : 'comentariul'} dvs.`,
+    };
+  },
+  generateCommentNotiBody: (feed, limit = 60) => {
+    return feed.length < limit ? feed : (feed || "").substring(0, limit) + "...";
+  },
+  getUserAvatar: ({ photo, avatarIndex, sex }) => {
+    sex = sex.toString();
+    if (photo) {
+      return photo;
+    }
+    const domain = "https://admin.trefla.net/assets";
+    if (avatarIndex !== undefined && avatarIndex !== '') {
+      return `${domain}/avatar/${
+        sex === '1' ? 'girl' : 'boy'
+      }/${avatarIndex}.png`;
+    }
+    return `${domain}/avatar/avatar_${sex === '1' ? 'girl2' : 'boy1'}.png`;
+  },
+}
+
+exports.create = (req, res) => {
+  const socketClient = req.app.locals.socketClient;
+  const { uid: user_id } = getTokenInfo(req);
+  let commentData = generateCommentData(req.body);
+  commentData.user_id = user_id;
+  commentData.time = req.body.time ? req.body.time : generateTZTimeString();
+  // commentData.isGuest = bool2Int(req.body.isGuest);
+
+  const TargetModel = req.body.type === 'COMMENT' ? Comment : Post;
+  let _comment;
+  return Comment.create(commentData)
+    .then(comment => {
+      _comment = comment;
+      return Promise.all([
+        TargetModel.getById(req.body.target_id),
+        Comment.commentNumber({ target_id: req.body.target_id, type: req.body.type })
+      ])
+    })
+    .then(([target, comment_num]) => {
+      return Promise.all([
+        User.getById(_comment.user_id),
+        User.getById(target.user_id),
+        TargetModel.save({ ...target, comment_num: comment_num })
+      ]);
+    })
+    .then(async ([user, target_user, target]) => {
+      if (target_user.socket_id) {
+        socketClient.emit(EVENT.SKT_LTS_SINGLE, {
+          to: target_user.socket_id,
+          event: EVENT.SKT_COMMENT_CREATED,
+          args: {
+            ..._comment, 
+            liked: 0,
+            user: User.output(user),
+          },
+        });
+      }
+      await activity.notifyNewComment({ 
+        user, target_user, target,
+        target_type: req.body.type,
+        isGuest: req.body.isGuest,
+        comment: _comment,
+       });
+      _comment = Comment.output(_comment);
+      return res.json({ status: true, message: "success", data: { ..._comment, liked: 0, user: User.output(user) } });
+    })
+    // .catch((error) => respondError(res, error));
+};
+
+exports.getById = (req, res) => {
+  const { id } = req.params;
+  return Comment.getById(id)
+    .then(comment => Promise.all([
+      comment,
+      User.getById(comment.user_id),
+      CommentLike.commentLikesOfUser({ comment_id: id, user_id: comment.user_id })
+    ]))
+    .then(([comment, user, likes]) => {
+      console.log('[Likes]', likes);
+      comment = Comment.output(comment);
+      return res.json({ status: true, message: "success", data: { 
+        ...comment, 
+        liked: likes.length > 1 ? 1 : 0, 
+        user: User.output(user) } });
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.pagination = (req, res) => {
+  const { uid } = getTokenInfo(req);
+  const { last_id, limit, target_id, type } = req.body;
+  let _comments = [], _total = 0, _posters = {}; _minId = 0;
+
+  return Promise.all([
+    Comment.pagination({ limit, last_id, target_id, type }),
+    Comment.getCountOfComments({ target_id, type }),
+    Comment.minId({ target_id, type }),
+  ])
+    .then(async ([comments, total, minId]) => {
+      _comments = comments; _total = total; _minId = minId;
+      const poster_ids = comments.map(comment => comment.user_id);
+      return User.getByIds(poster_ids);
+    })
+    .then(users => {
+      users.map(user => _posters[user.id] = user);
+      return Promise.all(_comments.map(comment => CommentLike.commentLikesOfUser({ user_id: uid, comment_id: comment.id })));
+    })
+    .then((commentLikedArray) => {
+      // console.log('[Liked]', uid, commentLikedArray.map(a => a.length));
+      // console.log('[posters]', _posters);
+      _comments = _comments.map(comment => Comment.output(comment)); // filter keys
+
+      _comments = _comments.map((comment, i) => ({
+        ...comment,
+        liked: commentLikedArray[i].length > 0 ? commentLikedArray[i][0].type : 0,
+        user: User.output(_posters[comment.user_id])
+      }));
+      if (type === 'POST') {
+        return Promise.all(_comments.map(comment => Comment.pagination({
+          limit: 10000,
+          offset: 0,
+          target_id: comment.id,
+          type: 'COMMENT',
+        })));
+      } else {
+        return [];
+      }
+    })
+    .then(async (children_array) => {
+      
+      if (children_array.length > 0) {
+        let user_ids = [0];
+        let comment_ids = [0];
+        children_array.forEach(children => {
+          children.forEach(comment => {
+            user_ids.push(comment.user_id);
+            !comment_ids.includes(comment.id) ? comment_ids.push(comment.id) : null;
+          })
+        });
+
+        const users = await User.getByIds(user_ids);
+        let usersObj = {};
+        users.forEach(user => {
+          usersObj[user.id] = user;
+        });
+        const likeArray = await Promise.all(comment_ids.map(comment_id => CommentLike.commentLikesOfUser({ user_id: uid, comment_id }))); 
+        // console.log('[like array]', comment_ids, likeArray);
+        const likes = {};
+        likeArray.forEach((la, i) => {
+          likes[comment_ids[i]] = likeArray[i];
+        });
+
+        // transform children
+        children_array.forEach((children, i) => {
+          const cld = children.map(comment => ({
+            ...(Comment.output(comment)),
+            liked: likes[comment.id].length > 0 ? 1 : 0,
+            user: User.output(usersObj[comment.user_id])
+          }));
+          _comments[i] = {
+            ...(_comments[i]),
+            children: cld,
+          }
+        });
+      }
+
+      cMinId = _comments.length > 0 ? _comments[_comments.length - 1].id : 0;
+
+      return res.json({
+        status: true,
+        message: 'success',
+        data: _comments,
+        pager: {
+          // page,
+          last_id: cMinId,
+          limit,
+          total: _total
+        },
+        hadMore: cMinId > _minId, //(limit * page + _comments.length) < _total
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.simplePagination = async (req, res) => {
+  let { limit, page, target_id, type } = req.query;
+  limit = Number(limit);
+  page = Number(page);
+
+  let _comments, _total;
+  return Promise.all([
+    Comment.simplePagination({ limit, page, target_id, type }),
+    Comment.getCountOfComments({ target_id, type })
+  ])
+    .then(([comments, total]) => {
+      _comments = comments;
+      _total = total;
+      const post_ids = comments.filter(item => item.type === 'POST').map(item => item.target_id);
+      const comment_ids = comments.filter(item => item.type === 'COMMENT').map(item => item.target_id);
+      const user_ids = comments.map(item => item.user_id);
+      // console.log('ids', post_ids, comment_ids, user_ids)
+      return Promise.all([
+        Post.getByIds(post_ids),
+        Comment.getByIds(comment_ids),
+        User.getByIds(user_ids),
+      ]);
+    })
+    .then(([posts, comments, users]) => {
+      let postsObj = {}, commentsObj = {}, usersObj = {};
+      posts.forEach(post => {
+        postsObj[post.id.toString()] = post;
+      });
+      comments.forEach(comment => {
+        commentsObj[comment.id.toString()] = comment;
+      });
+      users.forEach(user => {
+        usersObj[user.id.toString()] = user;
+      });
+      _comments = _comments.map(comment => {
+        const user = usersObj[comment.user_id.toString()];
+        const target = comment.type === 'COMMENT' ? Comment.output(commentsObj[comment.target_id.toString()]) : Post.output(postsObj[comment.target_id.toString()]);
+        return {
+          ...(Comment.output(comment)),
+          user: User.output(user),
+          target,
+        };
+      });
+      return {
+        status: true,
+        message: 'success',
+        data: _comments,
+        pager: {
+          limit,
+          page,
+          total: _total,
+        },
+        hasMore: (limit * page) + _comments.length < _total,
+      }
+    })
+}
+
+// to-do: only admin or creator can update
+exports.updateById = async (req, res) => {
+  const socketClient = req.app.locals.socketClient;
+  const { uid, role } = getTokenInfo(req);
+  const { id } = req.params;
+  let _comment;
+  
+  return Comment.getById(id)
+    .then(comment => {
+      // remove user id in update data
+      let updateData = {};
+      const disallowedKeys = role === 'ADMIN' ? ['id', 'target_id', 'type'] : ['id', 'user_id', 'target_id', 'type'];
+      Object.keys(req.body).forEach(key => {
+        if (disallowedKeys.includes(key)) {
+          // skip it
+        } else if (key === 'isGuest') {
+          comment.isGuest = bool2Int(req.body.isGuest);
+        } else if (comment[key] !== undefined) {
+          comment[key] = req.body[key];
+        }
+      });
+      return Comment.save(comment);      
+    })
+    .then(async (comment) => {
+      _comment = comment;
+      const TargetModel = comment.type === 'COMMENT' ? Comment : Post;
+      const target = await TargetModel.getById(comment.target_id);
+      return Promise.all([
+        role === 'ADMIN' ? { user_name: 'ADMIN', sex: '0' } : User.getById(uid),
+        target ? User.getById(target.user_id) : null,
+        target,
+      ])
+    })
+    .then(async ([user, target_user, target]) => {
+      if (target_user && target_user.socket_id) {
+        socketClient.emit(EVENT.SKT_LTS_SINGLE, {
+          to: target_user.socket_id,
+          event: EVENT.SKT_COMMENT_UPDATED,
+          args: {
+            ..._comment, 
+            liked: 0,
+            user: User.output(user),
+          },
+        });
+      }
+      await activity.notifyNewComment({ 
+        user, target_user, target,
+        target_type: _comment.type,
+        isGuest: _comment.isGuest,
+        comment: _comment,
+        action: 'UPDATE',
+       });
+      _comment = Comment.output(_comment);
+      return res.json({ status: true, message: "success", data: { ..._comment, liked: 0, user: User.output(user) } });
+    })
+    // .then(newComment => res.json({
+    //   status: true,
+    //   message: 'success',
+    //   data: Comment.output(newComment)
+    // }))
+    // .catch((error) => respondError(res, error));
+}
+
+exports.deleteById = async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { id: comment_id } = req.params;
+
+  const comment = await Comment.getById(comment_id);
+  const TargetModel = comment.type === 'COMMENT' ? Comment : Post;
+
+  return Comment.deleteById(comment_id)
+    .then(deleted => {
+      return Promise.all([
+        Comment.commentNumber({ type: comment.type, target_id: comment.target_id }),
+        TargetModel.getById(comment.target_id),
+        CommentLike.delete({ comment_id }),
+      ]);
+    })
+    .then(([comment_num, target, delRows]) => {
+      return TargetModel.save({ ...target, comment_num });
+    })
+    .then(() => {
+      return res.json({
+        status: true,
+        message: 'Comment has been deleted!'
+      });
+    })
+    .catch(error => respondError(res, error));
+}
+
+exports.getAll = (req, res) => {
+  Post.getAll()
+    .then((langs) =>
+      res.json({ status: true, message: "success", data: langs })
+    )
+    .catch((error) =>
+      res.status(500).json({
+        status: false,
+        message: error.message || "Something went wrong!",
+      })
+    );
+};
+
+exports.toggleCommentLike = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { id: comment_id } = req.params;
+  const { type } = req.body;
+  return CommentLike.userLikedComment({ user_id, comment_id, type })
+    .then(postLike => {
+      return postLike ? dislikeComment({ user_id, comment_id, type }) : likeComment({ user_id, comment_id, type });
+    })
+    .then(result => res.json({
+      status: !!result,
+      message: result ? 'success' : 'failed'
+    }))
+    .catch((error) => respondError(res, error));
+}
+
+exports.doLikeComment = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { id: comment_id } = req.params;
+  const { type } = req.body;
+  return CommentLike.userLikedComment({ user_id, comment_id, type })
+    .then(liked => {
+      if (liked) {
+        throw Object.assign(new Error('You liked it already!'), { code: 400 });
+      } else {
+        return likeComment({ user_id, comment_id, type });
+      }
+    })
+    .then(result => res.json({
+      status: !!result,
+      message: result ? 'You liked the comment!' : 'Failed to like the comment!'
+    }))
+    .catch((error) => respondError(res, error));
+}
+
+exports.dislikeComment = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const { id: comment_id } = req.params;
+  const { type } = req.body;
+  return CommentLike.userLikedComment({ user_id, comment_id, type })
+    .then(liked => {
+      if (liked) {
+        return dislikeComment({ user_id, comment_id, type });
+      } else {
+        throw Object.assign(new Error('You disliked it already!'), { code: 400 });
+      }
+    })
+    .then(result => res.json({
+      status: !!result,
+      message: result ? 'You disliked the comment!' : 'Failed to dislike the comment!'
+    }))
+    .catch((error) => respondError(res, error));
+}
+
+const dislikeComment = ({ user_id, comment_id, type }) => {
+  return Promise.all([
+    Comment.getById(comment_id),
+    CommentLike.userLikedComment({ user_id, comment_id, type })
+  ])
+    .then(([comment, commentLike]) => {
+      const like_fld = `like_${type}_num`;
+      comment[like_fld] = comment[like_fld] ? comment[like_fld] - 1 : 0;
+      comment['liked'] = getTotalLikes(comment);
+      return Promise.all([
+        CommentLike.deleteById(commentLike.id),
+        Comment.save(comment)
+      ])
+    })
+    .then(([deleted, newPost]) => {
+      return deleted && newPost;
+    })
+    .catch((error) => false);
+}
+
+const likeComment = ({ user_id, comment_id, type }) => {
+  return Promise.all([
+    Comment.getById(comment_id),
+    CommentLike.userLikedComment({ user_id, comment_id, type })
+  ])
+    .then(([comment, commentLike]) => {
+      if (commentLike) {
+        throw Object.assign(new Error('You liked this comment already!'), { code: 400 }); return;
+      }
+      const like_fld = `like_${type}_num`;
+      comment[like_fld] = comment[like_fld] + 1;
+      comment['liked'] = getTotalLikes(comment);
+
+      const cmtData = generateCommentLikeData({ user_id, comment_id, type });
+      return Promise.all([
+        CommentLike.create(cmtData),
+        Comment.save(comment)
+      ])
+    })
+    .then(([created, newCmt]) => {
+      return created && newCmt;
+    })
+    .catch((error) => {
+      console.log('[Like Comment]', error.message);
+      return false
+    });
+}
+

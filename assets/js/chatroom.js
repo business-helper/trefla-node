@@ -1,5 +1,7 @@
 "use strict";
 
+// const { SKT_COMMENT_CREATED } = require("../../src/constants/socket.constant");
+
 let user_pager = { limit: 10, page: 0 };
 let chat_pager = { limit: 10, page: 0 };
 let pending_pager = { limit: 10, page: 0 };
@@ -584,6 +586,14 @@ socket.on(SKT_MSG_FAILED, args => {
 
 socket.on(SKT_CHECK_HEALTH, args => {
   console.log(`[${SKT_CHECK_HEALTH}]`, args)
+})
+
+socket.on(SKT_COMMENT_CREATED, args => {
+  console.log(`[${SKT_COMMENT_CREATED}]`, args)
+})
+
+socket.on(SKT_COMMENT_UPDATED, args => {
+  console.log(`[${SKT_COMMENT_UPDATED}]`, args)
 })
 
 socket.on('get_token', args => {

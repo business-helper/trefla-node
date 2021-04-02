@@ -121,16 +121,16 @@ postRouters.post("/pagination", async (req, res) => {
   });
 
   validator.addPostRule(async (provider) =>
-  Promise.all([
-    provider.inputs.type
-  ]).then(([type]) => {
-    if (!type) {
-      provider.error('type', 'custom', 'Type param is required!');
-    } else if (!['AROUND', 'ALL', 'ME'].includes(type)) {
-      provider.error("type", "custom", `Type param must be of of "AROUND", "ALL", "ME"!`);
-    }
-  })
-);
+    Promise.all([
+      provider.inputs.type
+    ]).then(([type]) => {
+      if (!type) {
+        provider.error('type', 'custom', 'Type param is required!');
+      } else if (!['AROUND', 'ALL', 'ME'].includes(type)) {
+        provider.error("type", "custom", `Type param must be of of "AROUND", "ALL", "ME"!`);
+      }
+    })
+  );
 
   return validator
     .check()

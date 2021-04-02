@@ -31,6 +31,8 @@ exports.SKT_AUTHENTICATE = 'socket.authenticate';
 exports.SKT_MSG_FAILED = 'socket.message.failed';
 exports.SKT_BLOCK_BLOCKED = 'socket.block.blocked';
 exports.SKT_BLOCK_RELEASED = 'socket.block.released';
+exports.SKT_COMMENT_CREATED = 'socket.comment.created';
+exports.SKT_COMMENT_UPDATED = 'socket.comment.updated';
 
 exports.SKT_LTS_SINGLE = 'socket.local2server.single';
 exports.SKT_LTS_MULTIPLE = 'socket.local2server.multiple';
