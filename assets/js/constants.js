@@ -29,3 +29,5 @@ const SKT_AUTHENTICATE = 'socket.authenticate';
 const SKT_MSG_FAILED = 'socket.message.failed';
 const SKT_BLOCK_BLOCKED = 'socket.block.blocked';
 const SKT_BLOCK_RELEASED = 'socket.block.released';
+const SKT_COMMENT_CREATED = 'socket.comment.created';
+const SKT_COMMENT_UPDATED = 'socket.comment.updated';
