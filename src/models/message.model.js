@@ -94,6 +94,14 @@ Message.lastMsgInChat = (chat_id) => {
   });
 }
 
+Message.lastPreviewMsgInChat = (chat_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM messages WHERE chat_id=? AND type IN (4,5,6) ORDER BY id DESC LIMIT 1", [chat_id], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    });
+  })
+}
+
 Message.updateReceiverInCardChat = (chat_id, receiver_id) => {
   return new Promise((resolve, reject) => {
     sql.query(`UPDATE ${table} SET receiver_id=? WHERE chat_id=?`, [receiver_id, chat_id], (err, res) => {

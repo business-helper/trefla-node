@@ -26,6 +26,44 @@ const activity = {
     }
     return chat;
   },
+  processPreviewMsg: async ({ chat, user_id, payload: { from_where, target_id, receiver_id } }) => {
+    if (!from_where || !target_id) return false;
+
+    const mapWhere2Type = {
+      'POST': 4,
+      'COMMENT': 5,
+      'CARD': 6,
+    };
+    // check the last preview message.
+    const lastPreview = await models.message.lastPreviewMsgInChat(chat.id);
+    // if the lastest preview is same, then skip it.
+    if (lastPreview && mapWhere2Type[from_where] === lastPreview.type && lastPreview.message === target_id.toString()) return false;
+
+    // lets insert new preview msg.
+    const message = generateMessageData({
+      chat_id: chat.id,
+      message: target_id,
+      sender_id: user_id,
+      receiver_id: receiver_id || 0,
+      type: mapWhere2Type[from_where],
+      isOnlyEmoji: 0,
+      numEmoji: 0,
+      sizeEmoji: 0,
+    });
+    await models.message.create(message);
+    // emoticon message
+    const emotionMsg = generateMessageData({
+      chat_id: chat.id,
+      message: '[36]',
+      sender_id: user_id,
+      receiver_id: receiver_id || 0,
+      type: 0,
+      numEmoji: 1,
+      sizeEmoji: 100,
+      isOnlyEmoji: 1,
+    });
+    await models.message.create(emotionMsg);
+  },
 }
 
 
@@ -216,11 +254,18 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
     User.getById(user_id),
   ])
     .then(async ([chat, sender]) => {
+      // to-dos
+      // - add preview message.
+      // - add emoticon message.
+      await activity.processPreviewMsg({ chat, user_id, payload });
+
+      // add message after preview?
       const msgObj = message ? Message.create({ ...message, chat_id: chat.id }) : null
       chat = Chat.output(chat);
       chat.user = User.output(receiver);
 
-      chat.preview_data = await helpers.common.populateChatSource(chat.sources, models);
+      // @deprecated?
+      // chat.preview_data = await helpers.common.populateChatSource(chat.sources, models);
 
       return ({
         status: true,
@@ -375,7 +420,7 @@ exports.loadMessageReq = async ({ myId = null, chat_id, last_id, limit }) => {
     Message.getMinId({ chat_id }),
     User.getByIds(uIds)
   ])
-    .then(([messages, total, minId, users]) => {
+    .then(async ([messages, total, minId, users]) => {
       let userObj = {};
       users.forEach(user => {
         userObj[user.id.toString()] = User.output(user);
@@ -386,6 +431,26 @@ exports.loadMessageReq = async ({ myId = null, chat_id, last_id, limit }) => {
           user: userObj[msg.sender_id]
         };
       }); //.reverse();
+
+      const mapType2Model = {
+        '4': 'post',
+        '5': 'comment',
+      };
+      await Promise.all(messages.map(async (msg) => {
+        const msgType = msg.type.toString();
+
+        if (msgType === '4' || msgType === '5') {
+          // console.log('[preview message]', msg, mapType2Model[msgType])
+          const model = models[mapType2Model[msgType]];
+          const target = await model.getById(msg.message);
+          if (!target) return msg.data = null;
+          const poster = await models.user.getById(target.user_id);
+          msg.data = {
+            ...model.output(target),
+            user: poster ? models.user.output(poster) : null,
+          };
+        }
+      }))
       return { messages, minId, total };
     })
 }
