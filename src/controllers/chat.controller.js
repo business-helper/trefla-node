@@ -27,7 +27,7 @@ const activity = {
     return chat;
   },
   processPreviewMsg: async ({ chat, user_id, payload: { from_where, target_id, receiver_id } }) => {
-    if (!from_where || !target_id) return false;
+    if (!from_where || !target_id) return chat;
 
     const mapWhere2Type = {
       'POST': 4,
@@ -37,7 +37,7 @@ const activity = {
     // check the last preview message.
     const lastPreview = await models.message.lastPreviewMsgInChat(chat.id);
     // if the lastest preview is same, then skip it.
-    if (lastPreview && mapWhere2Type[from_where] === lastPreview.type && lastPreview.message === target_id.toString()) return false;
+    if (lastPreview && mapWhere2Type[from_where] === lastPreview.type && lastPreview.message === target_id.toString()) return chat;
 
     // lets insert new preview msg.
     const message = generateMessageData({
@@ -63,6 +63,19 @@ const activity = {
       isOnlyEmoji: 1,
     });
     await models.message.create(emotionMsg);
+
+    // update last message info of chat.
+    let last_messages = JSON.parse(chat.last_messages);
+    let unread_nums = JSON.parse(chat.unread_nums);
+    const userIndex = JSON.parse(chat.user_ids).indexOf(user_id);
+    unread_nums[1 - userIndex] += 2; chat.unread_nums = JSON.stringify(unread_nums);
+    chat.last_messages = JSON.stringify([{
+      msg: '[36]',
+      time: helpers.common.generateTZTimeString(),
+    }]);
+    await models.chat.save(chat);
+    
+    return chat;
   },
 }
 
@@ -257,7 +270,7 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
       // to-dos
       // - add preview message.
       // - add emoticon message.
-      await activity.processPreviewMsg({ chat, user_id, payload });
+      chat = await activity.processPreviewMsg({ chat, user_id, payload });
 
       // add message after preview?
       const msgObj = message ? Message.create({ ...message, chat_id: chat.id }) : null
