@@ -1,1 +1,308 @@
-const _0x1e37=['y2HHDf9Pza','w0Dfvf0Gl2nOyxqVCgvUzgLUzW','yM9KEq','q2HHDhjVB20Gzg9LCYbUB3qGzxHPC3rZigzVCIb0AguGz2L2zw4GAwqH','q2HHDcbKB2vZig5VDcbLEgLZDce','lI4VAgvSCgvYCY9HDxrOlMHLBhbLCNm','zxjYB3jZ','CgfYyw1Z','CMvJzwL2zxjFAwq','yxnZAwDU','yxzHAwXHyMXLq2HHDhjVB21Z','odq3nZfYqMrXD1K','DgHLBG','otC5mZvos2LWCfm','l2fJy2vWDgvK','mJq3oty2tgXfBwzy','lI4VBw9KzwXZl2nOyxqUBw9KzwW','nti3mJq4BMn4z29T','ywrKug9ZDfj1Bgu','zgvSzxrL','BgLTAxq','sw52ywXPzcbYzxf1zxn0','BgvUz3rO','ANnVBG','z2v0qNLjza','l3bLBMrPBMC','lI4Vy29UDhjVBgXLCNmVy2HHDc5JB250CM9SBgvY','iIbKB2vZig5VDcbLEgLZDhmH','C2vUzgvY','DxbKyxrLqNLjza','y3vZDg9T','uMvJzwL2zxiGzg9LCYbUB3qGzxHPC3qH','y2f0y2G','ww91igfYzsbUB3qGysbTzw1IzxiGB2yGDgHPCYbJAgf0ihjVB20H','C3vJy2vZCW','mtmZmw1rvwfbAa','zxHWB3j0CW','lI4VBw9KzwXZl21LC3nHz2uUBw9KzwW','CMvXDwLYzwr8Aw50zwDLCG','q29TBwvUDcb3AxrOigLKici','CMvJzwL2zxi','mta0uw5Itgfh','z2v0','l25VCM1HBa','C29JA2v0q2XPzw50','CgfNAw5HDgLVBG','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','ndy1nxPqtgPzyq','l3bHz2LUyxrPB24','Aw5JBhvKzxm','Bg9JywXZ','Bg9Hze1LC3nHz2vszxe','Aw5WDxrZ','ywXS','DxnLCL9Pzhm','zgvSzxrLqNLjzfjLCq','n2LqrfncyW','lI4VBwLKzgXLD2fYzxmVyMfZAwmUBwLKzgXLD2fYzq','mtKZnZe5ug9Vz01z','y2HHDhjVB20','y2HLy2S','zxjYB3i','BM9Kzs1PBNb1Dc12ywXPzgf0B3i','CgvUzgLUz0nOyxrYB29TCW','z2v0qwXSq2HHDhnpzLvZzxi','zxHWCMvZCW','Cg9ZDa','z2v0qNLvC2vYswrZ','mwTJCMrpta','lZPPza','q2HHDcbOyxmGyMvLBIbKzwXLDgvK','yxbW'];const _0x46e3=function(_0x3e0789,_0x5566db){_0x3e0789=_0x3e0789-0x7d;let _0x1e37bf=_0x1e37[_0x3e0789];if(_0x46e3['QLvoGG']===undefined){var _0x46e335=function(_0x26d11a){const _0xb6e01c='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x37db6e='';for(let _0x5dd4f3=0x0,_0x493efa,_0x534337,_0xa5e160=0x0;_0x534337=_0x26d11a['charAt'](_0xa5e160++);~_0x534337&&(_0x493efa=_0x5dd4f3%0x4?_0x493efa*0x40+_0x534337:_0x534337,_0x5dd4f3++%0x4)?_0x37db6e+=String['fromCharCode'](0xff&_0x493efa>>(-0x2*_0x5dd4f3&0x6)):0x0){_0x534337=_0xb6e01c['indexOf'](_0x534337);}return _0x37db6e;};_0x46e3['xAnTvW']=function(_0x455333){const _0x32248e=_0x46e335(_0x455333);let _0x319f68=[];for(let _0x2d9e91=0x0,_0x102eaf=_0x32248e['length'];_0x2d9e91<_0x102eaf;_0x2d9e91++){_0x319f68+='%'+('00'+_0x32248e['charCodeAt'](_0x2d9e91)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x319f68);},_0x46e3['XNuUVD']={},_0x46e3['QLvoGG']=!![];}const _0x1232ed=_0x1e37[0x0],_0xc8521e=_0x3e0789+_0x1232ed,_0x52ffb6=_0x46e3['XNuUVD'][_0xc8521e];return _0x52ffb6===undefined?(_0x1e37bf=_0x46e3['xAnTvW'](_0x1e37bf),_0x46e3['XNuUVD'][_0xc8521e]=_0x1e37bf):_0x1e37bf=_0x52ffb6,_0x1e37bf;};const _0x27d032=_0x46e3;(function(_0x55ae70,_0x15b5a6){const _0x3764a9=_0x46e3;while(!![]){try{const _0x9a19a8=-parseInt(_0x3764a9(0xb1))+parseInt(_0x3764a9(0x84))+parseInt(_0x3764a9(0xa6))*parseInt(_0x3764a9(0xaf))+parseInt(_0x3764a9(0x82))*-parseInt(_0x3764a9(0xbb))+parseInt(_0x3764a9(0x88))+-parseInt(_0x3764a9(0x9a))*-parseInt(_0x3764a9(0xa0))+-parseInt(_0x3764a9(0x86));if(_0x9a19a8===_0x15b5a6)break;else _0x55ae70['push'](_0x55ae70['shift']());}catch(_0x4a15f6){_0x55ae70['push'](_0x55ae70['shift']());}}}(_0x1e37,0x41da8));const express=require(_0x27d032(0xb8)),{Validator}=require(_0x27d032(0xb5)),chatRouters=express['Router'](),chatCtrl=require(_0x27d032(0x91)),Chat=require(_0x27d032(0x87)),User=require('../models/user.model'),Message=require(_0x27d032(0x9c)),{BearerMiddleware}=require(_0x27d032(0xb0)),{getTokenInfo}=require(_0x27d032(0xc4)),{respondValidateError}=require(_0x27d032(0xa5));chatRouters['use']((_0x1232ed,_0xc8521e,_0x52ffb6)=>{BearerMiddleware(_0x1232ed,_0xc8521e,_0x52ffb6);}),chatRouters[_0x27d032(0xa1)](_0x27d032(0x90),async(_0x26d11a,_0xb6e01c)=>{const _0x5e3b1e=_0x27d032;return console['log'](_0x5e3b1e(0xc0)),chatCtrl[_0x5e3b1e(0xb6)](_0x26d11a,_0xb6e01c);}),chatRouters['get'](_0x27d032(0x85),async(_0x37db6e,_0x5dd4f3)=>{const _0x1ba701=_0x27d032;return chatCtrl[_0x1ba701(0x81)](_0x37db6e,_0x5dd4f3);}),chatRouters[_0x27d032(0xa1)](_0x27d032(0xbc),async(_0x493efa,_0x534337)=>{const _0xc9b57c=_0x27d032,_0xa5e160=new Validator({'id':_0x493efa[_0xc9b57c(0x7e)]['id']},{'id':_0xc9b57c(0x9d)});return _0xa5e160['addPostRule'](async _0x455333=>Promise[_0xc9b57c(0xac)]([Chat['getById'](_0x455333[_0xc9b57c(0xab)]['id'])])[_0xc9b57c(0x83)](([_0x32248e])=>{const _0x27f13a=_0xc9b57c;!_0x32248e&&_0x455333['error']('id',_0x27f13a(0x95),_0x27f13a(0xc2));})),_0xa5e160[_0xc9b57c(0xb3)]()[_0xc9b57c(0x83)](_0x319f68=>{const _0x13c700=_0xc9b57c;if(!_0x319f68)throw Object['assign'](new Error(_0x13c700(0x8c)),{'code':0x190,'details':_0xa5e160[_0x13c700(0x7d)]});})[_0xc9b57c(0x83)](()=>chatCtrl[_0xc9b57c(0x8f)](_0x493efa,_0x534337))[_0xc9b57c(0x97)](_0x2d9e91=>respondValidateError(_0x534337,_0x2d9e91));}),chatRouters['get']('/',async(_0x102eaf,_0x164d27)=>{const _0x183468=_0x27d032,{uid:_0xf39a22}=getTokenInfo(_0x102eaf);return chatCtrl[_0x183468(0xb7)](_0xf39a22)[_0x183468(0x83)](_0x368bff=>_0x164d27[_0x183468(0x8e)](_0x368bff))[_0x183468(0x97)](_0x484113=>respondValidateError(_0x164d27,_0x484113));}),chatRouters[_0x27d032(0xb9)](_0x27d032(0xa7),async(_0x589d9a,_0x536411)=>{const _0x33a45d=_0x27d032,_0x36f5ae=new Validator(_0x589d9a['body'],{'page':_0x33a45d(0x9d),'limit':_0x33a45d(0x9d)});return _0x36f5ae[_0x33a45d(0xb3)]()[_0x33a45d(0x83)](_0x29e07e=>{const _0x3e5e74=_0x33a45d;if(!_0x29e07e)throw Object[_0x3e5e74(0x80)](new Error(_0x3e5e74(0x8c)),{'code':0x190,'details':_0x36f5ae['errors']});})[_0x33a45d(0x83)](()=>commentCtrl[_0x33a45d(0xa4)](_0x589d9a,_0x536411))[_0x33a45d(0x97)](_0x292c14=>respondValidateError(_0x536411,_0x292c14));}),chatRouters['post'](_0x27d032(0xa2),async(_0x1e5f75,_0x19f1e8)=>{const _0x38a5e5=_0x27d032,{uid:_0x5be6f1}=getTokenInfo(_0x1e5f75),_0x37764f=new Validator({..._0x1e5f75[_0x38a5e5(0xc1)],'user_id':_0x5be6f1},{'user_id':'required|integer','receiver_id':_0x38a5e5(0x9d)});return _0x37764f[_0x38a5e5(0x89)](async _0x48814e=>Promise[_0x38a5e5(0xac)]([User[_0x38a5e5(0x8f)](_0x48814e[_0x38a5e5(0xab)]['user_id']),User['getById'](_0x48814e[_0x38a5e5(0xab)][_0x38a5e5(0x7f)]),Chat[_0x38a5e5(0xba)]({'sender_id':_0x5be6f1,'receiver_id':_0x48814e[_0x38a5e5(0xab)][_0x38a5e5(0x7f)]})])[_0x38a5e5(0x83)](([_0x42e6e2,_0xfdffc2,_0x17b27f])=>{const _0x4c5539=_0x38a5e5;!_0x42e6e2&&_0x48814e['error'](_0x4c5539(0x93),'custom','Sender\x20does\x20not\x20exist!'),!_0xfdffc2&&_0x48814e['error'](_0x4c5539(0x9f),_0x4c5539(0x95),_0x4c5539(0x96)),_0x17b27f[_0x4c5539(0x8d)]>0x0&&_0x48814e[_0x4c5539(0xb4)](_0x4c5539(0xb2),_0x4c5539(0x95),'Chat\x20room\x20already\x20exists\x20between\x20users!');})),_0x37764f['check']()[_0x38a5e5(0x83)](_0x20decd=>{const _0xa0b960=_0x38a5e5;if(!_0x20decd)throw Object[_0xa0b960(0x80)](new Error(_0xa0b960(0x8c)),{'code':0x190,'details':_0x37764f[_0xa0b960(0x7d)]});})[_0x38a5e5(0x83)](()=>chatCtrl['create'](_0x1e5f75,_0x19f1e8))[_0x38a5e5(0x97)](_0x27e812=>respondValidateError(_0x19f1e8,_0x27e812));}),chatRouters[_0x27d032(0xb9)]('/:id/messages',async(_0x3d67a9,_0xf4e449)=>{const _0x458289=_0x27d032,{uid:_0x4e415a}=getTokenInfo(_0x3d67a9),_0x26390b=new Validator({..._0x3d67a9[_0x458289(0xc1)],'chat_id':_0x3d67a9[_0x458289(0x7e)]['id']},{'chat_id':_0x458289(0x9d),'limit':_0x458289(0x9d)});return _0x26390b[_0x458289(0x89)](async _0x346581=>Promise[_0x458289(0xac)]([Chat['getById'](_0x346581['inputs'][_0x458289(0xbf)])])['then'](([_0x2cec7c])=>{const _0x3b6ef7=_0x458289;!_0x2cec7c&&_0x346581[_0x3b6ef7(0xb4)]('id',_0x3b6ef7(0x95),_0x3b6ef7(0xc2));})),_0x26390b['check']()[_0x458289(0x83)](_0x59c23d=>{const _0x6ebb8d=_0x458289;if(!_0x59c23d)throw Object[_0x6ebb8d(0x80)](new Error(_0x6ebb8d(0x8c)),{'code':0x190,'details':_0x26390b[_0x6ebb8d(0x7d)]});})[_0x458289(0x83)](()=>chatCtrl[_0x458289(0xaa)]({'myId':_0x4e415a,'chat_id':_0x3d67a9[_0x458289(0x7e)]['id'],'last_id':_0x3d67a9[_0x458289(0xc1)]['last_id']||null,'limit':_0x3d67a9['body'][_0x458289(0x8b)]}))[_0x458289(0x83)](({messages:_0x4ee864,minId:_0x476588,total:_0x2386ad})=>{const _0x2366a7=_0x458289;_0xf4e449[_0x2366a7(0x8e)]({'status':!![],'message':_0x2366a7(0x99),'data':_0x4ee864,'pager':{'limit':_0x3d67a9['body'][_0x2366a7(0x8b)],'last_id':_0x4ee864[_0x2366a7(0x8d)]?_0x4ee864[_0x4ee864[_0x2366a7(0x8d)]-0x1]['id']:0x0},'hasMore':_0x4ee864[_0x2366a7(0x8d)]>0x0&&_0x4ee864[_0x4ee864[_0x2366a7(0x8d)]-0x1]['id']>_0x476588?0x1:0x0,'total':_0x2386ad});})[_0x458289(0x97)](_0x2288a6=>respondValidateError(_0xf4e449,_0x2288a6));}),chatRouters['patch'](_0x27d032(0xbc),async(_0x53fd32,_0x28cc6b)=>{const _0x1a18b6=_0x27d032,_0x31f2dc=new Validator({'id':_0x53fd32[_0x1a18b6(0x7e)]['id'],..._0x53fd32[_0x1a18b6(0xc1)]},{'id':_0x1a18b6(0x9d)});return _0x31f2dc['addPostRule'](async _0x2cd883=>Promise[_0x1a18b6(0xac)]([Comment['getById'](_0x2cd883[_0x1a18b6(0xab)]['id'])])['then'](([_0x429efd])=>{const _0x3804f3=_0x1a18b6;!_0x429efd&&_0x2cd883[_0x3804f3(0xb4)]('id',_0x3804f3(0x95),_0x3804f3(0x9e)+_0x2cd883['inputs']['id']+_0x3804f3(0x92));})),_0x31f2dc[_0x1a18b6(0xb3)]()['then'](_0xa5dc47=>{const _0x166859=_0x1a18b6;if(!_0xa5dc47)throw Object['assign'](new Error(_0x166859(0x8c)),{'code':0x190,'details':_0x31f2dc[_0x166859(0x7d)]});})[_0x1a18b6(0x83)](()=>commentCtrl[_0x1a18b6(0x94)](_0x53fd32,_0x28cc6b))['catch'](_0x2ee999=>respondValidateError(_0x28cc6b,_0x2ee999));}),chatRouters[_0x27d032(0x8a)](_0x27d032(0xbc),async(_0x180d5f,_0x4e7f12)=>{const _0x3106a6=_0x27d032,_0x2a457c=_0x180d5f[_0x3106a6(0xbe)][_0x3106a6(0xa9)][_0x3106a6(0xa3)],{uid:_0x2cf27e}=getTokenInfo(_0x180d5f),_0x53d86c=new Validator({'id':_0x180d5f[_0x3106a6(0x7e)]['id']},{'id':_0x3106a6(0x9d)});return _0x53d86c[_0x3106a6(0x89)](async _0x1666ed=>Promise[_0x3106a6(0xac)]([Chat[_0x3106a6(0x8f)](_0x1666ed[_0x3106a6(0xab)]['id'])])[_0x3106a6(0x83)](([_0x5aa72a])=>{const _0x40e413=_0x3106a6;if(!_0x5aa72a)_0x1666ed[_0x40e413(0xb4)]('id','custom',_0x40e413(0xc3));else{const _0x26302b=JSON['parse'](_0x5aa72a[_0x40e413(0xad)]);!_0x26302b[_0x40e413(0xa8)](_0x2cf27e)&&_0x1666ed[_0x40e413(0xb4)]('id',_0x40e413(0x95),_0x40e413(0x98));}})),_0x53d86c[_0x3106a6(0xb3)]()[_0x3106a6(0x83)](_0x211fcc=>{const _0x1dc509=_0x3106a6;if(!_0x211fcc)throw Object['assign'](new Error(_0x1dc509(0x8c)),{'code':0x190,'details':_0x53d86c[_0x1dc509(0x7d)]});return chatCtrl[_0x1dc509(0xae)]({'id':_0x180d5f[_0x1dc509(0x7e)]['id'],'user_id':_0x2cf27e,'socketClient':_0x2a457c});})[_0x3106a6(0x83)](_0xee8c70=>{const _0x566e72=_0x3106a6;return _0x4e7f12[_0x566e72(0x8e)]({'status':!![],'message':_0x566e72(0xbd)});})[_0x3106a6(0x97)](_0x377bb3=>respondValidateError(_0x4e7f12,_0x377bb3));}),module[_0x27d032(0x9b)]=chatRouters;
+const express = require("express");
+const { Validator } = require("node-input-validator");
+const chatRouters = express.Router();
+
+const chatCtrl = require("../controllers/chat.controller");
+const Chat = require("../models/chat.model");
+const User = require("../models/user.model");
+const Message = require("../models/message.model");
+const { BearerMiddleware } = require("../middlewares/basic.middleware");
+const { getTokenInfo } = require('../helpers/auth.helpers');
+const { respondValidateError } = require("../helpers/common.helpers");
+
+// Bearer authentication
+chatRouters.use((req, res, next) => {
+  BearerMiddleware(req, res, next);
+});
+
+chatRouters.get('/pending', async (req, res) => {
+  console.log('[GET] /chat/pending');
+  return chatCtrl.pendingChatrooms(req, res);
+});
+
+chatRouters.get('/accepted', async (req, res) => {
+  return chatCtrl.availableChatrooms(req, res);
+});
+
+chatRouters.get('/:id', async (req, res) => {
+  const validator = new Validator({
+    id: req.params.id
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Chat.getById(provider.inputs.id)
+    ]).then(([chatById]) => {
+      if (!chatById) {
+        provider.error(
+          "id",
+          "custom",
+          `Chatroom does not exists for the given id!`
+        );
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => chatCtrl.getById(req, res))
+  .catch((error) => respondValidateError(res, error));
+})
+
+chatRouters.get('/', async (req,res) => {
+  const { uid: user_id } = getTokenInfo(req);
+
+  return chatCtrl.getAllChatsOfUser(user_id)
+    .then(chats => res.json(chats))
+    .catch(error => respondValidateError(res, error));
+});
+
+chatRouters.post("/pagination", async (req, res) => {
+  const validator = new Validator(req.body, {
+    page: "required|integer",
+    limit: "required|integer",
+  });
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => commentCtrl.pagination(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
+
+/**
+ * @endpoint /normal
+ * @description creates a normal chat. with optional message
+ * @param {*number} receiver_id
+ * @param {?string} message
+ */
+chatRouters.post("/normal", async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const validator = new Validator(
+    {
+      ...req.body,
+      user_id
+    }, 
+    {
+      user_id: "required|integer",
+      receiver_id: "required|integer",
+    }
+  );
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      User.getById(provider.inputs.user_id),
+      User.getById(provider.inputs.receiver_id),
+      Chat.getByUserIds({ sender_id: user_id, receiver_id: provider.inputs.receiver_id })
+    ])
+    .then(([sender, receiver, chatrooms]) => {
+      if (!sender) {
+        provider.error('sender', 'custom', 'Sender does not exist!');
+      }
+      if (!receiver) {
+        provider.error('receiver', 'custom', 'Receiver does not exist!');
+      }
+      if (chatrooms.length > 0) {
+        provider.error('chatroom', 'custom', 'Chat room already exists between users!');
+      }
+    })
+  );
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => chatCtrl.create(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
+
+chatRouters.post('/:id/messages', async (req, res) => {
+  const { uid } = getTokenInfo(req);
+  const validator = new Validator({
+    ...req.body,
+    chat_id: req.params.id,
+  }, {
+    chat_id: "required|integer",
+    limit: "required|integer"
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Chat.getById(provider.inputs.chat_id)
+    ]).then(([chatById]) => {
+      if (!chatById) {
+        provider.error( "id", "custom", `Chatroom does not exists for the given id!` );
+      }
+    })
+  );
+
+  return validator
+    .check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => chatCtrl.loadMessageReq({
+      myId: uid,
+      chat_id: req.params.id,
+      last_id: req.body.last_id || null,
+      limit: req.body.limit
+    }))
+    .then(({ messages, minId, total }) => {
+      res.json({
+        status: true,
+        message: 'success',
+        data: messages,
+        pager: {
+          limit: req.body.limit, 
+          last_id: messages.length ? messages[messages.length - 1].id : 0,
+        },
+        hasMore: (messages.length > 0 && messages[messages.length - 1].id > minId) ? 1 : 0,
+        total,
+      })
+    })
+    .catch(error => respondValidateError(res, error));
+})
+
+chatRouters.patch("/:id", async (req, res) => {
+  const validator = new Validator({
+    id: req.params.id,
+    ...req.body
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Comment.getById(provider.inputs.id)
+    ]).then(([commentById]) => {
+      if (!commentById) {
+        provider.error(
+          "id",
+          "custom",
+          `Comment with id "${provider.inputs.id}" does not exists!`
+        );
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+  })
+  .then(() => commentCtrl.updateById(req, res))
+  .catch((error) => respondValidateError(res, error));
+});
+
+chatRouters.delete("/:id", async (req, res) => {
+  const socketClient = req.app.locals.socketClient;
+
+  const { uid } = getTokenInfo(req);
+  const validator = new Validator({
+    id: req.params.id
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      Chat.getById(provider.inputs.id)
+    ]).then(([chatById]) => {
+      if (!chatById) {
+        provider.error(
+          "id",
+          "custom",
+          `Chat does not exist!`
+        );
+      } else {
+        const user_ids = JSON.parse(chatById.user_ids);
+        if (!user_ids.includes(uid)) {
+          provider.error('id', 'custom', "You are not a member of this chat room!");
+        }
+      }
+    })
+  );
+
+  return validator
+  .check()
+  .then((matched) => {
+    if (!matched) {
+      throw Object.assign(new Error("Invalid request"), {
+        code: 400,
+        details: validator.errors,
+      });
+    }
+    return chatCtrl.deleteByIdReq({ id: req.params.id, user_id: uid, socketClient });
+  })
+  .then(deleted => {
+    return res.json({
+      status: true,
+      message: 'Chat has been deleted'
+    });
+  })
+  // .then(() => chatCtrl.deleteById(req, res))
+  .catch((error) => respondValidateError(res, error));
+});
+
+chatRouters.delete('/:id/:last_msg_id', async (req, res) => {
+  const socketClient = req.app.locals.socketClient;
+  const { uid } = getTokenInfo(req);
+  const validator = new Validator({
+    id: req.params.id,
+    last_msg_id: req.params.last_msg_id,
+  }, {
+    id: "required|integer",
+    last_msg_id: "required",
+  });
+
+  return validator.check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+      return chatCtrl.deleteMessagesInChat({ ...req.params, socketClient, user_id: uid });
+    })
+    .then(() => res.json({
+      status: true,
+      message: 'success',
+    }))
+    .catch((error) => respondValidateError(res, error));
+});
+
+module.exports = chatRouters;
