@@ -77,6 +77,34 @@ const activity = {
     
     return chat;
   },
+  updateChat4Delete: async ({ chat, messages }) => {
+    if (messages.length === 0) return chat;
+    const last_msgs = JSON.parse(chat.last_messages);
+    const unread_nums = JSON.parse(chat.unread_nums);
+    const user_ids = JSON.parse(chat.user_ids);
+    
+    const unreads = [0, 0];
+    messages.forEach((message) => {
+      if (Number(message.sender_id) === Number(user_ids[0])) unreads[1] ++;
+      else unreads[0] ++;
+    });
+    [0,1].forEach((index) => {
+      unread_nums[index] = Math.max((unread_nums[index] || 0) - unreads[index], 0);
+    });
+    chat.unread_nums = JSON.stringify(unread_nums);
+    
+    const minId = messages[0].id;
+    const newLastMsg = await models.message.getOneUnderId(chat.id, minId);
+
+    chat.last_messages = JSON.stringify(newLastMsg ? [{
+      msg: newLastMsg.message,
+      time: newLastMsg.time,
+    }] : []);
+    // delete messages;
+    await models.message.deleteAfterId(chat.id, minId - 1);
+
+    return models.chat.save(chat);
+  },
 }
 
 
@@ -566,5 +594,33 @@ exports.getAllChatsOfUser = async (user_id) => {
     .then(user => Chat.allChatsOfUser(user_id, user.card_number))
     .then(chats => chats);
 }
+
+exports.deleteMessagesInChat = async ({ id, last_msg_id, socketClient, user_id }) => {
+  let chat = await models.chat.getById(id);
+  if (!chat) throw new Error(`Chat does not exist with the given id!`);
+  const users = await models.user.getByIds(JSON.parse(chat.user_ids));
+
+  const messages = await models.message.getFromId(id, last_msg_id);
+  return activity.updateChat4Delete({ chat, messages })
+    .then((chat) => {
+      users.forEach((user, i) => {
+        if (user.socket_id) {
+          socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+            to: user.socket_id,
+            event: CONSTS.SKT_RECEIVE_MSG,
+            args: {
+              message: null,
+              chat: {
+                ...models.chat.output(chat),
+                user: models.user.output(users[1 - i]),
+              },
+            },
+          });
+        }
+      });
+      return chat;
+    });
+}
+
 
 

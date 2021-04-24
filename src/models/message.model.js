@@ -42,6 +42,14 @@ Message.deleteByChatId = async (chat_id) => {
   })
 }
 
+Message.deleteAfterId = async (chat_id, id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`DELETE FROM ${table} WHERE chat_id=? AND id > ?`, [chat_id, id], (err,res) => {
+      err ? reject(err) : resolve(res.affectedRows);
+    })
+  })
+}
+
 Message.pagination = async ({ limit, last_id = null, chat_id, minId = 0, maxId = 0 }) => {
   let where = [`chat_id=${chat_id}`];
   if (minId) where.push(`id > ${minId}`);
@@ -109,6 +117,25 @@ Message.updateReceiverInCardChat = (chat_id, receiver_id) => {
     });
   });
 }
+
+Message.getFromId = (chat_id, id) => {
+  id --;
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} WHERE chat_id=? AND id>? ORDER BY id ASC`, [chat_id, id], (err, res) => {
+      err ? reject(err) : resolve(res);
+    })
+  });
+}
+
+Message.getOneUnderId = (chat_id, id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} WHERE chat_id=? AND id < ? ORDER BY id DESC LIMIT 1`, [chat_id, id], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    })
+  });
+}
+
+
 
 Message.output = (comment) => {
   const delKeys = ['create_time', 'update_time'];
