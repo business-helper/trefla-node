@@ -119,7 +119,7 @@ Post.getMinIdOfPosts = ({ type = null, location_area = null }) => {
   type ? where.push(`type='${type}'`) : null;
   location_area ? where.push(`location_area='${location_area}'`) : null;
 
-  const strWhere = type ? ` WHERE '${where.join(' AND ')}'` : '';
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
     sql.query(`SELECT id from posts ${strWhere} ORDER BY id ASC LIMIT 1`, (err, res) => {
       err ? reject(err) : resolve(res.length > 0 ? res[0].id : 0);
