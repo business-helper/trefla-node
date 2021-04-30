@@ -182,7 +182,6 @@ exports.pagination = async (req, res) => {
       }));
 
       cLastId = posts.length > 0 ? posts[posts.length - 1].id : 0;
-
       return res.json({
         status: true,
         message: 'success',
