@@ -26,6 +26,15 @@ const activity = {
     }
     return chat;
   },
+  checkNewChat: async ({ chat_id, from_where = null, target_id = null }) => {
+    const lastPreview = await models.message.lastPreviewMsgInChat(chat_id);
+    const mapWhere2Type = {
+      'POST': 4,
+      'COMMENT': 5,
+      'CARD': 6,
+    };
+    return lastPreview && mapWhere2Type[from_where] === lastPreview.type && lastPreview.message === target_id.toString();
+  },
   processPreviewMsg: async ({ chat, user_id, payload: { from_where, target_id, receiver_id } }) => {
     if (!from_where || !target_id) return chat;
 
@@ -62,17 +71,18 @@ const activity = {
       sizeEmoji: 100,
       isOnlyEmoji: 1,
     });
-    await models.message.create(emotionMsg);
+    // await models.message.create(emotionMsg);
 
     // update last message info of chat.
     let last_messages = JSON.parse(chat.last_messages);
     let unread_nums = JSON.parse(chat.unread_nums);
     const userIndex = JSON.parse(chat.user_ids).indexOf(user_id);
-    unread_nums[1 - userIndex] += 2; chat.unread_nums = JSON.stringify(unread_nums);
-    chat.last_messages = JSON.stringify([{
-      msg: '[36]',
-      time: helpers.common.generateTZTimeString(),
-    }]);
+    unread_nums[1 - userIndex] += 1; 
+    // chat.unread_nums = JSON.stringify(unread_nums);
+    // chat.last_messages = JSON.stringify([{
+    //   msg: '[36]',
+    //   time: helpers.common.generateTZTimeString(),
+    // }]);
     await models.chat.save(chat);
     
     return chat;
@@ -305,13 +315,16 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
       chat = Chat.output(chat);
       chat.user = User.output(receiver);
 
+      const isNewChat = await activity.checkNewChat({ chat_id: chat.id, ...payload });
+
       // @deprecated?
       // chat.preview_data = await helpers.common.populateChatSource(chat.sources, models);
 
       return ({
         status: true,
         message: 'Chat room created!',
-        data: chat
+        data: chat,
+        isNewChat,
       });
     })
 }

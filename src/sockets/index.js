@@ -78,13 +78,18 @@ const bootstrapSocket = (io) => {
           return ctrls.chat.createNormalChatReq(uid, { receiver_id: toId, message, from_where, target_id }, isGuest);
         })
         .then(result => {
-          const { status, message, data } = result;
+          const { status, message, data, isNewChat } = result;
           if (_toUser.socket_id) {
-            io.to(_toUser.socket_id).emit(CONSTS.SKT_CONNECT_REQUESTED, { status, message: `Connection request from ${_fromUser.user_name}`, data: { ...data, isSent: false, user: models.user.output(_fromUser) } });
+            io.to(_toUser.socket_id).emit(CONSTS.SKT_CONNECT_REQUESTED, { 
+              status,
+              message: `Connection request from ${_fromUser.user_name}`,
+              data: { ...data, isSent: false, user: models.user.output(_fromUser) },
+              isNewChat,
+            });
           } else {
             console.log('[user is offline]', toId);
           }
-          socket.emit(CONSTS.SKT_CONNECT_TO_USER, { status, message, data: { ...data, isSent: true } });
+          socket.emit(CONSTS.SKT_CONNECT_TO_USER, { status, message, data: { ...data, isSent: true }, isNewChat });
         })
         .catch(error => {
           console.log(error);
