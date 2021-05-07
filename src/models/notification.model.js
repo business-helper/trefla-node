@@ -73,8 +73,8 @@ Notification.getMinIdtoUser = ({ receiver_id = null }) => {
   }
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : "";
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT COUNT(id) as total from notifications ${strWhere}`, [], (err, res) => {
-      err ? reject(err) : resolve(res[0].total);
+    sql.query(`SELECT id from notifications ${strWhere} ORDER BY id ASC LIMIT 1`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0] ? res[0].id : 0);
     });
   });
 }
