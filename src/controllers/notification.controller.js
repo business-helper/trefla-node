@@ -69,8 +69,10 @@ exports.getById = (req, res) => {
 }
 
 exports.pagination = (req, res) => {
-  const { last_id, limit, sender_id, receiver_id } = req.body;
+  const { uid } = getTokenInfo(req);
+  const { last_id, limit, sender_id } = req.body;
   // const offset = page * limit;
+  const receiver_id = uid;
 
   let _notis = [], _total = 0, _users = {}, _minId;
 
