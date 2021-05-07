@@ -3,7 +3,7 @@ const CONSTS = require('../constants/socket.constant');
 const User = require("../models/user.model");
 const Notification = require("../models/notification.model");
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { bool2Int, generateTZTimeString, respondError } = require("../helpers/common.helpers");
+const { bool2Int, generateTZTimeString, respondError, respondValidateError } = require("../helpers/common.helpers");
 const { generateNotificationData } = require('../helpers/model.helpers');
 
 exports.create = (req, res) => {
@@ -114,7 +114,7 @@ exports.pagination = (req, res) => {
         hadMore: lastId > _minId,
       });
     })
-    .catch((error) => respondError(res, error));
+    .catch((error) => respondValidateError(res, error));
 }
 
 // to-do: only admin or creator can update
