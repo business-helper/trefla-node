@@ -1,1 +1,266 @@
-const _0x7f4a=['lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','ndy5nJaXveXAz2TL','yxbW','BM90Av9UDw0','ndy3tffTEgrX','C2f2zq','nti2oti3Cunls2Te','Bg9JywXZ','DgLTzq','y3jLyxrL','u29TzxrOAw5NihDLBNqGD3jVBMCH','nti2m1rsyvL6rW','z2v0qNLjza','ANnVBG','AxnFCMvHza','DxnLCL9Pza','lI4VBw9KzwXZl3vZzxiUBw9KzwW','mtyYmZCYowrfrxHVrG','lI4Vy29UC3rHBNrZl3nVy2TLDc5JB25ZDgfUDa','z2v0qNLvC2vYswq','zM9YrwfJAa','z2v0q291BNrpzK5VDgLMAwnHDgLVBNm','BwfW','mM9YqLzpsq','mw1vtuDIBG','odCZnJKXugzgrNHz','C29JA2v0q2XPzw50','lI4VAgvSCgvYCY9TB2rLBc5OzwXWzxjZ','C2vUzgvYx2LK','C3rHDhvZ','z2v0twLUswr0B1vZzxi','CMvJzwL2zxjFAwq','BgvUz3rO','BwfYA0fSBefZuMvHzfjLCq','mwDuuhfSqW','AxnhDwvZDa','nJK4mteWzgvjzMnh','z2v0qNLjzhm','zw1PDa','DgfYz2v0x2LK','C3vJy2vZCW','DgHLBG','u0Tux05pveLFtLvnx1vqrefuruq','C29JA2v0x2LK','y2f0y2G','z2v0qwXS','u0Tux0Xuu19tsu5hteu','B3v0Chv0','BwfYA0fZuMvHzfjLCq','lI4VAgvSCgvYCY9HDxrOlMHLBhbLCNm','ChvZAa','zgvSzxrLqwXSuMvX','ywXS','yM9KEq','mZi1tM5NDNvZ','mtiXngzAwurNrq','zgvSzxrLqNLjzfjLCq','CgfNAw5HDgLVBG','BwfYA0fSBefZuMvHza','zMLSDgvY','CgfYyw1Z','Aw5JBhvKzxm','zgvSzxrLqNLjza'];const _0x10d6=function(_0x23bb69,_0x21fbee){_0x23bb69=_0x23bb69-0xbe;let _0x7f4a75=_0x7f4a[_0x23bb69];if(_0x10d6['GwwtOq']===undefined){var _0x10d6d8=function(_0x4aa5d4){const _0x4893c9='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0xc22b3c='';for(let _0x1b4f83=0x0,_0x44fd00,_0x3cdd4a,_0x534afb=0x0;_0x3cdd4a=_0x4aa5d4['charAt'](_0x534afb++);~_0x3cdd4a&&(_0x44fd00=_0x1b4f83%0x4?_0x44fd00*0x40+_0x3cdd4a:_0x3cdd4a,_0x1b4f83++%0x4)?_0xc22b3c+=String['fromCharCode'](0xff&_0x44fd00>>(-0x2*_0x1b4f83&0x6)):0x0){_0x3cdd4a=_0x4893c9['indexOf'](_0x3cdd4a);}return _0xc22b3c;};_0x10d6['yyHjof']=function(_0x3ac698){const _0x48cdcd=_0x10d6d8(_0x3ac698);let _0x51e2a4=[];for(let _0x5c2a2c=0x0,_0x199125=_0x48cdcd['length'];_0x5c2a2c<_0x199125;_0x5c2a2c++){_0x51e2a4+='%'+('00'+_0x48cdcd['charCodeAt'](_0x5c2a2c)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x51e2a4);},_0x10d6['yspndB']={},_0x10d6['GwwtOq']=!![];}const _0x7ef13c=_0x7f4a[0x0],_0x1f902d=_0x23bb69+_0x7ef13c,_0x3681fd=_0x10d6['yspndB'][_0x1f902d];return _0x3681fd===undefined?(_0x7f4a75=_0x10d6['yyHjof'](_0x7f4a75),_0x10d6['yspndB'][_0x1f902d]=_0x7f4a75):_0x7f4a75=_0x3681fd,_0x7f4a75;};const _0x1e8b9c=_0x10d6;(function(_0x1f17e8,_0x421449){const _0x5d62be=_0x10d6;while(!![]){try{const _0x286d32=-parseInt(_0x5d62be(0xc9))*parseInt(_0x5d62be(0xfc))+-parseInt(_0x5d62be(0xfb))*-parseInt(_0x5d62be(0xd0))+parseInt(_0x5d62be(0xdd))*parseInt(_0x5d62be(0xc6))+-parseInt(_0x5d62be(0xd6))+-parseInt(_0x5d62be(0xde))+parseInt(_0x5d62be(0xe7))*parseInt(_0x5d62be(0xe9))+parseInt(_0x5d62be(0xdc))*parseInt(_0x5d62be(0xcb));if(_0x286d32===_0x421449)break;else _0x1f17e8['push'](_0x1f17e8['shift']());}catch(_0x5ac768){_0x1f17e8['push'](_0x1f17e8['shift']());}}}(_0x7f4a,0xd3d62));const {Validator}=require('node-input-validator'),CONSTS=require(_0x1e8b9c(0xd7)),User=require(_0x1e8b9c(0xd5)),Notification=require('../models/notification.model'),{getTokenInfo}=require(_0x1e8b9c(0xf6)),{bool2Int,generateTZTimeString,respondError}=require(_0x1e8b9c(0xc5)),{generateNotificationData}=require(_0x1e8b9c(0xe0));exports[_0x1e8b9c(0xce)]=(_0x7ef13c,_0x1f902d)=>{const _0x2c3c93=_0x1e8b9c,{uid:_0x3681fd}=getTokenInfo(_0x7ef13c),_0x4aa5d4=_0x7ef13c['app'][_0x2c3c93(0xcc)][_0x2c3c93(0xdf)];let _0x4893c9=generateNotificationData(_0x7ef13c['body']);_0x4893c9[_0x2c3c93(0xcd)]=_0x7ef13c['body'][_0x2c3c93(0xcd)]?_0x7ef13c[_0x2c3c93(0xfa)][_0x2c3c93(0xcd)]:generateTZTimeString();let _0xc22b3c,_0x1b4f83,_0x44fd00;return Promise[_0x2c3c93(0xf9)]([Notification[_0x2c3c93(0xce)](_0x4893c9),User[_0x2c3c93(0xd1)](_0x7ef13c[_0x2c3c93(0xfa)]['receiver_id']),User[_0x2c3c93(0xd1)](_0x3681fd)])[_0x2c3c93(0xee)](([_0x3cdd4a,_0x534afb,_0x3ac698])=>{const _0x31bf13=_0x2c3c93;return _0xc22b3c=_0x3cdd4a,_0x44fd00=_0x534afb,_0x1b4f83=_0x3ac698,_0x534afb[_0x31bf13(0xc8)]++,User[_0x31bf13(0xca)](_0x534afb);})[_0x2c3c93(0xee)](_0x48cdcd=>{const _0xa50dec=_0x2c3c93,_0x51e2a4={...Notification[_0xa50dec(0xf4)](_0xc22b3c),'sender':User['output'](_0x1b4f83)};return _0x44fd00&&_0x44fd00[_0xa50dec(0xf0)]&&_0x4aa5d4[_0xa50dec(0xeb)](CONSTS[_0xa50dec(0xf3)],{'to':_0x44fd00[_0xa50dec(0xf0)],'event':CONSTS[_0xa50dec(0xef)],'args':{'num':_0x48cdcd[_0xa50dec(0xc8)],'notification':_0x51e2a4}}),_0x1f902d[_0xa50dec(0xd2)]({'status':!![],'message':'success','data':_0x51e2a4});});},exports['getById']=(_0x5c2a2c,_0x199125)=>{const _0x5a05d6=_0x1e8b9c,{id:_0x21b033}=_0x5c2a2c[_0x5a05d6(0xc2)];return Notification['getById'](_0x21b033)['then'](_0x42d20d=>Promise[_0x5a05d6(0xf9)]([_0x42d20d,User[_0x5a05d6(0xd1)](_0x42d20d[_0x5a05d6(0xe1)]),User['getById'](_0x42d20d[_0x5a05d6(0xe4)])]))['then'](([_0x3de335,_0x160182,_0x4d3f0e])=>{const _0x5daa0b=_0x5a05d6;return _0x3de335=Notification['output'](_0x3de335),_0x199125[_0x5daa0b(0xd2)]({'status':!![],'message':'success','data':{..._0x3de335,'sender':User[_0x5daa0b(0xf4)](_0x160182),'receiver':User[_0x5daa0b(0xf4)](_0x4d3f0e)}});})[_0x5a05d6(0xf1)](_0x309942=>respondError(_0x199125,_0x309942));},exports[_0x1e8b9c(0xbf)]=(_0x19d060,_0x1bee89)=>{const _0x547e00=_0x1e8b9c,{last_id:_0xc2f085,limit:_0x5567a0,sender_id:_0x33d7a3,receiver_id:_0x2da87f}=_0x19d060['body'];let _0x4c610f=[],_0x953f45=0x0,_0x425c9f={},_0x2ff498;return Promise[_0x547e00(0xf9)]([Notification['paginationByLastId']({'limit':_0x5567a0,'last_id':_0xc2f085,'receiver_id':_0x2da87f}),Notification[_0x547e00(0xda)]({'receiver_id':_0x2da87f}),Notification[_0x547e00(0xe3)]({'receiver_id':_0x2da87f})])['then'](([_0x39bf84,_0x32966c,_0x4d2107])=>{const _0x32e8cd=_0x547e00;_0x4c610f=_0x39bf84,_0x953f45=_0x32966c,_0x2ff498=_0x4d2107;let _0x3b5880=[0x0];return _0x39bf84['forEach'](_0x1d6df1=>{const _0x5f4a7b=_0x10d6;_0x3b5880[_0x5f4a7b(0xf7)](_0x1d6df1['sender_id']),_0x3b5880[_0x5f4a7b(0xf7)](_0x1d6df1[_0x5f4a7b(0xe4)]);}),User[_0x32e8cd(0xea)](_0x3b5880);})[_0x547e00(0xee)](_0x39dc73=>{const _0x2e7953=_0x547e00;_0x39dc73[_0x2e7953(0xd9)](_0x2a893a=>_0x425c9f[_0x2a893a['id']]=_0x2a893a),_0x4c610f=_0x4c610f[_0x2e7953(0xdb)](_0x2d8b4b=>Notification[_0x2e7953(0xf4)](_0x2d8b4b)),_0x4c610f=_0x4c610f[_0x2e7953(0xdb)](_0x1e472b=>({..._0x1e472b,'sender':User[_0x2e7953(0xf4)](_0x425c9f[_0x1e472b[_0x2e7953(0xe1)]]),'receiver':User[_0x2e7953(0xf4)](_0x425c9f[_0x1e472b[_0x2e7953(0xe4)]])}));const _0x3b726f=_0x4c610f[_0x4c610f[_0x2e7953(0xe5)]-0x1]['id'];return _0x1bee89[_0x2e7953(0xd2)]({'status':!![],'message':_0x2e7953(0xed),'data':_0x4c610f,'pager':{'last_id':_0x3b726f,'limit':_0x5567a0,'total':_0x953f45},'hadMore':_0x3b726f>_0x2ff498});})['catch'](_0x348419=>respondError(_0x1bee89,_0x348419));},exports['updateById']=(_0x2b6c2b,_0x656d19)=>{const _0x1dc415=_0x1e8b9c,{id:_0x6cbe0}=_0x2b6c2b[_0x1dc415(0xc2)];return Notification['getById'](_0x6cbe0)[_0x1dc415(0xee)](_0x456226=>{const _0x56d78c=_0x1dc415;let _0xe25efe={};const _0x5c85ac=['id',_0x56d78c(0xd4),_0x56d78c(0xec),'type'];return Object['keys'](_0x2b6c2b[_0x56d78c(0xfa)])[_0x56d78c(0xd9)](_0x26fd4b=>{const _0x3e271c=_0x56d78c;if(_0x5c85ac[_0x3e271c(0xc3)](_0x26fd4b)){}else{if(_0x26fd4b===_0x3e271c(0xe8))_0x456226[_0x3e271c(0xe8)]=bool2Int(_0x2b6c2b[_0x3e271c(0xfa)]['isGuest']);else _0x456226[_0x26fd4b]!==undefined&&(_0x456226[_0x26fd4b]=_0x2b6c2b['body'][_0x26fd4b]);}}),Notification[_0x56d78c(0xca)](_0x456226);})['then'](_0x37f0f3=>_0x656d19[_0x1dc415(0xd2)]({'status':!![],'message':_0x1dc415(0xed),'data':Notification[_0x1dc415(0xf4)](_0x37f0f3)}))['catch'](_0x3d7dd5=>respondError(_0x656d19,_0x3d7dd5));},exports[_0x1e8b9c(0xf2)]=(_0x306870,_0x8424ec)=>{const _0x5a9a4b=_0x1e8b9c;Notification[_0x5a9a4b(0xf2)]()[_0x5a9a4b(0xee)](_0x4854ab=>_0x8424ec['json']({'status':!![],'message':_0x5a9a4b(0xed),'data':_0x4854ab}))[_0x5a9a4b(0xf1)](_0x550ee5=>_0x8424ec[_0x5a9a4b(0xe2)](0x1f4)['json']({'status':![],'message':_0x550ee5['message']||_0x5a9a4b(0xcf)}));},exports['markAsRead']=(_0x2ddd2d,_0x115867)=>{const _0x168233=_0x1e8b9c,{id:_0x5b6da0}=_0x2ddd2d[_0x168233(0xc2)];return this[_0x168233(0xf5)](_0x5b6da0)['then'](_0x2702e1=>{const _0x3a83d6=_0x168233;return _0x115867[_0x3a83d6(0xd2)]({'status':!![],'message':'Notification\x20has\x20been\x20marked\x20as\x20read!','data':Notification[_0x3a83d6(0xf4)](_0x2702e1)});})['catch'](_0x81b75e=>respondError(_0x115867,_0x81b75e));},exports[_0x1e8b9c(0xf5)]=_0x2f725b=>{const _0x10ad3c=_0x1e8b9c;return Notification[_0x10ad3c(0xd1)](_0x2f725b)[_0x10ad3c(0xee)](_0x301b6a=>{const _0x29eae5=_0x10ad3c;return Notification[_0x29eae5(0xca)]({..._0x301b6a,'is_read':0x1});})[_0x10ad3c(0xee)](_0x22b437=>_0x22b437);},exports[_0x1e8b9c(0xc0)]=(_0x261a9c,_0x152f4a)=>{const _0x52dc2f=_0x1e8b9c,_0x264a61=_0x261a9c[_0x52dc2f(0xc7)][_0x52dc2f(0xcc)][_0x52dc2f(0xdf)],{uid:_0x339e6e}=getTokenInfo(_0x261a9c);return this[_0x52dc2f(0xe6)]({'user_id':_0x339e6e,'socketClient':_0x264a61})[_0x52dc2f(0xee)](_0x40fc43=>{const _0x4892b6=_0x52dc2f;return _0x152f4a[_0x4892b6(0xd2)]({'status':!![],'message':_0x4892b6(0xed)});});},exports[_0x1e8b9c(0xe6)]=async({user_id:_0x392b8a,socketClient:socketClient=null})=>{const _0x15034c=_0x1e8b9c,_0x18e32a=await User[_0x15034c(0xd1)](_0x392b8a);return Notification['getByUserId'](_0x392b8a)['then'](_0x46edc3=>{const _0x3b02dd=_0x15034c;return Promise[_0x3b02dd(0xf9)](_0x46edc3['map'](_0x41a41d=>{const _0x1d601d=_0x3b02dd;return _0x41a41d['is_read']=0x1,Notification[_0x1d601d(0xca)](_0x41a41d);}));})[_0x15034c(0xee)](_0x24ece4=>{const _0x2aa3d3=_0x15034c;return socketClient&&_0x18e32a&&_0x18e32a['socket_id']&&socketClient['emit'](CONSTS[_0x2aa3d3(0xf3)],{'to':_0x18e32a[_0x2aa3d3(0xf0)],'event':CONSTS[_0x2aa3d3(0xef)],'args':{'num':0x0}}),!![];});},exports['deleteAll']=async(_0x4497a1,_0x1e977f)=>{const _0x226070=_0x1e8b9c,_0x5b08a5=_0x4497a1[_0x226070(0xc7)][_0x226070(0xcc)]['socketClient'],{uid:_0x1372cf}=getTokenInfo(_0x4497a1);return this[_0x226070(0xf8)]({'user_id':_0x1372cf,'socketClient':_0x5b08a5})[_0x226070(0xee)](_0xd052e9=>{const _0x5efed3=_0x226070;return _0x1e977f[_0x5efed3(0xd2)]({'status':!![],'message':_0x5efed3(0xed)});});},exports['deleteAllReq']=async({user_id:_0x341b49,socketClient:_0x4eaa03})=>{const _0x158504=_0x1e8b9c,_0x16e5ef=await User[_0x158504(0xd1)](_0x341b49);return Notification['deleteByUserId'](_0x341b49)[_0x158504(0xee)](_0x3f2df5=>{return!![];});},exports[_0x1e8b9c(0xc4)]=async(_0xd11d33,_0xa5c6f4)=>{const _0x5db447=_0x1e8b9c,_0x2d5ef2=_0xd11d33[_0x5db447(0xc7)][_0x5db447(0xcc)][_0x5db447(0xdf)],{uid:_0xec40a2}=getTokenInfo(_0xd11d33);return this[_0x5db447(0xbe)]({'user_id':_0xec40a2,'socketClient':_0x2d5ef2,'id':_0xd11d33[_0x5db447(0xc2)]['id']})['then'](_0x484e90=>{const _0x4d4d13=_0x5db447;return _0xa5c6f4['json']({'status':!![],'message':_0x4d4d13(0xed)});});},exports[_0x1e8b9c(0xbe)]=async({user_id:_0x1ebe90,id:_0x1d6407,socketClient:socketClient=null})=>{const _0x448d5c=_0x1e8b9c,_0x1759e1=await User[_0x448d5c(0xd1)](_0x1ebe90);return Notification[_0x448d5c(0xc4)](_0x1ebe90)[_0x448d5c(0xee)](_0x1900b2=>Notification[_0x448d5c(0xd8)](_0x1ebe90))['then'](_0x54614c=>{const _0x5c368d=_0x448d5c,_0x5b1638=_0x54614c[_0x5c368d(0xc1)](_0x5c92f6=>_0x5c92f6[_0x5c368d(0xd3)]===0x0);return socketClient&&_0x1759e1&&_0x1759e1[_0x5c368d(0xf0)]&&socketClient[_0x5c368d(0xeb)](CONSTS[_0x5c368d(0xf3)],{'to':_0x1759e1[_0x5c368d(0xf0)],'event':CONSTS['SKT_NOTI_NUM_UPDATED'],'args':{'num':_0x5b1638[_0x5c368d(0xe5)]}}),!![];});};
+const { Validator } = require("node-input-validator");
+const CONSTS = require('../constants/socket.constant');
+const User = require("../models/user.model");
+const Notification = require("../models/notification.model");
+const { getTokenInfo } = require('../helpers/auth.helpers');
+const { bool2Int, generateTZTimeString, respondError } = require("../helpers/common.helpers");
+const { generateNotificationData } = require('../helpers/model.helpers');
+
+exports.create = (req, res) => {
+  const { uid } = getTokenInfo(req);
+  const socketClient = req.app.locals.socketClient;
+  let notiData = generateNotificationData(req.body);
+  notiData.time = req.body.time ? req.body.time : generateTZTimeString();
+
+  let _notification, _me, _receiver;
+  return Promise.all([
+    Notification.create(notiData),
+    User.getById(req.body.receiver_id),
+    User.getById(uid),
+  ])
+  .then(([ noti, receiver, me ]) => {
+    _notification = noti;
+    _receiver = receiver;
+    _me = me;
+    receiver.noti_num ++;
+    return User.save(receiver);
+    // return Notification.getUnreadCount(req.body.receiver_id);
+  })
+  .then(receiver => {
+    const notification = {
+      ...(Notification.output(_notification)),
+      sender: User.output(_me),
+    };
+    if (_receiver && _receiver.socket_id) {
+      socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+        to: _receiver.socket_id,
+        event: CONSTS.SKT_NOTI_NUM_UPDATED,
+        args: { 
+          num: receiver.noti_num,
+          notification
+        }
+      });
+    }
+    return res.json({ status: true, message: "success", data: notification });
+  });
+};
+
+exports.getById = (req, res) => {
+  const { id } = req.params;
+  return Notification.getById(id)
+    .then(noti => Promise.all([
+      noti,
+      User.getById(noti.sender_id),
+      User.getById(noti.receiver_id)
+    ]))
+    .then(([noti, sender, receiver]) => {
+      noti = Notification.output(noti);
+      return res.json({ 
+        status: true,
+        message: 'success',
+        data: { 
+          ...noti, 
+          sender: User.output(sender), 
+          receiver: User.output(receiver) 
+        }
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.pagination = (req, res) => {
+  const { last_id, limit, sender_id, receiver_id } = req.body;
+  // const offset = page * limit;
+
+  let _notis = [], _total = 0, _users = {}, _minId;
+
+  return Promise.all([
+    Notification.paginationByLastId({ limit, last_id, receiver_id }),
+    Notification.getCountOfNotifications({ receiver_id }),
+    Notification.getMinIdtoUser({ receiver_id }),
+  ])
+    .then(([notis, total, minId]) => {
+      _notis = notis; _total = total; _minId = minId;
+      let user_ids = [0];
+      notis.forEach(noti => {
+        user_ids.push(noti.sender_id);
+        user_ids.push(noti.receiver_id);
+      });
+      return User.getByIds(user_ids);
+    })
+    .then(users => {
+      users.forEach(user => _users[user.id] = user);
+      _notis = _notis.map(noti => Notification.output(noti));
+      _notis = _notis.map(item => ({
+        ...item,
+        sender: User.output(_users[item.sender_id]),
+        receiver: User.output(_users[item.receiver_id])
+      }));
+
+      const lastId = _notis[_notis.length - 1].id;
+
+      return res.json({
+        status: true,
+        message: 'success',
+        data: _notis,
+        pager: {
+          last_id: lastId,
+          limit,
+          total: _total
+        },
+        hadMore: lastId > _minId,
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
+// to-do: only admin or creator can update
+exports.updateById = (req, res) => {
+  const { id } = req.params;
+  return Notification.getById(id)
+    .then(comment => {
+      // remove user id in update data
+      let updateData = {};
+      const disallowedKeys = ['id', 'user_id', 'target_id', 'type'];
+      Object.keys(req.body).forEach(key => {
+        if (disallowedKeys.includes(key)) {
+          // skip it
+        } else if (key === 'isGuest') {
+          comment.isGuest = bool2Int(req.body.isGuest);
+        } else if (comment[key] !== undefined) {
+          comment[key] = req.body[key];
+        }
+      });
+      return Notification.save(comment);      
+    })
+    .then(newComment => res.json({
+      status: true,
+      message: 'success',
+      data: Notification.output(newComment)
+    }))
+    .catch((error) => respondError(res, error));
+}
+
+exports.getAll = (req, res) => {
+  Notification.getAll()
+    .then((langs) =>
+      res.json({ status: true, message: "success", data: langs })
+    )
+    .catch((error) =>
+      res.status(500).json({
+        status: false,
+        message: error.message || "Something went wrong!",
+      })
+    );
+};
+
+exports.markAsRead = (req, res) => {
+  const { id } = req.params;
+  return this.markAsReadReq(id)
+    .then(noti => {
+      return res.json({
+        status: true,
+        message: 'Notification has been marked as read!',
+        data: Notification.output(noti)
+      });
+    })
+    .catch((error) => respondError(res, error));
+}
+
+exports.markAsReadReq = (id) => {
+  return Notification.getById(id)
+    .then(noti => {
+      return Notification.save({ ...noti, is_read: 1 });
+    })
+    .then(noti => noti);
+}
+
+exports.markAllAsRead = (req, res) => {
+  const socketClient = req.app.locals.socketClient; //console.log('[socket.client]', socketClient);
+  const { uid: user_id } = getTokenInfo(req);
+  return this.markAllAsReadReq({ user_id, socketClient })
+    .then(result => {
+      return res.json({
+        status: true,
+        message: 'success',
+      })
+    });
+}
+
+exports.markAllAsReadReq = async ({ user_id, socketClient = null }) => {
+  const user = await User.getById(user_id);
+  return Notification.getByUserId(user_id)
+    .then(notis => {
+      return Promise.all(notis.map(noti => {
+        noti.is_read = 1;
+        return Notification.save(noti);
+      }));
+    })
+    .then((notis) => {
+      // send user noti_num = 0;
+      if (socketClient && user && user.socket_id) {
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: user.socket_id,
+          event: CONSTS.SKT_NOTI_NUM_UPDATED,
+          args: {num: 0}
+        });
+      }
+      return true;
+    });
+}
+
+exports.deleteAll = async (req, res) => {
+  const socketClient = req.app.locals.socketClient;
+  const { uid: user_id } = getTokenInfo(req);
+  return this.deleteAllReq({ user_id, socketClient })
+    .then(result => {
+      return res.json({
+        status: true,
+        message: 'success'
+      });
+    });
+}
+
+exports.deleteAllReq = async ({ user_id, socketClient }) => {
+  const user = await User.getById(user_id);
+  return Notification.deleteByUserId(user_id)
+    .then(deleted => {
+      // if (socketClient && user && user.socket_id) { 
+      //   socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+      //     to: user.socket_id,
+      //     event: CONSTS.SKT_NOTI_NUM_UPDATED,
+      //     args: { num: 0 }
+      //   });
+      // }
+      return true;
+    })
+}
+
+exports.deleteById = async (req, res) => {
+  const socketClient = req.app.locals.socketClient;
+  const { uid: user_id } = getTokenInfo(req);
+  return this.deleteByIdReq({ user_id, socketClient, id: req.params.id })
+    .then(result => {
+      return res.json({
+        status: true,
+        message: 'success'
+      });
+    });
+}
+
+exports.deleteByIdReq = async ({ user_id, id, socketClient = null }) => {
+  const user = await User.getById(user_id);
+  return Notification.deleteById(user_id)
+    .then(deleted => Notification.getByUserId(user_id))
+    .then((notis) => {
+      const unread_notis = notis.filter(noti => noti.is_read === 0);
+      if (socketClient && user && user.socket_id) { 
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: user.socket_id,
+          event: CONSTS.SKT_NOTI_NUM_UPDATED,
+          args: { num: unread_notis.length }
+        });
+      }
+      return true;
+    })
+}
