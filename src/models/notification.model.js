@@ -40,7 +40,7 @@ Notification.paginationByLastId = async ({ limit, last_id = null, receiver_id })
     where.push(`id < ${last_id}`);
   }
   
-  const strWhere = (receiver_id) ? ` WHERE ${where.join(' AND ')}` : '';
+  const strWhere = where.length ? ` WHERE ${where.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
     sql.query(`SELECT * FROM notifications ${strWhere} ORDER BY id DESC LIMIT ?`, [limit], (err, res) => {
       err ? reject(err) : resolve(res);
