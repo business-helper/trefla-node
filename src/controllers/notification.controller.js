@@ -70,9 +70,9 @@ exports.getById = (req, res) => {
 
 exports.pagination = (req, res) => {
   const { uid } = getTokenInfo(req);
-  const { last_id, limit, sender_id } = req.body;
+  const { last_id, limit, sender_id, receiver_id } = req.body;
   // const offset = page * limit;
-  const receiver_id = uid;
+  // const receiver_id = uid;
 
   let _notis = [], _total = 0, _users = {}, _minId;
 
@@ -82,6 +82,7 @@ exports.pagination = (req, res) => {
     Notification.getMinIdtoUser({ receiver_id }),
   ])
     .then(([notis, total, minId]) => {
+      console.log('[Notification][Pagination]', notis[notis.length - 1], total, minId)
       _notis = notis; _total = total; _minId = minId;
       let user_ids = [0];
       notis.forEach(noti => {
