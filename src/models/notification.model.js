@@ -35,7 +35,7 @@ Notification.pagination = async ({ limit, offset, receiver_id }) => {
 
 Notification.paginationByLastId = async ({ limit, last_id = null, receiver_id }) => {
   let where = [];
-  where.push(`receiver_id='${receiver_id}'`);
+  if (receiver_id) where.push(`receiver_id='${receiver_id}'`);
   if (last_id) {
     where.push(`id < ${last_id}`);
   }
