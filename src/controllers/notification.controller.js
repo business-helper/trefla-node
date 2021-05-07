@@ -100,7 +100,7 @@ exports.pagination = (req, res) => {
         receiver: User.output(_users[item.receiver_id])
       }));
 
-      const lastId = _notis[_notis.length - 1].id;
+      const lastId = notis.length ? _notis[_notis.length - 1].id : 0;
 
       return res.json({
         status: true,
