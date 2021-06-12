@@ -722,7 +722,7 @@ adminRouters.route('/employee').get(async (req, res) => {
 
 /**@secured by admin types */
 adminRouters.route('/employee').post(async (req, res) => {
-  const { role } = getTokenInfo(req);
+  const { role, role2 } = getTokenInfo(req);
   if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER)) return res.json({ status: false, message: "Permission denied!" });
 
   const validator = new Validator({
@@ -815,7 +815,5 @@ adminRouters.route('/employee/:id/permission').patch(async(req, res) => {
     }))
     .catch(error => respondValidateError(res, error))
 })
-
-
 
 module.exports = adminRouters;
