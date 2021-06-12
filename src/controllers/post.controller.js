@@ -124,16 +124,22 @@ exports.pagination = async (req, res) => {
   const { limit, last_id, type, post_type } = req.body;
   // const offset = page * limit;
   let _posts = [], _total = 0, _posters = {}, _minId;
+  // get config
+  let [me, config] = await Promise.all([
+    User.getById(uid),
+    Config.get()
+  ]);
 
+  const default_zone = config && config.apply_default_zone ? config.default_zone : null;
   let promiseAll;
 
   if (type === 'ALL') {
     const me = await User.getById(uid);
-    const location_area = req.body.location_area || me.location_area || null;
+    const location_area = req.body.location_area || me.location_area || '___';
     promiseAll = Promise.all([
-      Post.pagination({ limit, last_id, type: post_type, location_area }),
-      Post.getCountOfPosts({ type: post_type, location_area }),
-      Post.getMinIdOfPosts({ type: post_type, location_area }),
+      Post.pagination({ limit, last_id, type: post_type, location_area, default_zone }),
+      Post.getCountOfPosts({ type: post_type, location_area, default_zone }),
+      Post.getMinIdOfPosts({ type: post_type, location_area, default_zone }),
     ]);
   } else if (type === 'ME') {
     promiseAll = Promise.all([
@@ -142,11 +148,6 @@ exports.pagination = async (req, res) => {
       Post.getMinIdOfPosts({ type: post_type, user_id: uid })
     ]);
   } else { // AROUND
-    // get config
-    let [me, config] = await Promise.all([
-      User.getById(uid),
-      Config.get()
-    ]);
     // const config = await Config.get();
     const deltaDays = config.aroundSearchDays || 100;
     const minTime = timestamp(getTimeAfter(new Date(), -deltaDays));

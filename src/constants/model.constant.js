@@ -148,6 +148,8 @@ exports.DEFAULT_CONFIG = {
   admin_email: "",
   aroundSearchPeriod: 100,
   lang_version: "",
+  default_zone: "",
+  apply_default_zone: 0,
   create_time: timestamp(),
   update_time: timestamp(),
 };

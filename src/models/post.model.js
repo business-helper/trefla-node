@@ -57,23 +57,25 @@ Post.getAll = ({ type = null, user_id = null }) => {
   });
 };
 
-Post.pagination = async ({ limit, last_id, type = null, user_id = null, location_area = null }) => {
+Post.pagination = async ({ limit, last_id, type = null, user_id = null, location_area = null, default_zone = null }) => {
   limit = Number(limit);
   let where = [];
   type ? where.push(`type='${type}'`) : null;
   last_id ? where.push(`id < ${last_id}`) : null;
   user_id ? where.push(`user_id=${user_id}`) : null;
   
-  // let zones = [...default_zones];
-  // location_area ? zones.push(location_area) : null;
-  // zones.length === 0 ? zones.push('__0__') : null;
-  // zones = zones.map(zone => `'${zone}'`);
-  // const strZones = zones.join(',');
+  let zones = [default_zone, location_area]
+    .filter((zone) => zone)
+    .map(zone => `'${zone}'`);
+  const strZones = zones.join(',');
+  if (strZones.length > 0) {
+    where.push(`location_area IN (${strZones})`);
+  }
 
-  // where.push(`location_area IN (${strZones})`);
-  location_area ? where.push(`location_area='${location_area}'`) : null;
+  // location_area ? where.push(`location_area='${location_area}'`) : null;
 
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+
   return new Promise((resolve, reject) => {
     sql.query(`SELECT * FROM posts ${strWhere} ORDER BY id DESC LIMIT ?  `, [limit], (err, res) => {
       err ? reject(err) : resolve(res);
@@ -99,11 +101,19 @@ Post.simplePagination = async ({ limit, page, type = null, user_id = null }) => 
 }
 
 
-Post.getCountOfPosts = ({ type = null, user_id = null, location_area = null }) => {
+Post.getCountOfPosts = ({ type = null, user_id = null, location_area = null, default_zone = null }) => {
   const where = [];
   type ? where.push(`type=${type}`) : null;
   user_id ? where.push(`user_id=${user_id}`) : null;
-  location_area ? where.push(`location_area='${location_area}'`) : null;
+
+  let zones = [default_zone, location_area]
+    .filter((zone) => zone)
+    .map(zone => `'${zone}'`);
+  const strZones = zones.join(',');
+  if (strZones.length > 0) {
+    where.push(`location_area IN (${strZones})`);
+  }
+  // location_area ? where.push(`location_area='${location_area}'`) : null;
 
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
 
@@ -114,9 +124,17 @@ Post.getCountOfPosts = ({ type = null, user_id = null, location_area = null }) =
   });
 }
 
-Post.getMinIdOfPosts = ({ type = null, location_area = null }) => {
+Post.getMinIdOfPosts = ({ type = null, location_area = null, default_zone = null }) => {
   const where = [];
   type ? where.push(`type='${type}'`) : null;
+  
+  let zones = [default_zone, location_area]
+    .filter((zone) => zone)
+    .map(zone => `'${zone}'`);
+  const strZones = zones.join(',');
+  if (strZones.length > 0) {
+    where.push(`location_area IN (${strZones})`);
+  }
   location_area ? where.push(`location_area='${location_area}'`) : null;
 
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
