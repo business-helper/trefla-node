@@ -1,1 +1,819 @@
-const _0x487a=['/login','required|minLength:5','/langs/:id','../constants/common.constant','User\x20does\x20not\x20exist\x20with\x20the\x20given\x20id!','900566oUDBxM','checkAllowed','/langs/:id/sync','Admin\x20does\x20not\x20exist!','custom','get','syncLangReq','addEmployee','[GET]\x20/admin/firebase','deleteIdTransferById','updateLangById','user_name','success','checkAdminPermission','adminNotification','addPostRule','/send-notification','getByCode','split','updateAdminPassword','json','check','/id-transfers','Email\x20template\x20with\x20id\x20\x22','Lang\x20does\x20not\x20exist!','Notification\x20has\x20been\x20sent!','adminList','../controllers','getByIdReq','updateProfileReq','/upload-lang/:langCode','getByUserId','sendBulkNotification','getEmailTemplateById','updateAdminConfigReq','../middlewares/basic.middleware','/email-templates/:id','lang.edit','url','exports','user_id','langCode','/authenticate-token','/config','getAdminConfigReq','assign','/profile','type','loginReq','SUPER','updateEmployeePermission','settings.config','Email\x20template\x20does\x20not\x20exist!','13NXaIhB','delete','lang.async','totalResource4Stats','Invalid\x20user\x20settings!','13XaGuMV','then','updateEmailTemplateById','use','/id-transfers/:id','2031kAfCFg','lang.delete','permission','basicMiddleware','Language\x20does\x20not\x20exist!','errors','parse','create','output','inputs','Validation\x20failed!','\x22\x20does\x20not\x20exist!','/consent-email/:id','1537848vEuEYw','/employee/:id','language','27778SomzBr','adminPermission','/employee','222496dufYTr','55697JCgbVf','query','route','required|string','last7DayPosts','ID_TRANSFER','params','Data\x20does\x20not\x20exist!','user.sendNotification.show','custom\x27,\x20\x27Language\x20with\x20code\x20\x22','emailTemplate','363oObwYY','sendConsentEmail4Transfer','all','authorization','getAdminById','This\x20is\x20for\x20only\x20ID\x20Transfer!','status','Notifications\x20have\x20been\x20sent!','length','save','paginationReq','getById','Invalid\x20request!','46171kLPnfa','2sepMRm','user','Permission\x20denied!','User\x20name\x20already\x20taken\x20by\x20other\x20administrator!','boolean','error','post','sendNotification2User','Router','log','admin','getEmailTemplateReq','from','required','headers','payload','getIdTransfersReq','test','getByUsername','../models','body','patch','../helpers','catch','/langs','settings.emailTemplate','ADMIN','required|integer','deleteById','getFileContent','user.idTransfer.show','/update-password','lang.add','Invalid\x20requset!','/bulk-notifications','authenticateAdminToken'];const _0x4de6=function(_0x2fde5a,_0x1c6e9c){_0x2fde5a=_0x2fde5a-0xa9;let _0x487ac6=_0x487a[_0x2fde5a];return _0x487ac6;};const _0x9834da=_0x4de6;(function(_0x1d08ce,_0x121e81){const _0x218fb1=_0x4de6;while(!![]){try{const _0x5962db=-parseInt(_0x218fb1(0xf5))*parseInt(_0x218fb1(0xd6))+parseInt(_0x218fb1(0x102))*-parseInt(_0x218fb1(0xcc))+parseInt(_0x218fb1(0xe9))*parseInt(_0x218fb1(0x103))+-parseInt(_0x218fb1(0xea))*-parseInt(_0x218fb1(0xd1))+parseInt(_0x218fb1(0xe6))+-parseInt(_0x218fb1(0x12c))+parseInt(_0x218fb1(0xe3));if(_0x5962db===_0x121e81)break;else _0x1d08ce['push'](_0x1d08ce['shift']());}catch(_0x35d042){_0x1d08ce['push'](_0x1d08ce['shift']());}}}(_0x487a,0x793fd));const express=require('express'),{Validator}=require('node-input-validator'),adminRouters=express[_0x9834da(0x10b)](),ctrls=require(_0x9834da(0xb2)),models=require(_0x9834da(0x116)),helpers=require(_0x9834da(0x119)),middlewares=require(_0x9834da(0xba)),config=require('../config/app.config'),{BearerMiddleware}=require(_0x9834da(0xba)),{getTokenInfo}=require('../helpers/auth.helpers'),{respondValidateError}=require('../helpers/common.helpers'),{ADMIN_NOTI_TYPES}=require('../constants/notification.constant'),{ADMIN_ROLE}=require(_0x9834da(0x12a)),activity={'checkAdminPermission':async(_0x38d56d,_0x38488c)=>{const _0x18cd46=_0x9834da,{role:_0x4e9db5,role2:_0x3b8ee3,uid:_0x189084}=getTokenInfo(_0x38d56d);if(_0x4e9db5!==_0x18cd46(0x11d))return![];if(_0x3b8ee3===ADMIN_ROLE['SUPER'])return!![];const _0x4a7cd8=models[_0x18cd46(0xe7)]['output'](await models[_0x18cd46(0xe7)][_0x18cd46(0xb6)](_0x189084));return activity[_0x18cd46(0x12d)](_0x4a7cd8,_0x38488c);},'checkAllowed':(_0x5c8457,_0x452247=null)=>{const _0x14d476=_0x9834da;if(typeof _0x452247===_0x14d476(0x107))return _0x452247;else{if(_0x452247===null||_0x452247===''||_0x452247===undefined)return!![];}const _0xef7e3d=_0x452247[_0x14d476(0xa9)]('.');if(_0xef7e3d['length']===0x1)return _0x5c8457[_0xef7e3d[0x0]];else{if(_0xef7e3d[_0x14d476(0xfd)]===0x2)return _0x5c8457[_0xef7e3d[0x0]][_0xef7e3d[0x1]];else{if(_0xef7e3d['length']===0x3)return _0x5c8457[_0xef7e3d[0x0]][_0xef7e3d[0x1]][_0xef7e3d[0x2]];else{if(_0xef7e3d[_0x14d476(0xfd)]===0x4)return _0x5c8457[_0xef7e3d[0x0]][_0xef7e3d[0x1]][_0xef7e3d[0x2]][_0xef7e3d[0x3]];}}}return![];}};adminRouters[_0x9834da(0x109)](_0x9834da(0x127),async(_0x3e2edf,_0x50ae99)=>{const _0xf0a24f=_0x9834da;middlewares[_0xf0a24f(0xd9)](_0x3e2edf,_0x50ae99,()=>{const _0x43b914=_0xf0a24f,_0x645c33=new Validator(_0x3e2edf[_0x43b914(0x117)],{'email_or_name':'required','password':_0x43b914(0x128)});return _0x645c33[_0x43b914(0xac)]()['then'](_0x38ca73=>{const _0xc7f2d1=_0x43b914;if(!_0x38ca73)throw Object[_0xc7f2d1(0xc4)](new Error(_0xc7f2d1(0xe0)),{'code':0x190,'details':_0x645c33[_0xc7f2d1(0xdb)]});return ctrls['admin'][_0xc7f2d1(0xc7)](_0x3e2edf,_0x50ae99);})[_0x43b914(0xd2)](_0x2fda38=>{const _0x5b72c4=_0x43b914;return _0x50ae99[_0x5b72c4(0xab)](_0x2fda38);})[_0x43b914(0x11a)](_0x53cc66=>respondValidateError(_0x50ae99,_0x53cc66));});}),adminRouters[_0x9834da(0xd4)]((_0xf6ef9c,_0xb1a308,_0x460571)=>{BearerMiddleware(_0xf6ef9c,_0xb1a308,_0x460571);}),adminRouters[_0x9834da(0xec)](_0x9834da(0xc1))[_0x9834da(0x109)](async(_0x1afef0,_0x205383)=>{const _0x5e9a2a=_0x9834da,{uid:_0x5bc001,role:_0x111e59}=getTokenInfo(_0x1afef0);if(_0x111e59!=='ADMIN')return _0x205383[_0x5e9a2a(0xab)]({'status':![],'message':_0x5e9a2a(0x105)});const _0x4d2855=(_0x1afef0[_0x5e9a2a(0x111)][_0x5e9a2a(0xf8)]||'')[_0x5e9a2a(0xa9)]('\x20')[0x1]||'';return ctrls['admin'][_0x5e9a2a(0x126)](_0x5bc001)[_0x5e9a2a(0xd2)](_0x2f4ab4=>_0x205383['json']({..._0x2f4ab4,'token':_0x4d2855}))[_0x5e9a2a(0x11a)](_0x268911=>respondValidateError(_0x205383,_0x268911));}),adminRouters['get'](_0x9834da(0xc5),async(_0x2b5c77,_0x5316d3)=>{const _0x32d8af=_0x9834da,{uid:_0x52b6fd,role:_0x8e2f89}=getTokenInfo(_0x2b5c77);if(_0x8e2f89!=='ADMIN')return _0x5316d3['json']({'status':![],'message':'Permission\x20denied!'});return ctrls[_0x32d8af(0x10d)][_0x32d8af(0xf9)](_0x52b6fd)[_0x32d8af(0xd2)](_0x543b7f=>{const _0x1a0cdc=_0x32d8af;return _0x5316d3[_0x1a0cdc(0xab)]({'status':!![],'message':_0x1a0cdc(0x138),'data':models[_0x1a0cdc(0x10d)]['output'](_0x543b7f)});})['catch'](_0x1c509c=>respondValidateError(_0x5316d3,_0x1c509c));}),adminRouters[_0x9834da(0x131)](_0x9834da(0xc2),async(_0x2dacde,_0x3a55f6)=>{const _0xdaed67=_0x9834da,_0x5691ec=await activity[_0xdaed67(0x139)](_0x2dacde,_0xdaed67(0xca));if(!_0x5691ec)return _0x3a55f6['json']({'status':![],'message':_0xdaed67(0x105)});return ctrls['admin'][_0xdaed67(0xc3)]()[_0xdaed67(0xd2)](_0x1ebf98=>_0x3a55f6[_0xdaed67(0xab)](_0x1ebf98))[_0xdaed67(0x11a)](_0x1a3407=>respondValidateError(_0x3a55f6,_0x1a3407));}),adminRouters['get']('/firebase',async(_0x438e30,_0x41d05e)=>{const _0x72e100=_0x9834da;return console[_0x72e100(0x10c)](_0x72e100(0x134)),ctrls['firebase'][_0x72e100(0x114)]()['then'](_0x1928f8=>_0x41d05e[_0x72e100(0xab)](_0x1928f8))[_0x72e100(0x11a)](_0x5f97d8=>respondValidateError(_0x41d05e,_0x5f97d8));}),adminRouters['get'](_0x9834da(0xd5),async(_0x739d63,_0x243a34)=>{const _0x2978e5=_0x9834da,_0x20f200=await activity[_0x2978e5(0x139)](_0x739d63,_0x2978e5(0x121));if(!_0x20f200)return _0x243a34[_0x2978e5(0xab)]({'status':![],'message':_0x2978e5(0x105)});const _0x24db97=new Validator({'id':_0x739d63[_0x2978e5(0xf0)]['id']},{'id':'required'});return _0x24db97['addPostRule'](_0x47aab5=>{const _0x3d55b3=_0x2978e5;return models[_0x3d55b3(0x13a)]['getById'](_0x47aab5[_0x3d55b3(0xdf)]['id'])[_0x3d55b3(0xd2)](_0x5a1d54=>{const _0x56873b=_0x3d55b3;if(!_0x5a1d54)_0x47aab5[_0x56873b(0x108)]('id',_0x56873b(0x130),'Data\x20does\x20not\x20exist!');});}),_0x24db97['check']()[_0x2978e5(0xd2)](_0x5a48d1=>{const _0x48f196=_0x2978e5;if(!_0x5a48d1)throw Object['assign'](new Error(_0x48f196(0x101)),{'code':0x190,'details':_0x24db97[_0x48f196(0xdb)]});return ctrls[_0x48f196(0x10d)]['getIdTransferById'](_0x739d63[_0x48f196(0xf0)]['id']);})[_0x2978e5(0xd2)](_0x2ad64e=>_0x243a34['json'](_0x2ad64e))['catch'](_0x716454=>respondValidateError(_0x243a34,_0x716454));}),adminRouters['get'](_0x9834da(0xad),async(_0x58d193,_0x42313a)=>{const _0xe235d5=_0x9834da,_0x3b3b35=await activity[_0xe235d5(0x139)](_0x58d193,_0xe235d5(0x121));if(!_0x3b3b35)return _0x42313a[_0xe235d5(0xab)]({'status':![],'message':_0xe235d5(0x105)});const _0x506ce2=new Validator({..._0x58d193[_0xe235d5(0xeb)]},{'page':_0xe235d5(0x11e),'limit':_0xe235d5(0x11e)});return _0x506ce2[_0xe235d5(0xac)]()[_0xe235d5(0xd2)](_0x5d6d22=>{const _0x6aaff9=_0xe235d5;if(!_0x5d6d22)throw Object[_0x6aaff9(0xc4)](new Error(_0x6aaff9(0x101)),{'code':0x190,'details':_0x506ce2[_0x6aaff9(0xdb)]});return ctrls['admin'][_0x6aaff9(0x113)](_0x58d193[_0x6aaff9(0xeb)]);})['then'](_0x2c1506=>_0x42313a[_0xe235d5(0xab)](_0x2c1506))['catch'](_0x2b0259=>respondValidateError(_0x42313a,_0x2b0259));}),adminRouters[_0x9834da(0x131)]('/email-templates/:id',async(_0x49c99e,_0x79d03f)=>{const _0x89ee7f=_0x9834da,_0x5c920c=await activity['checkAdminPermission'](_0x49c99e,_0x89ee7f(0x11c));if(!_0x5c920c)return _0x79d03f[_0x89ee7f(0xab)]({'status':![],'message':_0x89ee7f(0x105)});const _0x3377a4=new Validator({..._0x49c99e[_0x89ee7f(0xf0)]},{'id':_0x89ee7f(0x11e)});return _0x3377a4[_0x89ee7f(0x13b)](_0x3c6b48=>{const _0x1c47f3=_0x89ee7f;return models[_0x1c47f3(0xf4)][_0x1c47f3(0x100)](_0x3c6b48['inputs']['id'])[_0x1c47f3(0xd2)](_0x36fb3d=>{const _0x4d3ea1=_0x1c47f3;if(!_0x36fb3d)_0x3c6b48[_0x4d3ea1(0x108)]('id',_0x4d3ea1(0x130),_0x4d3ea1(0xcb));});}),_0x3377a4[_0x89ee7f(0xac)]()['then'](_0x2d62d5=>{const _0x3b604e=_0x89ee7f;if(!_0x2d62d5)throw Object[_0x3b604e(0xc4)](new Error(_0x3b604e(0x101)),{'code':0x190,'details':_0x3377a4[_0x3b604e(0xdb)]});return ctrls['admin'][_0x3b604e(0xb8)](_0x49c99e[_0x3b604e(0xf0)]['id']);})[_0x89ee7f(0xd2)](_0x37bd6a=>_0x79d03f[_0x89ee7f(0xab)](_0x37bd6a))[_0x89ee7f(0x11a)](_0x504b74=>respondValidateError(_0x79d03f,_0x504b74));}),adminRouters[_0x9834da(0x131)]('/email-templates',async(_0x396801,_0x4047b7)=>{const _0x283fcb=_0x9834da,_0x43b017=await activity[_0x283fcb(0x139)](_0x396801,'settings.emailTemplate');if(!_0x43b017)return _0x4047b7[_0x283fcb(0xab)]({'status':![],'message':'Permission\x20denied!'});const _0x1c6e6a=new Validator({..._0x396801['query']},{'page':_0x283fcb(0x11e),'limit':_0x283fcb(0x11e)});return _0x1c6e6a[_0x283fcb(0xac)]()['then'](_0x1caf28=>{const _0x58f01d=_0x283fcb;if(!_0x1caf28)throw Object['assign'](new Error(_0x58f01d(0x101)),{'code':0x190,'details':_0x1c6e6a['errors']});return ctrls[_0x58f01d(0x10d)][_0x58f01d(0x10e)](_0x396801[_0x58f01d(0xeb)]);})['then'](_0x568fa8=>_0x4047b7[_0x283fcb(0xab)](_0x568fa8))[_0x283fcb(0x11a)](_0x654313=>respondValidateError(_0x4047b7,_0x654313));}),adminRouters['get']('/langs/:id/content',async(_0x5ad82c,_0x2477cb)=>{const _0x123243=_0x9834da,_0x243772=await activity[_0x123243(0x139)](_0x5ad82c,_0x123243(0xbc));if(!_0x243772)return _0x2477cb['status'](0x193)[_0x123243(0xab)]({'status':![],'message':_0x123243(0x105)});const _0x4b17e1=new Validator({'id':_0x5ad82c[_0x123243(0xf0)]['id']},{'id':_0x123243(0x110)});return _0x4b17e1[_0x123243(0x13b)](_0x3ae8f3=>{const _0x5846cb=_0x123243;return models[_0x5846cb(0xe5)][_0x5846cb(0x100)](_0x3ae8f3[_0x5846cb(0xdf)]['id'])[_0x5846cb(0xd2)](_0x161433=>{const _0x266b9f=_0x5846cb;if(!_0x161433)_0x3ae8f3['error']('id',_0x266b9f(0x130),_0x266b9f(0xaf));else!_0x161433[_0x266b9f(0xbd)]&&_0x3ae8f3[_0x266b9f(0x108)](_0x266b9f(0xbd),_0x266b9f(0x130),'Language\x20does\x20not\x20have\x20url!');});}),_0x4b17e1[_0x123243(0xac)]()[_0x123243(0xd2)](_0x27fa88=>{const _0x235880=_0x123243;if(!_0x27fa88)throw Object['assign'](new Error(_0x235880(0x101)),{'code':0x190,'details':_0x4b17e1[_0x235880(0xdb)]});return ctrls[_0x235880(0xe5)][_0x235880(0x120)](_0x5ad82c['params']['id']);})[_0x123243(0xd2)](_0x2858e0=>_0x2477cb['send'](_0x2858e0))['catch'](_0x2a6cd4=>respondValidateError(_0x2477cb,_0x2a6cd4));}),adminRouters[_0x9834da(0x131)]('/langs/:id',async(_0x210bfe,_0x1642d2)=>{const _0x53c92d=_0x9834da,_0x7568b3=await activity[_0x53c92d(0x139)](_0x210bfe,'lang.edit');if(!_0x7568b3)return _0x1642d2[_0x53c92d(0xfb)](0x193)[_0x53c92d(0xab)]({'status':![],'message':'Permission\x20denied!'});const _0x1068f6=new Validator({'id':_0x210bfe[_0x53c92d(0xf0)]['id']},{'id':'required'});return _0x1068f6['check']()[_0x53c92d(0xd2)](_0x1fe60a=>{const _0x4a0d88=_0x53c92d;if(!_0x1fe60a)throw Object[_0x4a0d88(0xc4)](new Error(_0x4a0d88(0x101)),{'code':0x190,'details':_0x1068f6[_0x4a0d88(0xdb)]});return ctrls[_0x4a0d88(0xe5)][_0x4a0d88(0xb3)](_0x210bfe[_0x4a0d88(0xf0)]['id']);})[_0x53c92d(0xd2)](_0x5f0684=>_0x1642d2[_0x53c92d(0xab)](_0x5f0684))[_0x53c92d(0x11a)](_0x158eca=>respondValidateError(_0x1642d2,_0x158eca));}),adminRouters[_0x9834da(0x131)](_0x9834da(0x11b),async(_0x5a04cf,_0x1c8811)=>{const _0x244877=_0x9834da,_0x3ac351=await activity['checkAdminPermission'](_0x5a04cf,'lang.show');if(!_0x3ac351)return _0x1c8811[_0x244877(0xfb)](0x193)[_0x244877(0xab)]({'status':![],'message':'Permission\x20denied!'});const _0x5826c6=new Validator(_0x5a04cf[_0x244877(0xeb)],{'limit':'required|integer','page':_0x244877(0x11e)});return _0x5826c6['check']()[_0x244877(0xd2)](_0x178421=>{const _0xbdadd8=_0x244877;if(!_0x178421)throw Object[_0xbdadd8(0xc4)](new Error('Invalid\x20request!'),{'code':0x190,'details':_0x5826c6[_0xbdadd8(0xdb)]});return ctrls[_0xbdadd8(0xe5)][_0xbdadd8(0xff)](_0x5a04cf[_0xbdadd8(0xeb)]);})['then'](_0x3c17fc=>_0x1c8811[_0x244877(0xab)](_0x3c17fc))[_0x244877(0x11a)](_0x1ab355=>respondValidateError(_0x1c8811,_0x1ab355));}),adminRouters[_0x9834da(0x131)]('/stats',async(_0x3d571d,_0x1a8a06)=>{const _0x344f70=_0x9834da,{role:_0x1e5e9e}=getTokenInfo(_0x3d571d);if(_0x1e5e9e!=='ADMIN')return _0x1a8a06[_0x344f70(0xab)]({'status':![],'message':_0x344f70(0x105)});return Promise[_0x344f70(0xf7)]([ctrls[_0x344f70(0x10d)]['recentPosts4Stats'](),ctrls[_0x344f70(0x10d)][_0x344f70(0xcf)](),ctrls[_0x344f70(0x10d)][_0x344f70(0xee)]()])['then'](([_0x23f957,_0x1ac16a,_0x5685a6])=>{const _0x544970=_0x344f70;return _0x1a8a06[_0x544970(0xab)]({'status':!![],'message':_0x544970(0x138),'recentPosts':_0x23f957,'total':_0x1ac16a,'stats4Post':_0x5685a6});})[_0x344f70(0x11a)](_0x4477dc=>respondValidateError(_0x1a8a06,_0x4477dc));}),adminRouters[_0x9834da(0x109)](_0x9834da(0x13c),async(_0x53508b,_0x120738)=>{const _0x4f0173=_0x9834da,_0x342438=await activity[_0x4f0173(0x139)](_0x53508b,_0x4f0173(0xf2));if(!_0x342438)return _0x120738[_0x4f0173(0xfb)](0x193)[_0x4f0173(0xab)]({'status':![],'message':'Permission\x20denied!'});const {uid:_0x5d2262}=getTokenInfo(_0x53508b),{user_id:_0x1e159b,title:_0x39acf7,body:_0x589837}=_0x53508b[_0x4f0173(0x117)],_0x3a0df2=new Validator(_0x53508b['body'],{'user_id':'required','title':'required','body':_0x4f0173(0x110)});return _0x3a0df2[_0x4f0173(0x13b)](async _0x1e376e=>Promise['all']([models[_0x4f0173(0x104)][_0x4f0173(0x100)](_0x1e159b)])[_0x4f0173(0xd2)](([_0x5107ea])=>{const _0x588cd1=_0x4f0173;!_0x5107ea&&_0x1e376e[_0x588cd1(0x108)](_0x588cd1(0xbf),'custom',_0x588cd1(0x12b));})),_0x3a0df2['check']()[_0x4f0173(0xd2)](_0x4aae47=>{const _0x48de91=_0x4f0173;if(!_0x4aae47)throw Object['assign'](new Error(_0x48de91(0x124)),{'code':0x190,'details':_0x3a0df2[_0x48de91(0xdb)]});return ctrls[_0x48de91(0x10d)][_0x48de91(0x10a)]({'user_id':_0x1e159b,'title':_0x39acf7,'body':_0x589837});})['then'](()=>_0x120738[_0x4f0173(0xab)]({'status':!![],'message':_0x4f0173(0xb0)}))[_0x4f0173(0x11a)](_0x3214c6=>respondValidateError(_0x120738,_0x3214c6));}),adminRouters[_0x9834da(0x109)](_0x9834da(0x125),async(_0xfff2dc,_0x475e8d)=>{const _0xdc06bf=_0x9834da,_0xe78615=await activity['checkAdminPermission'](_0xfff2dc,'user.sendNotification.show');if(!_0xe78615)return _0x475e8d[_0xdc06bf(0xfb)](0x193)[_0xdc06bf(0xab)]({'status':![],'message':_0xdc06bf(0x105)});const {uid:_0xf50514,role:_0x3d723f}=getTokenInfo(_0xfff2dc),{user_ids:_0x472817,title:_0x57e1f8,body:_0x3b0a6d}=_0xfff2dc[_0xdc06bf(0x117)],_0x184b4c=new Validator(_0xfff2dc[_0xdc06bf(0x117)],{'user_ids':_0xdc06bf(0x110),'title':'required','body':_0xdc06bf(0x110)});return _0x184b4c['check']()['then'](_0x10149c=>{const _0x195ae6=_0xdc06bf;if(!_0x10149c)throw Object[_0x195ae6(0xc4)](new Error(_0x195ae6(0x124)),{'code':0x190,'details':_0x184b4c['errors']});return ctrls[_0x195ae6(0x10d)][_0x195ae6(0xb7)]({'user_ids':_0x472817,'title':_0x57e1f8,'body':_0x3b0a6d});})[_0xdc06bf(0xd2)](()=>_0x475e8d[_0xdc06bf(0xab)]({'status':!![],'message':_0xdc06bf(0xfc)}))[_0xdc06bf(0x11a)](_0x2f5a6c=>respondValidateError(_0x475e8d,_0x2f5a6c));}),adminRouters[_0x9834da(0x109)](_0x9834da(0x12e),async(_0x56b403,_0x151c6b)=>{const _0x5b12ef=_0x9834da,_0x2a6e05=await activity[_0x5b12ef(0x139)](_0x56b403,_0x5b12ef(0xce));if(!_0x2a6e05)return _0x151c6b[_0x5b12ef(0xfb)](0x193)[_0x5b12ef(0xab)]({'status':![],'message':_0x5b12ef(0x105)});const _0x46e06e=new Validator({'id':_0x56b403['params']['id']},{'id':_0x5b12ef(0x110)});return _0x46e06e[_0x5b12ef(0x13b)](_0x29261b=>{const _0xbad4c7=_0x5b12ef;return models[_0xbad4c7(0xe5)][_0xbad4c7(0x100)](_0x29261b[_0xbad4c7(0xdf)]['id'])[_0xbad4c7(0xd2)](_0x409183=>{const _0x3feaab=_0xbad4c7;if(!_0x409183)_0x29261b[_0x3feaab(0x108)]('id','custom',_0x3feaab(0xda));});}),_0x46e06e[_0x5b12ef(0xac)]()[_0x5b12ef(0xd2)](_0x43dfbf=>{const _0x32bf0f=_0x5b12ef;if(!_0x43dfbf)throw Object[_0x32bf0f(0xc4)](new Error(_0x32bf0f(0x101)),{'code':0x190,'details':_0x46e06e[_0x32bf0f(0xdb)]});return ctrls[_0x32bf0f(0xe5)][_0x32bf0f(0x132)](_0x56b403['params']['id']);})[_0x5b12ef(0xd2)](_0x2603e8=>_0x151c6b[_0x5b12ef(0xab)](_0x2603e8))[_0x5b12ef(0x11a)](_0x42ccb7=>respondValidateError(_0x151c6b,_0x42ccb7));}),adminRouters[_0x9834da(0x109)](_0x9834da(0x11b),async(_0x14b5c5,_0x48d3ce)=>{const _0x2f2a32=_0x9834da,_0x8ba69c=await activity[_0x2f2a32(0x139)](_0x14b5c5,_0x2f2a32(0x123));if(!_0x8ba69c)return _0x48d3ce[_0x2f2a32(0xfb)](0x193)[_0x2f2a32(0xab)]({'status':![],'message':'Permission\x20denied!'});const _0x32bf0a=new Validator({..._0x14b5c5['body']},{'code':'required','name':_0x2f2a32(0x110),'active':'required'});return _0x32bf0a[_0x2f2a32(0xac)]()[_0x2f2a32(0xd2)](_0x27eb14=>{const _0x14a21a=_0x2f2a32;if(!_0x27eb14)throw Object[_0x14a21a(0xc4)](new Error(_0x14a21a(0x101)),{'code':0x190,'details':_0x32bf0a[_0x14a21a(0xdb)]});return ctrls[_0x14a21a(0xe5)][_0x14a21a(0xdd)](_0x14b5c5,_0x48d3ce);})['catch'](_0x91ab1b=>respondValidateError(_0x48d3ce,_0x91ab1b));}),adminRouters['post'](_0x9834da(0xb5),async(_0x2acf11,_0x1214c0)=>{const _0x2f22c6=_0x9834da,{role:_0x4fa8a1}=getTokenInfo(_0x2acf11);if(_0x4fa8a1!==_0x2f22c6(0x11d))return _0x1214c0['json']({'status':![],'message':_0x2f22c6(0x105)});const _0x586063=new Validator({'langCode':_0x2acf11[_0x2f22c6(0xf0)][_0x2f22c6(0xc0)]},{'langCode':_0x2f22c6(0xed)});return _0x586063[_0x2f22c6(0x13b)](_0x337ac4=>{const _0x212b79=_0x2f22c6;return models['language'][_0x212b79(0x13d)](_0x337ac4[_0x212b79(0xdf)][_0x212b79(0xc0)])['then'](_0x1d0541=>{const _0x4c9b18=_0x212b79;if(!_0x1d0541)_0x337ac4[_0x4c9b18(0x108)]('langCode',_0x4c9b18(0xf3)+_0x337ac4[_0x4c9b18(0xdf)][_0x4c9b18(0xc0)]+_0x4c9b18(0xe1));});}),_0x586063[_0x2f22c6(0xac)]()[_0x2f22c6(0xd2)](_0x56c442=>{const _0x41aba3=_0x2f22c6;if(!_0x56c442)throw Object['assign'](new Error(_0x41aba3(0x101)),{'code':0x190,'details':_0x586063[_0x41aba3(0xdb)]});return ctrls[_0x41aba3(0xe5)]['uploadLangFileReq'](_0x2acf11);})[_0x2f22c6(0xd2)](_0x5aa3a5=>{const _0x5f1cec=_0x2f22c6;if(!_0x5aa3a5[_0x5f1cec(0xfb)])throw Object[_0x5f1cec(0xc4)](new Error(_0x5aa3a5['message']),{'code':0x190});return Promise['all']([_0x5aa3a5[_0x5f1cec(0xbd)],models['language'][_0x5f1cec(0x13d)](_0x2acf11[_0x5f1cec(0xf0)][_0x5f1cec(0xc0)])]);})['then'](([_0x4f6cf5,_0x3d8801])=>{const _0x55b696=_0x2f22c6;return models[_0x55b696(0xe5)][_0x55b696(0xfe)]({..._0x3d8801,'url':_0x4f6cf5});})[_0x2f22c6(0xd2)](_0x2c0f78=>{const _0x4605e7=_0x2f22c6;return _0x1214c0[_0x4605e7(0xab)]({'status':!![],'message':'success','data':_0x2c0f78});})[_0x2f22c6(0x11a)](_0x5bf081=>respondValidateError(_0x1214c0,_0x5bf081));}),adminRouters[_0x9834da(0x109)](_0x9834da(0xe2),async(_0x473267,_0x58c13e)=>{const _0x5f16b2=_0x9834da,_0x5e030c=await activity[_0x5f16b2(0x139)](_0x473267,_0x5f16b2(0x121));if(!_0x5e030c)return _0x58c13e[_0x5f16b2(0xfb)](0x193)[_0x5f16b2(0xab)]({'status':![],'message':'Permission\x20denied!'});const _0xb729a0=new Validator({'id':_0x473267[_0x5f16b2(0xf0)]['id']},{'id':_0x5f16b2(0x110)});return _0xb729a0[_0x5f16b2(0x13b)](_0x3e30cd=>{const _0x1059fa=_0x5f16b2;return models[_0x1059fa(0x13a)]['getById'](_0x3e30cd['inputs']['id'])[_0x1059fa(0xd2)](_0x2944c0=>{const _0x3e1f45=_0x1059fa;if(!_0x2944c0)_0x3e30cd[_0x3e1f45(0x108)]('id',_0x3e1f45(0x130),'Data\x20does\x20not\x20exist!');const _0x40865d=JSON[_0x3e1f45(0xdc)](_0x2944c0[_0x3e1f45(0x112)]);(!_0x40865d[_0x3e1f45(0x10f)]||!_0x40865d['to'])&&_0x3e30cd[_0x3e1f45(0x108)]('users',_0x3e1f45(0x130),_0x3e1f45(0xd0)),_0x2944c0['type']!==ADMIN_NOTI_TYPES[_0x3e1f45(0xef)]&&_0x3e30cd[_0x3e1f45(0x108)](_0x3e1f45(0xc6),_0x3e1f45(0x130),_0x3e1f45(0xfa));});}),_0xb729a0['check']()[_0x5f16b2(0xd2)](_0x396a07=>{const _0x4f3d43=_0x5f16b2;if(!_0x396a07)throw Object['assign'](new Error(_0x4f3d43(0x101)),{'code':0x190,'details':_0xb729a0[_0x4f3d43(0xdb)]});return ctrls[_0x4f3d43(0x10d)][_0x4f3d43(0xf6)](_0x473267['params']['id']);})[_0x5f16b2(0xd2)](_0xd4e38e=>_0x58c13e['json'](_0xd4e38e))[_0x5f16b2(0x11a)](_0x463341=>respondValidateError(_0x58c13e,_0x463341));}),adminRouters[_0x9834da(0x118)](_0x9834da(0xbb),async(_0x558ab6,_0x5eb707)=>{const _0x2b4623=_0x9834da,_0x11cd71=await activity[_0x2b4623(0x139)](_0x558ab6,_0x2b4623(0x11c));if(!_0x11cd71)return _0x5eb707[_0x2b4623(0xfb)](0x193)['json']({'status':![],'message':_0x2b4623(0x105)});const _0x12de61=new Validator({..._0x558ab6[_0x2b4623(0xf0)]},{'id':_0x2b4623(0x11e)});return _0x12de61[_0x2b4623(0x13b)](_0x2364bd=>{const _0x2b545e=_0x2b4623;return models[_0x2b545e(0xf4)][_0x2b545e(0x100)](_0x2364bd[_0x2b545e(0xdf)]['id'])[_0x2b545e(0xd2)](_0x205cd7=>{const _0x4e10eb=_0x2b545e;if(!_0x205cd7)_0x2364bd['error']('id',_0x4e10eb(0x130),_0x4e10eb(0xae)+_0x2364bd[_0x4e10eb(0xdf)]['id']+_0x4e10eb(0xe1));});}),_0x12de61[_0x2b4623(0xac)]()[_0x2b4623(0xd2)](_0x5d4a59=>{const _0x324bec=_0x2b4623;if(!_0x5d4a59)throw Object[_0x324bec(0xc4)](new Error('Invalid\x20request!'),{'code':0x190,'details':_0x12de61[_0x324bec(0xdb)]});return ctrls[_0x324bec(0x10d)][_0x324bec(0xd3)](_0x558ab6[_0x324bec(0xf0)]['id'],_0x558ab6[_0x324bec(0x117)]);})[_0x2b4623(0xd2)](_0x1da602=>_0x5eb707[_0x2b4623(0xab)](_0x1da602))[_0x2b4623(0x11a)](_0x19c3bb=>respondValidateError(_0x5eb707,_0x19c3bb));}),adminRouters[_0x9834da(0x118)](_0x9834da(0xc5),async(_0x5bdd64,_0x32ebd5)=>{const _0x5573f9=_0x9834da,{uid:_0x283e93,role:_0x524cd7}=getTokenInfo(_0x5bdd64);if(_0x524cd7!==_0x5573f9(0x11d))return _0x32ebd5['json']({'status':![],'message':'Permission\x20denied!'});const _0x3cf670=new Validator({'user_id':_0x283e93,..._0x5bdd64[_0x5573f9(0x117)]},{'user_id':'required|integer','email':'required','user_name':_0x5573f9(0x110)});return _0x3cf670[_0x5573f9(0x13b)](_0x4e0242=>{const _0x4250c1=_0x5573f9;return models[_0x4250c1(0x10d)][_0x4250c1(0x100)](_0x4e0242[_0x4250c1(0xdf)][_0x4250c1(0xbf)])['then'](_0x4d5429=>{const _0x419371=_0x4250c1;if(!_0x4d5429)_0x4e0242[_0x419371(0x108)]('id','custom','Admin\x20does\x20not\x20exist\x20with\x20the\x20given\x20id!');});}),_0x3cf670[_0x5573f9(0xac)]()[_0x5573f9(0xd2)](_0x128e22=>{const _0x3291bb=_0x5573f9;if(!_0x128e22)throw Object[_0x3291bb(0xc4)](new Error(_0x3291bb(0x101)),{'code':0x190,'details':_0x3cf670['errors']});return ctrls[_0x3291bb(0x10d)][_0x3291bb(0xb4)](_0x283e93,_0x5bdd64['body']);})['then'](_0x212af2=>_0x32ebd5[_0x5573f9(0xab)](_0x212af2))[_0x5573f9(0x11a)](_0x3766a5=>respondValidateError(_0x32ebd5,_0x3766a5));}),adminRouters[_0x9834da(0x118)](_0x9834da(0x122),async(_0x380ffe,_0x19c601)=>{const _0x1b9b30=_0x9834da,{role:_0x5155b1,uid:_0x83727f}=getTokenInfo(_0x380ffe);if(_0x5155b1!=='ADMIN')return _0x19c601['json']({'status':![],'message':_0x1b9b30(0x105)});const _0x595ec7=new Validator({'user_id':_0x83727f,..._0x380ffe['body']},{'old_pass':_0x1b9b30(0x110),'password':'required'});return _0x595ec7[_0x1b9b30(0x13b)](_0x527c6c=>{const _0x302190=_0x1b9b30;return models['admin'][_0x302190(0x100)](_0x83727f)[_0x302190(0xd2)](_0x272e8d=>{const _0x25316a=_0x302190;if(!_0x272e8d)_0x527c6c['error']('id','custom',_0x25316a(0x12f));});}),_0x595ec7[_0x1b9b30(0xac)]()[_0x1b9b30(0xd2)](_0xf78d60=>{const _0x3de7f1=_0x1b9b30;if(!_0xf78d60)throw Object[_0x3de7f1(0xc4)](new Error(_0x3de7f1(0x101)),{'code':0x190,'details':_0x595ec7[_0x3de7f1(0xdb)]()});return ctrls[_0x3de7f1(0x10d)][_0x3de7f1(0xaa)](_0x83727f,_0x380ffe['body']);})[_0x1b9b30(0xd2)](_0x314dde=>_0x19c601[_0x1b9b30(0xab)](_0x314dde))[_0x1b9b30(0x11a)](_0x54724f=>respondValidateError(_0x19c601,_0x54724f));}),adminRouters[_0x9834da(0x118)](_0x9834da(0xc2),async(_0x1bf444,_0x24d0ea)=>{const _0x132cdf=_0x9834da,_0x17aa60=await activity[_0x132cdf(0x139)](_0x1bf444,'settings.config');if(!_0x17aa60)return _0x24d0ea[_0x132cdf(0xfb)](0x193)[_0x132cdf(0xab)]({'status':![],'message':_0x132cdf(0x105)});return ctrls['admin'][_0x132cdf(0xb9)](_0x1bf444[_0x132cdf(0x117)])['then'](_0x2e4f38=>_0x24d0ea[_0x132cdf(0xab)](_0x2e4f38))[_0x132cdf(0x11a)](_0x1bd1cc=>respondValidateError(_0x24d0ea,_0x1bd1cc));}),adminRouters[_0x9834da(0x118)](_0x9834da(0x129),async(_0x3f6a23,_0x33aae4)=>{const _0x358207=_0x9834da,_0x2d1ff6=await activity[_0x358207(0x139)](_0x3f6a23,'lang.edit');if(!_0x2d1ff6)return _0x33aae4[_0x358207(0xfb)](0x193)[_0x358207(0xab)]({'status':![],'message':_0x358207(0x105)});const _0x43761c=new Validator({'id':_0x3f6a23[_0x358207(0xf0)]['id']},{'id':_0x358207(0x11e)});return _0x43761c[_0x358207(0x13b)](_0x356a43=>{const _0x37614d=_0x358207;return models[_0x37614d(0xe5)][_0x37614d(0x100)](_0x356a43[_0x37614d(0xdf)]['id'])['then'](_0x54d0d2=>{const _0x5af026=_0x37614d;if(!_0x54d0d2)_0x356a43[_0x5af026(0x108)]('id','custom','Language\x20with\x20id\x20\x22'+_0x356a43['inputs']['id']+_0x5af026(0xe1));});}),_0x43761c[_0x358207(0xac)]()[_0x358207(0xd2)](_0x22a1fe=>{const _0x6eac61=_0x358207;if(!_0x22a1fe)throw Object[_0x6eac61(0xc4)](new Error(_0x6eac61(0x101)),{'code':0x190,'details':_0x43761c['errors']});return ctrls[_0x6eac61(0xe5)][_0x6eac61(0x136)](_0x3f6a23['params']['id'],_0x3f6a23['body']);})['then'](_0x589aa3=>_0x33aae4['json'](_0x589aa3))[_0x358207(0x11a)](_0x1592e1=>respondValidateError(_0x33aae4,_0x1592e1));}),adminRouters[_0x9834da(0xcd)](_0x9834da(0x129),async(_0x23af23,_0x1b71f5)=>{const _0x3c96b7=_0x9834da,_0x272620=await activity[_0x3c96b7(0x139)](_0x23af23,_0x3c96b7(0xd7));if(!_0x272620)return _0x1b71f5[_0x3c96b7(0xfb)](0x193)[_0x3c96b7(0xab)]({'status':![],'message':_0x3c96b7(0x105)});const _0x46bfeb=new Validator({'id':_0x23af23[_0x3c96b7(0xf0)]['id']},{'id':_0x3c96b7(0x110)});return _0x46bfeb['addPostRule'](_0x36175b=>{const _0x344002=_0x3c96b7;return models['language'][_0x344002(0x100)](_0x36175b['inputs']['id'])[_0x344002(0xd2)](_0x17eb2b=>{const _0x19aeeb=_0x344002;if(!_0x17eb2b)_0x36175b[_0x19aeeb(0x108)]('id',_0x19aeeb(0x130),_0x19aeeb(0xda));});}),_0x46bfeb[_0x3c96b7(0xac)]()[_0x3c96b7(0xd2)](_0x4afe4b=>{const _0x2e4eac=_0x3c96b7;if(!_0x4afe4b)throw Object['assign'](new Error(_0x2e4eac(0x101)),{'code':0x190,'details':_0x46bfeb[_0x2e4eac(0xdb)]});return ctrls[_0x2e4eac(0xe5)][_0x2e4eac(0x11f)](_0x23af23[_0x2e4eac(0xf0)]['id']);})[_0x3c96b7(0xd2)](_0x5c3da1=>_0x1b71f5['json'](_0x5c3da1))[_0x3c96b7(0x11a)](_0x5b7ed5=>respondValidateError(_0x1b71f5,_0x5b7ed5));}),adminRouters['delete'](_0x9834da(0xd5),async(_0x5d128b,_0x224677)=>{const _0x4e701c=_0x9834da,_0x195de7=await activity[_0x4e701c(0x139)](_0x5d128b,_0x4e701c(0x121));if(!_0x195de7)return _0x224677[_0x4e701c(0xfb)](0x193)['json']({'status':![],'message':_0x4e701c(0x105)});const _0x24752f=new Validator({'id':_0x5d128b['params']['id']},{'id':_0x4e701c(0x110)});return _0x24752f['addPostRule'](_0x2a4218=>{const _0x2e33ad=_0x4e701c;return models['adminNotification']['getById'](_0x2a4218['inputs']['id'])[_0x2e33ad(0xd2)](_0x3b788b=>{const _0x4b7e65=_0x2e33ad;if(!_0x3b788b)_0x2a4218[_0x4b7e65(0x108)]('id',_0x4b7e65(0x130),_0x4b7e65(0xf1));});}),_0x24752f['check']()[_0x4e701c(0xd2)](_0x2b3ff8=>{const _0x7310cb=_0x4e701c;if(!_0x2b3ff8)throw Object[_0x7310cb(0xc4)](new Error(_0x7310cb(0x101)),{'code':0x190,'details':_0x24752f['errors']});return ctrls['admin'][_0x7310cb(0x135)](_0x5d128b[_0x7310cb(0xf0)]['id']);})[_0x4e701c(0xd2)](_0x48a545=>_0x224677[_0x4e701c(0xab)](_0x48a545))[_0x4e701c(0x11a)](_0x138e19=>respondValidateError(_0x224677,_0x138e19));}),adminRouters[_0x9834da(0xec)](_0x9834da(0xe4))[_0x9834da(0x131)](async(_0x11ffd4,_0x3fe4ad)=>{const _0x30e9ab=_0x9834da,{role:_0x26041e,role2:_0x3f7f7f}=getTokenInfo(_0x11ffd4);if(!(_0x26041e===_0x30e9ab(0x11d)&&_0x3f7f7f===ADMIN_ROLE['SUPER']))return _0x3fe4ad[_0x30e9ab(0xab)]({'status':![],'message':_0x30e9ab(0x105)});const _0x2eaaf4=new Validator({'id':_0x11ffd4[_0x30e9ab(0xf0)]['id']},{'id':'required'});return _0x2eaaf4[_0x30e9ab(0x13b)](_0x4fe092=>{const _0x28f9e6=_0x30e9ab;return models['admin'][_0x28f9e6(0x100)](_0x4fe092[_0x28f9e6(0xdf)]['id'])[_0x28f9e6(0xd2)](_0x1aee9a=>{const _0x36a960=_0x28f9e6;if(!_0x1aee9a)_0x4fe092[_0x36a960(0x108)]('id',_0x36a960(0x130),_0x36a960(0xf1));});}),_0x2eaaf4[_0x30e9ab(0xac)]()[_0x30e9ab(0xd2)](_0x359af2=>{const _0x27eeb2=_0x30e9ab;if(!_0x359af2)throw Object['assign'](new Error(_0x27eeb2(0x101)),{'code':0x190,'details':_0x2eaaf4[_0x27eeb2(0xdb)]});return Promise[_0x27eeb2(0xf7)]([ctrls[_0x27eeb2(0x10d)][_0x27eeb2(0xf9)](_0x11ffd4['params']['id']),ctrls[_0x27eeb2(0x10d)]['getPermissionOfAdmin'](_0x11ffd4[_0x27eeb2(0xf0)]['id'])]);})[_0x30e9ab(0xd2)](([_0x472749,_0x4af44c])=>_0x3fe4ad[_0x30e9ab(0xab)]({'status':!![],'message':_0x30e9ab(0x138),'data':models[_0x30e9ab(0x10d)][_0x30e9ab(0xde)](_0x472749),'permission':models['adminPermission'][_0x30e9ab(0xde)](_0x4af44c)}))[_0x30e9ab(0x11a)](_0x5a75f2=>respondValidateError(_0x3fe4ad,_0x5a75f2));}),adminRouters['route'](_0x9834da(0xe8))[_0x9834da(0x131)](async(_0x4c5f9a,_0x5aed04)=>{const _0x36b65c=_0x9834da,{role:_0x21088a,role2:_0x1058ba}=getTokenInfo(_0x4c5f9a);if(!(_0x21088a===_0x36b65c(0x11d)&&_0x1058ba===ADMIN_ROLE[_0x36b65c(0xc8)]))_0x5aed04[_0x36b65c(0xab)]({'status':![],'message':_0x36b65c(0x105)});const _0x1b3dbe=new Validator(_0x4c5f9a[_0x36b65c(0xeb)],{'limit':_0x36b65c(0x110),'page':_0x36b65c(0x110)});return _0x1b3dbe[_0x36b65c(0xac)]()['then'](_0x4f9bc7=>{const _0x240a65=_0x36b65c;if(!_0x4f9bc7)throw Object[_0x240a65(0xc4)](new Error(_0x240a65(0x101)),{'code':0x190,'details':_0x1b3dbe[_0x240a65(0xdb)]});return ctrls[_0x240a65(0x10d)][_0x240a65(0xb1)]({'page':Number(_0x4c5f9a['query']['page']),'limit':Number(_0x4c5f9a[_0x240a65(0xeb)]['limit'])});})[_0x36b65c(0xd2)](_0x30e478=>_0x5aed04[_0x36b65c(0xab)](_0x30e478))['catch'](_0x412053=>respondValidateError(_0x5aed04,_0x412053));}),adminRouters[_0x9834da(0xec)](_0x9834da(0xe8))[_0x9834da(0x109)](async(_0x4818f5,_0xa38e10)=>{const _0x59c70f=_0x9834da,{role:_0x1f45dd}=getTokenInfo(_0x4818f5);if(!(_0x1f45dd===_0x59c70f(0x11d)&&role2===ADMIN_ROLE[_0x59c70f(0xc8)]))return _0xa38e10['json']({'status':![],'message':_0x59c70f(0x105)});const _0x1c4c01=new Validator({..._0x4818f5[_0x59c70f(0x117)]},{'email':_0x59c70f(0x110),'user_name':'required','password':_0x59c70f(0x110)});return _0x1c4c01[_0x59c70f(0x13b)](_0x47d9a3=>Promise['all']([models[_0x59c70f(0x10d)]['getByEmail'](_0x4818f5[_0x59c70f(0x117)]['email']),models[_0x59c70f(0x10d)][_0x59c70f(0x115)](_0x4818f5[_0x59c70f(0x117)][_0x59c70f(0x137)])])[_0x59c70f(0xd2)](([_0x1076b3,_0x399414])=>{const _0x5be421=_0x59c70f;if(_0x1076b3)_0x47d9a3['error']('email',_0x5be421(0x130),'Email\x20already\x20taken\x20by\x20other\x20administrator!');if(_0x399414)_0x47d9a3[_0x5be421(0x108)](_0x5be421(0x137),_0x5be421(0x130),_0x5be421(0x106));})),_0x1c4c01['check']()[_0x59c70f(0xd2)](_0x1ee6a0=>{const _0x3bf920=_0x59c70f;if(!_0x1ee6a0)throw Object[_0x3bf920(0xc4)](new Error(_0x3bf920(0x101)),{'code':0x190,'details':_0x1c4c01[_0x3bf920(0xdb)]});return ctrls[_0x3bf920(0x10d)][_0x3bf920(0x133)](_0x4818f5['body']);})['then'](_0xdf2838=>_0xa38e10[_0x59c70f(0xab)](_0xdf2838))[_0x59c70f(0x11a)](_0x28cbbc=>respondValidateError(_0xa38e10,_0x28cbbc));}),adminRouters[_0x9834da(0xec)]('/employee/:id')[_0x9834da(0xcd)](async(_0x430bdb,_0x17a5c4)=>{const _0x1dcc7e=_0x9834da,{role:_0x1c0c98,role2:_0x180585}=getTokenInfo(_0x430bdb);if(!(_0x1c0c98===_0x1dcc7e(0x11d)&&_0x180585===ADMIN_ROLE[_0x1dcc7e(0xc8)]))return _0x17a5c4[_0x1dcc7e(0xab)]({'status':![],'message':_0x1dcc7e(0x105)});const _0x13f8c2=new Validator({'id':_0x430bdb[_0x1dcc7e(0xf0)]['id']},{'id':_0x1dcc7e(0x110)});return _0x13f8c2['addPostRule'](_0x1fda8c=>models[_0x1dcc7e(0x10d)]['getById'](_0x1fda8c[_0x1dcc7e(0xdf)]['id'])[_0x1dcc7e(0xd2)](_0x5386e7=>{const _0x3318a0=_0x1dcc7e;if(!_0x5386e7)_0x1fda8c[_0x3318a0(0x108)]('id','custom','Employee\x20does\x20not\x20exist\x20with\x20the\x20given\x20id!');})),_0x13f8c2['check']()[_0x1dcc7e(0xd2)](_0x50ddde=>{const _0x485d11=_0x1dcc7e;if(!_0x50ddde)throw Object[_0x485d11(0xc4)](new Error('Invalid\x20request!'),{'code':0x190,'details':_0x13f8c2[_0x485d11(0xdb)]});return ctrls[_0x485d11(0x10d)]['deleteEmployee'](_0x430bdb[_0x485d11(0xf0)]['id']);})[_0x1dcc7e(0xd2)](_0x373ebe=>_0x17a5c4['json'](_0x373ebe))['catch'](_0xfd8f1a=>respondValidateError(_0x17a5c4,_0xfd8f1a));}),adminRouters[_0x9834da(0xec)]('/employee/:id/permission')['patch'](async(_0x5d0900,_0x14cb2f)=>{const _0x384c7a=_0x9834da,{role:_0xd9bdd,role2:_0xf29262,uid:_0x5773a9}=getTokenInfo(_0x5d0900);if(!(_0xd9bdd==='ADMIN'&&_0xf29262===ADMIN_ROLE[_0x384c7a(0xc8)]))return _0x14cb2f['json']({'status':![],'message':_0x384c7a(0x105)});const _0x848a58=new Validator({'id':_0x5d0900[_0x384c7a(0xf0)]['id']},{'id':_0x384c7a(0x110)});return _0x848a58[_0x384c7a(0x13b)](_0x28a210=>{const _0x435dad=_0x384c7a;return Promise[_0x435dad(0xf7)]([models[_0x435dad(0x10d)][_0x435dad(0x100)](_0x28a210['inputs']['id']),models['adminPermission'][_0x435dad(0xb6)](_0x28a210[_0x435dad(0xdf)]['id'])])[_0x435dad(0xd2)](([_0x19e405,_0x40efbb])=>{const _0x64127e=_0x435dad;if(!_0x19e405)_0x28a210['error']('id','custom',_0x64127e(0x12f));});}),_0x848a58[_0x384c7a(0xac)]()[_0x384c7a(0xd2)](_0x166d7b=>{const _0x48eb55=_0x384c7a;if(!_0x166d7b)throw Object[_0x48eb55(0xc4)](new Error(_0x48eb55(0x101)),{'code':0x190,'details':_0x848a58[_0x48eb55(0xdb)]});return ctrls['admin'][_0x48eb55(0xc9)](_0x5d0900[_0x48eb55(0xf0)]['id'],_0x5d0900[_0x48eb55(0x117)][_0x48eb55(0xd8)]);})['then'](({admin:_0x46f1f1,permission:_0x26f8d2})=>_0x14cb2f['json']({'status':!![],'message':'Permission\x20has\x20been\x20updated!','data':_0x46f1f1,'permission':_0x26f8d2}))[_0x384c7a(0x11a)](_0x270eec=>respondValidateError(_0x14cb2f,_0x270eec));}),module[_0x9834da(0xbe)]=adminRouters;
+const express = require("express");
+const { Validator } = require("node-input-validator");
+const adminRouters = express.Router();
+
+const ctrls = require("../controllers");
+const models = require("../models");
+const helpers = require("../helpers");
+const middlewares = require("../middlewares/basic.middleware");
+const config = require('../config/app.config');
+
+const { BearerMiddleware } = require("../middlewares/basic.middleware");
+const { getTokenInfo } = require('../helpers/auth.helpers');
+const { respondValidateError } = require("../helpers/common.helpers");
+const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
+const { ADMIN_ROLE } = require('../constants/common.constant');
+
+const activity = {
+  checkAdminPermission: async (req, identifier) => {
+    const { role, role2, uid } = getTokenInfo(req);
+    
+    if (role !== 'ADMIN') return false;
+    if (role2 === ADMIN_ROLE.SUPER) return true;
+
+    const permission = models.adminPermission.output(await models.adminPermission.getByUserId(uid));
+    return activity.checkAllowed(permission, identifier);
+  },
+  checkAllowed: (permission, identifier = null) => {
+    if (typeof identifier === 'boolean') return identifier;
+    else if (identifier === null || identifier === '' || identifier === undefined) return true;
+    
+    const keys = identifier.split('.');
+    if (keys.length === 1) return permission[keys[0]];
+    else if (keys.length === 2) return permission[keys[0]][keys[1]];
+    else if (keys.length === 3) return permission[keys[0]][keys[1]][keys[2]];
+    else if (keys.length === 4) return permission[keys[0]][keys[1]][keys[2]][keys[3]];
+    return false;
+  },
+};
+
+
+adminRouters.post('/login', async (req, res) => {
+
+  middlewares.basicMiddleware(req, res, () => {
+    const validator = new Validator(req.body, {
+      email_or_name: "required",
+      password: "required|minLength:5"
+    });
+
+    return validator.check()
+      .then(matched => {
+        if (!matched) {
+          throw Object.assign(new Error('Validation failed!'), { code: 400, details: validator.errors });
+        }
+        return ctrls.admin.loginReq(req, res);
+      })
+      .then((result) => {
+        return res.json(result);
+      })
+      .catch(error => respondValidateError(res, error));
+  })  
+});
+
+// Bearer authentication
+adminRouters.use((req, res, next) => {
+  BearerMiddleware(req, res, next);
+});
+
+adminRouters.route('/authenticate-token').post(async (req, res) => {
+  const { uid: user_id, role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+  const token = (req.headers.authorization || '').split(' ')[1] || '';
+  return ctrls.admin.authenticateAdminToken(user_id) 
+    .then(resl => res.json({ ...resl, token }))
+    .catch(error => respondValidateError(res, error));
+});
+
+
+adminRouters.get('/profile', async (req, res) => {
+  const { uid: user_id, role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  return ctrls.admin.getAdminById(user_id)
+    .then(admin => {
+      return res.json({
+        status: true,
+        message: 'success',
+        data: models.admin.output(admin),
+      });
+    })
+    .catch(error => respondValidateError(res, error));
+})
+
+/**@secured by admin types */
+adminRouters.get('/config', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'settings.config');
+  if (!permitted) return res.json({ status: false, message: "Permission denied!" });
+
+  return ctrls.admin.getAdminConfigReq()
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**
+ * @for test only
+ */
+adminRouters.get('/firebase', async (req, res) => {
+  console.log('[GET] /admin/firebase');
+  return ctrls.firebase.test()
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.get('/id-transfers/:id', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'user.idTransfer.show');
+  if (!permitted) return res.json({ status: false, message: "Permission denied!" });
+
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.adminNotification.getById(provider.inputs.id)
+      .then(adminNoti => {
+        if (!adminNoti) provider.error('id', 'custom', 'Data does not exist!');
+      })
+  })
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.getIdTransferById(req.params.id);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/** @secrued by admin types */
+adminRouters.get('/id-transfers', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'user.idTransfer.show');
+  if (!permitted) return res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    ...req.query,
+  }, {
+    page: "required|integer",
+    limit: "required|integer",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.getIdTransfersReq(req.query);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/** @secured by admin types  */
+adminRouters.get('/email-templates/:id', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'settings.emailTemplate');
+  if (!permitted) return res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    ...req.params,
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(provider => {
+    return models.emailTemplate.getById(provider.inputs.id)
+      .then(et => {
+        if (!et) provider.error('id', 'custom', 'Email template does not exist!');
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.getEmailTemplateById(req.params.id)
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+})
+
+/**@secured by admin types */
+adminRouters.get('/email-templates', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'settings.emailTemplate');
+  if (!permitted) return res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    ...req.query,
+  }, {
+    page: "required|integer",
+    limit: "required|integer",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors});
+      return ctrls.admin.getEmailTemplateReq(req.query);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.get('/langs/:id/content', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'lang.edit');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required"
+  });
+
+  validator.addPostRule(provider => {
+    return models.language.getById(provider.inputs.id)
+      .then(lang => {
+        if (!lang) {
+          provider.error('id', 'custom', 'Lang does not exist!');
+        } else if (!lang.url) {
+          provider.error('url', 'custom', 'Language does not have url!');
+        }        
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.language.getFileContent(req.params.id);
+    })
+    .then(result => res.send(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.get('/langs/:id', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'lang.edit');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors});
+      return ctrls.language.getByIdReq(req.params.id)
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.get('/langs', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'lang.show');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator(req.query, {
+    limit: "required|integer",
+    page: "required|integer",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors});
+      return ctrls.language.paginationReq(req.query)
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.get('/stats', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!" });
+
+  return Promise.all([
+    ctrls.admin.recentPosts4Stats(),
+    ctrls.admin.totalResource4Stats(),
+    ctrls.admin.last7DayPosts(),
+  ])
+    .then(([ recentPosts, total, stats4Post ]) => {
+      return res.json({
+        status: true,
+        message: 'success',
+        recentPosts,
+        total,
+        stats4Post,
+      });
+    })
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.post('/send-notification', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'user.sendNotification.show');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const { uid } = getTokenInfo(req);
+  const { user_id, title, body } = req.body;
+
+  const validator = new Validator(req.body, {
+    user_id: "required",
+    title: "required",
+    body: "required",
+  });
+
+  validator.addPostRule(async provider => 
+    Promise.all([
+      models.user.getById(user_id),
+    ])
+      .then(([ user ]) => {
+        if (!user) {
+          provider.error('user_id', 'custom', 'User does not exist with the given id!');
+        }
+      })  
+  );
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error('Invalid requset!'), { code: 400, details: validator.errors });
+      }
+      return ctrls.admin.sendNotification2User({ user_id, title, body });
+    })
+    .then(() => res.json({ status: true, message: 'Notification has been sent!' }))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.post('/bulk-notifications', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'user.sendNotification.show');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const { uid, role } = getTokenInfo(req);
+  const { user_ids, title, body } = req.body;
+
+  const validator = new Validator(req.body, {
+    user_ids: "required",
+    title: "required",
+    body: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error('Invalid requset!'), { code: 400, details: validator.errors });
+      }
+      return ctrls.admin.sendBulkNotification({ user_ids, title, body });
+    })
+    .then(() => res.json({ status: true, message: 'Notifications have been sent!' }))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.post('/langs/:id/sync', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'lang.async');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.language.getById(provider.inputs.id)
+      .then(lang => {
+        if (!lang) provider.error('id', 'custom', 'Language does not exist!');
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.language.syncLangReq(req.params.id);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.post('/langs', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'lang.add');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    ...req.body,
+  }, {
+    code: "required",
+    name: "required",
+    active: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors});
+      return ctrls.language.create(req, res);
+    })
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.post('/upload-lang/:langCode', async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    langCode: req.params.langCode,
+  }, {
+    langCode: "required|string"
+  });
+
+  validator.addPostRule(provider => {
+    return models.language.getByCode(provider.inputs.langCode)
+      .then(lang => {
+        if (!lang) provider.error('langCode', `custom', 'Language with code "${provider.inputs.langCode}" does not exist!`);
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      // upload file
+      return ctrls.language.uploadLangFileReq(req);
+    })
+    .then(result => {
+      if (!result.status) throw Object.assign(new Error(result.message), { code: 400 });
+      return Promise.all([
+        result.url,
+        models.language.getByCode(req.params.langCode),
+      ]);
+    })
+    .then(([ url, lang ]) => {
+      return models.language.save({ ...lang, url });
+    })
+    .then(lang => {
+      return res.json({
+        status: true,
+        message: 'success',
+        data: lang
+      });
+    })  
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.post('/consent-email/:id', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'user.idTransfer.show');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.adminNotification.getById(provider.inputs.id)
+      .then(adminNoti => {
+        if (!adminNoti) provider.error('id', 'custom', 'Data does not exist!');
+        const payload = JSON.parse(adminNoti.payload);
+        if (!payload.from || !payload.to) {
+          provider.error('users', 'custom', 'Invalid user settings!');
+        }
+        if (adminNoti.type !== ADMIN_NOTI_TYPES.ID_TRANSFER) {
+          provider.error('type', 'custom', 'This is for only ID Transfer!');
+        }
+      })
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.sendConsentEmail4Transfer(req.params.id);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.patch('/email-templates/:id', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'settings.emailTemplate');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    ...req.params,
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(provider => {
+    return models.emailTemplate.getById(provider.inputs.id)
+      .then(et => {
+        if (!et) provider.error('id', 'custom', `Email template with id "${provider.inputs.id}" does not exist!`);
+      })
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors});
+      return ctrls.admin.updateEmailTemplateById(req.params.id, req.body);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+})
+
+adminRouters.patch('/profile', async (req, res) => {
+  const { uid: user_id, role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    user_id,
+    ...req.body,
+  }, {
+    user_id: "required|integer",
+    email: "required",
+    user_name: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.admin.getById(provider.inputs.user_id)
+      .then(admin => {
+        if (!admin) provider.error('id', 'custom', 'Admin does not exist with the given id!');
+      })
+  })
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors});
+      return ctrls.admin.updateProfileReq(user_id, req.body);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+})
+
+adminRouters.patch('/update-password', async (req, res) => {
+  const { role, uid: user_id } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    user_id,
+    ...req.body
+  }, {
+    old_pass: "required",
+    password: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.admin.getById(user_id)
+      .then(admin => {
+        if (!admin) provider.error('id', 'custom', 'Admin does not exist!');
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors() });
+      return ctrls.admin.updateAdminPassword(user_id, req.body);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.patch('/config', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'settings.config');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  return ctrls.admin.updateAdminConfigReq(req.body)
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.patch('/langs/:id', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'lang.edit');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(provider => {
+    return models.language.getById(provider.inputs.id)
+      .then(lang => {
+        if (!lang) provider.error('id', 'custom', `Language with id "${provider.inputs.id}" does not exist!`);
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors});
+      return ctrls.language.updateLangById(req.params.id, req.body);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+})
+
+/**@secured by admin types */
+adminRouters.delete('/langs/:id', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'lang.delete');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.language.getById(provider.inputs.id)
+      .then(lang => {
+        if (!lang) provider.error('id', 'custom', 'Language does not exist!');
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.language.deleteById(req.params.id);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+})
+
+/**@secured by admin types */
+adminRouters.delete('/id-transfers/:id', async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'user.idTransfer.show');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.adminNotification.getById(provider.inputs.id)
+      .then(adminNoti => {
+        if (!adminNoti) provider.error('id', 'custom', 'Data does not exist!');
+      })
+  })
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.deleteIdTransferById(req.params.id);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+
+
+
+/**@secured by admin types */
+adminRouters.route('/employee/:id').get(async (req, res) => {
+  const { role, role2 } = getTokenInfo(req);
+  if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER ))
+    return res.json({ status: false, message: 'Permission denied!' });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.admin.getById(provider.inputs.id)
+      .then(admin => {
+        if (!admin) provider.error('id', 'custom', 'Data does not exist!');
+      });
+  })
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return Promise.all([
+        ctrls.admin.getAdminById(req.params.id),
+        ctrls.admin.getPermissionOfAdmin(req.params.id),
+      ]);
+    })
+    .then(([admin, permission]) => res.json({
+      status: true,
+      message: 'success',
+      data: models.admin.output(admin),
+      permission: models.adminPermission.output(permission),
+    }))
+    .catch(error => respondValidateError(res, error))
+});
+
+/**@secured by admin types */
+adminRouters.route('/employee').get(async (req, res) => {
+  const { role, role2 } = getTokenInfo(req);
+  if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER)) res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator(req.query, {
+    limit: "required",
+    page: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.adminList({
+        page: Number(req.query.page),
+        limit: Number(req.query.limit),
+      })
+    })
+    .then(resl => res.json(resl))
+    .catch(error => respondValidateError(res, error))
+});
+
+/**@secured by admin types */
+adminRouters.route('/employee').post(async (req, res) => {
+  const { role, role2 } = getTokenInfo(req);
+  if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER)) return res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    ...req.body,
+  }, {
+    email: "required",
+    user_name: "required",
+    password: "required",
+  });
+
+  validator.addPostRule(provider => Promise.all([
+    models.admin.getByEmail(req.body.email),
+    models.admin.getByUsername(req.body.user_name),
+  ])
+    .then(([ byEmail, byUserName ]) => {
+      if (byEmail) provider.error('email', 'custom', "Email already taken by other administrator!");
+      if (byUserName) provider.error('user_name', 'custom', 'User name already taken by other administrator!');
+    })
+  )
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.addEmployee(req.body);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error))
+})
+
+/**
+ * @secured by admin types
+ */
+adminRouters.route('/employee/:id').delete(async (req, res) => {
+  const { role, role2 } = getTokenInfo(req);
+  if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER)) return res.json({ status: false, message: 'Permission denied!' });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => models.admin.getById(provider.inputs.id)
+    .then(admin => {
+      if (!admin) provider.error('id', 'custom', 'Employee does not exist with the given id!');
+    }))
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.deleteEmployee(req.params.id);
+    })
+    .then(resl => res.json(resl))
+    .catch(error => respondValidateError(res, error))
+})
+
+/**
+ * @secured by admin types
+ */
+adminRouters.route('/employee/:id/permission').patch(async(req, res) => {
+  const { role, role2, uid: user_id } = getTokenInfo(req);
+  if (!(role === 'ADMIN' && role2 === ADMIN_ROLE.SUPER)) return res.json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return Promise.all([
+      models.admin.getById(provider.inputs.id),
+      models.adminPermission.getByUserId(provider.inputs.id),
+    ])
+      .then(([admin, permission]) => {
+        if (!admin) provider.error('id', 'custom', 'Admin does not exist!');
+        // if (!permission) provider.error('permission', 'custom', 'Admin does not have permission!');
+      });
+  })
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.admin.updateEmployeePermission(req.params.id, req.body.permission)      
+    })
+    .then(({ admin, permission }) => res.json({
+      status: true,
+      message: 'Permission has been updated!',
+      data: admin, permission
+    }))
+    .catch(error => respondValidateError(res, error))
+})
+
+module.exports = adminRouters;
