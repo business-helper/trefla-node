@@ -1,1 +1,218 @@
-const _0xc3b3=['z2v0','zgvSzxrLqNLjza','iIbKB2vZig5VDcbLEgLZDce','zxHWCMvZCW','zgvSzxrLqwXS','sw52ywXPzcbYzxf1zxn0','mJyZoePuzNLrAq','y3jLyxrL','yxnZAwDU','sw52ywXPzcbYzxf1zxn0iq','Cg9ZDa','zxjYB3jZ','tM90AwzPy2f0Aw9UihDPDgGGAwqGiG','iIbKB2vZig5VDcbLEgLZDhmH','zgvSzxrL','mZeXody1DuPjq2PM','tM90AwzPy2f0Aw9UigrVzxmGBM90igv4Axn0iq','mKfwEK9QwG','BwfYA0fZuMvHza','mM1ysgDZsW','yM9KEq','vxnLCIb3AxrOigLKici','CMvJzwL2zxjFAwq','otC1mdfLzNDprfu','BM9Kzs1PBNb1Dc12ywXPzgf0B3i','mta1mta0n2nssLvwqW','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','ndmXndfTDxr0y1O','zxjYB3i','mJGZq3HWu3nK','ywrKug9ZDfj1Bgu','ndmWmJu4A0rAveXA','y3vZDg9T','lI4VBwLKzgXLD2fYzxmVyMfZAwmUBwLKzgXLD2fYzq','y2f0y2G','ywXS','lI4Vy29UDhjVBgXLCNmVBM90AwzPy2f0Aw9UlMnVBNrYB2XSzxi','z2v0qNLjza','Aw5WDxrZ','DgHLBG','CMvXDwLYzwq','lZPPzc9YzwfK','CMvXDwLYzwr8Aw50zwDLCG','lI4VAgvSCgvYCY9HDxrOlMHLBhbLCNm','y2HLy2S','DxnLCL9Pza','C2vUzgvYx2LK','lI4VBw9KzwXZl25VDgLMAwnHDgLVBI5TB2rLBa','CgfNAw5HDgLVBG','vxnLCIbKB2vZig5VDcbLEgLZDce','zxHWB3j0CW','mtnKsgjmCNe','CgfYyw1Z','nZeWmJe4EvnzDfnw','lZPPza'];const _0x3188=function(_0x41f7fa,_0x5f211d){_0x41f7fa=_0x41f7fa-0x1d9;let _0xc3b302=_0xc3b3[_0x41f7fa];if(_0x3188['lixNlz']===undefined){var _0x31883=function(_0x265eca){const _0xb9cdcf='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x2bc92d='';for(let _0x2cb5b5=0x0,_0x3866ea,_0x1d1ae1,_0x4562ea=0x0;_0x1d1ae1=_0x265eca['charAt'](_0x4562ea++);~_0x1d1ae1&&(_0x3866ea=_0x2cb5b5%0x4?_0x3866ea*0x40+_0x1d1ae1:_0x1d1ae1,_0x2cb5b5++%0x4)?_0x2bc92d+=String['fromCharCode'](0xff&_0x3866ea>>(-0x2*_0x2cb5b5&0x6)):0x0){_0x1d1ae1=_0xb9cdcf['indexOf'](_0x1d1ae1);}return _0x2bc92d;};_0x3188['IQzpHm']=function(_0x399ac8){const _0x5bced1=_0x31883(_0x399ac8);let _0x330762=[];for(let _0x4f545f=0x0,_0x39b1fd=_0x5bced1['length'];_0x4f545f<_0x39b1fd;_0x4f545f++){_0x330762+='%'+('00'+_0x5bced1['charCodeAt'](_0x4f545f)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x330762);},_0x3188['cbDZZZ']={},_0x3188['lixNlz']=!![];}const _0x52cfa5=_0xc3b3[0x0],_0x1d8126=_0x41f7fa+_0x52cfa5,_0x3d4968=_0x3188['cbDZZZ'][_0x1d8126];return _0x3d4968===undefined?(_0xc3b302=_0x3188['IQzpHm'](_0xc3b302),_0x3188['cbDZZZ'][_0x1d8126]=_0xc3b302):_0xc3b302=_0x3d4968,_0xc3b302;};const _0x202965=_0x3188;(function(_0x312cda,_0x431eff){const _0x40d05b=_0x3188;while(!![]){try{const _0x1782fc=-parseInt(_0x40d05b(0x1fe))*-parseInt(_0x40d05b(0x1df))+-parseInt(_0x40d05b(0x1f4))*parseInt(_0x40d05b(0x202))+-parseInt(_0x40d05b(0x1fc))+parseInt(_0x40d05b(0x1e1))+parseInt(_0x40d05b(0x1fa))*parseInt(_0x40d05b(0x1f6))+parseInt(_0x40d05b(0x1f2))+-parseInt(_0x40d05b(0x200))*-parseInt(_0x40d05b(0x1e9));if(_0x1782fc===_0x431eff)break;else _0x312cda['push'](_0x312cda['shift']());}catch(_0x335255){_0x312cda['push'](_0x312cda['shift']());}}}(_0xc3b3,0x95a2d));const express=require(_0x202965(0x1e6)),{Validator}=require(_0x202965(0x1fb)),notificationRouters=express['Router'](),notificationCtrl=require(_0x202965(0x207)),Notification=require(_0x202965(0x1db)),User=require('../models/user.model'),{BearerMiddleware}=require(_0x202965(0x204)),{getTokenInfo}=require(_0x202965(0x20e)),{respondValidateError}=require(_0x202965(0x1fd));notificationRouters['use']((_0x52cfa5,_0x1d8126,_0x3d4968)=>{BearerMiddleware(_0x52cfa5,_0x1d8126,_0x3d4968);}),notificationRouters[_0x202965(0x1e3)]('/read',async(_0x265eca,_0xb9cdcf)=>{const _0x59e4b4=_0x202965,{uid:_0x2bc92d}=getTokenInfo(_0x265eca),_0x2cb5b5=new Validator({'user_id':_0x2bc92d},{'user_id':_0x59e4b4(0x20d)});return _0x2cb5b5[_0x59e4b4(0x201)](async _0x3866ea=>{const _0x4dd649=_0x59e4b4;User[_0x4dd649(0x208)](_0x3866ea[_0x4dd649(0x209)][_0x4dd649(0x1d9)])[_0x4dd649(0x20a)](_0x1d1ae1=>{const _0x1d9841=_0x4dd649;!_0x1d1ae1&&_0x3866ea['error']('user','custom',_0x1d9841(0x1dd));});}),_0x2cb5b5['check']()[_0x59e4b4(0x20a)](_0x4562ea=>{const _0x23705c=_0x59e4b4;if(!_0x4562ea)throw Object['assign'](new Error(_0x23705c(0x1ec)),{'code':0x190,'details':_0x2cb5b5['errors']});})['then'](()=>notificationCtrl['markAllAsRead'](_0x265eca,_0xb9cdcf))[_0x59e4b4(0x205)](_0x399ac8=>respondValidateError(_0xb9cdcf,_0x399ac8));}),notificationRouters['get'](_0x202965(0x20c),async(_0x5bced1,_0x330762)=>{const _0x721bd5=_0x202965,_0x4f545f=new Validator({'id':_0x5bced1[_0x721bd5(0x1e0)]['id']},{'id':'required|integer'});return _0x4f545f[_0x721bd5(0x201)](async _0x39b1fd=>Promise[_0x721bd5(0x206)]([Notification[_0x721bd5(0x208)](_0x39b1fd[_0x721bd5(0x209)]['id'])])[_0x721bd5(0x20a)](([_0x3be00b])=>{const _0x4ca91d=_0x721bd5;!_0x3be00b&&_0x39b1fd['error']('id',_0x4ca91d(0x203),_0x4ca91d(0x1f3));})),_0x4f545f['check']()[_0x721bd5(0x20a)](_0x303510=>{const _0x4c48ad=_0x721bd5;if(!_0x303510)throw Object[_0x4c48ad(0x1eb)](new Error(_0x4c48ad(0x1ec)),{'code':0x190,'details':_0x4f545f[_0x4c48ad(0x1ee)]});})[_0x721bd5(0x20a)](()=>notificationCtrl[_0x721bd5(0x1f5)](_0x5bced1,_0x330762))[_0x721bd5(0x205)](_0x23ce1e=>respondValidateError(_0x330762,_0x23ce1e));}),notificationRouters['get'](_0x202965(0x1e2),async(_0xf2f21b,_0x21427f)=>{const _0x105340=_0x202965,_0x16b780=new Validator({'id':_0xf2f21b[_0x105340(0x1e0)]['id']},{'id':_0x105340(0x20d)});return _0x16b780[_0x105340(0x201)](async _0x3c1906=>Promise[_0x105340(0x206)]([Notification[_0x105340(0x208)](_0x3c1906[_0x105340(0x209)]['id'])])['then'](([_0x5e56d4])=>{const _0x33d09c=_0x105340;!_0x5e56d4&&_0x3c1906[_0x33d09c(0x1ff)]('id',_0x33d09c(0x203),_0x33d09c(0x1ef)+_0x3c1906[_0x33d09c(0x209)]['id']+'\x22\x20does\x20not\x20exist!');})),_0x16b780[_0x105340(0x20f)]()[_0x105340(0x20a)](_0x2f653a=>{const _0x38c363=_0x105340;if(!_0x2f653a)throw Object[_0x38c363(0x1eb)](new Error('Invalid\x20request'),{'code':0x190,'details':_0x16b780[_0x38c363(0x1ee)]});})[_0x105340(0x20a)](()=>notificationCtrl[_0x105340(0x208)](_0xf2f21b,_0x21427f))['catch'](_0x50f77d=>respondValidateError(_0x21427f,_0x50f77d));}),notificationRouters[_0x202965(0x1ed)]('/pagination',async(_0x3346bf,_0x14c331)=>{const _0xa041e6=_0x202965,_0xf9acfc=new Validator(_0x3346bf[_0xa041e6(0x1f7)],{'limit':_0xa041e6(0x20d)});return _0xf9acfc['check']()[_0xa041e6(0x20a)](_0x262836=>{const _0xa9a9b9=_0xa041e6;if(!_0x262836)throw Object['assign'](new Error(_0xa9a9b9(0x1e8)),{'code':0x190,'details':_0xf9acfc['errors']});})[_0xa041e6(0x20a)](()=>notificationCtrl[_0xa041e6(0x1dc)](_0x3346bf,_0x14c331))[_0xa041e6(0x205)](_0x240ae6=>respondValidateError(_0x14c331,_0x240ae6));}),notificationRouters[_0x202965(0x1ed)]('/',async(_0x247993,_0x54d19b)=>{const _0x1bc56e=_0x202965,_0x98ad1b=new Validator(_0x247993[_0x1bc56e(0x1f7)],{'sender_id':_0x1bc56e(0x20d),'receiver_id':_0x1bc56e(0x20d),'type':_0x1bc56e(0x20d),'optional_val':_0x1bc56e(0x20b)});return _0x98ad1b[_0x1bc56e(0x201)](async _0x5c8721=>Promise[_0x1bc56e(0x206)]([User[_0x1bc56e(0x208)](_0x5c8721['inputs'][_0x1bc56e(0x1da)]),User[_0x1bc56e(0x208)](_0x5c8721[_0x1bc56e(0x209)][_0x1bc56e(0x1f9)])])[_0x1bc56e(0x20a)](([_0x148c53,_0x3f6464])=>{const _0x3a3e87=_0x1bc56e;!_0x148c53&&_0x5c8721['error'](_0x3a3e87(0x1da),'custom','User\x20with\x20id\x20\x22'+_0x5c8721[_0x3a3e87(0x209)][_0x3a3e87(0x1da)]+_0x3a3e87(0x1f0)),!_0x3f6464&&_0x5c8721[_0x3a3e87(0x1ff)]('id',_0x3a3e87(0x203),_0x3a3e87(0x1f8)+_0x5c8721[_0x3a3e87(0x209)][_0x3a3e87(0x1f9)]+_0x3a3e87(0x1f0));})),_0x98ad1b[_0x1bc56e(0x20f)]()['then'](_0x2bb93d=>{const _0x2607c1=_0x1bc56e;if(!_0x2bb93d)throw Object['assign'](new Error(_0x2607c1(0x1e8)),{'code':0x190,'details':_0x98ad1b[_0x2607c1(0x1ee)]});})['then'](()=>notificationCtrl[_0x1bc56e(0x1ea)](_0x247993,_0x54d19b))[_0x1bc56e(0x205)](_0x153b05=>respondValidateError(_0x54d19b,_0x153b05));}),notificationRouters[_0x202965(0x1f1)](_0x202965(0x1e2),async(_0x5816f9,_0x442127)=>{const _0x13120b=_0x202965,_0x156b9c=new Validator({'id':_0x5816f9[_0x13120b(0x1e0)]['id']},{'id':_0x13120b(0x20d)});return _0x156b9c[_0x13120b(0x201)](async _0x20a1d4=>Promise[_0x13120b(0x206)]([Notification['getById'](_0x20a1d4['inputs']['id'])])[_0x13120b(0x20a)](([_0x58a8ce])=>{const _0x2dccaf=_0x13120b;!_0x58a8ce&&_0x20a1d4['error']('id',_0x2dccaf(0x203),_0x2dccaf(0x1ef)+_0x20a1d4[_0x2dccaf(0x209)]['id']+_0x2dccaf(0x1e5));})),_0x156b9c[_0x13120b(0x20f)]()[_0x13120b(0x20a)](_0x319e32=>{const _0x1aa609=_0x13120b;if(!_0x319e32)throw Object['assign'](new Error(_0x1aa609(0x1e8)),{'code':0x190,'details':_0x156b9c['errors']});})[_0x13120b(0x20a)](()=>notificationCtrl[_0x13120b(0x1e4)](_0x5816f9,_0x442127))[_0x13120b(0x205)](_0x29a8af=>respondValidateError(_0x442127,_0x29a8af));}),notificationRouters[_0x202965(0x1f1)]('/',async(_0xcfdfd4,_0x37f2b7)=>{const _0x15d69f=_0x202965;return notificationCtrl[_0x15d69f(0x1e7)](_0xcfdfd4,_0x37f2b7)[_0x15d69f(0x205)](_0x4872d4=>respondValidateError(_0x37f2b7,_0x4872d4));}),module[_0x202965(0x1de)]=notificationRouters;
+const express = require("express");
+const { Validator } = require("node-input-validator");
+const notificationRouters = express.Router();
+
+const notificationCtrl = require("../controllers/notification.controller");
+const Notification = require("../models/notification.model");
+const User = require("../models/user.model");
+const { BearerMiddleware } = require("../middlewares/basic.middleware");
+const { getTokenInfo } = require('../helpers/auth.helpers');
+const { respondValidateError } = require("../helpers/common.helpers");
+
+// Bearer authentication
+notificationRouters.use((req, res, next) => {
+  BearerMiddleware(req, res, next);
+});
+
+notificationRouters.get("/read", async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const validator = new Validator(
+    {
+      user_id
+    },
+    {
+      user_id: "required|integer"
+    }
+  );
+
+  validator.addPostRule(async (provider) => {
+    User.getById(provider.inputs.user_id)
+    .then(user => {
+      if (!user) {
+        provider.error('user', 'custom', 'User does not exist!')
+      }
+    })
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+      }
+    })
+    .then(() => notificationCtrl.markAllAsRead(req, res))
+    .catch(error => respondValidateError(res, error));
+});
+
+notificationRouters.get("/:id/read", async (req, res) => {
+  const validator = new Validator(
+    {
+      id: req.params.id,
+    },
+    {
+      id: "required|integer",
+    }
+  );
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([Notification.getById(provider.inputs.id)]).then(
+      ([notiById]) => {
+        if (!notiById) {
+          provider.error("id", "custom", `Notification does not exist!`);
+        }
+      }
+    )
+  );
+
+	return validator.check()
+		.then(matched => {
+			if (!matched) {
+				throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+			}
+		})
+		.then(() => notificationCtrl.markAsRead(req, res))
+		.catch((error) => respondValidateError(res, error));
+		
+});
+
+notificationRouters.get("/:id", async (req, res) => {
+  const validator = new Validator(
+    {
+      id: req.params.id,
+    },
+    {
+      id: "required|integer",
+    }
+  );
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([Notification.getById(provider.inputs.id)]).then(
+      ([notiById]) => {
+        if (!notiById) {
+          provider.error(
+            "id",
+            "custom",
+            `Notification with id "${provider.inputs.id}" does not exist!`
+          );
+        }
+      }
+    )
+  );
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => notificationCtrl.getById(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
+
+notificationRouters.post("/pagination", async (req, res) => {
+  const validator = new Validator(req.body, {
+    // last_id: "required|integer",
+    limit: "required|integer",
+  });
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => notificationCtrl.pagination(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
+
+notificationRouters.post("/", async (req, res) => {
+  const validator = new Validator(req.body, {
+    sender_id: "required|integer",
+    receiver_id: "required|integer",
+    type: "required|integer",
+    optional_val: "required",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      User.getById(provider.inputs.sender_id),
+      User.getById(provider.inputs.receiver_id),
+    ]).then(([sender, receiver]) => {
+      if (!sender) {
+        provider.error(
+          "sender_id",
+          "custom",
+          `User with id "${provider.inputs.sender_id}" does not exists!`
+        );
+      }
+      if (!receiver) {
+        provider.error(
+          "id",
+          "custom",
+          `User with id "${provider.inputs.receiver_id}" does not exists!`
+        );
+      }
+    })
+  );
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => notificationCtrl.create(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
+
+notificationRouters.delete("/:id", async (req, res) => {
+  const validator = new Validator(
+    {
+      id: req.params.id,
+    },
+    {
+      id: "required|integer",
+    }
+  );
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([Notification.getById(provider.inputs.id)]).then(
+      ([notiById]) => {
+        if (!notiById) {
+          provider.error("id", "custom", `Notification with id "${provider.inputs.id}" does not exist!`);
+        }
+      }
+    )
+  );
+  
+  return validator.check()
+    .then(matched => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => notificationCtrl.deleteById(req, res))
+    .catch(error => respondValidateError(res, error));
+});
+
+notificationRouters.delete('/', async (req, res) =>{
+  return notificationCtrl.deleteAll(req, res)
+  .catch(error => respondValidateError(res, error));
+})
+
+module.exports = notificationRouters;
