@@ -179,6 +179,7 @@ exports.DEFAULT_NOTIFICATION = {
   time: generateTZTimeString(),
   is_read: 0,
   isFromAdmin: 0,
+  isGuest: 0,
   create_time: timestamp(),
   update_time: timestamp(),
 };
