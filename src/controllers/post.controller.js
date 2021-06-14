@@ -37,7 +37,7 @@ const activity = {
   generatePostNotiTitle: ({ name, isGuest }) => {
     return {
       'EN': `${isGuest ? 'Guest' : name} posted in your area`,
-      'RO': `${isGuest ? 'Oaspete' : name} postat în zona dvs.`
+      'RO': `${isGuest ? 'Oaspete' : name} a postat în zona ta.`
     };
   },
   generatePostNotiBody: (feed, limit = 60) => {
