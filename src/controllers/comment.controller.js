@@ -25,7 +25,7 @@ const activity = {
     const target = target_type.toLowerCase();
     return {
       'EN': `${isGuest ? 'A guest' : name} ${action === 'UPDATE' ? 'updated comment' : 'commented'} on your ${target_type === 'POST' ? 'post' : 'comment'}`,
-      'RO': `${isGuest ? 'Un oaspete' : name} ${action === 'UPDATE' ? 'a actualizat un comentariu la' : 'a comentat'} ${target_type === 'POST' ? 'postul' : 'comentariul'} dvs.`,
+      'RO': `${isGuest ? 'Anonim' : name} ${action === 'UPDATE' ? 'a actualizat un comentariu la' : 'a raspuns la'} ${target_type === 'POST' ? 'postarea ta' : 'comentariul tau'}.`,
     };
   },
   generateCommentNotiBody: (feed, limit = 60) => {
