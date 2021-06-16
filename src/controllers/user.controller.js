@@ -17,6 +17,113 @@ const {
   getTokenInfo,
 } = require("../helpers/auth.helpers");
 
+const activity = {
+  notifyVerificationResult: async ({ users, user_id, senders }) => {
+    const _user = await models.chat.getById(user_id);
+
+    if (_user.device_token) {
+      socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+        to: _user.socket_id,
+        event: CONSTS.SKT_NOTI_NUM_UPDATED,
+        args: {
+          num: _user.noti_num,
+          notification,
+        }
+      });
+    }
+
+    users.filter(user => user.id !== user_id).forEach(async user => {
+      const notiModel = helpers.model.generateNotificationData({
+        isFromAdmin: 1,
+        sender_id: 0,
+        receiver_id: user.id,
+        type: NOTI_TYPES.cardVerifyRequestRejectNotiType,
+        optional_val: _card_number,
+        time: generateTZTimeString(),
+      });
+      const notification = await models.notification.create(notiModel);
+      user.noti_num ++;
+      await models.user.save(user);
+      if (user.socket_id) {
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: user.socket_id,
+          event: CONSTS.SKT_NOTI_NUM_UPDATED,
+          args: {
+            num: user.noti_num,
+            notification,
+          }
+        })
+      }
+    })
+
+    // const senders = await models.user.getByIds(sender_ids.length ? sender_ids : [0]);
+
+    console.log('[chat.list.updated] --->');
+    users.filter(user => user.socket_id).forEach(user => {
+      console.log('[chatlist]', user.id, user.user_name, user.card_verified);
+      const removed = [];
+      const added = [];
+
+      if (user.id === user_id) {
+        console.log('[chat list]  added');
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: user.socket_id,
+          event: CONSTS.SKT_CHATLIST_UPDATED,
+          args: {
+            added: chats.map(chat => ({
+              ...(models.chat.output(chat)),
+              user: models.user.output(senders[JSONParser(chat.user_ids)[0].toString()]),
+            })),
+            removed: [],
+            your_name: user.user_name,
+          }
+        })
+      } else {
+        console.log('[chat list]  removed');
+        socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+          to: user.socket_id,
+          event: CONSTS.SKT_CHATLIST_UPDATED,
+          args: {
+            removed: chats.map(chat => chat.id),
+            added: [],
+            your_name: user.user_name,
+          }
+        })
+      }
+    });
+
+    
+    
+
+    // send socket message to the creator of card chat.
+    // await models.user.getByIds(sender_ids)
+    //   .then(senders => {
+        // const socketClient = req.app.locals.socketClient;
+        senders.forEach((sender, i) => {
+          if (sender.socket_id) {
+            // get card chat sender triggered.
+            const [chat] = chats.filter(chat => {
+              const user_ids = typeof chat.user_ids === 'string' ? JSON.parse(chat.user_ids) : chat.user_ids;
+              return user_ids[0] === sender.id;
+            });
+
+            // notify the card chat creators that a user has been verified on interesting card number,
+            socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+              to: sender.socket_id,
+              event: CONSTS.SKT_CARD_VERIFIED,
+              args: {
+                chat: {
+                  ...(models.chat.output(chat)),
+                  user: models.user.output(_user),
+                }
+              }
+            });
+          }
+        });
+      // })
+  },
+}
+
 exports.register = async (req, res) => {
   let verifiedUser = null, new_number;
   new_number = req.body.card_number || "";
@@ -535,7 +642,7 @@ exports.verifyUser = ({ user_id, socketClient }) => {
     .then(([users, chats]) => {
       return Promise.all([
         manageVerificationStatusOfUsers(users, user_id),
-        processChatroomToCard(chats, user_id),
+        chats.length ? processChatroomToCard(chats, user_id) : [],
       ]);
     })
     .then(async ([ users, chats ]) => {
@@ -1035,6 +1142,10 @@ const processChatroomToCard = async (chats, user_id) => {
     ]);
   }))
   .then(([[chat]]) => [chat])
+  .then((chats) => {
+    console.log('[processChatroomToCard]', chats.map((it) => it.id));
+    return chats;
+  })
   .catch(error => {
     console.log('[Process card chats] error', error);
     return false;
