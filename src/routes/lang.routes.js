@@ -131,7 +131,13 @@ langRouters.get('/by-name/:name', async (req, res) => {
 
 langRouters.get('/version', async (req, res) => {
   return Config.getById(1)
-    .then(config => res.json({ version: config.lang_version}))
+    .then(config => res.json({
+      version: config.lang_version,
+      android_version: config.android_version,
+      apple_version: config.apple_version,
+      android_link: config.android_link,
+      apple_link: config.apple_link,
+    }))
 })
 
 langRouters.get('/', language.getAll);
