@@ -1098,15 +1098,22 @@ exports.getUsersInMyArea = async (req, res) => {
     return Promise.all([
       models.user.pagination({ page, limit, location_area }),
       models.user.numberOfUsers({ location_area }),
-    ]);
-  }).then(([ users, total ]) => {
-    console.log('[Total]', total);
-    const hasMore = page * limit + users.length < total;
-    return res.json({
-      status: true,
-      message: 'success',
-      data: users,
-      hasMore,
+    ])
+    .then(([ users, total ]) => {
+      const hasMore = page * limit + users.length < total;
+      const formatUsers = users.map((user) => ({
+        distance: Number(helpers.common.getDistanceFromLatLonInMeter(
+          helpers.common.getUserLastLocation(user),
+          helpers.common.getUserLastLocation(me),
+        ).toFixed(1)),
+        ...(models.user.output(user)),
+      }))
+      return res.json({
+        status: true,
+        message: 'success',
+        data: formatUsers,
+        hasMore,
+      });
     });
   });
 }

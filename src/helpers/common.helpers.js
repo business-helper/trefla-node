@@ -281,6 +281,7 @@ module.exports = {
   getTime,
   getTimeAfter,
   getTotalLikes,
+  getUserLastLocation,
   int2Bool,
   JSONParser,
   JSONStringify,
