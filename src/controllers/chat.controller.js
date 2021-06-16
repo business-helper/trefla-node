@@ -45,6 +45,8 @@ const activity = {
     };
     // check the last preview message.
     const lastPreview = await models.message.lastPreviewMsgInChat(chat.id);
+    // if 'from_where' is invalid, skip it.
+    if (Object.keys(mapWhere2Type).includes(from_where)) return chat;
     // if the lastest preview is same, then skip it.
     if (lastPreview && mapWhere2Type[from_where] === lastPreview.type && lastPreview.message === target_id.toString()) return chat;
 
