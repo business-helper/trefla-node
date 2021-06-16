@@ -19,7 +19,8 @@ const genreateAuthToken = (user, role = 'USER', role2 = 'USER') => {
       iat: Math.floor(Date.now() / 1000) - 30,
     },
     appSecret,
-    { expiresIn: '100d' }
+    // { expiresIn: '100d' },
+    { expiresIn: role === 'USER' ? '100d' : '1h' },
   );
 };
 
