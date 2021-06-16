@@ -1,1 +1,244 @@
-const _0x43ff=['Dg90ywW','kePtt05Fq09ovefjtLmOyMXHy2TFBgLZDcWGjW','ifDirvjfia','C29JAwfSx3bHC3m','CxvLCNK','z2v0qNLjza','iIK9pW','jYWGjYqNkt0Xkq','z2v0qNLdyxjK','CgfNAw5HDgLVBG','zw1HAwW','ie9grLnfvca','DxnLCNm','C3rYAw5N','u0vmrunuienpvu5ukgLKksbHCYb0B3rHBcbguK9nihvZzxjZ','CMfKAxvZqxjVDw5K','vvbeqvrfihvZzxjZifnfvcbZB2nRzxrFAwq9pYbxsevsrsbPzd0/','mvrQCMnzvW','BgfUz3vHz2u','lI4Vy29UC3rHBNrZl2nVBw1VBI5JB25ZDgfUDa','C2v4','mJGYnZbjrvjPtM8','y2fYzf9UDw1Izxi9jW','tK9stufm','y3jLyxrL','yMLV','BNvTyMvYt2zdyxjK','u0vmrunuicOGrLjptsb1C2vYCYbxsevsrsa','BgvUz3rO','ChvZAa','mtiZnJLftvHNDKu','nZu1mZyYqwnRDNHT','AM9PBG','C2f2zq','Aw5Zzxj0swq','zM9YrwfJAa','ie9srevsiejzigLKierfu0mG','ifDirvjfiePtt05FrvHuuKfdvcHZB2nPywXFCgfZCYWGiIqU','y2fYzf92zxjPzMLLzd0','nteWndG3DKzXs0nV','lI9KyG','yMXHy2TFBgLZDa','u0vmrunuicOGrLjptsb1C2vYCYbxsevsrsbLBwfPBd0/ieXjtuLuide','ifDirvjfigvTywLSpt8Gqu5eigXVz2LUx21Vzgu9pYbmsu1jvcaX','revmrvrfiezst00GDxnLCNmGv0HfuKuGAwq9pW','CMvJB3zLCNLFy29Kzq','z2v0qNLfBwfPBa','DxbKyxrLx3rPBwu','mtaXnZG2n0nMugrYuq','nJz5zuHVswy','DxbKyxrLu29JA2v0u2vZC2LVBG','u0vmrunuicOGrLjptsb1C2vYCYa','BNvTyMvYt2zvC2vYCW','DxnLCL9Uyw1L','u0LnueXf','Bg9JyxrPB25FyxjYyxK','u0vmrunuicOGrLjptsb1C2vYCYbxsevsrsbPzcbjtIaOpYK','CgHVDg8','u0vmrunuicOGrLjptsb1C2vYCYbxsevsrsbPzd0/ieXjtuLuide','ieforca','mta4otK4mxriEwPAua','ywzMzwn0zwrsB3DZ','Aw5JBhvKzxm','Cg9ZDefYB3vUzenLBNrLCKnVB3jKAw5HDgu','ywn0AxzL','mJq4mJm2wezrC2Xw','B3v0Chv0','zxHWB3j0CW','ieXjtuLuia','z2v0qwXS','z2v0qMXVy2TLCNm','u0vmrunuicOGrLjptsa','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW'];const _0x1020=function(_0x1349a4,_0x2fd06b){_0x1349a4=_0x1349a4-0x165;let _0x43ff15=_0x43ff[_0x1349a4];if(_0x1020['dTsUdl']===undefined){var _0x1020de=function(_0x301912){const _0x3b0fa0='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x339aa4='';for(let _0x9ae0d2=0x0,_0x340081,_0x52a230,_0x29e1d3=0x0;_0x52a230=_0x301912['charAt'](_0x29e1d3++);~_0x52a230&&(_0x340081=_0x9ae0d2%0x4?_0x340081*0x40+_0x52a230:_0x52a230,_0x9ae0d2++%0x4)?_0x339aa4+=String['fromCharCode'](0xff&_0x340081>>(-0x2*_0x9ae0d2&0x6)):0x0){_0x52a230=_0x3b0fa0['indexOf'](_0x52a230);}return _0x339aa4;};_0x1020['XhUNGv']=function(_0xa7ad1f){const _0x4471a8=_0x1020de(_0xa7ad1f);let _0x9cb36c=[];for(let _0x68d77e=0x0,_0x374deb=_0x4471a8['length'];_0x68d77e<_0x374deb;_0x68d77e++){_0x9cb36c+='%'+('00'+_0x4471a8['charCodeAt'](_0x68d77e)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x9cb36c);},_0x1020['LVMwtJ']={},_0x1020['dTsUdl']=!![];}const _0x185e25=_0x43ff[0x0],_0x174997=_0x1349a4+_0x185e25,_0x524310=_0x1020['LVMwtJ'][_0x174997];return _0x524310===undefined?(_0x43ff15=_0x1020['XhUNGv'](_0x43ff15),_0x1020['LVMwtJ'][_0x174997]=_0x43ff15):_0x43ff15=_0x524310,_0x43ff15;};const _0x421445=_0x1020;(function(_0xfcc213,_0x495c3b){const _0x38e2df=_0x1020;while(!![]){try{const _0x1b0184=-parseInt(_0x38e2df(0x199))*parseInt(_0x38e2df(0x180))+parseInt(_0x38e2df(0x16f))+parseInt(_0x38e2df(0x1a7))+parseInt(_0x38e2df(0x170))*parseInt(_0x38e2df(0x1a6))+-parseInt(_0x38e2df(0x17b))+-parseInt(_0x38e2df(0x19d))+-parseInt(_0x38e2df(0x166));if(_0x1b0184===_0x495c3b)break;else _0xfcc213['push'](_0xfcc213['shift']());}catch(_0x37357b){_0xfcc213['push'](_0xfcc213['shift']());}}}(_0x43ff,0xadfa1));const sql=require(_0x421445(0x167)),{bool2Int,timestamp,JSONParser,stringifyModel}=require(_0x421445(0x187)),{LOGIN_MODE}=require(_0x421445(0x19b)),table=_0x421445(0x194),User=function(_0x185e25){const _0x3ce888=_0x421445;this[_0x3ce888(0x174)]=_0x185e25[_0x3ce888(0x174)],this['email']=_0x185e25['email'],this['active']=lang[_0x3ce888(0x17f)],this['create_time']=timestamp(),this[_0x3ce888(0x16e)]=timestamp();};User[_0x421445(0x1a0)]=_0x174997=>{return _0x174997['id']!==undefined?delete _0x174997['id']:null,_0x174997=stringifyModel(_0x174997),new Promise((_0x524310,_0x301912)=>{const _0x6ea7ef=_0x1020;sql[_0x6ea7ef(0x18c)]('INSERT\x20INTO\x20users\x20SET\x20?',_0x174997,(_0x3b0fa0,_0x339aa4)=>{const _0x1d481b=_0x6ea7ef;_0x3b0fa0?_0x301912(_0x3b0fa0):_0x524310({..._0x174997,'id':_0x339aa4[_0x1d481b(0x1aa)]});});});},User[_0x421445(0x1a9)]=async _0x9ae0d2=>{const _0x19822b=_0x421445;return _0x9ae0d2=stringifyModel(_0x9ae0d2),_0x9ae0d2[_0x19822b(0x16e)]=timestamp(),new Promise((_0x340081,_0x52a230)=>{const _0x1b7022=_0x19822b;sql[_0x1b7022(0x18c)]('UPDATE\x20users\x20SET\x20?\x20WHERE\x20id=?',[_0x9ae0d2,_0x9ae0d2['id']],(_0x29e1d3,_0xa7ad1f)=>{const _0x3eaa69=_0x1b7022;_0x29e1d3?_0x52a230(_0x29e1d3):_0x340081(User[_0x3eaa69(0x18d)](_0x9ae0d2['id']));});});},User[_0x421445(0x184)]=()=>{return new Promise((_0x4471a8,_0x9cb36c)=>{const _0x55f1f4=_0x1020;sql[_0x55f1f4(0x18c)]('SELECT\x20*\x20FROM\x20users',(_0x68d77e,_0x374deb)=>{_0x68d77e?_0x9cb36c(_0x68d77e):_0x4471a8(_0x374deb);});});},User[_0x421445(0x18d)]=_0x649992=>{return new Promise((_0x1bf048,_0x212fff)=>{const _0x57ce75=_0x1020;sql[_0x57ce75(0x18c)](_0x57ce75(0x179),[_0x649992],(_0x55139a,_0x458e20)=>{_0x55139a?_0x212fff(_0x55139a):_0x1bf048(_0x458e20[0x0]);});});},User['getByIds']=async _0x4ec857=>{const _0x120e55=_0x421445;return _0x4ec857[_0x120e55(0x1a5)](0x0),new Promise((_0x65e97d,_0x33f376)=>{const _0x6f6842=_0x120e55;sql[_0x6f6842(0x18c)](_0x6f6842(0x177),[_0x4ec857],(_0x3a758f,_0x183b82)=>{_0x3a758f?_0x33f376(_0x3a758f):_0x65e97d(_0x183b82);});});},User[_0x421445(0x16d)]=_0x130ec2=>{return new Promise((_0x2b2fba,_0x1ce081)=>{const _0x3bd33b=_0x1020;sql[_0x3bd33b(0x18c)](_0x3bd33b(0x169),[_0x130ec2],(_0x1a6bd9,_0x558db5)=>{_0x1a6bd9?_0x1ce081(_0x1a6bd9):_0x2b2fba(_0x558db5[0x0]);});});},User['duplicatedByEmailSocial']=(_0x142fb3,_0x15025b=LOGIN_MODE[_0x421445(0x19f)])=>{return new Promise((_0x3b0d26,_0x174407)=>{const _0x580d1d=_0x1020;sql[_0x580d1d(0x18c)]('SELECT\x20*\x20FROM\x20'+table+_0x580d1d(0x16a),[_0x142fb3,_0x15025b],(_0x28f699,_0x35870a)=>{_0x28f699?_0x174407(_0x28f699):_0x3b0d26(_0x35870a[0x0]);});});},User['getByUserName']=_0x1e3583=>{return new Promise((_0x52f7d0,_0x58bb08)=>{const _0x3e9798=_0x1020;sql[_0x3e9798(0x18c)]('SELECT\x20*\x20FROM\x20users\x20WHERE\x20user_name=?\x20LIMIT\x201',[_0x1e3583],(_0x5ae94e,_0x1569e1)=>{_0x5ae94e?_0x58bb08(_0x5ae94e):_0x52f7d0(_0x1569e1[0x0]);});});},User[_0x421445(0x190)]=(_0x2e16e3,_0x42f9a8=null)=>{const _0xb50284=_0x421445;let _0x36f747=[];_0x36f747[_0xb50284(0x1a5)](_0xb50284(0x19e)+_0x2e16e3+'\x27');[0x0,0x1,!![],![]][_0xb50284(0x17d)](_0x42f9a8)&&_0x36f747[_0xb50284(0x1a5)](_0xb50284(0x165)+bool2Int(_0x42f9a8));const _0x39f841=_0x36f747[_0xb50284(0x1a4)]>0x0?'\x20WHERE\x20'+_0x36f747['join'](_0xb50284(0x17a))+'\x20':'';return new Promise((_0x24cebc,_0x44cc38)=>{const _0x1ca178=_0xb50284;sql[_0x1ca178(0x18c)](_0x1ca178(0x172)+_0x39f841,[],(_0x12f8ee,_0x501474)=>{_0x12f8ee?_0x44cc38(_0x12f8ee):_0x24cebc(_0x501474);});});},User['getByLocationArea']=_0x1abb0b=>{const _0x3f4437=_0x421445;let _0xc47c54=[];_0x1abb0b&&_0xc47c54['push']('location_area=\x27'+_0x1abb0b+'\x27');const _0x1ec121=_0xc47c54[_0x3f4437(0x1a4)]>0x0?_0x3f4437(0x18a)+_0xc47c54['join'](_0x3f4437(0x17a)):'';return new Promise((_0x5ae520,_0x20cf4d)=>{sql['query']('SELECT\x20*\x20FROM\x20users\x20'+_0x1ec121,[],(_0xa5f44f,_0x1921d7)=>{_0xa5f44f?_0x20cf4d(_0xa5f44f):_0x5ae520(_0x1921d7);});});},User['getBySocialPass']=({platform:_0x15a698,pass:_0x5888fe})=>{return new Promise((_0xbed2a4,_0xf297fa)=>{const _0x49c1d6=_0x1020;sql[_0x49c1d6(0x18c)](_0x49c1d6(0x186)+table+_0x49c1d6(0x1ad)+_0x15a698+_0x49c1d6(0x18e),[_0x5888fe],(_0x2570a6,_0x203e83)=>{_0x2570a6?_0xf297fa(_0x2570a6):_0xbed2a4(_0x203e83[0x0]);});});},User[_0x421445(0x191)]=({page:_0x1c61d6,limit:_0x3a9577})=>{const _0x526eaf=_0x421445;_0x3a9577=Number(_0x3a9577);const _0x223e29=Number(_0x1c61d6*_0x3a9577),_0x41e1b3=_0x3a9577>0x0?_0x526eaf(0x183)+_0x3a9577+'\x20OFFSET\x20?':'';return new Promise((_0x2fa406,_0x3347bc)=>{const _0x50a255=_0x526eaf;sql['query'](_0x50a255(0x172)+_0x41e1b3,[_0x223e29],(_0x5c7886,_0x582704)=>{_0x5c7886?_0x3347bc(_0x5c7886):_0x2fa406(_0x582704);});});},User[_0x421445(0x173)]=()=>{return new Promise((_0x58c72c,_0x15e552)=>{const _0xa27ca7=_0x1020;sql[_0xa27ca7(0x18c)](_0xa27ca7(0x196),[],(_0x49be95,_0xff0566)=>{const _0x153bac=_0xa27ca7;_0x49be95?_0x15e552(_0x49be95):_0x58c72c(_0xff0566[0x0][_0x153bac(0x188)]);});});},User['cardPagination']=({page:_0x3b6267,limit:_0x5eab14})=>{const _0x1c3d75=_0x421445;_0x3b6267=Number(_0x3b6267),_0x5eab14=Number(_0x5eab14);const _0x49e122='card_number\x20!=\x20\x27\x27\x20OR\x20card_img_url\x20!=\x20\x27\x27',_0x5ef4ea=_0x3b6267*_0x5eab14,_0x13e28f=_0x5eab14===0x0?'':_0x1c3d75(0x183)+_0x5eab14+_0x1c3d75(0x193)+_0x5ef4ea;return new Promise((_0xec9453,_0x479cde)=>{const _0x3d74f3=_0x1c3d75;sql[_0x3d74f3(0x18c)](_0x3d74f3(0x1a3)+_0x49e122+_0x3d74f3(0x1ac)+_0x13e28f,[],(_0x24fe5a,_0x5a37c4)=>{_0x24fe5a?_0x479cde(_0x24fe5a):_0xec9453(_0x5a37c4);});});},User[_0x421445(0x1a2)]=()=>{const _0x3a27e9='card_number\x20!=\x20\x27\x27\x20OR\x20card_img_url\x20!=\x20\x27\x27';return new Promise((_0x3acb42,_0x47b633)=>{const _0x5bb742=_0x1020;sql[_0x5bb742(0x18c)]('SELECT\x20COUNT(id)\x20as\x20total\x20FROM\x20users\x20WHERE\x20'+_0x3a27e9,[],(_0x2d4d53,_0x2ca2db)=>{const _0x511e7e=_0x5bb742;_0x2d4d53?_0x47b633(_0x2d4d53):_0x3acb42(_0x2ca2db[0x0][_0x511e7e(0x188)]);});});},User[_0x421445(0x171)]=({id:_0x67398d,socketId:_0x1d401d})=>{return new Promise((_0x201741,_0x55ad1c)=>{const _0x5bb67b=_0x1020;sql[_0x5bb67b(0x18c)](_0x5bb67b(0x198),[_0x1d401d,_0x67398d],(_0xd32bd,_0x3be9ad)=>{_0xd32bd?_0x55ad1c(_0xd32bd):_0x201741(_0x3be9ad);});});},User[_0x421445(0x185)]=_0x71bd05=>{const _0x10d247=_0x421445;where=[],where[_0x10d247(0x1a5)](_0x10d247(0x189)+_0x71bd05+_0x10d247(0x18f));const _0x5da16b=_0x10d247(0x18a)+where[_0x10d247(0x1a8)](_0x10d247(0x17a));return new Promise((_0x296fd0,_0x23dfbb)=>{const _0x5d77c1=_0x10d247;sql[_0x5d77c1(0x18c)](_0x5d77c1(0x186)+table+'\x20'+_0x5da16b,[],(_0x2f8bc3,_0x4e3a6e)=>{_0x2f8bc3?_0x23dfbb(_0x2f8bc3):_0x296fd0(_0x4e3a6e);});});},User['deleteById']=async _0x3a39ac=>{return new Promise((_0x57281a,_0x51dae8)=>{const _0x3c2ccb=_0x1020;sql[_0x3c2ccb(0x18c)](_0x3c2ccb(0x16b),[_0x3a39ac],(_0x1c27ba,_0x2a50be)=>{const _0x3b3c21=_0x3c2ccb;_0x1c27ba?_0x51dae8(_0x1c27ba):_0x57281a(_0x2a50be[_0x3b3c21(0x17c)]>0x0);});});},User[_0x421445(0x188)]=()=>{return new Promise((_0x2bac09,_0x5dcd23)=>{const _0xb471d3=_0x1020;sql[_0xb471d3(0x18c)]('SELECT\x20COUNT(id)\x20as\x20total\x20FROM\x20users',[],(_0x51d3e9,_0x364c5f)=>{const _0x30bb65=_0xb471d3;_0x51d3e9?_0x5dcd23(_0x51d3e9):_0x2bac09(_0x364c5f[0x0][_0x30bb65(0x188)]);});});},User[_0x421445(0x181)]=(_0x7f6b33,_0x3b9ab7=_0x421445(0x19f))=>{const _0x46c609=_0x421445;if(!_0x7f6b33)return null;try{if(typeof _0x7f6b33[_0x46c609(0x176)]===_0x46c609(0x195))_0x7f6b33[_0x46c609(0x176)]=JSON['parse'](_0x7f6b33['location_array']||'[]');}catch(_0x392bd1){_0x7f6b33[_0x46c609(0x176)]=[];}if(_0x7f6b33[_0x46c609(0x168)]==='')_0x7f6b33[_0x46c609(0x168)]=[];else _0x7f6b33[_0x46c609(0x168)]=JSONParser(_0x7f6b33[_0x46c609(0x168)]);let _0x1a0d8d=[];if(_0x3b9ab7==='NORMAL')_0x1a0d8d=[_0x46c609(0x168),_0x46c609(0x192),'password',_0x46c609(0x18b),'login_mode',_0x46c609(0x19a),_0x46c609(0x1a1),_0x46c609(0x197),'noti_num','location_array',_0x46c609(0x17e),'create_time',_0x46c609(0x16e),_0x46c609(0x16c)];else{if(_0x3b9ab7==='PROFILE')_0x1a0d8d=[_0x46c609(0x168),'password',_0x46c609(0x18b),'login_mode','create_time',_0x46c609(0x16e),_0x46c609(0x16c)];else{if(_0x3b9ab7===_0x46c609(0x175))return{'id':_0x7f6b33['id'],'user_name':_0x7f6b33[_0x46c609(0x174)],'email':_0x7f6b33[_0x46c609(0x192)],'sex':_0x7f6b33[_0x46c609(0x19c)],'photo':_0x7f6b33[_0x46c609(0x178)]};}}return _0x1a0d8d[_0x46c609(0x1ab)](_0x6f7c88=>{delete _0x7f6b33[_0x6f7c88];}),_0x7f6b33;},module[_0x421445(0x182)]=User;
+const sql = require("./db");
+const { bool2Int, timestamp, JSONParser, stringifyModel } = require("../helpers/common.helpers");
+const { LOGIN_MODE } = require('../constants/common.constant');
+
+const table = 'users';
+
+const User = function (user) {
+  this.user_name = user.user_name;
+  this.email = user.email;
+  this.active = lang.active;
+  this.create_time = timestamp();
+  this.update_time = timestamp();
+};
+
+User.create = (newUser) => {
+  newUser.id !== undefined ? delete newUser.id : null;
+  newUser = stringifyModel(newUser);
+  return new Promise((resolve, reject) => {
+    sql.query("INSERT INTO users SET ?", newUser, (err, res) => {
+			err ? reject(err) : resolve({ ...newUser, id: res.insertId });
+    });
+  });
+};
+
+User.save = async (updateData) => {
+  updateData = stringifyModel(updateData);
+  updateData.update_time = timestamp();
+  return new Promise((resolve, reject) => {
+    sql.query("UPDATE users SET ? WHERE id=?", [updateData, updateData.id], (err, res) => {
+      err ? reject(err) : resolve(User.getById(updateData.id));
+    });
+  });
+}
+
+User.getAll = () => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM users", (err, res) => {
+			err ? reject(err) : resolve(res);
+    });
+  });
+};
+
+User.getById = (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM users WHERE id=? LIMIT 1", [id], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    });
+  });
+}
+
+User.getByIds = async (ids) => {
+  ids.push(0);
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM users WHERE id IN (?)", [ids], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+User.getByEmail = (email) => {
+	return new Promise((resolve, reject) => {
+		sql.query("SELECT * FROM users WHERE email=? LIMIT 1", [email], (err, res) => {
+			err ? reject(err) : resolve(res[0]);
+		});
+	})
+}
+
+User.duplicatedByEmailSocial = (email, login_mode = LOGIN_MODE.NORMAL) => {
+	return new Promise((resolve, reject) => {
+		sql.query(`SELECT * FROM ${table} WHERE email=? AND login_mode=? LIMIT 1`, [email, login_mode], (err, res) => {
+			err ? reject(err) : resolve(res[0]);
+		});
+	})
+}
+
+User.getByUserName = (user_name) => {
+	return new Promise((resolve, reject) => {
+		sql.query("SELECT * FROM users WHERE user_name=? LIMIT 1", [user_name], (err, res) => {
+			err ? reject(err) : resolve(res[0]);
+		});
+	});
+}
+
+User.getByCard = (card_number, verified = null) => {
+  let where = [];
+  where.push(`card_number='${card_number}'`);
+  if ([0, 1, true, false].includes(verified)) {
+    where.push(`card_verified=${bool2Int(verified)}`);
+  }
+  const strWhere =  where.length > 0 ? ` WHERE ${where.join(' AND ')} ` : "";
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM users ${strWhere}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+User.getByLocationArea = (location_area) => {
+  let where = [];
+  if (location_area) {
+    where.push(`location_area='${location_area}'`);
+  }
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM users ${strWhere}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    })
+  })
+}
+
+User.getBySocialPass = ({ platform, pass }) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} WHERE JSON_EXTRACT(social_pass, "$.${platform}")=?`, [pass], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    })
+  })
+}
+
+User.pagination = ({ page, limit, location_area = null }) => {
+  limit = Number(limit);
+  const offset = Number(page * limit);
+  const strLimit = limit > 0 ? ` LIMIT ${limit} OFFSET ?` : "";
+
+  const wheres = [];
+  if (location_area) {
+    wheres.push(`location_area='${location_area}'`);
+  }
+  const strWhere = wheres.length > 0 ? ` WHERE ${wheres.join(' AND ')}` : '';
+
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM users ${strWhere} ${strLimit}`, [ offset ], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+User.numberOfUsers = ({ location_area = null }) => {
+  const wheres = [];
+  if (location_area) {
+    wheres.push(`location_area='${location_area}'`);
+  }
+  const strWhere = wheres.length > 0 ? ` WHERE ${wheres.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM users ${strWhere}`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    });
+  });
+}
+
+User.cardPagination = ({ page, limit }) => {
+  page = Number(page);
+  limit = Number(limit);
+  const strWhere = `card_number != '' OR card_img_url != ''`;
+  const offset = page * limit;
+  const strLimit = limit === 0 ? '' : ` LIMIT ${limit} OFFSET ${offset}`;
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM users WHERE ${strWhere} ORDER BY id DESC ${strLimit}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  })
+}
+
+User.numberOfCard = () => {
+  const strWhere = `card_number != '' OR card_img_url != ''`;
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM users WHERE ${strWhere}`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    })
+  })
+}
+
+User.updateSocketSession = ({ id, socketId }) => {
+  return new Promise((resolve, reject) => {
+    sql.query("UPDATE users SET socket_id=? WHERE id=?", [socketId, id], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+User.getBlockers = (user_id) => {
+  // let where = [sender_id, receiver_id].map(user_id => `(JSON_CONTAINS(user_ids, '${user_id}', '$')=1)`);
+  where = [];
+  where.push(`(JSON_CONTAINS(black_list, '${user_id}', '$')=1)`);
+
+  const strWhere = ' WHERE ' + where.join(' AND ');
+
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} ${strWhere}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+User.deleteById = async (user_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM users WHERE id=?", [user_id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows > 0);
+    })
+  })
+}
+
+User.total = () => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM users`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    })
+  })
+}
+
+User.output = (user, mode = 'NORMAL') => {
+  if (!user) return null;
+  try {
+    if (typeof user.location_array === 'string') user.location_array = JSON.parse(user.location_array || "[]");
+  } catch (e) {
+    // console.log('[location array]', user.location_array);
+    user.location_array = [];
+  }
+  
+  if (user.black_list === "") user.black_list = [];
+  else user.black_list = JSONParser(user.black_list);
+
+  // keys to delete
+  let delKeys = [];
+  if (mode === 'NORMAL') {
+    delKeys = ['black_list', 'email', 'password', 'social_pass', 'login_mode', 'language', 'bio', 'radiusAround', 'noti_num', 'location_array', 'postAroundCenterCoordinate', 'create_time', 'update_time', 'recovery_code'];
+  } else if (mode === 'PROFILE') {
+    delKeys = ['black_list', 'password', 'social_pass', 'login_mode', 'create_time', 'update_time', 'recovery_code'];
+  } else if (mode === 'SIMPLE') {
+    return { 
+      id: user.id,
+      user_name: user.user_name,
+      email: user.email,
+      sex: user.sex,
+      photo: user.photo,
+    };
+  }
+  // delete the given keys
+  delKeys.forEach(field => {
+    delete user[field];
+  });
+  return user;
+}
+
+module.exports = User;

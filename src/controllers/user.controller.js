@@ -1085,6 +1085,32 @@ exports.createVerifyIdReq = async (req, res) => {
     })
 }
 
+exports.getUsersInMyArea = async (req, res) => {
+  let { page, limit } = req.query;
+  page = Number(page || 0);
+  limit = Number(limit || 50);
+
+  const { uid: user_id } = getTokenInfo(req);
+
+  return models.user.getById(user_id).then((me) => {
+    let { location_area } = me;
+    location_area = location_area || '___';
+    return Promise.all([
+      models.user.pagination({ page, limit, location_area }),
+      models.user.numberOfUsers({ location_area }),
+    ]);
+  }).then(([ users, total ]) => {
+    console.log('[Total]', total);
+    const hasMore = page * limit + users.length < total;
+    return res.json({
+      status: true,
+      message: 'success',
+      data: users,
+      hasMore,
+    });
+  });
+}
+
 const manageVerificationStatusOfUsers = (users, user_id) => {
   const card_number = users[0].card_number;
   return Promise.all(users.map(user => User.save({
