@@ -150,6 +150,10 @@ exports.DEFAULT_CONFIG = {
   lang_version: "",
   default_zone: "",
   apply_default_zone: 0,
+  android_version: '1.0',
+  android_link: '',
+  apple_version: '1.0',
+  apple_link: '',
   create_time: timestamp(),
   update_time: timestamp(),
 };
