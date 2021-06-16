@@ -116,20 +116,32 @@ User.getBySocialPass = ({ platform, pass }) => {
   })
 }
 
-User.pagination = ({ page, limit }) => {
+User.pagination = ({ page, limit, location_area = null }) => {
   limit = Number(limit);
   const offset = Number(page * limit);
-  const strLimit = limit > 0 ? ` LIMIT ${limit} OFFSET ?` : ""; 
+  const strLimit = limit > 0 ? ` LIMIT ${limit} OFFSET ?` : "";
+
+  const wheres = [];
+  if (location_area) {
+    wheres.push(`location_area='${location_area}'`);
+  }
+  const strWhere = wheres.length > 0 ? ` WHERE ${wheres.join(' AND ')}` : '';
+
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM users ${strLimit}`, [ offset ], (err, res) => {
+    sql.query(`SELECT * FROM users ${strWhere} ${strLimit}`, [ offset ], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
 }
 
-User.numberOfUsers = () => {
+User.numberOfUsers = ({ location_area = null }) => {
+  const wheres = [];
+  if (location_area) {
+    wheres.push(`location_area='${location_area}'`);
+  }
+  const strWhere = wheres.length > 0 ? ` WHERE ${wheres.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
-    sql.query("SELECT COUNT(id) as total FROM users", [], (err, res) => {
+    sql.query(`SELECT COUNT(id) as total FROM users ${strWhere}`, [], (err, res) => {
       err ? reject(err) : resolve(res[0].total);
     });
   });

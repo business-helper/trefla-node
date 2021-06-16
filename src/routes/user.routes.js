@@ -135,6 +135,22 @@ userRouters.get('/card', async (req, res) => {
 
 });
 
+userRouters.get('/in-area-users', async (req, res) => {
+  req.query.fake = 1;
+  const validator = new Validator(req.query, {
+    fake: "required",
+  });
+
+  return validator.check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error('Invalid request!'), { code: 400, details: validators.errors });
+      }
+      return userCtrl.getUsersInMyArea(req, res);
+    })
+    .catch((error) => respondValidateError(res, error));
+})
+
 userRouters.get('/:id', async (req, res) => {
   const validator = new Validator({
     id: req.params.id
