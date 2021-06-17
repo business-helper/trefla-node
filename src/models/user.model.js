@@ -134,7 +134,7 @@ User.pagination = ({ page, limit, location_area = null }) => {
   });
 }
 
-User.numberOfUsers = ({ location_area = null }) => {
+User.numberOfUsers = ({ location_area = null } = {}) => {
   const wheres = [];
   if (location_area) {
     wheres.push(`location_area='${location_area}'`);
