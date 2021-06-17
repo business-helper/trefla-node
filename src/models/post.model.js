@@ -83,7 +83,7 @@ Post.pagination = async ({ limit, last_id, type = null, user_id = null, location
   });
 }
 
-Post.simplePagination = async ({ limit, page, type = null, user_id = null }) => {
+Post.simplePagination = async ({ limit, page, type = null, user_id = null, sort: { field, desc }, keyword = '' }) => {
   limit = Number(limit);
   page = Number(page);
   const offset = limit * page;
@@ -94,7 +94,9 @@ Post.simplePagination = async ({ limit, page, type = null, user_id = null }) => 
 
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM posts ${strWhere} ORDER BY id DESC LIMIT ? OFFSET ?`, [limit, offset], (err, res) => {
+    sql.query(`SELECT *, (like_1_num + like_2_num + like_3_num + like_4_num + like_5_num + like_6_num) as likes 
+      FROM posts ${strWhere}
+      ORDER BY ${field || 'id'} ${desc ? 'DESC' : 'ASC'} LIMIT ? OFFSET ?`, [limit, offset], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
