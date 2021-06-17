@@ -1,1 +1,130 @@
-const _0x25dd=['z2v0qNLjzhm=','DhLWzq==','DxbKyxrLqNLjza==','ywXS','C3vJy2vZCW==','z2v0','B3v0Chv0','CgfNAw5HDgLVBLjLCq==','u0LnueXf','DxnLCG==','BwfW','lI4VAgvSCgvYCW==','DgHLBG==','CMvWB3j0','zgvSzxrLqNLjza==','q09ntuvova==','uMvWB3j0igHHCYbIzwvUignYzwf0zwqH','ChvZAa==','lI4VAgvSCgvYCY9TB2rLBc5OzwXWzxjZ','z2v0vg90ywW=','BgvUz3rO','lI4VBw9KzwXZ','DgfYz2v0x2LK','C2f2zq==','Dg9tDhjPBMC=','zgvSzxrLqNLjzfjLCq==','uMvWB3j0igHHCYbIzwvUigrLBgv0zwqH','y3jLyxrLuMvX','Cg9ZDa==','zM9YrwfJAa==','z2v0qNLjza==','BM9Kzs1PBNb1Dc12ywXPzgf0B3i=','y29TBwvUDa=='];(function(_0x312b5e,_0x33824c){const _0x25dd6e=function(_0x79655){while(--_0x79655){_0x312b5e['push'](_0x312b5e['shift']());}};_0x25dd6e(++_0x33824c);}(_0x25dd,0x11b));const _0x7965=function(_0x312b5e,_0x33824c){_0x312b5e=_0x312b5e-0x1a6;let _0x25dd6e=_0x25dd[_0x312b5e];if(_0x7965['apCqKn']===undefined){var _0x79655=function(_0x244b4e){const _0x289317='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=',_0xcf5fe=String(_0x244b4e)['replace'](/=+$/,'');let _0x2ed8c1='';for(let _0x842d9f=0x0,_0x212c6e,_0x1cbe1f,_0x375fb7=0x0;_0x1cbe1f=_0xcf5fe['charAt'](_0x375fb7++);~_0x1cbe1f&&(_0x212c6e=_0x842d9f%0x4?_0x212c6e*0x40+_0x1cbe1f:_0x1cbe1f,_0x842d9f++%0x4)?_0x2ed8c1+=String['fromCharCode'](0xff&_0x212c6e>>(-0x2*_0x842d9f&0x6)):0x0){_0x1cbe1f=_0x289317['indexOf'](_0x1cbe1f);}return _0x2ed8c1;};_0x7965['bWnfmg']=function(_0x5147e4){const _0x20f434=_0x79655(_0x5147e4);let _0x338873=[];for(let _0x2c3e5c=0x0,_0x3c71e9=_0x20f434['length'];_0x2c3e5c<_0x3c71e9;_0x2c3e5c++){_0x338873+='%'+('00'+_0x20f434['charCodeAt'](_0x2c3e5c)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x338873);},_0x7965['ZOXwtH']={},_0x7965['apCqKn']=!![];}const _0x4323e4=_0x7965['ZOXwtH'][_0x312b5e];return _0x4323e4===undefined?(_0x25dd6e=_0x7965['bWnfmg'](_0x25dd6e),_0x7965['ZOXwtH'][_0x312b5e]=_0x25dd6e):_0x25dd6e=_0x4323e4,_0x25dd6e;};const _0x11161a=_0x7965,{Validator}=require(_0x11161a(0x1b2)),models=require(_0x11161a(0x1a8)),helpers=require(_0x11161a(0x1bf)),{getTokenInfo}=require('../helpers/auth.helpers'),{bool2Int,chatPartnerId,getTotalLikes,generateTZTimeString,respondError}=require('../helpers/common.helpers'),{generateReportData,generateMessageData}=require(_0x11161a(0x1c6));exports[_0x11161a(0x1ae)]=async(_0x4323e4,_0x244b4e)=>{const _0x1ecfd3=_0x11161a,{uid:_0x289317}=getTokenInfo(_0x4323e4),_0xcf5fe=generateReportData({..._0x4323e4['body'],'user_id':_0x289317});return models[_0x1ecfd3(0x1c1)]['create'](_0xcf5fe)[_0x1ecfd3(0x1c0)](_0x2ed8c1=>Promise[_0x1ecfd3(0x1b7)]([_0x2ed8c1]))[_0x1ecfd3(0x1c0)](([_0x842d9f])=>{const _0x46bed3=_0x1ecfd3;return _0x842d9f=models[_0x46bed3(0x1c1)][_0x46bed3(0x1ba)](_0x842d9f),{'status':!![],'message':_0x46bed3(0x1c4),'data':_0x842d9f};});},exports[_0x11161a(0x1b1)]=async _0x212c6e=>{const _0xb0c06d=_0x11161a;return models[_0xb0c06d(0x1c1)][_0xb0c06d(0x1b1)](_0x212c6e)['then'](_0x1cbe1f=>{const _0x5d38da=_0xb0c06d;return{'status':!![],'message':_0x5d38da(0x1b8),'data':models[_0x5d38da(0x1c1)][_0x5d38da(0x1ba)](_0x1cbe1f)};});},exports[_0x11161a(0x1b6)]=async(_0x375fb7,_0x5147e4)=>{const _0x5be9f8=_0x11161a;return models[_0x5be9f8(0x1c1)][_0x5be9f8(0x1b1)](_0x375fb7)[_0x5be9f8(0x1c0)](_0x20f434=>{const _0x599258=_0x5be9f8;return Object['keys'](_0x20f434)[_0x599258(0x1b0)](_0x338873=>{_0x20f434[_0x338873]=_0x5147e4[_0x338873]!==undefined?_0x5147e4[_0x338873]:_0x20f434[_0x338873];}),models[_0x599258(0x1c1)][_0x599258(0x1aa)](_0x20f434);})[_0x5be9f8(0x1c0)](_0x2c3e5c=>{const _0x2aeb71=_0x5be9f8;return{'status':!![],'message':'Report\x20has\x20been\x20updated!','data':models[_0x2aeb71(0x1c1)][_0x2aeb71(0x1ba)](_0x2c3e5c)};});},exports[_0x11161a(0x1bb)]=async({page:_0x3c71e9,limit:_0x289d0d,type:_0x216da8,target_id:_0x588ce8})=>{const _0x1b27d5=_0x11161a;[_0x3c71e9,_0x289d0d]=[_0x3c71e9,_0x289d0d]['map'](_0x2a21c2=>Number(_0x2a21c2));let _0xa987db=[],_0x3f46d6=0x0;return Promise[_0x1b27d5(0x1b7)]([models[_0x1b27d5(0x1c1)][_0x1b27d5(0x1b9)]({'page':_0x3c71e9,'limit':_0x289d0d,'type':_0x216da8,'target_id':_0x588ce8}),models[_0x1b27d5(0x1c1)][_0x1b27d5(0x1a6)]({'type':_0x216da8,'target_id':_0x588ce8})])[_0x1b27d5(0x1c0)](([_0x1334e1,_0x9fe6de])=>{const _0x3c1619=_0x1b27d5;_0xa987db=_0x1334e1,_0x3f46d6=_0x9fe6de;const _0x22f85a=[0x0],_0x2bd210=[0x0],_0x105cca=[0x0];return _0x1334e1[_0x3c1619(0x1b0)](_0x24a8b9=>{const _0x2eea01=_0x3c1619,{user_id:_0x144439,type:_0x5da892,target_id:_0x17c0a6}=_0x24a8b9;_0x22f85a[_0x2eea01(0x1c5)](_0x144439),_0x5da892===_0x2eea01(0x1c3)?_0x2bd210[_0x2eea01(0x1c5)](_0x17c0a6):_0x105cca['push'](_0x17c0a6);}),Promise[_0x3c1619(0x1b7)]([models[_0x3c1619(0x1bd)]['getByIds'](_0x22f85a),models[_0x3c1619(0x1af)][_0x3c1619(0x1b4)](_0x105cca),models['comment'][_0x3c1619(0x1b4)](_0x2bd210)]);})['then'](([_0x591825,_0x35f98e,_0x17c9ce])=>{const _0x16aad0=_0x1b27d5,_0x1a980a={},_0x205880={},_0x3b35ce={};return _0x591825[_0x16aad0(0x1b0)](_0x126a01=>_0x1a980a[_0x126a01['id'][_0x16aad0(0x1ab)]()]=_0x126a01),_0x35f98e[_0x16aad0(0x1b0)](_0x1eb648=>_0x205880[_0x1eb648['id'][_0x16aad0(0x1ab)]()]=_0x1eb648),_0x17c9ce[_0x16aad0(0x1b0)](_0x501ac4=>_0x3b35ce[_0x501ac4['id'][_0x16aad0(0x1ab)]()]=_0x501ac4),_0xa987db=_0xa987db[_0x16aad0(0x1be)](_0x266e10=>({...models[_0x16aad0(0x1c1)][_0x16aad0(0x1ba)](_0x266e10),'user':models[_0x16aad0(0x1bd)][_0x16aad0(0x1ba)](_0x1a980a[_0x266e10['user_id'][_0x16aad0(0x1ab)]()],_0x16aad0(0x1bc)),'target':_0x266e10[_0x16aad0(0x1b5)]===_0x16aad0(0x1c3)?models[_0x16aad0(0x1b3)]['output'](_0x3b35ce[_0x266e10[_0x16aad0(0x1a9)][_0x16aad0(0x1ab)]()]):models[_0x16aad0(0x1af)][_0x16aad0(0x1ba)](_0x205880[_0x266e10[_0x16aad0(0x1a9)][_0x16aad0(0x1ab)]()])})),{'status':!![],'message':_0x16aad0(0x1b8),'data':_0xa987db,'pager':{'limit':_0x289d0d,'page':_0x3c71e9,'total':_0x3f46d6},'hasMore':_0x3c71e9*_0x289d0d+_0xa987db[_0x16aad0(0x1a7)]<_0x3f46d6};});},exports[_0x11161a(0x1ac)]=async({id:_0x50dd9a})=>{const _0x254766=_0x11161a;let _0x3673a9;return models['report'][_0x254766(0x1b1)](_0x50dd9a)[_0x254766(0x1c0)](_0x1a01e1=>{const _0x112e0e=_0x254766;return _0x3673a9=_0x1a01e1,models[_0x112e0e(0x1c1)][_0x112e0e(0x1c2)](_0x50dd9a);})[_0x254766(0x1c0)](_0x25ad40=>{const _0x2652e1=_0x254766;return{'status':!![],'message':_0x2652e1(0x1ad)};});};
+const { Validator } = require("node-input-validator");
+const models = require('../models');
+const helpers = require('../helpers');
+const { getTokenInfo } = require('../helpers/auth.helpers');
+const { bool2Int, chatPartnerId, getTotalLikes, generateTZTimeString, respondError } = require("../helpers/common.helpers");
+const { generateReportData, generateMessageData } = require('../helpers/model.helpers');
+
+
+exports.createReq = async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+
+  const model = generateReportData({
+    ...req.body, user_id
+  });
+
+  return models.report.create(model)
+    .then(report => Promise.all([
+      report,
+    ]))
+    .then(([report]) => {
+      report = models.report.output(report);
+
+      return {
+        status: true, 
+        message: 'Report has been created!',
+        data: report,
+      };
+    });
+}
+
+exports.getById = async (id) => {
+  return models.report.getById(id)
+    .then(report => {
+      return {
+        status: true,
+        message: 'success',
+        data: models.report.output(report),
+      };
+    })
+}
+
+exports.updateById = async (id, data) => {
+  return models.report.getById(id)
+    .then(report => {
+      Object.keys(report).forEach(key => {
+        report[key] = data[key] !== undefined ? data[key] : report[key];
+      });
+      return models.report.save(report);
+    })
+    .then(report => {
+      return {
+        status: true,
+        message: 'Report has been updated!',
+        data: models.report.output(report),
+      };
+    });
+}
+
+exports.paginationReq = async ({ page, limit, type, target_id, sort }) => {
+  [page, limit] = [page, limit].map(item => Number(item));
+  sort = JSON.parse(sort);
+
+  let _reports = [], _total = 0;
+
+  const tblColumns = ['user_id', 'reason', 'target_id', 'type', 'time'];
+
+  return Promise.all([
+    models.report.get({ page, limit, type, target_id, sort: { field: tblColumns[sort.col], desc: sort.desc } }),
+    models.report.getTotal({ type, target_id }),
+  ])
+    .then(([reports, total]) => {
+      _reports = reports;
+      _total = total;
+      const user_ids = [0];
+      const comment_ids = [0];
+      const post_ids = [0];
+      
+      reports.forEach(report => {
+        const { user_id, type, target_id } = report;
+        user_ids.push(user_id);
+        type === 'COMMENT' ? comment_ids.push(target_id) : post_ids.push(target_id);
+      });
+
+      return Promise.all([
+        models.user.getByIds(user_ids),
+        models.post.getByIds(post_ids),
+        models.comment.getByIds(comment_ids),
+      ])
+    })
+    .then(([ users, posts, comments ]) => {
+      const userObj = {}, postObj = {}, commentObj = {};
+      users.forEach(user => userObj[user.id.toString()] = user);
+      posts.forEach(post => postObj[post.id.toString()] = post);
+      comments.forEach(comment => commentObj[comment.id.toString()] = comment);
+
+      _reports = _reports.map(report => ({
+        ...(models.report.output(report)),
+        user: models.user.output(userObj[report.user_id.toString()], 'SIMPLE'),
+        target: report.type === 'COMMENT' ? models.comment.output(commentObj[report.target_id.toString()]) : models.post.output(postObj[report.target_id.toString()])
+      }));
+
+      return {
+        status: true,
+        message: 'success',
+        data: _reports,
+        pager: {
+          limit,
+          page,
+          total: _total,
+        },
+        hasMore: page * limit + _reports.length < _total,
+      }
+    })
+}
+
+exports.deleteByIdReq = async ({ id }) => {
+  let _report;
+  return models.report.getById(id)
+    .then(report => {
+      _report = report;
+      return models.report.deleteById(id)
+    })
+    .then(deletedRows => {
+      return {
+        status: true,
+        message: 'Report has been deleted!',
+      };
+    })
+}
+
