@@ -48,15 +48,22 @@ Comment.pagination = async ({ limit, last_id = null, target_id = null, type = nu
   });
 }
 
-Comment.simplePagination = async ({ limit = 10, page = 0, target_id = null, type = null }) => {
+Comment.simplePagination = async ({ limit = 10, page = 0, target_id = null, type = null, sort: { field, desc } }) => {
   let where = [];
   target_id && type ? where.push(`(target_id=${target_id} AND type='${type}')`) : null;
 
   const strWhere = where.length > 0 ? ` WHERE ${where.joni(' AND ')}` : '';
 
+  let orderBy = `${field || 'id'} ${desc ? 'DESC' : 'ASC'}`;
+  // if (field === 'parent') {
+  //   const dir = desc ? 'DESC' : 'ASC';
+  //   orderBy = `type ${dir}, target_id ${dir}`;
+  // }
+
   const offset = limit * page;
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM comments ${strWhere} ORDER BY id DESC LIMIT ? OFFSET ?`, [limit, offset], (err, res) => {
+    sql.query(`SELECT *, (like_1_num + like_2_num + like_3_num + like_4_num + like_5_num + like_6_num) as likes
+      FROM comments ${strWhere} ORDER BY ${orderBy} LIMIT ? OFFSET ?`, [limit, offset], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });

@@ -211,13 +211,17 @@ exports.pagination = (req, res) => {
 }
 
 exports.simplePagination = async (req, res) => {
-  let { limit, page, target_id, type } = req.query;
+  let { limit, page, target_id, type, sort } = req.query;
   limit = Number(limit);
   page = Number(page);
+  sort = JSON.parse(sort);
 
   let _comments, _total;
+
+  const tblColumns = ['user_id', 'comment', 'type', 'target_id', 'isGuest', 'likes', 'time', 'active'];
+
   return Promise.all([
-    Comment.simplePagination({ limit, page, target_id, type }),
+    Comment.simplePagination({ limit, page, target_id, type, sort: { field: tblColumns[sort.col], desc: sort.desc } }),
     Comment.getCountOfComments({ target_id, type })
   ])
     .then(([comments, total]) => {
