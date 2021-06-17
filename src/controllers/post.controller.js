@@ -201,12 +201,16 @@ exports.pagination = async (req, res) => {
 exports.simplePagination = async (req, res) => {
   //const tokenInfo = getTokenInfo(req); //console.log('tokenInfo', tokenInfo);
   const { uid } = getTokenInfo(req);
-  let { limit, page, type, post_type } = req.query; limit = Number(limit);
-
+  let { limit, page, type, post_type, sort } = req.query; 
+  limit = Number(limit);
+  sort = JSON.parse(sort);
+  
   let _posts = [], _total = 0, _posters = {}, _minId;
 
+  const tblColumns = ['user_id', 'post_name', 'feed', 'type', 'location_address', 'likes', 'comment_num', 'create_time', 'active'];
+
   let promiseAll = Promise.all([
-    Post.simplePagination({ limit, page, type: post_type }),
+    Post.simplePagination({ limit, page, type: post_type, sort: { field: tblColumns[sort.col], desc: sort.desc } }),
     Post.getCountOfPosts({ type: post_type }),
     Post.getMinIdOfPosts({ type: post_type })
   ]);
