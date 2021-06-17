@@ -116,7 +116,7 @@ User.getBySocialPass = ({ platform, pass }) => {
   })
 }
 
-User.pagination = ({ page, limit, location_area = null }) => {
+User.pagination = ({ page, limit, location_area = null, sort: { field, desc }, keyword = '' }) => {
   limit = Number(limit);
   const offset = Number(page * limit);
   const strLimit = limit > 0 ? ` LIMIT ${limit} OFFSET ?` : "";
@@ -125,19 +125,31 @@ User.pagination = ({ page, limit, location_area = null }) => {
   if (location_area) {
     wheres.push(`location_area='${location_area}'`);
   }
+  if (keyword) {
+    wheres.push(`(user_name LIKE '${keyword}' OR email LIKE '${keyword}')`);
+  }
   const strWhere = wheres.length > 0 ? ` WHERE ${wheres.join(' AND ')}` : '';
 
+  let orderBy = `${field || 'id'} ${desc ? 'DESC' : 'ASC'}`;
+  if (field === 'image') {
+    const dir = desc ? 'desc' : 'asc';
+    orderBy = `photo ${dir}, avatarIndex ${dir}`;
+  }
+
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM users ${strWhere} ${strLimit}`, [ offset ], (err, res) => {
+    sql.query(`SELECT * FROM users ${strWhere} ORDER BY ${orderBy} ${strLimit}`, [ offset ], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
 }
 
-User.numberOfUsers = ({ location_area = null } = {}) => {
+User.numberOfUsers = ({ location_area = null, keyword = '' } = {}) => {
   const wheres = [];
   if (location_area) {
     wheres.push(`location_area='${location_area}'`);
+  }
+  if (keyword) {
+    wheres.push(`(user_name LIKE '${keyword}' OR email LIKE '${keyword}')`);
   }
   const strWhere = wheres.length > 0 ? ` WHERE ${wheres.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
@@ -222,9 +234,9 @@ User.output = (user, mode = 'NORMAL') => {
   // keys to delete
   let delKeys = [];
   if (mode === 'NORMAL') {
-    delKeys = ['black_list', 'email', 'password', 'social_pass', 'login_mode', 'language', 'bio', 'radiusAround', 'noti_num', 'location_array', 'postAroundCenterCoordinate', 'create_time', 'update_time', 'recovery_code'];
+    delKeys = ['black_list', 'email', 'password', 'social_pass', 'login_mode', 'language', 'bio', 'radiusAround', 'noti_num', 'location_array', 'postAroundCenterCoordinate', 'update_time', 'recovery_code'];
   } else if (mode === 'PROFILE') {
-    delKeys = ['black_list', 'password', 'social_pass', 'login_mode', 'create_time', 'update_time', 'recovery_code'];
+    delKeys = ['black_list', 'password', 'social_pass', 'login_mode', 'update_time', 'recovery_code'];
   } else if (mode === 'SIMPLE') {
     return { 
       id: user.id,

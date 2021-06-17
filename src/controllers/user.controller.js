@@ -283,9 +283,19 @@ exports.getProfile = (req, res) => {
 
 exports.pagination = (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
+  let sort = JSON.parse(req.query.sort);
+  const keyword = req.query.keyword;
+
+  const tblColumns = ['user_name', 'image', 'email', 'sex', 'birthday', 'card_number', 'location_address', 'location_coordinate', 'create_time', 'active'];
+
   return Promise.all([
-    User.pagination({ limit: req.query.limit || 10, page: req.query.page || 0 }),
-    User.numberOfUsers()
+    User.pagination({ 
+      limit: req.query.limit || 10,
+      page: req.query.page || 0,
+      keyword,
+      sort: { field: tblColumns[sort.col], desc: sort.desc }
+    }),
+    User.numberOfUsers({ keyword: req.query.keyword })
   ])
     .then(([users, total]) => res.json({
       status: true,
