@@ -42,18 +42,20 @@ const activity = {
       'POST': 4,
       'COMMENT': 5,
       'CARD': 6,
+      'NONE': 7,
     };
     // check the last preview message.
     const lastPreview = await models.message.lastPreviewMsgInChat(chat.id);
     // if 'from_where' is invalid, skip it.
-    if (Object.keys(mapWhere2Type).includes(from_where)) return chat;
+    // if (Object.keys(mapWhere2Type).includes(from_where)) return chat;
+
     // if the lastest preview is same, then skip it.
     if (lastPreview && mapWhere2Type[from_where] === lastPreview.type && lastPreview.message === target_id.toString()) return chat;
 
     // lets insert new preview msg.
     const message = generateMessageData({
       chat_id: chat.id,
-      message: target_id,
+      message: from_where !== 'NONE' ? target_id : '------- A user contacted you from around -------',
       sender_id: user_id,
       receiver_id: receiver_id || 0,
       type: mapWhere2Type[from_where],
