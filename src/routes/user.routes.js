@@ -218,7 +218,7 @@ userRouters.post('/ban-reply', async (req, res) => {
       return userCtrl.banReplyReq(req, res);
     })
     .then(result => res.json(result))
-    .catch(error => respondValidatorError(res, error));
+    .catch(error => respondValidateError(res, error));
 });
 
 userRouters.post('/verify/:id', async (req, res) => {
@@ -287,7 +287,7 @@ userRouters.post('/unverify/:id', async (req, res) => {
       return userCtrl.unverifyUserReq(req, res);
     })
     .then(result => res.json(result))
-    .catch(error => respondValidatorError(error));
+    .catch(error => respondValidateError(res, error));
 })
 
 userRouters.post('/transfer-request/reply', async (req, res) => {
