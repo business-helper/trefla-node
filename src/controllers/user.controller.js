@@ -39,7 +39,7 @@ const activity = {
   },
   notifyRejectionResult: async ({ user_id }) => {
     const user = await models.user.getById(user_id);
-    if (_user.device_token) {
+    if (user.device_token) {
       const message = {
         'English': 'The registration number of your vehicle could not be verified. Please try again.',
         'Romanian': 'Numărul de înmatriculare al autovehiculului tău nu a putut fi verificat. Te rugăm să încerci din nou.',

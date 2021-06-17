@@ -67,7 +67,7 @@ const respondError = (res, error) => {
 const respondValidateError = (res, error) => {
   console.log('[Validation error]', error);
   logger.error(error);
-  const details = error.details || {}; //console.log(details);
+  const details = (error || {}).details || {}; //console.log(details);
 
   return res.status(400).json({
 		status: false,
