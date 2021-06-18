@@ -116,7 +116,7 @@ User.getBySocialPass = ({ platform, pass }) => {
   })
 }
 
-User.pagination = ({ page, limit, location_area = null, sort: { field, desc }, keyword = '' }) => {
+User.pagination = ({ page, limit, location_area = null, sort: { field, desc } = {}, keyword = '' }) => {
   limit = Number(limit);
   const offset = Number(page * limit);
   const strLimit = limit > 0 ? ` LIMIT ${limit} OFFSET ?` : "";
