@@ -116,12 +116,12 @@ User.getBySocialPass = ({ platform, pass }) => {
   })
 }
 
-User.pagination = ({ page, limit, location_area = null, sort: { field, desc } = {}, keyword = '' }) => {
+User.pagination = ({ page, limit, location_area = null, sort: { field, desc } = {}, keyword = '', extraConditions = [] }) => {
   limit = Number(limit);
   const offset = Number(page * limit);
   const strLimit = limit > 0 ? ` LIMIT ${limit} OFFSET ?` : "";
 
-  const wheres = [];
+  const wheres = extraConditions || [];
   if (location_area) {
     wheres.push(`location_area='${location_area}'`);
   }
@@ -143,8 +143,8 @@ User.pagination = ({ page, limit, location_area = null, sort: { field, desc } = 
   });
 }
 
-User.numberOfUsers = ({ location_area = null, keyword = '' } = {}) => {
-  const wheres = [];
+User.numberOfUsers = ({ location_area = null, keyword = '', extraConditions = [] } = {}) => {
+  const wheres = extraConditions || [];
   if (location_area) {
     wheres.push(`location_area='${location_area}'`);
   }
