@@ -1036,9 +1036,12 @@ exports.getUsersInMyArea = async (req, res) => {
   return models.user.getById(user_id).then((me) => {
     let { location_area } = me;
     location_area = location_area || '___';
+    const extraConditions = [
+      `id != ${user_id}`,
+    ];
     return Promise.all([
-      models.user.pagination({ page, limit, location_area }),
-      models.user.numberOfUsers({ location_area }),
+      models.user.pagination({ page, limit, location_area, extraConditions }),
+      models.user.numberOfUsers({ location_area, extraConditions }),
     ])
     .then(([ users, total ]) => {
       const hasMore = page * limit + users.length < total;
