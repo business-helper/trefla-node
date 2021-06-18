@@ -9,7 +9,7 @@ const User = require("../models/user.model");
 const helpers = require('../helpers');
 
 const EmailTemplate = require("../models/emailTemplate.model");
-const { generateTZTimeString, JSONParser, JSONStringify, respondError, sendMail } = require("../helpers/common.helpers");
+const { filterAroundUsers, generateTZTimeString, JSONParser, JSONStringify, respondError, sendMail } = require("../helpers/common.helpers");
 const {
   comparePassword,
   generateUserData,
@@ -51,6 +51,15 @@ const activity = {
       })
       .catch((error) => logger.info(`[notifyRejection][Error]: ${error.message}`));;
     }
+  },
+  myAroundUsers: async ({ me, users = [] }) => {
+    const pos = helpers.common.getUserLastLocation(me);
+    return users.filter((user) => {
+      const userPos = helpers.common.getUserLastLocation(user);
+      const d = helpers.common.getDistanceFromLatLonInMeter(pos, userPos);
+      const r = me.radiusAround;
+      return d <= r;
+    });
   },
 }
 
@@ -1039,26 +1048,25 @@ exports.getUsersInMyArea = async (req, res) => {
     const extraConditions = [
       `id != ${user_id}`,
     ];
-    return Promise.all([
-      models.user.pagination({ page, limit, location_area, extraConditions }),
-      models.user.numberOfUsers({ location_area, extraConditions }),
-    ])
-    .then(([ users, total ]) => {
-      const hasMore = page * limit + users.length < total;
-      const formatUsers = users.map((user) => ({
-        distance: Number(helpers.common.getDistanceFromLatLonInMeter(
-          helpers.common.getUserLastLocation(user),
-          helpers.common.getUserLastLocation(me),
-        ).toFixed(1)),
-        ...(models.user.output(user)),
-      }))
-      return res.json({
-        status: true,
-        message: 'success',
-        data: formatUsers,
-        hasMore,
+
+    return models.user.numberOfUsers({ location_area, extraConditions }).then((total) => models.user.pagination({ page: 0, limit: total, location_area, extraConditions }))
+      .then((users) => {
+        return activity.myAroundUsers({ me, users });
+      })
+      .then((users) => {
+        const usersF = users.map((user) => ({
+          distance: Number(helpers.common.getDistanceFromLatLonInMeter(
+            helpers.common.getUserLastLocation(user),
+            helpers.common.getUserLastLocation(me),
+          ).toFixed(1)),
+          ...(models.user.output(user)),
+        }));
+        return res.json({
+          status: true,
+          message: 'success',
+          data: usersF,
+        });
       });
-    });
   });
 }
 
