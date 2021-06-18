@@ -9,7 +9,7 @@ const User = require("../models/user.model");
 const helpers = require('../helpers');
 
 const EmailTemplate = require("../models/emailTemplate.model");
-const { filterAroundUsers, generateTZTimeString, JSONParser, JSONStringify, respondError, sendMail } = require("../helpers/common.helpers");
+const { generateTZTimeString, JSONParser, JSONStringify, respondError, sendMail } = require("../helpers/common.helpers");
 const {
   comparePassword,
   generateUserData,
@@ -52,15 +52,6 @@ const activity = {
       .catch((error) => logger.info(`[notifyRejection][Error]: ${error.message}`));;
     }
   },
-  myAroundUsers: async ({ me, users = [] }) => {
-    const pos = helpers.common.getUserLastLocation(me);
-    return users.filter((user) => {
-      const userPos = helpers.common.getUserLastLocation(user);
-      const d = helpers.common.getDistanceFromLatLonInMeter(pos, userPos);
-      const r = me.radiusAround;
-      return d <= r;
-    });
-  },
 }
 
 exports.register = async (req, res) => {
@@ -75,11 +66,14 @@ exports.register = async (req, res) => {
     }
   }
 
+  // get default around radius
+  const config = await models.config.getById(1);
+  
   // if card is already verified, then user can't have that card.
-  const userData = generateUserData({ ...req.body, card_number: verifiedUser ? '' : new_number });
+  const userData = generateUserData({ ...req.body, card_number: verifiedUser ? '' : new_number, radiusAround: config.defaultAroundRadius });
 
   return generatePassword(userData.password)
-    .then(encPassword => {
+    .then(async (encPassword) => {
       if (req.body.login_mode !== LOGIN_MODE.NORMAL && Object.keys(LOGIN_MODE).includes(req.body.login_mode)) {
         // social register.
         return {
@@ -90,7 +84,7 @@ exports.register = async (req, res) => {
       } else {
         req.body.login_mode = LOGIN_MODE.NORMAL;
         return { ...userData, password: encPassword }
-      }
+      }      
     })
     .then(async userModel => {
       return User.create(userModel)
@@ -1045,28 +1039,26 @@ exports.getUsersInMyArea = async (req, res) => {
   return models.user.getById(user_id).then((me) => {
     let { location_area } = me;
     location_area = location_area || '___';
-    const extraConditions = [
-      `id != ${user_id}`,
-    ];
-
-    return models.user.numberOfUsers({ location_area, extraConditions }).then((total) => models.user.pagination({ page: 0, limit: total, location_area, extraConditions }))
-      .then((users) => {
-        return activity.myAroundUsers({ me, users });
-      })
-      .then((users) => {
-        const usersF = users.map((user) => ({
-          distance: Number(helpers.common.getDistanceFromLatLonInMeter(
-            helpers.common.getUserLastLocation(user),
-            helpers.common.getUserLastLocation(me),
-          ).toFixed(1)),
-          ...(models.user.output(user)),
-        }));
-        return res.json({
-          status: true,
-          message: 'success',
-          data: usersF,
-        });
+    return Promise.all([
+      models.user.pagination({ page, limit, location_area }),
+      models.user.numberOfUsers({ location_area }),
+    ])
+    .then(([ users, total ]) => {
+      const hasMore = page * limit + users.length < total;
+      const formatUsers = users.map((user) => ({
+        distance: Number(helpers.common.getDistanceFromLatLonInMeter(
+          helpers.common.getUserLastLocation(user),
+          helpers.common.getUserLastLocation(me),
+        ).toFixed(1)),
+        ...(models.user.output(user)),
+      }))
+      return res.json({
+        status: true,
+        message: 'success',
+        data: formatUsers,
+        hasMore,
       });
+    });
   });
 }
 
