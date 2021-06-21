@@ -280,6 +280,7 @@ exports.DEFAULT_USER = {
   online: 0,
   active: 0,
   profile_done: 0,
+  theme_color: '',
   create_time: timestamp(),
   update_time: timestamp()
 };
