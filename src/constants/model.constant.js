@@ -192,6 +192,7 @@ exports.DEFAULT_PHOTO = {
   id: "",
   user_id: 0,
   url: '',
+  type: 'normal',
   create_time: timestamp(),
   update_time: timestamp(),
 };
