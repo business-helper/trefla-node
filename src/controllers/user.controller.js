@@ -61,6 +61,16 @@ const activity = {
       return d <= r;
     });
   },
+  getChatPartnerIds: async (user_id) => {
+    return models.chat.myChatrooms(user_id).then((chatrooms) => chatrooms.map((chat) => {
+      const [partner] = JSON.parse(chat.user_ids).filter((id) => Number(id) !== Number(user_id));
+      return partner;
+    })).then((partners) => partners.filter((id) => !!id).filter((id, i, self) => self.indexOf(id) === i))
+    .catch((error) => {
+      console.log('[User][PartnerIds][Error]', error);
+      return [];
+    });
+  },
 }
 
 exports.register = async (req, res) => {
@@ -1041,15 +1051,20 @@ exports.getUsersInMyArea = async (req, res) => {
   limit = Number(limit || 50);
 
   const { uid: user_id } = getTokenInfo(req);
-
+  const contacts = await activity.getChatPartnerIds(user_id);
   return models.user.getById(user_id).then((me) => {
     let { location_area } = me;
     location_area = location_area || '___';
     const extraConditions = [
       `id != ${user_id}`,
+      `isGuest=${me.isGuest}`,
     ];
+    if (contacts.length > 0) {
+      extraConditions.push(`id NOT IN (${contacts.join(',')})`);
+    }
 
-    return models.user.numberOfUsers({ location_area, extraConditions }).then((total) => models.user.pagination({ page: 0, limit: total, location_area, extraConditions }))
+    return models.user.numberOfUsers({ location_area, extraConditions })
+      .then((total) => models.user.pagination({ page: 0, limit: total, location_area, extraConditions }))
       .then((users) => {
         return activity.myAroundUsers({ me, users });
       })
