@@ -6,5 +6,6 @@ module.exports = {
   ba_password: process.env.BASIC_PASSWORD,
   appSecret: process.env.APP_SECRET,
   domain: process.env.APP_DOMAIN,
+  cdnDomain: process.env.CDN_DOMAIN,
   default_zones: [], //(process.env.DEFAULT_ZONE || '').split(','),
 };

@@ -82,3 +82,10 @@ SELECT * FROM users WHERE JSON_SEARCH(bouquet, 'one', '3') IS NOT NULL
 ## References
 
 [How to open some ports on Ubuntu?](https://stackoverflow.com/questions/30251889/how-to-open-some-ports-on-ubuntu)
+## Image Upload
+- profile
+thumbnail ->
+profile update
+
+- card
+update user.card_image_url after uploading.
