@@ -15,6 +15,17 @@ const { BearerMiddleware } = require("../middlewares/basic.middleware");
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { respondValidateError } = require("../helpers/common.helpers");
 
+const activity = {
+  confirmDirPath: (parent, name) => {
+    const dirPath = path.join(parent, name);
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath);
+      return dirPath;
+    }
+    return false;
+  },
+}
+
 // bearer authentication
 photoRouters.use((req, res, next) => {
   BearerMiddleware(req, res, next);
@@ -84,13 +95,25 @@ photoRouters.get('/', async (req, res) => {
 });
 
 photoRouters.post('/upload', async (req, res) => {
+  const type = req.body.type || 'normal';
+  return res.json(req.body);
+
   let form = formidable.IncomingForm();
   form.parse(req, function(err, fields, files) {
     let oldpath = files.file.path;
     let ext = path.extname(files.file.name);// console.log('[old path]', oldpath, ext)
     let newName = `${uuid()}${ext}`;
 
-    let newpath = path.join(path.resolve('assets/uploads'), newName);
+    const dirPath = activity.confirmDirPath(path.resolve('assets/uploads'), type);
+
+    if (!dirPath) {
+      return res.json({
+        'status': false,
+        'message': 'Failed to create path!',
+      });
+    }
+
+    let newpath = path.join(dirPath, newName);
     fs.readFile(oldpath, function(err, data) {
       if (err) {
         return res.json({
@@ -99,7 +122,7 @@ photoRouters.post('/upload', async (req, res) => {
           details: err.message,
         });
       }
-      fs.writeFile(newpath, data, function(err) {
+      fs.writeFile(newpath, data, async function(err) {
         if (err) {
           return res.json({
             status: false,
@@ -116,6 +139,7 @@ photoRouters.post('/upload', async (req, res) => {
             });
           }
         })
+
         return res.json({
           status: true,
           message: 'File has been uploaded!',

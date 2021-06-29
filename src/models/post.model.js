@@ -65,13 +65,13 @@ Post.pagination = async ({ limit, last_id, type = null, user_id = null, location
   user_id ? where.push(`user_id=${user_id}`) : null;
   guest_contacts.length > 0 ? where.push(`(isGuest = 0 OR (isGuest = 1 AND user_id NOT IN (${guest_contacts.join(',')})))`) : 0;
   
-  // let zones = [default_zone, location_area]
-  //   .filter((zone) => zone)
-  //   .map(zone => `'${zone}'`);
-  // const strZones = zones.join(',');
-  // if (strZones.length > 0) {
-  //   where.push(`location_area IN (${strZones})`);
-  // }
+  let zones = [default_zone, location_area]
+    .filter((zone) => zone)
+    .map(zone => `'${zone}'`);
+  const strZones = zones.join(',');
+  if (strZones.length > 0) {
+    where.push(`location_area IN (${strZones})`);
+  }
 
   //// location_area ? where.push(`location_area='${location_area}'`) : null;
 
