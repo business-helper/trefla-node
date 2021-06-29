@@ -81,6 +81,15 @@ Chat.allChatsOfUser = async (user_id, card_number) => {
   })
 }
 
+Chat.chatWithUsers = async (my_id, user_ids = []) => {
+  return Chat.myChatrooms(my_id).then((chats) => chats.filter((chat) => {
+    const user_ids = JSON.parse(chat.user_ids);
+    if (user_ids.length < 2) return false;
+    const [other_user] = user_ids.filter((id) => Number(id) !== Number(my_id))
+    return other_user && user.ids.includes(other_user);
+  }));
+}
+
 Chat.getAll = ({ user_id = null, isForCard = null, card_number = null }) => {
   let where = [];
   if (user_id) {
@@ -116,6 +125,14 @@ Chat.getByUserIds = ({ sender_id, receiver_id, isForCard = 0 }) => {
   return new Promise((resolve, reject) => {
     sql.query(`SELECT * FROM chats ${strWhere}`, [], (err, res) => {
       err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Chat.chatsBetweenTwoUsers = (user_id1, user_id2) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} WHERE JSON_CONTAINS(user_ids, '${user_id1}', '$') = 1 AND JSON_CONTAINS(user_ids, '${user_id2}', '$') = 1`, [], (err, res) => {
+      err ? reject(err) : resolve(res)
     });
   });
 }
@@ -157,6 +174,14 @@ Chat.deleteByUser = async (user_id) => {
       return Promise.all(chats.map(chat => this.deleteById(chat.id)));
     })
     .then(() => true);
+}
+
+Chat.test_json_extract = async () => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT id, user_ids, JSON_EXTRACT(user_ids, '$[0]'), JSON_EXTRACT(user_ids, '$[1]') FROM chats ORDER BY id DESC limit 10`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    }); 
+  });
 }
 
 Chat.output = (model) => {

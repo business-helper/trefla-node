@@ -4,6 +4,7 @@ const Post = require("../models/post.model");
 const User = require("../models/user.model");
 const Config = require("../models/config.model");
 const PostLike = require("../models/postLike.model");
+const models = require('../models');
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { filterAroundUsers, generateTZTimeString, getTimeAfter, getTotalLikes, respondError, SendAllMultiNotifications, timestamp } = require("../helpers/common.helpers");
 const { checkPostLocationWithUser, generatePostData, generatePostLikeData } = require('../helpers/model.helpers');
@@ -55,6 +56,17 @@ const activity = {
       }/${avatarIndex}.png`;
     }
     return `${domain}/avatar/avatar_${sex === '1' ? 'girl2' : 'boy1'}.png`;
+  },
+  filterPostsByGuestAndChat: async ({ posts, me }) => {
+    const user_ids = posts.map((post) => post.user_id)
+    console.log('[Me][Guest?]', me.isGuest)
+    if (!me.isGuest) return posts;
+
+    return posts.filter(async (post) => {
+      const post_user_id = post.user_id;
+      const chats = await models.chat.chatsBetweenTwoUsers(me.id, post.user_id);
+      return chats.length > 0;
+    });
   },
 }
 
@@ -163,7 +175,15 @@ exports.pagination = async (req, res) => {
 
   return promiseAll
     .then(async ([posts, total, minId]) => {
-      _posts = posts; _total = total; _minId = minId;
+      console.log('[Posts][Before Filter]', posts.map(it => it.id).join(', '));
+      _posts = posts;
+      // _posts = await activity.filterPostsByGuestAndChat({
+      //   posts: _posts,
+      //   me,
+      // });
+      console.log('[Posts][After Filter]', _posts.map(it => it.id).join(', '));
+
+      _total = total; _minId = minId;
       let poster_ids = posts.map(post => post.user_id); poster_ids.push(0);
       return User.getByIds(poster_ids);
     })
