@@ -24,6 +24,7 @@ app.set('view engine', 'ejs');
 
 const pageRouters = require('./routes/page.routes');
 app.use('/page', pageRouters);
+app.use('/images', require('./routes/image.routes'));
 app.use('/api/v1', appV1);
 
 
