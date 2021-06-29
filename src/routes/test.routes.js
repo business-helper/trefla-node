@@ -14,3 +14,4 @@ routes.get('/json-extract', (req, res) => {
   .catch((error) => respondValidateError(res, error))
 })
 
+module.exports = routes;

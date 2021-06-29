@@ -24,6 +24,8 @@ appV1.use(cors({
   optionsSuccessStatus: 200
 }));
 
+appV1.use('/test', require('./routes/test.routes'))
+
 appV1.use('/admin', adminRouters);
 appV1.use('/lang', langRouters);
 appV1.use('/auth', authRouters);
