@@ -57,22 +57,23 @@ Post.getAll = ({ type = null, user_id = null }) => {
   });
 };
 
-Post.pagination = async ({ limit, last_id, type = null, user_id = null, location_area = null, default_zone = null }) => {
+Post.pagination = async ({ limit, last_id, type = null, user_id = null, location_area = null, default_zone = null, guest_contacts = [] }) => {
   limit = Number(limit);
   let where = [];
   type ? where.push(`type='${type}'`) : null;
   last_id ? where.push(`id < ${last_id}`) : null;
   user_id ? where.push(`user_id=${user_id}`) : null;
+  guest_contacts.length > 0 ? where.push(`(isGuest = 0 OR (isGuest = 1 AND user_id NOT IN (${guest_contacts.join(',')})))`) : 0;
   
-  let zones = [default_zone, location_area]
-    .filter((zone) => zone)
-    .map(zone => `'${zone}'`);
-  const strZones = zones.join(',');
-  if (strZones.length > 0) {
-    where.push(`location_area IN (${strZones})`);
-  }
+  // let zones = [default_zone, location_area]
+  //   .filter((zone) => zone)
+  //   .map(zone => `'${zone}'`);
+  // const strZones = zones.join(',');
+  // if (strZones.length > 0) {
+  //   where.push(`location_area IN (${strZones})`);
+  // }
 
-  // location_area ? where.push(`location_area='${location_area}'`) : null;
+  //// location_area ? where.push(`location_area='${location_area}'`) : null;
 
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
   console.log('[Post][Where]', strWhere)
@@ -126,9 +127,10 @@ Post.getCountOfPosts = ({ type = null, user_id = null, location_area = null, def
   });
 }
 
-Post.getMinIdOfPosts = ({ type = null, location_area = null, default_zone = null }) => {
+Post.getMinIdOfPosts = ({ type = null, location_area = null, default_zone = null, guest_contacts = [] }) => {
   const where = [];
   type ? where.push(`type='${type}'`) : null;
+  guest_contacts.length > 0 ? where.push(`(isGuest = 0 OR (isGuest = 1 AND user_id NOT IN (${guest_contacts.join(',')})))`) : 0;
   
   let zones = [default_zone, location_area]
     .filter((zone) => zone)
@@ -147,10 +149,11 @@ Post.getMinIdOfPosts = ({ type = null, location_area = null, default_zone = null
   });
 }
 
-Post.getAroundPosts = ({ last_id, minTime }) => {
+Post.getAroundPosts = ({ last_id, minTime, guest_contacts = [] }) => {
   let where = [];
   where.push(`create_time > '${minTime}'`);
   last_id ? where.push(`id < ${last_id}`) : null;
+  guest_contacts.length > 0 ? where.push(`(isGuest = 0 OR (isGuest = 1 AND user_id NOT IN (${guest_contacts.join(',')})))`) : 0;
   
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
