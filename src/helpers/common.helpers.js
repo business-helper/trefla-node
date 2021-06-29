@@ -276,12 +276,18 @@ const photoHash = (photo) => {
 }
 
 const parsePhotoHash = (hash) => {
-  const parts = hash.split('-');
-  return {
-    create_time: parts[0],
-    user_id: parts[1],
-    id: parts[2],
-  };
+  try {
+    const parts = hash.split('-');
+    return {
+      create_time: parts[0],
+      user_id: parts[1],
+      id: parts[2],
+    };
+  } catch (error) {
+    return {
+      id: 0, user_id: 0, create_time: 0,
+    }
+  }
 }
 
 module.exports = {

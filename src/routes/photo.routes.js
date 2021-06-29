@@ -217,6 +217,7 @@ photoRouters.post('/upload', async (req, res) => {
           status: true,
           message: 'File has been uploaded!',
           url: `${config.domain}/uploads/${type}/${newName}`,
+          data: photo,
         })
       })
     });
