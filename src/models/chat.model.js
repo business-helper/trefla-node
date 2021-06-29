@@ -178,7 +178,7 @@ Chat.deleteByUser = async (user_id) => {
 
 Chat.test_json_extract = async () => {
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT id, user_ids, JSON_EXTRACT(user_ids, '$[0]'), JSON_EXTRACT(user_ids, '$[1]') FROM chats ORDER BY id DESC limit 10`, [], (err, res) => {
+    sql.query(`SELECT id, user_ids, JSON_EXTRACT(user_ids, '$[0]') as user1, JSON_EXTRACT(user_ids, '$[1]') as user2 FROM chats ORDER BY id DESC limit 10`, [], (err, res) => {
       err ? reject(err) : resolve(res);
     }); 
   });
