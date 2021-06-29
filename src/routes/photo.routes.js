@@ -17,12 +17,18 @@ const { respondValidateError } = require("../helpers/common.helpers");
 
 const activity = {
   confirmDirPath: (parent, name) => {
-    const dirPath = path.join(parent, name);
-    if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath);
+    try {
+      const dirPath = path.join(parent, name);
+      if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath);
+      } 
       return dirPath;
+    } catch (error) {
+      return false;
     }
-    return false;
+  },
+  createPhotoFromUrl: async ({ user_id, url, type }) => {
+    
   },
 }
 
@@ -95,11 +101,12 @@ photoRouters.get('/', async (req, res) => {
 });
 
 photoRouters.post('/upload', async (req, res) => {
-  const type = req.body.type || 'normal';
-  return res.json(req.body);
+  
 
   let form = formidable.IncomingForm();
   form.parse(req, function(err, fields, files) {
+    const type = fields.type || 'normal';
+    
     let oldpath = files.file.path;
     let ext = path.extname(files.file.name);// console.log('[old path]', oldpath, ext)
     let newName = `${uuid()}${ext}`;
@@ -130,6 +137,10 @@ photoRouters.post('/upload', async (req, res) => {
             details: err.message,
           });
         }
+        // add to db.
+
+        // crop images
+
         fs.unlink(oldpath, function(err) {
           if (err) {
             return res.json({
@@ -143,7 +154,7 @@ photoRouters.post('/upload', async (req, res) => {
         return res.json({
           status: true,
           message: 'File has been uploaded!',
-          url: `${config.domain}/uploads/${newName}`,
+          url: `${config.domain}/uploads/${type}/${newName}`,
         })
       })
     });
