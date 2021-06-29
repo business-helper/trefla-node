@@ -75,7 +75,7 @@ Post.pagination = async ({ limit, last_id, type = null, user_id = null, location
   // location_area ? where.push(`location_area='${location_area}'`) : null;
 
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
-
+  console.log('[Post][Where]', strWhere)
   return new Promise((resolve, reject) => {
     sql.query(`SELECT * FROM posts ${strWhere} ORDER BY id DESC LIMIT ?  `, [limit], (err, res) => {
       err ? reject(err) : resolve(res);
