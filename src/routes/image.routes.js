@@ -24,7 +24,7 @@ const activity = {
       // if external image, then redirect to it.
       if (!photo.url.includes(config.cdnDomain)) return res.redirect(photo.url);
   
-      const assetPath = photo.url.replace(config.domain, ''); // starting with '/uploads'
+      const assetPath = photo.url.replace(config.cdnDomain, ''); // starting with '/uploads'
   
       const internalPath = path.resolve(`assets/${assetPath}`);
       if (!fs.existsSync(internalPath)) throw new Error('Image not found on the server storage!');
