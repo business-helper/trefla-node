@@ -68,6 +68,16 @@ const activity = {
       return chats.length > 0;
     });
   },
+  getChatPartnerIds: async (user_id) => {
+    return models.chat.myChatrooms(user_id).then((chatrooms) => chatrooms.map((chat) => {
+      const [partner] = JSON.parse(chat.user_ids).filter((id) => Number(id) !== Number(user_id));
+      return partner;
+    })).then((partners) => partners.filter((id) => !!id).filter((id, i, self) => self.indexOf(id) === i))
+    .catch((error) => {
+      console.log('[Posts][PartnerIds][Error]', error);
+      return [];
+    });
+  },
 }
 
 exports.create = (req, res) => {
@@ -145,25 +155,29 @@ exports.pagination = async (req, res) => {
   const default_zone = config && config.apply_default_zone ? config.default_zone : null;
   let promiseAll;
 
+  const partners = await activity.getChatPartnerIds(uid);
+
+  console.log('[Post][Partners]', partners);
+
   if (type === 'ALL') {
     const me = await User.getById(uid);
     const location_area = req.body.location_area || me.location_area || '___';
     promiseAll = Promise.all([
-      Post.pagination({ limit, last_id, type: post_type, location_area, default_zone }),
-      Post.getCountOfPosts({ type: post_type, location_area, default_zone }),
-      Post.getMinIdOfPosts({ type: post_type, location_area, default_zone }),
+      Post.pagination({ limit, last_id, type: post_type, location_area, default_zone, guest_contacts: partners }),
+      Post.getCountOfPosts({ type: post_type, location_area, default_zone, guest_contacts: partners }),
+      Post.getMinIdOfPosts({ type: post_type, location_area, default_zone, guest_contacts: partners }),
     ]);
   } else if (type === 'ME') {
     promiseAll = Promise.all([
-      Post.pagination({ limit, last_id, type: post_type, user_id: uid }),
-      Post.getCountOfPosts({ type: post_type, user_id: uid }),
-      Post.getMinIdOfPosts({ type: post_type, user_id: uid })
+      Post.pagination({ limit, last_id, type: post_type, user_id: uid, guest_contacts: partners }),
+      Post.getCountOfPosts({ type: post_type, user_id: uid, guest_contacts: partners }),
+      Post.getMinIdOfPosts({ type: post_type, user_id: uid, guest_contacts: partners })
     ]);
   } else { // AROUND
     // const config = await Config.get();
     const deltaDays = config.aroundSearchDays || 100;
     const minTime = timestamp(getTimeAfter(new Date(), -deltaDays));
-    const rawPosts = await Post.getAroundPosts({ last_id, minTime });
+    const rawPosts = await Post.getAroundPosts({ last_id, minTime, guest_contacts: partners });
     // console.log('me', me);
     me = User.output(me, 'PROFILE');
     const aroundPosts = rawPosts.filter(post => checkPostLocationWithUser(post, me, config.aroundSearchPeriod, req.body.locationIndex));
@@ -175,13 +189,11 @@ exports.pagination = async (req, res) => {
 
   return promiseAll
     .then(async ([posts, total, minId]) => {
-      console.log('[Posts][Before Filter]', posts.map(it => it.id).join(', '));
       _posts = posts;
       // _posts = await activity.filterPostsByGuestAndChat({
       //   posts: _posts,
       //   me,
       // });
-      console.log('[Posts][After Filter]', _posts.map(it => it.id).join(', '));
 
       _total = total; _minId = minId;
       let poster_ids = posts.map(post => post.user_id); poster_ids.push(0);
