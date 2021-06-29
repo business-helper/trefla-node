@@ -78,3 +78,11 @@ SELECT * FROM users WHERE JSON_SEARCH(bouquet, 'one', '3') IS NOT NULL
 - online_status: n
 - last_messages: n-1,
 - lastMsgIdOnTransfer: n-2
+
+## Image Upload
+- profile
+thumbnail ->
+profile update
+
+- card
+update user.card_image_url after uploading.

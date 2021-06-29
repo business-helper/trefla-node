@@ -271,6 +271,19 @@ const populateChatSource = async (sources = [], models) => {
     .then((targets) => targets.filter(target => target));
 }
 
+const photoHash = (photo) => {
+  return `${photo.create_time}-${photo.user_id}-${photo.id}`;
+}
+
+const parsePhotoHash = (hash) => {
+  const parts = hash.split('-');
+  return {
+    create_time: parts[0],
+    user_id: parts[1],
+    id: parts[2],
+  };
+}
+
 module.exports = {
   bool2Int,
   chatPartnerId,
@@ -285,6 +298,8 @@ module.exports = {
   int2Bool,
   JSONParser,
   JSONStringify,
+  photoHash,
+  parsePhotoHash,
   populateChatSource,
 	respondError,
   respondValidateError,
