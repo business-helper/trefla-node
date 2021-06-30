@@ -1,5 +1,6 @@
 const sql = require("./db");
-const { timestamp } = require("../helpers/common.helpers");
+const config = require('../config/app.config');
+const { timestamp, photoHash } = require("../helpers/common.helpers");
 
 const Photo = function (lang) {
   this.code = lang.code;
@@ -43,7 +44,9 @@ Photo.deleteById = (id) => {
 }
 
 Photo.output = (model) => {
+  const hash = photoHash(model);
   ['create_time', 'update_time'].map(key => delete model[key]);
+  model.url_editable = `${config.domain}/images/${model.type || 'normal'}/${hash}`;
   return model;
 }
 module.exports = Photo;
