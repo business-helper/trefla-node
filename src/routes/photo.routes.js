@@ -216,8 +216,8 @@ photoRouters.post('/upload', async (req, res) => {
         return res.json({
           status: true,
           message: 'File has been uploaded!',
-          url: `${config.domain}/uploads/${type}/${newName}`,
-          data: photo,
+          url: `${config.cdnDomain}/uploads/${type}/${newName}`,
+          data: models.photo.output(photo),
         })
       })
     });
