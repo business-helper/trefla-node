@@ -1,1 +1,203 @@
-const _0x3f88=['y2f0y2G','yxnZAwDU','ywrKug9ZDfj1Bgu','Aw5JBhvKzxm','zw1HAwXFDxnLCM5HBwu','qwnJB3vUDcbHBhjLywr5igv4Axn0CYb3AxrOihrOzsbLBwfPBce','zxjYB3jZ','qwnJB3vUDcbKB2vZig5VDcbLEgLZDce','DxnLCL9Uyw1L','lI4VBwLKzgXLD2fYzxmVyMfZAwmUBwLKzgXLD2fYzq','zw1HAwW','yM9KEq','mZHXvwf4zKG','Bg9NAw5FBw9Kzq','zxjYB3i','BM9Kzs1PBNb1Dc12ywXPzgf0B3i','A2v5CW','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','odG0wKDZALzW','nZCXndfbD1f6Cve','l3jLC2v0x3bHC3n3B3jK','mtG4mM15Defwwq','mZiZndm0vMHUsfnW','DgHLBG','z2v0qNLvC2vYtMfTzq','CMvZzxrqyxnZD29Yza','lI4VAgvSCgvYCY9HDxrOlMHLBhbLCNm','Cg9ZDa','CMvXDwLYzwr8BwLUtgvUz3rOoJv8Bwf4tgvUz3rOoJuW','Bg9NAw4','nJqZCMPkzNH1','vxnLCIb3AxrOihvZzxjFBMfTzsaI','z2v0qNLfBwfPBa','l2XVz2LU','odflv0veAxa','zxHWB3j0CW','sw52ywXPzcbSB2DPBIbTB2rLiq','y3vZDg9T','ywXS','mteYuNvtqvbs','mJuZota2ChvxELPd','DxnL','vxnLCIbKB2vZig5VDcbLEgLZDcb3AxrOihrOzsbNAxzLBIbLBwfPBce','lI4Vy29UDhjVBgXLCNmVDxnLCI5JB250CM9SBgvY','tK9stufm','y2HLy2S','z2vUzxjHDgvvC2vYBMfTzq','uM91DgvY','CMvXDwLYzwr8BwLUtgvUz3rOoJr8Bwf4tgvUz3rOoJuW','Aw5WDxrZ','CMvXDwLYzwr8zw1HAwX8BwLUtgvUz3rOoJu','l2DLBI1WyxnZD29Yza','iIbHBhjLywr5igv4Axn0iq','mJq3nZe2u0rJsMHj','CMvXDwLYzwq','m2rUCe9YwG','sw52ywXPzcbYzxf1zxn0'];const _0xc55d=function(_0x403cf5,_0x7e4a3c){_0x403cf5=_0x403cf5-0x163;let _0x3f881d=_0x3f88[_0x403cf5];if(_0xc55d['dgTESL']===undefined){var _0xc55d8b=function(_0x3f6e08){const _0x21d704='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x169995='';for(let _0x5be59f=0x0,_0xd52777,_0x385ba3,_0xfef40=0x0;_0x385ba3=_0x3f6e08['charAt'](_0xfef40++);~_0x385ba3&&(_0xd52777=_0x5be59f%0x4?_0xd52777*0x40+_0x385ba3:_0x385ba3,_0x5be59f++%0x4)?_0x169995+=String['fromCharCode'](0xff&_0xd52777>>(-0x2*_0x5be59f&0x6)):0x0){_0x385ba3=_0x21d704['indexOf'](_0x385ba3);}return _0x169995;};_0xc55d['zJikEA']=function(_0x7559d9){const _0x36573c=_0xc55d8b(_0x7559d9);let _0x1aefce=[];for(let _0x2f096c=0x0,_0x3ad947=_0x36573c['length'];_0x2f096c<_0x3ad947;_0x2f096c++){_0x1aefce+='%'+('00'+_0x36573c['charCodeAt'](_0x2f096c)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x1aefce);},_0xc55d['oFymnW']={},_0xc55d['dgTESL']=!![];}const _0x37435b=_0x3f88[0x0],_0x278c00=_0x403cf5+_0x37435b,_0x41ff62=_0xc55d['oFymnW'][_0x278c00];return _0x41ff62===undefined?(_0x3f881d=_0xc55d['zJikEA'](_0x3f881d),_0xc55d['oFymnW'][_0x278c00]=_0x3f881d):_0x3f881d=_0x41ff62,_0x3f881d;};const _0x293456=_0xc55d;(function(_0x3dcf3d,_0x44e3e7){const _0x4ccbcc=_0xc55d;while(!![]){try{const _0x136d0c=parseInt(_0x4ccbcc(0x189))+parseInt(_0x4ccbcc(0x199))*-parseInt(_0x4ccbcc(0x166))+parseInt(_0x4ccbcc(0x172))*parseInt(_0x4ccbcc(0x176))+-parseInt(_0x4ccbcc(0x169))*parseInt(_0x4ccbcc(0x17b))+-parseInt(_0x4ccbcc(0x16a))+parseInt(_0x4ccbcc(0x167))*parseInt(_0x4ccbcc(0x18b))+parseInt(_0x4ccbcc(0x17c));if(_0x136d0c===_0x44e3e7)break;else _0x3dcf3d['push'](_0x3dcf3d['shift']());}catch(_0x420129){_0x3dcf3d['push'](_0x3dcf3d['shift']());}}}(_0x3f88,0x350e6));const express=require('express'),{Validator}=require(_0x293456(0x163)),authRouters=express[_0x293456(0x183)](),userCtrl=require(_0x293456(0x17f)),User=require('../models/user.model'),{basicMiddleware}=require(_0x293456(0x196)),{respondValidateError}=require(_0x293456(0x165)),{generatePassword}=require(_0x293456(0x16e)),{LOGIN_MODE}=require('../constants/common.constant');authRouters[_0x293456(0x17d)]((_0x37435b,_0x278c00,_0x41ff62)=>{basicMiddleware(_0x37435b,_0x278c00,_0x41ff62);});const activity={'generateUsername':async({email:_0x3f6e08,user:_0x21d704})=>{}};authRouters[_0x293456(0x16f)]('/register',async(_0x169995,_0x5be59f)=>{const _0x24c2f1=_0x293456;!_0x169995['body'][_0x24c2f1(0x195)]&&(_0x169995['body'][_0x24c2f1(0x195)]=await userCtrl[_0x24c2f1(0x182)](_0x169995['body'][_0x24c2f1(0x197)]));const _0xd52777=new Validator({..._0x169995['body']},{'user_name':_0x24c2f1(0x184),'email':_0x24c2f1(0x186),'password':_0x24c2f1(0x170),'device_token':_0x24c2f1(0x18a)});return _0xd52777['addPostRule'](async _0x385ba3=>Promise['all']([User[_0x24c2f1(0x16c)](_0x385ba3['inputs'][_0x24c2f1(0x195)]),User['getByEmail'](_0x385ba3[_0x24c2f1(0x185)][_0x24c2f1(0x197)])])[_0x24c2f1(0x16b)](([_0xfef40,_0x7559d9])=>{const _0x501991=_0x24c2f1;_0xfef40&&_0x385ba3[_0x501991(0x19b)]('user_name',_0x501991(0x179),_0x501991(0x173)+_0x385ba3[_0x501991(0x185)]['user_name']+_0x501991(0x188)),_0x7559d9&&_0x385ba3[_0x501991(0x19b)](_0x501991(0x197),'custom',_0x501991(0x192));})),_0xd52777[_0x24c2f1(0x181)]()['then'](_0x36573c=>{const _0x2436c9=_0x24c2f1;if(!_0x36573c)throw Object[_0x2436c9(0x18e)](new Error(_0x2436c9(0x18c)),{'code':0x190,'details':_0xd52777[_0x2436c9(0x193)]});})[_0x24c2f1(0x16b)](()=>userCtrl['register'](_0x169995,_0x5be59f))[_0x24c2f1(0x18d)](_0x1aefce=>respondValidateError(_0x5be59f,_0x1aefce));}),authRouters[_0x293456(0x16f)](_0x293456(0x175),async(_0x2f096c,_0x3ad947)=>{const _0x3dade9=_0x293456;_0x2f096c[_0x3dade9(0x198)]['login_mode']=_0x2f096c[_0x3dade9(0x198)]['login_mode']||LOGIN_MODE[_0x3dade9(0x180)];const _0x159eeb=new Validator(_0x2f096c[_0x3dade9(0x198)],{'email_username':_0x3dade9(0x18a),'password':'required|minLength:5|maxLength:50','login_mode':_0x3dade9(0x18a)});return _0x159eeb[_0x3dade9(0x18f)](async _0x1f9557=>Promise[_0x3dade9(0x17a)]([User['getByEmail'](_0x1f9557['inputs']['email_username']),User['getByUserName'](_0x1f9557[_0x3dade9(0x185)][_0x3dade9(0x191)])])[_0x3dade9(0x16b)](([_0x3ce929,_0x390304])=>{const _0x55b809=_0x3dade9;!_0x3ce929&&!_0x390304&&_0x1f9557['error']('email_username','custom',_0x55b809(0x194)),!Object[_0x55b809(0x164)](LOGIN_MODE)[_0x55b809(0x190)](_0x2f096c[_0x55b809(0x198)][_0x55b809(0x19a)])&&_0x1f9557['error'](_0x55b809(0x19a),_0x55b809(0x179),_0x55b809(0x178));})),_0x159eeb[_0x3dade9(0x181)]()[_0x3dade9(0x16b)](_0x5bda0b=>{const _0x24cae6=_0x3dade9;if(!_0x5bda0b)throw Object[_0x24cae6(0x18e)](new Error(_0x24cae6(0x18c)),{'code':0x190,'details':_0x159eeb[_0x24cae6(0x193)]});})[_0x3dade9(0x16b)](async()=>{const _0x15f4b9=_0x3dade9;return userCtrl[_0x15f4b9(0x171)](_0x2f096c,_0x3ad947);})['catch'](_0x5bac0e=>respondValidateError(_0x3ad947,_0x5bac0e));}),authRouters[_0x293456(0x16f)]('/forgot_password',async(_0x18cbea,_0x393612)=>{const _0x361bd0=_0x293456,_0x1f52f5=new Validator(_0x18cbea[_0x361bd0(0x198)],{'email':_0x361bd0(0x186),'code':_0x361bd0(0x18a)});return _0x1f52f5['addPostRule'](async _0x29b414=>Promise['all']([User[_0x361bd0(0x174)](_0x29b414[_0x361bd0(0x185)][_0x361bd0(0x197)])])[_0x361bd0(0x16b)](([_0x20d5ec])=>{const _0x28d483=_0x361bd0;!_0x20d5ec&&_0x29b414[_0x28d483(0x19b)](_0x28d483(0x197),'custom',_0x28d483(0x17e));})),_0x1f52f5[_0x361bd0(0x181)]()[_0x361bd0(0x16b)](_0x1b5f6c=>{const _0x2857ac=_0x361bd0;if(!_0x1b5f6c)throw Object[_0x2857ac(0x18e)](new Error(_0x2857ac(0x18c)),{'code':0x190,'details':_0x1f52f5['errors']});})[_0x361bd0(0x16b)](()=>userCtrl['forgotPassword'](_0x18cbea,_0x393612))['catch'](_0x31cf68=>respondValidateError(_0x393612,_0x31cf68));}),authRouters['post'](_0x293456(0x168),async(_0x518ad0,_0x57b226)=>{const _0x130e00=_0x293456,_0x1f8193=new Validator(_0x518ad0['body'],{'email':_0x130e00(0x186),'password':_0x130e00(0x170),'code':_0x130e00(0x18a)});return _0x1f8193[_0x130e00(0x18f)](async _0x3c045e=>Promise[_0x130e00(0x17a)]([User['getByEmail'](_0x3c045e[_0x130e00(0x185)]['email'])])[_0x130e00(0x16b)](([_0x4bbc5c])=>{const _0x40c20c=_0x130e00;!_0x4bbc5c&&_0x3c045e[_0x40c20c(0x19b)](_0x40c20c(0x197),_0x40c20c(0x179),_0x40c20c(0x17e));})),_0x1f8193[_0x130e00(0x181)]()[_0x130e00(0x16b)](_0x15f0ea=>{const _0x1e08ee=_0x130e00;if(!_0x15f0ea)throw Object[_0x1e08ee(0x18e)](new Error(_0x1e08ee(0x18c)),{'code':0x190,'details':_0x1f8193[_0x1e08ee(0x193)]});})[_0x130e00(0x16b)](()=>userCtrl[_0x130e00(0x16d)](_0x518ad0,_0x57b226))['catch'](_0x4ccfe8=>respondValidateError(_0x57b226,_0x4ccfe8));}),authRouters[_0x293456(0x16f)](_0x293456(0x187),async(_0x476447,_0x2bd874)=>{const _0x1b3f0d=_0x293456,{password:_0x2a5695}=_0x476447[_0x1b3f0d(0x198)];return generatePassword(_0x2a5695)[_0x1b3f0d(0x16b)](_0xc0a0b5=>_0x2bd874['json']({'status':!![],'password':_0xc0a0b5}))[_0x1b3f0d(0x18d)](_0x54e56c=>respondValidateError(_0x2bd874,_0x54e56c));}),module[_0x293456(0x177)]=authRouters;
+const express = require("express");
+const { Validator } = require("node-input-validator");
+const authRouters = express.Router();
+const userCtrl = require("../controllers/user.controller");
+const User = require("../models/user.model");
+const AppleToken = require("../models/appleToken.model");
+const { basicMiddleware } = require("../middlewares/basic.middleware");
+const { respondValidateError } = require("../helpers/common.helpers");
+const { generatePassword } = require("../helpers/auth.helpers");
+const { generateAppleToken } = require("../helpers/model.helpers");
+const { LOGIN_MODE } = require('../constants/common.constant');
+
+// basic authentication
+authRouters.use((req, res, next) => {
+  basicMiddleware(req, res, next);
+});
+
+
+const activity = {
+  generateUsername: async ({ email, user }) => {
+
+  },
+};
+
+authRouters.post("/register", async (req, res) => {
+  // const { user_name, email, password, language, isGuest, guestName, location_address, location_coordinate, birthday, sex, avatarIndex, card_verified, card_number } = req.body;
+
+  if (!req.body.user_name) {
+    req.body.user_name = await userCtrl.generateUsername(req.body.email);
+  }
+
+  const validator = new Validator({...req.body}, {
+    user_name: "required|minLength:4|maxLength:50",
+    email: "required|email|minLength:5",
+    password: "required|minLength:5|maxLength:50",
+    device_token: "required",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      User.getByUserName(provider.inputs.user_name),
+      // User.duplicatedByEmailSocial(provider.inputs.email, req.body.login_mode),
+      User.getByEmail(provider.inputs.email),
+    ]).then(([userByUserName, duplicated]) => {
+      if (userByUserName) {
+        provider.error("user_name", "custom", `User with user_name "${provider.inputs.user_name}" already exist!`);
+      }
+      if (duplicated) {
+        provider.error("email", "custom", `Account already exists with the email!`);
+      }
+    })
+  );
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => userCtrl.register(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
+
+authRouters.post("/login", async (req, res) => {
+  req.body.login_mode = req.body.login_mode || LOGIN_MODE.NORMAL;
+  const validator = new Validator(req.body, {
+    email_username: "required",
+    password: "required|minLength:5|maxLength:50",
+    login_mode: "required",
+    // device_token: "required"
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([
+      User.getByEmail(provider.inputs.email_username),
+      User.getByUserName(provider.inputs.email_username)
+    ]).then(
+      ([userByEmail, userByName]) => {
+        if (!userByEmail && !userByName) {
+          provider.error(
+            "email_username",
+            "custom",
+            `Account does not exist!`
+          );
+        }
+        if (!Object.keys(LOGIN_MODE).includes(req.body.login_mode)) {
+          provider.error('login_mode', 'custom', 'Invalid login mode!');
+        }
+      }
+    )
+  );
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), { code: 400, details: validator.errors });
+      }
+    })
+    .then(async () => {
+      return userCtrl.login(req, res);
+    })
+    .catch((error) => respondValidateError(res, error));
+});
+
+authRouters.post("/forgot_password", async (req, res) => {
+  const validator = new Validator(req.body, {
+    email: "required|email|minLength:5",
+    // user_id: "required|integer",
+    code: "required",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([User.getByEmail(provider.inputs.email)]).then(
+      ([userByEmail]) => {
+        if (!userByEmail) {
+          provider.error(
+            "email",
+            "custom",
+            `User does not exist with the given email!`
+          );
+        }
+      }
+    )
+  );
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => userCtrl.forgotPassword(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
+
+authRouters.post("/reset_password", async (req, res) => {
+  const validator = new Validator(req.body, {
+    email: "required|email|minLength:5",
+    password: "required|minLength:5|maxLength:50",
+    code: "required",
+  });
+
+  validator.addPostRule(async (provider) =>
+    Promise.all([User.getByEmail(provider.inputs.email)]).then(
+      ([userByEmail]) => {
+        if (!userByEmail) {
+          provider.error("email", "custom", `User does not exist with the given email!`);
+        }
+      }
+    )
+  );
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+    })
+    .then(() => userCtrl.resetPassword(req, res))
+    .catch((error) => respondValidateError(res, error));
+});
+
+authRouters.post('/gen-password', async (req, res) => {
+  const { password } = req.body;
+  return generatePassword(password)
+    .then(pass => res.json({ status: true, password: pass }))
+    .catch(error => respondValidateError(res, error));
+});
+
+authRouters.post('/apple-token', async (req, res) => {
+  const { token, email, name } = req.body;
+  return AppleToken.getByToken(token).then((row) => {
+    if (row) return res.json({
+      status: true,
+      message: 'exists',
+      data: row,
+    });
+
+    // add new
+    const tokenData = generateAppleToken({ token, email, name });
+    return AppleToken.create(tokenData).then((tokenRow) => res.json({
+      status: true,
+      message: 'created',
+      data: tokenRow,
+    }));
+  })
+  .catch((error) => respondValidateError(res, error));
+});
+
+module.exports = authRouters;
