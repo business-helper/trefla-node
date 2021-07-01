@@ -85,8 +85,14 @@ exports.register = async (req, res) => {
     }
   }
 
+  const config =  await models.config.getById(1);
+
   // if card is already verified, then user can't have that card.
-  const userData = generateUserData({ ...req.body, card_number: verifiedUser ? '' : new_number });
+  const userData = generateUserData({
+    ...req.body,
+    card_number: verifiedUser ? '' : new_number,
+    users_around_radius: config.defaultUserRadiusAround,
+  });
 
   return generatePassword(userData.password)
     .then(encPassword => {
