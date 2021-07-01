@@ -1,6 +1,7 @@
 const admin = require('./admin.model');
 const adminNotification = require("./adminNotification.model");
 const adminPermission = require('./adminPermission.model');
+const appleToken = require('./appleToken.model');
 const bug = require('./bug.model');
 const chat = require('./chat.model');
 const comment = require('./comment.model');
@@ -21,6 +22,7 @@ module.exports = {
   admin,
   adminNotification,
   adminPermission,
+  appleToken,
   bug,
   chat,
   config,
