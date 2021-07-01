@@ -37,7 +37,7 @@ const activity = {
     return Photo.create(photoData);
   },
   cropToThumnail: async ({ originPath, user_id }) => {
-    const sizes = [50, 100];
+    const sizes = [40, 80];
     const image = sharp(originPath);
     const { width, height, format } = await image.metadata();
     console.log('[MetaData]', width, height, format)

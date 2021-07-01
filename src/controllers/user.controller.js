@@ -57,7 +57,7 @@ const activity = {
     return users.filter((user) => {
       const userPos = helpers.common.getUserLastLocation(user);
       const d = helpers.common.getDistanceFromLatLonInMeter(pos, userPos);
-      const r = me.radiusAround;
+      const r = Number(me.users_around_radius);
       return d <= r;
     });
   },
@@ -85,8 +85,14 @@ exports.register = async (req, res) => {
     }
   }
 
+  const config =  await models.config.getById(1);
+
   // if card is already verified, then user can't have that card.
-  const userData = generateUserData({ ...req.body, card_number: verifiedUser ? '' : new_number });
+  const userData = generateUserData({
+    ...req.body,
+    card_number: verifiedUser ? '' : new_number,
+    users_around_radius: config.defaultUserRadiusAround,
+  });
 
   return generatePassword(userData.password)
     .then(encPassword => {
@@ -1049,6 +1055,8 @@ exports.getUsersInMyArea = async (req, res) => {
   let { page, limit } = req.query;
   page = Number(page || 0);
   limit = Number(limit || 50);
+
+  const config = await models.config.getById(1);
 
   const { uid: user_id } = getTokenInfo(req);
   const contacts = await activity.getChatPartnerIds(user_id);
