@@ -27,9 +27,11 @@ Photo.getById = (id) => {
   });
 }
 
-Photo.getByUser = (user_id) => {
+Photo.getByUser = (user_id, types) => {
+  const str = types.map((type) => `'${type}'`).join(',');
+  const query = `SELECT * FROM photos WHERE user_id=${user_id} AND type in (${str})`; console.log('[Query]', query)
   return new Promise((resolve, reject) => {
-    sql.query("SELECT * FROM photos WHERE user_id=?", [user_id], (err, res) => {
+    sql.query(`SELECT * FROM photos WHERE user_id=? AND type in (${str})`, [user_id], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
