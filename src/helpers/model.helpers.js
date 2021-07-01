@@ -2,6 +2,7 @@ const {
   DEFAULT_ADMIN,
   DEFAULT_ADMIN_NOTIFICATION,
   DEFAULT_ADMIN_PERMISSION,
+  DEFAULT_APPLE_TOKEN,
   DEFAULT_BUG,
   DEFAULT_COMMENT,
   DEFAULT_COMMENTLIKE,
@@ -55,6 +56,16 @@ const generateAdminPermissionData = (basicData, admin_role = ADMIN_ROLE.ADMIN) =
   defaultKeys.forEach(key => {
     data[key] = basicData[key] !== undefined ? basicData[key] : DEFAULT_ADMIN_PERMISSION[key];
   })
+  data.create_time = data.update_time = timestamp();
+  return data;
+}
+
+const generateAppleToken = (basicData) => {
+  const defaultKeys = Object.keys(DEFAULT_APPLE_TOKEN);
+  const data = {};
+  defaultKeys.forEach((field, i) => {
+    data[field]  = basicData[field] !== undefined ? basicData[field] : DEFAULT_APPLE_TOKEN[field];
+  });
   data.create_time = data.update_time = timestamp();
   return data;
 }
@@ -290,6 +301,7 @@ module.exports = {
   generateAdminData,
   generateAdminNotiData,
   generateAdminPermissionData,
+  generateAppleToken,
   generateBugData,
   generateChatData,
   generateCommentData,

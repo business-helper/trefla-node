@@ -3,9 +3,11 @@ const { Validator } = require("node-input-validator");
 const authRouters = express.Router();
 const userCtrl = require("../controllers/user.controller");
 const User = require("../models/user.model");
+const AppleToken = require("../models/appleToken.model");
 const { basicMiddleware } = require("../middlewares/basic.middleware");
 const { respondValidateError } = require("../helpers/common.helpers");
 const { generatePassword } = require("../helpers/auth.helpers");
+const { generateAppleToken } = require("../helpers/model.helpers");
 const { LOGIN_MODE } = require('../constants/common.constant');
 
 // basic authentication
@@ -176,6 +178,26 @@ authRouters.post('/gen-password', async (req, res) => {
   return generatePassword(password)
     .then(pass => res.json({ status: true, password: pass }))
     .catch(error => respondValidateError(res, error));
+});
+
+authRouters.post('/apple-token', async (req, res) => {
+  const { token, email, name } = req.body;
+  return AppleToken.getByToken(token).then((row) => {
+    if (row) return res.json({
+      status: true,
+      message: 'exists',
+      data: row,
+    });
+
+    // add new
+    const tokenData = generateAppleToken({ token, email, name });
+    return AppleToken.create(tokenData).then((tokenRow) => res.json({
+      status: true,
+      message: 'created',
+      data: tokenRow,
+    }));
+  })
+  .catch((error) => respondValidateError(res, error));
 });
 
 module.exports = authRouters;

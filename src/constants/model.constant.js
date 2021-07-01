@@ -84,6 +84,15 @@ exports.DEFAULT_ADMIN_NOTIFICATION = {
   update_time: timestamp(),
 };
 
+exports.DEFAULT_APPLE_TOKEN = {
+  id: '',
+  name: '',
+  email: '',
+  token: 0,
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
 exports.DEFAULT_BUG = {
   id: '',
   user_id: 0,
