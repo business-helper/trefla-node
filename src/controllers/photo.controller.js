@@ -38,7 +38,9 @@ exports.getById = (req, res) => {
 
 exports.getByUserIdReq = (req, res) => {
   const { id: user_id } = req.params;
-  return Photo.getByUser(user_id)
+  const { type } = req.query;
+  const types = type.split(',');
+  return Photo.getByUser(user_id, types)
     .then(photos => {
       return {
         status: true,
