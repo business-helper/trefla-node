@@ -85,7 +85,7 @@ exports.DEFAULT_ADMIN_NOTIFICATION = {
 };
 
 exports.DEFAULT_APPLE_TOKEN = {
-  id: '',
+  // id: '',
   name: '',
   email: '',
   token: 0,
