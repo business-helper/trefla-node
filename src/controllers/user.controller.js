@@ -1088,6 +1088,7 @@ exports.getUsersInMyArea = async (req, res) => {
           status: true,
           message: 'success',
           data: usersF,
+          hasMore: false,
         });
       });
   });
