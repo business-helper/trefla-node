@@ -37,6 +37,7 @@ appV1.use('/photo', photoRouters);
 appV1.use('/post', postRouters);
 appV1.use('/report', reportRouters);
 appV1.use('/user', userRouters);
+appV1.use('/public', require('./routes/public.routes'));
 
 appV1.post('/init-data', getInitData);
 
