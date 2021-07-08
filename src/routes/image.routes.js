@@ -46,7 +46,9 @@ const activity = {
         return res.sendFile(internalPath);
       } else {
         const thumbPath = await activity.generateThumbPath({ assetPath, shape_type, size });
-        return res.sendFile(thumbPath);
+        // var s = fs.createReadStream(file);
+        // return res.sendFile(thumbPath);
+        return activity.sendImage(thumbPath, res);
       }
     })
     .catch((error) => {
@@ -99,6 +101,30 @@ const activity = {
         resolve(targetPath)
       })
     });   
+  },
+  sendImage: async (file, res) => {
+    var mime = {
+      html: 'text/html',
+      txt: 'text/plain',
+      css: 'text/css',
+      gif: 'image/gif',
+      jpg: 'image/jpeg',
+      png: 'image/png',
+      svg: 'image/svg+xml',
+      js: 'application/javascript'
+    };
+    // return new Promise((resolve, reject) => {
+      var type = `image/${path.extname(file).slice(1)}`;
+      var s = fs.createReadStream(file);
+      s.on('open', function () {
+        res.set('Content-Type', type);
+        s.pipe(res);
+      });
+      s.on('error', function () {
+        res.set('Content-Type', 'text/plain');
+        res.status(404).end('Not found');
+      });
+    // });
   },
 }
 
