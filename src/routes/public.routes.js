@@ -17,11 +17,13 @@ routes.route('/profile/:username').get(async (req, res) => {
     username: "required",
   });
 
+  let foundUser;
   niv.addPostRule(provider => models.user.getByUserName(username).then((user) => {
     if (!user) {
       provider.error('username', 'custom', "User not found with the given username!");
     }
-  }))
+    foundUser = user;
+  }));
 
   return niv.check()
     .then((matched) => {
@@ -29,14 +31,18 @@ routes.route('/profile/:username').get(async (req, res) => {
         code: 400,
         details: niv.errors,
       });
-      return models.user.getByUserName(username);
+      return Promise.all([
+        models.user.getByUserName(username),
+        models.photo.getByUser(foundUser.id),
+      ]);
     })
-    .then((user) => {
+    .then(([user, photos]) => {
       return res.json({
         status: true,
         message: "success",
         data: {
           user: models.user.output(user, 'PUBLIC'),
+          photos: photos.map(photo => models.photo.output(photo)),
         },
       });
     })
