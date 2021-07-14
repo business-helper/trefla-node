@@ -249,6 +249,7 @@ User.output = (user, mode = 'NORMAL') => {
     const fields = ['id', 'user_name', 'location_area', 'card_number', 'card_verified', 'sex', 'birthday', 'language', 'bio', 'isGuest', 'guestName', 'avatarIndex', 'photo', 'location_address', 'city', 'online', 'guest_mood_status', 'normal_mood_status', 'socket_id', 'active', 'profile_done', 'theme_color', 'create_time'];
     const toReturn = {};
     fields.forEach((key, i) => toReturn[key] = user[key]);
+    toReturn.social_links = JSONParser(user.social_links);
     return toReturn;
   }
   // delete the given keys
