@@ -280,6 +280,7 @@ exports.DEFAULT_USER = {
   location_coordinate: '',
   location_address: '',
   location_array: JSON.stringify([]),
+  social_links: JSON.stringify([]),
   postAroundCenterCoordinate: '',
   city: '',
   ban_reason: "",
