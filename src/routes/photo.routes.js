@@ -30,9 +30,9 @@ const activity = {
       return false;
     }
   },
-  addPhoto: async ({ user_id, url, type }) => {
+  addPhoto: async ({ user_id, url, type, ratio }) => {
     const photoData = helpers.model.generatePhotoData({
-      user_id, url, type
+      user_id, url, type, ratio
     })
     return Photo.create(photoData);
   },
@@ -159,7 +159,9 @@ photoRouters.post('/upload', async (req, res) => {
 
   let form = formidable.IncomingForm();
   form.parse(req, function(err, fields, files) {
+    console.log('[Forms]', fields)
     const type = fields.type || 'normal';
+    const ratio = fields.ratio || 1;
     
     let oldpath = files.file.path;
     let ext = path.extname(files.file.name);// console.log('[old path]', oldpath, ext)
@@ -204,7 +206,7 @@ photoRouters.post('/upload', async (req, res) => {
         })
 
         // add to db.
-        const photo = await activity.addPhoto({ url, user_id, type });
+        const photo = await activity.addPhoto({ url, user_id, type, ratio });
         // crop image if type is 'profile'
         if (type === 'profile') {
           await activity.cropToThumnail({ user_id, originPath: newpath })
