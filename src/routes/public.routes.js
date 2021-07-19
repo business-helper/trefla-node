@@ -33,7 +33,7 @@ routes.route('/profile/:username').get(async (req, res) => {
       });
       return Promise.all([
         models.user.getByUserName(username),
-        models.photo.getByUser(foundUser.id, ['normal']),
+        models.photo.getByUser(foundUser.id, ['normal', 'youtube']),
       ]);
     })
     .then(([user, photos]) => {
