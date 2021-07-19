@@ -20,6 +20,8 @@ db-migrate create migrate-in-table
 db-migrate up
 ```
 
+## CI/CD
+referred to [this article](https://ironeko.com/posts/how-to-set-up-a-ci-cd-pipeline-to-an-ubuntu-server-with-github)
 
 ## Tech stacks
 
