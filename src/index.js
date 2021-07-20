@@ -33,6 +33,10 @@ app.get("/health", (req, res) => {
 	res.json({ status: true, message: "I'm healthy!" });
 });
 
+app.get('/version', (req, res) => {
+  return res.send('2021-07-20');
+})
+
 // Handle 404 Path
 app.use((req, res, next) => {
 	res.status(404).json({

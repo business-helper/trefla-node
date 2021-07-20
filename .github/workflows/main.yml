@@ -34,3 +34,21 @@ jobs:
       #   run: |
       #     echo Add other actions to build,
       #     echo test, and deploy your project.
+
+deploy:
+  runs-on: ubuntu-latset
+  needs: buildA # this job depends on 'buildA' having finished
+  steps:
+    - name Deploying to Ubuntu server
+    uses: appleboy/ssh-action@master
+    with:
+      host: ${{ secrets.SSH_HOST }}
+      username: ${{ secrets.SSH_USERNAME }}
+      password: ${{ secrets.SSH_PASSWORD }}
+      port: ${{ secrets.SSH_PORT }}
+      scripts: |
+        cd /home/ubuntu/trefla-node
+        git pull origin master
+        npm install
+        pm2 restart trefla
+
