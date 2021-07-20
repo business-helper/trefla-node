@@ -23,11 +23,19 @@ db-migrate up
 ## CI/CD
 referred to [this article](https://ironeko.com/posts/how-to-set-up-a-ci-cd-pipeline-to-an-ubuntu-server-with-github)
 
+- GEN SSH Key
+https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+- before 'git pull'
+https://stackoverflow.com/a/21909432/9644424
+
+
 - [Generating a new SSH key and adding it to the ssh-agent](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
 ```bash
 ssh-keygen -t ed25519 -C "your_email@example.com"
 
+# [Could not open a connection to your authentication agent](https://stackoverflow.com/a/21909432/9644424)
 ssh-agent -s
 ssh-add ~/.ssh/rsa_git
 ```

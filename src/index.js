@@ -52,4 +52,8 @@ const io = require('socket.io')(http);
 // app.locals.socketClient = socketClient;
 bootstrapSocket(io);
 
-http.listen(Number(appConfig.port), () => `Server running on port ${appConfig.port}`);
+if (require.main === module) {
+  http.listen(Number(appConfig.port), () => `Server running on port ${appConfig.port}`);
+} else {
+  module.exports = http;
+}
