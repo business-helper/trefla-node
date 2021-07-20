@@ -39,7 +39,7 @@ deploy:
   runs-on: ubuntu-latset
   needs: buildA # this job depends on 'buildA' having finished
   steps:
-    - name Deploying to Ubuntu server
+    - name: Deploying to Ubuntu server
     uses: appleboy/ssh-action@master
     with:
       host: ${{ secrets.SSH_HOST }}
