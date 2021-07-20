@@ -48,7 +48,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /home/ubuntu/trefla-node
-            git pull origin master
+            git pull github master
             npm install
             pm2 restart trefla
 
