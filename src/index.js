@@ -34,7 +34,7 @@ app.get("/health", (req, res) => {
 });
 
 app.get('/version', (req, res) => {
-  return res.send('2021-07-20');
+  return res.send('2021-07-20 11:26 AM');
 })
 
 // Handle 404 Path
