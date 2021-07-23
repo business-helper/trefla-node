@@ -2,6 +2,8 @@ const sql = require("./db");
 const config = require('../config/app.config');
 const { timestamp, photoHash } = require("../helpers/common.helpers");
 
+const table = 'photos';
+
 const Photo = function (lang) {
   this.code = lang.code;
   this.name = lang.name;
@@ -18,6 +20,15 @@ Photo.create = (model) => {
     });
   });
 };
+
+Photo.save = async (model) => {
+  model.update_time = timestamp();
+  return new Promise((resolve, reject) => {
+    sql.query(`UPDATE ${table} SET ? WHERE id=?`, [model, model.id], (err, res) => {
+      err ? reject(err) : resolve(Photo.getById(model.id));
+    });
+  });
+}
 
 Photo.getById = (id) => {
   return new Promise((resolve, reject) => {
