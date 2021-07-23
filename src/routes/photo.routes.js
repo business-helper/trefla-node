@@ -7,6 +7,9 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const sharp = require('sharp');
+const ffmpeg = require('ffmpeg');
+const FfmpegCommand = require('fluent-ffmpeg');
+const extractFrames = require('ffmpeg-extract-frames')
 
 const config = require('../config/app.config');
 const photoCtrl = require("../controllers/photo.controller");
@@ -16,7 +19,7 @@ const models = require('../models');
 const helpers = require('../helpers');
 const { BearerMiddleware } = require("../middlewares/basic.middleware");
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { respondValidateError, timestamp } = require("../helpers/common.helpers");
+const { respondValidateError, timestamp, photoHash } = require("../helpers/common.helpers");
 
 const activity = {
   confirmDirPath: (parent, name) => {
@@ -34,7 +37,12 @@ const activity = {
     const photoData = helpers.model.generatePhotoData({
       user_id, url, type, ratio
     })
-    return Photo.create(photoData);
+    return Photo.create(photoData)
+      .then(photo => {
+        const hash = photoHash(photo);
+        photo.thumbnail = hash;
+        return Photo.save(photo);
+      });
   },
   cropToThumnail: async ({ originPath, user_id }) => {
     const sizes = [40, 80];
@@ -83,6 +91,42 @@ const activity = {
         user.update_time = timestamp();
         return models.user.save(user);
       });
+  },
+  readFile: (path_from) => {
+    return new Promise((resolve, reject) => {
+      fs.readFile(path_from, (err, data) => {
+        if (err) reject(err);
+        resolve(data);
+      });
+    });
+  },
+  writeFile: (path_to, data) => {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(path_to, data, (err) => {
+        err ? reject(err) : resolve(true);
+      });
+    });
+  },
+  deleteFile: (path) => {
+    return new Promise((resolve, reject) => {
+      fs.unlink(path, (err) => {
+        err ? reject(err) : resolve(true);
+      });
+    });
+  },
+  extractThumbnailFromVideo: ({ src, photo }) => {
+    const dirPath = activity.confirmDirPath(path.resolve('assets/uploads'), 'frames');
+    const frameName = `${uuid()}.jpg`;
+    return extractFrames({
+      input: src,
+      output: path.resolve(dirPath, frameName),
+      offsets: [1000],
+    })
+    .then((what) => {
+      console.log('[What]', what);
+      photo.thumbnail = `${config.cdnDomain}/uploads/frames/${frameName}`;
+      return models.photo.save(photo);
+    });
   },
 }
 
@@ -156,74 +200,57 @@ photoRouters.get('/', async (req, res) => {
 
 photoRouters.post('/upload', async (req, res) => {
   const { uid: user_id } = helpers.auth.getTokenInfo(req);
-
   let form = formidable.IncomingForm();
-  form.parse(req, function(err, fields, files) {
-    console.log('[Forms]', fields)
-    const type = fields.type || 'normal';
-    const ratio = fields.ratio || 1;
-    
-    let oldpath = files.file.path;
-    let ext = path.extname(files.file.name);// console.log('[old path]', oldpath, ext)
-    let newName = `${uuid()}${ext}`;
-
-    const dirPath = activity.confirmDirPath(path.resolve('assets/uploads'), type);
-
-    if (!dirPath) {
-      return res.json({
-        'status': false,
-        'message': 'Failed to create path!',
+  
+  // convert callback => promise.
+  const parseForm = () => {
+    return new Promise((resolve, reject) => {
+      form.parse(req, (err, fields, files) => {
+        if (err) reject(err);
+        resolve({ fields, files });
       });
-    }
+    });
+  };
 
-    let newpath = path.join(dirPath, newName);
+  return parseForm()
+    .then(async ({ fields, files }) => {
+      const type = fields.type || 'normal';
+      const ratio = fields.ratio || 1;
 
-    let url = `${config.cdnDomain}/uploads/${type}/${newName}`;
-    fs.readFile(oldpath, function(err, data) {
-      if (err) {
-        return res.json({
-          status: false,
-          message: 'Failed to read file...',
-          details: err.message,
-        });
-      }
-      fs.writeFile(newpath, data, async function(err) {
-        if (err) {
-          return res.json({
-            status: false,
-            message: 'Failed to write file...',
-            details: err.message,
-          });
-        }
-        fs.unlink(oldpath, function(err) {
-          if (err) {
-            return res.json({
-              status: false,
-              message: 'Failed to delete file...',
-              details: err.message,
-            });
+      const oldPath = files.file.path;
+      const ext = path.extname(files.file.name);
+      const newName = `${uuid()}${ext}`;
+      const dirPath = activity.confirmDirPath(path.resolve('assets/uploads'), type);
+
+      if (!dirPath) throw new Error('Failed to create path!');
+      
+      const newPath = path.join(dirPath, newName);
+      const url = `${config.cdnDomain}/uploads/${type}/${newName}`;
+      
+      return activity.readFile(oldPath)
+        .then(data => activity.writeFile(newPath, data))
+        .then(() => activity.deleteFile(oldPath))
+        .then(() => activity.addPhoto({ url, user_id, type, ratio }))
+        .then(async (photo) => {
+          // crop image if type is 'profile'
+          if (type === 'profile') {
+            await activity.cropToThumnail({ user_id, originPath: newpath })
+              .then(() => activity.updateProfilePhoto({ photo }))
+          } else if (type === 'card') {
+            await activity.updateUserCardImageURL({ user_id, url })
+          } else if (type == 'video') {
+            return activity.extractThumbnailFromVideo({ src: newPath, photo });
           }
+          return photo;
         })
-
-        // add to db.
-        const photo = await activity.addPhoto({ url, user_id, type, ratio });
-        // crop image if type is 'profile'
-        if (type === 'profile') {
-          await activity.cropToThumnail({ user_id, originPath: newpath })
-            .then(() => activity.updateProfilePhoto({ photo }))
-        } else if (type === 'card') {
-          await activity.updateUserCardImageURL({ user_id, url })
-        }
-
-        return res.json({
+        .then((photo) => res.json({
           status: true,
           message: 'File has been uploaded!',
           url: `${config.cdnDomain}/uploads/${type}/${newName}`,
           data: models.photo.output(photo),
-        })
-      })
-    });
-  })
+        }));        
+    })
+    .catch(error => respondValidateError(res, error));
 });
 
 photoRouters.post('/', async (req, res) => {

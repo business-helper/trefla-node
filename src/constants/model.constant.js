@@ -193,6 +193,7 @@ exports.DEFAULT_NOTIFICATION = {
   is_read: 0,
   isFromAdmin: 0,
   isGuest: 0,
+  text: '',
   create_time: timestamp(),
   update_time: timestamp(),
 };
@@ -203,6 +204,7 @@ exports.DEFAULT_PHOTO = {
   url: '',
   type: 'normal',
   ratio: '',
+  thumbnail: '',
   create_time: timestamp(),
   update_time: timestamp(),
 };

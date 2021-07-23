@@ -767,6 +767,13 @@ exports.unverifyUserReq = (req, res) => {
     }));
 }
 
+exports.rejectIdVerification = (req, res) => {
+  const { user_id, reason } = req.body;
+  
+}
+
+
+
 exports.banReplyReq = (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
 
