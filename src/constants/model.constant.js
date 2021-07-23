@@ -176,6 +176,7 @@ exports.DEFAULT_MESSAGE = {
   isOnlyEmoji: 0,
   numEmoji: 0,
   sizeEmoji: 0,
+  optional: '',
   type: 0,
   status: 1,
   time: generateTZTimeString(),
