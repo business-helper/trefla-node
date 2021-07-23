@@ -126,6 +126,17 @@ const activity = {
       console.log('[What]', what);
       photo.thumbnail = `${config.cdnDomain}/uploads/frames/${frameName}`;
       return models.photo.save(photo);
+    })
+    .then(async photo => {
+      const thumbnail_param = {
+        user_id: photo.user_id,
+        url: photo.thumbnail,
+        type: 'internal',
+        ratio: 1,
+      };
+      const thumbnail = await activity.addPhoto(thumbnail_param);
+      photo.thumbnail = thumbnail.thumbnail;
+      return models.photo.save(photo);
     });
   },
 }
