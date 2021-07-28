@@ -1,1 +1,53 @@
-const _0x17a4=['u0vmrunuicOGrLjptsbJB25MAwCGv0HfuKuGAwq9pYbmsu1jvcaX','y3jLyxrL','DxbKyxrLx3rPBwu','z2v0qNLjza','Aw5Zzxj0swq','mteZnde3ounfAejSua','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','mJeWndi0yKPdChzj','vvbeqvrfignVBMzPzYbtrvqGpYbxsevsrsbPzd0/','mtq2mJa5m3DMAw1jqq','lI9KyG','B3v0Chv0','mZi3mJHnCLD5zKW','mtqYndi3mKf6uerUwG','mxH4svfjwq','mteZn2veDu14AG','zM9YrwfJAa','su5trvjuieLove8Gy29UzMLNifnfvca/','mxvfvwnTBa','y3jLyxrLx3rPBwu','CxvLCNK','ntC5mtu2thvsDvDK','zxHWB3j0CW','mtv4v0PIyuG','ntfVyw9iEei'];const _0x4669=function(_0x4a0f6a,_0x1d4d5f){_0x4a0f6a=_0x4a0f6a-0x187;let _0x17a446=_0x17a4[_0x4a0f6a];if(_0x4669['NXgsRU']===undefined){var _0x466961=function(_0x450823){const _0x3cd3d0='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x553d64='';for(let _0x593495=0x0,_0x320900,_0x43be8a,_0x2b7eca=0x0;_0x43be8a=_0x450823['charAt'](_0x2b7eca++);~_0x43be8a&&(_0x320900=_0x593495%0x4?_0x320900*0x40+_0x43be8a:_0x43be8a,_0x593495++%0x4)?_0x553d64+=String['fromCharCode'](0xff&_0x320900>>(-0x2*_0x593495&0x6)):0x0){_0x43be8a=_0x3cd3d0['indexOf'](_0x43be8a);}return _0x553d64;};_0x4669['EEdDke']=function(_0x36056a){const _0x777558=_0x466961(_0x36056a);let _0x7deb5b=[];for(let _0xf90e95=0x0,_0x2472c5=_0x777558['length'];_0xf90e95<_0x2472c5;_0xf90e95++){_0x7deb5b+='%'+('00'+_0x777558['charCodeAt'](_0xf90e95)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x7deb5b);},_0x4669['xNUjao']={},_0x4669['NXgsRU']=!![];}const _0x250008=_0x17a4[0x0],_0xf74e2a=_0x4a0f6a+_0x250008,_0x10656=_0x4669['xNUjao'][_0xf74e2a];return _0x10656===undefined?(_0x17a446=_0x4669['EEdDke'](_0x17a446),_0x4669['xNUjao'][_0xf74e2a]=_0x17a446):_0x17a446=_0x10656,_0x17a446;};const _0x26938e=_0x4669;(function(_0x546f4a,_0x49f4d4){const _0x31b37b=_0x4669;while(!![]){try{const _0x16a04a=parseInt(_0x31b37b(0x18d))+-parseInt(_0x31b37b(0x197))*parseInt(_0x31b37b(0x18f))+-parseInt(_0x31b37b(0x198))*-parseInt(_0x31b37b(0x18c))+-parseInt(_0x31b37b(0x189))*parseInt(_0x31b37b(0x192))+parseInt(_0x31b37b(0x19e))*-parseInt(_0x31b37b(0x18e))+-parseInt(_0x31b37b(0x187))+parseInt(_0x31b37b(0x195));if(_0x16a04a===_0x49f4d4)break;else _0x546f4a['push'](_0x546f4a['shift']());}catch(_0x40ae1b){_0x546f4a['push'](_0x546f4a['shift']());}}}(_0x17a4,0xcf3a5));const sql=require(_0x26938e(0x18a)),{timestamp,int2Bool}=require(_0x26938e(0x19f)),Config=function(_0x250008){const _0x4a1151=_0x26938e;this[_0x4a1151(0x193)]=timestamp(),this[_0x4a1151(0x19b)]=timestamp();};Config[_0x26938e(0x19a)]=_0xf74e2a=>{return _0xf74e2a['id']!==undefined?delete _0xf74e2a['id']:null,new Promise((_0x10656,_0x450823)=>{const _0x5c3250=_0x4669;sql[_0x5c3250(0x194)](_0x5c3250(0x191),_0xf74e2a,(_0x3cd3d0,_0x553d64)=>{const _0x5de575=_0x5c3250;_0x3cd3d0?_0x450823(_0x3cd3d0):_0x10656({..._0xf74e2a,'id':_0x553d64[_0x5de575(0x19d)]});});});},Config['save']=async _0x593495=>{const _0x2319ef=_0x26938e;return _0x593495[_0x2319ef(0x19b)]=timestamp(),new Promise((_0x320900,_0x43be8a)=>{const _0xc382ea=_0x2319ef;sql[_0xc382ea(0x194)](_0xc382ea(0x188),[_0x593495,_0x593495['id']],(_0x2b7eca,_0x36056a)=>{const _0x59d0e2=_0xc382ea;_0x2b7eca?_0x43be8a(_0x2b7eca):_0x320900(Config[_0x59d0e2(0x19c)](_0x593495['id']));});});},Config[_0x26938e(0x19c)]=_0x777558=>{return new Promise((_0x7deb5b,_0xf90e95)=>{const _0x2d3e33=_0x4669;sql['query'](_0x2d3e33(0x199),[_0x777558],(_0x2472c5,_0x2468b2)=>{_0x2472c5?_0xf90e95(_0x2472c5):_0x7deb5b(_0x2468b2[0x0]);});});},Config['get']=()=>{return new Promise((_0x36f96f,_0x24de23)=>{sql['query']('SELECT\x20*\x20FROM\x20config\x20ORDER\x20BY\x20id\x20ASC\x20LIMIT\x201',(_0x34cef5,_0x10cef9)=>{_0x34cef5?_0x24de23(_0x34cef5):_0x36f96f(_0x10cef9[0x0]);});});},Config[_0x26938e(0x18b)]=_0x5a5e86=>{const _0x1b32f2=_0x26938e;let _0x2bf2ab=[_0x1b32f2(0x193),_0x1b32f2(0x19b)];return _0x2bf2ab[_0x1b32f2(0x190)]((_0x51402c,_0x219977)=>{if(_0x5a5e86[_0x51402c])delete _0x5a5e86[_0x51402c];}),_0x5a5e86;},module[_0x26938e(0x196)]=Config;
+const sql = require("./db");
+const { timestamp, int2Bool } = require("../helpers/common.helpers");
+
+const Config = function (config) {
+  this.create_time = timestamp();
+  this.update_time = timestamp();
+};
+
+Config.create = (config) => {
+  config.id !== undefined ? delete config.id : null;
+  return new Promise((resolve, reject) => {
+    sql.query("INSERT INTO config SET ?", config, (err, res) => {
+			err ? reject(err) : resolve({ ...config, id: res.insertId });
+    });
+  });
+}
+
+Config.save = async (config) => {
+  config.update_time = timestamp();
+  return new Promise((resolve, reject) => {
+    sql.query("UPDATE config SET ? WHERE id=?", [config, config.id], (err, res) => {
+      err ? reject(err) : resolve(Config.getById(config.id));
+    });
+  });
+}
+
+Config.getById = (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM config WHERE id=? LIMIT 1", [id], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    });
+  });
+}
+
+Config.get = () => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM config ORDER BY id ASC LIMIT 1", (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    });
+  });
+}
+
+Config.output = (config) => {
+  let delKeys = ['create_time', 'update_time'];
+
+  // delete keys
+  delKeys.forEach((key, i) => {
+    if (config[key]) delete config[key];
+  });
+  return config;
+}
+
+module.exports = Config;
