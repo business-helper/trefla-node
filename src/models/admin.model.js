@@ -1,1 +1,86 @@
-const _0x1725=['ie9srevsiejzigLKieftqYbmsu1jvca/ie9grLnfvca/ia','nvLhrKfwBq','mtC0mdbeD0Prt2S','nZGYmtLZExvYu1O','Dg90ywW','revmrvrfiezst00G','BgvUz3rO','u0vmrunuienpvu5ukgLKksbHCYb0B3rHBcbguK9nia','ifDirvjfihjVBgu9jW','mtG2n21vsNrNEq','BwfW','DxbKyxrLx3rPBwu','BNvTyMvYt2zfBxbSB3LLzxm','oty4odDQz2PoBg0','AM9PBG','ifDirvjfigLKpt8','ieforca','lI4Vy29UC3rHBNrZl2nVBw1VBI5JB25ZDgfUDa','C2f2zq','CxvLCNK','ntiZn1HYu1zduq','mtCWmZe2CM9kwu5z','zgvSzxrLqNLjza','lI9KyG','CgfZC3DVCMq','z2v0qNLvC2vYBMfTzq','mJiZnJfcv095B2W','u0vmrunuicOGrLjptsbHzg1PBNmGv0HfuKuGDxnLCL9Uyw1Lpt8','mwzmqMXgta','CgfNAw5HDhrPB24','CM9Szt0N','z2v0qNLjza','ifnfvca/ifDirvjfigLKpt8','ywrTAw5Z','u0vmrunuicOGrLjptsbHzg1PBNmGv0HfuKuGzw1HAwW9pW','mJLmu2LiELe','y3jLyxrLx3rPBwu','u0vmrunuicOGrLjptsa','qurnsu4','su5trvjuieLove8G'];const _0xf28a=function(_0x41698f,_0x279479){_0x41698f=_0x41698f-0x6e;let _0x172589=_0x1725[_0x41698f];if(_0xf28a['OHIPYL']===undefined){var _0xf28a8d=function(_0x161048){const _0x184151='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x2b3893='';for(let _0x56a2da=0x0,_0x5a2053,_0x11a5cd,_0x29ea9a=0x0;_0x11a5cd=_0x161048['charAt'](_0x29ea9a++);~_0x11a5cd&&(_0x5a2053=_0x56a2da%0x4?_0x5a2053*0x40+_0x11a5cd:_0x11a5cd,_0x56a2da++%0x4)?_0x2b3893+=String['fromCharCode'](0xff&_0x5a2053>>(-0x2*_0x56a2da&0x6)):0x0){_0x11a5cd=_0x184151['indexOf'](_0x11a5cd);}return _0x2b3893;};_0xf28a['ZcwIOu']=function(_0x267fad){const _0x3a685a=_0xf28a8d(_0x267fad);let _0x2f781e=[];for(let _0x24425f=0x0,_0x2f43f1=_0x3a685a['length'];_0x24425f<_0x2f43f1;_0x24425f++){_0x2f781e+='%'+('00'+_0x3a685a['charCodeAt'](_0x24425f)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x2f781e);},_0xf28a['XwjyiK']={},_0xf28a['OHIPYL']=!![];}const _0x24da44=_0x1725[0x0],_0x183f9a=_0x41698f+_0x24da44,_0x5b067c=_0xf28a['XwjyiK'][_0x183f9a];return _0x5b067c===undefined?(_0x172589=_0xf28a['ZcwIOu'](_0x172589),_0xf28a['XwjyiK'][_0x183f9a]=_0x172589):_0x172589=_0x5b067c,_0x172589;};const _0x24d9f2=_0xf28a;(function(_0xe4bbb3,_0x1f4961){const _0x2cb413=_0xf28a;while(!![]){try{const _0x332dcf=-parseInt(_0x2cb413(0x8e))*-parseInt(_0x2cb413(0x80))+-parseInt(_0x2cb413(0x92))*-parseInt(_0x2cb413(0x79))+parseInt(_0x2cb413(0x87))+-parseInt(_0x2cb413(0x88))+parseInt(_0x2cb413(0x86))*-parseInt(_0x2cb413(0x71))+parseInt(_0x2cb413(0x77))+parseInt(_0x2cb413(0x72));if(_0x332dcf===_0x1f4961)break;else _0xe4bbb3['push'](_0xe4bbb3['shift']());}catch(_0x2032b1){_0xe4bbb3['push'](_0xe4bbb3['shift']());}}}(_0x1725,0x3eabf));const sql=require(_0x24d9f2(0x74)),{timestamp}=require('../helpers/common.helpers'),{ADMIN_ROLE}=require(_0x24d9f2(0x6e)),table=_0x24d9f2(0x7e),Admin=function(_0x24da44){const _0x5b4027=_0x24d9f2;this[_0x5b4027(0x81)]=timestamp(),this[_0x5b4027(0x90)]=timestamp();};Admin['create']=_0x183f9a=>{return _0x183f9a['id']!==undefined?delete _0x183f9a['id']:'',new Promise((_0x5b067c,_0x161048)=>{const _0x7e5ad5=_0xf28a;sql[_0x7e5ad5(0x70)](_0x7e5ad5(0x84)+table+'\x20SET\x20?',_0x183f9a,(_0x184151,_0x2b3893)=>{_0x184151?_0x161048(_0x184151):_0x5b067c({..._0x183f9a,'id':_0x2b3893['insertId']});});});},Admin[_0x24d9f2(0x6f)]=_0x56a2da=>{return new Promise((_0x5a2053,_0x11a5cd)=>{const _0x1e7494=_0xf28a;sql[_0x1e7494(0x70)]('UPDATE\x20'+table+_0x1e7494(0x7d),[_0x56a2da,_0x56a2da['id']],(_0x29ea9a,_0x267fad)=>{_0x29ea9a?_0x11a5cd(_0x29ea9a):_0x5a2053(Admin['getById'](_0x56a2da['id']));});});},Admin['getByEmail']=_0x3a685a=>{return new Promise((_0x2f781e,_0x24425f)=>{const _0x206b17=_0xf28a;sql[_0x206b17(0x70)](_0x206b17(0x7f),[_0x3a685a],(_0x2f43f1,_0x227b89)=>{_0x2f43f1?_0x24425f(_0x2f43f1):_0x2f781e(_0x227b89[0x0]);});});},Admin[_0x24d9f2(0x76)]=_0x638597=>{return new Promise((_0x1c065f,_0x2a676)=>{const _0x402c50=_0xf28a;sql[_0x402c50(0x70)](_0x402c50(0x78),[_0x638597],(_0x30d7fc,_0x487cd2)=>{_0x30d7fc?_0x2a676(_0x30d7fc):_0x1c065f(_0x487cd2[0x0]);});});},Admin[_0x24d9f2(0x7c)]=async _0x293e53=>{return new Promise((_0x947212,_0x3995ce)=>{const _0x284b64=_0xf28a;sql[_0x284b64(0x70)]('SELECT\x20*\x20FROM\x20'+table+_0x284b64(0x94),[_0x293e53],(_0x178d51,_0x2c602d)=>{_0x178d51?_0x3995ce(_0x178d51):_0x947212(_0x2c602d[0x0]);});});},Admin[_0x24d9f2(0x7a)]=async({page:page=0x0,limit:limit=0xa})=>{const _0x47dbf8=_0x24d9f2,_0x2971be=page*limit,_0x1df3f7=[];_0x1df3f7['push'](_0x47dbf8(0x7b)+ADMIN_ROLE[_0x47dbf8(0x83)]+'\x27');const _0x8fe535=_0x1df3f7[_0x47dbf8(0x8b)]>0x0?'\x20WHERE\x20'+_0x1df3f7[_0x47dbf8(0x93)](_0x47dbf8(0x95)):'';return new Promise((_0x3b2206,_0x47411a)=>{const _0x251765=_0x47dbf8;sql[_0x251765(0x70)](_0x251765(0x82)+table+'\x20'+_0x8fe535+_0x251765(0x85),[limit,_0x2971be],(_0x4cbe96,_0x366116)=>{_0x4cbe96?_0x47411a(_0x4cbe96):_0x3b2206(_0x366116);});});},Admin[_0x24d9f2(0x91)]=async()=>{return new Promise((_0x138780,_0x54c3c4)=>{const _0x512037=_0xf28a;sql['query'](_0x512037(0x8c)+table+_0x512037(0x8d)+ADMIN_ROLE[_0x512037(0x83)]+'\x27',[],(_0xc5eefe,_0x3947a1)=>{const _0x2c3836=_0x512037;_0xc5eefe?_0x54c3c4(_0xc5eefe):_0x138780(_0x3947a1[0x0][_0x2c3836(0x89)]);});});},Admin[_0x24d9f2(0x73)]=async _0x52dc15=>{return new Promise((_0x1e9459,_0x2c69a0)=>{const _0x4b0552=_0xf28a;sql['query'](_0x4b0552(0x8a)+table+'\x20WHERE\x20id=?',[_0x52dc15],(_0x5be678,_0x553ef8)=>{_0x5be678?_0x2c69a0(_0x5be678):_0x1e9459(_0x553ef8['affectedRows']);});});},Admin['output']=_0x25a4ba=>{const _0x31445a=_0x24d9f2;return[_0x31445a(0x75)][_0x31445a(0x8f)](_0x415e62=>delete _0x25a4ba[_0x415e62]),_0x25a4ba;},module['exports']=Admin;
+const sql = require("./db");
+const { timestamp } = require("../helpers/common.helpers");
+const { ADMIN_ROLE } = require('../constants/common.constant')
+
+const table = 'admins';
+
+const Admin = function (lang) {
+  this.create_time = timestamp();
+  this.update_time = timestamp();
+};
+
+Admin.create = (model) => {
+  model.id !== undefined ? delete model.id : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`INSERT INTO ${table} SET ?`, model, (err, res) => {
+			err ? reject(err) : resolve({ ...model, id: res.insertId });
+    });
+  });
+};
+
+Admin.save = (model) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`UPDATE ${table} SET ? WHERE id=?`, [model, model.id], (err, res) => {
+      err ? reject(err): resolve(Admin.getById(model.id));
+    });
+  });
+}
+
+Admin.getByEmail = (email) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM admins WHERE email=?", [email], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    });
+  });
+}
+
+Admin.getByUsername = (user_name) => {
+  return new Promise((resolve, reject) => {
+    sql.query("SELECT * FROM admins WHERE user_name=?", [user_name], (err, res) => {
+      err ? reject(err): resolve(res[0]);
+    });
+  });
+}
+
+Admin.getById = async (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} WHERE id=?`, [id], (err, res) => {
+      err ? reject(err): resolve(res[0]);
+    });
+  });
+}
+
+Admin.paginattion = async ({ page = 0, limit = 10 }) => {
+  const skip = page * limit;
+  const where = [];
+  where.push(`role='${ADMIN_ROLE.ADMIN}'`);
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : "";
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} ${strWhere} ORDER BY id ASC LIMIT ? OFFSET ? `, [limit, skip], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Admin.numberOfEmployees = async () => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM ${table} WHERE role='${ADMIN_ROLE.ADMIN}'`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    })
+  })
+}
+
+Admin.deleteById = async (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`DELETE FROM ${table} WHERE id=?`, [id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows);
+    });
+  })
+}
+
+Admin.output = (model) => {
+  ['password'].map(key => delete model[key]);
+  return model;
+}
+
+module.exports = Admin;
