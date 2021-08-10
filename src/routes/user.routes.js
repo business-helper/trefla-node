@@ -221,6 +221,10 @@ userRouters.post('/ban-reply', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/**
+* @description verify a user with card
+* @permission admin only
+*/
 userRouters.post('/verify/:id', async (req, res) => {
   const { role, uid: user_id } = getTokenInfo(req);
   // if (role !== 'ADMIN') return res.json({ status: true, message: 'Permission error!' });
@@ -256,6 +260,10 @@ userRouters.post('/verify/:id', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+/**
+ * @description unverify a user
+ * @permission admin
+ */
 userRouters.post('/unverify/:id', async (req, res) => {
   const { role } = getTokenInfo(req);
   // if (role !== 'ADMIN') return res.json({ status: true, message: 'Permission error!' });
@@ -288,7 +296,7 @@ userRouters.post('/unverify/:id', async (req, res) => {
     })
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
-})
+});
 
 userRouters.post('/transfer-request/reply', async (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
@@ -316,7 +324,7 @@ userRouters.post('/transfer-request/reply', async (req, res) => {
     })
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
-})
+});
 
 userRouters.post('/transfer-request', async (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
@@ -351,6 +359,8 @@ userRouters.post('/verify-request', async (req, res) => {
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
 });
+
+
 
 userRouters.post('/', async (req, res) => {
   userCtrl.pagination(req, res)

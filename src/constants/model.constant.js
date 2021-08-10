@@ -167,6 +167,15 @@ exports.DEFAULT_CONFIG = {
   update_time: timestamp(),
 };
 
+exports.DEFAULT_IDENTITY = {
+  id: '',
+  user_id: 0,
+  photo: '',
+  verified: 0,
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
 exports.DEFAULT_MESSAGE = {
   id: '',
   chat_id: 0,
@@ -274,6 +283,7 @@ exports.DEFAULT_USER = {
   card_number: '',
   card_img_url: '',
   card_verified: 0,
+  id_verified: 0,
   avatarIndex: 0,
   photo: '',
   radiusAround: 100,

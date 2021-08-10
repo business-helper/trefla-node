@@ -6,6 +6,7 @@ const {
   DEFAULT_BUG,
   DEFAULT_COMMENT,
   DEFAULT_COMMENTLIKE,
+  DEFAULT_IDENTITY,
   DEFAULT_NOTIFICATION,
   DEFAULT_PHOTO,
   DEFAULT_POST,
@@ -147,6 +148,15 @@ const generateCommentLikeData = basicData => {
   for (let field of defaultKeys) {
     data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_COMMENTLIKE[field];
   }
+  return data;
+}
+
+const generateIdentityData = basicData => {
+  const defaultKeys = Object.keys(DEFAULT_IDENTITY);
+  let data = {};
+  defaultKeys.forEach(field => {
+    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_IDENTITY[field];
+  });
   return data;
 }
 
@@ -306,6 +316,7 @@ module.exports = {
   generateChatData,
   generateCommentData,
   generateCommentLikeData,
+  generateIdentityData,
   generateMessageData,
   generateNotificationData,
   generatePhotoData,
