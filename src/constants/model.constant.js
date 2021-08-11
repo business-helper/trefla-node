@@ -170,7 +170,8 @@ exports.DEFAULT_CONFIG = {
 exports.DEFAULT_IDENTITY = {
   id: '',
   user_id: 0,
-  photo: '',
+  photo_id: '',
+  photo_person: '',
   verified: 0,
   create_time: timestamp(),
   update_time: timestamp(),

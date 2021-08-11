@@ -35,10 +35,18 @@ Identity.getById = (id) => {
   });
 }
 
-Identity.getByUser = (user_id, types) => {
+Identity.getByUser = (user_id) => {
   return new Promise((resolve, reject) => {
     sql.query(`SELECT * FROM ${table} WHERE user_id=?`, [user_id], (err, res) => {
       err ? reject(err) : resolve(res[0]);
+    });
+  });
+}
+
+Identity.deleteByUser = (user_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`DELETE FROM ${table} WHERE user_id=?`, [user_id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows > 0);
     });
   });
 }

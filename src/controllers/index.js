@@ -2,6 +2,7 @@ const admin = require('./admin.controller');
 const chat = require('./chat.controller');
 const comment = require('./comment.controller');
 const firebase = require('./firebase.controller');
+const identity = require('./identity.controller');
 const language = require('./lang.controller');
 const notification = require('./notification.controller');
 const photo = require('./photo.controller');
@@ -15,6 +16,7 @@ module.exports = {
   chat,
   comment,
   firebase,
+  identity,
   language,
   notification,
   photo,

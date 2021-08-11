@@ -32,12 +32,14 @@ appV1.use('/auth', authRouters);
 appV1.use('/bug', bugRouters);
 appV1.use('/chat', chatRouters);
 appV1.use('/comment', commentRouters);
+appV1.use('/identity', require('./routes/identity.routes'));
 appV1.use('/notification', notificationRouters);
 appV1.use('/photo', photoRouters);
 appV1.use('/post', postRouters);
 appV1.use('/report', reportRouters);
 appV1.use('/user', userRouters);
 appV1.use('/public', require('./routes/public.routes'));
+
 
 appV1.post('/init-data', getInitData);
 

@@ -1,5 +1,7 @@
 const path = require('path');
-const nodemailer = require('nodemailer');const admin = require('firebase-admin');
+const nodemailer = require('nodemailer');
+const formidable = require('formidable');
+const admin = require('firebase-admin');
 const serviceAccount = require('../config/trefla-firebase-adminsdk-ic030-de756cf0e9.json');
 const logger = require('../config/logger');
 
@@ -290,6 +292,16 @@ const parsePhotoHash = (hash) => {
   }
 }
 
+const parseForm = (req) => {
+  const form = formidable.IncomingForm();
+  return new Promise((resolve, reject) => {
+    form.parse(req, (err, fields, files) => {
+      if (err) reject(err);
+      resolve({ fields, files });
+    });
+  });
+}
+
 module.exports = {
   bool2Int,
   chatPartnerId,
@@ -304,8 +316,9 @@ module.exports = {
   int2Bool,
   JSONParser,
   JSONStringify,
-  photoHash,
+  parseForm,
   parsePhotoHash,
+  photoHash,
   populateChatSource,
 	respondError,
   respondValidateError,

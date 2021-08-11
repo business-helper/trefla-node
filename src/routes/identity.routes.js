@@ -8,6 +8,7 @@ const path = require('path');
 const sharp = require('sharp');
 
 const config = require('../config/app.config');
+const ctrls = require('../controllers');
 const models = require('../models');
 const helpers = require('../helpers');
 const { BearerMiddleware } = require('../middlewares/basic.middleware');
@@ -20,9 +21,10 @@ const routes = express.Router();
 // apply Bearer middleware.
 routes.use((req, res, next) => BearerMiddleware(req, res, next));
 
-routes.route('/upload').post(async (req, res) => {
-
-});
+routes.route('/upload').post(async (req, res) => ctrls.identity
+  .uploadIdentityRequest(req, res)
+  .catch(error => respondValidateError(res, error))
+);
 
 
 module.exports = routes;

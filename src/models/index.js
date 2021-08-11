@@ -8,6 +8,7 @@ const comment = require('./comment.model');
 const commentLike = require('./commentLike.model');
 const config = require('./config.model');
 const emailTemplate = require('./emailTemplate.model');
+const identity = require('./identity.model');
 const language = require('./lang.model');
 const message = require('./message.model');
 const notification = require('./notification.model');
@@ -29,6 +30,7 @@ module.exports = {
   comment,
   commentLike,
   emailTemplate,
+  identity,
   language,
   message,
   notification,
