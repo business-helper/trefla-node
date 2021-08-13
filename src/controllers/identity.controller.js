@@ -5,6 +5,7 @@ const formidable = require('formidable');
 const fs = require('fs');
 const sizeOf = require('image-size');
 
+
 const config = require('../config/app.config');
 const models = require('../models');
 const helpers = require('../helpers');
@@ -100,5 +101,9 @@ exports.uploadIdentityRequest = async (req, res) => {
         return models.identity.create(identityData);
       }
     })
-    .then((identity) => res.json(identity));
+    .then((identity) => res.json({
+      status: true,
+      message: 'success',
+      data: identity,
+    }));
 }

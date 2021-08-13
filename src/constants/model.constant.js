@@ -163,6 +163,7 @@ exports.DEFAULT_CONFIG = {
   android_link: '',
   apple_version: '1.0',
   apple_link: '',
+  enable_top_music: false,
   create_time: timestamp(),
   update_time: timestamp(),
 };
