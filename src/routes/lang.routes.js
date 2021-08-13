@@ -137,7 +137,8 @@ langRouters.get('/version', async (req, res) => {
       apple_version: config.apple_version,
       android_link: config.android_link,
       apple_link: config.apple_link,
-    }))
+      enable_top_music: config.enable_top_music,
+    }));
 })
 
 langRouters.get('/', language.getAll);

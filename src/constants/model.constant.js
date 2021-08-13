@@ -163,6 +163,17 @@ exports.DEFAULT_CONFIG = {
   android_link: '',
   apple_version: '1.0',
   apple_link: '',
+  enable_top_music: false,
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_IDENTITY = {
+  id: '',
+  user_id: 0,
+  photo_id: '',
+  photo_person: '',
+  verified: 0,
   create_time: timestamp(),
   update_time: timestamp(),
 };
@@ -274,6 +285,7 @@ exports.DEFAULT_USER = {
   card_number: '',
   card_img_url: '',
   card_verified: 0,
+  id_verified: 0,
   avatarIndex: 0,
   photo: '',
   radiusAround: 100,

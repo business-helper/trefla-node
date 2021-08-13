@@ -22,17 +22,7 @@ const { getTokenInfo } = require('../helpers/auth.helpers');
 const { respondValidateError, timestamp, photoHash } = require("../helpers/common.helpers");
 
 const activity = {
-  confirmDirPath: (parent, name) => {
-    try {
-      const dirPath = path.join(parent, name);
-      if (!fs.existsSync(dirPath)) {
-        fs.mkdirSync(dirPath);
-      } 
-      return dirPath;
-    } catch (error) {
-      return false;
-    }
-  },
+  confirmDirPath: (parent, name) => helpers.file.confirmDir(parent, name),
   addPhoto: async ({ user_id, url, type, ratio }) => {
     const photoData = helpers.model.generatePhotoData({
       user_id, url, type, ratio
@@ -92,28 +82,9 @@ const activity = {
         return models.user.save(user);
       });
   },
-  readFile: (path_from) => {
-    return new Promise((resolve, reject) => {
-      fs.readFile(path_from, (err, data) => {
-        if (err) reject(err);
-        resolve(data);
-      });
-    });
-  },
-  writeFile: (path_to, data) => {
-    return new Promise((resolve, reject) => {
-      fs.writeFile(path_to, data, (err) => {
-        err ? reject(err) : resolve(true);
-      });
-    });
-  },
-  deleteFile: (path) => {
-    return new Promise((resolve, reject) => {
-      fs.unlink(path, (err) => {
-        err ? reject(err) : resolve(true);
-      });
-    });
-  },
+  readFile: (path_from) => helpers.file.read(path_from),
+  writeFile: (path_to, data) => helpers.file.write(path_to, data),
+  deleteFile: (path) => helpers.file.delete(path),
   extractThumbnailFromVideo: ({ src, photo }) => {
     const dirPath = activity.confirmDirPath(path.resolve('assets/uploads'), 'frames');
     const frameName = `${uuid()}.jpg`;
@@ -202,7 +173,7 @@ photoRouters.get('/:id', async (req, res) => {
   })
   .then(() => photoCtrl.getById(req, res))
   .catch((error) => respondValidateError(res, error));
-})
+});
 
 photoRouters.get('/', async (req, res) => {
   return photoCtrl.getAllOfUser(req, res)
