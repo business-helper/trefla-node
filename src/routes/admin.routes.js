@@ -866,9 +866,16 @@ adminRouters.route('/identities/:id/verify').post(async (req, res) => {
       if (!matched) throw Object.assign(new Error('Invalid Request!'), { code: 400, details: validator.errors });
       return models.identity.getById(req.params.id);
     })
-    .then(identity => {
+    .then(async identity => {
       if (!identity) {
         throw new Error('Identity does not exists!');
+      }
+      const user = await models.user.getById(identity.user_id);
+      if (!user) {
+        throw new Error('User does not exist!');
+      }
+      if (user.id_verified && identity.verified) {
+        throw new Error('User identity is already verified!');
       }
       const socketClient = req.app.locals.socketClient;
       return ctrls.identity.verifyUserIdentityRequest({
