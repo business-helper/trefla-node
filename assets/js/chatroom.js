@@ -597,6 +597,14 @@ socket.on(SKT_COMMENT_UPDATED, args => {
   console.log(`[${SKT_COMMENT_UPDATED}]`, args)
 })
 
+const events = [SKT_ID_VERIFEID, SKT_ID_UNVERIFIED, SKT_POINT_ADDED, SKT_PROFILE_PHOTO_VERIFIED];
+
+events.forEach(event => {
+  socket.on(event, args => {
+    console.log(`[${event}]`, args);
+  });
+});
+
 socket.on('get_token', args => {
   console.log('[get token]', args);
 })

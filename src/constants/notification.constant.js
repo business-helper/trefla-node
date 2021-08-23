@@ -22,6 +22,11 @@ exports.cardVerifyRequestNotiType = 51;
 exports.cardVerifyRequestAcceptNotiType = 52;
 exports.cardVerifyRequestRejectNotiType = 53;
 
+exports.notiTypeIDVerified = 61;
+exports.notiTypeIDUnverified = 62;
+exports.notiTypePointReceived = 63;
+exports.notiTypeProfilePhotoVerified = 64;
+
 exports.ADMIN_NOTI_TYPES = {
   ID_TRANSFER: 'ID_TRANSFER',
   VERIFY_ID: 'VERIFY_ID',

@@ -43,6 +43,34 @@ Identity.getByUser = (user_id) => {
   });
 }
 
+Identity.pagination = ({ limit, page }) => {
+  limit = Number(limit);
+  page = Number(page);
+  const offset = limit * page;
+
+  let where = [];
+  
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT ${table}.*, users.user_name, users.email, users.photo, users.avatarIndex, users.sex
+      FROM ${table}
+      LEFT JOIN users ON users.id = ${table}.user_id
+      ${strWhere}
+      ORDER BY identities.id DESC LIMIT ? OFFSET ?
+      `, [limit, offset], (err, res) => {
+        err ? reeject(err) : resolve(res);
+    });
+  });
+}
+
+Identity.getTotal = () => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM ${table}`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    });
+  });
+}
+
 Identity.deleteByUser = (user_id) => {
   return new Promise((resolve, reject) => {
     sql.query(`DELETE FROM ${table} WHERE user_id=?`, [user_id], (err, res) => {

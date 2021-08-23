@@ -31,3 +31,8 @@ const SKT_BLOCK_BLOCKED = 'socket.block.blocked';
 const SKT_BLOCK_RELEASED = 'socket.block.released';
 const SKT_COMMENT_CREATED = 'socket.comment.created';
 const SKT_COMMENT_UPDATED = 'socket.comment.updated';
+
+const SKT_ID_VERIFEID = 'socket.identity.verified';
+const SKT_ID_UNVERIFIED = 'socket.identity.unverified';
+const SKT_POINT_ADDED = 'socket.point.added';
+const SKT_PROFILE_PHOTO_VERIFIED = 'socket.profile.photo.verified';

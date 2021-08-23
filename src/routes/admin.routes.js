@@ -659,6 +659,11 @@ adminRouters.delete('/id-transfers/:id', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+///////////////////////////////////////////////////////////
+//                                                       //
+// //////////////// E M P L O Y E E  //////////////////////
+//                                                       //
+///////////////////////////////////////////////////////////
 
 
 
@@ -815,5 +820,104 @@ adminRouters.route('/employee/:id/permission').patch(async(req, res) => {
     }))
     .catch(error => respondValidateError(res, error))
 })
+
+///////////////////////////////////////////////////////////
+//                                                       //
+//                  I D E N T I T Y                      //
+//                                                       //
+///////////////////////////////////////////////////////////
+
+/**
+ * @secured by admin types 
+ * @permission 'identity.view'
+*/
+adminRouters.route('/identities').get(async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'identity.view');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator(req.query, {
+    limit: "required",
+    page: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.identity.loadIdentitiesRequest(req.query)
+    })
+    .then(resl => res.json(resl))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**
+ * @secured by admin types
+ * @permission 'identity.verify'
+ */
+adminRouters.route('/identities/:id/verify').post(async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'identity.verify');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator(req.params, {
+    id: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error('Invalid Request!'), { code: 400, details: validator.errors });
+      return models.identity.getById(req.params.id);
+    })
+    .then(identity => {
+      if (!identity) {
+        throw new Error('Identity does not exists!');
+      }
+      const socketClient = req.app.locals.socketClient;
+      return ctrls.identity.verifyUserIdentityRequest({
+        id: Number(req.params.id),
+        socketClient,
+      });
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**
+ * @secured by admin types
+ * @permission 'identity.verify'
+ */
+adminRouters.route('/identities/:id/unverify').post(async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'identity.verify');
+  if (!permitted) return res.status(403).json({ status: false, message: 'Permission denied!' });
+
+  const validator = new Validator(req.params, {
+    id: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error('Invalid Request!'), { code: 400, details: validator.errors });
+      return models.identity.getById(req.params.id);
+    })
+    .then(async (identity) => {
+      if (!identity) {
+        throw new Error('Not fond the identity with the given ID!');
+      }
+      const user = await models.user.getById(identity.user_id);
+      if (!user) {
+        throw new Error('User does not exist!');
+      }
+      if (!identity.verified && !user.id_verified) {
+        throw new Error('User is unverified already.');
+      }
+
+      // get the socket client.
+      const socketClient = req.app.locals.socketClient;
+      return ctrls.identity.unverifyUserIdentityRequest({
+        id: req.params.id,
+        socketClient,
+      });
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
 
 module.exports = adminRouters;

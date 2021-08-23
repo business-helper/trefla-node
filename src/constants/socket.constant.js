@@ -34,6 +34,12 @@ exports.SKT_BLOCK_RELEASED = 'socket.block.released';
 exports.SKT_COMMENT_CREATED = 'socket.comment.created';
 exports.SKT_COMMENT_UPDATED = 'socket.comment.updated';
 
+exports.SKT_ID_VERIFEID = 'socket.identity.verified';
+exports.SKT_ID_UNVERIFIED = 'socket.identity.unverified';
+exports.SKT_POINT_ADDED = 'socket.point.added';
+exports.SKT_PROFILE_PHOTO_VERIFIED = 'socket.profile.photo.verified';
+
+
 exports.SKT_LTS_SINGLE = 'socket.local2server.single';
 exports.SKT_LTS_MULTIPLE = 'socket.local2server.multiple';
 exports.SKT_LTS_BROADCAST = 'socket.local2server.broadcast';

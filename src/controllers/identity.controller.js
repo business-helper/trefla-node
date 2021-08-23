@@ -5,10 +5,19 @@ const formidable = require('formidable');
 const fs = require('fs');
 const sizeOf = require('image-size');
 
-
 const config = require('../config/app.config');
 const models = require('../models');
 const helpers = require('../helpers');
+const {
+  generateTZTimeString,
+  timestamp,
+} = require('../helpers/common.helpers');
+const {
+  notiTypeIDVerified,
+  notiTypeIDUnverified,
+} = require('../constants/notification.constant');
+const EVENTS = require('../constants/socket.constant');
+const { identity } = require('.');
 
 const activity = {
   addPhoto: async ({ user_id, url, type, ratio }) => {
@@ -107,3 +116,150 @@ exports.uploadIdentityRequest = async (req, res) => {
       data: identity,
     }));
 }
+
+/**
+ * @description load identity list
+ * @param { string } page
+ * @param { string } limit
+ * @return { object } { status, message, data, pager, hasMore }
+ */
+exports.loadIdentitiesRequest = async (payload) => {
+  let { limit, page, type, sort } = payload;
+  limit = Number(limit);
+  page = Number(page);
+  // sort = JSON.parse(sort);
+
+  return Promise.all([
+    models.identity.pagination({ page, limit }),
+    models.identity.getTotal(),
+  ])
+    .then(([rows, total]) => {
+      return {
+        status: true,
+        message: 'success',
+        data: rows,
+        pager: {
+          limit,
+          total,
+        },
+        hasMore: total > page * limit + rows.length,
+      };
+    });
+}
+
+/**
+ * @description verify the identity of a user.
+ * @param { String } id
+ * @param { Object } socketClient
+ * @worflow 
+ *  1. mark the identity as verified.
+ *  2. mark the user as 'ID verified'
+ *  3. add a notification with type 'notiTypeIDVerified'
+ *  4. send the socket to the user. SKT_ID_VERIFEID
+ */
+exports.verifyUserIdentityRequest = async ({ id, socketClient }) => {
+  return models.identity.getById(id)
+    .then(identity => { // update the identity record.
+      identity.verified = 1;
+      identity.update_time = helpers.common.timestamp();
+      return Promise.all([
+        models.identity.save(identity),
+        models.user.getById(identity.user_id),
+      ]);
+    })
+    .then(([identity, user]) => { // mark the user as ID verified.
+      user.id_verified = 1;
+      user.update_time = helpers.common.timestamp();
+      return Promise.all([
+        models.user.save(user),
+        identity,
+      ]);
+    })
+    .then(async ([user, identity]) => {
+      // add a notification.
+      const notiData = {
+        sender_id: 0,
+        receiver_id: user.id,
+        type: notiTypeIDVerified,
+        optional_val: id,
+        time: generateTZTimeString(),
+        is_read: 0,
+        isFromAdmin: 1,
+        isGuest: 0,
+        text: '',
+        create_time: timestamp(),
+        update_time: timestamp(),
+      };
+      const notification = await models.notification.create(notiData);
+
+      // send a proper socket.
+      if (user.socket_id) {
+        socketClient.emit(EVENTS.SKT_LTS_SINGLE, {
+          to: user.socket_id,
+          event: EVENTS.SKT_ID_VERIFEID,
+          args: { identity },
+        });        
+      }
+      return {
+        status: true,
+        message: 'success',
+      };
+    });
+}
+
+/**
+ * @description unverify the identity of a user.
+ * @param { String } id
+ * @param { Object } socketClient
+ * @workflow
+ *  1. unverify identity & user
+ *  2. add a notification.
+ *  3. send a socket to the user.
+ */
+exports.unverifyUserIdentityRequest = async ({ id, reason, socketClient }) => {
+  return models.identity.getById(id).then(identity => models.user.getById(identity.user_id)
+    .then(async user => {
+      identity.verified = 0;
+      identity.update_time = timestamp();
+      user.id_verified = 0;
+      user.update_time = timestamp();
+
+      // save the verification status.
+      await Promise.all([
+        models.identity.save(identity),
+        models.user.save(user),
+      ]);
+
+      // add a notification.
+      const notiData = {
+        sender_id: 0,
+        receiver_id: user.id,
+        type: notiTypeIDUnverified,
+        optional_val: id,
+        time: generateTZTimeString(),
+        is_read: 0,
+        isFromAdmin: 1,
+        isGuest: 0,
+        text: reason || '',
+        create_time: timestamp(),
+        update_time: timestamp(),
+      };
+
+      const notification = await models.notification.create(notiData);
+      // send a proper socket.
+      if (user.socket_id) {
+        socketClient.emit(EVENTS.SKT_LTS_SINGLE, {
+          to: user.socket_id,
+          event: EVENTS.SKT_ID_UNVERIFIED,
+          args: { identity },
+        });        
+      }
+      return {
+        status: true,
+        message: 'success',
+      };
+    })
+  );
+
+}
+
