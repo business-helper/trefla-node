@@ -156,6 +156,9 @@ exports.DEFAULT_CONFIG = {
   id: '',
   admin_email: "",
   aroundSearchPeriod: 100,
+  aroundSearchDays: 1,
+  defaultAroundRadius: 100,
+  defaultUserRadiusAround: 100,
   lang_version: "",
   default_zone: "",
   apply_default_zone: 0,
@@ -164,6 +167,8 @@ exports.DEFAULT_CONFIG = {
   apple_version: '1.0',
   apple_link: '',
   enable_top_music: false,
+  post_point: 2,
+  comment_point: 1,
   create_time: timestamp(),
   update_time: timestamp(),
 };
