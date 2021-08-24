@@ -156,6 +156,9 @@ exports.DEFAULT_CONFIG = {
   id: '',
   admin_email: "",
   aroundSearchPeriod: 100,
+  aroundSearchDays: 1,
+  defaultAroundRadius: 100,
+  defaultUserRadiusAround: 100,
   lang_version: "",
   default_zone: "",
   apply_default_zone: 0,
@@ -164,6 +167,8 @@ exports.DEFAULT_CONFIG = {
   apple_version: '1.0',
   apple_link: '',
   enable_top_music: false,
+  post_point: 2,
+  comment_point: 1,
   create_time: timestamp(),
   update_time: timestamp(),
 };
@@ -217,6 +222,16 @@ exports.DEFAULT_PHOTO = {
   type: 'normal',
   ratio: '',
   thumbnail: '',
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
+exports.DEFAULT_POINT_TRANSACTION = {
+  id: '',
+  user_id: 0,
+  amount: 0,
+  src_type: 'POST',
+  src_id: 0,
   create_time: timestamp(),
   update_time: timestamp(),
 };
@@ -286,6 +301,8 @@ exports.DEFAULT_USER = {
   card_img_url: '',
   card_verified: 0,
   id_verified: 0,
+  photo_verified: 0,
+  points: 0,
   avatarIndex: 0,
   photo: '',
   radiusAround: 100,

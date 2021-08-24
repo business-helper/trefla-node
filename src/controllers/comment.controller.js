@@ -1,12 +1,19 @@
 const { Validator } = require("node-input-validator");
+
+const models = require('../models');
 const User = require("../models/user.model");
 const Post = require("../models/post.model");
 const Comment = require("../models/comment.model");
 const CommentLike = require("../models/commentLike.model");
+const Config = require('../models/config.model');
+
 const EVENT = require('../constants/socket.constant');
+const { POINT_AWARD_TYPE } = require('../constants/common.constant');
+const { notiTypePointReceived } = require('../constants/notification.constant');
+
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { bool2Int, getTotalLikes, generateTZTimeString, respondError, sendSingleNotification } = require("../helpers/common.helpers");
-const { generateCommentData, generateCommentLikeData } = require('../helpers/model.helpers');
+const { bool2Int, getTotalLikes, generateTZTimeString, respondError, sendSingleNotification, timestamp } = require("../helpers/common.helpers");
+const { generateCommentData, generateCommentLikeData, generateNotificationData, generatePointTransactionData } = require('../helpers/model.helpers');
 
 const activity = {
   notifyNewComment: async ({ user, target_user, target, target_type, isGuest, comment, action = 'CREATE' }) => {
@@ -44,6 +51,59 @@ const activity = {
     }
     return `${domain}/avatar/avatar_${sex === '1' ? 'girl2' : 'boy1'}.png`;
   },
+  processPoint4NewComment: async ({ user, comment, socketClient }) => {
+    // create a point transaction.
+    // increase user points.
+    // add a notification
+    // send socket to user.
+    const config = await Config.get();
+
+    const basicData = {
+      user_id: user.id,
+      amount: config.post_point,
+      src_type: POINT_AWARD_TYPE.COMMENT,
+      src_id: comment.id,
+    };
+    const pointTransactionData = generatePointTransactionData(basicData);
+    // create transaction.
+    const transaction = await models.pointTransaction.create(pointTransactionData);
+
+    // increase user points.
+    user.points += config.comment_point;
+    user.update_time = timestamp();
+    await models.user.save(user);
+
+    // add a notification.
+    const notiBasicData = {
+      sender_id: 0,
+      receiver_id: user.id,
+      type: notiTypePointReceived,
+      optional_val: `COMMENT:${comment.id}`,
+      time: generateTZTimeString(),
+      isFromAdmin: 1,
+    };
+    const notiData = generateNotificationData(notiBasicData);
+    const notification = await models.notification.create(notiData);
+
+    // send a socket to the user.
+    if (user.socket_id) {
+      socketClient.emit(EVENT.SKT_LTS_SINGLE, {
+        to: user.socket_id,
+        event: EVENT.SKT_POINT_ADDED,
+        args: {
+          amount: config.comment_point,
+          current: user.points,
+          data: {
+            type: POINT_AWARD_TYPE.COMMENT,
+            id: comment.id,
+            user_id: comment.user_id,
+            comment: comment.comment,
+          },
+        },
+      });
+    }
+    return user;
+  },
 }
 
 exports.create = (req, res) => {
@@ -72,6 +132,10 @@ exports.create = (req, res) => {
       ]);
     })
     .then(async ([user, target_user, target]) => {
+      if (user.id_verified) {
+        // process point for new comment.
+        user = await activity.processPoint4NewComment({ user, comment: _comment, socketClient });
+      }
       if (target_user.socket_id) {
         socketClient.emit(EVENT.SKT_LTS_SINGLE, {
           to: target_user.socket_id,
