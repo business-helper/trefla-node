@@ -12,3 +12,8 @@ exports.LOGIN_MODE = {
   FACEBOOK: "FACEBOOK",
   APPLE: "APPLE",
 };
+
+exports.POINT_AWARD_TYPE = {
+  POST: 'POST',
+  COMMENT: 'COMMENT',
+};

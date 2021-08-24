@@ -9,6 +9,7 @@ const {
   DEFAULT_IDENTITY,
   DEFAULT_NOTIFICATION,
   DEFAULT_PHOTO,
+  DEFAULT_POINT_TRANSACTION,
   DEFAULT_POST,
   DEFAULT_POSTLIKE,
   DEFAULT_REPORT,
@@ -193,6 +194,15 @@ const generatePhotoData = (basicData) => {
   return data;
 }
 
+const generatePointTransactionData = (basicData) => {
+  const defaultKeys = Object.keys(DEFAULT_POINT_TRANSACTION);
+  let data = {};
+  for (let field of defaultKeys) {
+    data[field] = basicData[field] !== undefined ? basicData[field] : DEFAULT_POINT_TRANSACTION[field];
+  }
+  return data;
+}
+
 const generatePostData = (basicData) => {
   const defaultKeys = Object.keys(DEFAULT_POST);
   let data = {};
@@ -320,6 +330,7 @@ module.exports = {
   generateMessageData,
   generateNotificationData,
   generatePhotoData,
+  generatePointTransactionData,
   generatePostData,
   generatePostLikeData,
   generateReportData,

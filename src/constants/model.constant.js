@@ -226,6 +226,16 @@ exports.DEFAULT_PHOTO = {
   update_time: timestamp(),
 };
 
+exports.DEFAULT_POINT_TRANSACTION = {
+  id: '',
+  user_id: 0,
+  amount: 0,
+  src_type: 'POST',
+  src_id: 0,
+  create_time: timestamp(),
+  update_time: timestamp(),
+};
+
 exports.DEFAULT_POST = {
   id: '',
   user_id: 0,
@@ -291,6 +301,8 @@ exports.DEFAULT_USER = {
   card_img_url: '',
   card_verified: 0,
   id_verified: 0,
+  photo_verified: 0,
+  points: 0,
   avatarIndex: 0,
   photo: '',
   radiusAround: 100,

@@ -1,13 +1,30 @@
 const { Validator } = require("node-input-validator");
+
 const CONSTS = require('../constants/socket.constant');
+const { POINT_AWARD_TYPE } = require('../constants/common.constant');
+const { notiTypePointReceived } = require('../constants/notification.constant');
 const Post = require("../models/post.model");
 const User = require("../models/user.model");
 const Config = require("../models/config.model");
 const PostLike = require("../models/postLike.model");
 const models = require('../models');
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { filterAroundUsers, generateTZTimeString, getTimeAfter, getTotalLikes, respondError, SendAllMultiNotifications, timestamp } = require("../helpers/common.helpers");
-const { checkPostLocationWithUser, generatePostData, generatePostLikeData } = require('../helpers/model.helpers');
+const {
+  filterAroundUsers,
+  generateTZTimeString,
+  getTimeAfter,
+  getTotalLikes,
+  respondError,
+  SendAllMultiNotifications,
+  timestamp
+} = require("../helpers/common.helpers");
+const {
+  checkPostLocationWithUser,
+  generatePostData,
+  generatePostLikeData,
+  generatePointTransactionData,
+  generateNotificationData,
+} = require('../helpers/model.helpers');
 const appConfig = require('../config/app.config');
 
 const activity = {
@@ -78,6 +95,60 @@ const activity = {
       return [];
     });
   },
+  processPoint4NewPost: async ({ user, post, socketClient }) => {
+    // create a point transaction.
+    // increase user points.
+    // add a notification
+    // send socket to user.
+    const config = await Config.get();
+
+    const basicData = {
+      user_id: user.id,
+      amount: config.post_point,
+      src_type: POINT_AWARD_TYPE.POST,
+      src_id: post.id,
+    };
+    const pointTransactionData = generatePointTransactionData(basicData);
+    // create transaction.
+    const transaction = await models.pointTransaction.create(pointTransactionData);
+
+    // increase user points.
+    user.points += config.post_point;
+    user.update_time = timestamp();
+    await models.user.save(user);
+
+    // add a notification.
+    const notiBasicData = {
+      sender_id: 0,
+      receiver_id: user.id,
+      type: notiTypePointReceived,
+      optional_val: `POST:${post.id}`,
+      time: generateTZTimeString(),
+      isFromAdmin: 1,
+    };
+    const notiData = generateNotificationData(notiBasicData);
+    const notification = await models.notification.create(notiData);
+
+    // send a socket to the user.
+    if (user.socket_id) {
+      socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+        to: user.socket_id,
+        event: CONSTS.SKT_POINT_ADDED,
+        args: {
+          amount: config.post_point,
+          current: user.points,
+          data: {
+            type: POINT_AWARD_TYPE.POST,
+            id: post.id,
+            user_id: post.user_id,
+            post_name: post.post_name,
+            feed: post.feed,
+          },
+        },
+      });
+    }
+    return user;
+  },
 }
 
 exports.create = (req, res) => {
@@ -93,6 +164,11 @@ exports.create = (req, res) => {
       User.getById(post.user_id)
     ]))
     .then(async ([post, user]) => {
+      // process points if user is ID-verified.
+      if (user.id_verified) {
+        user = await activity.processPoint4NewPost({ user, post, socketClient });
+      }
+
       post = Post.output(post);
       if (post.location_area) {
         const areaUsers = await User.getByLocationArea(post.location_area);

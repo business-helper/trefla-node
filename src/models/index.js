@@ -13,6 +13,7 @@ const language = require('./lang.model');
 const message = require('./message.model');
 const notification = require('./notification.model');
 const photo = require('./photo.model');
+const pointTransaction = require('./pointTransaction.model');
 const post = require('./post.model');
 const postLike = require('./postLike.model');
 const report = require('./report.model');
@@ -35,6 +36,7 @@ module.exports = {
   message,
   notification,
   photo,
+  pointTransaction,
   post,
   postLike,
   report,
