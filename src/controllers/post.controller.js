@@ -8,6 +8,7 @@ const User = require("../models/user.model");
 const Config = require("../models/config.model");
 const PostLike = require("../models/postLike.model");
 const models = require('../models');
+const helpers = require('../helpers');
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const {
   filterAroundUsers,
@@ -146,6 +147,8 @@ const activity = {
           },
         },
       });
+      // send socket for notifcation update.
+      await helpers.notification.socketOnNewNotification({ user_id: user.id, notification, socketClient });
     }
     return user;
   },

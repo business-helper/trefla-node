@@ -198,7 +198,8 @@ exports.verifyUserIdentityRequest = async ({ id, socketClient }) => {
           to: user.socket_id,
           event: EVENTS.SKT_ID_VERIFEID,
           args: { identity },
-        });        
+        });
+        await helpers.notification.socketOnNewNotification({ user_id: user.id, notification, socketClient });
       }
       return {
         status: true,
@@ -252,7 +253,8 @@ exports.unverifyUserIdentityRequest = async ({ id, reason, socketClient }) => {
           to: user.socket_id,
           event: EVENTS.SKT_ID_UNVERIFIED,
           args: { identity },
-        });        
+        });
+        await helpers.notification.socketOnNewNotification({ user_id: user.id, socketClient, notification });
       }
       return {
         status: true,
