@@ -480,7 +480,7 @@ exports.updateById = (req, res) => {
     .then(user => {
       const keys = Object.keys(user);
       keys.forEach(key => {
-        if (['location_array'].includes(key)) {
+        if (['location_array', 'payments'].includes(key)) {
           user[key] = req.body[key] ? JSON.stringify(req.body[key]) : user[key];
         } else {
           user[key] = req.body[key] !== undefined ? req.body[key] : user[key];

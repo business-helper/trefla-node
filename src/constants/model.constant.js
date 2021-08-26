@@ -329,6 +329,11 @@ exports.DEFAULT_USER = {
   active: 0,
   profile_done: 0,
   theme_color: '',
+  payments: {
+    bank: null,
+    card: null,
+    paypal: null,
+  },
   create_time: timestamp(),
   update_time: timestamp()
 };
