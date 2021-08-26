@@ -69,11 +69,6 @@ const activity = {
     // create transaction.
     const transaction = await models.pointTransaction.create(pointTransactionData);
 
-    // increase user points.
-    user.points += config.comment_point;
-    user.update_time = timestamp();
-    await models.user.save(user);
-
     // add a notification.
     const notiBasicData = {
       sender_id: 0,
@@ -85,6 +80,13 @@ const activity = {
     };
     const notiData = generateNotificationData(notiBasicData);
     const notification = await models.notification.create(notiData);
+
+    // increase user points.
+    user.points += config.comment_point;
+    user.noti_num ++;
+    user.update_time = timestamp();
+    await models.user.save(user);
+
 
     // send a socket to the user.
     if (user.socket_id) {
