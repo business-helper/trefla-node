@@ -1,8 +1,9 @@
 const EVENTS = require('../constants/socket.constant');
-const models = require('../models');
+const User = require('../models/user.model');
 
 module.exports.socketOnNewNotification = async ({ user_id, socketClient, notification }) => {
-  return models.user.getById(user_id)
+
+  return User.getById(user_id)
     .then(user => {
       if (user.socket_id) {
         socketClient.emit(EVENTS.SKT_LTS_SINGLE, {
