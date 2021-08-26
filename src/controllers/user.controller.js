@@ -4,6 +4,8 @@ const CONSTS = require('../constants/socket.constant');
 const NOTI_TYPES = require('../constants/notification.constant');
 const { LOGIN_MODE } = require('../constants/common.constant');
 const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
+const Payments = require('../types/Payments');
+
 const models = require("../models/index");
 const User = require("../models/user.model");
 const helpers = require('../helpers');
@@ -93,6 +95,10 @@ exports.register = async (req, res) => {
     card_number: verifiedUser ? '' : new_number,
     users_around_radius: config.defaultUserRadiusAround,
   });
+  if (userData.payments) {
+    payments = new Payments(userData.payments);
+    userData.payments = payments.toObject();
+  }
 
   return generatePassword(userData.password)
     .then(encPassword => {
@@ -480,7 +486,10 @@ exports.updateById = (req, res) => {
     .then(user => {
       const keys = Object.keys(user);
       keys.forEach(key => {
-        if (['location_array', 'payments'].includes(key)) {
+        if (key === 'payments') {
+          const payments = new Payments(req.body.payments);
+          user.payments = payments.toObject();
+        } else if (['location_array'].includes(key)) {
           user[key] = req.body[key] ? JSON.stringify(req.body[key]) : user[key];
         } else {
           user[key] = req.body[key] !== undefined ? req.body[key] : user[key];
