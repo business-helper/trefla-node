@@ -222,10 +222,10 @@ exports.verifyUserIdentityRequest = async ({ id, socketClient }) => {
         await helpers.notification.socketOnNewNotification({ user_id: user.id, notification, socketClient });
       }
       const pushNotiData = {
-        noti_id: notification.id,
-        optionalVal: notification.optional_val,
-        type: notification.type,
-        user_id: 0,
+        noti_id: String(notification.id || ""),
+        optionalVal: String(notification.optional_val || ""),
+        type: String(notification.type || ""),
+        user_id: "0",
         user_name: 'Admin',
         avatar: '',
       };
@@ -288,10 +288,10 @@ exports.unverifyUserIdentityRequest = async ({ id, reason, socketClient }) => {
         await helpers.notification.socketOnNewNotification({ user_id: user.id, socketClient, notification });
       }
       const pushNotiData = {
-        noti_id: notification.id,
-        optionalVal: notification.optional_val,
-        type: notification.type,
-        user_id: 0,
+        noti_id: String(notification.id || ""),
+        optionalVal: String(notification.optional_val || ""),
+        type: String(notification.type || ""),
+        user_id: "0",
         user_name: 'Admin',
         avatar: '',
       };
