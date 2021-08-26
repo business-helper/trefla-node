@@ -123,7 +123,7 @@ const activity = {
       sender_id: 0,
       receiver_id: user.id,
       type: notiTypePointReceived,
-      optional_val: `POST:${post.id}`,
+      optional_val: config.post_point,
       time: generateTZTimeString(),
       isFromAdmin: 1,
     };
@@ -150,7 +150,27 @@ const activity = {
       // send socket for notifcation update.
       await helpers.notification.socketOnNewNotification({ user_id: user.id, notification, socketClient });
     }
+    activity.pushNotification4NewPost({ user, notification });
     return user;
+  },
+  pushNotification4NewPost: ({ user, notification }) => {
+    const title = {
+      EN: 'Point Added',
+      RO: 'Punct adăugat',
+    };
+    const body = {
+      EN: `You earned ${notification.optional_val} points.`,
+      RO: `Ai câștigat ${notification.optional_val} puncte.`,
+    };
+    
+    const lang = ['EN', 'RO'].includes(user.language.toUpperCase()) ? user.language.toUpperCase() : 'EN';
+    if (user.device_token) {
+      return helpers.common.sendSingleNotification({
+        body: body[lang],
+        title: title[lang],
+        token: user.device_token,
+      });
+    }
   },
 }
 

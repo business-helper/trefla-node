@@ -48,6 +48,24 @@ const activity = {
       .then(() => helpers.file.delete(file.path))
       .then(() => activity.addPhoto({ user_id, url, type, ratio }));
   },
+  pushNotificationOnVerification: ({ user, verified }) => {
+    const title = {
+      EN: 'Identity Verification Updated',
+      RO: 'Verificarea identității a fost actualizată',
+    };
+    const body = {
+      EN: verified ? 'Your identity has been verified.' : 'Your identity has been unverified.',
+      RO: verified ? 'Identitatea dvs. a fost verificată.' : 'Identitatea dvs. a fost verificată.',
+    };
+    const lang = ['EN', 'RO'].includes(user.language.toUpperCase()) ? user.language.toUpperCase() : 'EN';
+    if (user.device_token) {
+      return helpers.common.sendSingleNotification({
+        body: body[lang],
+        title: title[lang],
+        token: user.device_token,
+      });
+    }
+  },
 };
 
 /**
@@ -201,6 +219,7 @@ exports.verifyUserIdentityRequest = async ({ id, socketClient }) => {
         });
         await helpers.notification.socketOnNewNotification({ user_id: user.id, notification, socketClient });
       }
+      activity.pushNotificationOnVerification({ user, verified: true });
       return {
         status: true,
         message: 'success',
@@ -256,6 +275,7 @@ exports.unverifyUserIdentityRequest = async ({ id, reason, socketClient }) => {
         });
         await helpers.notification.socketOnNewNotification({ user_id: user.id, socketClient, notification });
       }
+      activity.pushNotificationOnVerification({ user, verified: false });
       return {
         status: true,
         message: 'success',
