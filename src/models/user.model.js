@@ -231,6 +231,8 @@ User.output = (user, mode = 'NORMAL') => {
   if (user.black_list === "") user.black_list = [];
   else user.black_list = JSONParser(user.black_list);
 
+  user.payments = JSONParser(user.payments);
+
   // keys to delete
   let delKeys = [];
   if (mode === 'NORMAL') {
