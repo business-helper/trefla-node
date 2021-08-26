@@ -209,7 +209,8 @@ exports.verifyUserIdentityRequest = async ({ id, socketClient }) => {
         update_time: timestamp(),
       };
       const notification = await models.notification.create(notiData);
-
+      user.noti_num ++;
+      await models.user.save(user);
       // send a proper socket.
       if (user.socket_id) {
         socketClient.emit(EVENTS.SKT_LTS_SINGLE, {
@@ -266,6 +267,8 @@ exports.unverifyUserIdentityRequest = async ({ id, reason, socketClient }) => {
       };
 
       const notification = await models.notification.create(notiData);
+      user.noti_num ++;
+      await models.user.save(user);
       // send a proper socket.
       if (user.socket_id) {
         socketClient.emit(EVENTS.SKT_LTS_SINGLE, {
@@ -282,6 +285,4 @@ exports.unverifyUserIdentityRequest = async ({ id, reason, socketClient }) => {
       };
     })
   );
-
 }
-
