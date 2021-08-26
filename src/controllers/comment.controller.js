@@ -11,6 +11,7 @@ const EVENT = require('../constants/socket.constant');
 const { POINT_AWARD_TYPE } = require('../constants/common.constant');
 const { notiTypePointReceived } = require('../constants/notification.constant');
 
+const helpers = require('../helpers');
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { bool2Int, getTotalLikes, generateTZTimeString, respondError, sendSingleNotification, timestamp } = require("../helpers/common.helpers");
 const { generateCommentData, generateCommentLikeData, generateNotificationData, generatePointTransactionData } = require('../helpers/model.helpers');
@@ -101,6 +102,8 @@ const activity = {
           },
         },
       });
+      // send socket due to notfication udpate.
+      await helpers.notification.socketOnNewNotification({ user_id: user.id, notification, socketClient });
     }
     return user;
   },
