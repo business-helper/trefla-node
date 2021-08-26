@@ -120,10 +120,10 @@ const activity = {
       RO: `Ai câștigat ${notification.optional_val} puncte.`,
     };
     const data = {
-      noti_id: notification.id,
-      optionalVal: notification.optional_val,
-      type: notification.type,
-      user_id: 0,
+      noti_id: String(notification.id || ""),
+      optionalVal: String(notification.optional_val || ""),
+      type: String(notification.type || ""),
+      user_id: "0",
       user_name: 'Admin',
       avatar: '',
     };
