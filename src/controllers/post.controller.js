@@ -152,7 +152,8 @@ const activity = {
       // send socket for notifcation update.
       await helpers.notification.socketOnNewNotification({ user_id: user.id, notification, socketClient });
     }
-    activity.pushNotification4NewPost({ user, notification });
+
+    activity.pushNotification4NewPost({ user, notification }).catch(e => {});
     return user;
   },
   pushNotification4NewPost: ({ user, notification }) => {
@@ -164,13 +165,21 @@ const activity = {
       EN: `You earned ${notification.optional_val} points.`,
       RO: `Ai câștigat ${notification.optional_val} puncte.`,
     };
-    
+    const data = {
+      noti_id: notification.id,
+      optionalVal: notification.optional_val,
+      type: notification.type,
+      user_id: 0,
+      user_name: 'Admin',
+      avatar: '',
+    };
     const lang = ['EN', 'RO'].includes(user.language.toUpperCase()) ? user.language.toUpperCase() : 'EN';
     if (user.device_token) {
       return helpers.common.sendSingleNotification({
         body: body[lang],
         title: title[lang],
         token: user.device_token,
+        data,
       });
     }
   },
