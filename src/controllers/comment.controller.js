@@ -79,7 +79,7 @@ const activity = {
       sender_id: 0,
       receiver_id: user.id,
       type: notiTypePointReceived,
-      optional_val: `COMMENT:${comment.id}`,
+      optional_val: config.comment_point,
       time: generateTZTimeString(),
       isFromAdmin: 1,
     };
