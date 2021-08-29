@@ -27,6 +27,20 @@ PointTransaction.save = async (model) => {
   });
 }
 
+PointTransaction.count = async ({ user_id, type, start_time, end_time }) => {
+  const where = [];
+  if (user_id > 0) where.push(`user_id=${user_id}`);
+  if (type) where.push(`src_type='${type}'`);
+  if (start_time) where.push(`create_time >= ${start_time}`);
+  if (end_time) where.push(`create_time <= ${end_time}`);
+  const strWhere = where.length > 1 ? ` WHERE ${where.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT count(id) as total FROM ${table} ${strWhere} ORDER BY id DESC`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    });
+  });
+}
+
 PointTransaction.getById = (id) => {
   return new Promise((resolve, reject) => {
     sql.query(`SELECT * FROM ${table} WHERE id=?`, [id], (err, res) => {

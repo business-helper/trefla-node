@@ -168,7 +168,9 @@ exports.DEFAULT_CONFIG = {
   apple_link: '',
   enable_top_music: false,
   post_point: 2,
+  daily_post_limit: 1,
   comment_point: 1,
+  daily_comment_limit: 1,
   create_time: timestamp(),
   update_time: timestamp(),
 };
