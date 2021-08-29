@@ -105,7 +105,7 @@ const activity = {
 
     // check daily_post_limit
     const now = Date.now();
-    const days = Math.floor(now / 86400);
+    const days = Math.floor(now / 86400 / 1000);
     const start_time = days * 86400;
     const end_time = (days + 1) * 86400;
     const today_posts_count = await models.pointTransaction.count({
@@ -115,6 +115,7 @@ const activity = {
       end_time,
     });
     if (today_posts_count >= config.daily_post_limit) {
+      console.log('[Point][POST] out of limit');
       return user;
     }
 

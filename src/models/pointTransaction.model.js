@@ -31,8 +31,8 @@ PointTransaction.count = async ({ user_id, type, start_time, end_time }) => {
   const where = [];
   if (user_id > 0) where.push(`user_id=${user_id}`);
   if (type) where.push(`src_type='${type}'`);
-  if (start_time) where.push(`start_time >= ${start_time}`);
-  if (end_time) where.push(`end_time <= ${end_time}`);
+  if (start_time) where.push(`create_time >= ${start_time}`);
+  if (end_time) where.push(`create_time <= ${end_time}`);
   const strWhere = where.length > 1 ? ` WHERE ${where.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
     sql.query(`SELECT count(id) as total FROM ${table} ${strWhere} ORDER BY id DESC`, [], (err, res) => {
