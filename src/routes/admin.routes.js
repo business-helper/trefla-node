@@ -159,8 +159,17 @@ adminRouters.get('/id-transfers', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+
+
+///////////////////////////////////////////////////////////
+//                                                       //
+//            E M A I L   T E M P L A T E                //
+//                                                       //
+///////////////////////////////////////////////////////////
+
+
 /** @secured by admin types  */
-adminRouters.get('/email-templates/:id', async (req, res) => {
+adminRouters.route('/email-templates/:id').get(async (req, res) => {
   const permitted = await activity.checkAdminPermission(req, 'settings.emailTemplate');
   if (!permitted) return res.json({ status: false, message: "Permission denied!" });
 
@@ -181,6 +190,33 @@ adminRouters.get('/email-templates/:id', async (req, res) => {
     .then(matched => {
       if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
       return ctrls.admin.getEmailTemplateById(req.params.id)
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.route('/email-templates/:id').patch(async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'settings.emailTemplate');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    ...req.params,
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(provider => {
+    return models.emailTemplate.getById(provider.inputs.id)
+      .then(et => {
+        if (!et) provider.error('id', 'custom', `Email template with id "${provider.inputs.id}" does not exist!`);
+      })
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors});
+      return ctrls.admin.updateEmailTemplateById(req.params.id, req.body);
     })
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
@@ -207,8 +243,17 @@ adminRouters.get('/email-templates', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+
+
+///////////////////////////////////////////////////////////
+//                                                       //
+//                   L A N G U A G E                     //
+//                                                       //
+///////////////////////////////////////////////////////////
+
+
 /**@secured by admin types */
-adminRouters.get('/langs/:id/content', async (req, res) => {
+adminRouters.route('/langs/:id/content').get(async (req, res) => {
   const permitted = await activity.checkAdminPermission(req, 'lang.edit');
   if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
 
@@ -239,7 +284,34 @@ adminRouters.get('/langs/:id/content', async (req, res) => {
 });
 
 /**@secured by admin types */
-adminRouters.get('/langs/:id', async (req, res) => {
+adminRouters.route('/langs/:id/sync').post(async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'lang.async');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.language.getById(provider.inputs.id)
+      .then(lang => {
+        if (!lang) provider.error('id', 'custom', 'Language does not exist!');
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.language.syncLangReq(req.params.id);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.route('/langs/:id').get(async (req, res) => {
   const permitted = await activity.checkAdminPermission(req, 'lang.edit');
   if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
 
@@ -259,7 +331,61 @@ adminRouters.get('/langs/:id', async (req, res) => {
 });
 
 /**@secured by admin types */
-adminRouters.get('/langs', async (req, res) => {
+adminRouters.route('/langs/:id').patch(async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'lang.edit');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required|integer",
+  });
+
+  validator.addPostRule(provider => {
+    return models.language.getById(provider.inputs.id)
+      .then(lang => {
+        if (!lang) provider.error('id', 'custom', `Language with id "${provider.inputs.id}" does not exist!`);
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors});
+      return ctrls.language.updateLangById(req.params.id, req.body);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.route('/langs/:id').delete(async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'lang.delete');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    id: req.params.id,
+  }, {
+    id: "required",
+  });
+
+  validator.addPostRule(provider => {
+    return models.language.getById(provider.inputs.id)
+      .then(lang => {
+        if (!lang) provider.error('id', 'custom', 'Language does not exist!');
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      return ctrls.language.deleteById(req.params.id);
+    })
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+/**@secured by admin types */
+adminRouters.route('/langs').get(async (req, res) => {
   const permitted = await activity.checkAdminPermission(req, 'lang.show');
   if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
 
@@ -276,6 +402,72 @@ adminRouters.get('/langs', async (req, res) => {
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
 });
+
+/**@secured by admin types */
+adminRouters.route('/langs').post(async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'lang.add');
+  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
+
+  const validator = new Validator({
+    ...req.body,
+  }, {
+    code: "required",
+    name: "required",
+    active: "required",
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors});
+      return ctrls.language.create(req, res);
+    })
+    .catch(error => respondValidateError(res, error));
+});
+
+adminRouters.route('/upload-lang/:langCode').post(async (req, res) => {
+  const { role } = getTokenInfo(req);
+  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
+
+  const validator = new Validator({
+    langCode: req.params.langCode,
+  }, {
+    langCode: "required|string"
+  });
+
+  validator.addPostRule(provider => {
+    return models.language.getByCode(provider.inputs.langCode)
+      .then(lang => {
+        if (!lang) provider.error('langCode', `custom', 'Language with code "${provider.inputs.langCode}" does not exist!`);
+      });
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
+      // upload file
+      return ctrls.language.uploadLangFileReq(req);
+    })
+    .then(result => {
+      if (!result.status) throw Object.assign(new Error(result.message), { code: 400 });
+      return Promise.all([
+        result.url,
+        models.language.getByCode(req.params.langCode),
+      ]);
+    })
+    .then(([ url, lang ]) => {
+      return models.language.save({ ...lang, url });
+    })
+    .then(lang => {
+      return res.json({
+        status: true,
+        message: 'success',
+        data: lang
+      });
+    })  
+    .catch(error => respondValidateError(res, error));
+});
+
+
 
 adminRouters.get('/stats', async (req, res) => {
   const { role } = getTokenInfo(req);
@@ -297,6 +489,15 @@ adminRouters.get('/stats', async (req, res) => {
     })
     .catch(error => respondValidateError(res, error));
 });
+
+
+
+///////////////////////////////////////////////////////////
+//                                                       //
+//                 N O T I F I C A T I O N               //
+//                                                       //
+///////////////////////////////////////////////////////////
+
 
 /**@secured by admin types */
 adminRouters.post('/send-notification', async (req, res) => {
@@ -360,97 +561,6 @@ adminRouters.post('/bulk-notifications', async (req, res) => {
 });
 
 /**@secured by admin types */
-adminRouters.post('/langs/:id/sync', async (req, res) => {
-  const permitted = await activity.checkAdminPermission(req, 'lang.async');
-  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
-
-  const validator = new Validator({
-    id: req.params.id,
-  }, {
-    id: "required",
-  });
-
-  validator.addPostRule(provider => {
-    return models.language.getById(provider.inputs.id)
-      .then(lang => {
-        if (!lang) provider.error('id', 'custom', 'Language does not exist!');
-      });
-  });
-
-  return validator.check()
-    .then(matched => {
-      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
-      return ctrls.language.syncLangReq(req.params.id);
-    })
-    .then(result => res.json(result))
-    .catch(error => respondValidateError(res, error));
-});
-
-/**@secured by admin types */
-adminRouters.post('/langs', async (req, res) => {
-  const permitted = await activity.checkAdminPermission(req, 'lang.add');
-  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
-
-  const validator = new Validator({
-    ...req.body,
-  }, {
-    code: "required",
-    name: "required",
-    active: "required",
-  });
-
-  return validator.check()
-    .then(matched => {
-      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors});
-      return ctrls.language.create(req, res);
-    })
-    .catch(error => respondValidateError(res, error));
-});
-
-adminRouters.post('/upload-lang/:langCode', async (req, res) => {
-  const { role } = getTokenInfo(req);
-  if (role !== 'ADMIN') return res.json({ status: false, message: "Permission denied!"});
-
-  const validator = new Validator({
-    langCode: req.params.langCode,
-  }, {
-    langCode: "required|string"
-  });
-
-  validator.addPostRule(provider => {
-    return models.language.getByCode(provider.inputs.langCode)
-      .then(lang => {
-        if (!lang) provider.error('langCode', `custom', 'Language with code "${provider.inputs.langCode}" does not exist!`);
-      });
-  });
-
-  return validator.check()
-    .then(matched => {
-      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
-      // upload file
-      return ctrls.language.uploadLangFileReq(req);
-    })
-    .then(result => {
-      if (!result.status) throw Object.assign(new Error(result.message), { code: 400 });
-      return Promise.all([
-        result.url,
-        models.language.getByCode(req.params.langCode),
-      ]);
-    })
-    .then(([ url, lang ]) => {
-      return models.language.save({ ...lang, url });
-    })
-    .then(lang => {
-      return res.json({
-        status: true,
-        message: 'success',
-        data: lang
-      });
-    })  
-    .catch(error => respondValidateError(res, error));
-});
-
-/**@secured by admin types */
 adminRouters.post('/consent-email/:id', async (req, res) => {
   const permitted = await activity.checkAdminPermission(req, 'user.idTransfer.show');
   if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
@@ -483,33 +593,6 @@ adminRouters.post('/consent-email/:id', async (req, res) => {
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
 });
-
-/**@secured by admin types */
-adminRouters.patch('/email-templates/:id', async (req, res) => {
-  const permitted = await activity.checkAdminPermission(req, 'settings.emailTemplate');
-  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
-
-  const validator = new Validator({
-    ...req.params,
-  }, {
-    id: "required|integer",
-  });
-
-  validator.addPostRule(provider => {
-    return models.emailTemplate.getById(provider.inputs.id)
-      .then(et => {
-        if (!et) provider.error('id', 'custom', `Email template with id "${provider.inputs.id}" does not exist!`);
-      })
-  });
-
-  return validator.check()
-    .then(matched => {
-      if (!matched) throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors});
-      return ctrls.admin.updateEmailTemplateById(req.params.id, req.body);
-    })
-    .then(result => res.json(result))
-    .catch(error => respondValidateError(res, error));
-})
 
 adminRouters.patch('/profile', async (req, res) => {
   const { uid: user_id, role } = getTokenInfo(req);
@@ -577,60 +660,6 @@ adminRouters.patch('/config', async (req, res) => {
     .then(result => res.json(result))
     .catch(error => respondValidateError(res, error));
 });
-
-/**@secured by admin types */
-adminRouters.patch('/langs/:id', async (req, res) => {
-  const permitted = await activity.checkAdminPermission(req, 'lang.edit');
-  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
-
-  const validator = new Validator({
-    id: req.params.id,
-  }, {
-    id: "required|integer",
-  });
-
-  validator.addPostRule(provider => {
-    return models.language.getById(provider.inputs.id)
-      .then(lang => {
-        if (!lang) provider.error('id', 'custom', `Language with id "${provider.inputs.id}" does not exist!`);
-      });
-  });
-
-  return validator.check()
-    .then(matched => {
-      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors});
-      return ctrls.language.updateLangById(req.params.id, req.body);
-    })
-    .then(result => res.json(result))
-    .catch(error => respondValidateError(res, error));
-})
-
-/**@secured by admin types */
-adminRouters.delete('/langs/:id', async (req, res) => {
-  const permitted = await activity.checkAdminPermission(req, 'lang.delete');
-  if (!permitted) return res.status(403).json({ status: false, message: "Permission denied!" });
-
-  const validator = new Validator({
-    id: req.params.id,
-  }, {
-    id: "required",
-  });
-
-  validator.addPostRule(provider => {
-    return models.language.getById(provider.inputs.id)
-      .then(lang => {
-        if (!lang) provider.error('id', 'custom', 'Language does not exist!');
-      });
-  });
-
-  return validator.check()
-    .then(matched => {
-      if (!matched) throw Object.assign(new Error("Invalid request!"), { code: 400, details: validator.errors });
-      return ctrls.language.deleteById(req.params.id);
-    })
-    .then(result => res.json(result))
-    .catch(error => respondValidateError(res, error));
-})
 
 /**@secured by admin types */
 adminRouters.delete('/id-transfers/:id', async (req, res) => {

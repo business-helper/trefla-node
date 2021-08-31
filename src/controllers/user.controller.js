@@ -660,6 +660,7 @@ exports.verifyUser = ({ user_id, socketClient }) => {
           type: NOTI_TYPES.cardVerifyRequestRejectNotiType,
           optional_val: _card_number,
           time: generateTZTimeString(),
+          text: 'Other user has been verified.',
         });
         const notification = await models.notification.create(notiModel);
         user.noti_num ++;
