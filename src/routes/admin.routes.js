@@ -850,6 +850,51 @@ adminRouters.route('/employee/:id/permission').patch(async(req, res) => {
     .catch(error => respondValidateError(res, error))
 })
 
+
+
+///////////////////////////////////////////////////////////
+//                                                       //
+//                 D R I V E R   I D                     //
+//                                                       //
+///////////////////////////////////////////////////////////
+
+/**
+ * @secured by admin types
+ * @permission 'driver-id.reject'
+ */
+adminRouters.route('/driver-ids/reject/:user_id').post(async (req, res) => {
+  const permitted = await activity.checkAdminPermission(req, 'driver-id.reject');
+  if (!permitted) return res.status(403).json({ status: false, message: 'Permission denied!' });
+
+  const validator = new Validator({ ...req.params, ...req.body }, {
+    user_id: "required",
+    // reason: "required"
+  });
+
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+      return models.user.getById(req.params.user_id);
+    })
+    .then(user => {
+      if (!user) {
+        throw new Error(`Not found the user with id ${req.params.user_id}`);
+      }
+      if (!user.card_number) {
+        throw new Error(`User don't have card number!`);
+      }
+      const socketClient = req.app.locals.socketClient;
+      return ctrls.user.rejectIdVerification({
+        user_id: Number(req.params.user_id),
+        reason: req.body.reason,
+        socketClient,
+      });
+    })
+    .then(resp => res.json(resp))
+    .catch(error => respondValidateError(res, error));
+});
+
+
 ///////////////////////////////////////////////////////////
 //                                                       //
 //                  I D E N T I T Y                      //

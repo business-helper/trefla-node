@@ -2,7 +2,10 @@ const { Validator } = require("node-input-validator");
 const logger = require('../config/logger');
 const CONSTS = require('../constants/socket.constant');
 const NOTI_TYPES = require('../constants/notification.constant');
-const { LOGIN_MODE } = require('../constants/common.constant');
+const {
+  CARD_STATUS,
+  LOGIN_MODE
+} = require('../constants/common.constant');
 const { ADMIN_NOTI_TYPES } = require("../constants/notification.constant");
 const Payments = require('../types/Payments');
 
@@ -11,7 +14,7 @@ const User = require("../models/user.model");
 const helpers = require('../helpers');
 
 const EmailTemplate = require("../models/emailTemplate.model");
-const { filterAroundUsers, generateTZTimeString, JSONParser, JSONStringify, respondError, sendMail } = require("../helpers/common.helpers");
+const { filterAroundUsers, generateTZTimeString, JSONParser, JSONStringify, respondError, sendMail, timestamp } = require("../helpers/common.helpers");
 const {
   comparePassword,
   generateUserData,
@@ -777,9 +780,77 @@ exports.unverifyUserReq = (req, res) => {
     }));
 }
 
-exports.rejectIdVerification = (req, res) => {
-  const { user_id, reason } = req.body;
-  
+
+/**
+ * @description reject the driver id (card) of a user.
+ * @param {Integer} user_id
+ * @param {String} reason
+ * @param {SocketInstance} socketClient
+ * @workflow
+ *  - update the card_verified -> CARD_STATUS.REJECTED
+ *  - add a notification with text(reason) (socket also)
+ *  - send a socket about rejection.
+ *  - send a push notification to the user.
+ */
+exports.rejectIdVerification = async ({ user_id, reason, socketClient }) => {
+  const addRejectionNotification = async ({ user, card_number }) => {
+    const notiModel = helpers.model.generateNotificationData({
+      isFromAdmin: 1,
+      sender_id: 0,
+      receiver_id: user.id,
+      type: NOTI_TYPES.cardVerifyRequestRejectNotiType,
+      optional_val: card_number,
+      time: generateTZTimeString(),
+      text: `Administrator rejected your vehicle number ${card_number}.`,
+    });
+    
+    const notification = await models.notification.create(notiModel);
+    // increase noti number;
+    user.noti_num ++;
+    await models.user.save(user);
+
+    // send socket about new notification.
+    if (user.socket_id) {
+      socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+        to: user.socket_id,
+        event: CONSTS.SKT_NOTI_NUM_UPDATED,
+        args: {
+          num: user.noti_num,
+          notification,
+        }
+      })
+    }
+
+  }
+
+  return models.user.getById(user_id).then(async user => {
+    const card_number = user.card_number;
+    user.card_verified = CARD_STATUS.REJECTED;
+    user.update_time = timestamp();
+
+    // update the user.
+    await models.user.save(user);
+
+    // notification & socket.
+    await addRejectionNotification({ user, card_number });
+
+    // update chat verification.
+    await models.chat.getChatToCard(card_number).then(chats => {
+      if (chats.length) {
+        return unverifyCardChats(chats);
+      }
+    });
+
+    // socket
+
+    // push notification.
+    await activity.notifyRejectionResult({ user_id: user.id });
+    return {
+      status: true,
+      message: 'You rejected a user card number!',
+      data: user,
+    };
+  });
 }
 
 
