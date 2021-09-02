@@ -17,3 +17,9 @@ exports.POINT_AWARD_TYPE = {
   POST: 'POST',
   COMMENT: 'COMMENT',
 };
+
+exports.CARD_STATUS = {
+  PENDING: 0,
+  VERIFIED: 1,
+  REJECTED: 2,
+};
