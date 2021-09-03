@@ -136,7 +136,7 @@ const activity = {
     // check the message count after preview message.
     // if first message ( count === 1 ), proceed add message.
     // 
-
+    console.log('[Here] my Id', user_id)
     return Promise.resolve()
       .then(async () => {
         const lastPreviewMessage = await models.message.lastPreviewMsgInChat(chat.id);
@@ -211,7 +211,7 @@ const activity = {
         return { sockets };
       })
       .catch(error => {
-        // console.log('[Error]', error);
+        console.log('[Error]', error);
         return {
           sockets: [],
         }
@@ -583,7 +583,9 @@ exports.addMessageReq = async ({ sender_id, receiver_id, chat_id, payload }) => 
       // message.receiver = User.output(_receiver);
       chat = Chat.output(chat);
       chat.preview_data = await helpers.common.populateChatSource(chat.sources, models);
-      return { message, chat, unread_updated };
+
+      const { sockets } = await activity.addNewPoint({ chat, user_id: sender_id });
+      return { message, chat, unread_updated, sockets };
     })
 }
 
