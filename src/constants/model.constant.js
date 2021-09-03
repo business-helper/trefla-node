@@ -171,6 +171,7 @@ exports.DEFAULT_CONFIG = {
   daily_post_limit: 1,
   comment_point: 1,
   daily_comment_limit: 1,
+  chat_point: 1,
   create_time: timestamp(),
   update_time: timestamp(),
 };
