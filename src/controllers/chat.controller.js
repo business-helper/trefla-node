@@ -1,16 +1,23 @@
 const { Validator } = require("node-input-validator");
 const CONSTS = require('../constants/socket.constant');
+const { POINT_AWARD_TYPE } = require('../constants/common.constant');
+const NOTI_TYPES = require('../constants/notification.constant');
+
 const Chat = require("../models/chat.model");
 const User = require("../models/user.model");
 const Message = require('../models/message.model');
 const models = require('../models');
 const helpers = require('../helpers');
 const { getTokenInfo } = require('../helpers/auth.helpers');
-const { bool2Int, chatPartnerId, getTotalLikes, generateTZTimeString, respondError } = require("../helpers/common.helpers");
+const { bool2Int, chatPartnerId, getTotalLikes, generateTZTimeString, respondError, timestamp } = require("../helpers/common.helpers");
 const { generateChatData, generateMessageData, getLastMsgIndexOfChat } = require('../helpers/model.helpers');
 
 const activity = {
   processChatSource: ({ chat, from_where, target_id, last_msg_id = 0 }) => {
+    /**
+     * @description users can talk about multiple posts or comments, or without any of them.
+     *              Targets must not be in sequence for the adjacent two sources.
+     */
     if (from_where && target_id && ['POST', 'COMMENT'].includes(from_where)) {
       const sources = JSON.parse(chat.sources || '[]');
       let lastIndex = -1;
@@ -50,7 +57,9 @@ const activity = {
     // if (Object.keys(mapWhere2Type).includes(from_where)) return chat;
 
     // if the lastest preview is same, then skip it.
-    if (lastPreview && mapWhere2Type[from_where] === lastPreview.type && lastPreview.message === target_id.toString()) return chat;
+    if (lastPreview && 
+      (mapWhere2Type[from_where] === lastPreview.type && (lastPreview.type === 7 || lastPreview.message === target_id.toString()))
+      ) return chat;
 
     // lets insert new preview msg.
     const message = generateMessageData({
@@ -65,28 +74,31 @@ const activity = {
     });
     await models.message.create(message);
     // emoticon message
-    const emotionMsg = generateMessageData({
-      chat_id: chat.id,
-      message: '[36]',
-      sender_id: user_id,
-      receiver_id: receiver_id || 0,
-      type: 0,
-      numEmoji: 1,
-      sizeEmoji: 100,
-      isOnlyEmoji: 1,
-    });
+    // const emotionMsg = generateMessageData({
+    //   chat_id: chat.id,
+    //   message: '[36]',
+    //   sender_id: user_id,
+    //   receiver_id: receiver_id || 0,
+    //   type: 0,
+    //   numEmoji: 1,
+    //   sizeEmoji: 100,
+    //   isOnlyEmoji: 1,
+    // });
     // await models.message.create(emotionMsg);
 
+
+    // let unread_nums = JSON.parse(chat.unread_nums);
+    // const userIndex = JSON.parse(chat.user_ids).indexOf(user_id);
+    // unread_nums[1 - userIndex] += 1; 
+
     // update last message info of chat.
-    let last_messages = JSON.parse(chat.last_messages);
-    let unread_nums = JSON.parse(chat.unread_nums);
-    const userIndex = JSON.parse(chat.user_ids).indexOf(user_id);
-    unread_nums[1 - userIndex] += 1; 
+    // let last_messages = JSON.parse(chat.last_messages);
     // chat.unread_nums = JSON.stringify(unread_nums);
     // chat.last_messages = JSON.stringify([{
     //   msg: '[36]',
     //   time: helpers.common.generateTZTimeString(),
     // }]);
+
     await models.chat.save(chat);
     
     return chat;
@@ -118,6 +130,119 @@ const activity = {
     await models.message.deleteAfterId(chat.id, minId - 1);
 
     return models.chat.save(chat);
+  },
+  addNewPoint: async ({ chat, user_id }) => {
+    // get last preview message.
+    // check the message count after preview message.
+    // if first message ( count === 1 ), proceed add message.
+    // 
+
+    return Promise.resolve()
+      .then(async () => {
+        const lastPreviewMessage = await models.message.lastPreviewMsgInChat(chat.id);
+        const user = await models.user.getById(user_id);
+        if (!user || !user.id_verified) {
+          throw new Error(`User doesn't exist or is not verified!`);
+        }
+        const userMsgs = await models.message.pagination({
+          userId: user_id,
+          chat_id: chat.id,
+          minId: lastPreviewMessage.id,
+          limit: 2,
+        });
+
+        if (userMsgs.length === 0) throw new Error("You must add a new message!");
+        if (userMsgs.length > 1) throw new Error("You can't get point again!");
+
+        // start to add point to user.
+        const config = await models.config.get();
+        const transactionData = helpers.model.generatePointTransactionData({
+          user_id,
+          amount: config.chat_point,
+          src_type: POINT_AWARD_TYPE.MESSAGE,
+          src_id: userMsgs[0].id,
+        });
+        const transaction = await models.pointTransaction.create(transactionData);
+
+        // notification
+        const notiData = helpers.model.generateNotificationData({
+          sender_id: 0,
+          receiver_id: user_id,
+          type: NOTI_TYPES.notiTypePointReceived,
+          optional_val: config.chat_point,
+          time: generateTZTimeString(),
+          isFromAdmin: 1,
+        });
+        const notification = await models.notification.create(notiData);
+
+        user.points += config.chat_point;
+        user.noti_num ++;
+        user.update_time = timestamp();
+        await models.user.save(user);
+
+        const sockets = [];
+        if (user.socket_id) {
+          // socket for winning a point.
+          sockets.push({
+            to: user.socket_id,
+            event: CONSTS.SKT_POINT_ADDED,
+            args: {
+              amount: config.chat_point,
+              current: user.points,
+              data: {
+                type: POINT_AWARD_TYPE.MESSAGE,
+                id: userMsgs[0].id,
+                user_id,
+                message: userMsgs[0].message,
+              },
+            },
+          });
+          // socket for notification num increased.
+          sockets.push({
+            to: user.socket_id,
+            event: CONSTS.SKT_NOTI_NUM_UPDATED,
+            args: {
+              num: user.noti_num,
+              notification,
+            },
+          })
+        }
+        activity.pushNotification4NewPost({ user, notification }).catch(e => {});
+        return { sockets };
+      })
+      .catch(error => {
+        // console.log('[Error]', error);
+        return {
+          sockets: [],
+        }
+      });
+  },
+  pushNotification4NewPost: ({ user, notification }) => {
+    const title = {
+      EN: 'Point Added',
+      RO: 'Punct adăugat',
+    };
+    const body = {
+      EN: `You earned ${notification.optional_val} points.`,
+      RO: `Ai câștigat ${notification.optional_val} puncte.`,
+    };
+    const data = {
+      noti_id: String(notification.id || ""),
+      optionalVal: String(notification.optional_val || ""),
+      type: String(notification.type || ""),
+      user_id: "0",
+      user_name: 'Admin',
+      avatar: '',
+    };
+    const lang = ['EN', 'RO'].includes(user.language.toUpperCase()) ? user.language.toUpperCase() : 'EN';
+    if (user.device_token) {
+      return helpers.common.sendSingleNotification({
+        body: body[lang],
+        title: title[lang],
+        token: user.device_token,
+        data,
+      });
+    }
   },
 }
 
@@ -274,8 +399,10 @@ exports.availableChatrooms = async (req, res) => {
 exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
   const receiver = payload.receiver_id ? await User.getById(payload.receiver_id) : null;
   payload.last_msg_id = 0; // inital msg id on create chat.
+
   let model = generateChatData(payload, user_id, receiver);
-  model.accept_status = !isGuest ? 1 : 0;
+  const accept_status = 1; // !isGuest ? 1 : 0;
+  model.accept_status = accept_status;
 
   const message = payload.message ? generateMessageData({
     ...payload,
@@ -292,15 +419,18 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
     chatrooms = chatrooms.filter(chat => {
       const user_ids = JSON.parse(chat.user_ids);
       return ['COMMENT', 'POST', 'NONE'].includes(chat.from_where) && (user_ids.length === 2);
-    })
-    // if there exists chat between two users;
+    });
+    // if chats already exist between two users;
     if (chatrooms.length > 0) {
       _chat = chatrooms[0];
-      _chat.accept_status = !isGuest ? 1 : 0;
+      _chat.accept_status = accept_status;
+
+      // get the last message ID.
       const lastMsg = await models.message.lastMsgInChat(_chat.id);
       const last_msg_id = lastMsg ? lastMsg.id : 0;
+
+      // check & update chat.sources. They can talk about different post or comment.
       _chat = activity.processChatSource({ chat: _chat, ...payload, last_msg_id });
-      
     }
   }
 
@@ -315,7 +445,7 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
       chat = await activity.processPreviewMsg({ chat, user_id, payload });
 
       // add message after preview?
-      const msgObj = message ? Message.create({ ...message, chat_id: chat.id }) : null
+      const msgObj = message ? await Message.create({ ...message, chat_id: chat.id }) : null
       chat = Chat.output(chat);
       chat.user = User.output(receiver);
 
@@ -324,11 +454,14 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
       // @deprecated?
       // chat.preview_data = await helpers.common.populateChatSource(chat.sources, models);
 
+      const { sockets } = await activity.addNewPoint({ chat, user_id });
+
       return ({
         status: true,
         message: 'Chat room created!',
         data: chat,
         isNewChat,
+        sockets,
       });
     })
 }
@@ -638,6 +771,3 @@ exports.deleteMessagesInChat = async ({ id, last_msg_id, socketClient, user_id }
       return chat;
     });
 }
-
-
-

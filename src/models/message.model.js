@@ -50,10 +50,11 @@ Message.deleteAfterId = async (chat_id, id) => {
   })
 }
 
-Message.pagination = async ({ limit, last_id = null, chat_id, minId = 0, maxId = 0 }) => {
+Message.pagination = async ({ limit, last_id = null, chat_id, minId = 0, maxId = 0, userId = null }) => {
   let where = [`chat_id=${chat_id}`];
   if (minId) where.push(`id > ${minId}`);
   if (maxId) where.push(`id <= ${maxId}`);
+  if (userId) where.push(`(sender_id=${userId} OR receiver_id=${userId})`);
   if (last_id) {
     where.push(`id < ${last_id}`);
   }
