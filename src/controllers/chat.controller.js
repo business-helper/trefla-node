@@ -499,14 +499,18 @@ exports.createCardChatReq = async (user_id, payload, isGuest) => {
     chat, sender,
     message ? Message.create({ ...message, chat_id: chat.id }) : null
   ]))
-    .then(([chat, sender, msgObj]) => {
+    .then(async ([chat, sender, msgObj]) => {
       chat = Chat.output(chat);
       chat.user = User.output(receiver);
+
+      const { sockets } = await activity.addNewPoint({ chat, user_id });
+
       return ({
         status: true,
         message: 'Chat room created!',
         data: chat,
         msg: msgObj,
+        sockets,
       });
     });
 }
