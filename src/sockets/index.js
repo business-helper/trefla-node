@@ -7,6 +7,7 @@ const {
 const CONSTS = require('../constants/socket.constant');
 const { auth } = require('firebase-admin');
 const INNER_CLIENT = 'INNER_CLIENT';
+const resolvers = require('./resolvers');
 
 const bootstrapSocket = (io) => {
   io.on('connection', async socket => {
@@ -61,41 +62,7 @@ const bootstrapSocket = (io) => {
     })
 
     // connection request to a user.
-    socket.on(CONSTS.SKT_CONNECT_TO_USER, ({ toId, message, isGuest = true, from_where = 'NONE', target_id = '0' }) => {
-      const { uid } = helpers.auth.parseToken(token);
-      console.log('[connection req]', toId, uid);
-      let _toUser, _fromUser;
-      Promise.all([
-        models.user.getById(toId),
-        models.user.getById(uid)
-      ])
-        .then(([toUser, fromUser]) => {
-          if (!toUser) {
-            throw Object.assign(new Error("User doesn't exist!"), { code: 400 });
-          }
-          _toUser = toUser;
-          _fromUser = fromUser;
-          return ctrls.chat.createNormalChatReq(uid, { receiver_id: toId, message, from_where, target_id }, isGuest);
-        })
-        .then(result => {
-          const { status, message, data, isNewChat } = result;
-          if (_toUser.socket_id) {
-            io.to(_toUser.socket_id).emit(CONSTS.SKT_CONNECT_REQUESTED, { 
-              status,
-              message: `Connection request from ${_fromUser.user_name}`,
-              data: { ...data, isSent: false, user: models.user.output(_fromUser) },
-              isNewChat,
-            });
-          } else {
-            console.log('[user is offline]', toId);
-          }
-          socket.emit(CONSTS.SKT_CONNECT_TO_USER, { status, message, data: { ...data, isSent: true }, isNewChat });
-        })
-        .catch(error => {
-          console.log(error);
-          socket.emit(CONSTS.SKT_CONNECT_TO_USER, { status: false, message: error.message });
-        })
-    });
+    socket.on(CONSTS.SKT_CONNECT_TO_USER, (args) => resolvers.connect2User({ io, socket, token, ...args }));
 
     socket.on(CONSTS.SKT_CONNECT_TO_CARD, async ({ card_number, message, toId = 0, isGuest = true, from_where = 'CARD' }) => {
       const { uid } = helpers.auth.parseToken(token);
