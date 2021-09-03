@@ -7,6 +7,7 @@ const {
 const CONSTS = require('../constants/socket.constant');
 const { auth } = require('firebase-admin');
 const INNER_CLIENT = 'INNER_CLIENT';
+const resolvers = require('./resolvers');
 
 const bootstrapSocket = (io) => {
   io.on('connection', async socket => {
@@ -61,120 +62,9 @@ const bootstrapSocket = (io) => {
     })
 
     // connection request to a user.
-    socket.on(CONSTS.SKT_CONNECT_TO_USER, ({ toId, message, isGuest = true, from_where = 'NONE', target_id = '0' }) => {
-      const { uid } = helpers.auth.parseToken(token);
-      console.log('[connection req]', toId, uid);
-      let _toUser, _fromUser;
-      Promise.all([
-        models.user.getById(toId),
-        models.user.getById(uid)
-      ])
-        .then(([toUser, fromUser]) => {
-          if (!toUser) {
-            throw Object.assign(new Error("User doesn't exist!"), { code: 400 });
-          }
-          _toUser = toUser;
-          _fromUser = fromUser;
-          return ctrls.chat.createNormalChatReq(uid, { receiver_id: toId, message, from_where, target_id }, isGuest);
-        })
-        .then(result => {
-          const { status, message, data, isNewChat } = result;
-          if (_toUser.socket_id) {
-            io.to(_toUser.socket_id).emit(CONSTS.SKT_CONNECT_REQUESTED, { 
-              status,
-              message: `Connection request from ${_fromUser.user_name}`,
-              data: { ...data, isSent: false, user: models.user.output(_fromUser) },
-              isNewChat,
-            });
-          } else {
-            console.log('[user is offline]', toId);
-          }
-          socket.emit(CONSTS.SKT_CONNECT_TO_USER, { status, message, data: { ...data, isSent: true }, isNewChat });
-        })
-        .catch(error => {
-          console.log(error);
-          socket.emit(CONSTS.SKT_CONNECT_TO_USER, { status: false, message: error.message });
-        })
-    });
+    socket.on(CONSTS.SKT_CONNECT_TO_USER, (args) => resolvers.connect2User({ io, socket, token, ...args }));
 
-    socket.on(CONSTS.SKT_CONNECT_TO_CARD, async ({ card_number, message, toId = 0, isGuest = true, from_where = 'CARD' }) => {
-      const { uid } = helpers.auth.parseToken(token);
-      let _chat, _message;
-
-      const [cardUsers, fromUser] = await Promise.all([
-        models.user.getByCard(card_number),
-        models.user.getById(uid),
-        // models.chat.getChatToCard({ card_number, uid }),
-      ]);
-      const [verifiedUser] = cardUsers.filter(user => user.card_verified);
-      toId = verifiedUser ? verifiedUser.id : 0;
-      console.log('[connection req]', toId);
-
-      ctrls.chat.createCardChatReq(uid, {
-          receiver_id: toId,
-          message, card_number,
-          isForCard: 1,
-          card_verified: verifiedUser ? 1 : 0,
-          from_where,
-          target_id: card_number,
-         }, isGuest)
-        .then(({ status, message, data: chat, msg }) => {
-          _chat = chat; _message = msg;
-          // process the sender
-          socket.emit(CONSTS.SKT_CONNECT_TO_USER, { 
-            status, message, 
-            data: { ...chat, isSent: true } 
-          });
-
-          // process the receivers
-          (verifiedUser ? [verifiedUser] : cardUsers).map(receiver => {
-            if (receiver.socket_id) {
-              io.to(receiver.socket_id).emit(CONSTS.SKT_CONNECT_REQUESTED, {
-                status: true,
-                message: `Connection request from ${fromUser.user_name}`,
-                data: {
-                  ...chat,
-                  isSent: false,
-                  user: models.user.output(fromUser),
-                }
-              });
-            }
-          });
-        })
-        .then(() => {
-          if (_message) {
-            socket.emit(CONSTS.SKT_RECEIVE_MSG, { 
-              message: {
-                ...(models.message.output(_message)),
-                user: models.user.output(fromUser) // sender
-              },
-              chat: {
-                ..._chat,
-                user: models.user.output(verifiedUser)
-              }
-            });
-
-            (verifiedUser ? [verifiedUser] : cardUsers).map(receiver => {
-              if (receiver.socket_id) {
-                io.to(receiver.socket_id).emit(CONSTS.SKT_RECEIVE_MSG, {
-                  message: {
-                    ...(models.message.output(_message)),
-                    user: models.user.output(fromUser) // sender
-                  },
-                  chat: {
-                    ..._chat,
-                    user: models.user.output(fromUser)
-                  }
-                });
-              }
-            });
-          }
-        })
-        .catch(error => {
-          console.log(error);
-          socket.emit(CONSTS.SKT_CONNECT_TO_USER, { status: false, message: error.message });
-        });
-    });
+    socket.on(CONSTS.SKT_CONNECT_TO_CARD, (args) => resolvers.connect2Card({ io, socket, token, ...args }));
 
     socket.on(CONSTS.SKT_CONNECT_ACCEPT, async ({ chat_id }) => {
       const { uid } = helpers.auth.parseToken(token);
@@ -267,122 +157,7 @@ const bootstrapSocket = (io) => {
         });
     })
 
-    socket.on(CONSTS.SKT_SEND_MSG, async ({ message, chat_id, ...payload }) => {
-      const { uid } = helpers.auth.parseToken(token);
-      const chat = await models.chat.getById(chat_id);
-      const user_ids = JSON.parse(chat.user_ids);
-      let receiver_id = user_ids.length > 1 ? 
-        (user_ids[0] === uid ? user_ids[user_ids.length - 1] : user_ids[0] ): 
-        0;
-
-      if (chat.isForCard === 1) {
-        if (!chat.card_verified) {
-          receiver_id = 0;
-        }
-      }
-
-      const user_t = await models.user.getById(receiver_id); user_t.black_list = JSON.parse(user_t.black_list);
-      const user_f = await models.user.getById(uid); 
-      if (user_t.black_list.includes(uid)) {
-        socket.emit(CONSTS.SKT_MSG_FAILED, {
-          status: false,
-          message: `You're blocked by "${user_t.user_name}"`,
-          payload: {
-            message,
-            chat_id,
-            ...payload
-          }
-        });
-        return false;
-      }
-
-
-      Promise.all([
-        ctrls.chat.addMessageReq({
-          sender_id: uid,
-          receiver_id,
-          chat_id,
-          payload: {
-            message,
-            ...payload
-          }
-        }),
-        models.user.getById(uid),
-        models.user.getById(receiver_id),
-        (chat.isForCard === 1) ? models.user.getByCard(chat.card_number) : null,
-      ])
-        .then(async ([{message: msg, chat, unread_updated}, me, receiver, cardUsers]) => {
-          
-          /**
-           * @description send socket to receiver
-           * @for normal chat.
-           */
-          if (chat.isForCard === 0 && receiver.socket_id) {
-            io.to(receiver.socket_id).emit(CONSTS.SKT_RECEIVE_MSG, {
-              message: {
-                ...msg,
-                user: models.user.output(me) // sender
-              },
-              chat: {
-                ...chat,
-                user: models.user.output(me)
-              }
-            });
-          }
-
-
-          /**
-           * @description send socket to me.
-           */
-          socket.emit(CONSTS.SKT_RECEIVE_MSG, {
-            message: {
-              ...msg,
-              user: models.user.output(me) // sender
-            },
-            chat: {
-              ...chat,
-              user: models.user.output(receiver)
-            }
-          });
-
-          /**
-           * @deprecated
-           * @reason unread messages are calculated from chats list only
-           * @description send unread message status to receiver
-           * */ 
-          // if (chat.isForCard === 0 && unread_updated && receiver.socket_id) {
-          //   const unreads = await ctrls.chat.getUnreadMsgInfoReq(receiver.id);
-          //   io.to(receiver.socket_id).emit(CONSTS.SKT_UNREAD_MSG_UPDATED, unreads); // @deprecated
-          // } 
-          
-          /**
-           * @description send message to card users for card chat
-           * @memo for card chat there is no accepted status. it would be unused.
-           */
-          if (chat.isForCard === 1 && cardUsers.length) {
-            // if card chat is verified, then only to verified user, if not, then to all card users.
-            cardUsers.filter(item => item.socket_id && item.card_verified === chat.card_verified).forEach(cardUser => {
-              io.to(cardUser.socket_id).emit(CONSTS.SKT_RECEIVE_MSG, {
-                message: {
-                  ...msg,
-                  user: models.user.output(me),
-                },
-                chat: {
-                  ...chat,
-                  user: models.user.output(me),
-                }
-              });
-            });
-          } 
-        })
-        .catch(error => {
-          console.log(error);
-          socket.emit(CONSTS.SKT_SEND_MSG, {
-            status: false,
-            message: error.message,
-          });
-        });
-    });
+    socket.on(CONSTS.SKT_SEND_MSG, async (args) => resolvers.addMessage({ io, socket, token, ...args }));
 
     socket.on(CONSTS.SKT_USER_TYPING, ({ chat_id, typing }) => {
       socket.to(`chatroom_${chat_id}`).emit(CONSTS.SKT_USER_TYPING, { chat_id, typing });

@@ -192,6 +192,7 @@ Chat.output = (model) => {
   model.user_ids = JSONParser(model.user_ids || "");
   model.lastMsgIdOnTransfer = JSONParser(model.lastMsgIdOnTransfer || "");
   model.sources = JSONParser(model.sources || '[]');
+  model.profile_revealed = JSONParser(model.profile_revealed || '[0,0]');
   const delKeys = ['create_time', 'update_time'];
 
   delKeys.forEach(key => {

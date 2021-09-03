@@ -112,6 +112,7 @@ exports.DEFAULT_CHAT = {
   isForCard: 0,
   card_number: '',
   card_verified: 0,
+  profile_revealed: JSON.stringify([0,0]),
   from_where: 'NONE',
   target_id: "0",
   unread_nums: JSON.stringify([]),
@@ -171,6 +172,7 @@ exports.DEFAULT_CONFIG = {
   daily_post_limit: 1,
   comment_point: 1,
   daily_comment_limit: 1,
+  chat_point: 1,
   create_time: timestamp(),
   update_time: timestamp(),
 };

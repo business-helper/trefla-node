@@ -16,6 +16,7 @@ exports.LOGIN_MODE = {
 exports.POINT_AWARD_TYPE = {
   POST: 'POST',
   COMMENT: 'COMMENT',
+  MESSAGE: 'MESSAGE',
 };
 
 exports.CARD_STATUS = {
