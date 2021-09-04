@@ -47,7 +47,7 @@ const activity = {
       noti_id: String(notification.id || ""),
       optionalVal: String(notification.optional_val || ""),
       type: String(notification.type || ""),
-      user_id: "0",
+      user_id: iSender.id,
       user_name: senderName[lang],
       avatar: '',
     };
@@ -115,7 +115,7 @@ module.exports = async ({
       await activity.respond2Receiver(io, { chat, notification }).catch(error => false);
     })
     .catch(error => {
-      console.log('[Profile Reveail][Request] error: ', error);
+      console.log('[Profile Reveal][Request] error: ', error);
       socket.emit(CONSTS.SKT_PROFILE_REVEAL_REQUEST, { status: 'error', details: error.message });
     });    
 }
