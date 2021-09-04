@@ -23,7 +23,7 @@ class IUser extends TreflaModel {
   }
 
   asNormal() {
-    const keys2Delete = ['black_list', 'email', 'password', 'social_pass', 'login_mode', 'language', 'radiusAround', 'noti_num', 'location_array', 'postAroundCenterCoordinate', 'update_time', 'recovery_code'];
+    const keys2Delete = ['black_list', 'email', 'password', 'social_pass', 'login_mode', 'language', 'radiusAround', 'noti_num', 'location_array', 'postAroundCenterCoordinate', 'update_time', 'recovery_code', 'payments'];
     return this.asPartial(keys2Delete);
   }
 
@@ -33,7 +33,7 @@ class IUser extends TreflaModel {
   }
 
   asPublic() {
-    const keys2Delete = ['id', 'user_name', 'location_area', 'card_number', 'card_verified', 'sex', 'birthday', 'language', 'bio', 'isGuest', 'guestName', 'avatarIndex', 'photo', 'location_address', 'city', 'online', 'guest_mood_status', 'normal_mood_status', 'socket_id', 'active', 'profile_done', 'theme_color', 'create_time'];
+    const keys2Delete = ['id', 'user_name', 'location_area', 'card_number', 'card_verified', 'sex', 'birthday', 'language', 'bio', 'isGuest', 'guestName', 'avatarIndex', 'photo', 'location_address', 'city', 'online', 'guest_mood_status', 'normal_mood_status', 'socket_id', 'active', 'profile_done', 'theme_color', 'create_time', 'payments'];
     return this.asPartial(keys2Delete);
   }
   

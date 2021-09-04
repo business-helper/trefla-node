@@ -84,7 +84,7 @@ const activity = {
         const iSender = new IUser(sender);
         const iReceiver = new IUser(receiver);
         if (iReceiver.socket_id) {
-          io.to(iReceiver.socket_id).emit(CONSTS.SKT_PROFILE_REVEAL_REJECTED, {
+          io.to(iReceiver.socket_id).emit(CONSTS.SKT_PROFILE_REVEAL_REQUESTED, {
             chat: iChat.toObject(),
             sender: iSender.asNormal(),
           });
@@ -112,7 +112,7 @@ module.exports = async ({
 
       // now respond to users via socket.
       await activity.respond2Sender(socket, { chat, user_id: uid }).catch(error => false);
-      await activity.respond2Receiver(chat, iNotification.receiver_id).catch(error => false);
+      await activity.respond2Receiver(io, { chat, notification }).catch(error => false);
     })
     .catch(error => {
       console.log('[Profile Reveail][Request] error: ', error);
