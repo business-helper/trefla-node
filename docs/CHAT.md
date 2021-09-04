@@ -28,3 +28,48 @@ or for card chat,
   "from_where": "CARD"
 }
 ```
+
+## To Reveal Profiles
+
+### Request
+
+- Request socket
+```json
+{
+  "chat_id": "Chat ID<Int>"
+}
+```
+- Response to Sender
+
+Success Response
+
+```json
+{
+  "status": "Status<Boolean>",
+  "chat": "Chat<Chat>"
+}
+```
+
+Error Response
+```json
+{
+  "status": "Status<Boolean>",
+  "message": "Message<String>"
+}
+```
+
+
+- Response to Receiver
+```json
+{
+  "chat": "Chat<Object>",
+  "sender": "User<Object>"
+}
+```
+
+
+### Accept
+
+
+
+### Reject

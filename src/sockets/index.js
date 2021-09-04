@@ -157,6 +157,19 @@ const bootstrapSocket = (io) => {
         });
     })
 
+    //////////////////////////////////////////////
+    //                                          //
+    //       P R O F I L E   R E V E A L        //
+    //                                          //
+    //////////////////////////////////////////////
+
+    socket.on(CONSTS.SKT_PROFILE_REVEAL_REQUEST, (args) => resolvers.profileRevealRequest({ io, socket, token, ...args }));
+
+    socket.on(CONSTS.SKT_PROFILE_REVEAL_ACCEPT, (args) => resolvers.profileRevealAccept({ io, socket, token, ...args }));
+
+    socket.on(CONSTS.SKT_PROFILE_REVEAL_REJECT, (args) => resolvers.profileRevealReject({ io, socket, token, ...args }));
+
+
     socket.on(CONSTS.SKT_SEND_MSG, async (args) => resolvers.addMessage({ io, socket, token, ...args }));
 
     socket.on(CONSTS.SKT_USER_TYPING, ({ chat_id, typing }) => {
