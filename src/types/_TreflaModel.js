@@ -4,14 +4,9 @@ const { JSONParser, JSONStringify } = require('../helpers/common.helpers');
 
 class TreflaModel extends TreflaType {
   constructor(args, jsonFields = []) {
+    super();
     this.jsonFields = jsonFields;
     // do something to initialize with args.
-  }
-
-  toObject() {
-    const object = super.toObject();
-    delete object.jsonFields;
-    return object;
   }
 
   stringify() {
@@ -26,6 +21,26 @@ class TreflaModel extends TreflaType {
       this[key] = JSONParser(this[key]);
     }
     return this.toObject();
+  }
+
+  toObject() {
+    const object = super.toObject();
+    delete object.jsonFields;
+    return object;
+  }
+
+  toJSON() {
+    this.jsonify();
+    return this.toObject();
+  }
+
+  toDB() {
+    const object4DB = {};
+    for (const key in this) {
+      if (key === 'jsonFields') continue;
+      object4DB[key] = this.jsonFields.includes(key) ? JSONStringify(this[key]) : this[key];
+    }
+    return object4DB;
   }
 }
 

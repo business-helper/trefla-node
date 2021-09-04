@@ -36,3 +36,10 @@ const SKT_ID_VERIFEID = 'socket.identity.verified';
 const SKT_ID_UNVERIFIED = 'socket.identity.unverified';
 const SKT_POINT_ADDED = 'socket.point.added';
 const SKT_PROFILE_PHOTO_VERIFIED = 'socket.profile.photo.verified';
+
+const SKT_PROFILE_REVEAL_REQUEST = 'socket.profile.reveal.request';
+const SKT_PROFILE_REVEAL_REQUESTED = 'socket.profile.reveal.requested';
+const SKT_PROFILE_REVEAL_ACCEPT = 'socket.profile.reveal.accept';
+const SKT_PROFILE_REVEAL_ACCEPTED = 'socket.profile.reveal.accepted';
+const SKT_PROFILE_REVEAL_REJECT = 'socket.profile.reveal.reject';
+const SKT_PROFILE_REVEAL_REJECTED = 'socket.profile.reveal.rejected';

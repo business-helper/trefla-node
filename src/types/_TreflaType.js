@@ -6,7 +6,7 @@ class TreflaType {
       if (val && typeof val === 'object' && val.toObject && typeof val.toObject === 'function') {
         data[key] = val.toObject();
       } else {
-        data[key] = val || null;
+        data[key] = val === undefined ? '' : val;
       }
     }
     return data;   
