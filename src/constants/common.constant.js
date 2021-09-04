@@ -24,3 +24,9 @@ exports.CARD_STATUS = {
   VERIFIED: 1,
   REJECTED: 2,
 };
+
+exports.PROFILE_REVEAL_STATUS = {
+  PRIVATE: 0,
+  PUBLIC: 1,
+  PENDING: 2,
+};

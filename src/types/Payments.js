@@ -1,4 +1,4 @@
-const TreflaType = require('./TreflaType');
+const TreflaType = require('./_TreflaType');
 
 class CardPayment extends TreflaType {
   constructor(data = null) {

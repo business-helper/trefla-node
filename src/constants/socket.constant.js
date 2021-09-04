@@ -39,6 +39,9 @@ exports.SKT_ID_UNVERIFIED = 'socket.identity.unverified';
 exports.SKT_POINT_ADDED = 'socket.point.added';
 exports.SKT_PROFILE_PHOTO_VERIFIED = 'socket.profile.photo.verified';
 
+exports.SKT_PROFILE_REVEAL_REQUEST = 'socket.profile.reveal.request';
+exports.SKT_PROFILE_REVEAL_ACCEPT = 'socket.profile.reveal.accept';
+exports.SKT_PROFILE_REVEAL_REJECT = 'socket.profile.reveal.reject';
 
 exports.SKT_LTS_SINGLE = 'socket.local2server.single';
 exports.SKT_LTS_MULTIPLE = 'socket.local2server.multiple';
