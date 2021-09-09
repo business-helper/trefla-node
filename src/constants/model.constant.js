@@ -113,6 +113,7 @@ exports.DEFAULT_CHAT = {
   card_number: '',
   card_verified: 0,
   profile_revealed: 0,
+  reveal_request_by: 0,
   from_where: 'NONE',
   target_id: "0",
   unread_nums: JSON.stringify([]),
