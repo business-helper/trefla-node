@@ -11,11 +11,12 @@ const ctrls = require('../../controllers');
 const commonActivity = require('../common');
 
 const activity = {
-  updateProfileRevealStatusOfChat: (chat_id) => {
+  updateProfileRevealStatusOfChat: (chat_id, requested_by) => {
     return models.chat.getById(chat_id)
       .then(chat => {
         const iChat = new IChat(chat);
         iChat.profile_revealed = PROFILE_REVEAL_STATUS.PENDING;
+        iChat.reveal_request_by = requested_by;
         iChat.update_time = helpers.common.timestamp();
         return models.chat.save(iChat.toDB());
       });
@@ -99,7 +100,7 @@ module.exports = async ({
   chat_id,
 }) => {
   const { uid } = helpers.auth.parseToken(token);
-  return activity.updateProfileRevealStatusOfChat(chat_id)
+  return activity.updateProfileRevealStatusOfChat(chat_id, uid)
     .then(async chat => {
       const notification = await commonActivity.createNotificationForProfileRevealChange(chat, uid);
       const iNotification = new INotification(notification);

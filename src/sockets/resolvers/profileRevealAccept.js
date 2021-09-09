@@ -13,6 +13,7 @@ const activity = {
       .then(chat => {
         const iChat = new IChat(chat);
         iChat.profile_revealed = PROFILE_REVEAL_STATUS.PUBLIC;
+        iChat.reveal_request_by = 0;
         iChat.update_time = helpers.common.timestamp();
         return models.chat.save(iChat.toDB());
       });
