@@ -5,7 +5,7 @@ class IUser extends TreflaModel {
   constructor(args) {
     super(args);
     this.defineProperties();
-    this.jsonFields = ['location_array', 'black_list', 'payments', 'social_pass', 'social_links'];
+    this.jsonFields = ['location_array', 'black_list', 'payments', 'social_pass'];
     // initialize properties by args.
     for (const key in DEFAULT_USER) {
       this[key] = args[key];
