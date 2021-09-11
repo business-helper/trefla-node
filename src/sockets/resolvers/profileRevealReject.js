@@ -80,7 +80,10 @@ const activity = {
         title: title[lang],
         token: iReceiver.device_token,
         data,
-      }).catch(error => false);
+      }).catch(error => {
+        console.log('[ProfileReveal][Reject] Error: ', error);
+        return false;
+      });
     }
   },
   respond2Sender: async (socket, { chat, user_id }) => {
