@@ -48,7 +48,7 @@ const activity = {
       noti_id: String(notification.id || ""),
       optionalVal: String(notification.optional_val || ""),
       type: String(notification.type || ""),
-      user_id: iSender.id,
+      user_id: String(iSender.id),
       user_name: senderName[lang],
       avatar: '',
     };
@@ -59,7 +59,7 @@ const activity = {
         token: iReceiver.device_token,
         data,
       }).catch(error => {
-        console.log('[ProfileReveal][Request] Error: ', error);
+        // console.log('[ProfileReveal][Request] Error: ', iReceiver.device_token, error);
         return false;
       });
     }
