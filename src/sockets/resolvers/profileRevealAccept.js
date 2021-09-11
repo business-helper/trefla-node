@@ -67,7 +67,7 @@ const activity = {
       noti_id: String(notification.id || ""),
       optionalVal: String(notification.optional_val || ""),
       type: String(notification.type || ""),
-      user_id: iSender.id,
+      user_id: String(iSender.id),
       user_name: senderName[lang],
       avatar: '',
     };
