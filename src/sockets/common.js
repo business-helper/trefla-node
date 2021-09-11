@@ -1,7 +1,6 @@
 const CONSTS = require('../constants/socket.constant');
 const { PROFILE_REVEAL_STATUS } = require('../constants/common.constant');
 const NOTI_TYPES = require('../constants/notification.constant');
-const models = require('../models');
 
 const {
   IChat,
