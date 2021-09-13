@@ -8,6 +8,7 @@ const User = require("../models/user.model");
 const Message = require('../models/message.model');
 const models = require('../models');
 const helpers = require('../helpers');
+const { IChat } = require('../types')
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { bool2Int, chatPartnerId, getTotalLikes, generateTZTimeString, respondError, timestamp } = require("../helpers/common.helpers");
 const { generateChatData, generateMessageData, getLastMsgIndexOfChat } = require('../helpers/model.helpers');
@@ -136,78 +137,42 @@ const activity = {
     // check the message count after preview message.
     // if first message ( count === 1 ), proceed add message.
     // 
-    console.log('[Here] my Id', user_id)
+    const iChat = new IChat(chat);
+    const partnerId = iChat.user_ids[1 - iChat.user_ids.indexOf(user_id)];
+    console.log('[Here] my Id', user_id, partnerId);
+
     return Promise.resolve()
       .then(async () => {
+        if (!partnerId) throw new Error('You are alone in chat!');
+
         const lastPreviewMessage = await models.message.lastPreviewMsgInChat(chat.id);
         const user = await models.user.getById(user_id);
-        if (!user || !user.id_verified) {
-          throw new Error(`User doesn't exist or is not verified!`);
-        }
+        if (!user) throw new Error('User does not exist!');
+        if (!user.id_verified) throw new Error(`User is not verified!`);
+
         const userMsgs = await models.message.pagination({
           userId: user_id,
           chat_id: chat.id,
           minId: lastPreviewMessage.id,
           limit: 2,
         });
-
-        if (userMsgs.length === 0) throw new Error("You must add a new message!");
-        if (userMsgs.length > 1) throw new Error("You can't get point again!");
-
-        // start to add point to user.
-        const config = await models.config.get();
-        const transactionData = helpers.model.generatePointTransactionData({
-          user_id,
-          amount: config.chat_point,
-          src_type: POINT_AWARD_TYPE.MESSAGE,
-          src_id: userMsgs[0].id,
+        const partnerMsgs = await models.message.pagination({
+          userId: partnerId,
+          chat_id: iChat.id,
+          minId: lastPreviewMessage.id,
+          limit: 2,
         });
-        const transaction = await models.pointTransaction.create(transactionData);
 
-        // notification
-        const notiData = helpers.model.generateNotificationData({
-          sender_id: 0,
-          receiver_id: user_id,
-          type: NOTI_TYPES.notiTypePointReceived,
-          optional_val: config.chat_point,
-          time: generateTZTimeString(),
-          isFromAdmin: 1,
-        });
-        const notification = await models.notification.create(notiData);
-
-        user.points += config.chat_point;
-        user.noti_num ++;
-        user.update_time = timestamp();
-        await models.user.save(user);
-
-        const sockets = [];
-        if (user.socket_id) {
-          // socket for winning a point.
-          sockets.push({
-            to: user.socket_id,
-            event: CONSTS.SKT_POINT_ADDED,
-            args: {
-              amount: config.chat_point,
-              current: user.points,
-              data: {
-                type: POINT_AWARD_TYPE.MESSAGE,
-                id: userMsgs[0].id,
-                user_id,
-                message: userMsgs[0].message,
-              },
-            },
-          });
-          // socket for notification num increased.
-          sockets.push({
-            to: user.socket_id,
-            event: CONSTS.SKT_NOTI_NUM_UPDATED,
-            args: {
-              num: user.noti_num,
-              notification,
-            },
-          })
+        if (userMsgs.length !== 1 || partnerMsgs.length === 0) {
+          throw new Error('Condition does not match!');
         }
-        activity.pushNotification4NewPost({ user, notification }).catch(e => {});
+        // if (userMsgs.length === 0) throw new Error("You must add a new message!");
+        // if (userMsgs.length > 1) throw new Error("You can't get point again!");
+
+        const socket4User = await activity.processUserChatPoint(user_id, userMsgs[0]);
+        const socket4Partner = await activity.processUserChatPoint(partnerId, partnerMsgs[0]);
+        const sockets = [...socket4User, ...socket4Partner];
+
         return { sockets };
       })
       .catch(error => {
@@ -216,6 +181,63 @@ const activity = {
           sockets: [],
         }
       });
+  },
+  processUserChatPoint: async (user_id, message) => {
+    const user = await models.user.getById(user_id);
+    const config = await models.config.get();
+    const transactionData = helpers.model.generatePointTransactionData({
+      user_id,
+      amount: config.chat_point,
+      src_type: POINT_AWARD_TYPE.MESSAGE,
+      src_id: message.id,
+    });
+    const transaction = await models.pointTransaction.create(transactionData);
+
+    // notification
+    const notiData = helpers.model.generateNotificationData({
+      sender_id: 0,
+      receiver_id: user_id,
+      type: NOTI_TYPES.notiTypePointReceived,
+      optional_val: config.chat_point,
+      time: generateTZTimeString(),
+      isFromAdmin: 1,
+    });
+    const notification = await models.notification.create(notiData);
+
+    user.points += config.chat_point;
+    user.noti_num ++;
+    user.update_time = timestamp();
+    await models.user.save(user);
+
+    const sockets = [];
+    if (user.socket_id) {
+      // socket for winning a point.
+      sockets.push({
+        to: user.socket_id,
+        event: CONSTS.SKT_POINT_ADDED,
+        args: {
+          amount: config.chat_point,
+          current: user.points,
+          data: {
+            type: POINT_AWARD_TYPE.MESSAGE,
+            id: message.id,
+            user_id,
+            message: message.message,
+          },
+        },
+      });
+      // socket for notification num increased.
+      sockets.push({
+        to: user.socket_id,
+        event: CONSTS.SKT_NOTI_NUM_UPDATED,
+        args: {
+          num: user.noti_num,
+          notification,
+        },
+      })
+    }
+    activity.pushNotification4NewPost({ user, notification }).catch(e => {});
+    return sockets;
   },
   pushNotification4NewPost: ({ user, notification }) => {
     const title = {
@@ -454,7 +476,8 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
       // @deprecated?
       // chat.preview_data = await helpers.common.populateChatSource(chat.sources, models);
 
-      const { sockets } = await activity.addNewPoint({ chat, user_id });
+      // const { sockets } = await activity.addNewPoint({ chat, user_id });
+      const sockets = [];
 
       return ({
         status: true,
@@ -503,7 +526,8 @@ exports.createCardChatReq = async (user_id, payload, isGuest) => {
       chat = Chat.output(chat);
       chat.user = User.output(receiver);
 
-      const { sockets } = await activity.addNewPoint({ chat, user_id });
+      // const { sockets } = await activity.addNewPoint({ chat, user_id });
+      const sockets = [];      
 
       return ({
         status: true,
