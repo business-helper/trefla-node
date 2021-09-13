@@ -423,8 +423,10 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
   payload.last_msg_id = 0; // inital msg id on create chat.
 
   let model = generateChatData(payload, user_id, receiver);
-  const accept_status = 1; // !isGuest ? 1 : 0;
+  const accept_status = 1; // 
+  const profile_revealed = !isGuest ? 1 : 0;
   model.accept_status = accept_status;
+  model.profile_revealed = profile_revealed;
 
   const message = payload.message ? generateMessageData({
     ...payload,
@@ -446,6 +448,7 @@ exports.createNormalChatReq = async (user_id, payload, isGuest = true) => {
     if (chatrooms.length > 0) {
       _chat = chatrooms[0];
       _chat.accept_status = accept_status;
+      _chat.profile_revealed = profile_revealed;
 
       // get the last message ID.
       const lastMsg = await models.message.lastMsgInChat(_chat.id);
