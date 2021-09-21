@@ -30,3 +30,10 @@ exports.PROFILE_REVEAL_STATUS = {
   PUBLIC: 1,
   PENDING: 2,
 };
+
+exports.MATCH_STATUS = {
+  INIT: 'INIT',
+  PASS: 'PASS',
+  LIKE: 'LIKE',
+  DISLIKE: 'DISLIKE',
+};
