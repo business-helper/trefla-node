@@ -2,7 +2,10 @@ const { Validator } = require("node-input-validator");
 const models = require("../models");
 const { MATCH_STATUS } = require('../constants/common.constant');
 
-const { IUser } = require("../types");
+const {
+  IConfig,
+  IUser
+} = require("../types");
 
 const activity = {
   generateMatch: ({ user_id1, user_id2, status }) => {
@@ -21,17 +24,27 @@ const activity = {
   },
 };
 
-exports.getAreaUsers = ({ user_id, last_id = null, limit = 5 }) => {
+exports.getAreaUsers = async ({ user_id, last_id = null, limit = 5 }) => {
+  const config = await models.config.get();
+  const iConfig = new IConfig(config);
+
   return models.user.getById(user_id)
     .then((me) => {
       const iMe = new IUser(me);
       if (!iMe.location_area) throw new Error("Location area is unavailable!");
-      return models.user.getAreaUsers({
-        user_id,
-        limit,
-        last_id,
-        location_area: iMe.location_area,
-      });
+
+      const timeAfter = Math.floor(Date.now() / 1000) - iConfig.match_skip_days * 24 * 3600;
+      return models.Match.recentMatches(user_id, timeAfter)
+        .then(matches => {
+          const excludes = matches.map(match => match.user_id2);
+          excludes.push(user_id);
+          return models.user.getAreaUsers({
+            excludes,
+            limit,
+            last_id,
+            location_area: iMe.location_area,
+          });
+        });
     })
     .then(users => {
       return Promise.all(users.map(async user => {

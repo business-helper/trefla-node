@@ -172,9 +172,9 @@ User.cardPagination = ({ page, limit }) => {
   })
 }
 
-User.getAreaUsers = ({ user_id, limit, last_id, location_area }) => {
+User.getAreaUsers = ({ excludes, limit, last_id, location_area }) => {
   const where = [
-    `id != ${user_id}`,
+    `id NOT IN (${excludes.join(',')})`,
     `location_area='${location_area}'`,
   ];
   if (last_id) {
@@ -183,7 +183,9 @@ User.getAreaUsers = ({ user_id, limit, last_id, location_area }) => {
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
 
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM ${table} ${strWhere} ORDER BY create_time DESC LIMIT ${limit}`, [], (err, res) => {
+    sql.query(`SELECT *
+      FROM ${table} ${strWhere}
+      ORDER BY create_time DESC LIMIT ${limit}`, [], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   })

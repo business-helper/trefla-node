@@ -50,5 +50,13 @@ Match.getByUserIds = (user_id1, user_id2) => {
   });
 }
 
+Match.recentMatches = (user_id, timeAfter) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${Match.table()} WHERE user_id1=? AND update_time >= ?`, [user_id, timeAfter], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
 
 module.exports = Match;
