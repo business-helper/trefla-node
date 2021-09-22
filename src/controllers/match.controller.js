@@ -1,7 +1,25 @@
 const { Validator } = require("node-input-validator");
 const models = require("../models");
+const { MATCH_STATUS } = require('../constants/common.constant');
 
 const { IUser } = require("../types");
+
+const activity = {
+  generateMatch: ({ user_id1, user_id2, status }) => {
+    const { Match } = models;
+    return Match.getByUserIds(user_id1, user_id2)
+      .then(exists => {
+        let match;
+        if (exists) {
+          match = new Match(exists);
+          match.status = status;
+        } else {
+          match = new Match({ user_id1, user_id2, status });
+        }
+        return match.save();
+      });
+  },
+};
 
 exports.getAreaUsers = ({ user_id, last_id = null, limit = 5 }) => {
   return models.user.getById(user_id)
@@ -25,3 +43,27 @@ exports.getAreaUsers = ({ user_id, last_id = null, limit = 5 }) => {
       }))
     });
 };
+
+exports.likeUser = ({ my_id, target_id }) => {
+  return activity.generateMatch({
+    user_id1: my_id,
+    user_id2: target_id,
+    status: MATCH_STATUS.LIKE,
+  });
+};
+
+exports.dislikeUser = ({ my_id, target_id }) => {
+  return activity.generateMatch({
+    user_id1: my_id,
+    user_id2: target_id,
+    status: MATCH_STATUS.DISLIKE,
+  });
+}
+
+exports.passUser = ({ my_id, target_id }) => {
+  return activity.generateMatch({
+    user_id1: my_id,
+    user_id2: target_id,
+    status: MATCH_STATUS.PASS,
+  });
+}

@@ -174,6 +174,7 @@ exports.DEFAULT_CONFIG = {
   comment_point: 1,
   daily_comment_limit: 1,
   chat_point: 1,
+  match_skip_days: 7,
   create_time: timestamp(),
   update_time: timestamp(),
 };
