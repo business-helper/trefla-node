@@ -172,6 +172,25 @@ User.cardPagination = ({ page, limit }) => {
   })
 }
 
+User.getAreaUsers = ({ excludes, limit, last_id, location_area }) => {
+  const where = [
+    `id NOT IN (${excludes.join(',')})`,
+    `location_area='${location_area}'`,
+  ];
+  if (last_id) {
+    where.push(`id < ${last_id}`);
+  }
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT *
+      FROM ${table} ${strWhere}
+      ORDER BY create_time DESC LIMIT ${limit}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  })
+}
+
 User.numberOfCard = () => {
   const strWhere = `card_number != '' OR card_img_url != ''`;
   return new Promise((resolve, reject) => {
