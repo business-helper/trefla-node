@@ -46,6 +46,10 @@ exports.SKT_PROFILE_REVEAL_ACCEPTED = 'socket.profile.reveal.accepted';
 exports.SKT_PROFILE_REVEAL_REJECT = 'socket.profile.reveal.reject';
 exports.SKT_PROFILE_REVEAL_REJECTED = 'socket.profile.reveal.rejected';
 
+exports.SKT_MATCH_LIKED = 'socket.match.liked';
+exports.SKT_MATCH_DISLIKED = 'socket.match.disliked';
+exports.SKT_MATCH_PASSED = 'socket.match.passed';
+
 exports.SKT_LTS_SINGLE = 'socket.local2server.single';
 exports.SKT_LTS_MULTIPLE = 'socket.local2server.multiple';
 exports.SKT_LTS_BROADCAST = 'socket.local2server.broadcast';
