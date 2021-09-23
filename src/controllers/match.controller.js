@@ -49,7 +49,7 @@ exports.getAreaUsers = async ({ user_id, last_id = null, limit = 5 }) => {
     .then(users => {
       return Promise.all(users.map(async user => {
         const iUser = new IUser(user);
-        const photos = await models.photo.getUserGallery(iUser.id);
+        const photos = await models.photo.getUserGallery(iUser.id, 0);
         const nUser = iUser.asNormal();
         nUser.gallery = photos;
         return nUser;
