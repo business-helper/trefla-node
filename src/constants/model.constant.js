@@ -228,6 +228,7 @@ exports.DEFAULT_PHOTO = {
   type: 'normal',
   ratio: '',
   thumbnail: '',
+  private: 0,
   create_time: timestamp(),
   update_time: timestamp(),
 };

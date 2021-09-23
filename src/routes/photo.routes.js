@@ -256,6 +256,28 @@ photoRouters.post('/', async (req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+photoRouters.patch('/:id/private', async (req, res) => {
+  const { uid: user_id } = helpers.auth.getTokenInfo(req);
+  const validator = new Validator({
+    ...req.body,
+    ...req.params,
+  }, {
+    private: "required",
+    id: "required",
+  });
+
+  return validator.check()
+    .then(async matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request'), { code: 400, details: validator.errors });
+      const photo = await models.photo.getById(req.params.id);
+      if (!photo) throw new Error('Photo not found!');
+      if (photo.user_id !== user_id) throw new Error('Permission denied!');
+    })
+    .then(() => photoCtrl.updatePrivateStatus(Number(req.params.id), req.body.private))
+    .then(result => res.json({ status: true, message: 'success', data: result }))
+    .catch(error => respondValidateError(res, error));
+})
+
 photoRouters.delete('/:id', async (req, res) => {
   const validator = new Validator({
     id: req.params.id
