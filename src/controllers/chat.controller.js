@@ -138,12 +138,15 @@ const activity = {
     // if first message ( count === 1 ), proceed add message.
     // 
     const iChat = new IChat(chat);
-    const partnerId = iChat.user_ids[1 - iChat.user_ids.indexOf(user_id)];
-    console.log('[Here] my Id', user_id, partnerId);
+    // add chat point when the receiver replies first.
+    if (iChat.user_ids[1] !== user_id) return { sockets: [] };
+
+    // const partnerId = iChat.user_ids[1 - iChat.user_ids.indexOf(user_id)];
+    // console.log('[Here] my Id', user_id, partnerId);
 
     return Promise.resolve()
       .then(async () => {
-        if (!partnerId) throw new Error('You are alone in chat!');
+        // if (!partnerId) throw new Error('You are alone in chat!');
 
         const lastPreviewMessage = await models.message.lastPreviewMsgInChat(chat.id);
         const user = await models.user.getById(user_id);
@@ -156,21 +159,21 @@ const activity = {
           minId: lastPreviewMessage.id,
           limit: 2,
         });
-        const partnerMsgs = await models.message.pagination({
-          userId: partnerId,
-          chat_id: iChat.id,
-          minId: lastPreviewMessage.id,
-          limit: 2,
-        });
+        // const partnerMsgs = await models.message.pagination({
+        //   userId: partnerId,
+        //   chat_id: iChat.id,
+        //   minId: lastPreviewMessage.id,
+        //   limit: 2,
+        // });
 
-        if (userMsgs.length !== 1 || partnerMsgs.length === 0) {
-          throw new Error('Condition does not match!');
+        if (userMsgs.length !== 1) {//  || partnerMsgs.length === 0
+          throw new Error('[Chat Point] Must be first reply!');
         }
         // if (userMsgs.length === 0) throw new Error("You must add a new message!");
         // if (userMsgs.length > 1) throw new Error("You can't get point again!");
 
         const socket4User = await activity.processUserChatPoint(user_id, userMsgs[0]);
-        const socket4Partner = await activity.processUserChatPoint(partnerId, partnerMsgs[0]);
+        const socket4Partner = []; // await activity.processUserChatPoint(partnerId, partnerMsgs[0]);
         const sockets = [...socket4User, ...socket4Partner];
 
         return { sockets };
