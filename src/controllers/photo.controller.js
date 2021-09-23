@@ -60,3 +60,11 @@ exports.deleteById = (req, res) => {
       });
     });
 }
+
+exports.updatePrivateStatus = (id, private) => {
+  return Photo.getById(id)
+    .then(photo => {
+      photo.private = private;
+      return Photo.save(photo);
+    });
+}

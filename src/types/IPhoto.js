@@ -20,6 +20,7 @@ class IPhoto extends TreflaModel {
     this.type = 'normal';
     this.ratio = '1';
     this.thumbnail = '';
+    this.private = 0;
     this.create_time = timestamp();
     this.update_time = timestamp();
   }

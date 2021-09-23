@@ -48,12 +48,15 @@ Photo.getByUser = (user_id, types) => {
   });
 }
 
-Photo.getUserGallery = (user_id) => {
+Photo.getUserGallery = (user_id, isPrivate = null) => {
   const galleryTypes = ['normal', 'video' ,'youtube','url'];
   const where = [
     `user_id=${user_id}`,
     `type IN ('${galleryTypes.join("','")}')`
   ];
+  if (isPrivate !== null && [0, 1].includes(isPrivate)) {
+    where.push(`private = ${isPrivate}`);
+  }
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
     sql.query(`SELECT * FROM ${table} ${strWhere} ORDER BY id DESC`, [], (err, res) => {
