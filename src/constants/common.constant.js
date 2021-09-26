@@ -37,3 +37,10 @@ exports.MATCH_STATUS = {
   LIKE: 'LIKE',
   DISLIKE: 'DISLIKE',
 };
+
+exports.GALLERY_TYPE = {
+  NORMAL: 'normal',
+  VIDEO: 'video',
+  YOUTUBE: 'youtube',
+  URL: 'url',
+};

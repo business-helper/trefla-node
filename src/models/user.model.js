@@ -1,6 +1,6 @@
 const sql = require("./db");
 const { bool2Int, timestamp, JSONParser, stringifyModel } = require("../helpers/common.helpers");
-const { LOGIN_MODE } = require('../constants/common.constant');
+const { GALLERY_TYPE, LOGIN_MODE } = require('../constants/common.constant');
 
 const table = 'users';
 
@@ -173,19 +173,25 @@ User.cardPagination = ({ page, limit }) => {
 }
 
 User.getAreaUsers = ({ excludes, limit, last_id, location_area }) => {
+  const galleryTypes = Object.values(GALLERY_TYPE);
+  const str_galleryTypes = `'${galleryTypes.join("','")}'`;
+
   const where = [
-    `id NOT IN (${excludes.join(',')})`,
+    `users.id NOT IN (${excludes.join(',')})`,
     `location_area='${location_area}'`,
+    `photos.type IN (${str_galleryTypes})`,
   ];
   if (last_id) {
-    where.push(`id < ${last_id}`);
+    where.push(`users.id < ${last_id}`);
   }
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
 
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT *
-      FROM ${table} ${strWhere}
-      ORDER BY create_time DESC LIMIT ${limit}`, [], (err, res) => {
+    sql.query(`SELECT users.*, COUNT(photos.id) as photo_num
+      FROM ${table}
+      JOIN photos ON users.id=photos.user_id
+      ${strWhere}
+      ORDER BY users.create_time DESC LIMIT ${limit}`, [], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   })

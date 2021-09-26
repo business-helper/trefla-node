@@ -1,5 +1,6 @@
 const sql = require('./db');
 const { IMatch } = require('../types');
+const { GALLERY_TYPE } = require('../constants/common.constant');
 const { timestamp } = require('../helpers/common.helpers');
 
 const table = 'matches';
@@ -51,8 +52,12 @@ Match.getByUserIds = (user_id1, user_id2) => {
 }
 
 Match.recentMatches = (user_id, timeAfter) => {
+  const galleryTypes = Object.values(GALLERY_TYPE);
+  const str_galleryTypes = `'${galleryTypes.join("','")}'`;
+  
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM ${Match.table()} WHERE user_id1=? AND update_time >= ?`, [user_id, timeAfter], (err, res) => {
+    sql.query(`
+      SELECT * FROM ${Match.table()} WHERE user_id1=? AND matches.update_time >= ?`, [user_id, timeAfter], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });

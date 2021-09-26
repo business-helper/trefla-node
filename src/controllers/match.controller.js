@@ -36,7 +36,7 @@ exports.getAreaUsers = async ({ user_id, last_id = null, limit = 5 }) => {
       const timeAfter = Math.floor(Date.now() / 1000) - iConfig.match_skip_days * 24 * 3600;
       return models.Match.recentMatches(user_id, timeAfter)
         .then(matches => {
-          const excludes = matches.map(match => match.user_id2);
+          const excludes = matches.map(match => match.user_id2).filter(it => it);
           excludes.push(user_id);
           return models.user.getAreaUsers({
             excludes,
