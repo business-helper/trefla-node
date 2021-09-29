@@ -191,6 +191,7 @@ User.getAreaUsers = ({ excludes, limit, last_id, location_area }) => {
       FROM ${table}
       JOIN photos ON users.id=photos.user_id
       ${strWhere}
+      GROUP BY users.id
       ORDER BY users.create_time DESC LIMIT ${limit}`, [], (err, res) => {
       err ? reject(err) : resolve(res);
     });
