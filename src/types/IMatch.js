@@ -18,6 +18,7 @@ class IMatch extends TreflaModel {
     this.user_id1 = 0;
     this.user_id2 = 0;
     this.status = MATCH_STATUS.INIT;
+    this.likewise = 0;
     this.create_time = timestamp();
     this.update_time = timestamp();
   }

@@ -4,6 +4,7 @@ const { MATCH_STATUS } = require('../constants/common.constant');
 
 const {
   IConfig,
+  IMatch,
   IUser
 } = require("../types");
 
@@ -62,7 +63,26 @@ exports.likeUser = ({ my_id, target_id }) => {
     user_id1: my_id,
     user_id2: target_id,
     status: MATCH_STATUS.LIKE,
-  });
+  })
+    .then(match => {
+      const iMatch = new IMatch(match);
+      return models.Match.getByUserIds(iMatch.user_id2, iMatch.user_id1)
+        .then(matchR => {
+          if (matchR && matchR.status === MATCH_STATUS.LIKE) {
+            matchR.likewise = 1;
+            match.likewise = 1;
+
+            const mdlMatch = new models.Match(match);
+            const mdlMatchR = new models.Match(matchR);
+            return Promise.all([
+              mdlMatch.save(),
+              mdlMatchR.save(),
+            ])
+              .then(([matchO]) => matchO);
+          }
+          return match;
+        });
+    });
 };
 
 exports.dislikeUser = ({ my_id, target_id }) => {
@@ -70,7 +90,25 @@ exports.dislikeUser = ({ my_id, target_id }) => {
     user_id1: my_id,
     user_id2: target_id,
     status: MATCH_STATUS.DISLIKE,
-  });
+  })
+    .then(match => {
+      const iMatch = new IMatch(match);
+      if (!iMatch.likewise) return match;
+
+      return models.Match.getByUserIds(iMatch.user_id2, iMatch.user_id1)
+        .then(matchR => {
+          matchR.likewise = match.likewise = 0;
+
+          const mdlMatch = new models.Match(match);
+          const mdlMatchR = new models.Match(matchR);
+
+          return Promise.all([
+            mdlMatch.save(),
+            mdlMatchR.save(),
+          ]);
+        })
+        .then(([match1]) => match1);
+    });
 }
 
 exports.passUser = ({ my_id, target_id }) => {

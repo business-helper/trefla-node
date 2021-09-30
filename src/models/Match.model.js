@@ -10,7 +10,6 @@ class Match extends IMatch {
     super(args);
   }
 
-
   save() {
     const model = this.toDB();
     if (this.id === 0) {
