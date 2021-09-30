@@ -10,7 +10,6 @@ class Match extends IMatch {
     super(args);
   }
 
-
   save() {
     const model = this.toDB();
     if (this.id === 0) {
@@ -58,6 +57,29 @@ Match.recentMatches = (user_id, timeAfter) => {
   return new Promise((resolve, reject) => {
     sql.query(`
       SELECT * FROM ${Match.table()} WHERE user_id1=? AND matches.update_time >= ?`, [user_id, timeAfter], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Match.getMatches = ({ user_id, last_id, limit }) => {
+  const table = Match.table();
+
+  const where = [
+    `${table}.user_id1=${user_id}`,
+  ];
+  if (last_id) {
+    where.push(`users.id < ${last_id}`);
+  }
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT users.*
+      FROM ${table}
+      JOIN users ON users.id=${table}.user_id2
+      ${strWhere}
+      GROUP BY users.id
+      ORDER BY ${table}.update_time DESC LIMIT ${limit}`, [], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });

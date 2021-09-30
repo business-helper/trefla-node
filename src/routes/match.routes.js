@@ -76,4 +76,16 @@ routes.route('/pass/:target_id').post((req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+routes.route('/').get((req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+
+  return ctrls.match.getMatchedUsers({
+    user_id,
+    last_id: req.body.last_id || 0,
+    limit: req.body.limit,
+  })
+    .then(users => res.json({ status: true, message: 'success', data: users }))
+    .catch(error => respondValidateError(res, error));
+});
+
 module.exports = routes;

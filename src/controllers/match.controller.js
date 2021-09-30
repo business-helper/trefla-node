@@ -4,6 +4,7 @@ const { MATCH_STATUS } = require('../constants/common.constant');
 
 const {
   IConfig,
+  IMatch,
   IUser
 } = require("../types");
 
@@ -57,12 +58,44 @@ exports.getAreaUsers = async ({ user_id, last_id = null, limit = 5 }) => {
     });
 };
 
+exports.getMatchedUsers = async ({ user_id, last_id = null, limit = 5 }) => {
+  return models.Match.getMatches({ user_id, last_id, limit })
+    .then(users => {
+      return Promise.all(users.map(async user => {
+        const iUser = new IUser(user);
+        const photos = await models.photo.getUserGallery(iUser.id, 0);
+        const nUser = iUser.asNormal();
+        nUser.gallery = photos;
+        return nUser;
+      }));
+    });
+};
+
 exports.likeUser = ({ my_id, target_id }) => {
   return activity.generateMatch({
     user_id1: my_id,
     user_id2: target_id,
     status: MATCH_STATUS.LIKE,
-  });
+  })
+    .then(match => {
+      const iMatch = new IMatch(match);
+      return models.Match.getByUserIds(iMatch.user_id2, iMatch.user_id1)
+        .then(matchR => {
+          if (matchR && matchR.status === MATCH_STATUS.LIKE) {
+            matchR.likewise = 1;
+            match.likewise = 1;
+
+            const mdlMatch = new models.Match(match);
+            const mdlMatchR = new models.Match(matchR);
+            return Promise.all([
+              mdlMatch.save(),
+              mdlMatchR.save(),
+            ])
+              .then(([matchO]) => matchO);
+          }
+          return match;
+        });
+    });
 };
 
 exports.dislikeUser = ({ my_id, target_id }) => {
@@ -70,7 +103,25 @@ exports.dislikeUser = ({ my_id, target_id }) => {
     user_id1: my_id,
     user_id2: target_id,
     status: MATCH_STATUS.DISLIKE,
-  });
+  })
+    .then(match => {
+      const iMatch = new IMatch(match);
+      if (!iMatch.likewise) return match;
+
+      return models.Match.getByUserIds(iMatch.user_id2, iMatch.user_id1)
+        .then(matchR => {
+          matchR.likewise = match.likewise = 0;
+
+          const mdlMatch = new models.Match(match);
+          const mdlMatchR = new models.Match(matchR);
+
+          return Promise.all([
+            mdlMatch.save(),
+            mdlMatchR.save(),
+          ]);
+        })
+        .then(([match1]) => match1);
+    });
 }
 
 exports.passUser = ({ my_id, target_id }) => {
