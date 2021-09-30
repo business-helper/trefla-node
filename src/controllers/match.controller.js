@@ -58,6 +58,19 @@ exports.getAreaUsers = async ({ user_id, last_id = null, limit = 5 }) => {
     });
 };
 
+exports.getMatchedUsers = async ({ user_id, last_id = null, limit = 5 }) => {
+  return models.Match.getMatches({ user_id, last_id, limit })
+    .then(users => {
+      return Promise.all(users.map(async user => {
+        const iUser = new IUser(user);
+        const photos = await models.photo.getUserGallery(iUser.id, 0);
+        const nUser = iUser.asNormal();
+        nUser.gallery = photos;
+        return nUser;
+      }));
+    });
+};
+
 exports.likeUser = ({ my_id, target_id }) => {
   return activity.generateMatch({
     user_id1: my_id,
