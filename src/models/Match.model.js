@@ -78,7 +78,6 @@ Match.getMatches = ({ user_id, last_id, limit }) => {
       FROM ${table}
       JOIN users ON users.id=${table}.user_id2
       ${strWhere}
-      GROUP BY users.id
       ORDER BY ${table}.update_time DESC LIMIT ${limit}`, [], (err, res) => {
       err ? reject(err) : resolve(res);
     });
