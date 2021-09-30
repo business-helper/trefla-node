@@ -19,7 +19,7 @@ const activity = {
      * @description users can talk about multiple posts or comments, or without any of them.
      *              Targets must not be in sequence for the adjacent two sources.
      */
-    if (from_where && target_id && ['POST', 'COMMENT'].includes(from_where)) {
+    if (from_where && target_id && ['POST', 'COMMENT', 'MATCH'].includes(from_where)) {
       const sources = JSON.parse(chat.sources || '[]');
       let lastIndex = -1;
       sources.forEach((source, i) => {
@@ -40,6 +40,7 @@ const activity = {
       'POST': 4,
       'COMMENT': 5,
       'CARD': 6,
+      'MATCH': 8,
     };
     return lastPreview && mapWhere2Type[from_where] === lastPreview.type && lastPreview.message === target_id.toString();
   },
@@ -51,6 +52,7 @@ const activity = {
       'COMMENT': 5,
       'CARD': 6,
       'NONE': 7,
+      'MATCH': 8,
     };
     // check the last preview message.
     const lastPreview = await models.message.lastPreviewMsgInChat(chat.id);
