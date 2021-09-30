@@ -67,6 +67,7 @@ Match.getMatches = ({ user_id, last_id, limit }) => {
 
   const where = [
     `${table}.user_id1=${user_id}`,
+    `${table}.likewise = 1`,
   ];
   if (last_id) {
     where.push(`users.id < ${last_id}`);
