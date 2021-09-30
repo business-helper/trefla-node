@@ -76,7 +76,7 @@ routes.route('/pass/:target_id').post((req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
-routes.route('/').get((req, res) => {
+routes.route('/').post((req, res) => {
   const { uid: user_id } = getTokenInfo(req);
 
   return ctrls.match.getMatchedUsers({
