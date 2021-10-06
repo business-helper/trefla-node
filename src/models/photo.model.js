@@ -18,6 +18,10 @@ Photo.create = (model) => {
     sql.query("INSERT INTO photos SET ?", model, (err, res) => {
 			err ? reject(err) : resolve({ id: res.insertId, ...model });
     });
+  })
+  .then(photo => {
+    photo.orderIdx = photo.id;
+    return Photo.save(photo);
   });
 };
 
