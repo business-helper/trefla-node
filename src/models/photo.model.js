@@ -71,7 +71,7 @@ Photo.getUserGallery = (user_id, isPrivate = null) => {
   }
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM ${table} ${strWhere} ORDER BY id DESC`, [], (err, res) => {
+    sql.query(`SELECT * FROM ${table} ${strWhere} ORDER BY orderIdx DESC`, [], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
