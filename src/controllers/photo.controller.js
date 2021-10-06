@@ -68,3 +68,9 @@ exports.updatePrivateStatus = (id, private) => {
       return Photo.save(photo);
     });
 }
+
+exports.updateOrderIndices = (user_id, orderMaps) => {
+  orderMaps = orderMaps.filter(({ id, orderIdx }) => id !== orderIdx);
+  return Promise.all(orderMaps.map(orderMap => Photo.updateOrderIndex({ ...orderMap, user_id })))
+    .then(photos => photos.map(photo => Photo.output(photo)));
+}

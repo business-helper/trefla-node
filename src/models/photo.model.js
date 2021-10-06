@@ -69,6 +69,21 @@ Photo.getUserGallery = (user_id, isPrivate = null) => {
   });
 }
 
+Photo.updateOrderIndex = ({ id, orderIdx, user_id = null }) => {
+  const where = [
+    `id = ${id}`
+  ];
+  if (user_id) {
+    where.push(`user_id = ${user_id}`);
+  }
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`UPDATE ${table} SET orderIdx=? ${strWhere}`, [orderIdx], (err, res) => {
+      err ? reject(err) : resolve(Photo.getById(id));
+    });
+  });
+}
+
 Photo.deleteById = (id) => {
   return new Promise((resolve, reject) => {
     sql.query("DELETE FROM photos WHERE id=?", [id], (err, res) => {
@@ -83,4 +98,5 @@ Photo.output = (model) => {
   model.url_editable = `${config.domain}/images/${model.type || 'normal'}/${hash}`;
   return model;
 }
+
 module.exports = Photo;

@@ -276,7 +276,33 @@ photoRouters.patch('/:id/private', async (req, res) => {
     .then(() => photoCtrl.updatePrivateStatus(Number(req.params.id), req.body.private))
     .then(result => res.json({ status: true, message: 'success', data: result }))
     .catch(error => respondValidateError(res, error));
-})
+});
+
+/**
+ * @descriptioin update the order status of photos.
+ * @param { Array<Object> } orders
+ * @member { Integer } id
+ * @member { Integer } orderIdx
+ * @return { Object }
+ * @member { String } message
+ * @member { Boolean } status
+ * @member { Array<Photo> } data
+*/
+photoRouters.route('/orders').patch(async (req, res) => {
+  const { uid: user_id } = helpers.auth.getTokenInfo(req);
+  const validator = new Validator(req.body, {
+    orders: 'required|array',
+    'orders.*.id': 'required|integer',
+    'orders.*.orderIdx': 'required|integer',
+  });
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request'), { code: 400, details: validator.errors });
+    })
+    .then(() => photoCtrl.updateOrderIndices(user_id, req.body.orders))
+    .then(result => res.json({ status: true, message: 'success', data: result }))
+    .catch(error => respondValidateError(res, error));
+});
 
 photoRouters.delete('/:id', async (req, res) => {
   const validator = new Validator({
