@@ -39,8 +39,8 @@ exports.getById = (req, res) => {
 exports.getByUserIdReq = (req, res) => {
   const { id: user_id } = req.params;
   const { type } = req.query;
-  const types = type.split(',');
-  return Photo.getByUser(user_id, types)
+  const types = (type || '').split(',');
+  return Photo.getByUserAndTypes(user_id, types)
     .then(photos => {
       return {
         status: true,
@@ -67,4 +67,10 @@ exports.updatePrivateStatus = (id, private) => {
       photo.private = private;
       return Photo.save(photo);
     });
+}
+
+exports.updateOrderIndices = (user_id, orderMaps) => {
+  orderMaps = orderMaps.filter(({ id, orderIdx }) => id !== orderIdx);
+  return Promise.all(orderMaps.map(orderMap => Photo.updateOrderIndex({ ...orderMap, user_id })))
+    .then(photos => photos.map(photo => Photo.output(photo)));
 }

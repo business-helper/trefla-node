@@ -18,6 +18,10 @@ Photo.create = (model) => {
     sql.query("INSERT INTO photos SET ?", model, (err, res) => {
 			err ? reject(err) : resolve({ id: res.insertId, ...model });
     });
+  })
+  .then(photo => {
+    photo.orderIdx = photo.id;
+    return Photo.save(photo);
   });
 };
 
@@ -38,11 +42,19 @@ Photo.getById = (id) => {
   });
 }
 
-Photo.getByUser = (user_id, types) => {
-  const str = types.map((type) => `'${type}'`).join(',');
-  const query = `SELECT * FROM photos WHERE user_id=${user_id} AND type in (${str})`; console.log('[Query]', query)
+Photo.getByUser = (user_id) => {
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM photos WHERE user_id=? AND type in (${str})`, [user_id], (err, res) => {
+    sql.query(`SELECT * FROM photos WHERE user_id=? ORDER BY orderIdx ASC`, [user_id], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Photo.getByUserAndTypes = (user_id, types = ['__']) => {
+  const str = types.map((type) => `'${type}'`).join(',');
+  // const query = `SELECT * FROM photos WHERE user_id=${user_id} AND type in (${str}) ORDER BY orderIdx`; console.log('[Query]', query)
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM photos WHERE user_id=? AND type in (${str}) ORDER BY orderIdx ASC`, [user_id], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
@@ -59,8 +71,23 @@ Photo.getUserGallery = (user_id, isPrivate = null) => {
   }
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM ${table} ${strWhere} ORDER BY id DESC`, [], (err, res) => {
+    sql.query(`SELECT * FROM ${table} ${strWhere} ORDER BY orderIdx DESC`, [], (err, res) => {
       err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Photo.updateOrderIndex = ({ id, orderIdx, user_id = null }) => {
+  const where = [
+    `id = ${id}`
+  ];
+  if (user_id) {
+    where.push(`user_id = ${user_id}`);
+  }
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`UPDATE ${table} SET orderIdx=? ${strWhere}`, [orderIdx], (err, res) => {
+      err ? reject(err) : resolve(Photo.getById(id));
     });
   });
 }
@@ -79,4 +106,5 @@ Photo.output = (model) => {
   model.url_editable = `${config.domain}/images/${model.type || 'normal'}/${hash}`;
   return model;
 }
+
 module.exports = Photo;
