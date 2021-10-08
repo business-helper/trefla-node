@@ -27,6 +27,24 @@ routes.route('/area-users').post((req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+routes.route('/guess-list').post((req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const validator = new Validator(req.body, {
+    match_id: "required",
+  });
+
+  return validator.check()
+    .then(async matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+      const match = await models.Match.getById(req.body.match_id);
+      if (!match) throw new Error('Not found the match!');
+      if (match.user_id2 !== user_id) throw Object.assign(new Error('Permission denied!'), { code: 403, details: [] });
+    })
+    .then(() => ctrls.match.getGuessList({ user_id, ...req.body }))
+    .then(result => res.json({ status: true, message: 'success', data: result }))
+    .catch(error => respondValidateError(res, error));
+});
+
 routes.route('/like/:target_id').post((req, res) => {
   const { uid: user_id } = getTokenInfo(req);
   const validator = new Validator(req.params, {

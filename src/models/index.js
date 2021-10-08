@@ -19,6 +19,7 @@ const post = require('./post.model');
 const postLike = require('./postLike.model');
 const report = require('./report.model');
 const user = require('./user.model');
+const UserSetting = require('./UserSetting.model');
 
 
 module.exports = {
@@ -42,5 +43,6 @@ module.exports = {
   post,
   postLike,
   report,
-  user
+  user,
+  UserSetting,
 };

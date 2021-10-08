@@ -3,6 +3,7 @@ const IConfig = require('./IConfig');
 const IMatch = require('./IMatch');
 const INotification = require('./INotification');
 const IUser = require('./IUser');
+const IUserSetting = require('./IUserSetting');
 
 module.exports = {
   IChat,
@@ -10,4 +11,5 @@ module.exports = {
   IMatch,
   INotification,
   IUser,
+  IUserSetting,
 };
