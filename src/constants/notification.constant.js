@@ -30,7 +30,9 @@ exports.notiTypeIDUnverified = 62;
 exports.notiTypePointReceived = 63;
 exports.notiTypeProfilePhotoVerified = 64;
 
-exports.notiTypeMatchLiked = 71;
+exports.notiTypeMatchLiked = 65;
+exports.notiTypeMatchPaired = 66;
+
 exports.notiTypeMatchDisliked = 72;
 exports.notiTypeMatchPassed = 73;
 

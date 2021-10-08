@@ -30,6 +30,7 @@ class IConfig extends TreflaModel {
     this.daily_comment_limit = 0;
     this.chat_point = 0;
     this.match_skip_days = 7;
+    this.match_guess_wait = 10;
     this.create_time = timestamp();
     this.update_time = timestamp();
   }

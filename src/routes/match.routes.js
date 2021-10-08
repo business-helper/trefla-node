@@ -4,6 +4,7 @@ const { Validator } = require("node-input-validator");
 const { BearerMiddleware } = require('../middlewares/basic.middleware');
 const ctrls = require('../controllers');
 const models = require('../models');
+const { IMatch, IGuess } = require('../types');
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { respondValidateError } = require('../helpers/common.helpers');
 
@@ -23,6 +24,85 @@ routes.route('/area-users').post((req, res) => {
     last_id: req.body.last_id || 0,
     limit: req.body.limit,
   })
+    .then(result => res.json({ status: true, message: 'success', data: result }))
+    .catch(error => respondValidateError(res, error));
+});
+
+routes.route('/guess-list').post((req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const validator = new Validator(req.body, {
+    match_id: "required",
+  });
+
+  return validator.check()
+    .then(async matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+      const match = await models.Match.getById(req.body.match_id);
+      if (!match) throw new Error('Not found the match!');
+      if (match.user_id2 !== user_id) throw Object.assign(new Error('Permission denied!'), { code: 403, details: [] });
+    })
+    .then(() => ctrls.match.getGuessList({ user_id, ...req.body }))
+    .then(result => res.json({ status: true, message: 'success', data: result }))
+    .catch(error => respondValidateError(res, error));
+});
+
+routes.route('/guess/single').post((req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const validator = new Validator(req.body, {
+    match_id: 'required',
+    target_id: 'required',
+  });
+
+  return validator.check()
+    .then(async matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+      const match = await models.Match.getById(req.body.match_id);
+      if (!match) throw new Error('Not found the match!');
+      const iMatch = new IMatch(match);
+      if (iMatch.user_id2 !== user_id) throw new Error('Permission denied!');
+      const guess = await models.Guess.getByMatchId(req.body.match_id);
+      if (guess) {
+        const iGuess = new IGuess(guess);
+        if (iGuess.selected_users.length >= 3) {
+          throw new Error('You already selected the maximum users!');
+        }
+        if (iGuess.selected_users.includes(req.body.target_id)) {
+          throw new Error('You already selected this user!');
+        }
+      }
+      const target_user = await models.user.getById(req.body.target_id);
+      if (!target_user) throw new Error('Not found the target user!');
+      return ctrls.match.guessSingleUser(user_id, req.body);
+    })
+    .then(result => res.json({ status: true, message: 'success', data: result }))
+    .catch(error => respondValidateError(res, error));
+});
+
+routes.route('/guess/multiple').post((req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const validator = new Validator(req.body, {
+    match_id: 'required',
+    target_ids: 'required|array',
+    'target_ids.*': 'required|integer',
+  });
+  return validator.check()
+    .then(async matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+      if (req.body.target_ids.length > 3) throw new Error('You can selectd 3 users at max!');
+
+      const match = await models.Match.getById(req.body.match_id);
+      if (!match) throw new Error('Not found the match!');
+      const iMatch = new IMatch(match);
+
+      if (iMatch.user_id2 !== user_id) throw new Error('Permission denied!');
+      const guess = await models.Guess.getByMatchId(req.body.match_id);
+      if (guess) {
+        const mGuess = new models.Guess(guess);
+        if (mGuess.selected_users.length >= 3) throw new Error('You already selected the maximum users!');
+        if (mGuess.selected_users.length + req.body.target_ids.length > 3) throw new Error(`You can selected ${3 - mGuess.selected_users.length} more users in this match!`);
+      }
+      return ctrls.match.geussMultipleUsers(user_id, req.body);
+    })
     .then(result => res.json({ status: true, message: 'success', data: result }))
     .catch(error => respondValidateError(res, error));
 });

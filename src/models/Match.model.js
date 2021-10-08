@@ -1,6 +1,9 @@
 const sql = require('./db');
 const { IMatch } = require('../types');
-const { GALLERY_TYPE } = require('../constants/common.constant');
+const {
+  GALLERY_TYPE,
+  MATCH_STATUS,
+} = require('../constants/common.constant');
 const { timestamp } = require('../helpers/common.helpers');
 
 const table = 'matches';
@@ -51,9 +54,6 @@ Match.getByUserIds = (user_id1, user_id2) => {
 }
 
 Match.recentMatches = (user_id, timeAfter) => {
-  const galleryTypes = Object.values(GALLERY_TYPE);
-  const str_galleryTypes = `'${galleryTypes.join("','")}'`;
-  
   return new Promise((resolve, reject) => {
     sql.query(`
       SELECT * FROM ${Match.table()} WHERE user_id1=? AND matches.update_time >= ?`, [user_id, timeAfter], (err, res) => {
@@ -80,6 +80,28 @@ Match.getMatches = ({ user_id, last_id, limit }) => {
       JOIN users ON users.id=${table}.user_id2
       ${strWhere}
       ORDER BY ${table}.update_time DESC LIMIT ${limit}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Match.getMatchesByTypes = ({ user_id, types = ['LIKE'] }) => {
+  const table = Match.table();
+  const where = [
+    `user_id1 = ${user_id}`,
+  ];
+  if (types.length > 0) where.push(`status IN ('${types.join("','")}')`);
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} ${strWhere}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
+Match.getRecentlyLikedUsers = ({ timeAfter = 0 }) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} WHERE status=${MATCH_STATUS.LIKE} AND update_time >= ?`, [timeAfter], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });

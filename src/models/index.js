@@ -8,6 +8,7 @@ const comment = require('./comment.model');
 const commentLike = require('./commentLike.model');
 const config = require('./config.model');
 const emailTemplate = require('./emailTemplate.model');
+const Guess = require('./Guess.model');
 const identity = require('./identity.model');
 const language = require('./lang.model');
 const Match = require('./Match.model');
@@ -19,6 +20,7 @@ const post = require('./post.model');
 const postLike = require('./postLike.model');
 const report = require('./report.model');
 const user = require('./user.model');
+const UserSetting = require('./UserSetting.model');
 
 
 module.exports = {
@@ -32,6 +34,7 @@ module.exports = {
   comment,
   commentLike,
   emailTemplate,
+  Guess,
   identity,
   language,
   Match,
@@ -42,5 +45,6 @@ module.exports = {
   post,
   postLike,
   report,
-  user
+  user,
+  UserSetting,
 };

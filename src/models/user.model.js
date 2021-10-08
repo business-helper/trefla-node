@@ -198,6 +198,22 @@ User.getAreaUsers = ({ excludes, limit, last_id, location_area }) => {
   })
 }
 
+User.getRandomUsersForGuess = ({ excludes = [], location_area, limit = 9 }) => {
+  const where = [];
+  if (location_area) {
+    where.push(`location_area='${location_area}'`);
+  }
+  if (excludes.length > 0) {
+    where.push(`id NOT IN ('${excludes.join("','")}')`);
+  }
+  const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM users ${strWhere} ORDER BY rand() LIMIT ?`, [limit], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+}
+
 User.numberOfCard = () => {
   const strWhere = `card_number != '' OR card_img_url != ''`;
   return new Promise((resolve, reject) => {
