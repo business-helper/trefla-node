@@ -5,6 +5,7 @@ const { MATCH_STATUS } = require('../constants/common.constant');
 const NOTI_TYPES = require('../constants/notification.constant');
 const {
   IConfig,
+  IGuess,
   IMatch,
   IUser
 } = require("../types");
@@ -234,4 +235,40 @@ exports.getGuessList = async ({ user_id, match_id }) => {
     users.push(liker);
     return users.map(user => models.user.output(user));
   });
+}
+
+exports.guessSingleUser = async (user_id, { match_id, target_id }) => {
+  return Promise.all([
+    models.user.getById(user_id),
+    models.Match.getById(match_id),
+    models.user.getById(target_id),
+  ])
+    .then(async ([me, match, targetUser]) => {
+      const iMatch = new IMatch(match);
+      let guess = await models.Guess.getByMatchId(match_id);
+      if (!guess) {
+        guess = await (new models.Guess({
+          user_id, match_id,
+        })).save();
+      }
+      const mGuess = new models.Guess(guess);
+      mGuess.selected_users.push(target_id);
+      mGuess.isCorrect = mGuess.isCorrect || (target_id === iMatch.user_id1 ? 1 : 0);
+      return mGuess.save();
+    })
+    .then(guess => {
+      const mGuess = new models.Guess(guess);
+      return mGuess.toJSON();
+    });
+}
+
+exports.geussMultipleUsers = async (user_id, { match_id, target_ids }) => {
+  return Promise.all([
+    models.user.getById(user_id),
+    models.Match.getById(match_id),
+  ])
+    .then(async ([me, match]) => {
+      const mMatch = new models.Match(match);
+      
+    })
 }

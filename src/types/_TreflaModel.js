@@ -45,8 +45,11 @@ class TreflaModel extends TreflaType {
 
   acceptData(args = {}) {
     for (const key in args) {
-      if (this[key] !== undefined) this[key] = args[key];
+      if (this[key] !== undefined) {
+        this[key] = args[key];
+      }
     }
+    this.jsonify();
   }
 }
 

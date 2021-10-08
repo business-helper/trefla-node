@@ -8,6 +8,7 @@ const comment = require('./comment.model');
 const commentLike = require('./commentLike.model');
 const config = require('./config.model');
 const emailTemplate = require('./emailTemplate.model');
+const Guess = require('./Guess.model');
 const identity = require('./identity.model');
 const language = require('./lang.model');
 const Match = require('./Match.model');
@@ -33,6 +34,7 @@ module.exports = {
   comment,
   commentLike,
   emailTemplate,
+  Guess,
   identity,
   language,
   Match,

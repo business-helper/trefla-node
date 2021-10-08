@@ -30,7 +30,7 @@ class UserSetting extends IUserSetting {
 }
 
 UserSetting.table = () => {
-  return 'matches';
+  return table;
 }
 
 UserSetting.getById = (id) => {
