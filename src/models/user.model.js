@@ -198,17 +198,31 @@ User.getAreaUsers = ({ excludes, limit, last_id, location_area }) => {
   })
 }
 
-User.getRandomUsersForGuess = ({ excludes = [], location_area, limit = 9 }) => {
-  const where = [];
+User.getRandomUsersForGuess = ({ excludes = [], location_area, limit = 9, sex = null }) => {
+  const galleryTypes = Object.values(GALLERY_TYPE);
+  const str_galleryTypes = `'${galleryTypes.join("','")}'`;
+  const where = [
+    `photos.type IN (${str_galleryTypes})`,
+  ];
   if (location_area) {
     where.push(`location_area='${location_area}'`);
   }
   if (excludes.length > 0) {
-    where.push(`id NOT IN ('${excludes.join("','")}')`);
+    where.push(`${table}.id NOT IN ('${excludes.join("','")}')`);
+  }
+  if (sex !== null) {
+    where.push(`users.sex = ${sex}`);
   }
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM users ${strWhere} ORDER BY rand() LIMIT ?`, [limit], (err, res) => {
+    sql.query(`SELECT * FROM (SELECT users.*, COUNT(photos.id) as photo_num
+      FROM photos
+      LEFT JOIN users ON users.id=photos.user_id
+      ${strWhere}
+      GROUP BY users.id) usr
+      WHERE photo_num > 0
+      ORDER BY rand() LIMIT ?
+      `, [limit], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
