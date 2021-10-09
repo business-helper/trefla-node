@@ -321,7 +321,13 @@ exports.getGuessList = async ({ user_id, match_id }) => {
     console.log('[Excludes]', excludes);
     const users = await models.user.getRandomUsersForGuess({ excludes, location_area: iMe.location_area });
     users.push(liker);
-    return users.map(user => models.user.output(user));
+    return users.map(async user => {
+      const iUser = new IUser(user);
+      const photos = await models.photo.getUserGallery(iUser.id, 0);
+      const nUser = iUser.asNormal();
+      nUser.gallery = photos;
+      return nUser;
+    });
   });
 }
 
