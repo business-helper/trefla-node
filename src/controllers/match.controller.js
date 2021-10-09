@@ -243,8 +243,11 @@ exports.likeUser = ({ my_id, target_id }, socketClient) => {
         })
         .then(async match => {
           // process notification.
-          if (match.likewise === 1) {
+          const iMatch = new IMatch(match);
+          if (iMatch.likewise === 1) {
             await activity.addNotificationForPair(match, socketClient);
+            const matchR = await models.Match.getByUserIds(iMatch.user_id2, iMatch.user_id1);
+            await activity.addNotificationForPair(matchR, socketClient);
           } else {
             await activity.addNotificationForLike(match, socketClient);
           }
