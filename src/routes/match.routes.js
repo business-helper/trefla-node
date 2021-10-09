@@ -47,6 +47,7 @@ routes.route('/guess-list').post((req, res) => {
 });
 
 routes.route('/guess/single').post((req, res) => {
+  const socketClient = req.app.locals.socketClient;
   const { uid: user_id } = getTokenInfo(req);
   const validator = new Validator(req.body, {
     match_id: 'required',
@@ -72,13 +73,14 @@ routes.route('/guess/single').post((req, res) => {
       }
       const target_user = await models.user.getById(req.body.target_id);
       if (!target_user) throw new Error('Not found the target user!');
-      return ctrls.match.guessSingleUser(user_id, req.body);
+      return ctrls.match.guessSingleUser(user_id, req.body, socketClient);
     })
     .then(result => res.json({ status: true, message: 'success', data: result }))
     .catch(error => respondValidateError(res, error));
 });
 
 routes.route('/guess/multiple').post((req, res) => {
+  const socketClient = req.app.locals.socketClient;
   const { uid: user_id } = getTokenInfo(req);
   const validator = new Validator(req.body, {
     match_id: 'required',
@@ -101,13 +103,14 @@ routes.route('/guess/multiple').post((req, res) => {
         if (mGuess.selected_users.length >= 3) throw new Error('You already selected the maximum users!');
         if (mGuess.selected_users.length + req.body.target_ids.length > 3) throw new Error(`You can selected ${3 - mGuess.selected_users.length} more users in this match!`);
       }
-      return ctrls.match.geussMultipleUsers(user_id, req.body);
+      return ctrls.match.geussMultipleUsers(user_id, req.body, socketClient);
     })
     .then(result => res.json({ status: true, message: 'success', data: result }))
     .catch(error => respondValidateError(res, error));
 });
 
 routes.route('/like/:target_id').post((req, res) => {
+  const socketClient = req.app.locals.socketClient;
   const { uid: user_id } = getTokenInfo(req);
   const validator = new Validator(req.params, {
     target_id: "required",
@@ -119,7 +122,7 @@ routes.route('/like/:target_id').post((req, res) => {
       const target_user = await models.user.getById(req.params.target_id);
       if (!target_user) throw new Error('Target user not found!');
     })
-    .then(() => ctrls.match.likeUser({ my_id: user_id, target_id: Number(req.params.target_id) }))
+    .then(() => ctrls.match.likeUser({ my_id: user_id, target_id: Number(req.params.target_id) }, socketClient))
     .then(result => res.json({ status: true, message: 'success', data: result }))
     .catch(error => respondValidateError(res, error));
 });

@@ -43,3 +43,8 @@ const SKT_PROFILE_REVEAL_ACCEPT = 'socket.profile.reveal.accept';
 const SKT_PROFILE_REVEAL_ACCEPTED = 'socket.profile.reveal.accepted';
 const SKT_PROFILE_REVEAL_REJECT = 'socket.profile.reveal.reject';
 const SKT_PROFILE_REVEAL_REJECTED = 'socket.profile.reveal.rejected';
+
+const SKT_MATCH_LIKED = 'socket.match.liked';
+const SKT_MATCH_DISLIKED = 'socket.match.disliked';
+const SKT_MATCH_PASSED = 'socket.match.passed';
+const SKT_MATCH_PAIRED = 'socket.match.paired';

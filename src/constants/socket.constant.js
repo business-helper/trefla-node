@@ -49,6 +49,7 @@ exports.SKT_PROFILE_REVEAL_REJECTED = 'socket.profile.reveal.rejected';
 exports.SKT_MATCH_LIKED = 'socket.match.liked';
 exports.SKT_MATCH_DISLIKED = 'socket.match.disliked';
 exports.SKT_MATCH_PASSED = 'socket.match.passed';
+exports.SKT_MATCH_PAIRED = 'socket.match.paired';
 
 exports.SKT_LTS_SINGLE = 'socket.local2server.single';
 exports.SKT_LTS_MULTIPLE = 'socket.local2server.multiple';

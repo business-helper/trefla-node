@@ -2,11 +2,13 @@ const { Validator } = require("node-input-validator");
 const models = require("../models");
 const helpers = require('../helpers');
 const { MATCH_STATUS } = require('../constants/common.constant');
+const CONSTS = require('../constants/socket.constant');
 const NOTI_TYPES = require('../constants/notification.constant');
 const {
   IConfig,
   IGuess,
   IMatch,
+  INotification,
   IUser
 } = require("../types");
 const { generateTZTimeString, timestamp } = require('../helpers/common.helpers');
@@ -26,9 +28,10 @@ const activity = {
         return match.save();
       });
   },
-  addNotificationForLike: async (match) => {
+  addNotificationForLike: async (match, socketClient) => {
     const iMatch = new IMatch(match);
     const user = await models.user.getById(iMatch.user_id2);
+    const iUser = new IUser(user);
     const notiData = helpers.model.generateNotificationData({
       sender_id: 0,
       receiver_id: iMatch.user_id2,
@@ -38,14 +41,27 @@ const activity = {
       isFromAdmin: 1,
     });
     const notification = await models.notification.create(notiData);
-    activity.pushNotification4NewPost({ user, notification }).catch(() => {});
+    iUser.noti_num ++;
+    await models.user.save(iUser.toDB());
+    if (iUser.socket_id) {
+      socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+        to: user.socket_id,
+        event: CONSTS.SKT_MATCH_LIKED,
+        args: {
+          match_id: iMatch.id,
+        },
+      });
+      // send socket for notifcation update.
+      await helpers.notification.socketOnNewNotification({ user_id: iUser.id, notification, socketClient });
+    }
+    activity.pushNotification4NewLike({ user, notification }).catch(() => {});
     return notification;
     
   },
-  pushNotification4NewPost: ({ user, notification }) => {
+  pushNotification4NewLike: ({ user, notification }) => {
     const title = {
       EN: 'Match',
-      RO: 'Match',
+      RO: 'Meci',
     };
     const body = {
       EN: `Someone just liked you on Match`,
@@ -65,6 +81,74 @@ const activity = {
         body: body[lang],
         title: title[lang],
         token: user.device_token,
+        data,
+      });
+    }
+  },
+  addNotificationForPair: async (match, socketClient) => {
+    const iMatch = new IMatch(match);
+    const user = await models.user.getById(iMatch.user_id2);
+    const iUser = new IUser(user);
+    const user2 = await models.user.getById(iMatch.user_id1);
+    const iUser2 = new IUser(user2);
+    const notiData = helpers.model.generateNotificationData({
+      sender_id: 0,
+      receiver_id: iMatch.user_id2,
+      type: NOTI_TYPES.notiTypeMatchPaired,
+      optional_val: iMatch.user_id1,
+      time: generateTZTimeString(),
+      isFromAdmin: 1,
+    });
+    const notification = await models.notification.create(notiData);
+    iUser.noti_num ++;
+    await models.user.save(iUser.toDB());
+    if (iUser.socket_id) {
+      // get user2's gallery.
+      const photos = await models.photo.getUserGallery(iUser2.id, 0);
+      const matchedWith = iUser2.asNormal();
+      matchedWith.photos = photos;
+
+      socketClient.emit(CONSTS.SKT_LTS_SINGLE, {
+        to: user.socket_id,
+        event: CONSTS.SKT_MATCH_PAIRED,
+        args: {
+          user_id: iMatch.user_id1,
+          data: matchedWith,
+        },
+      });
+      // send socket for notifcation update.
+      await helpers.notification.socketOnNewNotification({ user_id: iUser.id, notification, socketClient });
+    }
+    activity.pushNotification4NewPair({ user, notification }).catch(() => {});
+    return notification;
+  },
+  pushNotification4NewPair: async ({ user, notification }) => {
+    const iUser = new IUser(user);
+    const iNotification = new INotification(notification);
+    const user2 = await models.user.getById(iNotification.optional_val);
+    const iUser2 = new IUser(user2);
+    const title = {
+      EN: 'Match',
+      RO: 'Meci',
+    };
+    const body = {
+      EN: `Congrats! You matched with ${iUser2.user_name}`,
+      RO: `Felicitări! Te-ai asortat cu ${iUser2.user_name}`,
+    };
+    const data = {
+      noti_id: String(iNotification.id || ""),
+      optional_val: String(iNotification.optional_val || ""),
+      type: String(notification.type || ""),
+      user_id: '0',
+      user_name: 'Admin',
+      avatar: '',
+    };
+    const lang = ['EN', 'RO'].includes(iUser.language.toUpperCase()) ? iUser.language.toUpperCase() : 'EN';
+    if (iUser.device_token) {
+      return helpers.common.sendSingleNotification({
+        body: body[lang],
+        title: title[lang],
+        token: iUser.device_token,
         data,
       });
     }
@@ -132,7 +216,7 @@ exports.getMatchedUsers = async ({ user_id, last_id = null, limit = 5 }) => {
     });
 };
 
-exports.likeUser = ({ my_id, target_id }) => {
+exports.likeUser = ({ my_id, target_id }, socketClient) => {
   return activity.generateMatch({
     user_id1: my_id,
     user_id2: target_id,
@@ -159,7 +243,11 @@ exports.likeUser = ({ my_id, target_id }) => {
         })
         .then(async match => {
           // process notification.
-          await activity.addNotificationForLike(match);
+          if (match.likewise === 1) {
+            await activity.addNotificationForPair(match, socketClient);
+          } else {
+            await activity.addNotificationForLike(match, socketClient);
+          }
           return match;
         });
     });
@@ -237,7 +325,7 @@ exports.getGuessList = async ({ user_id, match_id }) => {
   });
 }
 
-exports.guessSingleUser = async (user_id, { match_id, target_id }) => {
+exports.guessSingleUser = async (user_id, { match_id, target_id }, socketClient) => {
   return Promise.all([
     models.user.getById(user_id),
     models.Match.getById(match_id),
@@ -258,11 +346,15 @@ exports.guessSingleUser = async (user_id, { match_id, target_id }) => {
     })
     .then(guess => {
       const mGuess = new models.Guess(guess);
+      this.likeUser({
+        my_id: user_id,
+        target_id,
+      }, socketClient);
       return mGuess.toJSON();
     });
 }
 
-exports.geussMultipleUsers = async (user_id, { match_id, target_ids }) => {
+exports.geussMultipleUsers = async (user_id, { match_id, target_ids }, socketClient) => {
   return Promise.all([
     models.user.getById(user_id),
     models.Match.getById(match_id),
@@ -270,5 +362,24 @@ exports.geussMultipleUsers = async (user_id, { match_id, target_ids }) => {
     .then(async ([me, match]) => {
       const mMatch = new models.Match(match);
       
+      let guess = await models.Guess.getByMatchId(match_id);
+      if (!guess) { // if doesn't exist, create one.
+        guess = await (new models.Guess({
+          user_id, match_id,
+        })).save();
+      }
+      const mGuess = new models.Guess(guess);
+      let selected_users = mGuess.selected_users;
+      mGuess.selected_users = selected_users.concat(target_ids).filter((uid, i, self) => self.indexOf(uid) === i);
+      mGuess.isCorrect = mGuess.selected_users.some(uid => uid === mMatch.user_id1);
+      return mGuess.save();
     })
+    .then(async guess => {
+      const mGuess = new models.Guess(guess);
+      await Promise.all(target_ids.map(target_id => this.likeUser({
+        my_id: user_id,
+        target_id,
+      }, socketClient)));
+      return mGuess.toJSON();
+    });
 }
