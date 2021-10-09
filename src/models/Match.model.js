@@ -101,7 +101,7 @@ Match.getMatchesByTypes = ({ user_id, types = ['LIKE'] }) => {
 
 Match.getRecentlyLikedUsers = ({ timeAfter = 0 }) => {
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM ${table} WHERE status=${MATCH_STATUS.LIKE} AND update_time >= ?`, [timeAfter], (err, res) => {
+    sql.query(`SELECT * FROM ${table} WHERE status='${MATCH_STATUS.LIKE}' AND update_time >= ?`, [timeAfter], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
