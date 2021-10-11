@@ -380,14 +380,26 @@ exports.geussMultipleUsers = async (user_id, { match_id, target_ids }, socketCli
       let selected_users = mGuess.selected_users;
       mGuess.selected_users = selected_users.concat(target_ids).filter((uid, i, self) => self.indexOf(uid) === i);
       mGuess.isCorrect = mGuess.selected_users.some(uid => uid === mMatch.user_id1);
-      return mGuess.save();
+      return Promise.all([
+        mGuess.save(),
+        match,
+      ]);
     })
-    .then(async guess => {
+    .then(async ([guess, match]) => {
       const mGuess = new models.Guess(guess);
       await Promise.all(target_ids.map(target_id => this.likeUser({
         my_id: user_id,
         target_id,
       }, socketClient)));
-      return mGuess.toJSON();
+
+      const user1 = await models.user.getById(match.user_id1);
+      const iUser1 = new IUser(user1);
+      const photos = await models.photo.getUserGallery(iUser1.id, 0);
+      const nUser1 = iUser1.asNormal();
+      nUser1.gallery = photos;
+      return {
+        guess: mGuess.toJSON(),
+        matched: nUser1,
+      };
     });
 }

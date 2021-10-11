@@ -105,7 +105,7 @@ routes.route('/guess/multiple').post((req, res) => {
       }
       return ctrls.match.geussMultipleUsers(user_id, req.body, socketClient);
     })
-    .then(result => res.json({ status: true, message: 'success', data: result }))
+    .then(({ guess, matched }) => res.json({ status: true, message: 'success', data: guess, matched }))
     .catch(error => respondValidateError(res, error));
 });
 
