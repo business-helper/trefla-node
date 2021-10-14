@@ -321,7 +321,7 @@ exports.getGuessList = async ({ user_id, match_id }) => {
     excludes = excludes
       .concat(likedMatches.map(match => match.user_id2))
       .filter((user_id, i, self) => self.indexOf(user_id) === i);
-    const users = await models.user.getRandomUsersForGuess({ excludes, location_area: iMe.location_area, sex: 1 - iMe.sex });
+    const users = await models.user.getRandomUsersForGuess({ excludes, location_area: iMe.location_area, sex: 1 - iMe.sex, limit: 8 });
     users.push(liker);
     return Promise.all(users.map(async user => {
       const iUser = new IUser(user);
