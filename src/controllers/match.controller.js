@@ -196,8 +196,13 @@ exports.getAreaUsers = async ({ user_id, last_id = null, limit = 5 }) => {
       return Promise.all(users.map(async user => {
         const iUser = new IUser(user);
         const photos = await models.photo.getUserGallery(iUser.id, 0);
+
+        const matchProfile = await models.MatchProfile.getByUserId(iUser.id);
+        const mMatchProfile = new models.MatchProfile(matchProfile);
+
         const nUser = iUser.asNormal();
         nUser.gallery = photos;
+        nUser.matchProfile = mMatchProfile.output();
         return nUser;
       }))
     });
@@ -211,6 +216,10 @@ exports.getMatchedUsers = async ({ user_id, last_id = null, limit = 5 }) => {
         const photos = await models.photo.getUserGallery(iUser.id, 0);
         const nUser = iUser.asNormal();
         nUser.gallery = photos;
+
+        const matchProfile = await models.MatchProfile.getByUserId(iUser.id);
+        const mMatchProfile = new models.MatchProfile(matchProfile);
+        nUser.matchProfile = mMatchProfile.output();
         return nUser;
       }));
     });
@@ -328,6 +337,10 @@ exports.getGuessList = async ({ user_id, match_id }) => {
       const photos = await models.photo.getUserGallery(iUser.id, 0);
       const nUser = iUser.asNormal();
       nUser.gallery = photos;
+
+      const matchProfile = await models.MatchProfile.getByUserId(iUser.id);
+      const mMatchProfile = new models.MatchProfile(matchProfile);
+      nUser.matchProfile = mMatchProfile.output();
       return nUser;
     }));
   });

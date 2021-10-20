@@ -27,6 +27,20 @@ class MatchProfile extends IMatchProfile {
       });
     }
   }
+
+  output(level = 'OTHERS', keys = []) {
+    const data = this.toJSON();
+    var keys2Delete = [];
+    if (level === 'OTHERS') {
+      keys2Delete = ['id', 'create_time', 'update_time', 'preference'];
+    } else {
+      keys2Delete = ['create_time', 'update_time'];
+    }
+    keys2Delete.forEach(key => {
+      delete data[key];
+    });
+    return data;
+  }
 }
 
 MatchProfile.getById = (id) => {
