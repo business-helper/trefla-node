@@ -107,5 +107,4 @@ Match.getRecentlyLikedUsers = ({ timeAfter = 0 }) => {
   });
 }
 
-
 module.exports = Match;

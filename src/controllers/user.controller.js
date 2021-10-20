@@ -158,7 +158,7 @@ exports.register = async (req, res) => {
         genreateAuthToken(user)
       ]);
     })
-    .then(([user, token]) => res.json({
+    .then(([user, token]) => ({
       status: true,
       message: 'success',
       data: User.output(user, 'PROFILE'),
