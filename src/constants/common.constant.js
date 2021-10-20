@@ -44,3 +44,10 @@ exports.GALLERY_TYPE = {
   YOUTUBE: 'youtube',
   URL: 'url',
 };
+
+exports.MATCH_RELATION = {
+  OCCASIONAL: 'OCCASIONAL',
+  LONT_TERM: 'LONG_TERM',
+  FRIENDSHIP: 'FRIENDSHIP',
+  DISCUSSION: 'DISCUSSION',
+};

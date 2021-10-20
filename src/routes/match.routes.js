@@ -159,6 +159,60 @@ routes.route('/pass/:target_id').post((req, res) => {
     .catch(error => respondValidateError(res, error));
 });
 
+routes.route('/profile/me').get((req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  return ctrls.matchProfile.getByUserReq(user_id)
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+routes.route('/profile').patch((req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const validator = new Validator(req.body, {
+    name: "required",
+    smoking: "required",
+    drinking: "required",
+    height: "required",
+    relations: "required|array",
+  });
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request!'), { code: 400, details: validator.errors });
+    })
+    .then(() => ctrls.matchProfile.updateReq(user_id, req.body))
+    .then(result => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+routes.route('/profile/preference').patch((req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const validator = new Validator(req.body, {
+    'drinking': 'required',
+    'smoking': 'required',
+    'heightRange': 'required|array',
+    'ageRange': 'required|array',
+    'relations': 'required|array',
+  });
+  return validator.check()
+    .then(matched => {
+      if (!matched) throw Object.assign(new Error('Invalid request|!'), { code: 400, details: validator.errors });
+    })
+    .then(() => ctrls.matchProfile.updatePreferenceReq(user_id, req.body))
+    .then((result) => res.json(result))
+    .catch(error => respondValidateError(res, error));
+});
+
+routes.route('/profile/fill-default').patch((req, res) => {
+  return models.user.getAllIds()
+    .then(users => Promise.all(users.map(({ id }) => ctrls.matchProfile.activity.getUserMatchProfile(id))))
+    .then(matchProfiles => res.json({
+      status: true,
+      message: `Checked ${matchProfiles.length} users`,
+    }))
+    .catch(error => res.json({ status: false, message: error.message }));
+});
+
+
 routes.route('/').post((req, res) => {
   const { uid: user_id } = getTokenInfo(req);
 

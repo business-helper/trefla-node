@@ -12,6 +12,7 @@ const Guess = require('./Guess.model');
 const identity = require('./identity.model');
 const language = require('./lang.model');
 const Match = require('./Match.model');
+const MatchProfile = require('./MatchProfile.model');
 const message = require('./message.model');
 const notification = require('./notification.model');
 const photo = require('./photo.model');
@@ -38,6 +39,7 @@ module.exports = {
   identity,
   language,
   Match,
+  MatchProfile,
   message,
   notification,
   photo,

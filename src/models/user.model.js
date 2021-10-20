@@ -275,6 +275,14 @@ User.total = () => {
   })
 }
 
+User.getAllIds = () => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT id FROM ${table}`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    })
+  });
+}
+
 User.output = (user, mode = 'NORMAL') => {
   if (!user) return null;
   try {
