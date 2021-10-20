@@ -253,7 +253,7 @@ exports.deleteById = async (req, res) => {
 
 exports.deleteByIdReq = async ({ user_id, id, socketClient = null }) => {
   const user = await User.getById(user_id);
-  return Notification.deleteById(user_id)
+  return Notification.deleteById(id)
     .then(deleted => Notification.getByUserId(user_id))
     .then((notis) => {
       const unread_notis = notis.filter(noti => noti.is_read === 0);
