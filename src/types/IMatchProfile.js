@@ -16,11 +16,11 @@ class IMatchProfile extends TreflaModel {
     this.name = '';
     this.smoking = 0;
     this.drinking = 0;
-    this.height = 0;
+    this.height = 175;
     this.relations = Object.values(MATCH_RELATION);
     this.preference = {
-      smoking: 1,
-      drinking: 1,
+      smoking: 0,
+      drinking: 0,
       heightRange: [150, 200],
       ageRange: [13, 65],
       relations: Object.values(MATCH_RELATION),
