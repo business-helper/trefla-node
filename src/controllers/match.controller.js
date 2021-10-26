@@ -163,7 +163,7 @@ const activity = {
 
       const nUser = iUser.asNormal();
       nUser.gallery = photos;
-      nUser.matchProfile = mMatchProfile.output();
+      nUser.profile = mMatchProfile.output();
       return nUser;
     }));
   },
