@@ -215,19 +215,7 @@ exports.getAreaUsers = async ({ user_id, last_id = null, limit = 5 }) => {
 
 exports.getMatchedUsers = async ({ user_id, last_id = null, limit = 5 }) => {
   return models.Match.getMatches({ user_id, last_id, limit })
-    .then(users => {
-      return Promise.all(users.map(async user => {
-        const iUser = new IUser(user);
-        const photos = await models.photo.getUserGallery(iUser.id, 0);
-        const nUser = iUser.asNormal();
-        nUser.gallery = photos;
-
-        const matchProfile = await models.MatchProfile.getByUserId(iUser.id);
-        const mMatchProfile = new models.MatchProfile(matchProfile);
-        nUser.matchProfile = mMatchProfile.output();
-        return nUser;
-      }));
-    });
+    .then(users => activity.populateUsers4Match(users));
 };
 
 exports.likeUser = ({ my_id, target_id }, socketClient) => {
