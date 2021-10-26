@@ -112,3 +112,8 @@ profile update
 
 - card
 update user.card_image_url after uploading.
+
+
+## TO-DO
+
+- [admin] update user profile to check match profile and preference

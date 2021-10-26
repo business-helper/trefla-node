@@ -1,6 +1,7 @@
 const sql = require("./db");
 const { bool2Int, timestamp, JSONParser, stringifyModel } = require("../helpers/common.helpers");
 const { GALLERY_TYPE, LOGIN_MODE } = require('../constants/common.constant');
+const { IMatchProfile } = require('../types');
 
 const table = 'users';
 
@@ -172,7 +173,7 @@ User.cardPagination = ({ page, limit }) => {
   })
 }
 
-User.getAreaUsers = ({ excludes, limit, last_id, location_area }) => {
+User.getAreaUsers = ({ excludes, limit, last_id, location_area, matchProfile }) => {
   const galleryTypes = Object.values(GALLERY_TYPE);
   const str_galleryTypes = `'${galleryTypes.join("','")}'`;
 
@@ -184,21 +185,34 @@ User.getAreaUsers = ({ excludes, limit, last_id, location_area }) => {
   if (last_id) {
     where.push(`users.id < ${last_id}`);
   }
+  if (matchProfile) {
+    const iMatchProfile = new IMatchProfile(matchProfile);
+    where.push(`match_profiles.smoking=${iMatchProfile.preference.smoking}`);
+    where.push(`match_profiles.drinking=${iMatchProfile.preference.drinking}`);
+    where.push(`match_profiles.height >= ${iMatchProfile.preference.heightRange[0]} AND match_profiles.height <= ${iMatchProfile.preference.heightRange[1]}`);
+    if (iMatchProfile.preference.relations.length > 0) {
+      where.push(`(${
+        iMatchProfile.preference.relations
+        .map(relation => `JSON_CONTAINS(relations, '\"${relation}\"')=1`)
+        .join(' OR ')
+      })`);
+    }
+  }
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
-
   return new Promise((resolve, reject) => {
     sql.query(`SELECT users.*, COUNT(photos.id) as photo_num
       FROM ${table}
       JOIN photos ON users.id=photos.user_id
+      JOIN match_profiles ON users.id=match_profiles.user_id
       ${strWhere}
       GROUP BY users.id
       ORDER BY users.create_time DESC LIMIT ${limit}`, [], (err, res) => {
       err ? reject(err) : resolve(res);
     });
-  })
+  });
 }
 
-User.getRandomUsersForGuess = ({ excludes = [], location_area, limit = 9, sex = null }) => {
+User.getRandomUsersForGuess = ({ excludes = [], location_area, limit = 9, sex = null, matchProfile }) => {
   const galleryTypes = Object.values(GALLERY_TYPE);
   const str_galleryTypes = `'${galleryTypes.join("','")}'`;
   const where = [
@@ -213,11 +227,25 @@ User.getRandomUsersForGuess = ({ excludes = [], location_area, limit = 9, sex = 
   if (sex !== null) {
     where.push(`users.sex = ${sex}`);
   }
+  if (matchProfile) {
+    const iMatchProfile = new IMatchProfile(matchProfile);
+    where.push(`match_profiles.smoking=${iMatchProfile.preference.smoking}`);
+    where.push(`match_profiles.drinking=${iMatchProfile.preference.drinking}`);
+    where.push(`match_profiles.height >= ${iMatchProfile.preference.heightRange[0]} AND match_profiles.height <= ${iMatchProfile.preference.heightRange[1]}`);
+    if (iMatchProfile.preference.relations.length > 0) {
+      where.push(`(${
+        iMatchProfile.preference.relations
+        .map(relation => `JSON_CONTAINS(relations, '\"${relation}\"')=1`)
+        .join(' OR ')
+      })`);
+    }
+  }
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
     sql.query(`SELECT * FROM (SELECT users.*, COUNT(photos.id) as photo_num
       FROM photos
       LEFT JOIN users ON users.id=photos.user_id
+      JOIN match_profiles ON photos.user_id=match_profiles.user_id
       ${strWhere}
       GROUP BY users.id) usr
       WHERE photo_num > 0

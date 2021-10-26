@@ -153,6 +153,20 @@ const activity = {
       });
     }
   },
+  populateUsers4Match: async (users) => {
+    return Promise.all(users.map(async user => {
+      const iUser = new IUser(user);
+      const photos = await models.photo.getUserGallery(iUser.id, 0);
+
+      const matchProfile = await models.MatchProfile.getByUserId(iUser.id);
+      const mMatchProfile = new models.MatchProfile(matchProfile);
+
+      const nUser = iUser.asNormal();
+      nUser.gallery = photos;
+      nUser.matchProfile = mMatchProfile.output();
+      return nUser;
+    }));
+  },
 };
 
 /**
@@ -177,35 +191,26 @@ exports.getAreaUsers = async ({ user_id, last_id = null, limit = 5 }) => {
       return Promise.all([
         models.Match.recentMatches(user_id, timeAfter),
         models.Match.getRecentlyLikedUsers({ timeAfter: timestamp() - iConfig.match_guess_wait * 60 }),
+        models.MatchProfile.getByUserId(user_id),
       ])
-        .then(([matches, recentlyLikedMatches]) => {
+        .then(([matches, recentlyLikedMatches, matchProfile]) => {
+          if (!matchProfile) throw new Error('Something went wrong! Not found the match preference!');
           const excludes = matches
             .map(match => match.user_id2)
             .concat(recentlyLikedMatches.map(match => match.user_id2))
             .filter(it => it);
           excludes.push(user_id);
+
           return models.user.getAreaUsers({
             excludes,
             limit,
             last_id,
             location_area: iMe.location_area,
+            matchProfile,
           });
         });
     })
-    .then(users => {
-      return Promise.all(users.map(async user => {
-        const iUser = new IUser(user);
-        const photos = await models.photo.getUserGallery(iUser.id, 0);
-
-        const matchProfile = await models.MatchProfile.getByUserId(iUser.id);
-        const mMatchProfile = new models.MatchProfile(matchProfile);
-
-        const nUser = iUser.asNormal();
-        nUser.gallery = photos;
-        nUser.matchProfile = mMatchProfile.output();
-        return nUser;
-      }))
-    });
+    .then(users => activity.populateUsers4Match(users));
 };
 
 exports.getMatchedUsers = async ({ user_id, last_id = null, limit = 5 }) => {
@@ -330,19 +335,10 @@ exports.getGuessList = async ({ user_id, match_id }) => {
     excludes = excludes
       .concat(likedMatches.map(match => match.user_id2))
       .filter((user_id, i, self) => self.indexOf(user_id) === i);
-    const users = await models.user.getRandomUsersForGuess({ excludes, location_area: iMe.location_area, sex: 1 - iMe.sex, limit: 8 });
+    const matchProfile = await models.MatchProfile.getByUserId(user_id);
+    const users = await models.user.getRandomUsersForGuess({ excludes, location_area: iMe.location_area, sex: 1 - iMe.sex, limit: 8, matchProfile });
     users.push(liker);
-    return Promise.all(users.map(async user => {
-      const iUser = new IUser(user);
-      const photos = await models.photo.getUserGallery(iUser.id, 0);
-      const nUser = iUser.asNormal();
-      nUser.gallery = photos;
-
-      const matchProfile = await models.MatchProfile.getByUserId(iUser.id);
-      const mMatchProfile = new models.MatchProfile(matchProfile);
-      nUser.matchProfile = mMatchProfile.output();
-      return nUser;
-    }));
+    return activity.populateUsers4Match(users);
   });
 }
 
