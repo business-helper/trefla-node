@@ -359,7 +359,7 @@ exports.guessSingleUser = async (user_id, { match_id, target_id }, socketClient)
     });
 }
 
-exports.geussMultipleUsers = async (user_id, { match_id, target_ids }, socketClient) => {
+exports.guessMultipleUsers = async (user_id, { match_id, target_ids }, socketClient) => {
   return Promise.all([
     models.user.getById(user_id),
     models.Match.getById(match_id),

@@ -185,19 +185,19 @@ User.getAreaUsers = ({ excludes, limit, last_id, location_area, matchProfile }) 
   if (last_id) {
     where.push(`users.id < ${last_id}`);
   }
-  if (matchProfile) {
-    const iMatchProfile = new IMatchProfile(matchProfile);
-    where.push(`match_profiles.smoking=${iMatchProfile.preference.smoking}`);
-    where.push(`match_profiles.drinking=${iMatchProfile.preference.drinking}`);
-    where.push(`match_profiles.height >= ${iMatchProfile.preference.heightRange[0]} AND match_profiles.height <= ${iMatchProfile.preference.heightRange[1]}`);
-    if (iMatchProfile.preference.relations.length > 0) {
-      where.push(`(${
-        iMatchProfile.preference.relations
-        .map(relation => `JSON_CONTAINS(relations, '\"${relation}\"')=1`)
-        .join(' OR ')
-      })`);
-    }
-  }
+  // if (matchProfile) {
+  //   const iMatchProfile = new IMatchProfile(matchProfile);
+  //   where.push(`match_profiles.smoking=${iMatchProfile.preference.smoking}`);
+  //   where.push(`match_profiles.drinking=${iMatchProfile.preference.drinking}`);
+  //   where.push(`match_profiles.height >= ${iMatchProfile.preference.heightRange[0]} AND match_profiles.height <= ${iMatchProfile.preference.heightRange[1]}`);
+  //   if (iMatchProfile.preference.relations.length > 0) {
+  //     where.push(`(${
+  //       iMatchProfile.preference.relations
+  //       .map(relation => `JSON_CONTAINS(relations, '\"${relation}\"')=1`)
+  //       .join(' OR ')
+  //     })`);
+  //   }
+  // }
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
     sql.query(`SELECT users.*, COUNT(photos.id) as photo_num
@@ -227,19 +227,19 @@ User.getRandomUsersForGuess = ({ excludes = [], location_area, limit = 9, sex = 
   if (sex !== null) {
     where.push(`users.sex = ${sex}`);
   }
-  if (matchProfile) {
-    const iMatchProfile = new IMatchProfile(matchProfile);
-    where.push(`match_profiles.smoking=${iMatchProfile.preference.smoking}`);
-    where.push(`match_profiles.drinking=${iMatchProfile.preference.drinking}`);
-    where.push(`match_profiles.height >= ${iMatchProfile.preference.heightRange[0]} AND match_profiles.height <= ${iMatchProfile.preference.heightRange[1]}`);
-    if (iMatchProfile.preference.relations.length > 0) {
-      where.push(`(${
-        iMatchProfile.preference.relations
-        .map(relation => `JSON_CONTAINS(relations, '\"${relation}\"')=1`)
-        .join(' OR ')
-      })`);
-    }
-  }
+  // if (matchProfile) {
+  //   const iMatchProfile = new IMatchProfile(matchProfile);
+  //   where.push(`match_profiles.smoking=${iMatchProfile.preference.smoking}`);
+  //   where.push(`match_profiles.drinking=${iMatchProfile.preference.drinking}`);
+  //   where.push(`match_profiles.height >= ${iMatchProfile.preference.heightRange[0]} AND match_profiles.height <= ${iMatchProfile.preference.heightRange[1]}`);
+  //   if (iMatchProfile.preference.relations.length > 0) {
+  //     where.push(`(${
+  //       iMatchProfile.preference.relations
+  //       .map(relation => `JSON_CONTAINS(relations, '\"${relation}\"')=1`)
+  //       .join(' OR ')
+  //     })`);
+  //   }
+  // }
   const strWhere = where.length > 0 ? ` WHERE ${where.join(' AND ')}` : '';
   return new Promise((resolve, reject) => {
     sql.query(`SELECT * FROM (SELECT users.*, COUNT(photos.id) as photo_num
