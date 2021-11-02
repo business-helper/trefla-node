@@ -173,7 +173,7 @@ User.cardPagination = ({ page, limit }) => {
   })
 }
 
-User.getAreaUsers = ({ excludes, limit, last_id, location_area, matchProfile }) => {
+User.getAreaUsers = ({ excludes, limit, last_id, location_area, sex, matchProfile }) => {
   const galleryTypes = Object.values(GALLERY_TYPE);
   const str_galleryTypes = `'${galleryTypes.join("','")}'`;
 
@@ -182,6 +182,9 @@ User.getAreaUsers = ({ excludes, limit, last_id, location_area, matchProfile }) 
     `location_area='${location_area}'`,
     `photos.type IN (${str_galleryTypes})`,
   ];
+  if (sex !== undefined) {
+    where.push(`users.sex = ${sex}`);
+  }
   if (last_id) {
     where.push(`users.id < ${last_id}`);
   }

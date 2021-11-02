@@ -205,6 +205,7 @@ exports.getAreaUsers = async ({ user_id, last_id = null, limit = 5 }) => {
             excludes,
             limit,
             last_id,
+            sex: 1 - iMe.sex,
             location_area: iMe.location_area,
             matchProfile,
           });
