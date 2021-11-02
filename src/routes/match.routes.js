@@ -103,7 +103,7 @@ routes.route('/guess/multiple').post((req, res) => {
         if (mGuess.selected_users.length >= 3) throw new Error('You already selected the maximum users!');
         if (mGuess.selected_users.length + req.body.target_ids.length > 3) throw new Error(`You can selected ${3 - mGuess.selected_users.length} more users in this match!`);
       }
-      return ctrls.match.geussMultipleUsers(user_id, req.body, socketClient);
+      return ctrls.match.guessMultipleUsers(user_id, req.body, socketClient);
     })
     .then(({ guess, matched }) => res.json({ status: true, message: 'success', data: guess, matched }))
     .catch(error => respondValidateError(res, error));
