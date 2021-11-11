@@ -27,6 +27,7 @@ const {
   generateNotificationData,
 } = require('../helpers/model.helpers');
 const appConfig = require('../config/app.config');
+const { IUser, IPostLike } = require('../types');
 
 const activity = {
   pushNotificationToAroundUsers: async ({ areaUsers, post, poster }) => {
@@ -515,13 +516,16 @@ exports.togglePostLike = (req, res) => {
     .catch((error) => respondError(res, error));
 }
 
-exports.doLikePost = (req, res) => {
+exports.doLikePost = async (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
+  const user = await models.user.getById(user_id);
+  const iUser = new IUser(user);
+
   const { id: post_id } = req.params;
   const { type } = req.body;
   return PostLike.userLikedPost({ user_id, post_id, type })
     .then(postLike => {
-      if (postLike) {
+      if (postLike && iUser.isGuest === postLike.isGuest) {
         throw Object.assign(new Error('You already liked this post!'), { code: 400 });
       } else {
         return likePost({ user_id, post_id, type });
@@ -576,17 +580,19 @@ const dislikePost = ({ user_id, post_id, type }) => {
 const likePost = ({ user_id, post_id, type }) => {
   return Promise.all([
     Post.getById(post_id),
-    PostLike.userLikedPost({ user_id, post_id, type })
+    PostLike.userLikedPost({ user_id, post_id, type }),
+    models.user.getById(user_id),
   ])
-    .then(([post, postLike]) => {
-      if (postLike) {
+    .then(([post, postLike, user]) => {
+      const iUser = new IUser(user);
+      if (postLike && iUser.isGuest === postLike.isGuest) {
         throw Object.assign(new Error('You liked this post already!'), { code: 400 }); return;
       }
       const like_fld = `like_${type}_num`;
       post[like_fld] = post[like_fld] + 1;
       post['liked'] = getTotalLikes(post);
 
-      const plData = generatePostLikeData({ user_id, post_id, type });
+      const plData = generatePostLikeData({ user_id, post_id, type, isGuest: iUser.isGuest });
       return Promise.all([
         PostLike.create(plData),
         Post.save(post)

@@ -1,1 +1,112 @@
-const _0x37ab=['CxvLCNK','Cg9ZDeXPA2vZt2zvC2vY','mtH0vvLzq2e','DxnLCKXPA2vKug9ZDa','u0vmrunuicOGrLjptsbWB3n0x2XPA2vZifDirvjfigLKpt8GteLnsvqGmq','DxbKyxrLx3rPBwu','ywzMzwn0zwrsB3DZ','revmrvrfiezst00GCg9ZDf9SAwTLCYbxsevsrsb1C2vYx2LKpt8Gqu5eihbVC3rFAwq9pW','lI9KyG','B3v0Chv0','mJy3mZvAu3nAq2i','mta3mdmWn2vrCg11CW','revmrvrfiezst00GCg9ZDf9SAwTLCYbxsevsrsbPzd0/','z2v0qwXS','mtyWnta4ne9YqxLzDG','u0vmrunuicOGrLjptsbWB3n0x2XPA2vZia','nJe4mtHlsgPuv0G','otf5CKPLq0i','mtmYndKZovPnqMXzvW','zgvSzxrLqNLjza','mtuZmJG1owT6shnkCq','ifDirvjfihjLy2vPDMvYx2LKpq','mvvdsMHIsG','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','nda5A0vTDfnW','Aw5Zzxj0swq','mtqYmvDOreHtBG','y3jLyxrL','zgvSzxrLvxnLCLbVC3rmAwTL','CgfNAw5HDgLVBG','DxnLCL9Pza','su5trvjuieLove8GCg9ZDf9SAwTLCYbtrvqGpW','vvbeqvrfihbVC3rFBgLRzxmGu0vuid8Gv0HfuKuGAwq9pW','z2v0qNLjza'];const _0x11df=function(_0x4a7f7c,_0x4602d7){_0x4a7f7c=_0x4a7f7c-0xf3;let _0x37ab3c=_0x37ab[_0x4a7f7c];if(_0x11df['wwAqEu']===undefined){var _0x11dfe7=function(_0x1b4d3c){const _0x5a6233='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x13194e='';for(let _0x1aeb9b=0x0,_0x2ab02f,_0x5b6d52,_0x4ce4de=0x0;_0x5b6d52=_0x1b4d3c['charAt'](_0x4ce4de++);~_0x5b6d52&&(_0x2ab02f=_0x1aeb9b%0x4?_0x2ab02f*0x40+_0x5b6d52:_0x5b6d52,_0x1aeb9b++%0x4)?_0x13194e+=String['fromCharCode'](0xff&_0x2ab02f>>(-0x2*_0x1aeb9b&0x6)):0x0){_0x5b6d52=_0x5a6233['indexOf'](_0x5b6d52);}return _0x13194e;};_0x11df['PDlKYz']=function(_0x36416d){const _0x562334=_0x11dfe7(_0x36416d);let _0x322feb=[];for(let _0xb53ccf=0x0,_0x3c027e=_0x562334['length'];_0xb53ccf<_0x3c027e;_0xb53ccf++){_0x322feb+='%'+('00'+_0x562334['charCodeAt'](_0xb53ccf)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x322feb);},_0x11df['OHPCNr']={},_0x11df['wwAqEu']=!![];}const _0x2ab90f=_0x37ab[0x0],_0x4ccd38=_0x4a7f7c+_0x2ab90f,_0x252c1d=_0x11df['OHPCNr'][_0x4ccd38];return _0x252c1d===undefined?(_0x37ab3c=_0x11df['PDlKYz'](_0x37ab3c),_0x11df['OHPCNr'][_0x4ccd38]=_0x37ab3c):_0x37ab3c=_0x252c1d,_0x37ab3c;};const _0x461faa=_0x11df;(function(_0x7bd99,_0x289fbf){const _0x288ceb=_0x11df;while(!![]){try{const _0x4aaafe=-parseInt(_0x288ceb(0xff))*-parseInt(_0x288ceb(0x113))+parseInt(_0x288ceb(0xfa))+parseInt(_0x288ceb(0x107))*-parseInt(_0x288ceb(0x109))+parseInt(_0x288ceb(0x103))+parseInt(_0x288ceb(0xfd))+parseInt(_0x288ceb(0x101))*-parseInt(_0x288ceb(0x105))+-parseInt(_0x288ceb(0x100))*parseInt(_0x288ceb(0xf9));if(_0x4aaafe===_0x289fbf)break;else _0x7bd99['push'](_0x7bd99['shift']());}catch(_0x5146e5){_0x7bd99['push'](_0x7bd99['shift']());}}}(_0x37ab,0xefbc9));const sql=require(_0x461faa(0xf7)),{timestamp,int2Bool}=require(_0x461faa(0x106)),PostLike=function(_0x2ab90f){const _0x3bfc67=_0x461faa;this['user_id']=_0x2ab90f[_0x3bfc67(0x10d)];};PostLike[_0x461faa(0x10a)]=_0x4ccd38=>{return _0x4ccd38['id']!==undefined?delete _0x4ccd38['id']:null,new Promise((_0x252c1d,_0x1b4d3c)=>{const _0x4544e7=_0x11df;sql['query'](_0x4544e7(0x10e),_0x4ccd38,(_0x5a6233,_0x13194e)=>{const _0xb8a4ab=_0x4544e7;_0x5a6233?_0x1b4d3c(_0x5a6233):_0x252c1d({..._0x4ccd38,'id':_0x13194e[_0xb8a4ab(0x108)]});});});},PostLike['save']=async _0x1aeb9b=>{const _0x42656a=_0x461faa;return _0x1aeb9b[_0x42656a(0xf4)]=timestamp(),new Promise((_0x2ab02f,_0x5b6d52)=>{const _0x172e7d=_0x42656a;sql[_0x172e7d(0x111)](_0x172e7d(0x10f),[_0x1aeb9b,_0x1aeb9b['id']],(_0x4ce4de,_0x36416d)=>{const _0x5cedad=_0x172e7d;_0x4ce4de?_0x5b6d52(_0x4ce4de):_0x2ab02f(PostLike[_0x5cedad(0x110)](_0x1aeb9b['id']));});});},PostLike[_0x461faa(0x102)]=_0x562334=>{return new Promise((_0x322feb,_0xb53ccf)=>{const _0x3f546e=_0x11df;sql[_0x3f546e(0x111)](_0x3f546e(0xfb),[_0x562334],(_0x3c027e,_0x18ec15)=>{const _0x2bbb42=_0x3f546e;_0x3c027e?_0xb53ccf(_0x3c027e):_0x322feb(_0x18ec15[_0x2bbb42(0xf5)]>0x0?!![]:![]);});});},PostLike[_0x461faa(0x10b)]=({user_id:_0x270a92,post_id:_0x19b89c})=>{return new Promise((_0x179a73,_0x35072f)=>{const _0x36bf64=_0x11df;sql[_0x36bf64(0x111)](_0x36bf64(0xf6),[_0x270a92,_0x19b89c],(_0x1b5303,_0x4598b9)=>{const _0x2a4aa7=_0x36bf64;_0x1b5303?_0x35072f(_0x1b5303):_0x179a73(_0x4598b9[_0x2a4aa7(0xf5)]);});});},PostLike[_0x461faa(0x114)]=async({user_id:_0x8b7151,post_id:_0xd145c3,type:_0x50f9c1})=>{return new Promise((_0x34b87e,_0x5a5249)=>{const _0x2b1de1=_0x11df;sql[_0x2b1de1(0x111)]('SELECT\x20*\x20FROM\x20post_likes\x20WHERE\x20user_id=?\x20AND\x20post_id=?\x20AND\x20type=?',[_0x8b7151,_0xd145c3,_0x50f9c1],(_0xf36259,_0x24ffbd)=>{_0xf36259?_0x5a5249(_0xf36259):_0x34b87e(_0x24ffbd[0x0]);});});},PostLike[_0x461faa(0x112)]=async({user_id:_0x335c6d,post_id:_0x1954e0})=>{return new Promise((_0x2e2597,_0x4e4c1c)=>{const _0x1bb7d7=_0x11df;sql[_0x1bb7d7(0x111)]('SELECT\x20*\x20FROM\x20post_likes\x20WHERE\x20user_id=?\x20AND\x20post_id=?',[_0x335c6d,_0x1954e0],(_0x2161a0,_0x2fadf1)=>{_0x2161a0?_0x4e4c1c(_0x2161a0):_0x2e2597(_0x2fadf1);});});},PostLike[_0x461faa(0x10c)]=async({limit:_0x4d7bb5,offset:_0x16a214,receiver_id:_0x12b54c})=>{const _0x21cf38=_0x461faa,_0x24642e=_0x12b54c?_0x21cf38(0x104)+_0x12b54c:'';return new Promise((_0x4772f0,_0x1f91c0)=>{const _0x4a1ea2=_0x21cf38;sql[_0x4a1ea2(0x111)](_0x4a1ea2(0xfe)+_0x24642e+'\x20LIMIT\x20?\x20OFFSET\x20?\x20',[_0x4d7bb5,_0x16a214],(_0x242b63,_0x924354)=>{_0x242b63?_0x1f91c0(_0x242b63):_0x4772f0(_0x924354);});});},PostLike[_0x461faa(0xfc)]=({receiver_id:receiver_id=null})=>{const _0x181eb9=receiver_id?'\x20WHERE\x20receiver_id='+receiver_id:'';return new Promise((_0x3b896c,_0x51a641)=>{sql['query']('SELECT\x20*\x20FROM\x20post_likes\x20'+_0x181eb9,(_0x1c4a39,_0x5eb7b1)=>{_0x1c4a39?_0x51a641(_0x1c4a39):_0x3b896c(_0x5eb7b1);});});},PostLike['getById']=_0x16dd13=>{return new Promise((_0xc0ed33,_0x1bd173)=>{const _0x23441a=_0x11df;sql['query'](_0x23441a(0xf3),[_0x16dd13],(_0x37b1a5,_0x1bf9e4)=>{_0x37b1a5?_0x1bd173(_0x37b1a5):_0xc0ed33(_0x1bf9e4[0x0]);});});},PostLike[_0x461faa(0xf8)]=_0x121da1=>{return _0x121da1;},module['exports']=PostLike;
+const sql = require("./db");
+const { timestamp, int2Bool } = require("../helpers/common.helpers");
+
+const PostLike = function (pl) {
+  this.user_id = pl.user_id;
+};
+
+PostLike.create = (postLikes) => {
+  postLikes.id !== undefined ? delete postLikes.id : null;
+  return new Promise((resolve, reject) => {
+    sql.query("INSERT INTO post_likes SET ?", postLikes, (err, res) => {
+      err ? reject(err) : resolve({ ...postLikes, id: res.insertId });
+    });
+  });
+};
+
+PostLike.save = async (noti) => {
+  noti.update_time = timestamp();
+  return new Promise((resolve, reject) => {
+    sql.query(
+      "UPDATE post_likes SET ? WHERE id=?",
+      [noti, noti.id],
+      (err, res) => {
+        err ? reject(err) : resolve(PostLike.getById(noti.id));
+      }
+    );
+  });
+};
+
+PostLike.deleteById = (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query("DELETE FROM post_likes WHERE id=?", [id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows > 0 ? true : false);
+    });
+  });
+};
+
+PostLike.deleteUserPostLike = ({ user_id, post_id }) => {
+  return new Promise((resolve, reject) => {
+    sql.query(
+      "DELETE FROM post_likes WHERE user_id=? AND post_id=?",
+      [user_id, post_id],
+      (err, res) => {
+        err ? reject(err) : resolve(res.affectedRows);
+      }
+    );
+  });
+};
+
+PostLike.userLikedPost = async ({ user_id, post_id, type }) => {
+  return new Promise((resolve, reject) => {
+    sql.query(
+      "SELECT * FROM post_likes WHERE user_id=? AND post_id=? AND type=?",
+      [user_id, post_id, type],
+      (err, res) => {
+        err ? reject(err) : resolve(res[0]);
+      }
+    );
+  });
+};
+
+PostLike.postLikesOfUser = async ({ user_id, post_id }) => {
+  return new Promise((resolve, reject) => {
+    sql.query(
+      "SELECT * FROM post_likes WHERE user_id=? AND post_id=?",
+      [user_id, post_id],
+      (err, res) => {
+        err ? reject(err) : resolve(res);
+      }
+    );
+  });
+};
+
+PostLike.pagination = async ({ limit, offset, receiver_id }) => {
+  const strWhere = receiver_id ? ` WHERE receiver_id=${receiver_id}` : "";
+  return new Promise((resolve, reject) => {
+    sql.query(
+      `SELECT * FROM post_likes ${strWhere} LIMIT ? OFFSET ? `,
+      [limit, offset],
+      (err, res) => {
+        err ? reject(err) : resolve(res);
+      }
+    );
+  });
+};
+
+PostLike.getAll = ({ receiver_id = null }) => {
+  const strWhere = receiver_id ? ` WHERE receiver_id=${receiver_id}` : "";
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM post_likes ${strWhere}`, (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+};
+
+PostLike.getById = (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(
+      "SELECT * FROM post_likes WHERE id=? LIMIT 1",
+      [id],
+      (err, res) => {
+        err ? reject(err) : resolve(res[0]);
+      }
+    );
+  });
+};
+
+PostLike.output = (noti) => {
+  return noti;
+};
+
+module.exports = PostLike;
