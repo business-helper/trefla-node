@@ -525,7 +525,7 @@ exports.doLikePost = async (req, res) => {
   const { type } = req.body;
   return PostLike.userLikedPost({ user_id, post_id, type })
     .then(postLike => {
-      if (postLike && iUser.isGuest === postLike.isGuest) {
+      if (postLike) {
         throw Object.assign(new Error('You already liked this post!'), { code: 400 });
       } else {
         return likePost({ user_id, post_id, type });
@@ -585,7 +585,7 @@ const likePost = ({ user_id, post_id, type }) => {
   ])
     .then(([post, postLike, user]) => {
       const iUser = new IUser(user);
-      if (postLike && iUser.isGuest === postLike.isGuest) {
+      if (postLike) {
         throw Object.assign(new Error('You liked this post already!'), { code: 400 }); return;
       }
       const like_fld = `like_${type}_num`;
