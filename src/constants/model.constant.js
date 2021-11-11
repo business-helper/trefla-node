@@ -148,6 +148,7 @@ exports.DEFAULT_COMMENT = {
 exports.DEFAULT_COMMENTLIKE = {
   id: '',
   user_id: 0,
+  isGuest: 1,
   comment_id: 0,
   type: 0,
   create_time: timestamp(),

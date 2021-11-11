@@ -275,6 +275,44 @@ commentRouters.post("/:id/dislike", async (req, res) => {
     .catch((error) => respondValidateError(res, error));
 });
 
+commentRouters.post("/:id/liked-users", async (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const validator = new Validator(
+    {
+      id: req.params.id,
+      user_id,
+    },
+    {
+      id: "required|integer",
+      user_id: "required|integer",
+    }
+  );
+  validator.addPostRule(async (provider) =>
+    Promise.all([Comment.getById(provider.inputs.id)]).then(([post]) => {
+      if (!post) {
+        provider.error(
+          "id",
+          "custom",
+          `Comment with id "${provider.inputs.id}" does not exist!`
+        );
+      }
+    })
+  );
+
+  return validator
+    .check()
+    .then((matched) => {
+      if (!matched) {
+        throw Object.assign(new Error("Invalid request!"), {
+          code: 400,
+          details: validator.errors,
+        });
+      }
+      return commentCtrl.getLikedUserList(req, res);
+    })
+    .catch((error) => respondValidateError(res, error));
+});
+
 commentRouters.post("/", async (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
   const validator = new Validator(

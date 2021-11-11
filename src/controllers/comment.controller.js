@@ -15,6 +15,7 @@ const helpers = require('../helpers');
 const { getTokenInfo } = require('../helpers/auth.helpers');
 const { bool2Int, getTotalLikes, generateTZTimeString, respondError, sendSingleNotification, timestamp } = require("../helpers/common.helpers");
 const { generateCommentData, generateCommentLikeData, generateNotificationData, generatePointTransactionData } = require('../helpers/model.helpers');
+const { IUser } = require('../types');
 
 const activity = {
   notifyNewComment: async ({ user, target_user, target, target_type, isGuest, comment, action = 'CREATE' }) => {
@@ -502,8 +503,10 @@ exports.toggleCommentLike = (req, res) => {
     .catch((error) => respondError(res, error));
 }
 
-exports.doLikeComment = (req, res) => {
+exports.doLikeComment = async (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
+  const user = await models.user.getById(user_id);
+  const iUser = new IUser(user);
   const { id: comment_id } = req.params;
   const { type } = req.body;
   return CommentLike.userLikedComment({ user_id, comment_id, type })
@@ -511,7 +514,7 @@ exports.doLikeComment = (req, res) => {
       if (liked) {
         throw Object.assign(new Error('You liked it already!'), { code: 400 });
       } else {
-        return likeComment({ user_id, comment_id, type });
+        return likeComment({ user_id, comment_id, type, isGuest: iUser.isGuest });
       }
     })
     .then(result => res.json({
@@ -540,6 +543,36 @@ exports.dislikeComment = (req, res) => {
     .catch((error) => respondError(res, error));
 }
 
+exports.getLikedUserList = (req, res) => {
+  const { uid: user_id } = getTokenInfo(req);
+  const comment_id = Number(req.params.id);
+  const { last_id, limit } = req.body;
+
+  return Promise.all([
+    models.commentLike.getLikedUsersOfComment({ comment_id, limit, last_id }),
+    models.commentLike.getFirstLikeOfComment(comment_id),
+  ]).then(([likes, firstLike]) => {
+    const hasMore =
+      firstLike && likes[likes.length - 1].comment_like_id > firstLike.id;
+    const last_id = firstLike ? likes[likes.length - 1].comment_like_id : 0;
+    return Promise.all(
+      likes.map((like) => {
+        delete like.comment_like_id;
+        const iUser = new IUser(like);
+        return iUser.asNormal();
+      })
+    ).then((users) =>
+      res.json({
+        status: true,
+        message: "success",
+        users,
+        last_id,
+        hasMore,
+      })
+    );
+  });
+};
+
 const dislikeComment = ({ user_id, comment_id, type }) => {
   return Promise.all([
     Comment.getById(comment_id),
@@ -560,7 +593,7 @@ const dislikeComment = ({ user_id, comment_id, type }) => {
     .catch((error) => false);
 }
 
-const likeComment = ({ user_id, comment_id, type }) => {
+const likeComment = ({ user_id, comment_id, type, isGuest }) => {
   return Promise.all([
     Comment.getById(comment_id),
     CommentLike.userLikedComment({ user_id, comment_id, type })
@@ -573,7 +606,7 @@ const likeComment = ({ user_id, comment_id, type }) => {
       comment[like_fld] = comment[like_fld] + 1;
       comment['liked'] = getTotalLikes(comment);
 
-      const cmtData = generateCommentLikeData({ user_id, comment_id, type });
+      const cmtData = generateCommentLikeData({ user_id, comment_id, type, isGuest });
       return Promise.all([
         CommentLike.create(cmtData),
         Comment.save(comment)
