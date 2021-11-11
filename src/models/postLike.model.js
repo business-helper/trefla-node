@@ -71,6 +71,41 @@ PostLike.postLikesOfUser = async ({ user_id, post_id }) => {
   });
 };
 
+PostLike.getLikedUsersOfPost = async ({ post_id, last_id, limit }) => {
+  const where = [`post_likes.post_id=${post_id}`];
+  if (last_id) {
+    where.push(`post_likes.id < ${last_id}`);
+  }
+  const strWhere = where.length ? ` WHERE ${where.join(" AND ")}` : "";
+  const strLimit = limit ? ` LIMIT ${limit}` : "";
+  return new Promise((resolve, reject) => {
+    sql.query(
+      `SELECT users.*, post_likes.id as post_like_id FROM post_likes
+      JOIN users ON users.id=post_likes.user_id
+      ${strWhere}
+      ORDER BY post_likes.id DESC
+      ${strLimit}
+      `,
+      [],
+      (err, res) => {
+        err ? reject(err) : resolve(res);
+      }
+    );
+  });
+};
+
+PostLike.getFirstLikeOfPost = async (post_id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(
+      `SELECT * FROM post_likes WHERE post_id=? ORDER BY id ASC LIMIT 1`,
+      [post_id],
+      (err, res) => {
+        err ? reject(err) : resolve(res[0]);
+      }
+    );
+  });
+};
+
 PostLike.pagination = async ({ limit, offset, receiver_id }) => {
   const strWhere = receiver_id ? ` WHERE receiver_id=${receiver_id}` : "";
   return new Promise((resolve, reject) => {
