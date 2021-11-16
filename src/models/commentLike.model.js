@@ -110,7 +110,7 @@ CommentLike.getLikedUsersOfComment = async ({ comment_id, last_id, limit }) => {
   const strLimit = limit ? ` LIMIT ${limit}` : "";
   return new Promise((resolve, reject) => {
     sql.query(
-      `SELECT users.*, comment_likes.id as comment_like_id, comment_likes.isGuest, comment_likes.type as like_type
+      `SELECT users.*, comment_likes.id as comment_like_id, comment_likes.isGuest, comment_likes.type as like_type, comment_likes.create_time as liked_time
       FROM comment_likes
       JOIN users ON users.id=comment_likes.user_id
       ${strWhere}

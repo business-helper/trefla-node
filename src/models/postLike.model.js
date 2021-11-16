@@ -80,7 +80,7 @@ PostLike.getLikedUsersOfPost = async ({ post_id, last_id, limit }) => {
   const strLimit = limit ? ` LIMIT ${limit}` : "";
   return new Promise((resolve, reject) => {
     sql.query(
-      `SELECT users.*, post_likes.id as post_like_id, post_likes.isGuest, post_likes.type as like_type
+      `SELECT users.*, post_likes.id as post_like_id, post_likes.isGuest, post_likes.type as like_type, post_likes.create_time as liked_time
       FROM post_likes
       JOIN users ON users.id=post_likes.user_id
       ${strWhere}
