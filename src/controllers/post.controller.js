@@ -700,12 +700,17 @@ exports.getLikedUserList = (req, res) => {
     const last_id = firstLike ? likes[likes.length - 1].post_like_id : 0;
     return Promise.all(
       likes.map((like) => {
-        const { like_type } = like;
+        const { like_type, liked_time } = like;
         delete like.post_like_id;
         delete like.like_type;
 
         const iUser = new IUser(like);
-        return { ...iUser.asNormal(), type: like_type };
+        return {
+          ...iUser.asNormal(),
+          type: like_type,
+          liked_time: generateTZTimeString(liked_time * 1000),
+          liked_timeTS: liked_time,
+        };
       })
     ).then((users) =>
       res.json({
