@@ -51,3 +51,13 @@ exports.MATCH_RELATION = {
   FRIENDSHIP: 'FRIENDSHIP',
   DISCUSSION: 'DISCUSSION',
 };
+
+exports.GENDER_TYPE = {
+  Male: 'Male',
+  Female: 'Female',
+};
+
+exports.MapGenderToInt = {
+  Male: 0,
+  Female: 1,
+};
