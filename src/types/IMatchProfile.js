@@ -14,6 +14,7 @@ class IMatchProfile extends TreflaModel {
     this.id = 0;
     this.user_id = 0;
     this.name = '';
+    this.enabled = 0;
     this.smoking = 0;
     this.drinking = 0;
     this.height = 0;

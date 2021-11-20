@@ -22,7 +22,7 @@ exports.updateReq = (user_id, args) => {
   return activity.getUserMatchProfile(user_id)
     .then(matchProfile => {
       const mMatchProfile = new models.MatchProfile(matchProfile);
-      ['name', 'height', 'drinking', 'smoking', 'relations'].forEach((key) => {
+      ['name', 'height', 'drinking', 'smoking', 'relations', 'enabled'].forEach((key) => {
         if (mMatchProfile.hasOwnProperty(key) && args.hasOwnProperty(key)) {
           mMatchProfile[key] = args[key];
         }
