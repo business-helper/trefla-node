@@ -21,6 +21,14 @@ const _this = {
     });
   },
   populatePosts: async (posts, { user_id }) => Promise.all(posts.map((post) => _this.populatePost(post, { user_id }))),
+  populateUser: async (user, { fields = [] } = {}) => {
+    const mUser = new models.user(user);
+
+    return mUser.asNormal();
+  },
+  populateUsers: async (users, { fields = [] } = {}) => {
+    return Promise.all(users.map((user) => _this.populateUser(user, { fields })));
+  },
 };
 
 module.exports = _this;
