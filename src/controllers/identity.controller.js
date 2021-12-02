@@ -8,28 +8,23 @@ const sizeOf = require('image-size');
 const config = require('../config/app.config');
 const models = require('../models');
 const helpers = require('../helpers');
-const {
-  generateTZTimeString,
-  timestamp,
-} = require('../helpers/common.helpers');
-const {
-  notiTypeIDVerified,
-  notiTypeIDUnverified,
-} = require('../constants/notification.constant');
+const { generateTZTimeString, timestamp } = require('../helpers/common.helpers');
+const { notiTypeIDVerified, notiTypeIDUnverified } = require('../constants/notification.constant');
 const EVENTS = require('../constants/socket.constant');
-const { identity } = require('.');
 
 const activity = {
   addPhoto: async ({ user_id, url, type, ratio }) => {
     const photoData = helpers.model.generatePhotoData({
-      user_id, url, type, ratio
-    })
-    return models.photo.create(photoData)
-      .then(photo => {
-        const hash = helpers.common.photoHash(photo);
-        photo.thumbnail = hash;
-        return models.photo.save(photo);
-      });
+      user_id,
+      url,
+      type,
+      ratio,
+    });
+    return models.photo.create(photoData).then((photo) => {
+      const hash = helpers.common.photoHash(photo);
+      photo.thumbnail = hash;
+      return models.photo.save(photo);
+    });
   },
   uploadPhoto: ({ file, type, user_id }) => {
     const ext = path.extname(file.name);
@@ -39,12 +34,11 @@ const activity = {
     const newPath = path.join(dirPath, newName);
     const url = `${config.cdnDomain}/uploads/${type}/${newName}`;
     const resolution = sizeOf(file.path);
-    const ratio = resolution.width && resolution.height
-      ? (resolution.height / resolution.width).toFixed(1)
-      : 1;
+    const ratio = resolution.width && resolution.height ? (resolution.height / resolution.width).toFixed(1) : 1;
 
-    return helpers.file.read(file.path)
-      .then(data => helpers.file.write(newPath, data))
+    return helpers.file
+      .read(file.path)
+      .then((data) => helpers.file.write(newPath, data))
       .then(() => helpers.file.delete(file.path))
       .then(() => activity.addPhoto({ user_id, url, type, ratio }));
   },
@@ -59,12 +53,14 @@ const activity = {
     };
     const lang = ['EN', 'RO'].includes(user.language.toUpperCase()) ? user.language.toUpperCase() : 'EN';
     if (user.device_token) {
-      return helpers.common.sendSingleNotification({
-        body: body[lang],
-        title: title[lang],
-        token: user.device_token,
-        data,
-      }).catch(e => {});
+      return helpers.common
+        .sendSingleNotification({
+          body: body[lang],
+          title: title[lang],
+          token: user.device_token,
+          data,
+        })
+        .catch((e) => {});
     }
   },
 };
@@ -78,11 +74,12 @@ const activity = {
 exports.uploadIdentityRequest = async (req, res) => {
   const { uid: user_id } = helpers.auth.getTokenInfo(req);
   const user = await models.user.getById(user_id);
-  return helpers.common.parseForm(req)
+  return helpers.common
+    .parseForm(req)
     .then(async ({ fields, files }) => {
       // validate input for id photo.
       if (!fields.id && !files.id) {
-        throw Object.assign(new Error("Id field is required!"));
+        throw Object.assign(new Error('Id field is required!'));
       }
       // validate the input for person photo.
       if (!files.photo && !fields.photo && !user.photo) {
@@ -95,8 +92,9 @@ exports.uploadIdentityRequest = async (req, res) => {
         id: '',
         person: '',
       };
-      if (fields.id) { photos.id = fields.id; }
-      else {
+      if (fields.id) {
+        photos.id = fields.id;
+      } else {
         const isIdFileEmpty = await helpers.file.isEmpty(files.id.path);
         if (isIdFileEmpty) {
           throw new Error('Id file is empty!');
@@ -105,8 +103,9 @@ exports.uploadIdentityRequest = async (req, res) => {
         const photo = await models.photo.output(photoRaw);
         photos.id = photo.url_editable;
       }
-      if (fields.photo) { photos.person = fields.photo; }
-      else if (files.photo) {
+      if (fields.photo) {
+        photos.person = fields.photo;
+      } else if (files.photo) {
         const isPhotoFileEmpty = await helpers.file.isEmpty(files.photo.path);
         if (isPhotoFileEmpty) throw new Error('Photo file is empty!');
         const photoRaw = await activity.uploadPhoto({ file: files.photo, type: 'Person', user_id });
@@ -129,12 +128,14 @@ exports.uploadIdentityRequest = async (req, res) => {
         return models.identity.create(identityData);
       }
     })
-    .then((identity) => res.json({
-      status: true,
-      message: 'success',
-      data: identity,
-    }));
-}
+    .then((identity) =>
+      res.json({
+        status: true,
+        message: 'success',
+        data: identity,
+      })
+    );
+};
 
 /**
  * @description load identity list
@@ -148,11 +149,8 @@ exports.loadIdentitiesRequest = async (payload) => {
   page = Number(page);
   // sort = JSON.parse(sort);
 
-  return Promise.all([
-    models.identity.pagination({ page, limit }),
-    models.identity.getTotal(),
-  ])
-    .then(([rows, total]) => {
+  return Promise.all([models.identity.pagination({ page, limit }), models.identity.getTotal()]).then(
+    ([rows, total]) => {
       return {
         status: true,
         message: 'success',
@@ -163,36 +161,34 @@ exports.loadIdentitiesRequest = async (payload) => {
         },
         hasMore: total > page * limit + rows.length,
       };
-    });
-}
+    }
+  );
+};
 
 /**
  * @description verify the identity of a user.
  * @param { String } id
  * @param { Object } socketClient
- * @worflow 
+ * @worflow
  *  1. mark the identity as verified.
  *  2. mark the user as 'ID verified'
  *  3. add a notification with type 'notiTypeIDVerified'
  *  4. send the socket to the user. SKT_ID_VERIFEID
  */
 exports.verifyUserIdentityRequest = async ({ id, socketClient }) => {
-  return models.identity.getById(id)
-    .then(identity => { // update the identity record.
+  return models.identity
+    .getById(id)
+    .then((identity) => {
+      // update the identity record.
       identity.verified = 1;
       identity.update_time = helpers.common.timestamp();
-      return Promise.all([
-        models.identity.save(identity),
-        models.user.getById(identity.user_id),
-      ]);
+      return Promise.all([models.identity.save(identity), models.user.getById(identity.user_id)]);
     })
-    .then(([identity, user]) => { // mark the user as ID verified.
+    .then(([identity, user]) => {
+      // mark the user as ID verified.
       user.id_verified = 1;
       user.update_time = helpers.common.timestamp();
-      return Promise.all([
-        models.user.save(user),
-        identity,
-      ]);
+      return Promise.all([models.user.save(user), identity]);
     })
     .then(async ([user, identity]) => {
       // add a notification.
@@ -210,7 +206,7 @@ exports.verifyUserIdentityRequest = async ({ id, socketClient }) => {
         update_time: timestamp(),
       };
       const notification = await models.notification.create(notiData);
-      user.noti_num ++;
+      user.noti_num++;
       await models.user.save(user);
       // send a proper socket.
       if (user.socket_id) {
@@ -222,10 +218,10 @@ exports.verifyUserIdentityRequest = async ({ id, socketClient }) => {
         await helpers.notification.socketOnNewNotification({ user_id: user.id, notification, socketClient });
       }
       const pushNotiData = {
-        noti_id: String(notification.id || ""),
-        optionalVal: String(notification.optional_val || ""),
-        type: String(notification.type || ""),
-        user_id: "0",
+        noti_id: String(notification.id || ''),
+        optionalVal: String(notification.optional_val || ''),
+        type: String(notification.type || ''),
+        user_id: '0',
         user_name: 'Admin',
         avatar: '',
       };
@@ -235,7 +231,7 @@ exports.verifyUserIdentityRequest = async ({ id, socketClient }) => {
         message: 'success',
       };
     });
-}
+};
 
 /**
  * @description unverify the identity of a user.
@@ -247,18 +243,15 @@ exports.verifyUserIdentityRequest = async ({ id, socketClient }) => {
  *  3. send a socket to the user.
  */
 exports.unverifyUserIdentityRequest = async ({ id, reason, socketClient }) => {
-  return models.identity.getById(id).then(identity => models.user.getById(identity.user_id)
-    .then(async user => {
+  return models.identity.getById(id).then((identity) =>
+    models.user.getById(identity.user_id).then(async (user) => {
       identity.verified = 0;
       identity.update_time = timestamp();
       user.id_verified = 0;
       user.update_time = timestamp();
 
       // save the verification status.
-      await Promise.all([
-        models.identity.save(identity),
-        models.user.save(user),
-      ]);
+      await Promise.all([models.identity.save(identity), models.user.save(user)]);
 
       // add a notification.
       const notiData = {
@@ -276,7 +269,7 @@ exports.unverifyUserIdentityRequest = async ({ id, reason, socketClient }) => {
       };
 
       const notification = await models.notification.create(notiData);
-      user.noti_num ++;
+      user.noti_num++;
       await models.user.save(user);
       // send a proper socket.
       if (user.socket_id) {
@@ -288,10 +281,10 @@ exports.unverifyUserIdentityRequest = async ({ id, reason, socketClient }) => {
         await helpers.notification.socketOnNewNotification({ user_id: user.id, socketClient, notification });
       }
       const pushNotiData = {
-        noti_id: String(notification.id || ""),
-        optionalVal: String(notification.optional_val || ""),
-        type: String(notification.type || ""),
-        user_id: "0",
+        noti_id: String(notification.id || ''),
+        optionalVal: String(notification.optional_val || ''),
+        type: String(notification.type || ''),
+        user_id: '0',
         user_name: 'Admin',
         avatar: '',
       };
@@ -302,4 +295,4 @@ exports.unverifyUserIdentityRequest = async ({ id, reason, socketClient }) => {
       };
     })
   );
-}
+};

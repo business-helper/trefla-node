@@ -1,1 +1,72 @@
-const _0x44fc=['mxfoBwDvBa','z2v0qNLvC2vYswq','mtq0mda2ouPQDxDnsq','ifnfvca/','mtuYndi0mfzIuMLgBG','lI9KyG','ntmXmdK3D2LMzhnO','Aw5Zzxj0swq','mZqWntuZD1zZAg5y','ifDirvjfigLKpt8','y3jLyxrL','munbBxvdzq','revmrvrfiezst00G','su5trvjuieLove8G','mJC0ndGXBLPtCgr0','zM9YrwfJAa','Aw5JBhvKzxm','u0vmrunuicOGrLjptsa','ywrTAw5FAwq','vvbeqvrfia','mJqWnZmZAvfyBLb1','lI4VAgvSCgvYCY9JB21TB24UAgvSCgvYCW','ifnfvca/ifDirvjfigLKpt8','zgvSzxrLqNLjza','muH5DLPXzW','CxvLCNK','ywrTAw5FCgvYBwLZC2LVBNm','ywzMzwn0zwrsB3DZ','z2v0qNLjza','DxbKyxrLx3rPBwu','ohzbyNbVyG','ifDirvjfigfKBwLUx2LKpt8','mZC1whHYrNvn','mxfVt2DqtG','B3v0Chv0','C2f2zq'];const _0x1e99=function(_0xf4830c,_0x50062a){_0xf4830c=_0xf4830c-0x111;let _0x44fc93=_0x44fc[_0xf4830c];if(_0x1e99['joGSgP']===undefined){var _0x1e9919=function(_0x566569){const _0x4a1b4a='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x426661='';for(let _0x3f1e65=0x0,_0x2bb958,_0x278987,_0x2224ab=0x0;_0x278987=_0x566569['charAt'](_0x2224ab++);~_0x278987&&(_0x2bb958=_0x3f1e65%0x4?_0x2bb958*0x40+_0x278987:_0x278987,_0x3f1e65++%0x4)?_0x426661+=String['fromCharCode'](0xff&_0x2bb958>>(-0x2*_0x3f1e65&0x6)):0x0){_0x278987=_0x4a1b4a['indexOf'](_0x278987);}return _0x426661;};_0x1e99['WdJMNj']=function(_0x26b3ca){const _0x2b694c=_0x1e9919(_0x26b3ca);let _0x2e49f9=[];for(let _0x4d93b5=0x0,_0x577fec=_0x2b694c['length'];_0x4d93b5<_0x577fec;_0x4d93b5++){_0x2e49f9+='%'+('00'+_0x2b694c['charCodeAt'](_0x4d93b5)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x2e49f9);},_0x1e99['LiNyAK']={},_0x1e99['joGSgP']=!![];}const _0x5900fb=_0x44fc[0x0],_0x2c7e57=_0xf4830c+_0x5900fb,_0x557d1e=_0x1e99['LiNyAK'][_0x2c7e57];return _0x557d1e===undefined?(_0x44fc93=_0x1e99['WdJMNj'](_0x44fc93),_0x1e99['LiNyAK'][_0x2c7e57]=_0x44fc93):_0x44fc93=_0x557d1e,_0x44fc93;};const _0x3a618c=_0x1e99;(function(_0x24d7fd,_0x3e7b3a){const _0x1d4655=_0x1e99;while(!![]){try{const _0x4b5a34=parseInt(_0x1d4655(0x134))+parseInt(_0x1d4655(0x130))*-parseInt(_0x1d4655(0x114))+parseInt(_0x1d4655(0x112))+-parseInt(_0x1d4655(0x12c))*parseInt(_0x1d4655(0x12a))+-parseInt(_0x1d4655(0x11a))*-parseInt(_0x1d4655(0x117))+-parseInt(_0x1d4655(0x132))*parseInt(_0x1d4655(0x12d))+parseInt(_0x1d4655(0x124))*parseInt(_0x1d4655(0x120));if(_0x4b5a34===_0x3e7b3a)break;else _0x24d7fd['push'](_0x24d7fd['shift']());}catch(_0x340258){_0x24d7fd['push'](_0x24d7fd['shift']());}}}(_0x44fc,0xc01f1));const sql=require(_0x3a618c(0x111)),{JSONParser,timestamp}=require(_0x3a618c(0x121)),table=_0x3a618c(0x126),AdminPermission=function(_0x5900fb){const _0x44c94c=_0x3a618c;this['create_time']=timestamp(),this[_0x44c94c(0x129)]=timestamp();};AdminPermission[_0x3a618c(0x116)]=_0x2c7e57=>{return _0x2c7e57['id']!==undefined?delete _0x2c7e57['id']:'',new Promise((_0x557d1e,_0x566569)=>{const _0x4425a0=_0x1e99;sql[_0x4425a0(0x125)](_0x4425a0(0x119)+table+_0x4425a0(0x133),_0x2c7e57,(_0x4a1b4a,_0x426661)=>{const _0x404df3=_0x4425a0;_0x4a1b4a?_0x566569(_0x4a1b4a):_0x557d1e({..._0x2c7e57,'id':_0x426661[_0x404df3(0x113)]});});});},AdminPermission[_0x3a618c(0x12f)]=_0x3f1e65=>{return new Promise((_0x2bb958,_0x278987)=>{const _0x3d54ff=_0x1e99;sql[_0x3d54ff(0x125)](_0x3d54ff(0x11f)+table+_0x3d54ff(0x122),[_0x3f1e65,_0x3f1e65['id']],(_0x2224ab,_0x26b3ca)=>{const _0x21ff5b=_0x3d54ff;_0x2224ab?_0x278987(_0x2224ab):_0x2bb958(AdminPermission[_0x21ff5b(0x128)](_0x3f1e65['id']));});});},AdminPermission[_0x3a618c(0x128)]=async _0x2b694c=>{return new Promise((_0x2e49f9,_0x4d93b5)=>{const _0x407461=_0x1e99;sql[_0x407461(0x125)](_0x407461(0x11d)+table+_0x407461(0x115),[_0x2b694c],(_0x577fec,_0x2dbe62)=>{_0x577fec?_0x4d93b5(_0x577fec):_0x2e49f9(_0x2dbe62[0x0]);});});},AdminPermission[_0x3a618c(0x131)]=async _0x4a2fd3=>{return new Promise((_0xa70b,_0x3cc921)=>{const _0x68c83a=_0x1e99;sql[_0x68c83a(0x125)]('SELECT\x20*\x20FROM\x20'+table+_0x68c83a(0x12b),[_0x4a2fd3],(_0x249965,_0x4b15f1)=>{_0x249965?_0x3cc921(_0x249965):_0xa70b(_0x4b15f1[0x0]);});});},AdminPermission[_0x3a618c(0x123)]=async _0x1446d4=>{return new Promise((_0xe08b62,_0x3d0397)=>{const _0x10a7c8=_0x1e99;sql[_0x10a7c8(0x125)](_0x10a7c8(0x118)+table+_0x10a7c8(0x115),[_0x1446d4],(_0x26c453,_0xd15413)=>{const _0x5e02f1=_0x10a7c8;_0x26c453?_0x3d0397(_0x26c453):_0xe08b62(_0xd15413[_0x5e02f1(0x127)]);});});},AdminPermission['deleteByUserId']=async _0x4b11ce=>{return new Promise((_0x151e98,_0x2c2814)=>{const _0x4902f7=_0x1e99;sql[_0x4902f7(0x125)](_0x4902f7(0x118)+table+_0x4902f7(0x12b),[_0x4b11ce],(_0x4148f1,_0x55c151)=>{const _0x2feef5=_0x4902f7;_0x4148f1?_0x2c2814(_0x4148f1):_0x151e98(_0x55c151[_0x2feef5(0x127)]);});});},AdminPermission[_0x3a618c(0x12e)]=_0x361ea2=>{const _0x294beb=_0x3a618c,_0x2492c6=['id',_0x294beb(0x11e),'create_time',_0x294beb(0x129)];return Object['keys'](_0x361ea2)[_0x294beb(0x11b)](_0x1a190f=>{const _0x13c821=_0x294beb;!_0x2492c6[_0x13c821(0x11c)](_0x1a190f)&&(_0x361ea2[_0x1a190f]=JSONParser(_0x361ea2[_0x1a190f]));}),_0x361ea2;},module['exports']=AdminPermission;
+const sql = require('./db');
+const { JSONParser, timestamp } = require('../helpers/common.helpers');
+
+const table = 'admin_permissions';
+
+const AdminPermission = function (lang) {
+  this.create_time = timestamp();
+  this.update_time = timestamp();
+};
+
+AdminPermission.create = (model) => {
+  model.id !== undefined ? delete model.id : '';
+  return new Promise((resolve, reject) => {
+    sql.query(`INSERT INTO ${table} SET ?`, model, (err, res) => {
+      err ? reject(err) : resolve({ ...model, id: res.insertId });
+    });
+  });
+};
+
+AdminPermission.save = (model) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`UPDATE ${table} SET ? WHERE id=?`, [model, model.id], (err, res) => {
+      err ? reject(err) : resolve(AdminPermission.getById(model.id));
+    });
+  });
+};
+
+AdminPermission.getById = async (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} WHERE id=?`, [id], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    });
+  });
+};
+
+AdminPermission.getByUserId = async (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} WHERE admin_id=?`, [id], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    });
+  });
+};
+
+AdminPermission.deleteById = async (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`DELETE FROM ${table} WHERE id=?`, [id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows);
+    });
+  });
+};
+
+AdminPermission.deleteByUserId = async (id) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`DELETE FROM ${table} WHERE admin_id=?`, [id], (err, res) => {
+      err ? reject(err) : resolve(res.affectedRows);
+    });
+  });
+};
+
+AdminPermission.output = (model) => {
+  // ['create_time', 'update_time'].map(key => delete model[key]);
+
+  const noObjectKey = ['id', 'admin_id', 'create_time', 'update_time'];
+  Object.keys(model).forEach((key) => {
+    if (!noObjectKey.includes(key)) {
+      model[key] = JSONParser(model[key]);
+    }
+  });
+  return model;
+};
+
+module.exports = AdminPermission;

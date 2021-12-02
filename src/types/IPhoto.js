@@ -1,16 +1,12 @@
 const TreflaModel = require('./_TreflaModel');
 const { timestamp } = require('../helpers/common.helpers');
-const { moduleExpression } = require('@babel/types');
 
 class IPhoto extends TreflaModel {
   constructor(args) {
     super(args);
     this.defineProperties();
     this.jsonFields = [];
-    for (const key in args) {
-      if (this[key] !== undefined) this[key] = args[key];
-    }
-    this.jsonify();
+    this.acceptData(args);
   }
 
   defineProperties() {
