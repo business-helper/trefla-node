@@ -554,9 +554,9 @@ exports.doLikePost = async (req, res) => {
 
   const { id: post_id } = req.params;
   const { type } = req.body;
-  return PostLike.userLikedPost({ user_id, post_id, type })
-    .then((postLike) => {
-      if (postLike) {
+  return PostLike.postLikesOfUser({ user_id, post_id })
+    .then((postLikes) => {
+      if (postLikes.length) {
         throw Object.assign(new Error('You already liked this post!'), {
           code: 400,
         });
@@ -577,8 +577,8 @@ exports.disLikePost = (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
   const { id: post_id } = req.params;
   const { type } = req.body;
-  return PostLike.userLikedPost({ user_id, post_id, type })
-    .then((postLike) => {
+  return PostLike.postLikesOfUser({ user_id, post_id })
+    .then(([postLike]) => {
       if (postLike) {
         return dislikePost({ user_id, post_id, type });
       } else {
@@ -592,8 +592,7 @@ exports.disLikePost = (req, res) => {
         status: !!result,
         message: result ? 'You disliked this post!' : 'Failed to dislike post!',
       })
-    )
-    .catch((error) => respondError(res, error));
+    );
 };
 
 exports.getLikedUserList = (req, res) => {
@@ -633,10 +632,11 @@ exports.getLikedUserList = (req, res) => {
 };
 
 const dislikePost = ({ user_id, post_id, type }) => {
-  return Promise.all([Post.getById(post_id), PostLike.userLikedPost({ user_id, post_id, type })])
-    .then(([post, postLike]) => {
+  return Promise.all([Post.getById(post_id), PostLike.postLikesOfUser({ user_id, post_id })])
+    .then(([post, postLikes]) => {
+      const [postLike] = postLikes;
       const like_fld = `like_${type}_num`;
-      post[like_fld] = post[like_fld] ? post[like_fld] - 1 : 0;
+      post[like_fld] = Math.max(0, post[like_fld] - 1);
       post['liked'] = getTotalLikes(post);
       return Promise.all([PostLike.deleteById(postLike.id), Post.save(post)]);
     })
