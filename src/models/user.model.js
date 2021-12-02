@@ -349,6 +349,36 @@ User.getAllIds = () => {
   });
 };
 
+User.searchByQuery = (query, { last_id, limit }) => {
+  const where = [`user_name LIKE '%${query}%'`];
+  if (last_id !== null && last_id > 0) {
+    where.push(`id < ${last_id}`);
+  }
+  const strWhere = where.length ? ` WHERE ${where.join(' AND ')}` : '';
+
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} ${strWhere} ORDER BY id DESC`, [], (err, res) => {
+      err ? reject(err) : resolve(res);
+    });
+  });
+};
+
+User.lastUserForQuery = (query) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT * FROM ${table} WHERE user_name LIKE '%${query}%' ORDER BY id DESC LIMIT 1`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0]);
+    });
+  });
+};
+
+User.totalForQuery = (query) => {
+  return new Promise((resolve, reject) => {
+    sql.query(`SELECT COUNT(id) as total FROM ${table} WHERE user_name LIKE '%${query}%'`, [], (err, res) => {
+      err ? reject(err) : resolve(res[0].total);
+    });
+  });
+};
+
 User.output = (user, mode = 'NORMAL') => {
   if (!user) return null;
   try {
