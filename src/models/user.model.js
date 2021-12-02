@@ -357,7 +357,7 @@ User.searchByQuery = (query, { last_id, limit }) => {
   const strWhere = where.length ? ` WHERE ${where.join(' AND ')}` : '';
 
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM ${table} ${strWhere} ORDER BY id DESC`, [], (err, res) => {
+    sql.query(`SELECT * FROM ${table} ${strWhere} ORDER BY id DESC LIMIT ${limit}`, [], (err, res) => {
       err ? reject(err) : resolve(res);
     });
   });
