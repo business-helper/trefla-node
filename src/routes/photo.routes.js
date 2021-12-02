@@ -224,7 +224,7 @@ photoRouters.post('/upload', async (req, res) => {
           // crop image if type is 'profile'
           if (type === 'profile') {
             await activity
-              .cropToThumnail({ user_id, originPath: newpath })
+              .cropToThumnail({ user_id, originPath: newPath })
               .then(() => activity.updateProfilePhoto({ photo }));
           } else if (type === 'card') {
             await activity.updateUserCardImageURL({ user_id, url });
