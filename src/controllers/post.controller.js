@@ -33,7 +33,6 @@ const { IUser, IPostLike } = require('../types');
 
 const activity = {
   pushNotificationToAroundUsers: async ({ areaUsers, post, poster }) => {
-    console.log('[Here?]');
     const aroundUsers = filterAroundUsers(post.location_coordinate, areaUsers); //.filter(el => el.id !== user.id));
     const title = activity.generatePostNotiTitle({
       name: post.post_name,
@@ -42,8 +41,6 @@ const activity = {
     const body = activity.generatePostNotiBody(post.feed);
 
     const avatar = activity.getUserAvatar(poster);
-
-    console.log('[post avatar]', avatar);
 
     const messages = aroundUsers
       .filter((u) => u.device_token)
@@ -240,13 +237,14 @@ exports.create = (req, res) => {
         });
       }
 
-      post = Post.output(post);
+      const mPost = new models.post(post);
+      const mUser = new models.user(user);
 
-      if (post.location_area) {
-        const areaUsers = await User.getByLocationArea(post.location_area);
+      if (mPost.location_area) {
+        const areaUsers = await User.getByLocationArea(mPost.location_area);
 
         await activity.pushNotificationToAroundUsers({
-          post,
+          post: mPost.output(),
           areaUsers,
           poster: user,
         });
@@ -254,22 +252,23 @@ exports.create = (req, res) => {
         socketClient.emit(CONSTS.SKT_LTS_MULTIPLE, {
           users: areaUsers,
           event: CONSTS.SKT_POST_CREATED,
-          args: { ...post, liked: 0, user: User.output(user) },
+          args: { ...mPost.output(), liked: 0, user: mUser.asNormal() },
         });
       } else {
         socketClient.emit(CONSTS.SKT_LTS_BROADCAST, {
           event: CONSTS.SKT_POST_CREATED,
-          args: { ...post, liked: 0, user: User.output(user) },
+          args: { ...mPost.output(), liked: 0, user: mUser.asNormal() },
         });
       }
+
+      const data = await libs.populator.populatePost(post, { user_id });
 
       return res.json({
         status: true,
         message: 'success',
-        data: { ...post, liked: 0, user: User.output(user) },
+        data,
       });
-    })
-    .catch((error) => respondError(res, error));
+    });
 };
 
 exports.getById = (req, res) => {
@@ -295,11 +294,7 @@ exports.pagination = async (req, res) => {
   //const tokenInfo = getTokenInfo(req); //console.log('tokenInfo', tokenInfo);
   const { uid } = getTokenInfo(req);
   const { limit, last_id, type, post_type } = req.body;
-  // const offset = page * limit;
-  let _posts = [],
-    _total = 0,
-    _posters = {},
-    _minId;
+
   // get config
   let [me, config] = await Promise.all([User.getById(uid), Config.get()]);
 
@@ -307,8 +302,6 @@ exports.pagination = async (req, res) => {
   let promiseAll;
 
   const partners = await activity.getChatPartnerIds(uid);
-
-  console.log('[Post][Partners]', partners);
 
   if (type === 'ALL') {
     const me = await User.getById(uid);
@@ -376,57 +369,29 @@ exports.pagination = async (req, res) => {
     promiseAll = Promise.all([posts, minId, total]);
   }
 
-  return promiseAll
-    .then(async ([posts, total, minId]) => {
-      _posts = posts;
-      // _posts = await activity.filterPostsByGuestAndChat({
-      //   posts: _posts,
-      //   me,
-      // });
+  return promiseAll.then(async ([posts, total, minId]) => {
+    const data = await Promise.all(posts.map((post) => libs.populator.populatePost(post, { user_id: uid })));
+    const cLastId = posts.length > 0 ? posts[posts.length - 1].id : 0;
 
-      _total = total;
-      _minId = minId;
-      let poster_ids = posts.map((post) => post.user_id);
-      poster_ids.push(0);
-      return User.getByIds(poster_ids);
-    })
-    .then((users) => {
-      users.map((user) => (_posters[user.id] = user));
-      return Promise.all(_posts.map((post) => PostLike.postLikesOfUser({ user_id: uid, post_id: post.id })));
-    })
-    .then((postLikedArray) => {
-      // console.log('[Liked]', uid, postLikedArray.map(a => a.length));
-      // console.log('[posters]', _posters);
-
-      let posts = _posts.map((post) => Post.output(post)); // filter keys
-      posts = posts.map((post, i) => ({
-        ...post,
-        liked: postLikedArray[i].length > 0 ? postLikedArray[i][0].type : 0,
-        user: User.output(_posters[post.post_user_id]),
-      }));
-
-      cLastId = posts.length > 0 ? posts[posts.length - 1].id : 0;
-      return res.json({
-        status: true,
-        message: 'success',
-        data: posts,
-        pager: {
-          last_id: cLastId,
-          limit,
-          total: _total,
-        },
-        hadMore: cLastId > _minId,
-      });
-    })
-    .catch((error) => respondError(res, error));
+    return res.json({
+      status: true,
+      message: 'success',
+      data,
+      pager: {
+        last_id: cLastId,
+        limit,
+        total: total,
+      },
+      hadMore: cLastId > minId,
+    });
+  });
 };
 
 exports.simplePagination = async (req, res) => {
-  //const tokenInfo = getTokenInfo(req); //console.log('tokenInfo', tokenInfo);
   const { uid } = getTokenInfo(req);
   let { limit, page, type, post_type, sort } = req.query;
   limit = Number(limit);
-  sort = JSON.parse(sort);
+  sort = sort ? JSON.parse(sort) : { col: 0, desc: true };
 
   let _posts = [],
     _total = 0,
@@ -456,44 +421,22 @@ exports.simplePagination = async (req, res) => {
     Post.getMinIdOfPosts({ type: post_type }),
   ]);
 
-  return promiseAll
-    .then(async ([posts, total, minId]) => {
-      _posts = posts;
-      _total = total;
-      _minId = minId;
-      let poster_ids = posts.map((post) => post.user_id);
-      poster_ids.push(0);
-      return User.getByIds(poster_ids);
-    })
-    .then((users) => {
-      users.map((user) => (_posters[user.id] = user));
-      return true;
-    })
-    .then(() => {
-      // console.log('[Liked]', uid, postLikedArray.map(a => a.length));
-      // console.log('[posters]', _posters);
+  return promiseAll.then(async ([posts, total, minId]) => {
+    const cLastId = posts.length > 0 ? posts[posts.length - 1].id : 0;
+    const data = await libs.populator.populatePosts(posts, { user_id: uid });
 
-      let posts = _posts.map((post) => Post.output(post)); // filter keys
-      posts = posts.map((post, i) => ({
-        ...post,
-        user: User.output(_posters[post.post_user_id]),
-      }));
-
-      cLastId = posts.length > 0 ? posts[posts.length - 1].id : 0;
-
-      return res.json({
-        status: true,
-        message: 'success',
-        data: posts,
-        pager: {
-          // last_id: cLastId,
-          limit,
-          total: _total,
-        },
-        hasMore: cLastId > _minId,
-      });
-    })
-    .catch((error) => respondError(res, error));
+    return res.json({
+      status: true,
+      message: 'success',
+      data,
+      pager: {
+        // last_id: cLastId,
+        limit,
+        total,
+      },
+      hasMore: cLastId > _minId,
+    });
+  });
 };
 
 exports.getAll = (req, res) => {
