@@ -16,7 +16,7 @@ const _this = {
         ...mPost.output(),
         photos: photos.map((photo) => new models.photo(photo).output()),
         user: mUserPoster.asNormal(),
-        liked: likes > 0 ? 1 : 0,
+        liked: likes.length > 0 ? 1 : 0,
       };
     });
   },
