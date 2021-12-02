@@ -24,8 +24,6 @@ const getPostSummary = async (req, res) => {
   const location_area = req.body.location_area || me.location_area || '';
   logger.info(`[Init LArea] ${location_area}`);
 
-  let _posts = [],
-    _users = {};
   return Post.pagination({ limit, offset, location_area }).then((posts) =>
     libs.populator.populatePosts(posts, { user_id })
   );
