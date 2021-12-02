@@ -365,7 +365,7 @@ User.searchByQuery = (query, { last_id, limit }) => {
 
 User.lastUserForQuery = (query) => {
   return new Promise((resolve, reject) => {
-    sql.query(`SELECT * FROM ${table} WHERE user_name LIKE '%${query}%' ORDER BY id DESC LIMIT 1`, [], (err, res) => {
+    sql.query(`SELECT * FROM ${table} WHERE user_name LIKE '%${query}%' ORDER BY id ASC LIMIT 1`, [], (err, res) => {
       err ? reject(err) : resolve(res[0]);
     });
   });
