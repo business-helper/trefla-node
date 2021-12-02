@@ -1,15 +1,17 @@
-const { Validator } = require("node-input-validator");
+const { Validator } = require('node-input-validator');
 
-const CONSTS = require("../constants/socket.constant");
-const { POINT_AWARD_TYPE } = require("../constants/common.constant");
-const { notiTypePointReceived } = require("../constants/notification.constant");
-const Post = require("../models/post.model");
-const User = require("../models/user.model");
-const Config = require("../models/config.model");
-const PostLike = require("../models/postLike.model");
-const models = require("../models");
-const helpers = require("../helpers");
-const { getTokenInfo } = require("../helpers/auth.helpers");
+const CONSTS = require('../constants/socket.constant');
+const { POINT_AWARD_TYPE } = require('../constants/common.constant');
+const { notiTypePointReceived } = require('../constants/notification.constant');
+const Post = require('../models/post.model');
+const User = require('../models/user.model');
+const Config = require('../models/config.model');
+const PostLike = require('../models/postLike.model');
+const models = require('../models');
+const helpers = require('../helpers');
+const libs = require('../libs');
+
+const { getTokenInfo } = require('../helpers/auth.helpers');
 const {
   filterAroundUsers,
   generateTZTimeString,
@@ -18,16 +20,16 @@ const {
   respondError,
   SendAllMultiNotifications,
   timestamp,
-} = require("../helpers/common.helpers");
+} = require('../helpers/common.helpers');
 const {
   checkPostLocationWithUser,
   generatePostData,
   generatePostLikeData,
   generatePointTransactionData,
   generateNotificationData,
-} = require("../helpers/model.helpers");
-const appConfig = require("../config/app.config");
-const { IUser, IPostLike } = require("../types");
+} = require('../helpers/model.helpers');
+const appConfig = require('../config/app.config');
+const { IUser, IPostLike } = require('../types');
 
 const activity = {
   pushNotificationToAroundUsers: async ({ areaUsers, post, poster }) => {
@@ -40,19 +42,12 @@ const activity = {
 
     const avatar = activity.getUserAvatar(poster);
 
-    console.log("[post avatar]", avatar);
-
     const messages = aroundUsers
       .filter((u) => u.device_token)
       .map((u) => ({
         token: u.device_token,
         notification: {
-          title:
-            title[
-              u.language && u.language.toLowerCase() === "romanian"
-                ? "RO"
-                : "EN"
-            ],
+          title: title[u.language && u.language.toLowerCase() === 'romanian' ? 'RO' : 'EN'],
           body,
           image: avatar,
         },
@@ -62,35 +57,31 @@ const activity = {
         //   }
         // },
       }));
-    await SendAllMultiNotifications(messages);
+    await SendAllMultiNotifications(messages).catch();
   },
   generatePostNotiTitle: ({ name, isGuest }) => {
     return {
-      EN: `${isGuest ? "Guest" : name} posted in your area`,
-      RO: `${isGuest ? "Oaspete" : name} a postat în zona ta.`,
+      EN: `${isGuest ? 'Guest' : name} posted in your area`,
+      RO: `${isGuest ? 'Oaspete' : name} a postat în zona ta.`,
     };
   },
   generatePostNotiBody: (feed, limit = 60) => {
-    return feed.length < limit
-      ? feed
-      : (feed || "").substring(0, limit) + "...";
+    return feed.length < limit ? feed : (feed || '').substring(0, limit) + '...';
   },
   getUserAvatar: ({ photo, avatarIndex, sex }) => {
     sex = sex.toString();
     if (photo) {
       return photo;
     }
-    const domain = "https://admin.trefla.net/assets";
-    if (avatarIndex !== undefined && avatarIndex !== "") {
-      return `${domain}/avatar/${
-        sex === "1" ? "girl" : "boy"
-      }/${avatarIndex}.png`;
+    const domain = 'https://admin.trefla.net/assets';
+    if (avatarIndex !== undefined && avatarIndex !== '') {
+      return `${domain}/avatar/${sex === '1' ? 'girl' : 'boy'}/${avatarIndex}.png`;
     }
-    return `${domain}/avatar/avatar_${sex === "1" ? "girl2" : "boy1"}.png`;
+    return `${domain}/avatar/avatar_${sex === '1' ? 'girl2' : 'boy1'}.png`;
   },
   filterPostsByGuestAndChat: async ({ posts, me }) => {
     const user_ids = posts.map((post) => post.user_id);
-    console.log("[Me][Guest?]", me.isGuest);
+    console.log('[Me][Guest?]', me.isGuest);
     if (!me.isGuest) return posts;
 
     return posts.filter(async (post) => {
@@ -104,19 +95,13 @@ const activity = {
       .myChatrooms(user_id)
       .then((chatrooms) =>
         chatrooms.map((chat) => {
-          const [partner] = JSON.parse(chat.user_ids).filter(
-            (id) => Number(id) !== Number(user_id)
-          );
+          const [partner] = JSON.parse(chat.user_ids).filter((id) => Number(id) !== Number(user_id));
           return partner;
         })
       )
-      .then((partners) =>
-        partners
-          .filter((id) => !!id)
-          .filter((id, i, self) => self.indexOf(id) === i)
-      )
+      .then((partners) => partners.filter((id) => !!id).filter((id, i, self) => self.indexOf(id) === i))
       .catch((error) => {
-        console.log("[Posts][PartnerIds][Error]", error);
+        console.log('[Posts][PartnerIds][Error]', error);
         return [];
       });
   },
@@ -134,12 +119,12 @@ const activity = {
     const end_time = (days + 1) * 86400;
     const today_posts_count = await models.pointTransaction.count({
       user_id: user.id,
-      type: "POST",
+      type: 'POST',
       start_time,
       end_time,
     });
     if (today_posts_count >= config.daily_post_limit) {
-      console.log("[Point][POST] out of limit");
+      console.log('[Point][POST] out of limit');
       return user;
     }
 
@@ -151,9 +136,7 @@ const activity = {
     };
     const pointTransactionData = generatePointTransactionData(basicData);
     // create transaction.
-    const transaction = await models.pointTransaction.create(
-      pointTransactionData
-    );
+    const transaction = await models.pointTransaction.create(pointTransactionData);
 
     // add a notification.
     const notiBasicData = {
@@ -191,11 +174,13 @@ const activity = {
         },
       });
       // send socket for notifcation update.
-      await helpers.notification.socketOnNewNotification({
-        user_id: user.id,
-        notification,
-        socketClient,
-      });
+      await libs.notification
+        .socketOnNewNotification({
+          user_id: user.id,
+          notification,
+          socketClient,
+        })
+        .catch();
     }
 
     activity.pushNotification4NewPost({ user, notification });
@@ -203,24 +188,22 @@ const activity = {
   },
   pushNotification4NewPost: ({ user, notification }) => {
     const title = {
-      EN: "Point Added",
-      RO: "Punct adăugat",
+      EN: 'Point Added',
+      RO: 'Punct adăugat',
     };
     const body = {
       EN: `You earned ${notification.optional_val} points.`,
       RO: `Ai câștigat ${notification.optional_val} puncte.`,
     };
     const data = {
-      noti_id: String(notification.id || ""),
-      optionalVal: String(notification.optional_val || ""),
-      type: String(notification.type || ""),
-      user_id: "0",
-      user_name: "Admin",
-      avatar: "",
+      noti_id: String(notification.id || ''),
+      optionalVal: String(notification.optional_val || ''),
+      type: String(notification.type || ''),
+      user_id: '0',
+      user_name: 'Admin',
+      avatar: '',
     };
-    const lang = ["EN", "RO"].includes(user.language.toUpperCase())
-      ? user.language.toUpperCase()
-      : "EN";
+    const lang = ['EN', 'RO'].includes(user.language.toUpperCase()) ? user.language.toUpperCase() : 'EN';
     if (user.device_token) {
       return helpers.common.sendSingleNotification({
         body: body[lang],
@@ -234,14 +217,15 @@ const activity = {
 
 exports.create = (req, res) => {
   const socketClient = req.app.locals.socketClient;
-
   const { uid: user_id, role } = getTokenInfo(req);
-  let postData = generatePostData(req.body);
-  role !== "ADMIN" ? (postData.user_id = user_id) : null; // req.body.post_user_id;
-  postData.post_time = req.body.post_time
-    ? req.body.post_time
-    : generateTZTimeString();
-  return Post.create(postData)
+
+  const mPost = new Post(req.body);
+  if (role !== 'ADMIN') {
+    mPost.user_id = user_id;
+  }
+
+  return mPost
+    .save()
     .then((post) => Promise.all([post, User.getById(post.user_id)]))
     .then(async ([post, user]) => {
       // process points if user is ID-verified.
@@ -253,12 +237,14 @@ exports.create = (req, res) => {
         });
       }
 
-      post = Post.output(post);
-      if (post.location_area) {
-        const areaUsers = await User.getByLocationArea(post.location_area);
+      const mPost = new models.post(post);
+      const mUser = new models.user(user);
+
+      if (mPost.location_area) {
+        const areaUsers = await User.getByLocationArea(mPost.location_area);
 
         await activity.pushNotificationToAroundUsers({
-          post,
+          post: mPost.output(),
           areaUsers,
           poster: user,
         });
@@ -266,45 +252,39 @@ exports.create = (req, res) => {
         socketClient.emit(CONSTS.SKT_LTS_MULTIPLE, {
           users: areaUsers,
           event: CONSTS.SKT_POST_CREATED,
-          args: { ...post, liked: 0, user: User.output(user) },
+          args: { ...mPost.output(), liked: 0, user: mUser.asNormal() },
         });
       } else {
         socketClient.emit(CONSTS.SKT_LTS_BROADCAST, {
           event: CONSTS.SKT_POST_CREATED,
-          args: { ...post, liked: 0, user: User.output(user) },
+          args: { ...mPost.output(), liked: 0, user: mUser.asNormal() },
         });
       }
 
+      const data = await libs.populator.populatePost(post, { user_id });
+
       return res.json({
         status: true,
-        message: "success",
-        data: { ...post, liked: 0, user: User.output(user) },
+        message: 'success',
+        data,
       });
-    })
-    .catch((error) => respondError(res, error));
+    });
 };
 
 exports.getById = (req, res) => {
   const { uid: user_id } = getTokenInfo(req);
   const { id } = req.params;
   return Post.getById(id)
-    .then((post) =>
-      Promise.all([
-        post,
-        User.getById(post.user_id),
-        PostLike.postLikesOfUser({ post_id: id, user_id }),
-      ])
-    )
-    .then(([post, user, likes]) => {
-      post = Post.output(post);
+    .then(async (post) => {
+      const data = await libs.populator.populatePost(post, {
+        fields: ['user', 'photos'],
+        user_id,
+      });
+
       return res.json({
         status: true,
-        message: "success",
-        data: {
-          ...post,
-          liked: likes.length > 1 ? 1 : 0,
-          user: User.output(user),
-        },
+        message: 'success',
+        data,
       });
     })
     .catch((error) => respondError(res, error));
@@ -314,25 +294,18 @@ exports.pagination = async (req, res) => {
   //const tokenInfo = getTokenInfo(req); //console.log('tokenInfo', tokenInfo);
   const { uid } = getTokenInfo(req);
   const { limit, last_id, type, post_type } = req.body;
-  // const offset = page * limit;
-  let _posts = [],
-    _total = 0,
-    _posters = {},
-    _minId;
+
   // get config
   let [me, config] = await Promise.all([User.getById(uid), Config.get()]);
 
-  const default_zone =
-    config && config.apply_default_zone ? config.default_zone : null;
+  const default_zone = config && config.apply_default_zone ? config.default_zone : null;
   let promiseAll;
 
   const partners = await activity.getChatPartnerIds(uid);
 
-  console.log("[Post][Partners]", partners);
-
-  if (type === "ALL") {
+  if (type === 'ALL') {
     const me = await User.getById(uid);
-    const location_area = req.body.location_area || me.location_area || "___";
+    const location_area = req.body.location_area || me.location_area || '___';
     promiseAll = Promise.all([
       Post.pagination({
         limit,
@@ -355,7 +328,7 @@ exports.pagination = async (req, res) => {
         guest_contacts: partners,
       }),
     ]);
-  } else if (type === "ME") {
+  } else if (type === 'ME') {
     promiseAll = Promise.all([
       Post.pagination({
         limit,
@@ -386,77 +359,39 @@ exports.pagination = async (req, res) => {
       guest_contacts: partners,
     });
     // console.log('me', me);
-    me = User.output(me, "PROFILE");
+    me = User.output(me, 'PROFILE');
     const aroundPosts = rawPosts.filter((post) =>
-      checkPostLocationWithUser(
-        post,
-        me,
-        config.aroundSearchPeriod,
-        req.body.locationIndex
-      )
+      checkPostLocationWithUser(post, me, config.aroundSearchPeriod, req.body.locationIndex)
     );
     const posts = aroundPosts.splice(0, limit || 20);
-    const minId =
-      aroundPosts.length > 0 ? aroundPosts[aroundPosts.length - 1].id : 0;
+    const minId = aroundPosts.length > 0 ? aroundPosts[aroundPosts.length - 1].id : 0;
     const total = aroundPosts.length;
     promiseAll = Promise.all([posts, minId, total]);
   }
 
-  return promiseAll
-    .then(async ([posts, total, minId]) => {
-      _posts = posts;
-      // _posts = await activity.filterPostsByGuestAndChat({
-      //   posts: _posts,
-      //   me,
-      // });
+  return promiseAll.then(async ([posts, total, minId]) => {
+    const data = await Promise.all(posts.map((post) => libs.populator.populatePost(post, { user_id: uid })));
+    const cLastId = posts.length > 0 ? posts[posts.length - 1].id : 0;
 
-      _total = total;
-      _minId = minId;
-      let poster_ids = posts.map((post) => post.user_id);
-      poster_ids.push(0);
-      return User.getByIds(poster_ids);
-    })
-    .then((users) => {
-      users.map((user) => (_posters[user.id] = user));
-      return Promise.all(
-        _posts.map((post) =>
-          PostLike.postLikesOfUser({ user_id: uid, post_id: post.id })
-        )
-      );
-    })
-    .then((postLikedArray) => {
-      // console.log('[Liked]', uid, postLikedArray.map(a => a.length));
-      // console.log('[posters]', _posters);
-
-      let posts = _posts.map((post) => Post.output(post)); // filter keys
-      posts = posts.map((post, i) => ({
-        ...post,
-        liked: postLikedArray[i].length > 0 ? postLikedArray[i][0].type : 0,
-        user: User.output(_posters[post.post_user_id]),
-      }));
-
-      cLastId = posts.length > 0 ? posts[posts.length - 1].id : 0;
-      return res.json({
-        status: true,
-        message: "success",
-        data: posts,
-        pager: {
-          last_id: cLastId,
-          limit,
-          total: _total,
-        },
-        hadMore: cLastId > _minId,
-      });
-    })
-    .catch((error) => respondError(res, error));
+    return res.json({
+      status: true,
+      message: 'success',
+      data,
+      pager: {
+        last_id: cLastId,
+        limit,
+        total: total,
+      },
+      hadMore: cLastId > minId,
+    });
+  });
 };
 
 exports.simplePagination = async (req, res) => {
-  //const tokenInfo = getTokenInfo(req); //console.log('tokenInfo', tokenInfo);
   const { uid } = getTokenInfo(req);
   let { limit, page, type, post_type, sort } = req.query;
   limit = Number(limit);
-  sort = JSON.parse(sort);
+  sort = sort ? JSON.parse(sort) : { col: 0, desc: true };
 
   let _posts = [],
     _total = 0,
@@ -464,15 +399,15 @@ exports.simplePagination = async (req, res) => {
     _minId;
 
   const tblColumns = [
-    "user_id",
-    "post_name",
-    "feed",
-    "type",
-    "location_address",
-    "likes",
-    "comment_num",
-    "create_time",
-    "active",
+    'user_id',
+    'post_name',
+    'feed',
+    'type',
+    'location_address',
+    'likes',
+    'comment_num',
+    'create_time',
+    'active',
   ];
 
   let promiseAll = Promise.all([
@@ -486,55 +421,31 @@ exports.simplePagination = async (req, res) => {
     Post.getMinIdOfPosts({ type: post_type }),
   ]);
 
-  return promiseAll
-    .then(async ([posts, total, minId]) => {
-      _posts = posts;
-      _total = total;
-      _minId = minId;
-      let poster_ids = posts.map((post) => post.user_id);
-      poster_ids.push(0);
-      return User.getByIds(poster_ids);
-    })
-    .then((users) => {
-      users.map((user) => (_posters[user.id] = user));
-      return true;
-    })
-    .then(() => {
-      // console.log('[Liked]', uid, postLikedArray.map(a => a.length));
-      // console.log('[posters]', _posters);
+  return promiseAll.then(async ([posts, total, minId]) => {
+    const cLastId = posts.length > 0 ? posts[posts.length - 1].id : 0;
+    const data = await libs.populator.populatePosts(posts, { user_id: uid });
 
-      let posts = _posts.map((post) => Post.output(post)); // filter keys
-      posts = posts.map((post, i) => ({
-        ...post,
-        user: User.output(_posters[post.post_user_id]),
-      }));
-
-      cLastId = posts.length > 0 ? posts[posts.length - 1].id : 0;
-
-      return res.json({
-        status: true,
-        message: "success",
-        data: posts,
-        pager: {
-          // last_id: cLastId,
-          limit,
-          total: _total,
-        },
-        hasMore: cLastId > _minId,
-      });
-    })
-    .catch((error) => respondError(res, error));
+    return res.json({
+      status: true,
+      message: 'success',
+      data,
+      pager: {
+        // last_id: cLastId,
+        limit,
+        total,
+      },
+      hasMore: cLastId > _minId,
+    });
+  });
 };
 
 exports.getAll = (req, res) => {
   Post.getAll()
-    .then((posts) =>
-      res.json({ status: true, message: "success", data: posts })
-    )
+    .then((posts) => res.json({ status: true, message: 'success', data: posts }))
     .catch((error) =>
       res.status(500).json({
         status: false,
-        message: error.message || "Something went wrong!",
+        message: error.message || 'Something went wrong!',
       })
     );
 };
@@ -549,7 +460,7 @@ exports.updateById = (req, res) => {
     .then((post) => {
       // remove user id in update data
       let updateData = {};
-      const disallowedKeys = role === "ADMIN" ? ["id"] : ["id", "user_id"];
+      const disallowedKeys = role === 'ADMIN' ? ['id'] : ['id', 'user_id'];
       Object.keys(req.body).forEach((key) => {
         if (disallowedKeys.includes(key)) {
           // skip it
@@ -585,7 +496,7 @@ exports.updateById = (req, res) => {
 
       return res.json({
         status: true,
-        message: "success",
+        message: 'success',
         data: Post.output(newPost),
       });
     })
@@ -600,7 +511,7 @@ exports.deleteById = (req, res) => {
       if (deleted) {
         return PostLike.deleteUserPostLike({ user_id, post_id });
       } else {
-        throw Object.assign(new Error("Failed to delete the post!"), {
+        throw Object.assign(new Error('Failed to delete the post!'), {
           code: 400,
         });
       }
@@ -613,7 +524,7 @@ exports.deleteById = (req, res) => {
       });
       return res.json({
         status: true,
-        message: "Post has been deleted!",
+        message: 'Post has been deleted!',
       });
     })
     .catch((error) => respondError(res, error));
@@ -625,14 +536,12 @@ exports.togglePostLike = (req, res) => {
   const { type } = req.body;
   return PostLike.userLikedPost({ user_id, post_id, type })
     .then((postLike) => {
-      return postLike
-        ? dislikePost({ user_id, post_id, type })
-        : likePost({ user_id, post_id, type });
+      return postLike ? dislikePost({ user_id, post_id, type }) : likePost({ user_id, post_id, type });
     })
     .then((result) =>
       res.json({
         status: !!result,
-        message: result ? "success" : "failed",
+        message: result ? 'success' : 'failed',
       })
     )
     .catch((error) => respondError(res, error));
@@ -648,7 +557,7 @@ exports.doLikePost = async (req, res) => {
   return PostLike.userLikedPost({ user_id, post_id, type })
     .then((postLike) => {
       if (postLike) {
-        throw Object.assign(new Error("You already liked this post!"), {
+        throw Object.assign(new Error('You already liked this post!'), {
           code: 400,
         });
       } else {
@@ -658,7 +567,7 @@ exports.doLikePost = async (req, res) => {
     .then((result) =>
       res.json({
         status: !!result,
-        message: result ? "You liked this post!" : "Failed to like post!",
+        message: result ? 'You liked this post!' : 'Failed to like post!',
       })
     )
     .catch((error) => respondError(res, error));
@@ -673,7 +582,7 @@ exports.disLikePost = (req, res) => {
       if (postLike) {
         return dislikePost({ user_id, post_id, type });
       } else {
-        throw Object.assign(new Error("You never liked this post!"), {
+        throw Object.assign(new Error('You never liked this post!'), {
           code: 400,
         });
       }
@@ -681,7 +590,7 @@ exports.disLikePost = (req, res) => {
     .then((result) =>
       res.json({
         status: !!result,
-        message: result ? "You disliked this post!" : "Failed to dislike post!",
+        message: result ? 'You disliked this post!' : 'Failed to dislike post!',
       })
     )
     .catch((error) => respondError(res, error));
@@ -695,8 +604,7 @@ exports.getLikedUserList = (req, res) => {
     models.postLike.getLikedUsersOfPost({ post_id, limit, last_id }),
     models.postLike.getFirstLikeOfPost(post_id),
   ]).then(([likes, firstLike]) => {
-    const hasMore =
-      firstLike && likes[likes.length - 1].post_like_id > firstLike.id;
+    const hasMore = firstLike && likes[likes.length - 1].post_like_id > firstLike.id;
     const last_id = firstLike ? likes[likes.length - 1].post_like_id : 0;
     return Promise.all(
       likes.map((like) => {
@@ -715,7 +623,7 @@ exports.getLikedUserList = (req, res) => {
     ).then((users) =>
       res.json({
         status: true,
-        message: "success",
+        message: 'success',
         users,
         last_id,
         hasMore,
@@ -725,14 +633,11 @@ exports.getLikedUserList = (req, res) => {
 };
 
 const dislikePost = ({ user_id, post_id, type }) => {
-  return Promise.all([
-    Post.getById(post_id),
-    PostLike.userLikedPost({ user_id, post_id, type }),
-  ])
+  return Promise.all([Post.getById(post_id), PostLike.userLikedPost({ user_id, post_id, type })])
     .then(([post, postLike]) => {
       const like_fld = `like_${type}_num`;
       post[like_fld] = post[like_fld] ? post[like_fld] - 1 : 0;
-      post["liked"] = getTotalLikes(post);
+      post['liked'] = getTotalLikes(post);
       return Promise.all([PostLike.deleteById(postLike.id), Post.save(post)]);
     })
     .then(([deleted, newPost]) => {
@@ -750,14 +655,14 @@ const likePost = ({ user_id, post_id, type }) => {
     .then(([post, postLike, user]) => {
       const iUser = new IUser(user);
       if (postLike) {
-        throw Object.assign(new Error("You liked this post already!"), {
+        throw Object.assign(new Error('You liked this post already!'), {
           code: 400,
         });
         return;
       }
       const like_fld = `like_${type}_num`;
       post[like_fld] = post[like_fld] + 1;
-      post["liked"] = getTotalLikes(post);
+      post['liked'] = getTotalLikes(post);
 
       const plData = generatePostLikeData({
         user_id,
@@ -771,7 +676,7 @@ const likePost = ({ user_id, post_id, type }) => {
       return created && newPost;
     })
     .catch((error) => {
-      console.log("[Like Post]", error);
+      console.log('[Like Post]', error);
       return false;
     });
 };

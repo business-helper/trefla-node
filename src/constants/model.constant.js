@@ -252,6 +252,7 @@ exports.DEFAULT_POST = {
   user_id: 0,
   post_name: '',
   feed: '',
+  photos: '[]',
   isGuest: 0,
   type: '1',
   target_date: '',

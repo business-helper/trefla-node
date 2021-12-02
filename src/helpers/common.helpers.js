@@ -5,14 +5,11 @@ const admin = require('firebase-admin');
 const serviceAccount = require('../config/trefla-firebase-adminsdk-ic030-de756cf0e9.json');
 const logger = require('../config/logger');
 
-const { 
-	ERR_MSG_NORMAL,
-	ERR_MSG_VALIDATE
-} = require("../constants/common.constant");
+const { ERR_MSG_NORMAL, ERR_MSG_VALIDATE } = require('../constants/common.constant');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://trefla.firebaseio.com"
+  databaseURL: 'https://trefla.firebaseio.com',
 });
 
 const transporter = nodemailer.createTransport({
@@ -28,7 +25,7 @@ const transporter = nodemailer.createTransport({
 
 const formatAsTwoDigits = (num) => {
   return num > 9 ? num : '0' + num;
-}
+};
 
 const generateTZTimeString = (strTime = '') => {
   let dt = !strTime ? new Date() : new Date(strTime);
@@ -40,11 +37,11 @@ const generateTZTimeString = (strTime = '') => {
   const ss = formatAsTwoDigits(dt.getSeconds());
   const tz = -dt.getTimezoneOffset();
   return `${year}-${month}-${date}-${hh}-${mm}-${ss}:${tz}`;
-}
+};
 
 const bool2Int = (boolVal) => {
   return boolVal ? 1 : 0;
-}
+};
 
 const deg2rad = function (deg) {
   return deg * (Math.PI / 180);
@@ -56,14 +53,11 @@ const getTime = () => {
 
 const int2Bool = (intVal) => {
   return Number(intVal) === 1 ? true : false;
-}
+};
 
 const respondError = (res, error) => {
-  // console.log(error);
   logger.error(error);
-  return res
-    .status(500)
-    .json({ status: false, message: error.message || ERR_MSG_NORMAL });
+  return res.status(500).json({ status: false, message: error.message || ERR_MSG_NORMAL });
 };
 
 const respondValidateError = (res, error) => {
@@ -72,10 +66,11 @@ const respondValidateError = (res, error) => {
   const details = (error || {}).details || {}; //console.log(details);
 
   return res.status(400).json({
-		status: false,
-		message: Object.keys(details).length > 0 ? details[Object.keys(details)[0]].message : (error.message || ERR_MSG_VALIDATE),
-		details: error.details || {}
-	});
+    status: false,
+    message:
+      Object.keys(details).length > 0 ? details[Object.keys(details)[0]].message : error.message || ERR_MSG_VALIDATE,
+    details: error.details || {},
+  });
 };
 
 const sendMail = ({ from, to, subject, body }) => {
@@ -88,10 +83,10 @@ const sendMail = ({ from, to, subject, body }) => {
   };
 
   return transporter.sendMail(mailOptions);
-}
+};
 
 const timestamp = (dt = null) => {
-  !dt ? dt = new Date() : null;
+  !dt ? (dt = new Date()) : null;
   const time = dt.getTime();
   return Math.floor(time / 1000);
 };
@@ -107,19 +102,16 @@ const getDistanceFromLatLonInMeter = function (location1, location2) {
   var dLon = deg2rad(lon2 - lon1);
   var a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(deg2rad(lat1)) *
-      Math.cos(deg2rad(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   var d = R * c; // Distance in km
   return d * 1000;
 };
 
 const getTotalLikes = (obj) => {
-  const fields = [1,2,3,4,5,6].map(type => `like_${type}_num`);
+  const fields = [1, 2, 3, 4, 5, 6].map((type) => `like_${type}_num`);
   return fields.reduce((total, field) => total + Number(obj[field]), 0);
-}
+};
 
 /**
  * @function getTimeAfterDelta
@@ -128,10 +120,10 @@ const getTotalLikes = (obj) => {
  * @return {Date}
  */
 const getTimeAfter = (nowDt = null, delta = 0) => {
-  !nowDt ? nowDt = new Date() : null;
+  !nowDt ? (nowDt = new Date()) : null;
   let time = nowDt.getTime();
   return new Date(time + 86400 * 1000 * delta);
-}
+};
 
 const string2Coordinate = function (str) {
   try {
@@ -156,8 +148,7 @@ const string2Timestamp = (str_time) => {
   const my_timezone = -dt.getTimezoneOffset();
   const time = dt.getTime();
   const timezoneOffset = Number(arr1[1]);
-  const final_time =
-    Math.floor(time / 1000) - (my_timezone - timezoneOffset) * 60;
+  const final_time = Math.floor(time / 1000) - (my_timezone - timezoneOffset) * 60;
   return final_time;
 };
 
@@ -166,47 +157,48 @@ const chatPartnerId = (user_ids, my_id) => {
     user_ids = JSON.parse(user_ids);
   }
   let myPosition = user_ids.indexOf(my_id);
-  if (myPosition === -1) { return 0; }
+  if (myPosition === -1) {
+    return 0;
+  }
   const partnerPos = 1 - myPosition;
   return user_ids[partnerPos] !== my_id ? user_ids[partnerPos] : 0;
-}
+};
 
 const JSONParser = (data) => {
   if (!data) return data;
   if (typeof data === 'object') return data;
 
   return JSON.parse(data);
-}
+};
 
 const JSONStringify = (data) => {
   if (!data) return data;
   if (typeof data === 'object') return JSON.stringify(data);
-  return data;  
-}
+  return data;
+};
 
 const stringifyModel = (data) => {
-  Object.keys(data).forEach(key => {
+  Object.keys(data).forEach((key) => {
     if (typeof data[key] === 'object') {
       data[key] = JSONStringify(data[key]);
     }
-  })
+  });
   return data;
-}
+};
 
 const filterAroundUsers = (strPostCoord, users) => {
   try {
     const postPos = string2Coordinate(strPostCoord);
-    return users.filter(user => {
+    return users.filter((user) => {
       const userPos = getUserLastLocation(user);
       const d = getDistanceFromLatLonInMeter(postPos, userPos);
       const r = user.radiusAround || 100;
       return d <= r;
     });
-  }
-  catch(e) {
+  } catch (e) {
     return [];
   }
-}
+};
 
 const getUserLastLocation = function (user) {
   try {
@@ -230,7 +222,7 @@ const sendMultiNotifications = async ({ title, body, tokens }) => {
     notification: { body, title },
   };
   return admin.messaging().sendMulticast(message);
-}
+};
 
 const sendSingleNotification = async ({ title, body, token, data = {} }) => {
   const message = {
@@ -239,43 +231,46 @@ const sendSingleNotification = async ({ title, body, token, data = {} }) => {
     data,
   };
   return admin.messaging().send(message);
-}
+};
 
 const generateRandomString = (length) => {
-  var result           = '';
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
-}
+};
 
 const populateChatSource = async (sources = [], models) => {
-  return Promise.all(sources.map(async source => {
-    const { from_where, target_id, last_msg_id } = source;
-    if (from_where && target_id && ['POST', 'COMMENT'].includes(from_where)) {
-      const modelName = from_where.toLowerCase();
-      const target = await models[modelName].getById(target_id);
-      if (!target) return null;
-      
-      const { user_id } = target;
-      const user = await models.user.getById(user_id);
+  return Promise.all(
+    sources.map(async (source) => {
+      const { from_where, target_id, last_msg_id } = source;
+      if (from_where && target_id && ['POST', 'COMMENT'].includes(from_where)) {
+        const modelName = from_where.toLowerCase();
+        const target = await models[modelName].getById(target_id);
+        if (!target) return null;
 
-      return {
-        data: { ...(models[modelName].output(target)), user: models.user.output(user) },        
-        from_where, target_id, last_msg_id,
-      };
-    } else {
-      return null;
-    }
-  }))
-    .then((targets) => targets.filter(target => target));
-}
+        const { user_id } = target;
+        const user = await models.user.getById(user_id);
+
+        return {
+          data: { ...models[modelName].output(target), user: models.user.output(user) },
+          from_where,
+          target_id,
+          last_msg_id,
+        };
+      } else {
+        return null;
+      }
+    })
+  ).then((targets) => targets.filter((target) => target));
+};
 
 const photoHash = (photo) => {
   return `${photo.create_time}-${photo.user_id}-${photo.id}`;
-}
+};
 
 const parsePhotoHash = (hash) => {
   try {
@@ -287,10 +282,12 @@ const parsePhotoHash = (hash) => {
     };
   } catch (error) {
     return {
-      id: 0, user_id: 0, create_time: 0,
-    }
+      id: 0,
+      user_id: 0,
+      create_time: 0,
+    };
   }
-}
+};
 
 const parseForm = (req) => {
   const form = formidable.IncomingForm();
@@ -300,7 +297,7 @@ const parseForm = (req) => {
       resolve({ fields, files });
     });
   });
-}
+};
 
 module.exports = {
   bool2Int,
@@ -320,7 +317,7 @@ module.exports = {
   parsePhotoHash,
   photoHash,
   populateChatSource,
-	respondError,
+  respondError,
   respondValidateError,
   SendAllMultiNotifications,
   sendMail,
