@@ -1,6 +1,8 @@
 const express = require("express");
 const { Validator } = require("node-input-validator");
 const authRouters = express.Router();
+const ctrls = require('../controllers');
+const types = require('../types');
 const userCtrl = require("../controllers/user.controller");
 const User = require("../models/user.model");
 const AppleToken = require("../models/appleToken.model");
@@ -62,6 +64,12 @@ authRouters.post("/register", async (req, res) => {
       }
     })
     .then(() => userCtrl.register(req, res))
+    .then(result => {
+      return ctrls.matchProfile.activity.getUserMatchProfile(result.data.id)
+        .then(matchProfile => {
+          return res.json(result);
+        });
+    })
     .catch((error) => respondValidateError(res, error));
 });
 

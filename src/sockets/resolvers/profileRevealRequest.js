@@ -11,11 +11,12 @@ const ctrls = require('../../controllers');
 const commonActivity = require('../common');
 
 const activity = {
-  updateProfileRevealStatusOfChat: (chat_id) => {
+  updateProfileRevealStatusOfChat: (chat_id, requested_by) => {
     return models.chat.getById(chat_id)
       .then(chat => {
         const iChat = new IChat(chat);
         iChat.profile_revealed = PROFILE_REVEAL_STATUS.PENDING;
+        iChat.reveal_request_by = requested_by;
         iChat.update_time = helpers.common.timestamp();
         return models.chat.save(iChat.toDB());
       });
@@ -47,7 +48,7 @@ const activity = {
       noti_id: String(notification.id || ""),
       optionalVal: String(notification.optional_val || ""),
       type: String(notification.type || ""),
-      user_id: "0",
+      user_id: String(iSender.id),
       user_name: senderName[lang],
       avatar: '',
     };
@@ -57,7 +58,10 @@ const activity = {
         title: title[lang],
         token: iReceiver.device_token,
         data,
-      }).catch(error => false);
+      }).catch(error => {
+        // console.log('[ProfileReveal][Request] Error: ', iReceiver.device_token, error);
+        return false;
+      });
     }
   },
   respond2Sender: async (socket, { chat, user_id }) => {
@@ -99,7 +103,7 @@ module.exports = async ({
   chat_id,
 }) => {
   const { uid } = helpers.auth.parseToken(token);
-  return activity.updateProfileRevealStatusOfChat(chat_id)
+  return activity.updateProfileRevealStatusOfChat(chat_id, uid)
     .then(async chat => {
       const notification = await commonActivity.createNotificationForProfileRevealChange(chat, uid);
       const iNotification = new INotification(notification);
@@ -115,7 +119,7 @@ module.exports = async ({
       await activity.respond2Receiver(io, { chat, notification }).catch(error => false);
     })
     .catch(error => {
-      console.log('[Profile Reveail][Request] error: ', error);
+      console.log('[Profile Reveal][Request] error: ', error);
       socket.emit(CONSTS.SKT_PROFILE_REVEAL_REQUEST, { status: 'error', details: error.message });
     });    
 }

@@ -171,7 +171,7 @@ function loadUsers({ limit, page }) {
         console.log(error);
         return reject(
           Object.assign(
-            new Error(resopnseJSON.message || "Something went wrong!"),
+            new Error(error.message || "Something went wrong!"),
             { code: 400 }
           )
         );
@@ -189,7 +189,7 @@ function loadPendingChats({ limit, page }) {
         const { responseJSON } = error;
         return reject(
           Object.assign(
-            new Error(resopnseJSON.message || "Something went wrong!"),
+            new Error(error.message || "Something went wrong!"),
             { code: 400 }
           )
         );
@@ -602,6 +602,7 @@ const events = [
   SKT_PROFILE_REVEAL_REQUEST, SKT_PROFILE_REVEAL_REQUESTED,
   SKT_PROFILE_REVEAL_ACCEPT, SKT_PROFILE_REVEAL_ACCEPTED,
   SKT_PROFILE_REVEAL_REJECT, SKT_PROFILE_REVEAL_REJECTED,
+  SKT_MATCH_LIKED, SKT_MATCH_DISLIKED, SKT_MATCH_PASSED, SKT_MATCH_PAIRED,
 ];
 
 events.forEach(event => {

@@ -5,7 +5,7 @@ class IChat extends TreflaModel {
   constructor(args) {
     super(args);
     this.defineProperties();
-    this.jsonFields = ['user_ids', 'sources', 'online_status', 'last_messages', 'lastMsgIdOnTransfer'];
+    this.jsonFields = ['user_ids', 'sources', 'online_status', 'last_messages', 'lastMsgIdOnTransfer', 'unread_nums'];
     // initialize properties by args.
     for (const key in args) {
       if (this[key] !== undefined) this[key] = args[key];
@@ -23,6 +23,7 @@ class IChat extends TreflaModel {
     this.card_number = '';
     this.card_verified = 0;
     this.profile_revealed = 0;
+    this.reveal_request_by = 0;
     this.from_where = '';
     this.target_id = '';
     this.unread_nums = '';

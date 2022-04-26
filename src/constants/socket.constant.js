@@ -11,7 +11,7 @@ exports.SKT_USER_ENTER_ROOM = 'socket.user.enter.room';
 exports.SKT_USER_TYPING = 'socket.user.typing';
 exports.SKT_ACCEPT_CONNECTION = 'socket.accepted.connection';
 exports.SKT_SELECT_CHAT = 'socket.select.chat';
-exports.SKT_LEAVE_CHAT = 'socket.select.chat';
+exports.SKT_LEAVE_CHAT = 'socket.leave.chat';
 exports.SKT_SEND_MSG = 'socket.send.message';
 exports.SKT_RECEIVE_MSG = 'socket.receive.message';
 exports.SKT_UPDATE_ONLINE = 'socket.update.online';
@@ -45,6 +45,11 @@ exports.SKT_PROFILE_REVEAL_ACCEPT = 'socket.profile.reveal.accept';
 exports.SKT_PROFILE_REVEAL_ACCEPTED = 'socket.profile.reveal.accepted';
 exports.SKT_PROFILE_REVEAL_REJECT = 'socket.profile.reveal.reject';
 exports.SKT_PROFILE_REVEAL_REJECTED = 'socket.profile.reveal.rejected';
+
+exports.SKT_MATCH_LIKED = 'socket.match.liked';
+exports.SKT_MATCH_DISLIKED = 'socket.match.disliked';
+exports.SKT_MATCH_PASSED = 'socket.match.passed';
+exports.SKT_MATCH_PAIRED = 'socket.match.paired';
 
 exports.SKT_LTS_SINGLE = 'socket.local2server.single';
 exports.SKT_LTS_MULTIPLE = 'socket.local2server.multiple';

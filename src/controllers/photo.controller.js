@@ -39,8 +39,8 @@ exports.getById = (req, res) => {
 exports.getByUserIdReq = (req, res) => {
   const { id: user_id } = req.params;
   const { type } = req.query;
-  const types = type.split(',');
-  return Photo.getByUser(user_id, types)
+  const types = (type || '').split(',');
+  return Photo.getByUserAndTypes(user_id, types)
     .then(photos => {
       return {
         status: true,
@@ -59,4 +59,18 @@ exports.deleteById = (req, res) => {
         message: 'Photo has been deleted!'
       });
     });
+}
+
+exports.updatePrivateStatus = (id, private) => {
+  return Photo.getById(id)
+    .then(photo => {
+      photo.private = private;
+      return Photo.save(photo);
+    });
+}
+
+exports.updateOrderIndices = (user_id, orderMaps) => {
+  orderMaps = orderMaps.filter(({ id, orderIdx }) => id !== orderIdx);
+  return Promise.all(orderMaps.map(orderMap => Photo.updateOrderIndex({ ...orderMap, user_id })))
+    .then(photos => photos.filter(photo => !!photo).map(photo => Photo.output(photo)));
 }

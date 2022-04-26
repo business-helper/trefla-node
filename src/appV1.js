@@ -33,6 +33,7 @@ appV1.use('/bug', bugRouters);
 appV1.use('/chat', chatRouters);
 appV1.use('/comment', commentRouters);
 appV1.use('/identity', require('./routes/identity.routes'));
+appV1.use('/match', require('./routes/match.routes'));
 appV1.use('/notification', notificationRouters);
 appV1.use('/photo', photoRouters);
 appV1.use('/post', postRouters);

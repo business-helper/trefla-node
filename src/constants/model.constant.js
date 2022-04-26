@@ -1,5 +1,5 @@
 const { generateTZTimeString, timestamp } = require('../helpers/common.helpers');
-const { ADMIN_NOTI_TYPES } = require("./notification.constant");
+const { ADMIN_NOTI_TYPES } = require('./notification.constant');
 const { ADMIN_ROLE, LOGIN_MODE } = require('./common.constant');
 
 exports.DEFAULT_ADMIN = {
@@ -106,15 +106,16 @@ exports.DEFAULT_BUG = {
 
 exports.DEFAULT_CHAT = {
   id: '',
-  user_ids: "",
+  user_ids: '',
   accept_status: 1,
   sources: '[]',
   isForCard: 0,
   card_number: '',
   card_verified: 0,
   profile_revealed: 0,
+  reveal_request_by: 0,
   from_where: 'NONE',
-  target_id: "0",
+  target_id: '0',
   unread_nums: JSON.stringify([]),
   online_status: JSON.stringify({}),
   last_messages: JSON.stringify([]),
@@ -147,21 +148,22 @@ exports.DEFAULT_COMMENT = {
 exports.DEFAULT_COMMENTLIKE = {
   id: '',
   user_id: 0,
+  isGuest: 1,
   comment_id: 0,
   type: 0,
   create_time: timestamp(),
   update_time: timestamp(),
-}
+};
 
 exports.DEFAULT_CONFIG = {
   id: '',
-  admin_email: "",
+  admin_email: '',
   aroundSearchPeriod: 100,
   aroundSearchDays: 1,
   defaultAroundRadius: 100,
   defaultUserRadiusAround: 100,
-  lang_version: "",
-  default_zone: "",
+  lang_version: '',
+  default_zone: '',
   apply_default_zone: 0,
   android_version: '1.0',
   android_link: '',
@@ -173,6 +175,8 @@ exports.DEFAULT_CONFIG = {
   comment_point: 1,
   daily_comment_limit: 1,
   chat_point: 1,
+  match_skip_days: 7,
+  match_guess_wait: 10,
   create_time: timestamp(),
   update_time: timestamp(),
 };
@@ -201,7 +205,7 @@ exports.DEFAULT_MESSAGE = {
   status: 1,
   time: generateTZTimeString(),
   create_time: timestamp(),
-  update_time: timestamp()
+  update_time: timestamp(),
 };
 
 exports.DEFAULT_NOTIFICATION = {
@@ -220,12 +224,15 @@ exports.DEFAULT_NOTIFICATION = {
 };
 
 exports.DEFAULT_PHOTO = {
-  id: "",
+  id: '',
   user_id: 0,
   url: '',
   type: 'normal',
   ratio: '',
   thumbnail: '',
+  orderIdx: 0,
+  private: 0,
+  description: '',
   create_time: timestamp(),
   update_time: timestamp(),
 };
@@ -245,9 +252,10 @@ exports.DEFAULT_POST = {
   user_id: 0,
   post_name: '',
   feed: '',
+  photos: '[]',
   isGuest: 0,
-  type: "1",
-  target_date: "",
+  type: '1',
+  target_date: '',
   option_val: '',
   comment_num: 0,
   liked: 0,
@@ -270,11 +278,12 @@ exports.DEFAULT_POST = {
 exports.DEFAULT_POSTLIKE = {
   id: '',
   user_id: 0,
+  isGuest: 1,
   post_id: 0,
   type: 0,
   create_time: timestamp(),
   update_time: timestamp(),
-}
+};
 
 exports.DEFAULT_REPORT = {
   id: '',
@@ -311,8 +320,8 @@ exports.DEFAULT_USER = {
   photo: '',
   radiusAround: 100,
   device_token: '',
-  noti_num: 0,   // when add noti
-  unread_msg_num: 0,  // send message
+  noti_num: 0, // when add noti
+  unread_msg_num: 0, // send message
   location_area: '',
   location_coordinate: '',
   location_address: '',
@@ -320,10 +329,10 @@ exports.DEFAULT_USER = {
   social_links: JSON.stringify([]),
   postAroundCenterCoordinate: '',
   city: '',
-  ban_reason: "",
-  ban_reply: "",
+  ban_reason: '',
+  ban_reply: '',
   recovery_code: '',
-  socket_id: "",
+  socket_id: '',
   current_chat: 0,
   guest_mood_status: 'offline',
   normal_mood_status: 'offline',
@@ -339,5 +348,5 @@ exports.DEFAULT_USER = {
     paypal: null,
   },
   create_time: timestamp(),
-  update_time: timestamp()
+  update_time: timestamp(),
 };

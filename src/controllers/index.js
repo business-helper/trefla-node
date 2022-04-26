@@ -4,6 +4,8 @@ const comment = require('./comment.controller');
 const firebase = require('./firebase.controller');
 const identity = require('./identity.controller');
 const language = require('./lang.controller');
+const match = require('./match.controller');
+const matchProfile = require('./matchProfile.controller');
 const notification = require('./notification.controller');
 const photo = require('./photo.controller');
 const post = require('./post.controller');
@@ -17,6 +19,8 @@ module.exports = {
   comment,
   firebase,
   identity,
+  match,
+  matchProfile,
   language,
   notification,
   photo,

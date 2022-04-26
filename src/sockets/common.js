@@ -36,14 +36,23 @@ const activity = {
       });
   },
   socket4NewNotification: async ({ user_id, io, notification }) => {
-    return models.user.getById(user_id)
-      .then(user => {
+    const iNotification = new INotification(notification);
+
+    return Promise.all([
+      models.user.getById(user_id),
+      models.user.getById(iNotification.sender_id),
+    ])
+      .then(([user, sender]) => {
         const iUser = new IUser(user);
+        const iSender = new IUser(sender);
         if (iUser.socket_id) {
           io.to(iUser.socket_id).emit(CONSTS.SKT_NOTI_NUM_UPDATED,
             {
               num: user.noti_num,
-              notification,
+              notification: {
+                ...notification,
+                sender: iSender.asNormal(),
+              },
             });
         }
       })

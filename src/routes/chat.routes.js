@@ -73,8 +73,7 @@ chatRouters.post("/pagination", async (req, res) => {
     limit: "required|integer",
   });
 
-  return validator
-    .check()
+  return validator.check()
     .then((matched) => {
       if (!matched) {
         throw Object.assign(new Error("Invalid request"), {
